@@ -1,0 +1,8 @@
+{
+    "autoPullOnBoot": true,
+    "autoBackupAfterFileChange": true,
+    "autoBackupAfterFileChangeMinutes": 5,
+    "autoPullInterval": 5,
+    "commitMessage": "vault backup: {{date}}",
+    "disablePush": false
+}
