@@ -11,9 +11,12 @@ OUTPUT_DIR = "articles"
 
 def get_latest_articles():
     """Scrapes the main page for article links."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
     print(f"Fetching {BASE_URL}...")
     try:
-        response = requests.get(BASE_URL, timeout=10)
+        response = requests.get(BASE_URL, headers=headers, timeout=10)
         response.raise_for_status()
     except Exception as e:
         print(f"Error fetching base URL: {e}")
@@ -41,8 +44,11 @@ def get_latest_articles():
 def scrape_article(url):
     """Fetches a single article and extracts content."""
     print(f"Scraping {url}...")
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
     except Exception as e:
         print(f"Error fetching {url}: {e}")
