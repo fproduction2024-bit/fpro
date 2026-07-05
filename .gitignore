@@ -60,3 +60,7 @@ docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社
 docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社rtma/画像/gigafile-0402-d3ff202646b195144dc43d36a3890617.zip
 docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社マインド/FC加盟店事業説明資料.pdf
 projects/tangleseed_hp_production.zip
+
+# 自動生成ログ（git管理外。ファイルはローカルに残る）
+plaud_exports/*.log
+projects/proline_extractor/logs/

@@ -1,5 +1,5 @@
 ---
-description: タングルシードのブログ記事を新規追加してVercelに自動デプロイする
+description: タングルシードのブログ記事を新規追加し、XserverへFTPアップロードして公開する
 ---
 
 # タングルシード ブログ記事制作ルール
@@ -197,7 +197,9 @@ description: タングルシードのブログ記事を新規追加してVercel�
 
 ### 技術チェック
 - [ ] HTMLの構造が`_template.html`の形式と一致しているか
+- [ ] GA4タグ（G-B5MMYK9SCY）が残っているか（テンプレート由来。消えていたら復元）
 - [ ] blog/index.htmlに記事カードが追加されているか（最新記事を一番上に）
+- [ ] sitemap.xmlに新記事のURLが追加されているか
 - [ ] 画像が`images/blog/[SLUG].jpg`に保存されているか
 
 ---
@@ -227,6 +229,8 @@ No faces clearly visible or hands-only close-up. Film grain aesthetic. Square fo
 
 `/Users/hiroshi/cursor/projects/tangleseed-website/blog/_template.html` をコピーして `blog/[SLUG].html` を作成し、プレースホルダーをすべて置換する。
 
+テンプレートにはGA4タグ（G-B5MMYK9SCY）が設置済みのため、新記事にも自動で含まれる。置換の際に削除しないこと。
+
 ### blog/index.htmlへの記事カード追加
 
 最新記事を一番上（`<div class="blog-grid">` の直後）に追加する：
@@ -251,19 +255,73 @@ No faces clearly visible or hands-only close-up. Film grain aesthetic. Square fo
 </article>
 ```
 
-### commit & push
+### sitemap.xmlへのURL追加
+
+`/Users/hiroshi/cursor/projects/tangleseed-website/sitemap.xml` の `</urlset>` 直前に新記事のエントリを追加する：
+
+```xml
+  <url>
+    <loc>https://tangle-seed.co.jp/blog/[SLUG].html</loc>
+    <lastmod>[YYYY-MM-DD]</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+```
+
+### commit & push（履歴管理用。これでは公開されない）
 
 // turbo
 ```bash
 cd /Users/hiroshi/cursor/projects/tangleseed-website && \
-git add blog/[SLUG].html blog/index.html images/blog/[SLUG].jpg && \
+git add blog/[SLUG].html blog/index.html sitemap.xml images/blog/[SLUG].jpg && \
 git commit -m "feat: ブログ記事追加「[TITLE]」" && \
 git push origin main
 ```
 
-完了後、1〜2分でVercelが自動デプロイ。以下のURLで確認する：
-- `https://tangle-seed.co.jp/blog/[SLUG].html`
-- `https://tangle-seed.co.jp/blog/`
+**⚠️ GitHubへのpushでは本番に反映されない。** tangle-seed.co.jp はVercelではなく、Xserver（sv13047.xserver.jp）の `/tangle-seed.co.jp/public_html` で稼働している。公開には次のFTPアップロードが必須（2026-07-04に「pushだけして未公開」のまま記事3本が放置される事故が実際に発生した）。
+
+### FTPアップロード（これが本番公開）
+
+FTP認証情報は `/Users/hiroshi/cursor/ftp-uploader/config.json` から読む。ただし同ファイルの `remote_directory` は fproduction.co.jp 用なので使わず、アップロード先は必ず `/tangle-seed.co.jp/public_html` を明示する。
+
+```bash
+python3 - <<'EOF'
+import json, ftplib
+from pathlib import Path
+
+SLUG = "[SLUG]"  # ← 置換
+SITE = Path("/Users/hiroshi/cursor/projects/tangleseed-website")
+REMOTE_ROOT = "/tangle-seed.co.jp/public_html"  # config.jsonのremote_directoryは使わない
+
+files = [
+    (SITE / f"blog/{SLUG}.html",       f"{REMOTE_ROOT}/blog/{SLUG}.html"),
+    (SITE / "blog/index.html",         f"{REMOTE_ROOT}/blog/index.html"),
+    (SITE / "sitemap.xml",             f"{REMOTE_ROOT}/sitemap.xml"),
+    (SITE / f"images/blog/{SLUG}.jpg", f"{REMOTE_ROOT}/images/blog/{SLUG}.jpg"),
+]
+
+cfg = json.load(open("/Users/hiroshi/cursor/ftp-uploader/config.json"))
+ftp = ftplib.FTP()
+ftp.connect(cfg["host"], cfg.get("port", 21))
+ftp.login(cfg["username"], cfg["password"])
+ftp.set_pasv(cfg.get("passive_mode", True))
+for local, remote in files:
+    d, name = remote.rsplit("/", 1)
+    ftp.cwd(d)
+    with open(local, "rb") as f:
+        ftp.storbinary(f"STOR {name}", f)
+    print("OK", remote)
+ftp.quit()
+EOF
+```
+
+トップページなど他のHTMLも変更した場合は、同様に `files` に追加してアップロードする。
+
+### 公開確認
+
+アップロード直後に本番URLで表示を確認する（ブラウザキャッシュ回避のためシークレットウィンドウ推奨）：
+- `https://tangle-seed.co.jp/blog/[SLUG].html` — 記事本体が表示される
+- `https://tangle-seed.co.jp/blog/` — 一覧の一番上に新記事カードが出る
 
 ---
 
@@ -273,4 +331,4 @@ git push origin main
 - 記事中の「ゼンタングル®」は初出のみ®付き、以降はなし
 - slugは既存記事と重複しないこと（`ls blog/*.html` で確認）
 - blog/index.htmlの記事コメント番号は現在最大23番（次は24番から）
-- リポジトリ：`https://github.com/fproduction2024-bit/tangleseed-website`
+- リポジトリ：`https://github.com/fproduction2024-bit/tangleseed-website`（履歴管理用。pushしても本番には反映されない）

@@ -5,6 +5,21 @@ description: 高コンバージョンなLP（ランディングページ）を�
 
 # LP 制作スキル
 
+## ⚠️ 実行前の必須手順（PDCA）
+1. 同ディレクトリの `LEARNINGS.md` を必ず読む。勝ちパターンを反映し、負けパターン・禁止事項を避けること。
+2. 成果物は LEARNINGS.md 記載のarchiveパスに保存し、ファイル先頭に以下のfrontmatterを付けること:
+   ```yaml
+   ---
+   date: YYYY-MM-DD
+   client: <案件・クライアント名>
+   type: <広告コピー | LP | 提案書 など>
+   skill: <スキル名>
+   result: 未計測   # ← 人間が後日、CTR/CPA/受注結果などを一言追記
+   verdict: 未計測  # win | lose | 未計測
+   reviewed: false  # /skill-review が処理したら true
+   ---
+   ```
+
 FC募集LP・セミナー集客LP・商品販売LPなど、あらゆるLPを高品質に制作するためのスキル。
 
 ## 必ず参照するリファレンス

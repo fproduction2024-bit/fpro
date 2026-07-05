@@ -464,7 +464,7 @@
   {
     "id": "brain-commit-dashboard",
     "name": "Brainコミット プロジェクトダッシュボード",
-    "url": "https://brain-commit-dashboard.surge.sh",
+    "url": "https://commit-dashboard.surge.sh",
     "category": "Brain",
     "description": "迫佑樹×木村コミュニティ「Brainコミット」の制作プロジェクト管理ダッシュボード。ファネル設計・動画プロットv5・コアメッセージ・ターゲットペルソナ・木村インタビュー設計・タスク管理の7タブ構成。",
     "deployedAt": "2026-04-15",
@@ -514,6 +514,61 @@
     "deployedAt": "2026-04-27",
     "updatedAt": "2026-04-27",
     "sourceDir": "docs/古橋の会社ナレッジ/タングルシード",
+    "status": "active"
+  },
+  {
+    "id": "fuse-dashboard",
+    "name": "FUSE プロジェクトダッシュボード",
+    "url": "https://fuse-dashboard.surge.sh",
+    "category": "Fプロダクション",
+    "description": "FUSE（フルオート・ファネル構築）プロジェクト管理ダッシュボード。動画台本・ROIシミュレーション・セールスロジック・コアインタビューを一元管理。",
+    "deployedAt": "2026-05-20",
+    "updatedAt": "2026-05-20",
+    "sourceDir": "docs/古橋の会社ナレッジ/Fプロダクション/FUSE",
+    "status": "active"
+  },
+  {
+    "id": "proline-business-plan",
+    "name": "プロライン構築代行 2ヶ年事業計画シミュレーター",
+    "url": "https://proline-business-plan.surge.sh",
+    "category": "その他",
+    "description": "プロライン構築代行事業の2ヶ年事業計画シミュレーター。財務・顧客獲得数のリアルタイム計算モデルとグラフ表示。",
+    "deployedAt": "2026-06-09",
+    "updatedAt": "2026-06-09",
+    "sourceDir": "docs/古橋の会社ナレッジ/事業計画書",
+    "status": "active"
+  },
+  {
+    "id": "brain-school-proposal",
+    "name": "Brainスクール（仮）事業提案書",
+    "url": "https://brain-school-proposal.surge.sh",
+    "category": "Brain",
+    "description": "迫様宛の新規事業「Brainスクール（仮）」プラットフォーム構想の事業提案書。適切な情報開示と売り込まないコンシェルジュセールスによる、大人向けリスキリング市場の自浄エコシステム構築提案。",
+    "deployedAt": "2026-06-17",
+    "updatedAt": "2026-06-17",
+    "sourceDir": "docs/brain-school-proposal",
+    "status": "active"
+  },
+  {
+    "id": "content-concept-lp",
+    "name": "オンラインコンテンツ特化 売れる企画コンセプトの答え",
+    "url": "https://content-concept-lp.surge.sh",
+    "category": "その他",
+    "description": "南幅一刀氏の長文note記事「オンラインコンテンツ特化の売れる企画コンセプトの答え」をLP風のHTMLに変換・デザイン化したページ。",
+    "deployedAt": "2026-06-29",
+    "updatedAt": "2026-06-29",
+    "sourceDir": "docs/concept-lp",
+    "status": "active"
+  },
+  {
+    "id": "sanjukyu-dashboard",
+    "name": "株式会社三十九 プロジェクト管理ダッシュボード",
+    "url": "https://sanjukyu-dashboard.surge.sh",
+    "category": "リッツプロ",
+    "description": "株式会社三十九の伴走型FC事業支援（本部構築・加盟店開発）プロジェクト管理ダッシュボード。カルテ・ガント・議事録・マニュアル体系・成果物管理・ロイヤリティ3案比較を掲載。",
+    "deployedAt": "2026-07-03",
+    "updatedAt": "2026-07-03",
+    "sourceDir": "workspace-os/02-company_knowledge/Fプロダクション/03-Project/ritzpro-sanjukyu/deliverables/dashboard",
     "status": "active"
   }
 ]

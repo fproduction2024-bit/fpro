@@ -4,77 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{CLIENT_COMPANY}} — プロジェクト管理ダッシュボード</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
-            --forest: #2a4418; --forest-light: #345520; --forest-lighter: #3d6626;
-            --gold: #BC9B5D; --gold-light: #D4B87A; --gold-dim: rgba(188,155,93,0.15);
-            --cream: #FCF8ED; --sage: #E0E7D9; --brown: #675045;
-            --white: #f0efe8; --gray: #8a8878;
-            --bg: #1a1a14; --card: #232318; --border: #3a3a2e;
-            --green: #5A8A35; --blue: #6b9cd4; --red: #c45a4a;
+            /* サイドバー面・テーブルヘッダー等の淡いベージュ面（旧: フォレストグリーン系）。名前は互換性のため維持 */
+            --forest: #f1e9d4; --forest-light: #ece1c8; --forest-lighter: #e6d9bc;
+            --gold: #a8862f; --gold-light: #c9a355; --gold-dim: rgba(168,134,47,0.08);
+            --cream: #fdfbf5; --sage: #efe9d8; --brown: #5a4a2e;
+            /* --white はテキスト主色（本テーマでは濃茶）。名前は互換性のため維持 */
+            --white: #2a2519; --gray: #8c8266;
+            --bg: #f6f1e6; --card: #ffffff; --border: #e2d8c2;
+            --green: #2f7d4f; --blue: #2f5fa8; --red: #b3443a; --orange: #b5762a;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Noto Sans JP','Inter',sans-serif; background:var(--bg); color:var(--white); line-height:1.7; min-height:100vh; }
         .layout { display:flex; min-height:100vh; }
-        .sidebar { width:260px; background:var(--forest); border-right:1px solid var(--border); position:fixed; top:0; left:0; bottom:0; overflow-y:auto; z-index:100; }
-        .sidebar-header { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,0.1); }
-        .sidebar-header h1 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--gold); letter-spacing:1px; }
-        .sidebar-header p { font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; }
+        .sidebar { width:260px; background:var(--cream); border-right:1px solid var(--border); position:fixed; top:0; left:0; bottom:0; overflow-y:auto; z-index:100; }
+        .sidebar-header { padding:28px 24px 20px; border-bottom:1px solid var(--border); }
+        .sidebar-header h1 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--gold); letter-spacing:0.03em; }
+        .sidebar-header p { font-size:11px; color:var(--gray); margin-top:4px; }
         .nav-section { padding:16px 0 8px; }
-        .nav-section-title { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4); padding:0 24px; margin-bottom:8px; }
-        .nav-link { display:flex; align-items:center; gap:10px; padding:10px 24px; font-size:13px; color:rgba(255,255,255,0.8); text-decoration:none; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
-        .nav-link:hover { background:var(--forest-light); color:var(--gold-light); }
-        .nav-link.active { background:var(--gold-dim); color:var(--gold); border-left-color:var(--gold); font-weight:600; }
+        .nav-section-title { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:var(--gray); padding:0 24px; margin-bottom:8px; }
+        .nav-link { display:flex; align-items:center; gap:10px; padding:10px 24px; font-size:13px; color:var(--white); opacity:0.75; text-decoration:none; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+        .nav-link:hover { background:var(--forest-light); color:var(--gold); opacity:1; }
+        .nav-link.active { background:var(--gold-dim); color:var(--gold); border-left-color:var(--gold); font-weight:600; opacity:1; }
         .nav-link .icon { font-size:16px; }
-        .nav-badge { margin-left:auto; font-size:10px; background:var(--forest-lighter); color:rgba(255,255,255,0.5); padding:2px 8px; border-radius:10px; font-weight:600; }
+        .nav-badge { margin-left:auto; font-size:10px; background:var(--forest-lighter); color:var(--gray); padding:2px 8px; border-radius:10px; font-weight:600; }
         .main { flex:1; margin-left:260px; padding:32px 40px; max-width:1100px; }
         .section { display:none; animation:fadeIn 0.3s ease; }
         .section.active { display:block; }
         @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         .section-header { margin-bottom:28px; }
-        .section-header h2 { font-family:'Noto Serif JP',serif; font-size:26px; font-weight:700; color:var(--white); display:flex; align-items:center; gap:12px; }
+        .section-header h2 { font-family:'Noto Serif JP',serif; font-size:26px; font-weight:700; color:var(--white); letter-spacing:0.02em; display:flex; align-items:center; gap:12px; position:relative; padding-bottom:14px; }
+        .section-header h2::after { content:''; position:absolute; left:0; bottom:0; width:40px; height:2px; background:var(--gold); }
         .section-header h2 .icon { font-size:28px; }
-        .section-header p { color:var(--gray); font-size:13px; margin-top:6px; }
+        .section-header p { color:var(--gray); font-size:13px; margin-top:14px; }
         .tabs { display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:0; overflow-x:auto; padding-bottom:0; }
         .tab-btn { padding:10px 20px; font-size:13px; font-weight:500; color:var(--gray); background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.2s; white-space:nowrap; font-family:inherit; }
         .tab-btn:hover { color:var(--white); }
         .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
         .tab-panel { display:none; padding:24px 0; }
         .tab-panel.active { display:block; }
-        .md-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:32px; font-size:14px; line-height:1.8; overflow-x:auto; }
-        .md-content h1 { font-family:'Noto Serif JP',serif; font-size:22px; color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:20px; }
-        .md-content h2 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold-light); margin-top:32px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+        .md-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:32px; font-size:14px; line-height:1.8; overflow-x:auto; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .md-content h1 { font-family:'Noto Serif JP',serif; font-size:22px; color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:20px; letter-spacing:0.02em; }
+        .md-content h2 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold); margin-top:32px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); letter-spacing:0.02em; }
         .md-content h3 { font-size:15px; color:var(--white); margin-top:24px; margin-bottom:8px; }
-        .md-content p { margin-bottom:12px; color:#ccc; }
+        .md-content p { margin-bottom:12px; color:var(--white); }
         .md-content ul,.md-content ol { padding-left:24px; margin-bottom:12px; }
-        .md-content li { margin-bottom:4px; color:#ccc; }
+        .md-content li { margin-bottom:4px; color:var(--white); }
         .md-content li input[type="checkbox"] { margin-right:6px; accent-color:var(--gold); }
-        .md-content code { background:var(--forest); color:var(--gold-light); padding:2px 6px; border-radius:4px; font-size:13px; }
+        .md-content code { background:var(--forest); color:var(--brown); padding:2px 6px; border-radius:4px; font-size:13px; }
         .md-content pre { background:var(--forest); border:1px solid var(--border); border-radius:8px; padding:16px; overflow-x:auto; margin-bottom:16px; }
         .md-content pre code { background:none; padding:0; }
         .md-content table { width:100%; border-collapse:collapse; margin-bottom:16px; font-size:13px; }
         .md-content th { background:var(--forest); color:var(--gold); padding:10px 12px; text-align:left; font-weight:600; border:1px solid var(--border); }
-        .md-content td { padding:8px 12px; border:1px solid var(--border); color:#ccc; }
-        .md-content tr:hover td { background:var(--forest); }
-        .md-content blockquote { border-left:3px solid var(--gold); padding:12px 16px; margin:16px 0; background:var(--gold-dim); border-radius:0 8px 8px 0; color:#ddd; }
+        .md-content td { padding:8px 12px; border:1px solid var(--border); color:var(--white); }
+        .md-content tr:hover td { background:var(--forest-light); }
+        .md-content blockquote { border-left:3px solid var(--gold); padding:12px 16px; margin:16px 0; background:var(--gold-dim); border-radius:0 8px 8px 0; color:var(--white); }
         .md-content strong { color:var(--white); }
         .md-content hr { border:none; border-top:1px solid var(--border); margin:24px 0; }
         .overview-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-bottom:32px; }
-        .overview-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; transition:all 0.2s; cursor:pointer; }
-        .overview-card:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+        .overview-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; transition:all 0.2s; cursor:pointer; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .overview-card:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 6px 20px rgba(42,37,25,0.10); }
         .overview-card .card-icon { font-size:28px; margin-bottom:12px; }
         .overview-card .card-title { font-size:14px; font-weight:600; color:var(--white); margin-bottom:4px; }
         .overview-card .card-desc { font-size:12px; color:var(--gray); }
         .overview-card .card-count { font-size:24px; font-weight:700; color:var(--gold); margin-top:12px; font-family:'Inter',sans-serif; }
-        .status-bar { display:flex; gap:24px; padding:16px 24px; background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:24px; flex-wrap:wrap; }
+        .status-bar { display:flex; gap:24px; padding:16px 24px; background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:24px; flex-wrap:wrap; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .status-item { display:flex; align-items:center; gap:8px; font-size:12px; }
         .status-dot { width:8px; height:8px; border-radius:50%; }
         .status-dot.green { background:var(--green); }
         .status-dot.yellow { background:var(--gold); }
         .status-dot.blue { background:var(--blue); }
-        .preview-frame-container { background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+        .preview-frame-container { background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .preview-toolbar { display:flex; align-items:center; justify-content:space-between; padding:12px 20px; background:var(--forest); border-bottom:1px solid var(--border); font-size:12px; color:var(--gray); }
         .preview-toolbar a { color:var(--gold); text-decoration:none; font-weight:600; font-size:12px; }
         .preview-toolbar a:hover { color:var(--gold-light); }
@@ -86,39 +89,57 @@
         ::-webkit-scrollbar-thumb:hover { background:var(--gray); }
 
         /* ── Carte / Form styles ── */
-        .carte-section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; margin-bottom:20px; }
-        .carte-section-title { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+        .carte-section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; margin-bottom:20px; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .carte-section-title { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border); letter-spacing:0.02em; }
         .carte-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
         .carte-grid.full { grid-template-columns:1fr; }
         .carte-field { display:flex; flex-direction:column; gap:4px; }
         .carte-field label { font-size:12px; font-weight:600; color:var(--gray); }
-        .carte-field input, .carte-field textarea, .carte-field select { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px 14px; color:var(--white); font-size:14px; font-family:inherit; transition:border-color 0.2s; }
-        .carte-field input:focus, .carte-field textarea:focus { outline:none; border-color:var(--gold); }
+        .carte-field input, .carte-field textarea, .carte-field select { background:#ffffff; border:1px solid var(--border); border-radius:8px; padding:10px 14px; color:var(--white); font-size:14px; font-family:inherit; transition:border-color 0.2s, box-shadow 0.2s; }
+        .carte-field input:focus, .carte-field textarea:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(168,134,47,0.15); }
         .carte-field textarea { min-height:80px; resize:vertical; }
         .action-item-row { display:grid; grid-template-columns:1fr 120px 120px 100px 32px; gap:8px; align-items:center; margin-bottom:8px; }
-        .action-item-row input, .action-item-row select { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 10px; color:var(--white); font-size:12px; font-family:inherit; }
-        .action-item-row input:focus { outline:none; border-color:var(--gold); }
+        .action-item-row input, .action-item-row select { background:#ffffff; border:1px solid var(--border); border-radius:6px; padding:8px 10px; color:var(--white); font-size:12px; font-family:inherit; }
+        .action-item-row input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(168,134,47,0.15); }
         .action-item-row .remove-action { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; padding:4px; }
         .action-item-header { display:grid; grid-template-columns:1fr 120px 120px 100px 32px; gap:8px; margin-bottom:6px; font-size:11px; color:var(--gray); font-weight:600; }
         .minutes-category { font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:6px; }
         .cat-定例 { background:var(--blue); color:#fff; }
         .cat-臨時 { background:var(--orange); color:#fff; }
         .cat-ヒアリング { background:var(--green); color:#fff; }
-        .cat-キックオフ { background:var(--gold); color:#000; }
-        .cat-セミナー { background:#9b59b6; color:#fff; }
+        .cat-キックオフ { background:var(--gold); color:#fff; }
+        .cat-セミナー { background:#8a5fa8; color:#fff; }
         .cat-その他 { background:var(--gray); color:#fff; }
         .minutes-section-label { font-size:11px; font-weight:700; color:var(--gold); margin-top:10px; margin-bottom:4px; }
         .minutes-actions-table { width:100%; font-size:12px; border-collapse:collapse; margin-top:4px; }
         .minutes-actions-table th { text-align:left; color:var(--gray); font-size:11px; padding:4px 8px; border-bottom:1px solid var(--border); }
-        .minutes-actions-table td { padding:4px 8px; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .minutes-actions-table td { padding:4px 8px; border-bottom:1px solid var(--border); }
         .action-status-done { color:var(--green); }
         .action-status-progress { color:var(--gold); }
         .action-status-todo { color:var(--gray); }
 
+        /* ── Carte: section nav + sticky save bar ── */
+        .carte-body { display:flex; gap:24px; align-items:flex-start; }
+        .carte-main { flex:1; min-width:0; }
+        .carte-sidenav { width:220px; flex-shrink:0; position:sticky; top:20px; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:8px; box-shadow:0 1px 3px rgba(42,37,25,0.06); max-height:calc(100vh - 40px); overflow-y:auto; }
+        .carte-sidenav-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--gray); padding:8px 10px 6px; }
+        .carte-sidenav-item { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px 10px; border-radius:6px; font-size:13px; color:var(--white); cursor:pointer; border-left:2px solid transparent; transition:all 0.15s; line-height:1.4; }
+        .carte-sidenav-item:hover { background:var(--gold-dim); }
+        .carte-sidenav-item.active { background:var(--gold-dim); border-left-color:var(--gold); color:var(--gold); font-weight:600; }
+        .carte-sidenav-item .sidenav-label { flex:1; }
+        .carte-sidenav-count { font-size:11px; color:var(--gray); font-weight:600; white-space:nowrap; }
+        .carte-sidenav-count.complete { color:var(--green); }
+        @media (max-width:1280px) {
+            .carte-sidenav { display:none; }
+        }
+        .carte-savebar { position:sticky; bottom:0; left:0; right:0; background:var(--card); border-top:1px solid var(--border); box-shadow:0 -2px 8px rgba(42,37,25,0.06); padding:12px 20px; margin-top:20px; display:flex; align-items:center; justify-content:space-between; gap:16px; border-radius:0 0 10px 10px; z-index:10; }
+        .carte-savebar-status { font-size:12px; color:var(--gray); display:flex; align-items:center; gap:10px; }
+        .carte-savebar-dirty { color:var(--orange); font-weight:600; }
+
         .carte-actions { display:flex; gap:12px; margin-top:20px; justify-content:flex-end; }
         .btn { padding:10px 24px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all 0.2s; }
-        .btn-primary { background:var(--gold); color:#000; }
-        .btn-primary:hover { background:var(--gold-light); }
+        .btn-primary { background:var(--white); color:#f3ead3; }
+        .btn-primary:hover { background:#3a3325; }
         .btn-secondary { background:var(--forest); color:var(--white); border:1px solid var(--border); }
         .btn-secondary:hover { background:var(--forest-light); }
         .btn-danger { background:var(--red); color:#fff; }
@@ -127,14 +148,21 @@
         .save-toast.show { opacity:1; transform:translateY(0); }
 
         /* ── Gantt ── */
-        .gantt-container { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto; }
+        .gantt-container { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .gantt-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
-        .gantt-toolbar select { background:var(--bg); border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; }
+        .gantt-toolbar select { background:#ffffff; border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; }
         .gantt-table { width:100%; border-collapse:collapse; min-width:900px; }
-        .gantt-table th { background:var(--forest); color:var(--gold); padding:8px 10px; font-size:11px; font-weight:600; border:1px solid var(--border); text-align:center; white-space:nowrap; position:sticky; top:0; }
+        .gantt-table th { background:var(--forest); color:var(--gold); padding:8px 10px; font-size:11px; font-weight:600; border:1px solid var(--border); text-align:center; white-space:nowrap; position:sticky; top:0; z-index:2; }
         .gantt-table td { padding:0; border:1px solid var(--border); height:36px; position:relative; }
         .gantt-table td.task-name { padding:8px 12px; font-size:13px; color:var(--white); white-space:nowrap; min-width:180px; background:var(--card); }
         .gantt-table td.task-status { padding:4px 8px; text-align:center; font-size:11px; min-width:70px; }
+        .gantt-table th.task-name, .gantt-table th.task-status,
+        .gantt-table td.task-name, .gantt-table td.task-status { position:sticky; background:var(--card); }
+        .gantt-table th.task-name, .gantt-table th.task-status { background:var(--forest); z-index:3; }
+        .gantt-table th.task-name, .gantt-table td.task-name { left:0; }
+        .gantt-table th.task-status, .gantt-table td.task-status { left:180px; }
+        .gantt-table th.today-col, .gantt-table td.today-col { background:rgba(168,134,47,0.06); }
+        .gantt-table th.today-col { background:var(--gold); color:#fff; }
         .gantt-bar { position:absolute; top:6px; bottom:6px; border-radius:4px; min-width:4px; cursor:pointer; transition:opacity 0.2s; }
         .gantt-bar:hover { opacity:0.85; }
         .gantt-bar.done { background:var(--green); }
@@ -142,28 +170,59 @@
         .gantt-bar.planned { background:var(--blue); }
         .gantt-bar.delayed { background:var(--red); }
         .status-badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:600; }
-        .status-badge.done { background:rgba(90,138,53,0.2); color:var(--green); }
+        .status-badge.done { background:rgba(47,125,79,0.12); color:var(--green); }
         .status-badge.active { background:var(--gold-dim); color:var(--gold); }
-        .status-badge.planned { background:rgba(107,156,212,0.2); color:var(--blue); }
-        .status-badge.delayed { background:rgba(196,90,74,0.2); color:var(--red); }
+        .status-badge.planned { background:rgba(47,95,168,0.12); color:var(--blue); }
+        .status-badge.delayed { background:rgba(179,68,58,0.12); color:var(--red); }
+
+        /* ── Gantt: summary chips ── */
+        .gantt-chip-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+        .gantt-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:20px; font-size:12px; font-weight:600; cursor:pointer; background:#fff; border:1px solid var(--border); color:var(--white); transition:all 0.15s; }
+        .gantt-chip:hover { border-color:var(--gold); }
+        .gantt-chip.active { color:#fff; border-color:transparent; }
+        .gantt-chip.active[data-status="all"] { background:var(--white); }
+        .gantt-chip.active[data-status="done"] { background:var(--green); }
+        .gantt-chip.active[data-status="active"] { background:var(--gold); }
+        .gantt-chip.active[data-status="planned"] { background:var(--blue); }
+        .gantt-chip.active[data-status="delayed"] { background:var(--red); }
 
         /* ── Minutes ── */
         .minutes-list { display:flex; flex-direction:column; gap:16px; }
-        .minutes-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; }
+        .minutes-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .minutes-card .minutes-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
         .minutes-meta { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
         .minutes-card h3 { color:var(--white); font-size:16px; font-weight:600; margin:0; }
-        .minutes-detail { color:#ccc; font-size:13px; line-height:1.8; }
+        .minutes-detail { color:var(--white); font-size:13px; line-height:1.8; }
         .minutes-detail strong { color:var(--gold); }
         .action-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
         .action-table th { background:var(--forest); color:var(--gold); padding:8px 12px; text-align:left; font-weight:600; border:1px solid var(--border); }
-        .action-table td { padding:8px 12px; border:1px solid var(--border); color:#ccc; }
+        .action-table td { padding:8px 12px; border:1px solid var(--border); color:var(--white); }
+
+        /* ── Minutes: pending actions card ── */
+        .minutes-pending-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; box-shadow:0 1px 3px rgba(42,37,25,0.06); margin-bottom:24px; }
+        .minutes-pending-title { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border); letter-spacing:0.02em; }
+        .minutes-pending-row { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--forest); flex-wrap:wrap; }
+        .minutes-pending-row:last-child { border-bottom:none; }
+        .minutes-pending-task { flex:1; min-width:160px; font-size:13px; color:var(--white); }
+        .minutes-pending-badge { font-size:11px; font-weight:600; padding:3px 10px; border-radius:10px; background:var(--gold-dim); color:var(--gold); white-space:nowrap; }
+        .minutes-pending-badge.owner { background:rgba(47,95,168,0.10); color:var(--blue); }
+        .minutes-pending-deadline { font-size:12px; color:var(--white); white-space:nowrap; }
+        .minutes-pending-deadline.overdue { color:var(--red); font-weight:600; }
+        .minutes-pending-source { font-size:11px; color:var(--gray); white-space:nowrap; }
+
+        /* ── Minutes: timeline ── */
+        .minutes-timeline { position:relative; padding-left:28px; }
+        .minutes-timeline::before { content:''; position:absolute; left:5px; top:6px; bottom:6px; width:2px; background:var(--border); }
+        .minutes-timeline-item { position:relative; margin-bottom:16px; }
+        .minutes-timeline-item:last-child { margin-bottom:0; }
+        .minutes-timeline-node { position:absolute; left:-28px; top:20px; width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--border); }
+        .minutes-timeline-item.latest .minutes-timeline-node { background:var(--gold); border-color:var(--gold); }
 
         /* ── Modal ── */
-        .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:200; align-items:center; justify-content:center; }
+        .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(42,37,25,0.4); z-index:200; align-items:center; justify-content:center; }
         .modal-overlay.show { display:flex; }
-        .modal { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; max-width:600px; width:90%; max-height:80vh; overflow-y:auto; }
-        .modal h3 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold); margin-bottom:20px; }
+        .modal { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; max-width:600px; width:90%; max-height:80vh; overflow-y:auto; box-shadow:0 6px 20px rgba(42,37,25,0.10); }
+        .modal h3 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold); margin-bottom:20px; letter-spacing:0.02em; }
 
         @media (max-width:768px) {
             .sidebar { display:none; }
@@ -174,23 +233,23 @@
         }
 
         /* ── Login Info ── */
-        .login-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:12px; }
+        .login-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:12px; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .login-card .login-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
         .login-card .login-title { font-size:14px; font-weight:600; color:var(--white); display:flex; align-items:center; gap:8px; }
         .login-card .login-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
         .login-field { display:flex; flex-direction:column; gap:2px; }
         .login-field label { font-size:11px; color:var(--gray); }
         .login-field .login-val { display:flex; align-items:center; gap:6px; }
-        .login-field input { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--white); font-size:13px; font-family:inherit; flex:1; }
+        .login-field input { background:#ffffff; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--white); font-size:13px; font-family:inherit; flex:1; }
         .toggle-pw { background:none; border:none; color:var(--gray); cursor:pointer; font-size:14px; padding:4px; }
         .toggle-pw:hover { color:var(--gold); }
         .copy-btn { background:none; border:none; color:var(--gray); cursor:pointer; font-size:12px; padding:4px; }
         .copy-btn:hover { color:var(--gold); }
 
         /* ── Deliverables ── */
-        .deliverable-group { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
-        .deliverable-group h3 { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-        .deliverable-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid rgba(58,58,46,0.5); }
+        .deliverable-group { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .deliverable-group h3 { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); letter-spacing:0.02em; }
+        .deliverable-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
         .deliverable-item:last-child { border-bottom:none; }
         .deliverable-check { width:20px; height:20px; accent-color:var(--gold); cursor:pointer; }
         .deliverable-name { flex:1; font-size:14px; color:var(--white); }
@@ -199,18 +258,70 @@
         .deliverable-link:hover { color:var(--gold-light); }
 
         /* ── Manual ── */
-        .manual-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; cursor:pointer; transition:all 0.2s; }
-        .manual-card:hover { border-color:var(--gold); transform:translateY(-1px); }
+        .manual-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; cursor:pointer; transition:all 0.2s; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .manual-card:hover { border-color:var(--gold); transform:translateY(-1px); box-shadow:0 6px 20px rgba(42,37,25,0.10); }
         .manual-card h3 { font-size:15px; color:var(--white); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
         .manual-card p { font-size:13px; color:var(--gray); }
         .manual-editor { display:none; margin-top:16px; }
         .manual-editor.open { display:block; }
-        .manual-editor textarea { width:100%; min-height:200px; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:16px; color:var(--white); font-size:14px; font-family:inherit; line-height:1.7; resize:vertical; }
+        .manual-editor textarea { width:100%; min-height:200px; background:#ffffff; border:1px solid var(--border); border-radius:8px; padding:16px; color:var(--white); font-size:14px; font-family:inherit; line-height:1.7; resize:vertical; }
 
         /* ── Access Control ── */
-        .access-bar { display:flex; gap:8px; margin-bottom:20px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:10px; align-items:center; flex-wrap:wrap; }
+        .access-bar { display:flex; gap:8px; margin-bottom:20px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:10px; align-items:center; flex-wrap:wrap; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
         .access-bar label { font-size:12px; color:var(--gray); font-weight:600; }
-        .access-select { background:var(--bg); border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; font-size:13px; }
+        .access-select { background:#ffffff; border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; font-size:13px; }
+
+        /* ── Project Home ── */
+        .home-kicker { font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:6px; }
+        .home-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:24px; box-shadow:0 1px 3px rgba(42,37,25,0.06); margin-bottom:20px; }
+        .home-phase-card { position:relative; }
+        .home-phase-hint { position:absolute; top:18px; right:24px; font-size:11px; color:var(--gray); }
+        .home-card-title { font-family:'Noto Serif JP',serif; font-size:15px; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); letter-spacing:0.02em; }
+
+        /* Phase stepper */
+        .phase-stepper { display:flex; align-items:flex-start; padding-top:8px; }
+        .phase-step { display:flex; flex-direction:column; align-items:center; flex:1; cursor:pointer; position:relative; }
+        .phase-step-circle { width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Inter',sans-serif; transition:all 0.2s; }
+        .phase-step.done .phase-step-circle { background:var(--green); color:#fff; }
+        .phase-step.current .phase-step-circle { background:var(--gold); color:#fff; }
+        .phase-step.future .phase-step-circle { background:#fff; border:1.5px solid var(--border); color:var(--gray); }
+        .phase-step-label { margin-top:8px; font-size:12px; color:var(--gray); text-align:center; }
+        .phase-step.current .phase-step-label { color:var(--white); font-weight:700; }
+        .phase-step.done .phase-step-label { color:var(--white); }
+        .phase-connector { flex:1; height:2px; background:var(--border); margin-top:18px; }
+        .phase-connector.done { background:var(--green); }
+
+        /* KPI cards */
+        .home-kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:20px; }
+        .home-kpi-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px 20px; box-shadow:0 1px 3px rgba(42,37,25,0.06); }
+        .home-kpi-label { font-size:12px; color:var(--gray); margin-bottom:8px; }
+        .home-kpi-value { font-family:'Noto Serif JP',serif; font-size:26px; color:var(--white); font-weight:700; display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+        .home-kpi-value.gold { color:var(--gold); }
+        .home-kpi-sub { font-size:12px; color:var(--white); }
+        .home-kpi-alert { font-size:12px; color:var(--red); font-weight:700; }
+
+        /* 2-column row */
+        .home-2col { display:grid; grid-template-columns:1.4fr 1fr; gap:16px; margin-bottom:20px; }
+
+        /* Next actions list */
+        .home-action-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid var(--forest); }
+        .home-action-row:last-child { border-bottom:none; }
+        .home-action-name { font-size:13px; color:var(--white); }
+        .home-action-badge { font-size:11px; font-weight:600; padding:3px 10px; border-radius:10px; background:var(--gold-dim); color:var(--gold); white-space:nowrap; }
+        .home-action-badge.owner { background:rgba(47,95,168,0.10); color:var(--blue); }
+        .home-empty-state { font-size:13px; color:var(--gray); padding:12px 0; }
+
+        /* Deliverables mini progress */
+        .home-progress-block { margin-bottom:18px; cursor:pointer; }
+        .home-progress-block:last-child { margin-bottom:0; }
+        .home-progress-label { font-size:11px; color:var(--gray); margin-bottom:6px; display:flex; justify-content:space-between; }
+        .home-progress-track { width:100%; height:6px; background:var(--forest); border-radius:3px; overflow:hidden; }
+        .home-progress-bar { height:100%; background:var(--gold); border-radius:3px; transition:width 0.3s; }
+
+        @media (max-width:768px) {
+            .home-kpi-grid { grid-template-columns:1fr 1fr; }
+            .home-2col { grid-template-columns:1fr; }
+        }
     </style>
 </head>
 <body>
@@ -221,139 +332,73 @@
             <p>プロジェクト管理ダッシュボード</p>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">概要</div>
-            <a class="nav-link active" data-section="overview"><span class="icon">📊</span> ダッシュボード</a>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">プロジェクト管理</div>
-            <a class="nav-link" data-section="carte"><span class="icon">📋</span> お客様カルテ</a>
-            <a class="nav-link" data-section="gantt"><span class="icon">📅</span> ガントチャート</a>
+            <div class="nav-section-title">プロジェクト</div>
+            <a class="nav-link active" data-section="overview"><span class="icon">🏠</span> ホーム</a>
+            <a class="nav-link" data-section="gantt"><span class="icon">📅</span> スケジュール</a>
             <a class="nav-link" data-section="minutes"><span class="icon">📝</span> 議事録</a>
-            <a class="nav-link" data-section="manual"><span class="icon">📖</span> マニュアル</a>
-            <a class="nav-link" data-section="deliverables"><span class="icon">📦</span> 成果物管理</a>
-            <a class="nav-link" data-section="logins"><span class="icon">🔐</span> ログイン情報</a>
+            <a class="nav-link" data-section="deliverables"><span class="icon">📦</span> 成果物</a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">広告</div>
+            <div class="nav-section-title">戦略・設計</div>
+            <a class="nav-link" data-section="carte"><span class="icon">📋</span> お客様カルテ</a>
+            <a class="nav-link" data-section="manual"><span class="icon">📖</span> マニュアル</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">制作物</div>
             <a class="nav-link" data-section="ads"><span class="icon">🎨</span> 広告クリエイティブ<span class="nav-badge">4</span></a>
             <a class="nav-link" data-section="ad-ops"><span class="icon">📈</span> 広告運用設計<span class="nav-badge">1</span></a>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">Webページ</div>
             <a class="nav-link" data-section="pages"><span class="icon">🌐</span> LP・Webページ<span class="nav-badge">4</span></a>
-        </div>
-        <div class="nav-section">
-            <div class="nav-section-title">セミナー</div>
             <a class="nav-link" data-section="seminar"><span class="icon">🎓</span> セミナースライド<span class="nav-badge">40枚</span></a>
+            <a class="nav-link" data-section="flow"><span class="icon">🔗</span> 申込み導線<span class="nav-badge">1</span></a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">導線・運用</div>
-            <a class="nav-link" data-section="flow"><span class="icon">🔗</span> 申込み導線<span class="nav-badge">1</span></a>
+            <div class="nav-section-title">管理</div>
+            <a class="nav-link" data-section="logins"><span class="icon">🔐</span> ログイン情報</a>
+        </div>
+        <div style="padding:20px 24px; margin-top:12px; border-top:1px solid var(--border);">
+            <div style="background:var(--cream); border:1px solid var(--border); border-radius:8px; padding:10px 14px;">
+                <div style="font-size:11px; color:var(--gray);">担当</div>
+                <div style="font-size:13px; color:var(--white); font-weight:600; margin-top:2px;">Fプロダクション 古橋</div>
+            </div>
         </div>
     </nav>
 
     <main class="main">
 
-        <!-- ========== Overview ========== -->
+        <!-- ========== Overview / Project Home ========== -->
         <div class="section active" id="overview">
             <div class="section-header">
-                <h2><span class="icon">📊</span> プロジェクト管理ダッシュボード</h2>
-                <p>{{CLIENT_COMPANY}} — {{BRAND_NAME}} FC事業支援 全体管理</p>
+                <div class="home-kicker">PROJECT HOME</div>
+                <h2><span class="icon">🏠</span> FC本部構築プロジェクト</h2>
+                <p>{{CLIENT_COMPANY}} — {{BRAND_NAME}} FC事業支援</p>
             </div>
+
+            <!-- Phase Stepper -->
+            <div class="home-card home-phase-card">
+                <div class="home-phase-hint">クリックで現在フェーズを変更</div>
+                <div class="phase-stepper" id="phase-stepper"></div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="home-kpi-grid" id="home-kpi-grid"></div>
+
+            <!-- 2-column row -->
+            <div class="home-2col">
+                <div class="home-card">
+                    <div class="home-card-title">次のアクション</div>
+                    <div id="home-next-actions"></div>
+                </div>
+                <div class="home-card">
+                    <div class="home-card-title">成果物の進捗</div>
+                    <div id="home-deliverables-progress"></div>
+                </div>
+            </div>
+
             <div class="status-bar">
                 <div class="status-item"><span class="status-dot green"></span> 広告クリエイティブ 4種 完成</div>
                 <div class="status-item"><span class="status-dot green"></span> LP・Webページ 4点 デプロイ済</div>
                 <div class="status-item"><span class="status-dot green"></span> セミナースライド 40枚 完成</div>
                 <div class="status-item"><span class="status-dot blue"></span> 広告運用設計 テスト計画策定済</div>
-            </div>
-            <div class="overview-grid">
-                <div class="overview-card" onclick="navigate('carte')">
-                    <div class="card-icon">📋</div>
-                    <div class="card-title">お客様カルテ</div>
-                    <div class="card-desc">顧客情報・ヒアリング・戦略設計</div>
-                    <div class="card-count">4シート</div>
-                </div>
-                <div class="overview-card" onclick="navigate('gantt')">
-                    <div class="card-icon">📅</div>
-                    <div class="card-title">ガントチャート</div>
-                    <div class="card-desc">プロジェクト進行管理</div>
-                    <div class="card-count" id="gantt-task-count">—</div>
-                </div>
-                <div class="overview-card" onclick="navigate('minutes')">
-                    <div class="card-icon">📝</div>
-                    <div class="card-title">議事録</div>
-                    <div class="card-desc">ミーティング記録・アクション管理</div>
-                    <div class="card-count" id="minutes-count">—</div>
-                </div>
-                <div class="overview-card" onclick="navigate('manual')">
-                    <div class="card-icon">📖</div>
-                    <div class="card-title">マニュアル</div>
-                    <div class="card-desc">本部構築・業務マニュアル</div>
-                    <div class="card-count" id="manual-count">—</div>
-                </div>
-                <div class="overview-card" onclick="navigate('deliverables')">
-                    <div class="card-icon">📦</div>
-                    <div class="card-title">成果物管理</div>
-                    <div class="card-desc">本部構築・加盟店開発の成果物</div>
-                    <div class="card-count" id="deliverables-count">—</div>
-                </div>
-                <div class="overview-card" onclick="navigate('logins')">
-                    <div class="card-icon">🔐</div>
-                    <div class="card-title">ログイン情報</div>
-                    <div class="card-desc">各種サービスのアクセス情報</div>
-                    <div class="card-count" id="logins-count">—</div>
-                </div>
-                <div class="overview-card" onclick="navigate('ads')">
-                    <div class="card-icon">🎨</div>
-                    <div class="card-title">広告クリエイティブ</div>
-                    <div class="card-desc">バナー・動画台本・コピー・カルーセル</div>
-                    <div class="card-count">4種</div>
-                </div>
-                <div class="overview-card" onclick="navigate('pages')">
-                    <div class="card-icon">🌐</div>
-                    <div class="card-title">LP・Webページ</div>
-                    <div class="card-desc">FC募集LP・サンクス・セミナー案内・提案書</div>
-                    <div class="card-count">4点</div>
-                </div>
-                <div class="overview-card" onclick="navigate('seminar')">
-                    <div class="card-icon">🎓</div>
-                    <div class="card-title">セミナースライド</div>
-                    <div class="card-desc">FC説明会 全6部構成</div>
-                    <div class="card-count">40枚</div>
-                </div>
-                <div class="overview-card" onclick="navigate('ad-ops')">
-                    <div class="card-icon">📈</div>
-                    <div class="card-title">広告運用設計</div>
-                    <div class="card-desc">キャンペーン設計・A/Bテスト計画</div>
-                    <div class="card-count">1式</div>
-                </div>
-                <div class="overview-card" onclick="navigate('flow')">
-                    <div class="card-icon">🔗</div>
-                    <div class="card-title">申込み導線</div>
-                    <div class="card-desc">フォーム・LINE公式・メール</div>
-                    <div class="card-count">3種</div>
-                </div>
-            </div>
-            <div style="margin-top:8px;">
-                <h3 style="font-family:'Noto Serif JP',serif;font-size:16px;color:var(--gold);margin-bottom:16px;">🔗 デプロイ済みページ</h3>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                    <a href="https://rtma-on-fc-lp.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
-                        <div style="font-size:13px;font-weight:600;">FC募集LP</div>
-                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-lp.surge.sh</div>
-                    </a>
-                    <a href="https://rtma-on-fc-thanks.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
-                        <div style="font-size:13px;font-weight:600;">サンクスページ</div>
-                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-thanks.surge.sh</div>
-                    </a>
-                    <a href="https://rtma-on-fc-seminar.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
-                        <div style="font-size:13px;font-weight:600;">セミナー案内ページ</div>
-                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-seminar.surge.sh</div>
-                    </a>
-                    <a href="https://rtma-on-fc-proposal.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
-                        <div style="font-size:13px;font-weight:600;">個別面談用提案書</div>
-                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-proposal.surge.sh</div>
-                    </a>
-                </div>
             </div>
         </div>
 
@@ -361,13 +406,17 @@
         <div class="section" id="carte">
             <div class="section-header">
                 <h2><span class="icon">📋</span> お客様カルテ</h2>
-                <p>{{CLIENT_COMPANY}} 嶋岡様 — 顧客情報・ヒアリング・コンセプト設計</p>
+                <p>{{CLIENT_COMPANY}} {{CLIENT_CEO}}様 — 顧客情報・ヒアリング・営業資料・コンセプト設計</p>
             </div>
             <div class="tabs">
                 <button class="tab-btn active" data-target="carte-info">顧客情報</button>
                 <button class="tab-btn" data-target="carte-hearing1">ヒアリング①</button>
                 <button class="tab-btn" data-target="carte-hearing2">ヒアリング②</button>
+                <button class="tab-btn" data-target="carte-sales">営業資料</button>
             </div>
+
+            <div class="carte-body">
+            <div class="carte-main">
 
             <!-- Tab: 顧客情報 -->
             <div class="tab-panel active" id="carte-info">
@@ -424,9 +473,6 @@
                         <div class="carte-field"><label>顧客インタビュー② 〇〇様</label><input type="url" id="c-interview2" placeholder="https://"></div>
                         <div class="carte-field"><label>顧客インタビュー③ 〇〇様</label><input type="url" id="c-interview3" placeholder="https://"></div>
                     </div>
-                </div>
-                <div class="carte-actions">
-                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
                 </div>
             </div>
 
@@ -621,9 +667,6 @@
                             </textarea></div>
                     </div>
                 </div>
-                <div class="carte-actions">
-                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
-                </div>
             </div>
 
             <!-- Tab: ヒアリング② -->
@@ -698,16 +741,100 @@
                             </textarea></div>
                     </div>
                 </div>
-                <div class="carte-actions">
-                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
+            </div>
+
+            <!-- Tab: 営業資料 -->
+            <div class="tab-panel" id="carte-sales">
+                <div class="carte-section">
+                    <div class="carte-section-title">📖 導入・つかみ</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>タイトル</label><textarea id="s-title" placeholder="営業資料の表紙タイトル"></textarea></div>
+                        <div class="carte-field"><label>なぜ、FCを募集するのか？</label><textarea id="s-why-fc" placeholder="FC募集の理由・ストーリー"></textarea></div>
+                        <div class="carte-field"><label>ブランドの強み（6個程度）</label><textarea id="s-strengths" placeholder="ブランドの強みを6個程度、箇条書きで"></textarea></div>
+                        <div class="carte-field"><label>ブランドとは？</label><textarea id="s-brand-about" placeholder="ブランドのコンセプト・世界観の説明"></textarea></div>
+                        <div class="carte-field"><label>ブランド成功の定義</label><textarea id="s-brand-success" placeholder="このブランドにおける「成功」の定義"></textarea></div>
+                        <div class="carte-field"><label>成功までのロードマップ</label><textarea id="s-roadmap" placeholder="加盟から成功までのステップ・タイムライン"></textarea></div>
+                    </div>
                 </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🏢 会社・市場</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>会社概要</label><textarea id="s-company-profile" placeholder="会社概要（沿革・所在地・事業内容等）"></textarea></div>
+                        <div class="carte-field"><label>MVV</label><textarea id="s-mvv" placeholder="ミッション・ビジョン・バリュー"></textarea></div>
+                        <div class="carte-field"><label>業界市場状況</label><textarea id="s-market-status" placeholder="業界の市場規模・トレンド・成長性"></textarea></div>
+                        <div class="carte-field"><label>お客様から見るブランドのニーズ</label><textarea id="s-customer-needs" placeholder="エンドユーザーが求めているもの"></textarea></div>
+                        <div class="carte-field"><label>スタッフから見るブランドのニーズ</label><textarea id="s-staff-needs" placeholder="働く側から見た魅力・ニーズ"></textarea></div>
+                        <div class="carte-field"><label>出店する魅力</label><textarea id="s-store-appeal" placeholder="オーナーにとっての出店メリット"></textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🔥 業界課題と成功要因</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>なぜ、この業界はうまくいかないのか？</label><textarea id="s-industry-fail" placeholder="業界でよくある失敗要因"></textarea></div>
+                        <div class="carte-field"><label>業界オーナーの悩み</label><textarea id="s-owner-pain" placeholder="既存オーナーが抱える悩み・課題"></textarea></div>
+                        <div class="carte-field"><label>業界成功の秘訣</label><textarea id="s-industry-success" placeholder="成功しているオーナー・店舗の共通点"></textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">💎 ビジネスモデル・技術</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>ビジネスモデル（売上・集客・採用の仕組み）</label><textarea id="s-biz-model" placeholder="収益構造・集客導線・採用の仕組み"></textarea></div>
+                        <div class="carte-field"><label>技術紹介</label><textarea id="s-tech-intro" placeholder="独自技術・サービスの特徴"></textarea></div>
+                        <div class="carte-field"><label>お客様の属性</label><textarea id="s-customer-profile" placeholder="ターゲット顧客の属性・ペルソナ"></textarea></div>
+                        <div class="carte-field"><label>他社（業界）との比較（なぜ勝てるのか）</label><textarea id="s-competitor-comparison" placeholder="競合比較表・優位性の根拠"></textarea></div>
+                        <div class="carte-field"><label>店舗イメージ（内装・外装）</label><textarea id="s-store-image" placeholder="内装・外装写真の説明、掲載予定素材"></textarea></div>
+                        <div class="carte-field"><label>サービス・商品紹介一覧</label><textarea id="s-service-list" placeholder="提供サービス・商品のラインナップ"></textarea></div>
+                        <div class="carte-field"><label>施術イメージ写真</label><textarea id="s-treatment-photos" placeholder="施術シーンの写真素材・説明"></textarea></div>
+                        <div class="carte-field"><label>施術BA（ビフォーアフター）</label><textarea id="s-before-after" placeholder="ビフォーアフター実績・素材"></textarea></div>
+                        <div class="carte-field"><label>口コミ</label><textarea id="s-reviews" placeholder="お客様の口コミ・評判"></textarea></div>
+                        <div class="carte-field"><label>すごい技術の秘訣</label><textarea id="s-tech-secret" placeholder="技術・ノウハウの差別化ポイント"></textarea></div>
+                        <div class="carte-field"><label>楽しく、みんなで高めあう会社です</label><textarea id="s-culture" placeholder="社内カルチャー・チームの雰囲気"></textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">💰 収益・費用</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>経営パッケージ</label><textarea id="s-mgmt-package" placeholder="加盟パッケージの内容・提供物"></textarea></div>
+                        <div class="carte-field"><label>収益シミュレーション</label><textarea id="s-revenue-sim" placeholder="月次・年次の収益シミュレーション"></textarea></div>
+                        <div class="carte-field"><label>開業費用</label><textarea id="s-opening-cost" placeholder="開業に必要な費用の総額・内訳"></textarea></div>
+                        <div class="carte-field"><label>実際の本部の開業費用の内訳</label><textarea id="s-hq-cost-detail" placeholder="本部直営店の実際の開業費用内訳"></textarea></div>
+                        <div class="carte-field"><label>売上アップ計画（3年分）</label><textarea id="s-growth-plan" placeholder="1〜3年目の売上成長計画"></textarea></div>
+                        <div class="carte-field"><label>実際の月次例</label><textarea id="s-monthly-example" placeholder="実店舗の月次売上・収支の実例"></textarea></div>
+                        <div class="carte-field"><label>オーナーの声</label><textarea id="s-owner-voice" placeholder="既存加盟オーナーの声・体験談"></textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🤝 サポート・加盟条件・クロージング</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>本部からの支援</label><textarea id="s-hq-support" placeholder="本部が提供するサポート内容"></textarea></div>
+                        <div class="carte-field"><label>加盟店がやること</label><textarea id="s-franchisee-tasks" placeholder="加盟店側が担う業務・役割"></textarea></div>
+                        <div class="carte-field"><label>役割分担</label><textarea id="s-role-split" placeholder="本部と加盟店の役割分担表"></textarea></div>
+                        <div class="carte-field"><label>本部からのお願い</label><textarea id="s-hq-request" placeholder="加盟店に守ってほしいルール・お願い事項"></textarea></div>
+                        <div class="carte-field"><label>加盟条件</label><textarea id="s-terms" placeholder="加盟に必要な条件・審査基準"></textarea></div>
+                        <div class="carte-field"><label>今だけのキャンペーン価格</label><textarea id="s-campaign-price" placeholder="期間限定キャンペーン・特典価格"></textarea></div>
+                        <div class="carte-field"><label>OPENまでの流れ</label><textarea id="s-open-flow" placeholder="契約からOPENまでのステップ"></textarea></div>
+                        <div class="carte-field"><label>補足資料</label><textarea id="s-appendix" placeholder="その他添付資料・補足情報"></textarea></div>
+                    </div>
+                </div>
+            </div>
+
+            </div><!-- /.carte-main -->
+            <nav class="carte-sidenav" id="carte-sidenav"></nav>
+            </div><!-- /.carte-body -->
+
+            <div class="carte-savebar" id="carte-savebar">
+                <div class="carte-savebar-status">
+                    <span id="carte-savebar-time">未保存</span>
+                    <span class="carte-savebar-dirty" id="carte-savebar-dirty" style="display:none;">●未保存の変更があります</span>
+                </div>
+                <button class="btn btn-primary" onclick="saveCarteFromBar()">💾 保存する</button>
             </div>
         </div>
 
         <!-- ========== Gantt Section ========== -->
         <div class="section" id="gantt">
             <div class="section-header">
-                <h2><span class="icon">📅</span> ガントチャート</h2>
+                <h2><span class="icon">📅</span> スケジュール</h2>
                 <p>プロジェクト進行管理 — タスク一覧とスケジュール</p>
             </div>
             <div class="gantt-container">
@@ -719,6 +846,7 @@
                     </div>
                     <button class="btn btn-sm btn-primary" onclick="openTaskModal()">＋ タスク追加</button>
                 </div>
+                <div class="gantt-chip-row" id="gantt-chip-row"></div>
                 <div style="overflow-x:auto;">
                     <table class="gantt-table" id="gantt-table"></table>
                 </div>
@@ -740,7 +868,16 @@
             <div style="margin-bottom:20px;">
                 <button class="btn btn-primary" onclick="openMinutesModal()">＋ 新規議事録を作成</button>
             </div>
-            <div class="minutes-list" id="minutes-list"></div>
+
+            <!-- 未完了アクション集約カード -->
+            <div class="minutes-pending-card" id="minutes-pending-card">
+                <div class="minutes-pending-title">🎯 未完了のアクション</div>
+                <div id="minutes-pending-list"></div>
+            </div>
+
+            <div class="minutes-timeline" id="minutes-timeline">
+                <div class="minutes-list" id="minutes-list"></div>
+            </div>
         </div>
 
 
@@ -759,7 +896,7 @@
         <!-- ========== Deliverables Section ========== -->
         <div class="section" id="deliverables">
             <div class="section-header">
-                <h2><span class="icon">📦</span> 成果物管理</h2>
+                <h2><span class="icon">📦</span> 成果物</h2>
                 <p>本部構築・加盟店開発に必要な成果物のチェックリスト</p>
             </div>
             <div class="tabs">
@@ -833,26 +970,26 @@
             </div>
             <div class="tab-panel active" id="page-lp">
                 <div class="preview-frame-container">
-                    <div class="preview-toolbar"><span>FC募集LP — rtma-on-fc-lp.surge.sh</span><a href="https://rtma-on-fc-lp.surge.sh" target="_blank">新規タブで開く ↗</a></div>
-                    <iframe class="preview-frame" src="https://rtma-on-fc-lp.surge.sh" loading="lazy"></iframe>
+                    <div class="preview-toolbar"><span>FC募集LP — {{LP_URL}}</span><a href="{{LP_URL}}" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="{{LP_URL}}" loading="lazy"></iframe>
                 </div>
             </div>
             <div class="tab-panel" id="page-thanks">
                 <div class="preview-frame-container">
-                    <div class="preview-toolbar"><span>サンクスページ — rtma-on-fc-thanks.surge.sh</span><a href="https://rtma-on-fc-thanks.surge.sh" target="_blank">新規タブで開く ↗</a></div>
-                    <iframe class="preview-frame" src="https://rtma-on-fc-thanks.surge.sh" loading="lazy"></iframe>
+                    <div class="preview-toolbar"><span>サンクスページ — {{THANKS_URL}}</span><a href="{{THANKS_URL}}" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="{{THANKS_URL}}" loading="lazy"></iframe>
                 </div>
             </div>
             <div class="tab-panel" id="page-seminar">
                 <div class="preview-frame-container">
-                    <div class="preview-toolbar"><span>セミナー案内ページ — rtma-on-fc-seminar.surge.sh</span><a href="https://rtma-on-fc-seminar.surge.sh" target="_blank">新規タブで開く ↗</a></div>
-                    <iframe class="preview-frame" src="https://rtma-on-fc-seminar.surge.sh" loading="lazy"></iframe>
+                    <div class="preview-toolbar"><span>セミナー案内ページ — {{SEMINAR_URL}}</span><a href="{{SEMINAR_URL}}" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="{{SEMINAR_URL}}" loading="lazy"></iframe>
                 </div>
             </div>
             <div class="tab-panel" id="page-proposal">
                 <div class="preview-frame-container">
-                    <div class="preview-toolbar"><span>個別面談用提案書 — rtma-on-fc-proposal.surge.sh</span><a href="https://rtma-on-fc-proposal.surge.sh" target="_blank">新規タブで開く ↗</a></div>
-                    <iframe class="preview-frame" src="https://rtma-on-fc-proposal.surge.sh" loading="lazy"></iframe>
+                    <div class="preview-toolbar"><span>個別面談用提案書 — {{PROPOSAL_URL}}</span><a href="{{PROPOSAL_URL}}" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="{{PROPOSAL_URL}}" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -876,7 +1013,7 @@
         </div>
 
         <div class="footer">
-            黄土よもぎ蒸し専門店「ON」FC事業部 — {{CLIENT_COMPANY}} / 運営支援：リッツプロ
+            {{BRAND_NAME}} FC事業部 — {{CLIENT_COMPANY}} / 運営支援：リッツプロ
         </div>
     </main>
 </div>
@@ -973,6 +1110,8 @@ function navigate(sectionId) {
         firstTab.classList.add('active');
         document.getElementById(firstTab.dataset.target).classList.add('active');
     }
+    if (sectionId === 'overview' && typeof renderHome === 'function') renderHome();
+    if (sectionId === 'carte' && typeof carteBuildSideNav === 'function') setTimeout(carteBuildSideNav, 0);
 }
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => navigate(link.dataset.section));
@@ -995,8 +1134,20 @@ function showToast(msg) {
     setTimeout(() => t.classList.remove('show'), 2000);
 }
 
+// Safe date parsing — never throws, returns null on invalid input
+function safeParseDate(value) {
+    if (!value) return null;
+    try {
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return null;
+        return d;
+    } catch (e) {
+        return null;
+    }
+}
+
 // ── Carte Save/Load ──
-const CARTE_KEY = 'rtma-carte-data';
+const CARTE_KEY = '{{STORAGE_PREFIX}}-carte-data';
 function getCarteFields() {
     return document.querySelectorAll('#carte input, #carte textarea, #carte select');
 }
@@ -1018,11 +1169,135 @@ function loadCarte() {
     } catch(e) {}
 }
 loadCarte();
+
+// ── Carte: section nav (scrollspy) + sticky save bar ──
+const CARTE_SAVED_AT_KEY = '{{STORAGE_PREFIX}}-carte-saved-at';
+let carteDirty = false;
+let carteNavObserver = null;
+let carteCountDebounceTimer = null;
+
+function carteFormatSavedAt(ts) {
+    if (!ts) return '未保存';
+    const d = new Date(parseInt(ts, 10));
+    if (isNaN(d.getTime())) return '未保存';
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    return `最終保存 ${hh}:${mm}`;
+}
+
+function carteRenderSavedAt() {
+    const el = document.getElementById('carte-savebar-time');
+    if (!el) return;
+    el.textContent = carteFormatSavedAt(localStorage.getItem(CARTE_SAVED_AT_KEY));
+}
+
+function carteSetDirty(dirty) {
+    carteDirty = dirty;
+    const el = document.getElementById('carte-savebar-dirty');
+    if (el) el.style.display = dirty ? 'inline' : 'none';
+}
+
+function saveCarteFromBar() {
+    saveCarte();
+    localStorage.setItem(CARTE_SAVED_AT_KEY, String(Date.now()));
+    carteSetDirty(false);
+    carteRenderSavedAt();
+    carteRenderSideNav();
+}
+
+function carteGetActivePanel() {
+    return document.querySelector('#carte .tab-panel.active');
+}
+
+function carteBuildSideNav() {
+    const nav = document.getElementById('carte-sidenav');
+    if (!nav) return;
+    const panel = carteGetActivePanel();
+    if (!panel) { nav.innerHTML = ''; return; }
+    const sections = Array.from(panel.querySelectorAll('.carte-section'));
+
+    // Ensure each section has a stable id for anchoring/observing
+    sections.forEach((sec, i) => {
+        if (!sec.id) sec.id = `${panel.id}-sec-${i}`;
+    });
+
+    nav.innerHTML = `<div class="carte-sidenav-title">セクション</div>` + sections.map(sec => {
+        const titleEl = sec.querySelector('.carte-section-title');
+        const title = titleEl ? titleEl.textContent.trim() : 'セクション';
+        return `<div class="carte-sidenav-item" data-target="${sec.id}">
+            <span class="sidenav-label">${title}</span>
+            <span class="carte-sidenav-count" data-count-for="${sec.id}"></span>
+        </div>`;
+    }).join('');
+
+    nav.querySelectorAll('.carte-sidenav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const target = document.getElementById(item.dataset.target);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    carteUpdateCounts();
+    carteObserveSections(sections);
+}
+
+function carteUpdateCounts() {
+    const panel = carteGetActivePanel();
+    if (!panel) return;
+    panel.querySelectorAll('.carte-section').forEach(sec => {
+        if (!sec.id) return;
+        const fields = sec.querySelectorAll('input, textarea, select');
+        const total = fields.length;
+        let filled = 0;
+        fields.forEach(f => { if (f.value && String(f.value).trim() !== '') filled++; });
+        const countEl = document.querySelector(`.carte-sidenav-count[data-count-for="${sec.id}"]`);
+        if (!countEl) return;
+        const isComplete = total > 0 && filled === total;
+        countEl.classList.toggle('complete', isComplete);
+        countEl.textContent = isComplete ? `✓ ${filled}/${total}` : `${filled}/${total}`;
+    });
+}
+
+function carteObserveSections(sections) {
+    if (carteNavObserver) { carteNavObserver.disconnect(); carteNavObserver = null; }
+    if (!('IntersectionObserver' in window) || sections.length === 0) return;
+    carteNavObserver = new IntersectionObserver((entries) => {
+        // Pick the entry closest to the top of the viewport among intersecting ones
+        let best = null;
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!best || entry.boundingClientRect.top < best.boundingClientRect.top) best = entry;
+            }
+        });
+        if (!best) return;
+        document.querySelectorAll('.carte-sidenav-item').forEach(item => item.classList.remove('active'));
+        const activeItem = document.querySelector(`.carte-sidenav-item[data-target="${best.target.id}"]`);
+        if (activeItem) activeItem.classList.add('active');
+    }, { root: null, rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    sections.forEach(sec => carteNavObserver.observe(sec));
+}
+
+document.querySelectorAll('#carte .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Wait for the tab-panel active class to switch (generic handler runs first since it was bound earlier)
+        setTimeout(carteBuildSideNav, 0);
+    });
+});
+
+document.getElementById('carte').addEventListener('input', (e) => {
+    if (!e.target.matches('input, textarea, select')) return;
+    carteSetDirty(true);
+    clearTimeout(carteCountDebounceTimer);
+    carteCountDebounceTimer = setTimeout(carteUpdateCounts, 300);
+});
+
+carteRenderSavedAt();
+carteBuildSideNav();
 </script>
 
 <script>
 // ── Gantt Chart ──
-const GANTT_KEY = 'rtma-gantt-tasks';
+const GANTT_KEY = '{{STORAGE_PREFIX}}-gantt-tasks';
 let ganttYear = 2026, ganttMonth = 2; // 0-indexed: 2 = March
 let editingTaskIdx = -1;
 
@@ -1034,11 +1309,7 @@ const defaultTasks = [
     { name:'提案書作成', status:'done', start:'2025-01-15', end:'2025-02-20' },
     { name:'広告運用設計', status:'done', start:'2025-02-01', end:'2025-02-28' },
     { name:'契約書整備', status:'active', start:'2026-03-01', end:'2026-03-15' },
-    { name:'Meta広告アカウント作成', status:'active', start:'2026-03-03', end:'2026-03-10' },
-    { name:'大阪店オープン準備', status:'active', start:'2026-03-03', end:'2026-03-11' },
-    { name:'写真素材撮影・共有', status:'planned', start:'2026-03-05', end:'2026-03-15' },
     { name:'セミナー開催（週2-3回）', status:'planned', start:'2026-03-10', end:'2026-04-30' },
-    { name:'クラウドサイン導入', status:'planned', start:'2026-03-10', end:'2026-03-20' },
     { name:'マニュアル化サポート', status:'planned', start:'2026-03-15', end:'2026-04-15' },
     { name:'0次募集 加盟店開拓', status:'planned', start:'2026-03-15', end:'2026-05-31' },
 ];
@@ -1052,22 +1323,53 @@ function saveGanttTasks(tasks) {
     localStorage.setItem(GANTT_KEY, JSON.stringify(tasks));
 }
 
+let ganttStatusFilter = 'all';
+
+function ganttSetFilter(status) {
+    ganttStatusFilter = status;
+    renderGantt();
+}
+
+function ganttRenderChips(allTasks) {
+    const row = document.getElementById('gantt-chip-row');
+    if (!row) return;
+    const counts = { done:0, active:0, planned:0, delayed:0 };
+    allTasks.forEach(t => { if (counts[t.status] !== undefined) counts[t.status]++; });
+    const chips = [
+        { status:'all', label:'すべて', count:allTasks.length },
+        { status:'done', label:'✓完了', count:counts.done },
+        { status:'active', label:'●進行中', count:counts.active },
+        { status:'planned', label:'○予定', count:counts.planned },
+        { status:'delayed', label:'!遅延', count:counts.delayed },
+    ];
+    row.innerHTML = chips.map(c => `<button type="button" class="gantt-chip ${ganttStatusFilter === c.status ? 'active' : ''}" data-status="${c.status}" onclick="ganttSetFilter('${c.status}')">${c.label} ${c.count}</button>`).join('');
+}
+
 function renderGantt() {
-    const tasks = loadGanttTasks();
+    const allTasks = loadGanttTasks();
+    const tasks = ganttStatusFilter === 'all' ? allTasks : allTasks.filter(t => t.status === ganttStatusFilter);
     const table = document.getElementById('gantt-table');
     const daysInMonth = new Date(ganttYear, ganttMonth + 1, 0).getDate();
     const monthNames = ['1月','2月','3月','','5月','6月','7月','8月','9月','10月','11月','12月'];
     document.getElementById('gantt-month-label').textContent = `${ganttYear}年${monthNames[ganttMonth]}`;
 
-    let html = '<thead><tr><th style="min-width:180px;">タスク名</th><th style="min-width:70px;">状態</th>';
+    const today = new Date();
+    const isCurrentMonth = today.getFullYear() === ganttYear && today.getMonth() === ganttMonth;
+    const todayDate = today.getDate();
+
+    ganttRenderChips(allTasks);
+
+    let html = '<thead><tr><th class="task-name" style="min-width:180px;">タスク名</th><th class="task-status" style="min-width:70px;">状態</th>';
     for (let d = 1; d <= daysInMonth; d++) {
         const dow = new Date(ganttYear, ganttMonth, d).getDay();
         const isWeekend = dow === 0 || dow === 6;
-        html += `<th style="min-width:28px;${isWeekend ? 'color:var(--red);' : ''}">${d}</th>`;
+        const isToday = isCurrentMonth && d === todayDate;
+        html += `<th class="${isToday ? 'today-col' : ''}" style="min-width:28px;${isWeekend && !isToday ? 'color:var(--red);' : ''}">${d}</th>`;
     }
     html += '</tr></thead><tbody>';
 
-    tasks.forEach((task, idx) => {
+    tasks.forEach((task) => {
+        const idx = allTasks.indexOf(task);
         const statusLabels = { done:'完了', active:'進行中', planned:'予定', delayed:'遅延' };
         html += `<tr>`;
         html += `<td class="task-name" style="cursor:pointer;" onclick="editTask(${idx})">${task.name}</td>`;
@@ -1080,7 +1382,8 @@ function renderGantt() {
             const cellDate = new Date(ganttYear, ganttMonth, d);
             const dow = cellDate.getDay();
             const isWeekend = dow === 0 || dow === 6;
-            let bgStyle = isWeekend ? 'background:rgba(255,255,255,0.02);' : '';
+            const isToday = isCurrentMonth && d === todayDate;
+            let bgStyle = isToday ? 'background:rgba(168,134,47,0.06);' : (isWeekend ? 'background:rgba(42,37,25,0.03);' : '');
 
             if (cellDate >= tStart && cellDate <= tEnd) {
                 const isFirst = cellDate.getTime() === tStart.getTime() || d === 1;
@@ -1103,7 +1406,7 @@ function renderGantt() {
 
     // Update count
     const countEl = document.getElementById('gantt-task-count');
-    if (countEl) countEl.textContent = tasks.length + '件';
+    if (countEl) countEl.textContent = allTasks.length + '件';
 }
 
 function ganttPrev() { ganttMonth--; if (ganttMonth < 0) { ganttMonth = 11; ganttYear--; } renderGantt(); }
@@ -1161,45 +1464,19 @@ renderGantt();
 
 <script>
 // ── Minutes ──
-const MIN_KEY = 'rtma-minutes';
+const MIN_KEY = '{{STORAGE_PREFIX}}-minutes';
 let editingMinIdx = -1;
 
 const defaultMinutes = [
-    { date:'2026-03-03', title:'第5回 進捗確認・広告運用・店舗開発',
-      category:'定例', attendees:'嶋岡氏、古橋',
-      video:'https://tldv.io/app/meetings/69a67b6f8d99ac0013bf03d2/',
-      agenda:'1. 加盟金・契約条件の確認\n2. 大阪オープン準備状況\n3. 広告運用方針\n4. セミナー体制',
-      content:'加盟金の段階的引き上げ方針、大阪オープンの進捗、Meta広告アカウント準備、セミナースケジュールについて議論。',
-      decisions:'・加盟金: 現在100万円（0次・5店舗目まで）→ 再現性確認後150〜200万へ増額\n・大阪オープン: 3月11日（4席モデル）\n・広告予算: 月30〜50万円\n・契約書: クラウドサインへデジタル化\n・0次募集エリア: 関東圏内\n・セミナー: 週2〜3回ペース',
+    { date:'2026-01-01', title:'第1回 初回ヒアリング・事業概要',
+      category:'ヒアリング', attendees:'{{CLIENT_CEO}}様、古橋',
+      video:'',
+      agenda:'',
+      content:'FC展開の可能性について初回ヒアリング。事業モデル・出店戦略・収益性を議論。',
+      decisions:'',
       aiSummary:'',
-      actionItems:[
-        {task:'大阪初期費用算出', assignee:'嶋岡氏', deadline:'2026-03-07', status:'完了'},
-        {task:'Meta広告アカウント作成', assignee:'嶋岡氏', deadline:'2026-03-05', status:'完了'},
-        {task:'クラウドサイン導入', assignee:'嶋岡氏', deadline:'2026-03-10', status:'進行中'},
-        {task:'契約書共有', assignee:'嶋岡氏', deadline:'2026-03-10', status:'進行中'},
-        {task:'写真素材共有', assignee:'嶋岡氏', deadline:'2026-03-07', status:'完了'},
-        {task:'デザイン制作物ブラッシュアップ', assignee:'古橋', deadline:'2026-03-10', status:'進行中'},
-        {task:'セミナー担当者顔合わせ設定', assignee:'古橋', deadline:'2026-03-14', status:'未着手'},
-        {task:'マニュアル化サポート', assignee:'古橋', deadline:'2026-03-20', status:'未着手'}
-      ],
-      next:'2026年3月10日' },
-    { date:'2024-11-25', title:'第4回 契約書読み合わせ・大阪プロジェクト',
-      category:'定例', attendees:'嶋岡氏、古橋',
-      video:'https://tldv.io/app/meetings/6909504edf24cf0013e1444b',
-      agenda:'', content:'契約金330万円（税込）・分割払い・70/30の利益分配確認。契約書はクラウドサインで送付。大阪プロジェクト・ゼロ次募集について議論。',
-      decisions:'', aiSummary:'', actionItems:[], next:'' },
-    { date:'2024-11-21', title:'第3回 提案・支援パッケージ詳細',
-      category:'定例', attendees:'嶋岡氏、古橋', video:'', agenda:'',
-      content:'2年支援契約300万円の提案。募集資料・セミナー/LP制作・デザインサポート含む。月1〜2件の加盟契約目標。広告費月30〜50万。',
-      decisions:'', aiSummary:'', actionItems:[], next:'' },
-    { date:'2024-11-01', title:'第2回 事業モデル・収益性深掘り',
-      category:'定例', attendees:'嶋岡氏、古橋', video:'', agenda:'',
-      content:'店舗の収益モデル（4台モデル・月次売上予測）の詳細議論。フランチャイズの再現性と出店戦略について。',
-      decisions:'', aiSummary:'', actionItems:[], next:'' },
-    { date:'2024-10-01', title:'第1回 初回ヒアリング・事業概要',
-      category:'ヒアリング', attendees:'嶋岡氏、古橋', video:'', agenda:'',
-      content:'よもぎ蒸しサロンのフランチャイズ展開の可能性について初回ヒアリング。事業モデル・出店戦略・収益性・将来の売却可能性を議論。',
-      decisions:'', aiSummary:'', actionItems:[], next:'' }
+      actionItems:[],
+      next:'' }
 ];
 
 function loadMinutes() {
@@ -1278,20 +1555,75 @@ function renderMinutes() {
             detailParts.push(`<div class="minutes-section-label">🎯 Next Action</div><div>${m.actions.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
         }
 
-        return `<div class="minutes-card" style="cursor:pointer;" onclick="editMinutes(${i})">
-            <div class="minutes-header">
-                <div>
-                    <div class="minutes-meta">
-                        ${isLatest ? '<span style="background:var(--gold);color:#000;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">最新</span>' : ''}
-                        <span class="minutes-category cat-${cat}">${cat}</span>
-                        <span style="color:var(--gray);font-size:12px;">${m.date}</span>
-                        <span style="color:var(--gray);font-size:11px;">👥 ${m.attendees || ''}</span>
+        return `<div class="minutes-timeline-item ${isLatest ? 'latest' : ''}">
+            <div class="minutes-timeline-node"></div>
+            <div class="minutes-card" style="cursor:pointer;" onclick="editMinutes(${i})">
+                <div class="minutes-header">
+                    <div>
+                        <div class="minutes-meta">
+                            ${isLatest ? '<span style="background:var(--gold);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">最新</span>' : ''}
+                            <span class="minutes-category cat-${cat}">${cat}</span>
+                            <span style="color:var(--gray);font-size:12px;">${m.date}</span>
+                            <span style="color:var(--gray);font-size:11px;">👥 ${m.attendees || ''}</span>
+                        </div>
+                        <h3>${m.title}</h3>
                     </div>
-                    <h3>${m.title}</h3>
+                    ${videoBtn}
                 </div>
-                ${videoBtn}
+                <div class="minutes-detail">${detailParts.join('')}</div>
             </div>
-            <div class="minutes-detail">${detailParts.join('')}</div>
+        </div>`;
+    }).join('');
+
+    renderMinutesPending();
+}
+
+function renderMinutesPending() {
+    const container = document.getElementById('minutes-pending-list');
+    if (!container) return;
+    const list = loadMinutes();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let pending = [];
+    list.forEach((m, mi) => {
+        (m.actionItems || []).forEach(a => {
+            if (a.status !== '完了') {
+                pending.push({ ...a, sourceDate: m.date, sourceTitle: m.title, sourceIdx: mi });
+            }
+        });
+    });
+
+    pending.sort((a, b) => {
+        const da = safeParseDate(a.deadline);
+        const db = safeParseDate(b.deadline);
+        if (!da && !db) return 0;
+        if (!da) return 1;
+        if (!db) return -1;
+        return da.getTime() - db.getTime();
+    });
+
+    if (pending.length === 0) {
+        container.innerHTML = `<div class="home-empty-state">未完了のアクションはありません</div>`;
+        return;
+    }
+
+    container.innerHTML = pending.map(a => {
+        const assignee = a.assignee || '';
+        const isOwner = assignee.includes('古橋') || assignee.includes('Fプロ');
+        const badgeClass = isOwner ? 'minutes-pending-badge owner' : 'minutes-pending-badge';
+        const deadline = a.deadline || '';
+        const deadlineDate = safeParseDate(deadline);
+        const isOverdue = deadlineDate && deadlineDate.getTime() < today.getTime();
+        const deadlineHtml = deadline
+            ? `<span class="minutes-pending-deadline ${isOverdue ? 'overdue' : ''}">${deadline}${isOverdue ? '（期限超過）' : ''}</span>`
+            : '';
+        const sourceLabel = a.sourceDate ? `${a.sourceDate}の議事録` : (a.sourceTitle || '');
+        return `<div class="minutes-pending-row">
+            <span class="minutes-pending-task">${a.task}</span>
+            <span class="${badgeClass}">${assignee}</span>
+            ${deadlineHtml}
+            <span class="minutes-pending-source">${sourceLabel}</span>
         </div>`;
     }).join('');
 }
@@ -1411,13 +1743,13 @@ mdContent['md-ad-banner'] = `# {{BRAND_NAME}} FC募集 — 静止画バナーデ
 // Ad Video
 mdContent['md-ad-video'] = `# {{BRAND_NAME}} FC募集 — 動画広告台本（15〜30秒）
 
-## パターンA：嶋岡さん出演バージョン（トーキングヘッド）
+## パターンA：代表者出演バージョン（トーキングヘッド）
 **尺：30秒 / 形式：縦型9:16**
 
 | 秒数 | テロップ |
 |------|----------|
 | 0〜3秒 | **技術ゼロ。資格ゼロ。年収500万超。** |
-| 3〜8秒 | 黄土よもぎ蒸し専門店「ON」 |
+| 3〜8秒 | {{BRAND_NAME}} |
 | 8〜15秒 | ✅技術不要 ✅1名運営 ✅マンションでOK |
 | 15〜22秒 | 📊年間純利益 **542万円** / 利益率 **35.6%** |
 | 22〜27秒 | 「2ヶ月で黒字化しました」 |
@@ -1467,7 +1799,7 @@ externalMd['md-seminar'] = `# {{BRAND_NAME}} FC募集 — セミナースライ�
 
 ## 第1部：共感・信頼構築（5枚） スライド1〜5
 ## 第2部：市場の可能性（4枚） スライド6〜9
-## 第3部：ONのビジネスモデル（11枚） スライド10〜20
+## 第3部：{{BRAND_NAME}}のビジネスモデル（11枚） スライド10〜20
 ## 第4部：収益データ（7枚） スライド21〜27
 - **年間純利益 ¥5,417,194**（利益率35.6%）
 - **3年累計純利益 ¥16,930,196**
@@ -1532,9 +1864,9 @@ Object.keys(externalMd).forEach(id => {
 
 <script>
 // ── Manual Section ──
-const MANUAL_KEY = 'rtma-manuals';
+const MANUAL_KEY = '{{STORAGE_PREFIX}}-manuals';
 const defaultManuals = [
-    { title:'業務フロー・施術マニュアル', desc:'施術の9ステップフロー、接客手順、開店・閉店チェックリスト', content:'# 業務フロー・施術マニュアル\n\n## 施術フロー（9ステップ）\n1. 予約確認・準備\n2. お客様お出迎え\n3. カウンセリング\n4. よもぎ蒸し準備（ハーブセット）\n5. お客様着替え\n6. よもぎ蒸し施術（40分）\n7. 施術終了・お茶提供\n8. 次回予約確認\n9. お見送り・後片付け' },
+    { title:'業務フロー・施術マニュアル', desc:'施術の9ステップフロー、接客手順、開店・閉店チェックリスト', content:'# 業務フロー・施術マニュアル\n\n## 施術フロー（9ステップ）\n1. 予約確認・準備\n2. お客様お出迎え\n3. カウンセリング\n4. 施術準備（器材セット）\n5. お客様着替え\n6. 施術（40分）\n7. 施術終了・お茶提供\n8. 次回予約確認\n9. お見送り・後片付け' },
     { title:'FC加盟オーナー研修プログラム', desc:'新規オーナー向け研修カリキュラム、スケジュール、評価基準', content:'' },
     { title:'集客・マーケティングマニュアル', desc:'HPB運用、Instagram投稿ガイド、LINE公式運用ルール', content:'' },
     { title:'衛生管理・安全基準マニュアル', desc:'清掃チェックリスト、衛生基準、緊急時対応', content:'' },
@@ -1597,7 +1929,7 @@ function deleteManual(idx) {
 renderManuals();
 
 // ── Deliverables Section ──
-const DEL_KEY = 'rtma-deliverables';
+const DEL_KEY = '{{STORAGE_PREFIX}}-deliverables';
 const defaultDeliverables = {
     hq: [
         { name:'お客様カルテ（ヒアリングシート）', done:true, link:'#', linkLabel:'カルテ' },
@@ -1614,13 +1946,13 @@ const defaultDeliverables = {
         { name:'クラウドサイン導入・契約デジタル化', done:false, link:'', linkLabel:'' },
     ],
     recruit: [
-        { name:'FC募集LP', done:true, link:'https://rtma-on-fc-lp.surge.sh', linkLabel:'LP' },
+        { name:'FC募集LP', done:true, link:'{{LP_URL}}', linkLabel:'LP' },
         { name:'セミナースライド（40枚）', done:true, link:'#', linkLabel:'スライド' },
-        { name:'個別面談用提案書', done:true, link:'https://rtma-on-fc-proposal.surge.sh', linkLabel:'提案書' },
+        { name:'個別面談用提案書', done:true, link:'{{PROPOSAL_URL}}', linkLabel:'提案書' },
         { name:'広告クリエイティブ（4種）', done:true, link:'#', linkLabel:'広告' },
         { name:'広告運用設計', done:true, link:'#', linkLabel:'運用設計' },
-        { name:'セミナー案内ページ', done:true, link:'https://rtma-on-fc-seminar.surge.sh', linkLabel:'案内' },
-        { name:'サンクスページ', done:true, link:'https://rtma-on-fc-thanks.surge.sh', linkLabel:'サンクス' },
+        { name:'セミナー案内ページ', done:true, link:'{{SEMINAR_URL}}', linkLabel:'案内' },
+        { name:'サンクスページ', done:true, link:'{{THANKS_URL}}', linkLabel:'サンクス' },
         { name:'申込み導線（フォーム・LINE・メール）', done:true, link:'#', linkLabel:'導線' },
         { name:'営業資料（事例集）', done:false, link:'', linkLabel:'' },
         { name:'顧客インタビュー動画', done:false, link:'', linkLabel:'' },
@@ -1669,9 +2001,9 @@ function toggleDeliverable(type, idx, checked) {
 renderDeliverables();
 
 // ── Login Info Section ──
-const LOGIN_KEY = 'rtma-logins';
+const LOGIN_KEY = '{{STORAGE_PREFIX}}-logins';
 const defaultLogins = [
-    { service:'Meta広告マネージャ', icon:'📊', url:'https://business.facebook.com/', user:'', password:'', note:'嶋岡氏がアカウント作成予定' },
+    { service:'Meta広告マネージャ', icon:'📊', url:'https://business.facebook.com/', user:'', password:'', note:'' },
     { service:'UTAGE', icon:'🔧', url:'', user:'', password:'', note:'' },
     { service:'LINE公式アカウント', icon:'💬', url:'', user:'', password:'', note:'{{BRAND_NAME}} FC事業説明会' },
     { service:'ホットペッパービューティー (HPB)', icon:'💇', url:'', user:'', password:'', note:'集客メインチャネル' },
@@ -1760,6 +2092,172 @@ function deleteLogin(idx) {
     showToast('🗑️ 削除しました');
 }
 renderLogins();
+</script>
+
+<script>
+// ── Project Home ──
+const PHASE_KEY = '{{STORAGE_PREFIX}}-phase';
+const PHASE_LABELS = ['戦略設計', '制作', '募集準備', '募集開始', '加盟店開発'];
+
+function loadPhase() {
+    const raw = localStorage.getItem(PHASE_KEY);
+    const n = raw ? parseInt(raw, 10) : NaN;
+    if (Number.isInteger(n) && n >= 1 && n <= PHASE_LABELS.length) return n;
+    return 2;
+}
+function savePhase(n) { localStorage.setItem(PHASE_KEY, String(n)); }
+
+function setPhase(n) {
+    savePhase(n);
+    renderHome();
+    showToast('✅ フェーズを更新しました');
+}
+
+function renderPhaseStepper() {
+    const current = loadPhase();
+    const container = document.getElementById('phase-stepper');
+    if (!container) return;
+    let html = '';
+    PHASE_LABELS.forEach((label, i) => {
+        const stepNum = i + 1;
+        const state = stepNum < current ? 'done' : stepNum === current ? 'current' : 'future';
+        const circleContent = state === 'done' ? '✓' : String(stepNum);
+        html += `<div class="phase-step ${state}" onclick="setPhase(${stepNum})">
+            <div class="phase-step-circle">${circleContent}</div>
+            <div class="phase-step-label">${label}</div>
+        </div>`;
+        if (i < PHASE_LABELS.length - 1) {
+            const connectorDone = stepNum < current ? 'done' : '';
+            html += `<div class="phase-connector ${connectorDone}"></div>`;
+        }
+    });
+    container.innerHTML = html;
+}
+
+function renderHomeKpis() {
+    const container = document.getElementById('home-kpi-grid');
+    if (!container) return;
+
+    // 1. 全体進捗 — from deliverables
+    const delData = loadDeliverables();
+    const allDeliverables = [...(delData.hq || []), ...(delData.recruit || [])];
+    const doneCount = allDeliverables.filter(x => x.done).length;
+    const totalCount = allDeliverables.length;
+    const progressPct = totalCount > 0 ? Math.round((doneCount / totalCount) * 100) : 0;
+
+    // 2. 進行中タスク — from gantt
+    const tasks = loadGanttTasks();
+    const activeCount = tasks.filter(t => t.status === 'active').length;
+    const delayedCount = tasks.filter(t => t.status === 'delayed').length;
+
+    // 3. 次回MTG — latest minutes entry with non-empty `next`
+    let nextMtg = '未定';
+    try {
+        const minutes = loadMinutes();
+        const sorted = [...minutes].sort((a, b) => {
+            const da = safeParseDate(a.date);
+            const db = safeParseDate(b.date);
+            if (!da && !db) return 0;
+            if (!da) return 1;
+            if (!db) return -1;
+            return db.getTime() - da.getTime();
+        });
+        const found = sorted.find(m => m.next && m.next.trim() !== '');
+        if (found) nextMtg = found.next;
+    } catch (e) {
+        nextMtg = '未定';
+    }
+
+    container.innerHTML = `
+        <div class="home-kpi-card">
+            <div class="home-kpi-label">全体進捗</div>
+            <div class="home-kpi-value gold">${progressPct}%</div>
+        </div>
+        <div class="home-kpi-card">
+            <div class="home-kpi-label">進行中タスク</div>
+            <div class="home-kpi-value">${activeCount}件 ${delayedCount > 0 ? `<span class="home-kpi-alert">遅延${delayedCount}</span>` : ''}</div>
+        </div>
+        <div class="home-kpi-card">
+            <div class="home-kpi-label">次回MTG</div>
+            <div class="home-kpi-value" style="font-size:13px;">${nextMtg}</div>
+        </div>
+        <div class="home-kpi-card">
+            <div class="home-kpi-label">成果物</div>
+            <div class="home-kpi-value">${doneCount}/${totalCount}</div>
+        </div>
+    `;
+}
+
+function renderHomeNextActions() {
+    const container = document.getElementById('home-next-actions');
+    if (!container) return;
+    let items = [];
+    try {
+        const minutes = loadMinutes();
+        const sorted = [...minutes].sort((a, b) => {
+            const da = safeParseDate(a.date);
+            const db = safeParseDate(b.date);
+            if (!da && !db) return 0;
+            if (!da) return 1;
+            if (!db) return -1;
+            return db.getTime() - da.getTime();
+        });
+        if (sorted.length > 0) {
+            const latest = sorted[0];
+            items = (latest.actionItems || []).filter(a => a.status !== '完了').slice(0, 6);
+        }
+    } catch (e) {
+        items = [];
+    }
+
+    if (items.length === 0) {
+        container.innerHTML = `<div class="home-empty-state">未完了のアクションはありません</div>`;
+        return;
+    }
+
+    container.innerHTML = items.map(a => {
+        const assignee = a.assignee || '';
+        const isOwner = assignee.includes('古橋') || assignee.includes('Fプロ');
+        const badgeClass = isOwner ? 'home-action-badge owner' : 'home-action-badge';
+        const deadline = a.deadline || '';
+        return `<div class="home-action-row">
+            <span class="home-action-name">${a.task}</span>
+            <span class="${badgeClass}">${assignee}${deadline ? ' ・ ' + deadline : ''}</span>
+        </div>`;
+    }).join('');
+}
+
+function renderHomeDeliverablesProgress() {
+    const container = document.getElementById('home-deliverables-progress');
+    if (!container) return;
+    const data = loadDeliverables();
+    const hq = data.hq || [];
+    const recruit = data.recruit || [];
+    const hqDone = hq.filter(x => x.done).length;
+    const recruitDone = recruit.filter(x => x.done).length;
+    const hqPct = hq.length > 0 ? Math.round((hqDone / hq.length) * 100) : 0;
+    const recruitPct = recruit.length > 0 ? Math.round((recruitDone / recruit.length) * 100) : 0;
+
+    container.innerHTML = `
+        <div class="home-progress-block" onclick="navigate('deliverables')">
+            <div class="home-progress-label"><span>本部構築</span><span>${hqDone}/${hq.length}</span></div>
+            <div class="home-progress-track"><div class="home-progress-bar" style="width:${hqPct}%;"></div></div>
+        </div>
+        <div class="home-progress-block" onclick="navigate('deliverables')">
+            <div class="home-progress-label"><span>加盟店開発</span><span>${recruitDone}/${recruit.length}</span></div>
+            <div class="home-progress-track"><div class="home-progress-bar" style="width:${recruitPct}%;"></div></div>
+        </div>
+    `;
+}
+
+function renderHome() {
+    renderPhaseStepper();
+    renderHomeKpis();
+    renderHomeNextActions();
+    renderHomeDeliverablesProgress();
+}
+
+renderHome();
 </script>
 
 </body>
