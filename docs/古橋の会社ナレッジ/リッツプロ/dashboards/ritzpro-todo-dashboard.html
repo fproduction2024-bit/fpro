@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リッツプロ — やることリスト</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2332;
+            --surface: #243142;
+            --card: #1e2b3a;
+            --border: #2d3e50;
+            --white: #e8e0d0;
+            --gray: #8997a8;
+            --gold: #c9a84c;
+            --gold-light: #d4b87a;
+            --gold-dim: rgba(201, 168, 76, 0.10);
+            --green: #4a9d6e;
+            --green-bg: rgba(74, 157, 110, 0.12);
+            --red: #c9574c;
+            --red-bg: rgba(201, 87, 76, 0.12);
+            --blue: #4a7dc9;
+            --blue-bg: rgba(74, 125, 201, 0.12);
+            --orange: #c98a4c;
+            --orange-bg: rgba(201, 138, 76, 0.12);
+            --forest: #1e2b3a;
+            --forest-light: #263546;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #141e2b 0%, #1a2535 100%);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .sidebar-brand {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-brand h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-brand p {
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-section {
+            padding: 16px 0 8px;
+        }
+
+        .nav-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.35);
+            padding: 0 24px;
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 24px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: rgba(201, 168, 76, 0.06);
+            color: var(--white);
+        }
+
+        .nav-link.active {
+            border-left-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+            font-weight: 600;
+        }
+
+        .nav-link .nav-icon {
+            font-size: 16px;
+            width: 22px;
+            text-align: center;
+        }
+
+        .nav-link .nav-badge {
+            margin-left: auto;
+            font-size: 11px;
+            background: var(--gold-dim);
+            color: var(--gold);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        /* ── Main ── */
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 32px 40px;
+            min-height: 100vh;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 28px;
+        }
+
+        .section-header h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 24px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        /* ── Overview Cards ── */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .overview-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .overview-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-card:hover::before {
+            opacity: 1;
+        }
+
+        .overview-card .card-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+        }
+
+        .overview-card .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .overview-card .card-desc {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .overview-card .card-target {
+            font-size: 11px;
+            color: var(--gold);
+            background: var(--gold-dim);
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        /* ── Progress Bar ── */
+        .progress-bar-container {
+            margin-top: 12px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--gray);
+            margin-bottom: 6px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* ── Overall Stats ── */
+        .overall-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+
+        .stat-card.green .stat-number {
+            color: var(--green);
+        }
+
+        .stat-card.blue .stat-number {
+            color: var(--blue);
+        }
+
+        .stat-card.orange .stat-number {
+            color: var(--orange);
+        }
+
+        /* ── Project Detail Section ── */
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-header .project-icon {
+            font-size: 36px;
+        }
+
+        .project-header .project-info h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 22px;
+            color: var(--white);
+        }
+
+        .project-header .project-info .project-meta {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .project-header .project-info .project-meta span {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .project-header .project-info .project-meta .target-badge {
+            color: var(--gold);
+            background: var(--gold-dim);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .project-overview-text {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .project-overview-text strong {
+            color: var(--gold-light);
+        }
+
+        /* ── Task List ── */
+        .task-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .task-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .task-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-section-title .icon {
+            font-size: 18px;
+        }
+
+        .task-add-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .task-add-row input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        .task-add-row input::placeholder {
+            color: var(--gray);
+        }
+
+        .task-add-row input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .task-add-row button {
+            background: var(--gold);
+            color: #1a2332;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .task-add-row button:hover {
+            background: var(--gold-light);
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            border-bottom: 1px solid rgba(45, 62, 80, 0.4);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item:hover {
+            background: rgba(201, 168, 76, 0.04);
+        }
+
+        .task-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .task-item .task-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--white);
+            line-height: 1.5;
+        }
+
+        .task-item.done .task-text {
+            text-decoration: line-through;
+            color: var(--gray);
+            opacity: 0.6;
+        }
+
+        .task-item .task-status {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .task-item .task-status.not_started {
+            background: rgba(137, 151, 168, 0.15);
+            color: var(--gray);
+        }
+
+        .task-item .task-status.in_progress {
+            background: var(--blue-bg);
+            color: var(--blue);
+        }
+
+        .task-item .task-status.completed {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .task-item .task-delete {
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .task-item:hover .task-delete {
+            opacity: 0.6;
+        }
+
+        .task-item .task-delete:hover {
+            opacity: 1;
+            color: var(--red);
+            background: var(--red-bg);
+        }
+
+        /* ── Notes ── */
+        .notes-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .notes-section .notes-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            min-height: 120px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+            line-height: 1.7;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .notes-section textarea::placeholder {
+            color: var(--gray);
+        }
+
+        .notes-section textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* ── Reference Flow ── */
+        .reference-flow {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .reference-flow .flow-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .flow-step {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 12px;
+            color: var(--white);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .flow-step .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            color: #1a2332;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+        .flow-arrow {
+            color: var(--gold);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* ── Filter Bar ── */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gray);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .filter-btn.active {
+            background: var(--gold-dim);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ── Toast ── */
+        .save-toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--green);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 1000;
+            pointer-events: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .save-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Mobile Toggle ── */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 200;
+            background: var(--gold);
+            color: #1a2332;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width:768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 24px 16px;
+                padding-top: 64px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .overall-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .flow-arrow {
+                text-align: center;
+                transform: rotate(90deg);
+            }
+
+            .task-item .task-status {
+                font-size: 10px;
+                padding: 2px 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+
+    <!-- ── Sidebar ── -->
+    <nav class="sidebar">
+        <div class="sidebar-brand">
+            <h1>RITZ PRO</h1>
+            <p>やることリスト管理</p>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">ダッシュボード</div>
+            <a class="nav-link active" onclick="showSection('overview')">
+                <span class="nav-icon">📊</span> 概要
+            </a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">プロジェクト</div>
+            <a class="nav-link" onclick="showSection('sales-manual')">
+                <span class="nav-icon">📋</span> 営業マニュアル化
+                <span class="nav-badge" id="badge-sales-manual">0/0</span>
+            </a>
+            <a class="nav-link" onclick="showSection('line-funnel')">
+                <span class="nav-icon">💬</span> サンクス→LINE導線
+                <span class="nav-badge" id="badge-line-funnel">0/0</span>
+            </a>
+            <a class="nav-link" onclick="showSection('email-sms')">
+                <span class="nav-icon">✉️</span> メルマガ・SMS改善
+                <span class="nav-badge" id="badge-email-sms">0/0</span>
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            最終更新: <span id="last-updated">—</span>
+        </div>
+    </nav>
+
+    <!-- ── Main Content ── -->
+    <div class="main">
+
+        <!-- ======== OVERVIEW ======== -->
+        <div class="section active" id="section-overview">
+            <div class="section-header">
+                <h2>📊 やることリスト - 概要</h2>
+                <p>リッツプロ事業に関する施策の進捗状況を一覧で確認できます。</p>
+            </div>
+
+            <div class="overall-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-tasks">0</div>
+                    <div class="stat-label">全タスク</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-number" id="total-done">0</div>
+                    <div class="stat-label">完了</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-number" id="total-progress">0</div>
+                    <div class="stat-label">進行中</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-number" id="total-not-started">0</div>
+                    <div class="stat-label">未着手</div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container" style="margin-bottom:32px;">
+                <div class="progress-label">
+                    <span>全体進捗</span>
+                    <span id="overall-percent">0%</span>
+                </div>
+                <div class="progress-bar" style="height:10px;">
+                    <div class="progress-fill" id="overall-fill" style="width:0%;"></div>
+                </div>
+            </div>
+
+            <div class="overview-grid" id="overview-grid">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+
+        <!-- ======== PROJECT SECTIONS (generated by JS) ======== -->
+        <div id="project-sections"></div>
+    </div>
+
+    <!-- Toast -->
+    <div class="save-toast" id="save-toast">✓ 保存しました</div>
+
+    <script>
+        // ── Data ──
+        const STORAGE_KEY = 'ritzpro_todo_v2';
+
+        const DEFAULT_PROJECTS = [
+            {
+                id: 'sales-manual',
+                name: '営業マニュアル化',
+                icon: '📋',
+                target: 'リッツ・プロの営業',
+                description: '他営業マンでもわかるマニュアルを整備。どの粒度のマニュアルが必要か（手順書なのか、営業そもそもの動き方なのか）を要件から固め、新たにjoinする営業メンバーが即戦力になれる体制を目指す。',
+                referenceFlow: [
+                    'セミナー参加リマインド（TEL含む）',
+                    'セミナー実施（講師として話す）',
+                    '参加者フォロー（商談引き上げ）',
+                    '商談',
+                    '契約',
+                    'CSにトスアップ'
+                ],
+                tasks: [
+                    { id: 'sm-1', text: '新たに営業でjoinする方とMTGし、必要なマニュアルの粒度をヒアリング', done: false, status: 'not_started' },
+                    { id: 'sm-2', text: 'マニュアル要件の整理（手順書 or 営業の動き方 or 両方）', done: false, status: 'not_started' },
+                    { id: 'sm-3', text: 'セミナー参加リマインドのフロー文書化（TEL含む）', done: false, status: 'not_started' },
+                    { id: 'sm-4', text: 'セミナー実施マニュアル（講師用の進行台本）', done: false, status: 'not_started' },
+                    { id: 'sm-5', text: '参加者フォロー→商談引き上げの手順書', done: false, status: 'not_started' },
+                    { id: 'sm-6', text: '商談→契約→CSトスアップの標準フロー整備', done: false, status: 'not_started' },
+                ],
+                notes: ''
+            },
+            {
+                id: 'line-funnel',
+                name: 'サンクス→LINE導線設計',
+                icon: '💬',
+                target: 'リッツ・プロ / クライアント',
+                description: 'セミナー参加後のサンクスページからLINE登録数を最大化する導線を設計。サンクスページの改修、必要に応じたクリエイティブ作成、参加後メルマガ、セミナー終盤でのLINE誘導など、登録率を上げる施策を包括的に進める。',
+                referenceFlow: null,
+                tasks: [
+                    { id: 'lf-1', text: 'サンクスページの現状分析・課題洗い出し', done: false, status: 'not_started' },
+                    { id: 'lf-2', text: 'サンクスページのUI・文言改善案作成', done: false, status: 'not_started' },
+                    { id: 'lf-3', text: 'LINE登録を促すクリエイティブ作成（LP等）', done: false, status: 'not_started' },
+                    { id: 'lf-4', text: '参加後サンクスメルマガの設計・作成', done: false, status: 'not_started' },
+                    { id: 'lf-5', text: 'セミナー終盤にLINE登録を促すスライド/トーク追加', done: false, status: 'not_started' },
+                ],
+                notes: ''
+            },
+            {
+                id: 'email-sms',
+                name: 'メルマガ・SMSコピー見直し',
+                icon: '✉️',
+                target: 'リッツ・プロ',
+                description: 'UTAGEで送付しているセミナー案内メール・申込み〜リマインドSMSを改善。メルマガは申込数最大化、SMSは着席率UP・キャンセル減・迷惑メール回避を目指す。加えて作業の自動化・テンプレ化で工数を削減する。',
+                referenceFlow: null,
+                tasks: [
+                    { id: 'es-1', text: 'メルマガ：現行セミナー案内メールの分析と改善案作成', done: false, status: 'not_started' },
+                    { id: 'es-2', text: 'メルマガ：申込数を最大化するコピーのA/Bテスト計画', done: false, status: 'not_started' },
+                    { id: 'es-3', text: 'SMS：リマインドメッセージの改善（着席率UP）', done: false, status: 'not_started' },
+                    { id: 'es-4', text: 'SMS：キャンセル防止の文言設計', done: false, status: 'not_started' },
+                    { id: 'es-5', text: 'SMS：リンクを減らし迷惑メール振り分けを回避', done: false, status: 'not_started' },
+                    { id: 'es-6', text: '自動化・テンプレ化：作業工数を削減する仕組みづくり', done: false, status: 'not_started' },
+                ],
+                notes: ''
+            }
+        ];
+
+        // ── State ──
+        let projects = [];
+
+        function loadData() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try { projects = JSON.parse(saved); } catch (e) { projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS)); }
+            } else {
+                projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+            updateLastUpdated();
+            showToast();
+            renderOverview();
+            updateBadges();
+        }
+
+        function showToast() {
+            const t = document.getElementById('save-toast');
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 1800);
+        }
+
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('last-updated').textContent = now.toLocaleDateString('ja-JP') + ' ' + now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // ── Status helpers ──
+        const STATUS_LABELS = { 'not_started': '未着手', 'in_progress': '進行中', 'completed': '完了' };
+        const STATUS_CYCLE = ['not_started', 'in_progress', 'completed'];
+
+        function cycleStatus(projId, taskId) {
+            const proj = projects.find(p => p.id === projId);
+            const task = proj.tasks.find(t => t.id === taskId);
+            const idx = STATUS_CYCLE.indexOf(task.status);
+            task.status = STATUS_CYCLE[(idx + 1) % STATUS_CYCLE.length];
+            if (task.status === 'completed') task.done = true;
+            else if (task.status === 'not_started') task.done = false;
+            saveData();
+            renderProject(projId);
+        }
+
+        function toggleTask(projId, taskId) {
+            const proj = projects.find(p => p.id === projId);
+            const task = proj.tasks.find(t => t.id === taskId);
+            task.done = !task.done;
+            task.status = task.done ? 'completed' : 'not_started';
+            saveData();
+            renderProject(projId);
+        }
+
+        function addTask(projId) {
+            const input = document.getElementById('add-task-' + projId);
+            const text = input.value.trim();
+            if (!text) return;
+            const proj = projects.find(p => p.id === projId);
+            const newId = projId.split('-').map(w => w[0]).join('') + '-' + Date.now();
+            proj.tasks.push({ id: newId, text, done: false, status: 'not_started' });
+            input.value = '';
+            saveData();
+            renderProject(projId);
+        }
+
+        function deleteTask(projId, taskId) {
+            const proj = projects.find(p => p.id === projId);
+            proj.tasks = proj.tasks.filter(t => t.id !== taskId);
+            saveData();
+            renderProject(projId);
+        }
+
+        function saveNotes(projId) {
+            const textarea = document.getElementById('notes-' + projId);
+            const proj = projects.find(p => p.id === projId);
+            proj.notes = textarea.value;
+            saveData();
+        }
+
+        // ── Navigation ──
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+            if (id === 'overview') {
+                document.getElementById('section-overview').classList.add('active');
+            } else {
+                document.getElementById('section-' + id).classList.add('active');
+            }
+
+            // Highlight nav
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(l => {
+                const onclick = l.getAttribute('onclick');
+                if (onclick && onclick.includes("'" + id + "'")) l.classList.add('active');
+            });
+
+            // Close mobile sidebar
+            document.querySelector('.sidebar').classList.remove('open');
+        }
+
+        // ── Render Overview ──
+        function renderOverview() {
+            let totalTasks = 0, totalDone = 0, totalInProgress = 0, totalNotStarted = 0;
+
+            projects.forEach(p => {
+                totalTasks += p.tasks.length;
+                p.tasks.forEach(t => {
+                    if (t.status === 'completed' || t.done) totalDone++;
+                    else if (t.status === 'in_progress') totalInProgress++;
+                    else totalNotStarted++;
+                });
+            });
+
+            document.getElementById('total-tasks').textContent = totalTasks;
+            document.getElementById('total-done').textContent = totalDone;
+            document.getElementById('total-progress').textContent = totalInProgress;
+            document.getElementById('total-not-started').textContent = totalNotStarted;
+
+            const pct = totalTasks > 0 ? Math.round((totalDone / totalTasks) * 100) : 0;
+            document.getElementById('overall-percent').textContent = pct + '%';
+            document.getElementById('overall-fill').style.width = pct + '%';
+
+            // Cards
+            const grid = document.getElementById('overview-grid');
+            grid.innerHTML = projects.map(p => {
+                const done = p.tasks.filter(t => t.done || t.status === 'completed').length;
+                const total = p.tasks.length;
+                const ppct = total > 0 ? Math.round((done / total) * 100) : 0;
+                return `
+            <div class="overview-card" onclick="showSection('${p.id}')">
+                <div class="card-icon">${p.icon}</div>
+                <div class="card-title">${p.name}</div>
+                <span class="card-target">対象: ${p.target}</span>
+                <div class="card-desc">${p.description.substring(0, 80)}…</div>
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>${done}/${total} タスク完了</span>
+                        <span>${ppct}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:${ppct}%"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+            }).join('');
+        }
+
+        // ── Update Badges ──
+        function updateBadges() {
+            projects.forEach(p => {
+                const badge = document.getElementById('badge-' + p.id);
+                if (badge) {
+                    const done = p.tasks.filter(t => t.done || t.status === 'completed').length;
+                    badge.textContent = done + '/' + p.tasks.length;
+                }
+            });
+        }
+
+        // ── Render Project Detail ──
+        function renderProject(projId) {
+            const proj = projects.find(p => p.id === projId);
+            if (!proj) return;
+            const container = document.getElementById('tasks-' + projId);
+            if (!container) return;
+
+            // Get current filter
+            const filterBtns = document.querySelectorAll(`#filters-${projId} .filter-btn`);
+            let currentFilter = 'all';
+            filterBtns.forEach(btn => { if (btn.classList.contains('active')) currentFilter = btn.dataset.filter; });
+
+            let filteredTasks = proj.tasks;
+            if (currentFilter === 'not_started') filteredTasks = proj.tasks.filter(t => t.status === 'not_started' && !t.done);
+            else if (currentFilter === 'in_progress') filteredTasks = proj.tasks.filter(t => t.status === 'in_progress');
+            else if (currentFilter === 'completed') filteredTasks = proj.tasks.filter(t => t.status === 'completed' || t.done);
+
+            container.innerHTML = filteredTasks.map(t => `
+        <div class="task-item ${t.done ? 'done' : ''}">
+            <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask('${projId}','${t.id}')">
+            <span class="task-text">${t.text}</span>
+            <span class="task-status ${t.status}" onclick="cycleStatus('${projId}','${t.id}')">${STATUS_LABELS[t.status]}</span>
+            <button class="task-delete" onclick="deleteTask('${projId}','${t.id}')" title="削除">✕</button>
+        </div>
+    `).join('');
+
+            // Update progress in card
+            const done = proj.tasks.filter(t => t.done || t.status === 'completed').length;
+            const total = proj.tasks.length;
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+            const progLabel = document.getElementById('prog-label-' + projId);
+            const progFill = document.getElementById('prog-fill-' + projId);
+            const progPct = document.getElementById('prog-pct-' + projId);
+            if (progLabel) progLabel.textContent = done + '/' + total + ' タスク完了';
+            if (progPct) progPct.textContent = pct + '%';
+            if (progFill) progFill.style.width = pct + '%';
+
+            updateBadges();
+        }
+
+        function setFilter(projId, filter, btn) {
+            document.querySelectorAll(`#filters-${projId} .filter-btn`).forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProject(projId);
+        }
+
+        // ── Generate Project Sections ──
+        function generateProjectSections() {
+            const container = document.getElementById('project-sections');
+            container.innerHTML = projects.map(p => {
+                const done = p.tasks.filter(t => t.done || t.status === 'completed').length;
+                const total = p.tasks.length;
+                const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+                let flowHtml = '';
+                if (p.referenceFlow && p.referenceFlow.length > 0) {
+                    flowHtml = `
+                <div class="reference-flow">
+                    <div class="flow-title">🔄 参考：営業の流れ</div>
+                    <div class="flow-steps">
+                        ${p.referenceFlow.map((step, i) => `
+                            <div class="flow-step"><span class="step-num">${i + 1}</span>${step}</div>
+                            ${i < p.referenceFlow.length - 1 ? '<span class="flow-arrow">→</span>' : ''}
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+                }
+
+                return `
+            <div class="section" id="section-${p.id}">
+                <div class="project-header">
+                    <div class="project-icon">${p.icon}</div>
+                    <div class="project-info">
+                        <h2>${p.name}</h2>
+                        <div class="project-meta">
+                            <span class="target-badge">対象: ${p.target}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container" style="margin-bottom:24px;">
+                    <div class="progress-label">
+                        <span id="prog-label-${p.id}">${done}/${total} タスク完了</span>
+                        <span id="prog-pct-${p.id}">${pct}%</span>
+                    </div>
+                    <div class="progress-bar" style="height:8px;">
+                        <div class="progress-fill" id="prog-fill-${p.id}" style="width:${pct}%"></div>
+                    </div>
+                </div>
+
+                <div class="project-overview-text">
+                    ${p.description}
+                </div>
+
+                ${flowHtml}
+
+                <div class="task-section">
+                    <div class="task-section-header">
+                        <div class="task-section-title"><span class="icon">✅</span> タスク</div>
+                    </div>
+                    <div class="task-add-row">
+                        <input type="text" id="add-task-${p.id}" placeholder="新しいタスクを追加…" onkeydown="if(event.key==='Enter')addTask('${p.id}')">
+                        <button onclick="addTask('${p.id}')">＋ 追加</button>
+                    </div>
+                    <div class="filter-bar" id="filters-${p.id}">
+                        <button class="filter-btn active" data-filter="all" onclick="setFilter('${p.id}','all',this)">すべて</button>
+                        <button class="filter-btn" data-filter="not_started" onclick="setFilter('${p.id}','not_started',this)">未着手</button>
+                        <button class="filter-btn" data-filter="in_progress" onclick="setFilter('${p.id}','in_progress',this)">進行中</button>
+                        <button class="filter-btn" data-filter="completed" onclick="setFilter('${p.id}','completed',this)">完了</button>
+                    </div>
+                    <div id="tasks-${p.id}"></div>
+                </div>
+
+                <div class="notes-section">
+                    <div class="notes-title">📝 メモ</div>
+                    <textarea id="notes-${p.id}" placeholder="このプロジェクトに関するメモを自由に記入…" oninput="saveNotes('${p.id}')">${p.notes || ''}</textarea>
+                </div>
+            </div>
+        `;
+            }).join('');
+        }
+
+        // ── Init ──
+        function init() {
+            loadData();
+            generateProjectSections();
+            projects.forEach(p => renderProject(p.id));
+            renderOverview();
+            updateBadges();
+            updateLastUpdated();
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リッツプロ — 施策成果物まとめ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a2332;
+            --surface: #243142;
+            --card: #1e2b3a;
+            --border: #2d3e50;
+            --white: #e8e0d0;
+            --gray: #8997a8;
+            --gold: #c9a84c;
+            --gold-light: #d4b87a;
+            --gold-dim: rgba(201, 168, 76, .1);
+            --green: #4a9d6e;
+            --green-bg: rgba(74, 157, 110, .12);
+            --red: #c9574c;
+            --blue: #4a7dc9;
+            --blue-bg: rgba(74, 125, 201, .12);
+            --orange: #c98a4c;
+            --line-green: #06C755
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            min-height: 100vh
+        }
+
+        .header {
+            background: linear-gradient(135deg, #141e2b, #1e3040);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .header h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 22px;
+            color: var(--gold)
+        }
+
+        .header p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px
+        }
+
+        .tabs {
+            display: flex;
+            gap: 2px;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            overflow-x: auto
+        }
+
+        .tab {
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray);
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all .2s
+        }
+
+        .tab:hover {
+            color: var(--white)
+        }
+
+        .tab.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+            background: rgba(201, 168, 76, .04)
+        }
+
+        .main {
+            padding: 32px 40px;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .panel {
+            display: none
+        }
+
+        .panel.active {
+            display: block
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 6px
+        }
+
+        .section-desc {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 24px;
+            line-height: 1.7
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px
+        }
+
+        .card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card p,
+        .card li {
+            font-size: 13px;
+            color: #c8c0b0;
+            line-height: 1.8
+        }
+
+        .card ul,
+        .card ol {
+            padding-left: 20px;
+            margin-bottom: 12px
+        }
+
+        .card li {
+            margin-bottom: 4px
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-left: 8px
+        }
+
+        .badge-gold {
+            background: var(--gold-dim);
+            color: var(--gold)
+        }
+
+        .badge-green {
+            background: var(--green-bg);
+            color: var(--green)
+        }
+
+        .badge-blue {
+            background: var(--blue-bg);
+            color: var(--blue)
+        }
+
+        .flow-h {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin: 16px 0
+        }
+
+        .flow-step {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 12px;
+            color: var(--white);
+            font-weight: 500
+        }
+
+        .flow-step .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            color: #1a2332;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            margin-right: 6px
+        }
+
+        .flow-arrow {
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: bold
+        }
+
+        .copy-box {
+            background: #141e2b;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #c8c0b0;
+            line-height: 1.9;
+            white-space: pre-wrap;
+            position: relative
+        }
+
+        .copy-box .copy-label {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 10px;
+            color: var(--gold);
+            background: var(--gold-dim);
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer
+        }
+
+        .copy-box .copy-label:hover {
+            background: rgba(201, 168, 76, .2)
+        }
+
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 12px 0
+        }
+
+        .compare .before,
+        .compare .after {
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 12px;
+            line-height: 1.8
+        }
+
+        .compare .before {
+            background: rgba(137, 151, 168, .08);
+            border: 1px solid rgba(137, 151, 168, .2);
+            color: var(--gray)
+        }
+
+        .compare .after {
+            background: rgba(74, 157, 110, .06);
+            border: 1px solid rgba(74, 157, 110, .2);
+            color: #c8c0b0
+        }
+
+        .compare .label {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .compare .before .label {
+            color: var(--gray)
+        }
+
+        .compare .after .label {
+            color: var(--green)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 13px
+        }
+
+        th {
+            background: rgba(201, 168, 76, .08);
+            color: var(--gold);
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid var(--border)
+        }
+
+        td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            color: #c8c0b0
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(30, 43, 58, .5)
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 16px 0
+        }
+
+        .kpi-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center
+        }
+
+        .kpi-card .value {
+            font-family: Inter, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold)
+        }
+
+        .kpi-card .label {
+            font-size: 11px;
+            color: var(--gray);
+            margin-top: 4px
+        }
+
+        .kpi-card.green .value {
+            color: var(--green)
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+            margin: 16px 0
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border)
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 16px
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--bg)
+        }
+
+        .timeline-item .time {
+            font-size: 11px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 2px
+        }
+
+        .timeline-item .content {
+            font-size: 13px;
+            color: #c8c0b0;
+            line-height: 1.6
+        }
+
+        .auto-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0
+        }
+
+        .auto-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px
+        }
+
+        .auto-step .icon {
+            font-size: 20px;
+            flex-shrink: 0
+        }
+
+        .auto-step .text {
+            font-size: 13px;
+            color: #c8c0b0;
+            flex: 1
+        }
+
+        .auto-step .tool {
+            font-size: 11px;
+            color: var(--gold);
+            background: var(--gold-dim);
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap
+        }
+
+        .line-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--line-green);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            margin: 12px 0;
+            border: none;
+            cursor: pointer
+        }
+
+        .script-block {
+            background: #141e2b;
+            border-left: 3px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #c8c0b0;
+            line-height: 2
+        }
+
+        .script-block .speaker {
+            color: var(--gold);
+            font-weight: 700
+        }
+
+        @media(max-width:768px) {
+            .header {
+                padding: 16px 20px
+            }
+
+            .tabs {
+                padding: 0 16px
+            }
+
+            .main {
+                padding: 20px 16px
+            }
+
+            .compare {
+                grid-template-columns: 1fr
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div>
+            <h1>RITZ PRO — 施策成果物まとめ</h1>
+            <p>営業マニュアル / サンクス→LINE導線 / メルマガ・SMS改善</p>
+        </div>
+    </div>
+    <div class="tabs" id="tabs">
+        <button class="tab active" onclick="showPanel(0)">📊 概要</button>
+        <button class="tab" onclick="showPanel(1)">📋 営業フロー手順書</button>
+        <button class="tab" onclick="showPanel(2)">🎓 セミナー運営</button>
+        <button class="tab" onclick="showPanel(3)">💬 サンクス→LINE設計</button>
+        <button class="tab" onclick="showPanel(4)">✉️ メルマガテンプレ</button>
+        <button class="tab" onclick="showPanel(5)">📱 SMSテンプレ</button>
+        <button class="tab" onclick="showPanel(6)">🎤 セミナーLINE誘導</button>
+        <button class="tab" onclick="showPanel(7)">⚙️ 自動化設計</button>
+    </div>
+    <div class="main">
+
+        <!-- ===== TAB 0: 概要 ===== -->
+        <div class="panel active" id="panel-0">
+            <h2 class="section-title">📊 施策成果物 概要</h2>
+            <p class="section-desc">リッツプロの3プロジェクトに紐づく全成果物を一覧で確認できます。各タブから詳細を閲覧してください。</p>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="value">8</div>
+                    <div class="label">成果物数</div>
+                </div>
+                <div class="kpi-card green">
+                    <div class="value">3</div>
+                    <div class="label">プロジェクト</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="value">4</div>
+                    <div class="label">メールテンプレ</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="value">4</div>
+                    <div class="label">SMSテンプレ</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📋 Project 1: 営業マニュアル化</h3>
+                <p>新規営業メンバーが即戦力になるための手順書。STEP1〜4（リード獲得→セミナー→面談→契約）の全フローを文書化。セミナー運営の進行台本・チェックリスト付き。</p>
+                <table>
+                    <tr>
+                        <th>成果物</th>
+                        <th>タブ</th>
+                        <th>内容</th>
+                    </tr>
+                    <tr>
+                        <td>営業フロー手順書</td>
+                        <td>📋 営業フロー手順書</td>
+                        <td>STEP1-4の全手順・チェックリスト</td>
+                    </tr>
+                    <tr>
+                        <td>セミナー運営マニュアル</td>
+                        <td>🎓 セミナー運営</td>
+                        <td>準備→当日→フォローの進行台本</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>💬 Project 2: サンクス→LINE導線設計</h3>
+                <p>セミナー申込後のサンクスページからLINE登録率を最大化する導線。サンクスページ改修仕様、LINEステップ配信シナリオ、セミナー終盤のLINE誘導スクリプトを整備。</p>
+                <table>
+                    <tr>
+                        <th>成果物</th>
+                        <th>タブ</th>
+                        <th>内容</th>
+                    </tr>
+                    <tr>
+                        <td>サンクスページ → LINE設計書</td>
+                        <td>💬 サンクス→LINE設計</td>
+                        <td>改修仕様・CTA設計・特典設計</td>
+                    </tr>
+                    <tr>
+                        <td>セミナー終盤LINE誘導スクリプト</td>
+                        <td>🎤 セミナーLINE誘導</td>
+                        <td>講師用トーク台本</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>✉️ Project 3: メルマガ・SMSコピー見直し</h3>
+                <p>UTAGEで送付するセミナー案内メール・SMSの改善。Before/After比較形式のテンプレ集、A/Bテスト計画、クロスチャネル自動化フロー。</p>
+                <table>
+                    <tr>
+                        <th>成果物</th>
+                        <th>タブ</th>
+                        <th>内容</th>
+                    </tr>
+                    <tr>
+                        <td>メルマガテンプレート集</td>
+                        <td>✉️ メルマガテンプレ</td>
+                        <td>4パターン × Before/After</td>
+                    </tr>
+                    <tr>
+                        <td>SMSテンプレート集</td>
+                        <td>📱 SMSテンプレ</td>
+                        <td>4パターン + 迷惑メール回避ルール</td>
+                    </tr>
+                    <tr>
+                        <td>自動化設計</td>
+                        <td>⚙️ 自動化設計</td>
+                        <td>配信スケジュール・テンプレ運用フロー</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== TAB 1: 営業フロー手順書 ===== -->
+        <div class="panel" id="panel-1">
+            <h2 class="section-title">📋 営業フロー手順書</h2>
+            <p class="section-desc">リッツプロのFC加盟店開発営業を誰でも再現可能にするための手順書。新規の営業メンバーがこのマニュアルだけで一通りの業務を回せることを目指します。</p>
+
+            <div class="card">
+                <h3>🔄 営業フロー全体像</h3>
+                <div class="flow-h">
+                    <div class="flow-step"><span class="num">1</span>リード獲得</div><span class="flow-arrow">→</span>
+                    <div class="flow-step"><span class="num">2</span>セミナー運営</div><span class="flow-arrow">→</span>
+                    <div class="flow-step"><span class="num">3</span>個別面談</div><span class="flow-arrow">→</span>
+                    <div class="flow-step"><span class="num">4</span>契約・CS引継</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📌 STEP1: リード獲得</h3>
+                <p><strong>広告運用</strong>: Meta広告（Facebook/Instagram）。RIDE社が運用、リッツプロがディレクション。月次レポートをクライアント共有。</p>
+                <ol>
+                    <li>UTAGEの管理画面で新規リードを確認</li>
+                    <li>自動返信メールの送信を確認</li>
+                    <li>GoogleスプレッドシートのリードリストにID追加を確認</li>
+                    <li>LINE友だち追加が入った場合 → あいさつメッセージの自動送信 + ステップ配信スケジュールを確認</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>📌 STEP2: セミナー運営 <span class="badge badge-gold">別タブに詳細</span></h3>
+                <p>セミナー準備〜当日運営〜フォローまでの詳細は「🎓 セミナー運営」タブに記載。</p>
+                <table>
+                    <tr>
+                        <th>時間</th>
+                        <th>内容</th>
+                        <th>ポイント</th>
+                    </tr>
+                    <tr>
+                        <td>0-10分</td>
+                        <td>自己紹介・会社紹介</td>
+                        <td>実績で信頼構築</td>
+                    </tr>
+                    <tr>
+                        <td>10-30分</td>
+                        <td>市場の可能性</td>
+                        <td>CAGRの数値を使用</td>
+                    </tr>
+                    <tr>
+                        <td>30-50分</td>
+                        <td>ビジネスモデル説明</td>
+                        <td>「技術不要・1名運営」を強調</td>
+                    </tr>
+                    <tr>
+                        <td>50-70分</td>
+                        <td>収支データ公開</td>
+                        <td>12ヶ月分の月次データ</td>
+                    </tr>
+                    <tr>
+                        <td>70-85分</td>
+                        <td>FC条件・費用説明</td>
+                        <td>比較表で他FCと差別化</td>
+                    </tr>
+                    <tr>
+                        <td>85-100分</td>
+                        <td>Q&A・次のステップ</td>
+                        <td>個別面談への誘導 + LINE登録促進</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>📌 STEP3: 個別面談・クロージング</h3>
+                <p><strong>面談前の準備</strong>: ①お客様カルテの確認 ②提案書を準備 ③収支シミュレーション準備</p>
+                <table>
+                    <tr>
+                        <th>時間</th>
+                        <th>内容</th>
+                        <th>ポイント</th>
+                    </tr>
+                    <tr>
+                        <td>0-10分</td>
+                        <td>アイスブレイク</td>
+                        <td>セミナーの感想を聞く</td>
+                    </tr>
+                    <tr>
+                        <td>10-25分</td>
+                        <td>ヒアリング</td>
+                        <td>動機・資金・時期・エリア</td>
+                    </tr>
+                    <tr>
+                        <td>25-40分</td>
+                        <td>提案</td>
+                        <td>収支モデルをカスタマイズ</td>
+                    </tr>
+                    <tr>
+                        <td>40-50分</td>
+                        <td>質疑応答</td>
+                        <td>不安要素を1つずつ解消</td>
+                    </tr>
+                    <tr>
+                        <td>50-60分</td>
+                        <td>ネクストステップ</td>
+                        <td>契約意思の確認</td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px"><strong>クロージングの要点:</strong></p>
+                <ul>
+                    <li>「今だけの条件」を明示（0次募集は加盟金100万円、通常200万円）</li>
+                    <li>投資回収期間を具体的に（14ヶ月）</li>
+                    <li>他のオーナーの声を共有</li>
+                    <li>即決できない場合は次の具体日程を必ず確保</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📌 STEP4: 契約・オンボーディング → CSへトスアップ</h3>
+                <ol>
+                    <li><strong>契約手続き</strong>: クラウドサインで契約書送付 → 入金確認（加盟金+初期費用） → 領収書発行</li>
+                    <li><strong>キックオフMTG</strong>: ダッシュボードURL共有 → ガントチャートで全体スケジュール説明 → 初回ヒアリング（お客様カルテ記入）</li>
+                    <li><strong>CS引継ぎ</strong>: お客様カルテ・契約情報・商談録画をCS担当に共有。以降の進行管理はCSが主導</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- ===== TAB 2: セミナー運営 ===== -->
+        <div class="panel" id="panel-2">
+            <h2 class="section-title">🎓 セミナー運営マニュアル</h2>
+            <p class="section-desc">セミナー準備（7日前〜）から当日運営、フォローまでの全手順。講師用の進行台本として活用してください。</p>
+
+            <div class="card">
+                <h3>📅 セミナー前の準備</h3>
+                <table>
+                    <tr>
+                        <th>タスク</th>
+                        <th>担当</th>
+                        <th>期限</th>
+                    </tr>
+                    <tr>
+                        <td>Zoom URLの発行</td>
+                        <td>営業</td>
+                        <td>7日前</td>
+                    </tr>
+                    <tr>
+                        <td>セミナースライドの最終確認</td>
+                        <td>営業</td>
+                        <td>3日前</td>
+                    </tr>
+                    <tr>
+                        <td>リマインド配信設定の確認（LINE/メール/SMS）</td>
+                        <td>CS</td>
+                        <td>3日前</td>
+                    </tr>
+                    <tr>
+                        <td>申込者リストの確認</td>
+                        <td>営業</td>
+                        <td>1日前</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>🎬 セミナー当日 タイムテーブル</h3>
+                <p><strong>開始30分前:</strong> Zoom開室 → 画面共有テスト → スライド準備 → 録画開始確認</p>
+                <table>
+                    <tr>
+                        <th>時間</th>
+                        <th>セクション</th>
+                        <th>話すこと</th>
+                    </tr>
+                    <tr>
+                        <td>0-10分</td>
+                        <td>導入</td>
+                        <td>自己紹介・リッツプロの実績紹介。BUPURAやNBドローンスクールの成功事例で信頼構築</td>
+                    </tr>
+                    <tr>
+                        <td>10-30分</td>
+                        <td>市場説明</td>
+                        <td>よもぎ蒸し市場のCAGR・成長性。「なぜ今このタイミングか」を数字で説明</td>
+                    </tr>
+                    <tr>
+                        <td>30-50分</td>
+                        <td>モデル説明</td>
+                        <td>「技術不要・1名運営・利益率35.6%」の3条件。直営店のオペレーションを解説</td>
+                    </tr>
+                    <tr>
+                        <td>50-70分</td>
+                        <td>収支公開</td>
+                        <td>12ヶ月分の月次データをすべて公開。「14ヶ月で投資回収」の実績を提示</td>
+                    </tr>
+                    <tr>
+                        <td>70-85分</td>
+                        <td>FC条件</td>
+                        <td>加盟金・ロイヤリティ・初期費用の説明。他FCとの比較表を見せる</td>
+                    </tr>
+                    <tr>
+                        <td>85-95分</td>
+                        <td>Q&A</td>
+                        <td>参加者の質問に回答。よくある不安（資金・エリア・未経験）を事前に用意</td>
+                    </tr>
+                    <tr>
+                        <td>95-100分</td>
+                        <td>クロージング</td>
+                        <td>個別面談の案内 + <strong>LINE登録の促進</strong>（→「🎤 セミナーLINE誘導」タブ参照）</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>📞 セミナー後フォロー</h3>
+                <table>
+                    <tr>
+                        <th>タイミング</th>
+                        <th>アクション</th>
+                        <th>チャネル</th>
+                    </tr>
+                    <tr>
+                        <td>当日中</td>
+                        <td>お礼メッセージ + アーカイブ動画送付</td>
+                        <td>LINE</td>
+                    </tr>
+                    <tr>
+                        <td>翌日</td>
+                        <td>個別面談の案内</td>
+                        <td>メール</td>
+                    </tr>
+                    <tr>
+                        <td>3日後</td>
+                        <td>リマインド「まだ間に合います」</td>
+                        <td>SMS</td>
+                    </tr>
+                    <tr>
+                        <td>7日後</td>
+                        <td>ラストチャンス + 事例紹介</td>
+                        <td>LINE</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>✅ セミナー開催チェックリスト</h3>
+                <ul>
+                    <li>□ Zoom URL発行済み</li>
+                    <li>□ リマインド配信の設定確認（LINE / メール / SMS）</li>
+                    <li>□ スライド資料の最終確認</li>
+                    <li>□ 録画開始ボタンの確認</li>
+                    <li>□ 参加者リスト最新化</li>
+                    <li>□ フォロー配信（お礼・アーカイブ・面談案内）のセット</li>
+                    <li>□ 録画データの保存・ダッシュボードへのアップロード</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== TAB 3: サンクス→LINE設計 ===== -->
+        <div class="panel" id="panel-3">
+            <h2 class="section-title">💬 サンクスページ → LINE導線設計</h2>
+            <p class="section-desc">セミナー申込後のサンクスページでLINE登録率を最大化するための導線設計。CTA配置・特典訴求・LINE側の設定を網羅。</p>
+
+            <div class="card">
+                <h3>🔄 改善後のフロー</h3>
+                <div class="flow-h">
+                    <div class="flow-step"><span class="num">1</span>広告クリック</div><span class="flow-arrow">→</span>
+                    <div class="flow-step"><span class="num">2</span>FC募集LP</div><span class="flow-arrow">→</span>
+                    <div class="flow-step"><span class="num">3</span>申込フォーム</div><span class="flow-arrow">→</span>
+                    <div class="flow-step" style="border-color:var(--line-green)"><span class="num"
+                            style="background:var(--line-green)">4</span>サンクスページ＋LINE CTA</div><span
+                        class="flow-arrow">→</span>
+                    <div class="flow-step" style="border-color:var(--line-green)"><span class="num"
+                            style="background:var(--line-green)">5</span>LINEステップ配信</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📐 サンクスページ改修 CTA仕様</h3>
+                <p>セミナー申込完了後に表示されるサンクスページに、以下の要素を追加:</p>
+                <table>
+                    <tr>
+                        <th>要素</th>
+                        <th>仕様</th>
+                    </tr>
+                    <tr>
+                        <td>LINE登録ボタン</td>
+                        <td>LINEグリーン(#06C755)・角丸12px・幅100%(最大480px)・高さ60px<br>テキスト:「LINEで限定資料を受け取る 📩」</td>
+                    </tr>
+                    <tr>
+                        <td>特典訴求</td>
+                        <td>✅ FC加盟オーナー収支モデル(12ヶ月分)<br>✅ よもぎ蒸し市場レポート2026<br>✅ セミナースライド資料(事前配布)</td>
+                    </tr>
+                    <tr>
+                        <td>QRコード</td>
+                        <td>PC閲覧時のみ表示(スマホ非表示)</td>
+                    </tr>
+                    <tr>
+                        <td>緊急性</td>
+                        <td>「本セミナーは定員制です。LINE登録後、すぐに参加URLをお送りします。」</td>
+                    </tr>
+                </table>
+                <p style="margin-top:16px"><strong>ページ構成（上から順）:</strong></p>
+                <ol>
+                    <li>✅アイコン +「お申込みありがとうございます」</li>
+                    <li>セミナー日時・形式の確認</li>
+                    <li><strong>LINE登録CTA</strong>（NEW）</li>
+                    <li><strong>特典リスト</strong>（NEW）</li>
+                    <li><strong>QRコード</strong>（NEW / PC表示時のみ）</li>
+                    <li>注意事項（Zoom参加方法など）</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>📱 LINE側の設定</h3>
+                <p><strong>あいさつメッセージ（改訂案）:</strong></p>
+                <div class="copy-box"><span class="copy-label" onclick="copyText(this)">コピー</span>【お名前】様、セミナーへのお申込み
+                    ありがとうございます！🙏
+
+                    黄土よもぎ蒸し専門店「ON」
+                    FC加盟店募集の公式LINEです。
+
+                    ━━━━━━━━━━━━━━━━
+                    🎁 お約束の限定特典をお届けします
+                    ━━━━━━━━━━━━━━━━
+
+                    こちらのリッチメニューから
+                    いつでもご確認いただけます👇
+
+                    📩 セミナーのZoom URLは
+                    前日にLINEでお送りします。
+
+                    ご質問があればお気軽に
+                    メッセージをお送りください✨</div>
+
+                <p><strong>リッチメニュー（改訂案）:</strong></p>
+                <table>
+                    <tr>
+                        <td>セミナー詳細 🎓</td>
+                        <td>限定資料DL 📩</td>
+                        <td>収益モデル 📊</td>
+                    </tr>
+                    <tr>
+                        <td>オーナーの声 💬</td>
+                        <td>よくある質問 ❓</td>
+                        <td>個別相談予約 📅</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>📅 LINEステップ配信スケジュール</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="time">登録直後</div>
+                        <div class="content">あいさつメッセージ + 限定特典配信 → 信頼構築</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー3日前</div>
+                        <div class="content">「準備はOK？」+ 事前質問募集 → エンゲージメント向上</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー前日</div>
+                        <div class="content">リマインド + Zoom URL送付 → 参加率向上</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー当日AM</div>
+                        <div class="content">「本日です！」+ Zoom URL再送 → 離脱防止</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー翌日</div>
+                        <div class="content">お礼 + アーカイブ動画 + 個別面談案内 → リード転換</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー3日後</div>
+                        <div class="content">「まだ間に合います」+ 限定オファー → 決断促進</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー7日後</div>
+                        <div class="content">ラストチャンス + 成功事例紹介 → 最終プッシュ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TAB 4: メルマガテンプレ ===== -->
+        <div class="panel" id="panel-4">
+            <h2 class="section-title">✉️ メルマガテンプレート集</h2>
+            <p class="section-desc">UTAGEで送付するセミナー案内メール4パターン。Before/After比較で改善ポイントを明確化。コピーして即利用可能。</p>
+
+            <div class="card">
+                <h3>📧 パターンA: セミナー集客メール <span class="badge badge-gold">申込数最大化</span></h3>
+                <div class="compare">
+                    <div class="before">
+                        <div class="label">❌ Before（想定）</div>件名:
+                        FC加盟説明会のご案内<br><br>〇〇様<br>よもぎ蒸しサロンのFC加盟説明会を開催します。<br>詳しくはこちらをご覧ください。<br>→ セミナーLP URL
+                    </div>
+                    <div class="after">
+                        <div class="label">✅ After</div>件名:
+                        【残席3名】年間利益542万円の"よもぎ蒸しFC"無料説明会<br><br>〇〇様<br><br>「技術不要・1名運営・利益率35.6%」<br>──この3つの条件を満たすFC、他にありますか？<br><br>直営店で年間純利益542万円、14ヶ月で投資回収。<br><br>■
+                        日時：〇月〇日 〇:00〜<br>■ 形式：Zoom（オンライン）<br>■ 定員：先着10名様<br><br>▼ 30秒で申込完了 ▼<br>【セミナーLP URL】
+                    </div>
+                </div>
+                <p style="margin-top:12px;font-size:12px;color:var(--gold)">💡 改善ポイント: ①件名に数字+緊急性 ②冒頭で差別化要素 ③CTAを明確に</p>
+            </div>
+
+            <div class="card">
+                <h3>📧 パターンB: セミナー前日リマインド</h3>
+                <div class="copy-box"><span class="copy-label" onclick="copyText(this)">コピー</span>件名:
+                    【明日開催】12ヶ月分の収支データ、全て見せます
+
+                    〇〇様
+
+                    いよいよ明日です。
+
+                    明日のセミナーでは、普通は絶対に出さない
+                    「直営店12ヶ月分の月次収支データ」を
+                    すべてオープンにします。
+
+                    ・1月目：赤字●万円 → 14ヶ月目：累計黒字達成
+                    ・売上/原価/人件費/家賃を全公開
+                    ・なぜ「技術不要」で利益率35.6%出るのか
+
+                    ■ 明日 〇月〇日（〇）〇:00〜
+                    ■ Zoom URL：【URL】
+                    ※ 5分前にはご入室ください
+
+                    代表 嶋岡 みのり</div>
+            </div>
+
+            <div class="card">
+                <h3>📧 パターンC: セミナー後フォロー</h3>
+                <div class="copy-box"><span class="copy-label" onclick="copyText(this)">コピー</span>件名: 昨日のデータ、もう一度見たい方へ
+
+                    〇〇様
+
+                    昨日はセミナーにご参加いただき
+                    ありがとうございました。
+
+                    「もう一度、収支データを見たい」
+                    「家族に見せて相談したい」
+
+                    そんなお声をいただいたため、
+                    セミナーのアーカイブ動画を
+                    期間限定でお送りします。
+
+                    ▼ アーカイブ視聴はこちら ▼
+                    【URL】
+                    ※ 視聴期限：〇月〇日まで
+
+                    ▼ 無料個別相談を予約する ▼
+                    【URL】</div>
+            </div>
+
+            <div class="card">
+                <h3>📧 パターンD: 休眠リスト掘り起こし</h3>
+                <div class="copy-box"><span class="copy-label" onclick="copyText(this)">コピー</span>件名:
+                    【ご報告】ON、3店舗目が決まりました
+
+                    〇〇様
+
+                    以前、よもぎ蒸しFC「ON」に
+                    ご興味をお持ちいただいた〇〇様に
+                    1つご報告です。
+
+                    直営2店舗に加え、
+                    FC加盟による3店舗目の出店が決定しました。
+
+                    0次募集の特別条件
+                    （加盟金100万円 → 通常200万円）は
+                    残り▲枠となっております。
+
+                    ▼ 30秒でセミナー申込 ▼
+                    【URL】</div>
+            </div>
+
+            <div class="card">
+                <h3>📊 A/Bテスト計画</h3>
+                <table>
+                    <tr>
+                        <th>テスト項目</th>
+                        <th>パターンA</th>
+                        <th>パターンB</th>
+                        <th>判定KPI</th>
+                    </tr>
+                    <tr>
+                        <td>件名の数字有無</td>
+                        <td>【残席3名】年間利益542万円…</td>
+                        <td>よもぎ蒸しFC 無料説明会のご案内</td>
+                        <td>開封率</td>
+                    </tr>
+                    <tr>
+                        <td>CTA文言</td>
+                        <td>▼ 30秒で申込完了 ▼</td>
+                        <td>▼ 詳細はこちら ▼</td>
+                        <td>クリック率</td>
+                    </tr>
+                    <tr>
+                        <td>送信時間</td>
+                        <td>火曜10:00</td>
+                        <td>木曜18:00</td>
+                        <td>開封率</td>
+                    </tr>
+                    <tr>
+                        <td>本文の長さ</td>
+                        <td>短文（200字以内）</td>
+                        <td>長文（詳細説明付き）</td>
+                        <td>CVR</td>
+                    </tr>
+                </table>
+                <p style="margin-top:12px;font-size:12px;color:var(--gray)">※ 各テストは最低100件以上の配信数で実施。1テストずつ順番に検証すること。</p>
+            </div>
+        </div>
+
+        <!-- ===== TAB 5: SMSテンプレ ===== -->
+        <div class="panel" id="panel-5">
+            <h2 class="section-title">📱 SMSテンプレート集</h2>
+            <p class="section-desc">SMSは70文字以内に収め、URL短縮を必須とすること。送信時間は平日10:00-12:00 or 18:00-20:00が推奨。</p>
+
+            <div class="card">
+                <h3>⚠️ 迷惑メール回避の3原則 <span class="badge badge-green">着席率UP</span></h3>
+                <ol>
+                    <li><strong>リンクは1つだけ</strong>（複数リンク = 迷惑メール判定されやすい）</li>
+                    <li><strong>短縮URL使用</strong>（bitly等で短縮。生URLは文字数超過 + 迷惑メール判定リスク）</li>
+                    <li><strong>過度な記号を避ける</strong>（【】★※の多用は迷惑メールフィルターに引っかかりやすい）</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3>📱 パターン1: セミナー告知</h3>
+                <div class="compare">
+                    <div class="before">
+                        <div class="label">❌ Before</div>FC説明会を開催します。詳しくはこちら→URL
+                    </div>
+                    <div class="after">
+                        <div class="label">✅ After（68文字）</div>{名前}様、技術不要で年利益542万のよもぎ蒸しFC。無料説明会→{短縮URL}残席わずか
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📱 パターン2: リマインド <span class="badge badge-blue">キャンセル防止</span></h3>
+                <div class="copy-box"><span class="copy-label"
+                        onclick="copyText(this)">コピー</span>{名前}様、明日のFC説明会リマインドです。Zoom→{URL} 10時開始/5分前入室をお願いします</div>
+                <p style="margin-top:8px;font-size:12px;color:var(--gray)">65文字 — Zoom URLのみ1リンク。「5分前入室」で心理的コミットメントを高める。
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>📱 パターン3: 不参加フォロー</h3>
+                <div class="copy-box"><span class="copy-label"
+                        onclick="copyText(this)">コピー</span>{名前}様、先日のセミナー録画をお送りします。期間限定→{URL} ご都合よい時にどうぞ</div>
+                <p style="margin-top:8px;font-size:12px;color:var(--gray)">62文字 — 「期間限定」で行動を促す。プレッシャーをかけすぎない柔らかいトーン。</p>
+            </div>
+
+            <div class="card">
+                <h3>📱 パターン4: 掘り起こし</h3>
+                <div class="copy-box"><span class="copy-label"
+                        onclick="copyText(this)">コピー</span>{名前}様、よもぎ蒸しFC「ON」0次募集の残枠わずか。特別条件で加盟可→{URL}</div>
+                <p style="margin-top:8px;font-size:12px;color:var(--gray)">56文字 — 「0次募集」「残枠わずか」で希少性+緊急性。リンク1つのみで迷惑メール回避。
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== TAB 6: セミナーLINE誘導 ===== -->
+        <div class="panel" id="panel-6">
+            <h2 class="section-title">🎤 セミナー終盤 LINE登録誘導スクリプト</h2>
+            <p class="section-desc">セミナーの最後5分（95-100分）で使用する、LINE登録を促すための講師用トーク台本。自然な流れでLINE登録に誘導します。</p>
+
+            <div class="card">
+                <h3>🎯 誘導タイミングと目的</h3>
+                <p>セミナー終盤のQ&Aが終わった直後、「次のステップ」案内の中でLINE登録を促す。個別面談への誘導と一体で行うのがポイント。</p>
+                <table>
+                    <tr>
+                        <th>タイミング</th>
+                        <th>内容</th>
+                        <th>目的</th>
+                    </tr>
+                    <tr>
+                        <td>Q&A終了直後</td>
+                        <td>「ありがとうございました」のお礼</td>
+                        <td>場の締めくくり</td>
+                    </tr>
+                    <tr>
+                        <td>→ 切り替え</td>
+                        <td>「最後に1つだけお伝えしたいことがあります」</td>
+                        <td>注意を引く</td>
+                    </tr>
+                    <tr>
+                        <td>→ 特典告知</td>
+                        <td>LINE登録で限定資料を受け取れることを案内</td>
+                        <td>行動の動機づけ</td>
+                    </tr>
+                    <tr>
+                        <td>→ 操作誘導</td>
+                        <td>画面にQRコード/URLを表示し、その場で登録</td>
+                        <td>即時行動</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>📝 講師用トーク台本</h3>
+                <div class="script-block">
+                    <span class="speaker">【講師】</span>
+                    皆さん、本日は長い時間お付き合いいただきありがとうございました。
+
+                    最後に1つだけお伝えさせてください。
+
+                    本日お見せした<strong>12ヶ月分の収支データ</strong>、
+                    「もう一度じっくり見たい」「家族に見せたい」
+                    という方もいらっしゃると思います。
+
+                    実は、今日ご参加いただいた方限定で、
+                    <strong>3つの特典</strong>をご用意しています。
+
+                    ━━━━━━━━━━━━━━━━
+                    🎁 セミナー参加者 限定特典
+                    ━━━━━━━━━━━━━━━━
+                    ✅ 特典①: 12ヶ月分の収支データ（PDF版）
+                    ✅ 特典②: よもぎ蒸し市場レポート2026
+                    ✅ 特典③: 本日のセミナースライド資料
+
+                    これらを <strong>LINE公式アカウント</strong> からお受け取りいただけます。
+
+                    <span class="speaker">【スライドにQRコードを表示】</span>
+
+                    今、画面にQRコードを出しています。
+                    スマホのカメラで読み取っていただくか、
+                    チャット欄にURLを貼りますので、
+                    <strong>今この場で</strong>友だち追加をお願いします。
+
+                    <span class="speaker">【30秒ほど待つ】</span>
+
+                    追加できましたか？
+                    「追加できました」とチャットで教えていただけると嬉しいです。
+
+                    LINEでは、今後の<strong>個別相談のご予約</strong>も
+                    ワンタップでできるようにしています。
+
+                    本日のセミナーを聞いて
+                    「もう少し自分の状況に合わせて聞きたい」
+                    という方は、ぜひLINEからご予約ください。
+
+                    本日はありがとうございました！
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🖥️ スライド準備物</h3>
+                <ul>
+                    <li><strong>QRコードスライド</strong>: LINE公式アカウントの友だち追加QRコードを大きく表示</li>
+                    <li><strong>特典一覧スライド</strong>: 3つの特典をビジュアルでわかりやすく表示</li>
+                    <li><strong>URL</strong>: Zoomチャット欄に貼る用のURLを準備（短縮URL推奨）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== TAB 7: 自動化設計 ===== -->
+        <div class="panel" id="panel-7">
+            <h2 class="section-title">⚙️ 自動化・テンプレ化 設計</h2>
+            <p class="section-desc">メルマガ・SMSの配信業務を自動化・テンプレ化し、工数を削減する仕組み設計。</p>
+
+            <div class="card">
+                <h3>📅 クロスチャネル自動配信スケジュール</h3>
+                <p>申込〜セミナー〜フォローまでの全配信を一元管理。UTAGEの自動配信機能で設定。</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="time">申込当日</div>
+                        <div class="content">📧 メール: 申込確認メール（自動）<br>📱 SMS:「ありがとうございます。LINEも追加→{URL}」</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">申込翌日</div>
+                        <div class="content">💬 LINE: 限定特典資料を配信</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー3日前</div>
+                        <div class="content">💬 LINE:「準備はOK？」+ 事前質問募集</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー前日</div>
+                        <div class="content">📧 メール: リマインド + Zoom URL<br>📱 SMS: リマインド（Zoom URL）<br>💬 LINE: リマインド</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー当日AM</div>
+                        <div class="content">💬 LINE:「本日です！」+ Zoom URL再送</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー翌日</div>
+                        <div class="content">📧 メール: お礼 + アーカイブ動画<br>💬 LINE: 個別面談案内</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー3日後</div>
+                        <div class="content">📱 SMS:「まだ間に合います」+ 面談予約URL</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">セミナー7日後</div>
+                        <div class="content">💬 LINE: ラストチャンス + 成功事例紹介</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="time">以降 月1回</div>
+                        <div class="content">📧 メール: 実績報告・新事例紹介</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🔧 UTAGEでの自動化設定手順</h3>
+                <div class="auto-flow">
+                    <div class="auto-step"><span class="icon">1️⃣</span><span
+                            class="text">UTAGEにメール/SMSテンプレートを登録（上記テンプレをそのままコピペ）</span><span class="tool">UTAGE</span>
+                    </div>
+                    <div class="auto-step"><span class="icon">2️⃣</span><span
+                            class="text">ステップメール配信シナリオを作成（申込日起点で日数指定）</span><span class="tool">UTAGE</span></div>
+                    <div class="auto-step"><span class="icon">3️⃣</span><span
+                            class="text">LINEステップ配信を作成（友だち追加を起点に日数指定）</span><span class="tool">LINE / UTAGE</span></div>
+                    <div class="auto-step"><span class="icon">4️⃣</span><span
+                            class="text">SMS配信のスケジュール設定（申込日+セミナー日起点）</span><span class="tool">UTAGE</span></div>
+                    <div class="auto-step"><span class="icon">5️⃣</span><span class="text">テスト配信（自分のアドレス / 自分のLINE /
+                            自分のSMS）</span><span class="tool">テスト</span></div>
+                    <div class="auto-step"><span class="icon">6️⃣</span><span class="text">本番稼働 →
+                            月次で開封率・クリック率・参加率をレビュー</span><span class="tool">運用</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 KPI目標</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="value">30%</div>
+                        <div class="label">メール開封率（目標）</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">5%</div>
+                        <div class="label">メールクリック率</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">15%</div>
+                        <div class="label">SMSクリック率</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="value">80%</div>
+                        <div class="label">セミナー参加率</div>
+                    </div>
+                    <div class="kpi-card green">
+                        <div class="value">50%</div>
+                        <div class="label">セミナー→面談率</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>✅ テスト確認項目</h3>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>テスト項目</th>
+                        <th>確認内容</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>メール受信確認</td>
+                        <td>迷惑メールに入らないか</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>リンク動作</td>
+                        <td>全URLが正しく遷移するか</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>SMS文字数</td>
+                        <td>70文字以内に収まっているか</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>SMS短縮URL</td>
+                        <td>短縮URLが正しく展開されるか</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>パーソナライズ</td>
+                        <td>{名前}が正しく差し込まれるか</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>配信タイミング</td>
+                        <td>スケジュール通り自動配信されるか</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>オプトアウト</td>
+                        <td>配信停止リンクが機能するか</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPanel(idx) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + idx).classList.add('active');
+            document.querySelectorAll('.tab')[idx].classList.add('active');
+        }
+        function copyText(el) {
+            const box = el.parentElement;
+            const text = box.innerText.replace('コピー', '').trim();
+            navigator.clipboard.writeText(text).then(() => { el.textContent = '✓ コピー済'; setTimeout(() => { el.textContent = 'コピー' }, 1500) });
+        }
+    </script>
+</body>
+
+</html>

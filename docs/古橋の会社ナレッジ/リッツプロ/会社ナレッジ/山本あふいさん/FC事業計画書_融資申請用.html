@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事業計画書（融資申請用）｜山本あふい｜FC事業展開</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0d2137;
+            --navy2: #173352;
+            --blue: #1e4f8c;
+            --accent: #c8a96e;
+            --red: #c0392b;
+            --green: #1a7a4a;
+            --text: #1a1a1a;
+            --textl: #555;
+            --bg: #f5f7fa;
+            --white: #fff;
+            --border: #d0d8e4;
+            --card: #fff;
+            --teal: #0e7490;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            line-height: 1.85;
+        }
+
+        /* ── Cover ── */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 55%, var(--blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 169, 110, .08), transparent 65%);
+        }
+
+        .cover-inner {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 2rem;
+            max-width: 720px;
+        }
+
+        .cover-stamp {
+            display: inline-block;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-size: .72rem;
+            letter-spacing: .3em;
+            padding: .45rem 1.8rem;
+            margin-bottom: 2.5rem;
+            border-radius: 2px;
+        }
+
+        .cover h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.45;
+            margin-bottom: 1.5rem;
+            letter-spacing: .08em;
+        }
+
+        .cover h1 em {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        .cover-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+            margin: .8rem auto 1.6rem;
+        }
+
+        .cover-meta {
+            font-size: .82rem;
+            opacity: .7;
+            line-height: 2.2;
+        }
+
+        .cover-meta strong {
+            color: var(--accent);
+            font-size: .9rem;
+        }
+
+        .cover-box {
+            margin-top: 2rem;
+            display: inline-block;
+            text-align: left;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(200, 169, 110, .3);
+            border-radius: 10px;
+            padding: 1.2rem 2rem;
+            font-size: .82rem;
+            line-height: 2.2;
+        }
+
+        .cover-box .label {
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: .6rem;
+        }
+
+        /* ── Layout ── */
+        .wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--navy);
+            border-left: 4px solid var(--blue);
+            padding: .3rem 0 .3rem 1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--navy2);
+            margin: 2rem 0 .8rem;
+            padding-bottom: .4rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .sec-num {
+            display: inline-block;
+            background: var(--blue);
+            color: var(--white);
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: .15em;
+            padding: .25rem .9rem;
+            border-radius: 2px;
+            margin-bottom: .8rem;
+        }
+
+        .page-break {
+            border: none;
+            border-top: 2px dashed var(--border);
+            margin: 4rem 0;
+        }
+
+        /* ── Table ── */
+        table.tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .87rem;
+            margin: 1.2rem 0;
+        }
+
+        table.tbl thead {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        table.tbl th {
+            padding: .8rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: .04em;
+        }
+
+        table.tbl td {
+            padding: .75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        table.tbl tbody tr:nth-child(even) {
+            background: rgba(30, 79, 140, .03);
+        }
+
+        table.tbl .num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        table.tbl .hl {
+            font-weight: 700;
+            color: var(--navy2);
+        }
+
+        table.tbl .hlr {
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        table.tbl .hlg {
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        table.tbl tfoot td {
+            background: rgba(30, 79, 140, .07);
+            font-weight: 700;
+            border-top: 2px solid var(--blue);
+            padding: .85rem 1rem;
+        }
+
+        .row-hd td {
+            background: rgba(30, 79, 140, .06);
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--blue);
+            letter-spacing: .05em;
+        }
+
+        /* ── Cards ── */
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+
+        .card .c-label {
+            font-size: .72rem;
+            color: var(--textl);
+            letter-spacing: .08em;
+            margin-bottom: .5rem;
+        }
+
+        .card .c-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            line-height: 1.15;
+        }
+
+        .card .c-sub {
+            font-size: .72rem;
+            color: var(--textl);
+            margin-top: .3rem;
+        }
+
+        .card.blue {
+            background: linear-gradient(135deg, var(--navy), var(--blue));
+            border: none;
+        }
+
+        .card.blue .c-label,
+        .card.blue .c-sub {
+            color: rgba(255, 255, 255, .55);
+        }
+
+        .card.blue .c-num {
+            color: var(--accent);
+        }
+
+        .card.red .c-num {
+            color: var(--red);
+        }
+
+        .card.green .c-num {
+            color: var(--green);
+        }
+
+        /* ── Info boxes ── */
+        .info-box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.4rem 1.8rem;
+            margin: 1.2rem 0;
+        }
+
+        .warn-box {
+            background: rgba(192, 57, 43, .05);
+            border: 1px solid rgba(192, 57, 43, .25);
+            border-left: 4px solid var(--red);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.4rem;
+            margin: .8rem 0;
+            font-size: .88rem;
+        }
+
+        .warn-box strong {
+            color: var(--red);
+        }
+
+        .ok-box {
+            background: rgba(26, 122, 74, .05);
+            border: 1px solid rgba(26, 122, 74, .22);
+            border-left: 4px solid var(--green);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.4rem;
+            margin: .8rem 0;
+            font-size: .88rem;
+        }
+
+        .ok-box strong {
+            color: var(--green);
+        }
+
+        .note {
+            font-size: .8rem;
+            color: var(--textl);
+            margin: .5rem 0;
+        }
+
+        /* ── Repayment visual ── */
+        .rep-bar-wrap {
+            margin: .4rem 0 .9rem;
+        }
+
+        .rep-bar-row {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            margin-bottom: .45rem;
+        }
+
+        .rep-bar-row .lbl {
+            font-size: .78rem;
+            width: 115px;
+            flex-shrink: 0;
+            color: var(--textl);
+        }
+
+        .rep-bar-track {
+            flex: 1;
+            height: 9px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, .07);
+            overflow: hidden;
+        }
+
+        .rep-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .fill-income {
+            background: linear-gradient(90deg, var(--teal), #38bdf8);
+        }
+
+        .fill-repay {
+            background: linear-gradient(90deg, var(--accent), #d4bc8a);
+        }
+
+        .fill-cost {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+        }
+
+        .rep-bar-row .val {
+            font-size: .78rem;
+            font-weight: 700;
+            width: 70px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        /* ── Purpose breakdown ── */
+        .use-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: .8rem;
+            margin: 1.2rem 0;
+        }
+
+        .use-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            background: var(--white);
+        }
+
+        .use-item .u-cat {
+            font-size: .7rem;
+            color: var(--blue);
+            font-weight: 700;
+            letter-spacing: .1em;
+            margin-bottom: .3rem;
+        }
+
+        .use-item .u-name {
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: .2rem;
+        }
+
+        .use-item .u-amt {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--navy2);
+        }
+
+        .use-item .u-note {
+            font-size: .75rem;
+            color: var(--textl);
+            margin-top: .2rem;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            border-left: 3px solid var(--blue);
+            padding-left: 1.8rem;
+            margin: 1.2rem 0;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: .5rem;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 3px solid var(--bg);
+        }
+
+        .tl-period {
+            font-size: .72rem;
+            color: var(--blue);
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+
+        .tl-title {
+            font-size: .95rem;
+            font-weight: 700;
+            margin: .15rem 0;
+        }
+
+        .tl-desc {
+            font-size: .83rem;
+            color: var(--textl);
+        }
+
+        /* ── Signature block ── */
+        .sig-block {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            background: var(--white);
+            margin-top: 3rem;
+        }
+
+        .sig-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .sig-field {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .sig-field .sf-label {
+            font-size: .75rem;
+            color: var(--textl);
+            margin-bottom: .3rem;
+        }
+
+        .sig-field .sf-line {
+            border-bottom: 1.5px solid var(--navy);
+            padding-bottom: .3rem;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+
+        .sig-field .sf-val {
+            font-size: .9rem;
+            font-weight: 700;
+            padding: .3rem 0;
+        }
+
+        /* ── Footer ── */
+        footer {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-size: .75rem;
+            color: var(--textl);
+            border-top: 1px solid var(--border);
+        }
+
+        @media(max-width:640px) {
+            .wrap {
+                padding: 2.5rem 1rem;
+            }
+
+            .card-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sig-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== COVER ===== -->
+    <div class="cover">
+        <div class="cover-inner">
+            <div class="cover-stamp">BUSINESS PLAN FOR FINANCING</div>
+            <h1>事業計画書<br><em>フランチャイズ本部構築事業</em><br>融資申請用</h1>
+            <div class="cover-divider"></div>
+            <div class="cover-box">
+                <div><span class="label">申請者</span>山本あふい（法人名：___________株式会社）</div>
+                <div><span class="label">所在地</span>北海道</div>
+                <div><span class="label">事業内容</span>脱毛・ホワイトニングサロン フランチャイズ本部構築・加盟店支援</div>
+                <div><span class="label">申請先</span>（日本政策金融公庫 / □□銀行 □□支店）</div>
+                <div><span class="label">作成日</span>2026年2月</div>
+                <div><span class="label">申請金額</span><strong>15,000,000円（1,500万円）</strong></div>
+                <div><span class="label">返済期間</span>5年（60回均等払い）</div>
+            </div>
+            <div class="cover-meta" style="margin-top:1.5rem;opacity:.45;">
+                本書類の内容は申請者が作成・提出する事業計画であり、将来の業績を保証するものではありません。</div>
+        </div>
+    </div>
+
+    <!-- ===== 第1章: 申請者概要 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 1 章</div>
+        <h2>申請者・法人概要</h2>
+
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th style="width:30%">項目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>法人名</td>
+                    <td>___________株式会社</td>
+                </tr>
+                <tr>
+                    <td>代表者名</td>
+                    <td>山本 あふい</td>
+                </tr>
+                <tr>
+                    <td>設立年月</td>
+                    <td>2026年（2025年個人事業として開業、今月法人化）</td>
+                </tr>
+                <tr>
+                    <td>所在地</td>
+                    <td>北海道（詳細住所は別途記載）</td>
+                </tr>
+                <tr>
+                    <td>事業内容</td>
+                    <td>① 脱毛施術・ホワイトニング施術（既存サロン事業）<br>② フランチャイズ本部構築・加盟店開発・SVサポート（新規事業）</td>
+                </tr>
+                <tr>
+                    <td>従業員数</td>
+                    <td>2名（代表＋スタッフ1名）</td>
+                </tr>
+                <tr>
+                    <td>直近年商</td>
+                    <td>約2,200万円（月間150〜200万円、稼働率ほぼ100%）</td>
+                </tr>
+                <tr>
+                    <td>資本金</td>
+                    <td>（　　　）万円</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>代表者略歴・強み</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th style="width:22%">時期</th>
+                    <th>経歴・実績</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>〜2024年</td>
+                    <td>歯科衛生士として勤務。専門的な口腔ケア技術・衛生管理知識を習得</td>
+                </tr>
+                <tr>
+                    <td>2024年</td>
+                    <td>自宅サロンにて脱毛＋ホワイトニング施術で開業。初年度から月150万超を達成</td>
+                </tr>
+                <tr>
+                    <td>2025年</td>
+                    <td>スタッフ1名採用。年商約2,200万円（業界水準を大幅超過）。稼働率ほぼ満席。</td>
+                </tr>
+                <tr>
+                    <td>2026年</td>
+                    <td>法人化。フランチャイズ展開によるモデルの横展開・スケールアップを決定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="ok-box">
+            <strong>【金融機関へのアピールポイント】</strong><br>
+            自宅サロン（約6坪・2ブース）でスタッフ2名体制のまま年商2,200万円を達成。利益率は高水準（家賃・光熱費の事業按分ほぼゼロ）。歯科衛生士資格に基づく専門性と衛生管理能力を持ち、FC展開においてもモデルの品質担保が強み。既存事業の黒字キャッシュフローで本部運営コストの一部を補填できる体制にある。
+        </div>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第2章: 新規事業の概要 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 2 章</div>
+        <h2>新規事業の概要（フランチャイズ本部構築）</h2>
+
+        <h3>事業の目的・背景</h3>
+        <div class="info-box">
+            <p>現在の自宅サロンは満席稼働に達しており、物理的な売上拡大の限界に到達しています。既存モデルは脱毛＋ホワイトニングの組み合わせによる「時間単価の最大化」を実現しており、正しくマニュアル化・標準化すれば<strong>他地域でも再現可能なビジネスモデル</strong>です。
+            </p>
+            <p style="margin-top:.8rem;">
+                本計画では、2026年内にFC本部機能を構築し、初年度2〜3店舗の加盟獲得を目標とします。FC加盟金収入と月次固定ロイヤルティ収入という2本柱の収益構造により、安定したストック型収益基盤を確立します。</p>
+        </div>
+
+        <h3>ビジネスモデル（収益構造）</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>収益区分</th>
+                    <th>内容</th>
+                    <th class="num">単価</th>
+                    <th>特性</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>FC加盟金</strong></td>
+                    <td>新規加盟時の一時金（契約締結時）</td>
+                    <td class="num">150〜250万円/店</td>
+                    <td>フロー収益（加盟獲得に比例）</td>
+                </tr>
+                <tr>
+                    <td><strong>月次ロイヤルティ</strong></td>
+                    <td>出店後の固定月額（売上連動なし）</td>
+                    <td class="num">10万円/店/月</td>
+                    <td>ストック収益（累積で安定）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>市場環境・競合状況</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th style="width:30%">観点</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>市場規模</td>
+                    <td>国内脱毛サロン市場は年々拡大。特に地方・中小規模サロンへの需要が増加傾向</td>
+                </tr>
+                <tr>
+                    <td>競合状況</td>
+                    <td>大手チェーン（スキンケアbc等）は都市部中心。地方・自宅型FCは参入余地大</td>
+                </tr>
+                <tr>
+                    <td>差別化要因</td>
+                    <td>① 歯科衛生士のバックグラウンドによる衛生・安全管理の信頼性<br>② 脱毛＋ホワイトニング複合型で客単価・回転率を両立<br>③
+                        低コスト出店モデル（自宅・小スペース対応）で加盟ハードルを低減</td>
+                </tr>
+                <tr>
+                    <td>加盟ターゲット</td>
+                    <td>美容業界経験者・副業志望者・地方での独立希望者</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第3章: 資金使途 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 3 章</div>
+        <h2>資金使途（融資総額 1,500万円）</h2>
+
+        <div class="card-row" style="grid-template-columns:repeat(3,1fr);">
+            <div class="card blue">
+                <div class="c-label">融資申請総額</div>
+                <div class="c-num">1,500<span style="font-size:.9rem;">万円</span></div>
+                <div class="c-sub">税別</div>
+            </div>
+            <div class="card">
+                <div class="c-label">うち 初期投資</div>
+                <div class="c-num" style="color:var(--navy2);">800<span style="font-size:.9rem;">万円</span></div>
+                <div class="c-sub">FC本部構築一式</div>
+            </div>
+            <div class="card">
+                <div class="c-label">うち 運転資金</div>
+                <div class="c-num" style="color:var(--navy2);">700<span style="font-size:.9rem;">万円</span></div>
+                <div class="c-sub">初年度赤字補填・本部運営費</div>
+            </div>
+        </div>
+
+        <h3>① 初期投資 800万円の内訳</h3>
+        <div class="use-grid">
+            <div class="use-item">
+                <div class="u-cat">本部・システム</div>
+                <div class="u-name">本部構築</div>
+                <div class="u-amt">150万円</div>
+                <div class="u-note">FC本部設計・業務フロー・SV体制</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">商品開発</div>
+                <div class="u-name">サブスク商品開発</div>
+                <div class="u-amt">100万円</div>
+                <div class="u-note">加盟店向けサービスメニュー設計</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">法務</div>
+                <div class="u-name">契約書作成</div>
+                <div class="u-amt">80万円</div>
+                <div class="u-note">加盟契約書・法定開示書類</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">教育・マニュアル</div>
+                <div class="u-name">マニュアル整備</div>
+                <div class="u-amt">120万円</div>
+                <div class="u-note">施術・接客・衛生管理マニュアル</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">営業ツール</div>
+                <div class="u-name">営業・募集資料</div>
+                <div class="u-amt">130万円</div>
+                <div class="u-note">営業資料＋加盟店募集パンフ</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">広告・LP</div>
+                <div class="u-name">広告LP・クリエイティブ</div>
+                <div class="u-amt">140万円</div>
+                <div class="u-note">LP制作＋SNS広告バナー</div>
+            </div>
+            <div class="use-item">
+                <div class="u-cat">予備費</div>
+                <div class="u-name">予備・諸経費</div>
+                <div class="u-amt">80万円</div>
+                <div class="u-note">修正・追加対応・外注費等</div>
+            </div>
+        </div>
+
+        <h3>② 運転資金 700万円の内訳</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>用途</th>
+                    <th>説明</th>
+                    <th class="num">金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初年度本部運営費（補填分）</td>
+                    <td>SV人件費・広告継続費・管理費（月60万×12ヶ月）の一部補填</td>
+                    <td class="num">500万円</td>
+                </tr>
+                <tr>
+                    <td>予備・緊急対応資金</td>
+                    <td>加盟獲得が計画より遅延した場合の赤字補填リスク資金</td>
+                    <td class="num">200万円</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>運転資金合計</strong></td>
+                    <td class="num"><strong>700万円</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第4章: 収支計画 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 4 章</div>
+        <h2>収支計画（3ヵ年）</h2>
+
+        <p style="margin-bottom:1rem;">本計画は楽観・保守の2シナリオを策定済みです。融資審査においては<strong>保守的シナリオ</strong>を基準に返済能力を評価しています。</p>
+
+        <h3>シナリオ別 前提条件</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>【基準】保守シナリオ</th>
+                    <th>楽観シナリオ（参考）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初年度FC加盟数</td>
+                    <td class="hl">2店舗（12月出店）</td>
+                    <td>3店舗（9月出店）</td>
+                </tr>
+                <tr>
+                    <td>2年目FC加盟数</td>
+                    <td class="hl">5店舗（10月出店）</td>
+                    <td>12店舗</td>
+                </tr>
+                <tr>
+                    <td>3年目FC加盟数</td>
+                    <td class="hl">10店舗（10月出店）</td>
+                    <td>36店舗</td>
+                </tr>
+                <tr>
+                    <td>本部年間運営コスト</td>
+                    <td class="hl">720万円/年（SV・広告・管理費）</td>
+                    <td>—（未計上）</td>
+                </tr>
+                <tr>
+                    <td>リッツプロ成果報酬</td>
+                    <td class="hl">（加盟金-マーケコスト）×70%をリッツプロへ支払</td>
+                    <td>例）(150-50万)×70%=70万が報酬　30万が山本様手取り</td>
+                </tr>
+                <tr>
+                    <td>加盟金単価</td>
+                    <td class="hl">150万→200万→250万（段階改定）</td>
+                    <td>同左</td>
+                </tr>
+                <tr>
+                    <td>ロイヤルティ単価</td>
+                    <td class="hl">10万円/月・固定</td>
+                    <td>同左</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>【保守シナリオ】3ヵ年 損益計画（融資基準）</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>区分</th>
+                    <th class="num">初年度<br><small>2026/4〜2027/3</small></th>
+                    <th class="num">2年目<br><small>2027/4〜2028/3</small></th>
+                    <th class="num">3年目<br><small>2028/4〜2029/3</small></th>
+                    <th class="num">3ヵ年累計</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-hd">
+                    <td colspan="5">■ FC本部 収入（新規事業）</td>
+                </tr>
+                <tr>
+                    <td>FC加盟金（グロス）</td>
+                    <td class="num">300</td>
+                    <td class="num">1,000</td>
+                    <td class="num">2,500</td>
+                    <td class="num">3,800</td>
+                </tr>
+                <tr>
+                    <td>　└ リッツプロ成果報酬（▲）</td>
+                    <td class="num hlr">▲140</td>
+                    <td class="num hlr">▲525</td>
+                    <td class="num hlr">▲1,400</td>
+                    <td class="num hlr">▲2,065</td>
+                </tr>
+                <tr>
+                    <td>　└ <strong>加盟金 手取り</strong></td>
+                    <td class="num hl"><strong>60</strong></td>
+                    <td class="num hl"><strong>225</strong></td>
+                    <td class="num hl"><strong>600</strong></td>
+                    <td class="num hl"><strong>885</strong></td>
+                </tr>
+                <tr>
+                    <td>ロイヤルティ収入</td>
+                    <td class="num">60</td>
+                    <td class="num">490</td>
+                    <td class="num">1,340</td>
+                    <td class="num">1,890</td>
+                </tr>
+                <tr class="row-hd">
+                    <td colspan="5">■ 既存サロン事業 収入（参考）</td>
+                </tr>
+                <tr>
+                    <td>既存サロン売上（年間）</td>
+                    <td class="num">2,200</td>
+                    <td class="num">2,200</td>
+                    <td class="num">2,200</td>
+                    <td class="num">6,600</td>
+                </tr>
+                <tr>
+                    <td><strong>総手取り合計（万円）</strong></td>
+                    <td class="num hl"><strong>2,320</strong></td>
+                    <td class="num hl"><strong>2,915</strong></td>
+                    <td class="num hl"><strong>4,140</strong></td>
+                    <td class="num hl"><strong>9,375</strong></td>
+                </tr>
+                <tr class="row-hd">
+                    <td colspan="5">■ 費用</td>
+                </tr>
+                <tr>
+                    <td>初期投資（一括）</td>
+                    <td class="num hlr">▲800</td>
+                    <td class="num">—</td>
+                    <td class="num">—</td>
+                    <td class="num hlr">▲800</td>
+                </tr>
+                <tr>
+                    <td>FC本部運営コスト</td>
+                    <td class="num hlr">▲720</td>
+                    <td class="num hlr">▲720</td>
+                    <td class="num hlr">▲720</td>
+                    <td class="num hlr">▲2,160</td>
+                </tr>
+                <tr>
+                    <td>既存サロン経費（変動費等）</td>
+                    <td class="num">▲900</td>
+                    <td class="num">▲900</td>
+                    <td class="num">▲900</td>
+                    <td class="num">▲2,700</td>
+                </tr>
+                <tr>
+                    <td>融資返済額（元金＋利息）</td>
+                    <td class="num">▲305</td>
+                    <td class="num">▲305</td>
+                    <td class="num">▲305</td>
+                    <td class="num">▲915</td>
+                </tr>
+                <tr>
+                    <td><strong>年次損益（万円）</strong></td>
+                    <td class="num hlr"><strong>▲1,405</strong></td>
+                    <td class="num hlr"><strong>▲10</strong></td>
+                    <td class="num hlg"><strong>＋2,215</strong></td>
+                    <td class="num hlg"><strong>＋800</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>累計損益（万円）</strong></td>
+                    <td class="num hlr"><strong>▲1,405</strong></td>
+                    <td class="num hlr"><strong>▲1,415</strong></td>
+                    <td class="num hlg"><strong>＋800</strong></td>
+                    <td class="num hlg">—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="ok-box">
+            <strong>【既存事業の安全網】</strong>既存サロンは年商2,200万円・高利益率で黒字継続中です。FC本部の立ち上げが計画通り進まない場合も、既存事業の純利益（推定年間1,000〜1,300万円）で返済を継続できる体制にあります。融資返済は既存事業単独でも十分にカバー可能です。
+        </div>
+
+        <h3>キャッシュフロー推移イメージ（万円）</h3>
+        <div class="rep-bar-wrap" style="margin-top:1rem;">
+            <div style="font-size:.78rem;color:var(--textl);margin-bottom:.7rem;">■ 初年度</div>
+            <div class="rep-bar-row"><span class="lbl">FC加盟金/ﾛｲﾔﾙﾃｨ</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-income" style="width:15%"></div>
+                </div><span class="val" style="color:var(--teal);">＋360</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">既存サロン純利益</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-income" style="width:55%"></div>
+                </div><span class="val" style="color:var(--teal);">＋1,300</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">初期投資＋運営費</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-cost" style="width:65%"></div>
+                </div><span class="val" style="color:var(--textl);">▲1,520</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">融資返済</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-repay" style="width:13%"></div>
+                </div><span class="val" style="color:var(--accent);">▲305</span>
+            </div>
+            <div style="font-size:.78rem;color:var(--textl);margin:1rem 0 .7rem;">■ 2年目</div>
+            <div class="rep-bar-row"><span class="lbl">FC加盟金/ﾛｲﾔﾙﾃｨ</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-income" style="width:63%"></div>
+                </div><span class="val" style="color:var(--teal);">＋1,490</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">既存サロン純利益</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-income" style="width:55%"></div>
+                </div><span class="val" style="color:var(--teal);">＋1,300</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">本部運営費</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-cost" style="width:30%"></div>
+                </div><span class="val" style="color:var(--textl);">▲720</span>
+            </div>
+            <div class="rep-bar-row"><span class="lbl">融資返済</span>
+                <div class="rep-bar-track">
+                    <div class="rep-bar-fill fill-repay" style="width:13%"></div>
+                </div><span class="val" style="color:var(--accent);">▲305</span>
+            </div>
+        </div>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第5章: 返済計画 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 5 章</div>
+        <h2>返済計画</h2>
+
+        <div class="card-row">
+            <div class="card blue">
+                <div class="c-label">融資額</div>
+                <div class="c-num">1,500<span style="font-size:.85rem;">万円</span></div>
+            </div>
+            <div class="card">
+                <div class="c-label">返済期間</div>
+                <div class="c-num" style="color:var(--navy2);">5年<span style="font-size:.85rem;">（60回）</span></div>
+            </div>
+            <div class="card">
+                <div class="c-label">想定金利（年）</div>
+                <div class="c-num" style="color:var(--navy2);">2.0<span style="font-size:.85rem;">%</span></div>
+                <div class="c-sub">日本政策金融公庫基準</div>
+            </div>
+            <div class="card">
+                <div class="c-label">月額返済額（概算）</div>
+                <div class="c-num" style="color:var(--navy2);">約25.4<span style="font-size:.85rem;">万円</span></div>
+                <div class="c-sub">元利均等払い</div>
+            </div>
+        </div>
+
+        <h3>年次返済スケジュール（概算）</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>年次</th>
+                    <th class="num">年間返済額</th>
+                    <th class="num">うち元金</th>
+                    <th class="num">うち利息</th>
+                    <th class="num">年末残高</th>
+                    <th>返済財源</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1年目（2026）</td>
+                    <td class="num">約305万円</td>
+                    <td class="num">約275万円</td>
+                    <td class="num">約30万円</td>
+                    <td class="num">約1,225万円</td>
+                    <td>既存サロン純利益</td>
+                </tr>
+                <tr>
+                    <td>2年目（2027）</td>
+                    <td class="num">約305万円</td>
+                    <td class="num">約280万円</td>
+                    <td class="num">約25万円</td>
+                    <td class="num">約945万円</td>
+                    <td>FC収益＋既存サロン</td>
+                </tr>
+                <tr>
+                    <td>3年目（2028）</td>
+                    <td class="num">約305万円</td>
+                    <td class="num">約286万円</td>
+                    <td class="num">約19万円</td>
+                    <td class="num">約659万円</td>
+                    <td>FC収益（主軸に移行）</td>
+                </tr>
+                <tr>
+                    <td>4年目（2029）</td>
+                    <td class="num">約305万円</td>
+                    <td class="num">約291万円</td>
+                    <td class="num">約14万円</td>
+                    <td class="num">約368万円</td>
+                    <td>ロイヤルティ収益中心</td>
+                </tr>
+                <tr>
+                    <td>5年目（2030）</td>
+                    <td class="num">約305万円</td>
+                    <td class="num">約296万円</td>
+                    <td class="num">約9万円</td>
+                    <td class="num">完済</td>
+                    <td>ロイヤルティ収益中心</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>5年合計</strong></td>
+                    <td class="num"><strong>約1,525万円</strong></td>
+                    <td class="num">1,500万円</td>
+                    <td class="num">約97万円</td>
+                    <td class="num">—</td>
+                    <td>—</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="ok-box">
+            <strong>返済能力の根拠：</strong>既存サロン事業の年間純利益（推定1,000〜1,300万円）は融資返済額（年305万円）の<strong>約3〜4倍</strong>です。FC本部収入がゼロになった最悪ケースでも、既存事業単独で返済を継続できます。2年目以降はFC収益が加算されるため、返済能力はさらに向上します。
+        </div>
+
+        <div class="warn-box">
+            <strong>リスク認識：</strong>初年度はFC加盟獲得が遅延する可能性があり、FC収入が計画を下回るリスクがあります。ただし、既存サロン事業の安定収益がバッファーとなるため、融資返済への影響は限定的と判断します。
+        </div>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第6章: 実行スケジュール ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 6 章</div>
+        <h2>実行スケジュール・マイルストーン</h2>
+
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-period">2026年 4月〜6月</div>
+                <div class="tl-title">📐 本部構築フェーズ</div>
+                <div class="tl-desc">契約書・法定書類整備 / マニュアル全体制作 / サブスク商品設計 / 加盟募集ツール完成</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-period">2026年 7月〜8月</div>
+                <div class="tl-title">📣 加盟募集開始</div>
+                <div class="tl-desc">広告LP公開 / Meta広告配信スタート / 説明会開催 / 加盟候補者へのヒアリング・審査</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-period">2026年 9月〜12月</div>
+                <div class="tl-title">🏪 初期加盟店 出店（目標2〜3店舗）</div>
+                <div class="tl-desc">加盟契約締結 / 開業研修・施術研修 / オープン支援 / SV巡回開始</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-period">2027年（2年目）</div>
+                <div class="tl-title">📈 拡大フェーズ（目標累計7店舗）</div>
+                <div class="tl-desc">加盟実績の口コミ・事例展開 / 年5〜6件の新規加盟獲得 / 加盟金200万円に改定 / ロイヤルティ月490万ペースへ</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-period">2028年（3年目）</div>
+                <div class="tl-title">🚀 スケールフェーズ（目標累計17店舗）</div>
+                <div class="tl-desc">加盟金250万円に改定 / 年10件超の加盟獲得 / ロイヤルティ月170万超の安定収益 / 融資完全返済の目処</div>
+            </div>
+            <div class="tl-item">
+                <div class="tl-period">2030年（5年目）</div>
+                <div class="tl-title">✅ 融資完済</div>
+                <div class="tl-desc">5年均等払い完済。累計FC店舗数25〜50店舗体制確立（楽観〜保守の中間想定）</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 第7章: リスクと対策 ===== -->
+    <div class="wrap">
+        <div class="sec-num">第 7 章</div>
+        <h2>想定リスクと対策</h2>
+
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th style="width:25%">リスク項目</th>
+                    <th style="width:35%">発生可能性・影響</th>
+                    <th>対策・軽減策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>加盟獲得の遅延</strong></td>
+                    <td>中〜高。初年度収入が計画比50%以下になる可能性</td>
+                    <td>既存サロン収益でカバー。紹介インセンティブ・説明会を早期開催</td>
+                </tr>
+                <tr>
+                    <td><strong>加盟店の業績不振</strong></td>
+                    <td>低〜中。ロイヤルティ未払い・途中解約リスク</td>
+                    <td>出店後6ヶ月は集中SVサポート。経営指導・集客支援を本部が提供</td>
+                </tr>
+                <tr>
+                    <td><strong>競合FC参入</strong></td>
+                    <td>中。類似業態のFC化が進む可能性</td>
+                    <td>先行者優位の確立。実績店舗の事例・口コミで信頼性を蓄積</td>
+                </tr>
+                <tr>
+                    <td><strong>法的リスク</strong></td>
+                    <td>インゾー特商法・FC法定書類の不備</td>
+                    <td>FC専門弁護士に委託済み（予算80万計上）</td>
+                </tr>
+                <tr>
+                    <td><strong>既存サロン収益の減少</strong></td>
+                    <td>低。現在満席稼働・需要は安定</td>
+                    <td>現収益を融資返済のバッファーに確保。FC業務は段階的に移管</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="ok-box" style="margin-top:1.5rem;">
+            <strong>【総合評価】</strong>既存事業（年商2,200万円・高利益率）の安定キャッシュフローが融資返済の確実な財源となっており、FC本部事業はゼロベースでのスタートではなく、実証済みモデルの横展開です。リッツプロへの成果報酬（3年累計▲2,065万円）を差し引いても、既存事業純利益（年間推定1,000〜1,300万円）で返済を継続できる体制にあります。融資元本1,500万円に対する返済能力は十分と判断します。
+        </div>
+    </div>
+
+    <hr class="page-break">
+
+    <!-- ===== 宣誓・署名 ===== -->
+    <div class="wrap">
+        <div class="sec-num">添付・署名</div>
+        <h2>申請者宣誓・署名欄</h2>
+        <div class="info-box">
+            <p style="line-height:2.2;">
+                本事業計画書に記載した内容は全て事実に基づき、誠実に作成したものです。虚偽の記載はなく、記載内容に相違が生じた場合には速やかに報告いたします。融資の実行にあたっては、資金を所定の目的・用途のみに使用することを誓約します。
+            </p>
+        </div>
+
+        <div class="sig-block">
+            <div style="margin-bottom:1.5rem;font-size:.85rem;color:var(--textl);">2026年　　　月　　　日</div>
+            <div class="sig-row">
+                <div class="sig-field">
+                    <div class="sf-label">法人名</div>
+                    <div class="sf-val">___________株式会社</div>
+                    <div style="border-bottom:1.5px solid var(--navy);margin-top:.5rem;"></div>
+                </div>
+                <div class="sig-field">
+                    <div class="sf-label">代表者名</div>
+                    <div class="sf-val">山本 あふい　　　　　　㊞</div>
+                    <div style="border-bottom:1.5px solid var(--navy);margin-top:.5rem;"></div>
+                </div>
+            </div>
+            <div class="sig-row" style="margin-top:1.5rem;">
+                <div class="sig-field">
+                    <div class="sf-label">所在地</div>
+                    <div class="sf-line">北海道　　　　　　　　　　　　　　　</div>
+                </div>
+                <div class="sig-field">
+                    <div class="sf-label">連絡先電話番号</div>
+                    <div class="sf-line">　　　　　　　　　　　　　　　</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top:2rem;">添付書類チェックリスト</h3>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <th>書類名</th>
+                    <th>備考</th>
+                    <th style="width:80px;text-align:center;">添付</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>本事業計画書</td>
+                    <td>本書</td>
+                    <td style="text-align:center;">☑</td>
+                </tr>
+                <tr>
+                    <td>登記簿謄本（履歴事項全部証明書）</td>
+                    <td>発行から3ヶ月以内</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+                <tr>
+                    <td>直近2期分の決算書（税務申告書含む）</td>
+                    <td>個人事業青色申告書 or 法人決算書</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+                <tr>
+                    <td>代表者の確定申告書（直近2期）</td>
+                    <td>個人所得の証明</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+                <tr>
+                    <td>見積書（初期投資の根拠）</td>
+                    <td>各制作会社・外注先からの見積</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+                <tr>
+                    <td>資金繰り表</td>
+                    <td>月次12ヶ月分</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+                <tr>
+                    <td>代表者の身分証明書</td>
+                    <td>運転免許証等のコピー</td>
+                    <td style="text-align:center;">□</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p><strong>事業計画書（融資申請用）</strong>　山本あふい ／ FC事業展開計画</p>
+        <p style="margin-top:.4rem;">作成日：2026年2月　／　リッツプロ株式会社 策定支援　／　本書の数値は試算です。実際の業績・融資結果を保証するものではありません。</p>
+    </footer>
+
+</body>
+
+</html>

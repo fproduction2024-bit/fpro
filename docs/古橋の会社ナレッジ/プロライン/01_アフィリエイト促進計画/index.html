@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アフィリエイト促進 実行計画書｜プロライン</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+    // ============================================================
+    //  ★ 数値変数 — ここを変更すると全ページに反映されます
+    // ============================================================
+    const VARS = {
+        // --- 現状（KPIシート + 契約社数CSVより） ---
+        currentMonthlyConnections: 473,    // 現状の月間アカウント連携数（28days実績）
+        currentPaidProAccounts:   1550,    // 現在のプロ有料アカウント数（2026年3月）
+        currentPaidGoldAccounts:   238,    // 現在のゴールド有料アカウント数（2026年3月）
+
+        // --- プラン月額 ---
+        proMonthlyFee:            9680,    // プロプラン月額（円）
+        goldMonthlyFee:          29700,    // ゴールドプラン月額（円）
+
+        // --- ファネル転換率（実績ベース） ---
+        trialConversionRate:      0.44,    // 連携→お試し転換率（KPIシート: 208/473）
+        paidConversionRate:       0.48,    // お試し→有料転換率（100件÷208件 推定）
+        monthlyChurnRate:         0.056,   // 月次解約率（100件÷1,788件 推定）
+
+        // --- 既存ファネルの月次新規有料化（アフィリなし） ---
+        currentNewPaidPerMonth:    100,    // 既存ファネルからの月間新規有料化数（推定）
+
+        // --- アフィリ計画 ---
+        targetMonthlyLinksPerAffiliate: 50, // 1人あたり月間目標連携数
+        targetNewAffiliators:        11,    // 新規養成するアフィリエイター数（527÷50≈11）
+        affiliateRewardRate:        0.30,   // アフィリ報酬率
+
+        // --- 全体目標（理想ライン） ---
+        idealMonthlyConnections:  1000,    // 月間アカウント連携 理想ライン
+        idealMonthlySalesMan:     5000,    // 理想の月商（万円）
+        idealMonthlyProfitMan:    2137,    // 理想の月間利益（万円）
+
+        // --- KPIシート参照値 ---
+        currentMonthlySalesMan:   1961,    // 現状の月商（万円）
+        currentMonthlyProfitMan:   621,    // 現状の月間利益（万円）
+        currentMonthlyAdCostMan:   500,    // 現状の広告費（万円）
+
+        // --- 勉強会設計 ---
+        studySessionFreq:        "週1回",
+        studySessionParticipants:    15,
+        studySessionPrice:        50000,
+
+        // --- スケジュール ---
+        phase1Weeks: 2,
+        phase2Weeks: 2,
+        phase3Weeks: 4,
+        targetPeriodMonths: 3,
+    };
+    // ============================================================
+
+    const fmt = {
+        num:   (n) => Number(n).toLocaleString('ja-JP'),
+        yen:   (n) => '¥' + Number(n).toLocaleString('ja-JP'),
+        pct:   (n) => (n * 100).toFixed(1) + '%',
+        man:   (n) => Math.round(n / 10000) + '万円',
+        manNum:(n) => Math.round(n / 10000) + '万',
+        manYen:(n) => '¥' + Math.round(n / 10000).toLocaleString('ja-JP') + '万',
+        months:(n) => Math.round(n) + 'ヶ月',
+    };
+
+    // 計算値
+    const CALC = {
+        // === 現状MRR ===
+        currentPaidTotal:   VARS.currentPaidProAccounts + VARS.currentPaidGoldAccounts, // 1,788
+        currentMRRPro:      VARS.currentPaidProAccounts * VARS.proMonthlyFee,           // 1,500万
+        currentMRRGold:     VARS.currentPaidGoldAccounts * VARS.goldMonthlyFee,         //  707万
+        get currentMRR() { return this.currentMRRPro + this.currentMRRGold; },          // 2,207万
+
+        // === ファネル（連携→有料）===
+        avgMonthlyFee: (VARS.currentPaidProAccounts * VARS.proMonthlyFee + VARS.currentPaidGoldAccounts * VARS.goldMonthlyFee)
+                     / (VARS.currentPaidProAccounts + VARS.currentPaidGoldAccounts),    // 加重平均月額
+        avgLifetimeMonths: Math.round(1 / VARS.monthlyChurnRate),                       // 平均継続期間
+
+        // === アフィリ計画の追加インパクト ===
+        affiliiConnections:  VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate, // 550件
+        affiliiTrials:       Math.round(VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate * VARS.trialConversionRate), // 242件
+        affiliiNewPaid:      Math.round(VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate * VARS.trialConversionRate * VARS.paidConversionRate), // 116件
+
+        // === 施策後の月次合計新規有料 ===
+        totalNewPaidPerMonth: VARS.currentNewPaidPerMonth + Math.round(VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate * VARS.trialConversionRate * VARS.paidConversionRate), // 216件
+
+        // === 均衡点（新規有料 = 解約数になる有料アカウント数）===
+        get equilibriumPaid() {
+            return Math.round(this.totalNewPaidPerMonth / VARS.monthlyChurnRate); // 3,857件
+        },
+        get equilibriumMRR() {
+            const proRatio = VARS.currentPaidProAccounts / (VARS.currentPaidProAccounts + VARS.currentPaidGoldAccounts);
+            const goldRatio = 1 - proRatio;
+            return Math.round(this.equilibriumPaid * (proRatio * VARS.proMonthlyFee + goldRatio * VARS.goldMonthlyFee));
+        },
+
+        // 連携ギャップ
+        gap: VARS.idealMonthlyConnections - VARS.currentMonthlyConnections,
+        monthlyAddedByNewAffili: VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate,
+        monthlyTotalAfterPlan:   VARS.currentMonthlyConnections + (VARS.targetNewAffiliators * VARS.targetMonthlyLinksPerAffiliate),
+
+        // 勉強会収益
+        studySessionRevenue: VARS.targetNewAffiliators * VARS.studySessionPrice,
+    };
+
+    // DOM挿入
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-var]').forEach(el => {
+            const key = el.dataset.var;
+            const format = el.dataset.fmt || 'num';
+            const val = key.startsWith('CALC.') ? CALC[key.replace('CALC.','')] : VARS[key];
+            if (val !== undefined) el.textContent = fmt[format] ? fmt[format](val) : val;
+        });
+    });
+    </script>
+
+    <style>
+        :root {
+            --teal: #0C4A4E;
+            --teal-mid: #145B60;
+            --orange: #E8650A;
+            --orange-light: #F08040;
+            --orange-pale: #FFF3EC;
+            --text: #1E2B2E;
+            --text-light: #6B7B7D;
+            --white: #FFFFFF;
+            --bg: #F5F8F8;
+            --card-bg: #FFFFFF;
+            --border: #D8E5E6;
+            --success: #1F9E5E;
+            --warn: #C75000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        /* COVER */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #061E20 0%, #0C4A4E 50%, #145B60 100%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; text-align: center; color: var(--white);
+        }
+        .cover::before {
+            content: '';
+            position: absolute; top: -20%; right: -15%; width: 60%; height: 130%;
+            background: radial-gradient(ellipse, rgba(232,101,10,.18) 0%, transparent 65%);
+            animation: pulse 7s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.05);opacity:.8} }
+
+        .cover-inner { position: relative; z-index: 2; padding: 3rem 2rem; max-width: 820px; }
+
+        .cover-badge {
+            display: inline-block; padding: .4rem 1.8rem;
+            border: 1px solid rgba(232,101,10,.7); color: var(--orange-light);
+            font-size: .7rem; letter-spacing: .35em; margin-bottom: 2rem;
+            border-radius: 2px; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 600;
+        }
+
+        .cover h1 {
+            font-size: clamp(1.9rem, 5vw, 3.4rem); font-weight: 900;
+            letter-spacing: .04em; line-height: 1.35; margin-bottom: 1rem;
+        }
+        .cover h1 .accent { color: var(--orange-light); }
+        .cover p.sub { font-size: .92rem; opacity: .68; letter-spacing: .08em; margin-bottom: .4rem; font-weight: 300; }
+        .cover-meta { font-size: .78rem; opacity: .38; margin-top: 2rem; letter-spacing: .08em; }
+
+        .cover-kpi-row { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+        .cover-kpi {
+            background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px; padding: 1rem 1.4rem; min-width: 150px;
+        }
+        .cover-kpi .ck-label { font-size: .67rem; letter-spacing: .1em; opacity: .52; margin-bottom: .2rem; }
+        .cover-kpi .ck-num { font-size: 1.45rem; font-weight: 900; color: var(--orange-light); font-family: 'Inter', sans-serif; line-height: 1.1; }
+        .cover-kpi .ck-sub { font-size: .67rem; opacity: .48; margin-top: .15rem; }
+
+        /* NAV */
+        .toc { background: var(--teal); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.2); }
+        .toc-inner { max-width: 1040px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+        .toc-inner::-webkit-scrollbar { display: none; }
+        .toc-item {
+            padding: .85rem 1.2rem; font-size: .76rem; letter-spacing: .05em;
+            color: rgba(255,255,255,.6); white-space: nowrap; text-decoration: none;
+            border-bottom: 3px solid transparent; transition: color .2s, border-color .2s; font-weight: 500;
+        }
+        .toc-item:hover { color: var(--white); border-color: var(--orange); }
+
+        /* LAYOUT */
+        section { max-width: 1040px; margin: 0 auto; padding: 4.5rem 2rem; }
+        .sec-label {
+            display: inline-block; color: var(--orange); font-size: .68rem;
+            letter-spacing: .3em; font-weight: 700; margin-bottom: .4rem;
+            text-transform: uppercase; font-family: 'Inter', sans-serif;
+        }
+        section > h2 {
+            font-size: 1.75rem; font-weight: 900; color: var(--teal);
+            margin-bottom: 1rem; padding-bottom: 1rem; position: relative;
+        }
+        section > h2::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--orange-light)); border-radius: 2px;
+        }
+        .lead { color: var(--text-light); font-size: .93rem; margin-bottom: 2rem; max-width: 760px; line-height: 2; }
+        hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        /* CARDS */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.1rem; margin: 1.8rem 0; }
+        .kpi-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: 14px; padding: 1.5rem 1.3rem; text-align: center;
+            transition: transform .25s, box-shadow .25s;
+        }
+        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(12,74,78,.1); }
+        .kpi-card .kl { font-size: .7rem; letter-spacing: .08em; color: var(--text-light); margin-bottom: .45rem; }
+        .kpi-card .kn { font-size: 1.8rem; font-weight: 900; color: var(--teal); line-height: 1.2; font-family: 'Inter', sans-serif; }
+        .kpi-card .ks { font-size: .7rem; color: var(--text-light); margin-top: .35rem; line-height: 1.6; }
+        .kpi-card.orange { border-color: var(--orange); }
+        .kpi-card.orange .kn { color: var(--orange); }
+        .kpi-card.dark { background: linear-gradient(135deg, var(--teal), var(--teal-mid)); border-color: #1A7A82; }
+        .kpi-card.dark .kl, .kpi-card.dark .ks { color: rgba(255,255,255,.5); }
+        .kpi-card.dark .kn { color: var(--orange-light); }
+
+        /* CONTENT BLOCK */
+        .content-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 2rem; margin: 1.4rem 0; }
+        .content-block h3 { color: var(--teal); font-size: 1rem; margin-bottom: 1rem; padding-bottom: .7rem; border-bottom: 1px solid var(--border); }
+
+        /* HIGHLIGHT BOX */
+        .hl-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+            color: var(--white); border-radius: 16px; padding: 2.2rem 2.5rem;
+            margin: 1.8rem 0; position: relative; overflow: hidden;
+        }
+        .hl-box::after {
+            content: ''; position: absolute; top: -40%; right: -10%;
+            width: 260px; height: 260px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,101,10,.18), transparent 70%);
+        }
+        .hl-box h3 { color: var(--orange-light); font-size: 1rem; margin-bottom: .7rem; position: relative; z-index: 1; }
+        .hl-box p, .hl-box ul { opacity: .9; position: relative; z-index: 1; line-height: 2; }
+        .hl-box .big-num { font-size: 2.8rem; font-weight: 900; color: var(--orange-light); display: block; line-height: 1.1; margin: .4rem 0 .2rem; font-family: 'Inter', sans-serif; position: relative; z-index: 1; }
+        .hl-box .big-sub { font-size: .78rem; opacity: .55; position: relative; z-index: 1; }
+
+        /* BULLET LIST */
+        .bullet-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: .8rem 0; }
+        .bullet-list li { padding-left: 1.3rem; position: relative; font-size: .91rem; line-height: 1.75; }
+        .bullet-list li::before { content: '▶'; position: absolute; left: 0; color: var(--orange); font-size: .62rem; top: .4rem; }
+        .bullet-list.teal li::before { color: var(--teal); }
+        .bullet-list.check li::before { content: '✓'; color: var(--success); font-size: .75rem; top: .3rem; }
+
+        /* NOTE / WARN */
+        .note-box { background: rgba(12,74,78,.05); border: 1px solid var(--border); border-left: 4px solid var(--teal); border-radius: 8px; padding: 1rem 1.4rem; margin: 1rem 0; font-size: .87rem; color: var(--text-light); line-height: 1.85; }
+        .note-box strong { color: var(--teal); }
+        .warn-box { background: var(--orange-pale); border: 1px solid rgba(232,101,10,.25); border-left: 4px solid var(--orange); border-radius: 8px; padding: 1rem 1.4rem; margin: 1rem 0; font-size: .87rem; line-height: 1.85; }
+        .warn-box strong { color: var(--warn); }
+
+        /* TABLE */
+        .styled-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: .88rem; }
+        .styled-table thead { background: var(--teal); color: var(--white); }
+        .styled-table th { padding: .85rem 1.1rem; text-align: left; font-weight: 600; font-size: .82rem; }
+        .styled-table td { padding: .8rem 1.1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .styled-table tbody tr:hover { background: rgba(12,74,78,.03); }
+        .styled-table .num { text-align: right; font-family: 'Inter', sans-serif; }
+        .styled-table .hl { color: var(--orange); font-weight: 700; }
+        .styled-table tfoot td { padding: .9rem 1.1rem; font-weight: 700; background: var(--orange-pale); border-top: 2px solid var(--orange); color: var(--warn); }
+
+        /* FLOW */
+        .flow-steps { display: flex; gap: 0; margin: 1.8rem 0; flex-wrap: wrap; }
+        .flow-step { flex: 1; min-width: 130px; position: relative; }
+        .flow-step:not(:last-child)::after { content: '→'; position: absolute; right: -13px; top: 46%; transform: translateY(-50%); color: var(--orange); font-size: 1.3rem; font-weight: 700; z-index: 2; }
+        .flow-step-inner { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem .9rem; text-align: center; margin: 0 .5rem; transition: transform .2s; }
+        .flow-step-inner:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(12,74,78,.1); }
+        .step-icon { font-size: 1.4rem; margin-bottom: .35rem; }
+        .step-label { font-size: .66rem; letter-spacing: .08em; color: var(--text-light); margin-bottom: .18rem; }
+        .step-title { font-size: .82rem; font-weight: 700; color: var(--teal); line-height: 1.4; }
+
+        /* PHASE TIMELINE */
+        .timeline { margin: 1.8rem 0; }
+        .tl-item { display: flex; gap: 1.2rem; margin-bottom: 1.4rem; align-items: flex-start; }
+        .tl-left { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
+        .tl-dot { width: 42px; height: 42px; border-radius: 50%; background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: .82rem; flex-shrink: 0; font-family: 'Inter', sans-serif; }
+        .tl-dot.o { background: var(--orange); }
+        .tl-line { width: 2px; flex: 1; background: var(--border); min-height: 28px; margin-top: 4px; }
+        .tl-content { flex: 1; padding-bottom: .4rem; }
+        .tl-phase { font-size: .7rem; letter-spacing: .1em; color: var(--orange); font-weight: 700; margin-bottom: .25rem; text-transform: uppercase; }
+        .tl-title { font-size: .98rem; font-weight: 700; color: var(--teal); margin-bottom: .35rem; }
+        .tl-desc { font-size: .87rem; color: var(--text-light); line-height: 1.8; }
+
+        /* VAR HIGHLIGHT */
+        [data-var] { color: var(--orange); font-weight: 700; }
+
+        h4 { font-size: .93rem; font-weight: 700; color: var(--teal); margin: 1.5rem 0 .55rem; }
+
+        footer { max-width: 1040px; margin: 0 auto; padding: 2.5rem 2rem 3.5rem; text-align: center; font-size: .78rem; color: var(--text-light); border-top: 1px solid var(--border); }
+
+        @media (max-width: 640px) {
+            section { padding: 3rem 1.2rem; }
+            .flow-steps { flex-direction: column; }
+            .flow-step::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <div class="cover-inner">
+        <div class="cover-badge">Action Plan — Proline</div>
+        <h1><span class="accent">アフィリエイト促進</span><br>実行計画書</h1>
+        <p class="sub">月間1,000件連携（理想ライン）達成に向けた、アフィリエイター養成計画</p>
+        <div class="cover-kpi-row">
+            <div class="cover-kpi">
+                <div class="ck-label">現状の月間連携数</div>
+                <div class="ck-num"><span data-var="currentMonthlyConnections"></span>件/月</div>
+                <div class="ck-sub">KPIシート 28days実績</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">理想ライン（目標）</div>
+                <div class="ck-num"><span data-var="idealMonthlyConnections"></span>件/月</div>
+                <div class="ck-sub">不足分 <span data-var="CALC.gap"></span>件をアフィリで補う</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">新規養成アフィリエイター数</div>
+                <div class="ck-num"><span data-var="targetNewAffiliators"></span>人</div>
+                <div class="ck-sub">1人50件/月 × <span data-var="targetNewAffiliators"></span>人 = <span data-var="CALC.monthlyAddedByNewAffili"></span>件</div>
+            </div>
+        </div>
+        <p class="cover-meta">プロライン アフィリエイト促進プロジェクト ／ 2026年4月</p>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+    <div class="toc-inner">
+        <a class="toc-item" href="#sec-goal">① 目的・目標</a>
+        <a class="toc-item" href="#sec-sim">② 収益試算</a>
+        <a class="toc-item" href="#sec-method">③ コア手法</a>
+        <a class="toc-item" href="#sec-manual">④ マニュアル整備</a>
+        <a class="toc-item" href="#sec-study">⑤ 勉強会設計</a>
+        <a class="toc-item" href="#sec-product">⑥ 商品化設計</a>
+        <a class="toc-item" href="#sec-external">⑦ 外部講師活用</a>
+        <a class="toc-item" href="#sec-kpi">⑧ KPI管理</a>
+        <a class="toc-item" href="#sec-roadmap">⑨ スケジュール</a>
+    </div>
+</nav>
+
+
+<!-- ① 目的・目標 -->
+<section id="sec-goal">
+    <span class="sec-label">Section 01</span>
+    <h2>① 目的と目標</h2>
+    <p class="lead">
+        現状の月間<strong><span data-var="currentMonthlyConnections"></span>件</strong>から、理想ラインの<strong><span data-var="idealMonthlyConnections"></span>件</strong>へ。
+        この不足分<strong><span data-var="CALC.gap"></span>件</strong>をアフィリエイター養成によって埋めることが、この計画の中心的なテーマです。
+    </p>
+
+    <div class="hl-box">
+        <h3>🎯 この計画が目指すゴール</h3>
+        <p>
+            新規アフィリエイター <strong style="color:var(--orange-light);"><span data-var="targetNewAffiliators"></span>人</strong> を養成し、<br>
+            1人あたり月間 <strong style="color:var(--orange-light);"><span data-var="targetMonthlyLinksPerAffiliate"></span>件</strong> の連携を創出することで、<br>
+            月間合計 <strong style="color:var(--orange-light);"><span data-var="CALC.monthlyTotalAfterPlan"></span>件</strong> ≒ 理想ラインの<strong style="color:var(--orange-light);"> 1,000件</strong> に到達する。
+        </p>
+        <p style="margin-top:1rem; font-size:.88rem; opacity:.7;">
+            ※ 短期的な勉強会売上ではなく、<strong style="color:var(--orange-light);">「実際に使われ続けるアカウント数」</strong>を最重要指標として設定します。
+        </p>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kl">現状の月間連携数（実績）</div>
+            <div class="kn"><span data-var="currentMonthlyConnections"></span>件</div>
+            <div class="ks">KPIシート 28days実績より</div>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kl">理想ライン（目標）</div>
+            <div class="kn"><span data-var="idealMonthlyConnections"></span>件</div>
+            <div class="ks">月間アカウント連携数の理想値</div>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kl">アフィリで補う不足分</div>
+            <div class="kn"><span data-var="CALC.gap"></span>件</div>
+            <div class="ks">1,000 − <span data-var="currentMonthlyConnections"></span> = <span data-var="CALC.gap"></span>件</div>
+        </div>
+        <div class="kpi-card dark">
+            <div class="kl">養成アフィリエイター数</div>
+            <div class="kn"><span data-var="targetNewAffiliators"></span>人</div>
+            <div class="ks">1人50件/月 × <span data-var="targetNewAffiliators"></span>人 = <span data-var="CALC.monthlyAddedByNewAffili"></span>件</div>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <strong>なぜ今、アフィリエイトなのか：</strong><br>
+        ブログ型アフィリ（農耕型）は成果まで1年以上かかる。SNS（X等）を活用した集客（狩猟型）は
+        始めた月から登録が生まれる即効型。理想の1,000件に最短で届く手段として位置づけます。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ② 収益試算 -->
+<section id="sec-sim">
+    <span class="sec-label">Section 02</span>
+    <h2>② 収益試算</h2>
+    <p class="lead">
+        「連携数 × 月額」ではなく、実際のファネル（連携→お試し→有料→解約）を通じた<br>
+        <strong>MRR成長モデル</strong>で試算します。数値はKPIシートと契約社数CSVの実績値がベースです。
+    </p>
+
+    <!-- ブロック1：現状MRR -->
+    <div class="content-block">
+        <h3>📊 Step 1｜現状のMRR（月次定期収益）</h3>
+        <table class="styled-table">
+            <thead>
+                <tr><th>プラン</th><th class="num">契約数</th><th class="num">月額</th><th class="num">月間MRR</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロプラン（有料）</td>
+                    <td class="num"><span data-var="currentPaidProAccounts"></span>件</td>
+                    <td class="num"><span data-var="proMonthlyFee" data-fmt="yen"></span></td>
+                    <td class="num"><span data-var="CALC.currentMRRPro" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td>ゴールドプラン（有料）</td>
+                    <td class="num"><span data-var="currentPaidGoldAccounts"></span>件</td>
+                    <td class="num"><span data-var="goldMonthlyFee" data-fmt="yen"></span></td>
+                    <td class="num"><span data-var="CALC.currentMRRGold" data-fmt="man"></span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>現在の有料合計 / MRR</strong></td>
+                    <td class="num"><strong><span data-var="CALC.currentPaidTotal"></span>件</strong></td>
+                    <td class="num">—</td>
+                    <td class="num"><strong><span data-var="CALC.currentMRR" data-fmt="man"></span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="note-box">
+            有料アカウントは直近6ヶ月で1,700〜1,800件台を横ばい推移。<br>
+            月間新規有料化（約100件）と月間解約（約100件）がほぼ拮抗している状態。
+        </div>
+    </div>
+
+    <!-- ブロック2：ファネル構造 -->
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>📊 Step 2｜現状のファネル構造と解約率</h3>
+        <table class="styled-table">
+            <thead><tr><th>指標</th><th>根拠</th><th class="num">実績値</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>月間アカウント連携数</td>
+                    <td>KPIシート 28days実績</td>
+                    <td class="num"><span data-var="currentMonthlyConnections"></span>件/月</td>
+                </tr>
+                <tr>
+                    <td>連携→お試し転換率</td>
+                    <td>208件 ÷ 473件（KPIシート）</td>
+                    <td class="num"><span data-var="trialConversionRate" data-fmt="pct"></span></td>
+                </tr>
+                <tr>
+                    <td>お試し→有料転換率</td>
+                    <td>月次新規有料100件 ÷ お試し208件（推定）</td>
+                    <td class="num"><span data-var="paidConversionRate" data-fmt="pct"></span></td>
+                </tr>
+                <tr>
+                    <td>月次解約率</td>
+                    <td>月間解約100件 ÷ 有料1,788件（推定）</td>
+                    <td class="num" style="color:var(--warn);"><span data-var="monthlyChurnRate" data-fmt="pct"></span></td>
+                </tr>
+                <tr>
+                    <td>平均継続期間</td>
+                    <td>1 ÷ 5.6%</td>
+                    <td class="num"><span data-var="CALC.avgLifetimeMonths" data-fmt="months"></span></td>
+                </tr>
+                <tr style="background:rgba(12,74,78,.04);">
+                    <td><strong>月次新規有料化数（既存ファネル）</strong></td>
+                    <td>473件 × 44% × 48%</td>
+                    <td class="num hl"><span data-var="currentNewPaidPerMonth"></span>件/月</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ブロック3：アフィリ追加後の新規有料化 -->
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>📊 Step 3｜アフィリ計画による新規有料化の上乗せ</h3>
+        <table class="styled-table">
+            <thead><tr><th>ファネルステップ</th><th>計算式</th><th class="num">件数</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>① 新規連携（アフィリ経由）</td>
+                    <td><span data-var="targetNewAffiliators"></span>人 × <span data-var="targetMonthlyLinksPerAffiliate"></span>件</td>
+                    <td class="num"><span data-var="CALC.affiliiConnections"></span>件/月</td>
+                </tr>
+                <tr>
+                    <td>② お試し開始（<span data-var="trialConversionRate" data-fmt="pct"></span>転換）</td>
+                    <td><span data-var="CALC.affiliiConnections"></span>件 × <span data-var="trialConversionRate" data-fmt="pct"></span></td>
+                    <td class="num"><span data-var="CALC.affiliiTrials"></span>件/月</td>
+                </tr>
+                <tr>
+                    <td>③ 新規有料化（<span data-var="paidConversionRate" data-fmt="pct"></span>転換）</td>
+                    <td><span data-var="CALC.affiliiTrials"></span>件 × <span data-var="paidConversionRate" data-fmt="pct"></span></td>
+                    <td class="num hl"><span data-var="CALC.affiliiNewPaid"></span>件/月</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="styled-table" style="margin-top:1rem;">
+            <thead><tr><th>月次新規有料化の合計</th><th class="num">件数</th></tr></thead>
+            <tbody>
+                <tr><td>既存ファネル（現状維持）</td><td class="num"><span data-var="currentNewPaidPerMonth"></span>件/月</td></tr>
+                <tr><td>アフィリ計画による追加</td><td class="num">+<span data-var="CALC.affiliiNewPaid"></span>件/月</td></tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>施策後の月次新規有料化合計</strong></td>
+                    <td class="num"><strong><span data-var="CALC.totalNewPaidPerMonth"></span>件/月</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- ブロック4：MRR均衡点 -->
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>📊 Step 4｜MRR成長の均衡点（最終到達値）</h3>
+        <p style="color:var(--text-light); margin-bottom:1rem; font-size:.9rem;">
+            「月次新規有料化数 ÷ 月次解約率」で、長期的に到達するMRRの均衡点が決まります。
+        </p>
+        <table class="styled-table">
+            <thead><tr><th>項目</th><th>計算式</th><th class="num">数値</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>月次新規有料化</td>
+                    <td>100件（既存）+ <span data-var="CALC.affiliiNewPaid"></span>件（アフィリ）</td>
+                    <td class="num"><span data-var="CALC.totalNewPaidPerMonth"></span>件/月</td>
+                </tr>
+                <tr>
+                    <td>月次解約率</td>
+                    <td>契約社数CSVより逆算</td>
+                    <td class="num"><span data-var="monthlyChurnRate" data-fmt="pct"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>均衡有料アカウント数</strong></td>
+                    <td><span data-var="CALC.totalNewPaidPerMonth"></span>件 ÷ <span data-var="monthlyChurnRate" data-fmt="pct"></span></td>
+                    <td class="num hl"><span data-var="CALC.equilibriumPaid"></span>件</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>均衡到達時のMRR（月商）</strong></td>
+                    <td class="num"><strong><span data-var="CALC.equilibriumMRR" data-fmt="man"></span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="hl-box" style="margin-top:1.2rem;">
+            <h3 style="margin-bottom:.6rem;">🎯 アフィリ計画の到達点は理想ライン5,000万円と一致</h3>
+            <table class="styled-table" style="margin-top:.6rem;">
+                <thead><tr><th>状態</th><th class="num">有料アカウント</th><th class="num">月間MRR</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>現状</td>
+                        <td class="num"><span data-var="CALC.currentPaidTotal"></span>件</td>
+                        <td class="num"><span data-var="CALC.currentMRR" data-fmt="man"></span></td>
+                    </tr>
+                    <tr>
+                        <td>アフィリ計画 均衡点（目標）</td>
+                        <td class="num" style="color:var(--teal);font-weight:700;"><span data-var="CALC.equilibriumPaid"></span>件</td>
+                        <td class="num" style="color:var(--teal);font-weight:700;"><span data-var="CALC.equilibriumMRR" data-fmt="man"></span></td>
+                    </tr>
+                    <tr>
+                        <td>KPIシート 理想ライン</td>
+                        <td class="num">1,000件/月連携</td>
+                        <td class="num" style="color:var(--orange-light);font-weight:700;"><span data-var="idealMonthlySalesMan"></span>万円</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note-box" style="margin-top:1rem;">
+                均衡点への到達は段階的（概ね12〜18ヶ月）。解約率改善（継続率UP）が最も効果的なKPI。<br>
+                解約率を5.6% → 4%に改善するだけで、同じ新規有料数でも均衡MRRは約+40%向上する。
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ブロック1：現状 vs 理想ライン比較 -->
+
+<hr class="divider">
+
+
+<!-- ③ コア手法 -->
+<section id="sec-method">
+    <span class="sec-label">Section 03</span>
+    <h2>③ コア手法：Xプレゼント企画によるリスト獲得</h2>
+    <p class="lead">
+        月間<span data-var="targetMonthlyLinksPerAffiliate"></span>件の連携を再現性よく達成するためのコア手法として、
+        <strong>X（旧Twitter）でのプレゼント企画を起点にしてLINE登録→プロライン連携</strong>につなげる山山型フローを構築します。
+        この型をチーム<span data-var="targetNewAffiliators"></span>人全員に展開することで、組織的に蛋然性を作ります。
+    </p>
+
+    <div class="hl-box">
+        <h3>🎁 なぜ「Xプレゼント企画」がこの規模の集客に最適なのか</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:.6rem; margin-top:.8rem; position:relative; z-index:1;">
+            <li style="padding-left:1.4rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">&#9658;</span>
+                <strong style="color:var(--orange-light);">SNS拡散力が高い</strong>：1回の投稿が数千リーチに拡大。広告費不要で始める月から効果が出る。
+            </li>
+            <li style="padding-left:1.4rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">&#9658;</span>
+                <strong style="color:var(--orange-light);">フォロワー数に依存しない</strong>：バズりやリリートによる視触率拡大で、アカウント公式かまどなく参加できる。
+            </li>
+            <li style="padding-left:1.4rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">&#9658;</span>
+                <strong style="color:var(--orange-light);">型化すると誤差が出にくい</strong>：投稿文・コンテンツ・ LINE誘導のフローが定まればチーム調で再現できる。
+            </li>
+            <li style="padding-left:1.4rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">&#9658;</span>
+                <strong style="color:var(--orange-light);">LINE登録と直結び</strong>：プレゼントの受け取りをトリガーに使い、然脱なくLINE登録→プロライン連携の導線につなげる。
+            </li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h3>📌 基本フロー：Xプレゼント企画 → LINE登録 → プロライン連携</h3>
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="flow-step-inner">
+                    <div class="step-icon">📣</div>
+                    <div class="step-label">STEP 1</div>
+                    <div class="step-title">Xにプレゼント企画を投稿</div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-inner">
+                    <div class="step-icon">🔁</div>
+                    <div class="step-label">STEP 2</div>
+                    <div class="step-title">フォロー＋リポストで拡散</div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-inner">
+                    <div class="step-icon">💬</div>
+                    <div class="step-label">STEP 3</div>
+                    <div class="step-title">DMでLINE誘導リンクを送信</div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-inner">
+                    <div class="step-icon">📥</div>
+                    <div class="step-label">STEP 4</div>
+                    <div class="step-title">LINE登録・プレゼント受け取り</div>
+                </div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-step-inner">
+                    <div class="step-icon">🔗</div>
+                    <div class="step-label">STEP 5</div>
+                    <div class="step-title">プロライン連携誘導・登録</div>
+                </div>
+            </div>
+        </div>
+
+        <table class="styled-table" style="margin-top:1.2rem;">
+            <thead><tr><th>STEP</th><th>内容</th><th>ポイント</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. X投稿</strong></td>
+                    <td>「フォロー＋RTで○○をプレゼント！」形式でビジネス層に刺さる内容を投稿</td>
+                    <td>フック文の型 • 画像標準化が鍵</td>
+                </tr>
+                <tr>
+                    <td><strong>2. 拡散</strong></td>
+                    <td>リツイート・インプレッションによる手動またはDM自動化ツール実行</td>
+                    <td>フォロワー数に左右されないから始めやすい</td>
+                </tr>
+                <tr>
+                    <td><strong>3. DM送信</strong></td>
+                    <td>RT者にDMでLINE誘導リンクを送信（自動化可）</td>
+                    <td>DM文面の型をチームで共有する</td>
+                </tr>
+                <tr>
+                    <td><strong>4. LINE登録</strong></td>
+                    <td>プレゼント（無料テンプレ・ノウハウ等）の受け取りに必要なLINE登録を完了</td>
+                    <td>登録率を上げるプレゼント内容の設計が重要</td>
+                </tr>
+                <tr>
+                    <td><strong>5. プロライン連携</strong></td>
+                    <td>LINE登録後のシナリオで導線→プロラインアカウント連携へ</td>
+                    <td>連携後のフォローアップで継続課金へ転換</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>👥 チーム<span data-var="targetNewAffiliators"></span>人でこの型を展開する—蛋然性の考え方</h3>
+        <table class="styled-table">
+            <thead><tr><th>規模</th><th>内容</th><th class="num">月間連携数</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>1人が達成する目標</td>
+                    <td>Xプレゼント企画を定期実施し、連携を毎月積み上げる</td>
+                    <td class="num hl"><span data-var="targetMonthlyLinksPerAffiliate"></span>件/人</td>
+                </tr>
+                <tr>
+                    <td>チーム全体（<span data-var="targetNewAffiliators"></span>人）</td>
+                    <td>全員が同じ型で動くことで合計連携数を確保</td>
+                    <td class="num hl"><span data-var="CALC.monthlyAddedByNewAffili"></span>件/月</td>
+                </tr>
+                <tr style="background:rgba(12,74,78,.04);">
+                    <td><strong>既存連携（アフィリ・広告）</strong></td>
+                    <td>KPIシート実績ベース</td>
+                    <td class="num" style="color:var(--teal); font-weight:700;"><span data-var="currentMonthlyConnections"></span>件/月</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>施策後の月間合計（理想ライン達成）</strong></td>
+                    <td class="num"><strong><span data-var="CALC.monthlyTotalAfterPlan"></span>件/月 ✓</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="note-box" style="margin-top:1rem;">
+            <strong>蛋然性を作るとは：</strong><br>
+            1人が失敗しても1人分の配分が落ちるだけ。全員が同じ型で動くことで、組織全体の半数以上が機能すれば月間<span data-var="idealMonthlyConnections"></span>件準は維持できる。
+            これが偏り殺しなチーム型集客の強み。
+        </div>
+    </div>
+
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>🎁 プレゼント内容の設計（型化項目）</h3>
+        <table class="styled-table">
+            <thead><tr><th>要素</th><th>内容（標準仕様）</th><th>チームで共有する内容</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>プレゼント内容</strong></td>
+                    <td>LINE集客ノウハウPDF・アフィリ実践テンプレート等</td>
+                    <td>プロライン内製定しチーム全員が使えるため初回登録率を高める</td>
+                </tr>
+                <tr>
+                    <td><strong>X投稿文の型</strong></td>
+                    <td>「展開不要」形式のフック文＋ベネフィットリスト</td>
+                    <td>チーム共通の投稿テンプレート集を作成し共有</td>
+                </tr>
+                <tr>
+                    <td><strong>DM誘導文</strong></td>
+                    <td>LINE登録誘導のDM文（自動化対応）</td>
+                    <td>返信率が高い文面パターンを定期的にアップデート</td>
+                </tr>
+                <tr>
+                    <td><strong>LINE登録後シナリオ</strong></td>
+                    <td>登録直後→プレゼント渡し→プロライン話顔誘導</td>
+                    <td>プロライン標準シナリオを全員が利用する（連携率利く）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="warn-box">
+        <strong>❗ コンテンツ設計の注意点：</strong><br>
+        プレゼント内容が「ビジネス・前向きな人」に刺さる内容でないと、LINE登録はするがプロライン連携にはつながらない。
+        「ビジネスパーソン or 副業希望者」を明確にターゲットにしたプレゼント内容設計が重要。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ④ マニュアル整備 -->
+<section id="sec-manual">
+    <span class="sec-label">Section 03</span>
+    <h2>③ マニュアル整備</h2>
+    <p class="lead">
+        アフィリエイターの活動を再現可能にするため、
+        実際に成果を出している活動内容を整理し、誰でも実践できる形でマニュアル化します。
+    </p>
+
+    <div class="content-block">
+        <h3>マニュアルに含めるべき内容（案）</h3>
+        <ul class="bullet-list">
+            <li><strong>SNSアカウント設計</strong>：プロフィール文・投稿テーマ・発信頻度の型</li>
+            <li><strong>集客投稿の型</strong>：副業・ウェブ集客層に刺さるフック文・投稿フォーマット</li>
+            <li><strong>勉強会への誘導方法</strong>：DM文・固定ツイート・ストーリーズ活用など</li>
+            <li><strong>プロライン年間契約への転換手順</strong>：勉強会→登録の導線と具体的トーク</li>
+            <li><strong>アフィリエイトリンクの使い方</strong>：設定方法・計測方法・報酬確認方法</li>
+            <li><strong>よくある質問と回答集</strong>：見込み客からの疑問パターンと対応</li>
+        </ul>
+    </div>
+
+    <div class="warn-box">
+        <strong>⚠️ 整備上の注意：</strong>
+        マニュアルはなるべくシンプルに保つこと。細かくしすぎると読まれなくなる。
+        「これだけやれば始められる」最小構成版を先に出し、後から補強する方針が現実的。
+    </div>
+
+    <h4>整備担当・スケジュール</h4>
+    <table class="styled-table">
+        <thead><tr><th>項目</th><th>担当</th><th>期限目安</th></tr></thead>
+        <tbody>
+            <tr><td>現状の成功事例の整理・ヒアリング</td><td>プロライン本体</td><td>第<span data-var="phase1Weeks"></span>週以内</td></tr>
+            <tr><td>マニュアル初稿の作成（AI活用可）</td><td>プロライン本体</td><td>第<span data-var="phase1Weeks"></span>週以内</td></tr>
+            <tr><td>コンサルタント数名によるレビュー</td><td>本体＋コンサル</td><td>第<span data-var="phase1Weeks"></span>週＋α</td></tr>
+            <tr><td>認定コンサル・アフィリへの配布</td><td>プロライン本体</td><td>勉強会開始前</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<hr class="divider">
+
+
+<!-- ④ 勉強会設計 -->
+<section id="sec-study">
+    <span class="sec-label">Section 04</span>
+    <h2>④ Zoom勉強会の設計</h2>
+    <p class="lead">
+        マニュアルを配るだけでなく、<strong>定期的な勉強会</strong>によって実践の場と仲間意識を提供することで、
+        アフィリエイターのコミットメントと再現性を高めます。
+    </p>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kl">開催頻度</div>
+            <div class="kn" style="font-size:1.4rem;"><span data-var="studySessionFreq"></span></div>
+            <div class="ks">状況に応じて隔週に変更可</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kl">目標参加人数</div>
+            <div class="kn"><span data-var="studySessionParticipants"></span>人</div>
+            <div class="ks">認定コンサル＋一般アフィリ</div>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kl">講師</div>
+            <div class="kn" style="font-size:1rem; line-height:1.5;">内部担当者<br>or 外部講師</div>
+            <div class="ks">月50件達成後→外部講師検討</div>
+        </div>
+    </div>
+
+    <div class="content-block">
+        <h3>勉強会のコンテンツ設計（案）</h3>
+        <table class="styled-table">
+            <thead><tr><th>コーナー</th><th>内容</th><th>時間目安</th></tr></thead>
+            <tbody>
+                <tr><td>① 成功事例紹介</td><td>実際に連携が取れた事例・投稿・トークを共有</td><td>15分</td></tr>
+                <tr><td>② 今週のSNS投稿レビュー</td><td>参加者の投稿を添削・フィードバック</td><td>20分</td></tr>
+                <tr><td>③ テーマ講義</td><td>プロフ設計・DM術・勉強会誘導など毎回テーマを設定</td><td>20分</td></tr>
+                <tr><td>④ Q&A・翌週の目標設定</td><td>質問対応＋各自の翌週アクション宣言</td><td>15分</td></tr>
+            </tbody>
+        </table>
+        <div class="note-box" style="margin-top:1rem;">
+            合計 <strong>約70分</strong>を想定。録画して見逃し配信も行うことで参加率・継続率を維持できる。
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑤ 商品化設計 -->
+<section id="sec-product">
+    <span class="sec-label">Section 05</span>
+    <h2>⑤ 勉強会の商品化設計</h2>
+    <p class="lead">
+        勉強会を「無料の特典」にとどめず、
+        <strong>有償商品として設計</strong>することで費用回収と追加収益化を実現します。
+        有償にすることでコミットメントも生まれ、定着率が上がります。
+    </p>
+
+    <div class="content-block">
+        <h3>商品設計案</h3>
+        <table class="styled-table">
+            <thead><tr><th>項目</th><th>内容</th></tr></thead>
+            <tbody>
+                <tr><td>商品名（案）</td><td>「プロラインSNSアフィリ実践プログラム」</td></tr>
+                <tr><td>提供内容</td><td>Zoom勉強会（<span data-var="studySessionFreq"></span>）＋マニュアル＋チャットサポート</td></tr>
+                <tr><td>価格</td><td><span data-var="studySessionPrice" data-fmt="yen"></span>/人（3ヶ月間など期間設定も可）</td></tr>
+                <tr><td>対象</td><td>認定コンサルタント・一般アフィリエイター・希望者</td></tr>
+                <tr><td>販売目標</td><td><span data-var="studySessionSaleTarget"></span>人（初期）</td></tr>
+                <tr><td>見込み収益</td><td><span data-var="CALC.studySessionRevenue" data-fmt="man"></span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="hl-box">
+        <h3>💡 商品化の主な目的</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-top:.8rem; position:relative; z-index:1;">
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                外部講師への発注費用（<span data-var="externalLecturerBudget" data-fmt="man"></span>程度）の費用回収
+            </li>
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                有償化によるコミットメントの担保（無料＝参加率が低下する）
+            </li>
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                プロライン本体の新たな収益ライン確立
+            </li>
+        </ul>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑥ 外部講師 -->
+<section id="sec-external">
+    <span class="sec-label">Section 06</span>
+    <h2>⑥ 外部講師活用（オプション）</h2>
+    <p class="lead">
+        月間<span data-var="targetMonthlyLinks"></span>件以上の安定的な連携が見込める場合、
+        再現性をさらに高めるためにSNS集客のプロへ外部発注を検討します。
+    </p>
+
+    <div class="content-block">
+        <h3>外部講師発注の概要（案）</h3>
+        <table class="styled-table">
+            <thead><tr><th>項目</th><th>内容</th></tr></thead>
+            <tbody>
+                <tr><td>依頼内容</td><td>X（旧Twitter）を中心としたSNS集客ノウハウの提供・講師役</td></tr>
+                <tr><td>契約期間</td><td><span data-var="externalLecturerMonths"></span>ヶ月（期限付き）</td></tr>
+                <tr><td>予算目安</td><td>月額 <span data-var="externalLecturerUnitMin" data-fmt="man"></span>〜<span data-var="externalLecturerUnitMax" data-fmt="man"></span>（合計 <span data-var="externalLecturerBudget" data-fmt="man"></span>以内）</td></tr>
+                <tr><td>アウトプット</td><td>勉強会講師×<span data-var="externalLecturerMonths"></span>回＋SNS攻略コンテンツ提供</td></tr>
+                <tr><td>判断タイミング</td><td>内部アフィリエイターが月<span data-var="targetMonthlyLinks"></span>件を安定して達成した後</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="warn-box">
+        <strong>⚠️ 注意点：</strong>
+        外部発注後のコンテンツはプロラインの資産として蓄積できる形で契約すること。
+        単発の講師依頼に終わらせず、マニュアルやSlide等の形で残す設計が重要。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑦ KPI -->
+<section id="sec-kpi">
+    <span class="sec-label">Section 07</span>
+    <h2>⑦ KPI・管理指標</h2>
+    <p class="lead">毎月確認すべき指標と、その見方を定義します。</p>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>指標</th>
+                <th>目標値</th>
+                <th>確認方法</th>
+                <th>判断基準</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>月間新規アカウント連携数</td>
+                <td class="hl"><span data-var="targetMonthlyLinks"></span>〜<span data-var="targetMonthlyLinksMax"></span>件</td>
+                <td>プロライン管理画面</td>
+                <td><span data-var="targetMonthlyLinks"></span>件未満が続く場合は施策を見直す</td>
+            </tr>
+            <tr>
+                <td>アクティブアフィリエイター数</td>
+                <td class="hl"><span data-var="targetAffiliators"></span>人以上</td>
+                <td>連携数の発生元で確認</td>
+                <td>月1件以上紹介できている人をカウント</td>
+            </tr>
+            <tr>
+                <td>勉強会参加率</td>
+                <td class="hl">50%以上</td>
+                <td>Zoom参加者数</td>
+                <td>30%を下回る場合は内容・時間帯を変更</td>
+            </tr>
+            <tr>
+                <td>継続課金アカウント増加数（累計）</td>
+                <td class="hl">月次で純増傾向</td>
+                <td>解約数との差分で確認</td>
+                <td>純増がゼロになったら原因分析</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑧ ロードマップ -->
+<section id="sec-roadmap">
+    <span class="sec-label">Section 08</span>
+    <h2>⑧ 実行スケジュール</h2>
+    <p class="lead">初期<span data-var="targetPeriodMonths"></span>ヶ月の実行タイムラインです。</p>
+
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot">P1</div><div class="tl-line"></div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 1 — 第<span data-var="phase1Weeks"></span>週以内</div>
+                <div class="tl-title">マニュアル整備・対象者の洗い出し</div>
+                <div class="tl-desc">
+                    成功事例のヒアリング → マニュアル初稿作成（AI活用）<br>
+                    対象アフィリエイター<span data-var="targetAffiliators"></span>人のリストアップとアプローチ開始
+                </div>
+            </div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot o">P2</div><div class="tl-line"></div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 2 — 第<span data-var="phase2Weeks"></span>〜4週</div>
+                <div class="tl-title">Zoom勉強会ローンチ（内部担当者講師）</div>
+                <div class="tl-desc">
+                    マニュアル配布 → 第1回勉強会を無料または低価格でお試し開催<br>
+                    参加者フィードバックをもとに内容を改善<br>
+                    月間連携数<span data-var="targetMonthlyLinks"></span>件達成を目標に活動加速
+                </div>
+            </div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot">P3</div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 3 — 第5〜<span data-var="phase3Weeks"></span>週（〜3ヶ月）</div>
+                <div class="tl-title">商品化・外部講師検討・拡大</div>
+                <div class="tl-desc">
+                    勉強会を <span data-var="studySessionPrice" data-fmt="yen"></span>/人で商品化し正式販売開始<br>
+                    安定して月<span data-var="targetMonthlyLinks"></span>件超えたら外部講師発注を検討<br>
+                    対象者を認定コンサル外の一般アフィリエイターにも拡大
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hl-box" style="margin-top:2rem;">
+        <h3>🚀 この計画の成功要件</h3>
+        <p>
+            マニュアルを渡すだけで終わらせないこと。<br>
+            <strong style="color:var(--orange-light);">「一緒にやる場所（勉強会）」と「続ける理由（有償コミット）」</strong>をセットで提供することが、
+            アフィリエイターの再現性と定着率を高める鍵です。
+        </p>
+    </div>
+</section>
+
+
+<footer>
+    <p style="margin-bottom:.3rem;">プロライン アフィリエイト促進 実行計画書</p>
+    <p>2026年4月 ／ Confidential</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プラン・料金提案スクリプト — KLF スタッフマニュアル</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-light: #10896B;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --amber-light: #F59E0B;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F1F5F2;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --blue: #1D4ED8;
+            --blue-pale: #DBEAFE;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .top-bar {
+            background: var(--mint);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .top-bar .sub {
+            color: rgba(255, 255, 255, .75);
+            font-size: 12px;
+        }
+
+        .badge-staff {
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--mint);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--mint-mid);
+        }
+
+        /* Plan comparison */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        @media(max-width:700px) {
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .plan-card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 2px solid var(--mint-mid);
+            padding: 22px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.recommended {
+            border-color: var(--amber);
+            box-shadow: 0 4px 20px rgba(217, 119, 6, .15);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -1px;
+            right: 16px;
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .plan-name {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--slate);
+            margin-bottom: 4px;
+        }
+
+        .plan-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--mint);
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 2px;
+        }
+
+        .plan-price span {
+            font-size: 14px;
+            color: var(--slate-light);
+            font-weight: 400;
+        }
+
+        .plan-binding {
+            font-size: 12px;
+            color: var(--slate-light);
+            margin-bottom: 14px;
+        }
+
+        .plan-features {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .plan-feature {
+            display: flex;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--slate-mid);
+            align-items: flex-start;
+        }
+
+        .plan-feature::before {
+            content: '✓';
+            color: var(--mint);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .plan-note {
+            background: var(--mint-pale);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--slate-mid);
+        }
+
+        .plan-note.amber-note {
+            background: var(--amber-pale);
+            color: var(--amber-light);
+        }
+
+        /* basic fee table */
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 28px;
+        }
+
+        .fee-table th {
+            background: var(--mint);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .fee-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--mint-mid);
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .fee-table tr:hover td {
+            background: var(--mint-pale);
+        }
+
+        .fee-highlight {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--mint);
+        }
+
+        /* Option cards */
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .option-card {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--mint-mid);
+            padding: 16px 18px;
+        }
+
+        .option-card .o-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .option-card .o-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 4px;
+        }
+
+        .option-card .o-desc {
+            font-size: 12.5px;
+            color: var(--slate-light);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .option-card .o-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--mint);
+        }
+
+        /* Script */
+        .script-block {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .sb-header {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--mint-mid);
+            cursor: pointer;
+        }
+
+        .sb-header:hover {
+            background: var(--mint-pale);
+        }
+
+        .sb-title-text {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--slate);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sb-toggle {
+            font-size: 18px;
+            color: var(--slate-light);
+            transition: transform .3s;
+        }
+
+        .sb-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .sb-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .sb-content.open {
+            display: block;
+        }
+
+        .dialog {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .line {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .line-speaker {
+            width: 52px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 6px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .line-speaker.staff {
+            background: var(--mint);
+            color: #fff;
+        }
+
+        .line-speaker.pt {
+            background: var(--slate-mid);
+            color: #fff;
+        }
+
+        .line-text.staff-line {
+            background: var(--mint-pale);
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-mid);
+        }
+
+        .line-text.pt-line {
+            background: #F1F5F9;
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-light);
+        }
+
+        .tip-box {
+            background: var(--amber-pale);
+            border: 1px solid var(--amber-light);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 10px;
+        }
+
+        .tip-box .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--mint-pale), #F0FAF7);
+            border: 2px solid var(--mint-mid);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 14px;
+        }
+
+        .highlight-box .hl-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--mint);
+            margin-bottom: 8px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: var(--slate-mid);
+            line-height: 1.75;
+        }
+
+        .caution-box {
+            background: var(--red-pale);
+            border: 1px solid #FECACA;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 10px;
+        }
+
+        .caution-box .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div>
+            <h1>💴 プラン・料金提案スクリプト</h1>
+            <div class="sub">KLF スタッフ用 — 料金説明から入会クロージングまで</div>
+        </div>
+        <span class="badge-staff">STAFF ONLY</span>
+    </div>
+
+    <div class="container">
+
+        <!-- Basic fees -->
+        <div class="section-title">📋 基本料金（毎回かかる費用）</div>
+        <table class="fee-table">
+            <tr>
+                <th>来院回数</th>
+                <th>施術料</th>
+                <th>検査料</th>
+                <th>合計（目安）</th>
+                <th>備考</th>
+            </tr>
+            <tr>
+                <td>初回（初診）</td>
+                <td class="fee-highlight">4,500円</td>
+                <td>1,100円</td>
+                <td class="fee-highlight">5,600円</td>
+                <td>初診料が高め。以降下がる</td>
+            </tr>
+            <tr>
+                <td>2回目</td>
+                <td>2,500円</td>
+                <td>1,100円</td>
+                <td>3,600円</td>
+                <td>1ヶ月以内の来院が条件</td>
+            </tr>
+            <tr>
+                <td>3回目〜</td>
+                <td>1,100円</td>
+                <td>1,100円</td>
+                <td>2,200円</td>
+                <td>継続的に来ている場合</td>
+            </tr>
+            <tr>
+                <td>1ヶ月超の再来</td>
+                <td>4,500円（リセット）</td>
+                <td>1,100円</td>
+                <td>5,600円〜</td>
+                <td>1ヶ月空くと初回に戻る</td>
+            </tr>
+        </table>
+
+        <!-- Member plans -->
+        <div class="section-title">🏷️ 会員プラン比較（矯正受け放題）</div>
+        <div class="plan-grid">
+            <div class="plan-card">
+                <div class="plan-name">1ヶ月プラン</div>
+                <div class="plan-price">18,000<span>円/月（税別）</span></div>
+                <div class="plan-binding">縛りなし</div>
+                <div class="plan-features">
+                    <div class="plan-feature">期間中の矯正が何度でも込み</div>
+                    <div class="plan-feature">「まずお試し」に最適</div>
+                    <div class="plan-feature">再発しやすいリスクあり</div>
+                </div>
+                <div class="plan-note">→ とりあえず試したい方向け</div>
+            </div>
+            <div class="plan-card recommended">
+                <div class="plan-badge">⭐ イチオシ</div>
+                <div class="plan-name">3ヶ月プラン</div>
+                <div class="plan-price">13,000<span>円/月（税別）</span></div>
+                <div class="plan-binding">3ヶ月縛り</div>
+                <div class="plan-features">
+                    <div class="plan-feature">3ヶ月で根本改善が見込める</div>
+                    <div class="plan-feature">月5,000円お得（1ヶ月比）</div>
+                    <div class="plan-feature">産後改善の黄金期間をカバー</div>
+                </div>
+                <div class="plan-note amber-note">→ 最も多く選ばれるプラン</div>
+            </div>
+            <div class="plan-card">
+                <div class="plan-name">1年プラン</div>
+                <div class="plan-price">11,000<span>円/月（税別）</span></div>
+                <div class="plan-binding">12ヶ月縛り</div>
+                <div class="plan-features">
+                    <div class="plan-feature">最も月額が安い</div>
+                    <div class="plan-feature">長期で再発防止を目指す</div>
+                    <div class="plan-feature">卒業後も月々更新で安く再開可</div>
+                </div>
+                <div class="plan-note">→ しっかり維持したい方向け</div>
+            </div>
+        </div>
+
+        <div style="background:var(--amber-pale);border-radius:12px;padding:16px 20px;margin-bottom:32px;">
+            <div style="font-size:12px;font-weight:700;color:var(--amber);margin-bottom:6px;">⭐ 入会費について（当日割引あり）</div>
+            <div style="font-size:14px;color:var(--slate-mid);">入会費：通常 <strong>8,000円（税別）</strong> → <strong
+                    style="color:var(--amber);">当日入会で 5,500円（税別）に割引</strong><br>
+                「今日決めると入会費が安くなる」というインセンティブを必ず伝えること。</div>
+        </div>
+
+        <!-- Options -->
+        <div class="section-title">🔧 オプションメニュー</div>
+        <div class="option-grid">
+            <div class="option-card">
+                <div class="o-icon">🦴</div>
+                <div class="o-name">肋骨矯正（ロスマン）</div>
+                <div class="o-desc">肋骨・ウエストを締める施術。１回でウエスト2〜3cm変化するケースも。</div>
+                <div class="o-price">単品オプション価格</div>
+            </div>
+            <div class="option-card">
+                <div class="o-icon">🤱</div>
+                <div class="o-name">産後骨盤矯正</div>
+                <div class="o-desc">出産で開いた骨盤を締める専用施術。産後12ヶ月以内に特に効果的。</div>
+                <div class="o-price">3,300円〜（初回セット）</div>
+            </div>
+            <div class="option-card">
+                <div class="o-icon">⚡</div>
+                <div class="o-name">EMS</div>
+                <div class="o-desc">産後の筋肉再生に特化した電気刺激機器。寝たままで筋トレ相当の刺激。</div>
+                <div class="o-price">月4回：11,000円<br>月2回：6,600円</div>
+            </div>
+            <div class="option-card">
+                <div class="o-icon">🔮</div>
+                <div class="o-name">Pulse（最新）</div>
+                <div class="o-desc">EMS＋脂肪燃焼の最新機器。筋肉強化と脂肪分解を同時に行う。</div>
+                <div class="o-price">30回コース：132,000円〜</div>
+            </div>
+            <div class="option-card">
+                <div class="o-icon">🌿</div>
+                <div class="o-name">SOT（無通矯正）</div>
+                <div class="o-desc">ボキボキなしの骨盤調整。バキバキが怖い方・産後すぐの方に対応。</div>
+                <div class="o-price">会員料金の半額程度</div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <div class="section-title">💬 料金提案スクリプト</div>
+
+        <div class="script-block">
+            <div class="sb-header" onclick="toggleBlock(this)">
+                <div class="sb-title-text">💴 基本料金の切り出し方（費用感を先に示す）</div>
+                <span class="sb-toggle open">▼</span>
+            </div>
+            <div class="sb-content open">
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            一応今日、本当に初めてホームページから来てくれたから、ちょっとお金の話をしますね。<br>まず今日受けてもらう分でいうと、基本かかるのが5,600円です。<br>初診料が4,500円＋検査1,100円なんですけど、今日はホームページから来てくれてるから、骨盤矯正のクーポンが使えるのでその部分は0円になります。
+                        </div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            2回目からは2,500円になって、3回目以降は1,100円になっていくんですけど、1ヶ月以上空くとまたリセットされます。だから継続して来てもらえると、だんだん安くなっていくイメージですね。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="sb-header" onclick="toggleBlock(this)">
+                <div class="sb-title-text">🏷️ 会員プランの提案（3ヶ月推し）</div>
+                <span class="sb-toggle open">▼</span>
+            </div>
+            <div class="sb-content open">
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            で、骨盤矯正（ボキボキするやつ）って本来1回7,700円なんですよ。<br>毎回それだと高いから、会員制度を作ってて、一定の月額を払うと何回でも矯正が込みになるんです。</div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            プランは3つあって、1ヶ月18,000円・3ヶ月13,000円・1年11,000円です。<br>一番多く選ばれるのが3ヶ月で、産後で言うと3ヶ月でかなり変化が見えやすい期間なんですよ。
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 料金を比較させる時のポイント</div>
+                    「3ヶ月プランと1ヶ月プランを比べると月々5,000円の差ですけど、3ヶ月続けると15,000円お得になります。<br>期間的にも産後は最初の3ヶ月が勝負なんで、ここで踏ん張れると後が楽になりますよ。」
+                </div>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="sb-header" onclick="toggleBlock(this)">
+                <div class="sb-title-text">⭐ 当日入会割引のクロージング</div>
+                <span class="sb-toggle open">▼</span>
+            </div>
+            <div class="sb-content open">
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            入会費が8,000円かかるんですけど、今日入会していただくと5,500円になります。<br>この割引は今日だけなので、今日決めていただけるなら全然余裕で待ちますよ。</div>
+                    </div>
+                </div>
+                <div class="caution-box">
+                    <div class="tip-label">⚠️ 注意点</div>
+                    「今日だけ」と言う時は強引に押し付けないこと。選択権は患者に渡しつつ、情報として伝える形で。
+                </div>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="sb-header" onclick="toggleBlock(this)">
+                <div class="sb-title-text">🤔 「少し考えたい」と言われた時の対応</div>
+                <span class="sb-toggle">▼</span>
+            </div>
+            <div class="sb-content">
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker pt">患者</span>
+                        <div class="line-text pt-line">少し考えてから決めたいです</div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            もちろんです！何か気になってることとかあります？お金的な部分なのか、来る頻度的な部分なのか、それとも別のとこが引っかかってるのか、どっちが近いですか？</div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 ポイント</div>
+                    「考えたい」の理由を探ることで、本当のハードルが見えてくる。料金なら「月払いにもできます」、頻度なら「月2回からでも来れます」など、具体的な解決策を提示する。
+                </div>
+                <div class="highlight-box">
+                    <div class="hl-label">どちらに不安がある？の型</div>
+                    <p>「体的な問題ですか？料金的な問題ですか？どっちが今の悩みに近いですか？」<br>
+                        →どちらか答えてもらうことで、次のトークが組み立てやすくなる。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-block">
+            <div class="sb-header" onclick="toggleBlock(this)">
+                <div class="sb-title-text">⚕️ 労災利用トーク（保育士・介護職など向け）</div>
+                <span class="sb-toggle">▼</span>
+            </div>
+            <div class="sb-content">
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            お仕事って保育士さんですよね？実は保育士さんって、仕事で腰や肩を痛めた場合は、労災として申請できるんですよ。<br>労災が通ると、治療費がゼロになる期間があります。<br>申請のやり方とかも一緒に確認しましょうか？
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 対象となる職業例</div>
+                    保育士・介護職・看護師・飲食業など身体を使う職業。「抱っこが原因で痛くなった」という因果関係が説明できれば労災申請の可能性あり。
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            KLF スタッフマニュアル A-4 / プラン・料金提案スクリプト &nbsp;|&nbsp; 制作：リッツプロ &nbsp;|&nbsp; 2026年4月
+        </div>
+    </div>
+
+    <script>
+        function toggleBlock(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.sb-toggle');
+            content.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>

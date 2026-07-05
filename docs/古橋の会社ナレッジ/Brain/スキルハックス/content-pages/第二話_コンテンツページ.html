@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【第二話】最短で結果を出す人が持っている3つの武器</title>
+    <meta name="description" content="スキルハックス動画講座 第二話。3万人のデータから判明した、最短で稼ぐ人だけが持つ3つの武器を公開。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #f8f9fb;
+            color: #333;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .ep-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px 32px;
+        }
+
+        .ep-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: .5px;
+        }
+
+        .ep-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 900;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .ep-title .accent {
+            color: #60a5fa;
+        }
+
+        .ep-meta {
+            font-size: 13px;
+            opacity: .7;
+        }
+
+        .timer-bar {
+            background: #fff3cd;
+            color: #856404;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .video-section {
+            background: #000;
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #111;
+        }
+
+        .video-placeholder .insert-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .video-placeholder .insert-note strong {
+            color: #60a5fa;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .content {
+            background: #fff;
+            padding: 32px 24px;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid #2563eb;
+            line-height: 1.5;
+        }
+
+        .content p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .recap-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .recap-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 4px;
+        }
+
+        .recap-box p {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .weapon-card {
+            background: #f8f9fb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+
+        .weapon-card .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: #2563eb;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .weapon-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .weapon-card p {
+            font-size: 14px;
+            color: #666;
+            padding-left: 36px;
+        }
+
+        .highlight-box {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 24px 0;
+            border: 1px solid #dbeafe;
+        }
+
+        .highlight-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .next-section {
+            background: linear-gradient(180deg, #fff 0%, #f0f4ff 100%);
+            padding: 32px 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .next-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            letter-spacing: .5px;
+        }
+
+        .next-section h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .next-section p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-section {
+            background: #fff;
+            padding: 32px 24px 40px;
+            border-top: 3px solid #2563eb;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color .2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #06C755 0%, #05a848 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 8px;
+            transition: opacity .2s;
+            box-shadow: 0 4px 14px rgba(6, 199, 85, .3);
+        }
+
+        .submit-btn:hover {
+            opacity: .9;
+        }
+
+        .submit-btn .sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .micro-copy {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: #bbb;
+            background: #f8f9fb;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <header class="ep-header">
+            <div class="ep-badge">🎬 第二話（全4話）</div>
+            <h1 class="ep-title">
+                最短で結果を出す人が<br>
+                持っている<span class="accent">3つの武器</span>
+            </h1>
+            <p class="ep-meta">講師：迫 佑樹（株式会社ブレイン 代表取締役）</p>
+        </header>
+
+        <div class="timer-bar">
+            <span>⏰</span> この動画の視聴期限：あと <strong>3日間</strong>
+        </div>
+
+        <section class="video-section">
+            <div class="video-placeholder">
+                <div class="insert-note">
+                    <strong>▶ ここに第二話の動画を挿入</strong>
+                    Vimeo or YouTube（限定公開）を埋め込み
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="recap-box">
+                <div class="label">📝 前回の振り返り</div>
+                <p>
+                    第一話では「ノウハウを知ること自体に価値はない」こと、<br>
+                    そしてスキルを身につけて稼ぐことが最もリスクの低い方法であることをお伝えしました。
+                </p>
+            </div>
+
+            <h2>この動画で手に入るもの</h2>
+            <p>
+                今回は、第一話の先へ──<br>
+                <strong>最短で結果を出す人が共通して持っている「3つの武器」</strong>を具体的に解説します。
+            </p>
+
+            <div class="weapon-card">
+                <h3><span class="num">1</span>コアスキルだけに集中する</h3>
+                <p>動画編集なら「5つの要素」だけでOK。枝葉の情報を追いかけるのをやめ、お金に直結するスキルだけを磨く。</p>
+            </div>
+            <div class="weapon-card">
+                <h3><span class="num">2</span>完璧を待たずにお金をもらう</h3>
+                <p>60点の状態で営業し、現場で覚える。参考書を最初から全部読む人は絶対に結果が出ない。</p>
+            </div>
+            <div class="weapon-card">
+                <h3><span class="num">3</span>挫折させない環境に身を置く</h3>
+                <p>「当たり前の基準」が高い環境に身を置くことで、自然と行動量が上がり成長が加速する。</p>
+            </div>
+
+            <div class="highlight-box">
+                <div class="label">💰 キャッシュフローの教育</div>
+                <p>
+                    さらにこの動画では、稼いだお金を<br>
+                    <strong>「労働収入 → 資産構築 → 自動化」</strong><br>
+                    のキャッシュフローに変えていく方法もお伝えします。<br>
+                    迫佑樹の泥臭い初案件ストーリーも必見。
+                </p>
+            </div>
+        </section>
+
+        <section class="next-section">
+            <div class="next-badge">📺 次のプレゼント</div>
+            <h3>【第三話】なぜ僕は業界を全部敵に回す覚悟で<br>「この仕組み」を作ったのか</h3>
+            <p>
+                スキル教育市場の「安くて手厚い」という空白ポジション。<br>
+                全講座学び放題・伴走支援・コミュニティの3つの柱と、<br>
+                「2倍返金保証」の覚悟をお話しします。
+            </p>
+        </section>
+
+        <section class="form-section" id="form">
+            <h2>感想を送信して<br>第三話を受け取る</h2>
+            <p class="form-note">
+                期限内に感想を送信した方だけに、続きの動画をお届けしています。<br>
+                感想を送信いただくと、1分以内に第三話が届きます。
+            </p>
+
+            <form>
+                <div class="form-group">
+                    <label>お名前</label>
+                    <input type="text" placeholder="例：田中 太郎">
+                </div>
+                <div class="form-group">
+                    <label>動画のご感想</label>
+                    <textarea placeholder="3つの武器の中で最も印象に残ったこと、今の悩みなどをお聞かせください。"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    感想を送信して第三話を受け取る ▶
+                    <span>💬 送信後、1分以内にLINEで第三話をお届けします</span>
+                </button>
+            </form>
+
+            <p class="micro-copy">
+                ※ いただいた感想は迫佑樹が全て目を通しています。<br>
+                ※ 視聴期限を過ぎると、このページは閲覧できなくなります。
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>© Skill Hacks by Brain Inc.</p>
+            <p>※ 本ページの内容は個人の経験に基づくものであり、結果を保証するものではありません。</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+{
+    "last_updated": "2026-03-02T09:00:00+09:00",
+    "projects": [
+        {
+            "id": "ritzpro",
+            "name": "リッツプロ",
+            "client": "リッツプロ",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "yolos",
+            "name": "YOLO's（全般）",
+            "client": "YOLO's",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "yolos-itk",
+            "name": "YOLO's itk LINE構築",
+            "client": "YOLO's",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "yolos-sod",
+            "name": "YOLO's SOD提携",
+            "client": "YOLO's",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "tangleseed",
+            "name": "タングルシード",
+            "client": "タングルシード",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "brain",
+            "name": "Brain",
+            "client": "Brain",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "fproduction",
+            "name": "Fプロダクション",
+            "client": "Fプロダクション",
+            "active": true,
+            "tasks": []
+        },
+        {
+            "id": "lisa",
+            "name": "LISA",
+            "client": "LISA",
+            "active": true,
+            "tasks": []
+        }
+    ],
+    "_task_schema": {
+        "name": "タスク名",
+        "type": "📄契約 | 🤝ミーティング | 📊資料作成 | 🔍リサーチ | 📱LINE構築 | 💻開発 | 📞連絡",
+        "deadline": "YYYY-MM-DD",
+        "status": "pending | in_progress | completed | cancelled",
+        "priority": "high | medium | low",
+        "person": "関連する人名",
+        "notes": "補足メモ",
+        "created_at": "ISO8601",
+        "completed_at": "ISO8601 or null",
+        "deadline_history": [
+            "変更前の期日リスト"
+        ],
+        "alerts_sent": [
+            "3day | today | overdue"
+        ]
+    }
+}

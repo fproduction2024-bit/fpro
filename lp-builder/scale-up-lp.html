@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="4年で170店舗に拡大したスケールアップ戦略を公開。店舗を増やすほどマネジメントが大変、規模をもっと上げたいとお悩みの店舗事業者様へ。">
+    <title>4年で170店舗達成 | 店舗スケールアップ戦略を無料公開</title>
+
+    <style>
+        /* ===== リセット & 基本設定 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* カラーシステム */
+            --primary: #2D5BFF;
+            --primary-dark: #1E3FCC;
+            --primary-light: #4A73FF;
+            --secondary: #FF6B35;
+            --accent: #FFC107;
+            --success: #00C853;
+            --dark: #1A1A2E;
+            --dark-light: #2A2A40;
+            --text: #E8E8E8;
+            --text-secondary: #B0B0C3;
+            --background: #0F0F1E;
+            --surface: #1F1F35;
+            --surface-light: #2F2F45;
+
+            /* グラデーション */
+            --gradient-primary: linear-gradient(135deg, #2D5BFF 0%, #6366F1 100%);
+            --gradient-secondary: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+            --gradient-accent: linear-gradient(135deg, #FFC107 0%, #FFD54F 100%);
+            --gradient-hero: linear-gradient(135deg, #0F0F1E 0%, #1F1F35 50%, #2A2A40 100%);
+
+            /* スペーシング */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --spacing-3xl: 6rem;
+
+            /* フォント */
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+
+            /* ボーダーラジウス */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+
+            /* シャドウ */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 40px rgba(45, 91, 255, 0.3);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== タイポグラフィ ===== */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: var(--spacing-md);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            color: var(--text-secondary);
+        }
+
+        /* ===== レイアウト ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        section {
+            padding: var(--spacing-3xl) 0;
+            position: relative;
+        }
+
+        /* ===== ヘッダー ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-sm) 0;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-cta {
+            display: none;
+        }
+
+        /* ===== ヒーローセクション ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(45, 91, 255, 0.15) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero h1 {
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            background: linear-gradient(135deg, #FFFFFF 0%, #B0B0C3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: var(--spacing-xs);
+        }
+
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.8s both;
+        }
+
+        /* ===== ボタン ===== */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-md) var(--spacing-xl);
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(45, 91, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(45, 91, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-large {
+            padding: var(--spacing-lg) var(--spacing-2xl);
+            font-size: 1.25rem;
+        }
+
+        /* ===== 課題セクション ===== */
+        .problems {
+            background: var(--surface);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .problem-card {
+            background: var(--surface-light);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .problem-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .problem-card h3 {
+            color: var(--text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ===== 解決策セクション ===== */
+        .solution {
+            background: var(--background);
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+            margin-top: var(--spacing-xl);
+        }
+
+        .solution-visual {
+            position: relative;
+        }
+
+        .big-number {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .visual-label {
+            font-size: 1.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .solution-points {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .point-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .point-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        .point-content h4 {
+            color: var(--text);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .point-content p {
+            font-size: 0.9375rem;
+        }
+
+        /* ===== ベネフィットセクション ===== */
+        .benefits {
+            background: var(--surface);
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--background);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(45, 91, 255, 0.3);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--spacing-md);
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .benefit-card h3 {
+            color: var(--text);
+        }
+
+        /* ===== CTAフォームセクション ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+            padding: var(--spacing-3xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(45, 91, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-container {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .cta-header h2 {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group label .required {
+            color: var(--secondary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: var(--background);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 91, 255, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .checkbox-group a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: var(--spacing-md);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== 信頼性セクション ===== */
+        .trust {
+            background: var(--background);
+            text-align: center;
+        }
+
+        .trust-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .trust-stat {
+            padding: var(--spacing-xl);
+        }
+
+        .trust-stat-number {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .trust-stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== フッター ===== */
+        footer {
+            background: var(--dark);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .copyright {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== アニメーション ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* ===== レスポンシブ ===== */
+        @media (max-width: 768px) {
+            section {
+                padding: var(--spacing-2xl) 0;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: var(--spacing-3xl) 0;
+            }
+
+            .hero-stats {
+                gap: var(--spacing-lg);
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-grid,
+            .benefit-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-cta {
+                display: none !important;
+            }
+
+            .btn-large {
+                padding: var(--spacing-md) var(--spacing-lg);
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .header-cta {
+                display: block;
+            }
+        }
+
+        /* ===== ユーティリティ ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: var(--spacing-lg);
+        }
+
+        /* サクセスメッセージ */
+        .success-message {
+            display: none;
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.1) 0%, rgba(0, 200, 83, 0.05) 100%);
+            border: 2px solid var(--success);
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .success-message h3 {
+            color: var(--success);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .success-message p {
+            color: var(--text);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ScaleUp Strategy</div>
+                <a href="#form" class="btn btn-primary header-cta">無料で資料を受け取る</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">店舗事業者様限定公開</div>
+                <h1>4年で170店舗。<br>その全戦略を、あなたに。</h1>
+                <p class="hero-subtitle">
+                    1〜5店舗経営の壁を突破し、規模を飛躍的に拡大させた<br class="desktop-only">
+                    実証済みのスケールアップ戦略を無料公開
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4年</span>
+                        <span class="stat-label">達成期間</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">170店</span>
+                        <span class="stat-label">展開店舗数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">42倍</span>
+                        <span class="stat-label">成長率</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#form" class="btn btn-primary btn-large">今すぐ無料で戦略資料を受け取る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 課題セクション -->
+    <section class="problems" id="problems">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">あなたのお悩み</span>
+                <h2>店舗を増やすほど、<br>こんな課題に直面していませんか？</h2>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">😰</div>
+                    <h3>マネジメントが限界</h3>
+                    <p>店舗が増えるごとに管理が複雑化し、オーナー自身が疲弊。現場の統制が取れず、品質のバラつきが発生している。</p>
+                </div>
+
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">📉</div>
+                    <h3>売上は上がっても利益が残らない</h3>
+                    <p>店舗数は増えたものの、人件費や管理コストが膨らみ、思ったほど利益が出ない。スケールメリットが活かせていない。</p>
+                </div>
+
+                <div class="problem-card fade-in">
+                    <div class="problem-icon">🔄</div>
+                    <h3>優秀な人材が定着しない</h3>
+                    <p>採用しても育成が追いつかず、離職率が高い。店長候補が育たず、次の出店計画が立てられない状態が続いている。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解決策セクション -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">実証済みの戦略</span>
+                <h2>その悩み、すべて解決できます</h2>
+                <p>私たちは4年で170店舗を展開し、同じ課題を乗り越えてきました</p>
+            </div>
+
+            <div class="solution-content">
+                <div class="solution-visual fade-in">
+                    <div class="big-number">170</div>
+                    <div class="visual-label">4年間で達成した店舗数</div>
+                </div>
+
+                <div class="solution-points">
+                    <div class="point-item fade-in">
+                        <div class="point-number">1</div>
+                        <div class="point-content">
+                            <h4>独自のマネジメントシステム</h4>
+                            <p>オーナー不在でも回る組織づくり。現場の自律的運営を実現する仕組みを構築しました。</p>
+                        </div>
+                    </div>
+
+                    <div class="point-item fade-in">
+                        <div class="point-number">2</div>
+                        <div class="point-content">
+                            <h4>収益性を最大化するオペレーション</h4>
+                            <p>店舗あたりの利益率を向上させる具体的な施策とデータ活用法をお伝えします。</p>
+                        </div>
+                    </div>
+
+                    <div class="point-item fade-in">
+                        <div class="point-number">3</div>
+                        <div class="point-content">
+                            <h4>人材育成の完全マニュアル</h4>
+                            <p>離職率を50%削減し、店長候補を量産する育成プログラムを公開します。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ベネフィットセクション -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-tag">得られる成果</span>
+                <h2>この戦略を学ぶことで得られるもの</h2>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>加速的な成長</h3>
+                    <p>年間10店舗以上の出店を実現する具体的なロードマップ</p>
+                </div>
+
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">💰</div>
+                    <h3>利益率の向上</h3>
+                    <p>店舗あたりの営業利益率を平均20%以上に引き上げる手法</p>
+                </div>
+
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">👥</div>
+                    <h3>強固な組織</h3>
+                    <p>離職率を大幅に削減し、次世代リーダーを育成する仕組み</p>
+                </div>
+
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">⏰</div>
+                    <h3>時間的自由</h3>
+                    <p>オーナーの現場稼働を週3日以下に削減する経営手法</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAフォームセクション -->
+    <section class="cta-section" id="form">
+        <div class="container">
+            <div class="cta-container">
+                <div class="cta-header">
+                    <h2>今すぐ無料で戦略資料を受け取る</h2>
+                    <p>4年で170店舗を達成したスケールアップ戦略の全貌を、期間限定で無料公開中です</p>
+                </div>
+
+                <form id="leadForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lastName">姓 <span class="required">*</span></label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required
+                                placeholder="山田">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">名 <span class="required">*</span></label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required
+                                placeholder="太郎">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" class="form-input" required
+                            placeholder="example@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">電話番号 <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required
+                            placeholder="090-1234-5678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stores">現在の店舗数 <span class="required">*</span></label>
+                        <input type="number" id="stores" name="stores" class="form-input" required placeholder="例: 3"
+                            min="1" max="10">
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">
+                            <a href="#" target="_blank">プライバシーポリシー</a>に同意します <span class="required">*</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary btn-large submit-btn">
+                        無料で戦略資料を今すぐ受け取る
+                    </button>
+
+                    <p class="form-note">
+                        ※ご入力いただいた情報は厳重に管理し、資料送付以外の目的では使用いたしません
+                    </p>
+                </form>
+
+                <div id="successMessage" class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h3>送信完了しました！</h3>
+                    <p>ご登録いただいたメールアドレス宛に、戦略資料をお送りいたします。<br>
+                        メールが届かない場合は、迷惑メールフォルダをご確認ください。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 信頼性セクション -->
+    <section class="trust" id="trust">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>数字で見る実績</h2>
+            </div>
+
+            <div class="trust-stats">
+                <div class="trust-stat fade-in">
+                    <span class="trust-stat-number">170</span>
+                    <span class="trust-stat-label">総店舗数</span>
+                </div>
+                <div class="trust-stat fade-in">
+                    <span class="trust-stat-number">98%</span>
+                    <span class="trust-stat-label">顧客満足度</span>
+                </div>
+                <div class="trust-stat fade-in">
+                    <span class="trust-stat-number">15年</span>
+                    <span class="trust-stat-label">業界経験</span>
+                </div>
+                <div class="trust-stat fade-in">
+                    <span class="trust-stat-number">500+</span>
+                    <span class="trust-stat-label">支援企業数</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">会社概要</a>
+                <a href="#">プライバシーポリシー</a>
+                <a href="#">特定商取引法に基づく表記</a>
+                <a href="#">お問い合わせ</a>
+            </div>
+            <p class="copyright">© 2026 ScaleUp Strategy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========== スクロールアニメーション ==========
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ========== ヘッダースクロール効果 ==========
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // ========== スムーズスクロール ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========== フォーム送信処理 ==========
+        const leadForm = document.getElementById('leadForm');
+        const successMessage = document.getElementById('successMessage');
+
+        leadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // フォームデータ取得
+            const formData = {
+                lastName: document.getElementById('lastName').value,
+                firstName: document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                stores: document.getElementById('stores').value,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('フォーム送信データ:', formData);
+
+            // TODO: 実際の送信処理をここに実装
+            // 例: Google Apps Script、メール送信API、CRM連携など
+
+            // 模擬送信（成功想定）
+            try {
+                // ここで実際のAPI呼び出しを行う
+                // await fetch('YOUR_API_ENDPOINT', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify(formData)
+                // });
+
+                // 成功メッセージ表示
+                leadForm.style.display = 'none';
+                successMessage.classList.add('show');
+
+                // Google Analytics イベント送信（導入している場合）
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion', {
+                        'event_category': 'Lead',
+                        'event_label': 'Scale Up Strategy Form'
+                    });
+                }
+
+                // スクロール
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('送信エラー:', error);
+                alert('送信中にエラーが発生しました。しばらく経ってから再度お試しください。');
+            }
+        });
+
+        // ========== 電話番号フォーマット ==========
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+
+            if (value.length >= 7) {
+                value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, '$1-$2-$3');
+            } else if (value.length >= 4) {
+                value = value.replace(/(\d{3})(\d{0,4})/, '$1-$2');
+            }
+
+            e.target.value = value;
+        });
+
+        // ========== 数字カウントアップアニメーション ==========
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // ヒーローセクションの統計が表示されたらアニメーション開始
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach((stat, index) => {
+                        const text = stat.textContent;
+                        const matches = text.match(/(\d+)/);
+                        if (matches) {
+                            const targetValue = parseInt(matches[1]);
+                            setTimeout(() => {
+                                animateValue(stat, 0, targetValue, 2000);
+                                // 単位を追加
+                                setTimeout(() => {
+                                    if (text.includes('年')) stat.textContent += '年';
+                                    if (text.includes('店')) stat.textContent += '店';
+                                    if (text.includes('倍')) stat.textContent += '倍';
+                                }, 2000);
+                            }, index * 200);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            statsObserver.observe(heroStats);
+        }
+    </script>
+</body>
+
+</html>

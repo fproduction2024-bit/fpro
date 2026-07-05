@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リッツプロ｜伴走型FC支援 お申込みフォーム</title>
+    <meta name="description" content="株式会社リッツ・PRO の伴走型FC支援サービスへのお申込みフォームです。FC本部構築から加盟店開発、M&A戦略までトータルサポートいたします。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #F0F4F8;
+            color: #444;
+            line-height: 1.8;
+            font-size: 15px;
+            min-height: 100vh;
+        }
+
+        /* ── Design Tokens ── */
+        :root {
+            --teal: #0C4A4E;
+            --teal-light: #0D5E63;
+            --orange: #E8650A;
+            --orange-v2: #F97316;
+            --white: #FFFFFF;
+            --gray-bg: #F8F9FB;
+            --orange-bg: #FFF7F0;
+            --text-dark: #1A1A2E;
+            --text-body: #444444;
+            --green: #10B981;
+            --red: #EF4444;
+            --border: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, .10);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, .12);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 50%, #147a80 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 56px 24px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, .06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 50px;
+            padding: 6px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .05em;
+            margin-bottom: 20px;
+            animation: fadeInDown .6s ease;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            animation: fadeInUp .6s ease;
+        }
+
+        .hero p {
+            font-size: 15px;
+            opacity: .85;
+            max-width: 560px;
+            margin: 0 auto;
+            animation: fadeInUp .8s ease;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 720px;
+            margin: -32px auto 60px;
+            padding: 0 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Form Card ── */
+        .form-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* ── Section Header ── */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 28px 32px 0;
+        }
+
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-v2));
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* ── Form Content ── */
+        .form-section {
+            padding: 20px 32px 32px;
+        }
+
+        .form-section+.form-section {
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── Field ── */
+        .field {
+            margin-bottom: 24px;
+        }
+
+        .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .field-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .field-label .req {
+            display: inline-block;
+            background: var(--red);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: .05em;
+        }
+
+        .field-label .opt {
+            display: inline-block;
+            background: #94A3B8;
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: .05em;
+        }
+
+        .field-hint {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            background: var(--white);
+            transition: border-color .2s, box-shadow .2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(12, 74, 78, .12);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2394A3B8'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 18px;
+            padding-right: 42px;
+        }
+
+        /* ── Grid ── */
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* ── Radio / Checkbox ── */
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all .2s;
+            background: var(--white);
+        }
+
+        .radio-group label:hover,
+        .checkbox-group label:hover {
+            border-color: var(--teal);
+            background: rgba(12, 74, 78, .03);
+        }
+
+        .radio-group input:checked+span,
+        .checkbox-group input:checked+span {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        .radio-group input:checked~*,
+        .checkbox-group input:checked~* {
+            color: var(--teal);
+        }
+
+        .radio-group label:has(input:checked),
+        .checkbox-group label:has(input:checked) {
+            border-color: var(--teal);
+            background: rgba(12, 74, 78, .05);
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            accent-color: var(--teal);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* ── Info Box ── */
+        .info-box {
+            background: var(--orange-bg);
+            border-left: 4px solid var(--orange);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 16px 20px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #7C4A03;
+            margin-top: 24px;
+        }
+
+        .info-box strong {
+            color: var(--orange);
+        }
+
+        /* ── Submit ── */
+        .submit-section {
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--gray-bg);
+        }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 400px;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-v2));
+            color: var(--white);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 4px 16px rgba(232, 101, 10, .3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(232, 101, 10, .4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-note {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 16px;
+        }
+
+        /* ── Privacy ── */
+        .privacy-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .privacy-check a {
+            color: var(--teal);
+            text-decoration: underline;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            font-size: 12px;
+            color: #94A3B8;
+        }
+
+        .footer a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 40px 20px 36px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .form-section {
+                padding: 20px 20px 28px;
+            }
+
+            .section-header {
+                padding: 24px 20px 0;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-section {
+                padding: 24px 20px;
+            }
+
+            .radio-group,
+            .checkbox-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── Hero ── -->
+    <header class="hero">
+        <span class="hero-badge">RITZ PRO｜伴走型FC支援</span>
+        <h1>支援お申込みフォーム</h1>
+        <p>FC本部構築から加盟店開発、M&A戦略まで。<br>貴社に最適な支援プランをご提案いたします。</p>
+    </header>
+
+    <!-- ── Form ── -->
+    <main class="container">
+        <form class="form-card" id="applicationForm" action="#" method="POST">
+
+            <!-- ━━ Section 1: 基本情報 ━━ -->
+            <div class="section-header">
+                <span class="section-number">1</span>
+                <h2 class="section-title">基本情報</h2>
+            </div>
+            <div class="form-section">
+
+                <div class="field">
+                    <div class="field-label">会社名・屋号 <span class="req">必須</span></div>
+                    <input type="text" name="company_name" id="company_name" placeholder="例：株式会社○○" required>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <div class="field-label">お名前 <span class="req">必須</span></div>
+                        <input type="text" name="name" id="name" placeholder="例：山田 太郎" required>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">フリガナ <span class="req">必須</span></div>
+                        <input type="text" name="name_kana" id="name_kana" placeholder="例：ヤマダ タロウ" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">お役職 <span class="opt">任意</span></div>
+                    <input type="text" name="position" id="position" placeholder="例：代表取締役">
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <div class="field-label">メールアドレス <span class="req">必須</span></div>
+                        <input type="email" name="email" id="email" placeholder="例：info@example.com" required>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">電話番号 <span class="req">必須</span></div>
+                        <input type="tel" name="phone" id="phone" placeholder="例：090-1234-5678" required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">所在地（都道府県・市区町村） <span class="req">必須</span></div>
+                    <input type="text" name="address" id="address" placeholder="例：東京都渋谷区" required>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">会社HP / SNS <span class="opt">任意</span></div>
+                    <input type="url" name="website" id="website" placeholder="例：https://example.com">
+                </div>
+            </div>
+
+            <!-- ━━ Section 2: 事業の現状 ━━ -->
+            <div class="section-header">
+                <span class="section-number">2</span>
+                <h2 class="section-title">事業の現状</h2>
+            </div>
+            <div class="form-section">
+
+                <div class="field">
+                    <div class="field-label">業種・業態 <span class="req">必須</span></div>
+                    <input type="text" name="industry" id="industry" placeholder="例：美容サロン、飲食、教育スクール、施術系 など" required>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">事業内容の概要 <span class="req">必須</span></div>
+                    <div class="field-hint">提供しているサービス・商品の概要をお聞かせください。</div>
+                    <textarea name="business_overview" id="business_overview"
+                        placeholder="例：小顔矯正に特化した美容サロンを都内2店舗で運営。自社開発の施術メソッドを確立済み。" required></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <div class="field-label">設立年数 <span class="req">必須</span></div>
+                        <select name="company_age" id="company_age" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="1年未満">1年未満</option>
+                            <option value="1〜3年">1〜3年</option>
+                            <option value="3〜5年">3〜5年</option>
+                            <option value="5〜10年">5〜10年</option>
+                            <option value="10年以上">10年以上</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">従業員数 <span class="req">必須</span></div>
+                        <select name="employee_count" id="employee_count" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="1名（個人）">1名（個人）</option>
+                            <option value="2〜5名">2〜5名</option>
+                            <option value="6〜10名">6〜10名</option>
+                            <option value="11〜30名">11〜30名</option>
+                            <option value="31〜50名">31〜50名</option>
+                            <option value="51名以上">51名以上</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <div class="field-label">現在の店舗数 <span class="req">必須</span></div>
+                        <select name="store_count" id="store_count" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="店舗なし（無形サービス）">店舗なし（無形サービス）</option>
+                            <option value="1店舗">1店舗</option>
+                            <option value="2〜3店舗">2〜3店舗</option>
+                            <option value="4〜10店舗">4〜10店舗</option>
+                            <option value="11店舗以上">11店舗以上</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="field-label">直近の年商規模 <span class="req">必須</span></div>
+                        <select name="annual_revenue" id="annual_revenue" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="1,000万円未満">1,000万円未満</option>
+                            <option value="1,000万〜3,000万円">1,000万〜3,000万円</option>
+                            <option value="3,000万〜5,000万円">3,000万〜5,000万円</option>
+                            <option value="5,000万〜1億円">5,000万〜1億円</option>
+                            <option value="1億〜3億円">1億〜3億円</option>
+                            <option value="3億円以上">3億円以上</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">FC展開の経験 <span class="req">必須</span></div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="fc_experience" value="なし（初めて）"
+                                required><span>なし（初めて）</span></label>
+                        <label><input type="radio" name="fc_experience" value="検討中"><span>検討中・準備段階</span></label>
+                        <label><input type="radio" name="fc_experience" value="展開中"><span>すでにFC展開中</span></label>
+                        <label><input type="radio" name="fc_experience" value="過去に経験あり"><span>過去に経験あり</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ━━ Section 3: 支援希望内容 ━━ -->
+            <div class="section-header">
+                <span class="section-number">3</span>
+                <h2 class="section-title">支援のご希望内容</h2>
+            </div>
+            <div class="form-section">
+
+                <div class="field">
+                    <div class="field-label">ご希望の支援内容 <span class="req">必須</span></div>
+                    <div class="field-hint">該当するものを全てお選びください（複数選択可）</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="support_type[]" value="FC本部構築"><span>FC本部構築</span></label>
+                        <label><input type="checkbox" name="support_type[]" value="加盟店開発"><span>加盟店開発</span></label>
+                        <label><input type="checkbox" name="support_type[]"
+                                value="マーケティング戦略"><span>マーケティング戦略</span></label>
+                        <label><input type="checkbox" name="support_type[]" value="ブランディング"><span>ブランディング</span></label>
+                        <label><input type="checkbox" name="support_type[]" value="マニュアル作成"><span>マニュアル作成</span></label>
+                        <label><input type="checkbox" name="support_type[]"
+                                value="M&A・出口戦略"><span>M&A・出口戦略</span></label>
+                        <label><input type="checkbox" name="support_type[]" value="その他"><span>その他</span></label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">目標とするFC展開規模 <span class="req">必須</span></div>
+                    <select name="target_scale" id="target_scale" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="〜10店舗">〜10店舗</option>
+                        <option value="10〜30店舗">10〜30店舗</option>
+                        <option value="30〜50店舗">30〜50店舗</option>
+                        <option value="50〜100店舗">50〜100店舗</option>
+                        <option value="100店舗以上">100店舗以上</option>
+                        <option value="未定・相談したい">未定・相談したい</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">目標達成の希望時期 <span class="req">必須</span></div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="target_timeline" value="1年以内"
+                                required><span>1年以内</span></label>
+                        <label><input type="radio" name="target_timeline" value="1〜2年"><span>1〜2年</span></label>
+                        <label><input type="radio" name="target_timeline" value="2〜3年"><span>2〜3年</span></label>
+                        <label><input type="radio" name="target_timeline" value="3年以上"><span>3年以上</span></label>
+                        <label><input type="radio" name="target_timeline" value="未定"><span>未定</span></label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">M&A（事業売却）の意向 <span class="req">必須</span></div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="ma_interest" value="積極的に検討"
+                                required><span>積極的に検討したい</span></label>
+                        <label><input type="radio" name="ma_interest" value="興味あり"><span>興味はある</span></label>
+                        <label><input type="radio" name="ma_interest" value="まだ考えていない"><span>まだ考えていない</span></label>
+                        <label><input type="radio" name="ma_interest" value="現時点では不要"><span>現時点では不要</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ━━ Section 4: 投資・予算 ━━ -->
+            <div class="section-header">
+                <span class="section-number">4</span>
+                <h2 class="section-title">投資・ご予算</h2>
+            </div>
+            <div class="form-section">
+
+                <div class="field">
+                    <div class="field-label">FC展開にあたっての投資可能予算 <span class="req">必須</span></div>
+                    <select name="budget" id="budget" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="300万円未満">300万円未満</option>
+                        <option value="300万〜500万円">300万〜500万円</option>
+                        <option value="500万〜800万円">500万〜800万円</option>
+                        <option value="800万〜1,500万円">800万〜1,500万円</option>
+                        <option value="1,500万円以上">1,500万円以上</option>
+                        <option value="相談して決めたい">相談して決めたい</option>
+                    </select>
+                </div>
+
+                <div class="info-box">
+                    <strong>💡 費用について</strong><br>
+                    リッツプロの伴走型支援は、リスクの発生するマーケティング（FC開発のLP制作費など）は<strong>完全成果報酬制</strong>で支援します。テストマーケティングの費用も弊社が負担するため、安心してご相談ください。なお、月間の支援先募集数は<strong>1社限定</strong>です。
+                </div>
+            </div>
+
+            <!-- ━━ Section 5: ヒアリング ━━ -->
+            <div class="section-header">
+                <span class="section-number">5</span>
+                <h2 class="section-title">ヒアリング</h2>
+            </div>
+            <div class="form-section">
+
+                <div class="field">
+                    <div class="field-label">現在、事業の中で最も課題に感じていること <span class="req">必須</span></div>
+                    <textarea name="current_challenge" id="current_challenge"
+                        placeholder="例：店舗数を増やしたいが、人材確保と教育に時間がかかり、スピード感のある展開ができていない。" required></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">リッツプロの支援で実現したいこと <span class="req">必須</span></div>
+                    <textarea name="goals" id="goals" placeholder="例：2年以内にFC30店舗の展開と、3年後のM&Aを目指したい。"
+                        required></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">リッツプロを知ったきっかけ <span class="req">必須</span></div>
+                    <select name="referral_source" id="referral_source" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="Web検索">Web検索</option>
+                        <option value="SNS">SNS（Instagram / X / Facebook 等）</option>
+                        <option value="知人・紹介">知人・ビジネスパートナーからの紹介</option>
+                        <option value="セミナー・イベント">セミナー・イベント</option>
+                        <option value="テレビ・メディア">テレビ・メディア</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">ご紹介者名 <span class="opt">任意</span></div>
+                    <input type="text" name="referrer" id="referrer" placeholder="ご紹介者がいらっしゃる場合はお名前をご記入ください">
+                </div>
+
+                <div class="field">
+                    <div class="field-label">その他ご要望・ご質問 <span class="opt">任意</span></div>
+                    <textarea name="additional_notes" id="additional_notes"
+                        placeholder="事前にお伝えしておきたいことがありましたらご記入ください。"></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">初回ミーティングのご希望日時 <span class="opt">任意</span></div>
+                    <div class="field-hint">第1〜第3希望をご記入ください。平日10:00〜18:00推奨。</div>
+                    <textarea name="preferred_date" id="preferred_date" rows="3"
+                        placeholder="第1希望：4月15日（火）14:00〜&#10;第2希望：4月17日（木）10:00〜&#10;第3希望：4月18日（金）15:00〜"></textarea>
+                </div>
+            </div>
+
+            <!-- ━━ Submit ━━ -->
+            <div class="submit-section">
+                <div class="privacy-check">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy"><a href="#">プライバシーポリシー</a>に同意する</label>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    送信する
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <p class="submit-note">※ 社内審査の上、3営業日以内にご連絡いたします。</p>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="footer">
+        <p>&copy; 2026 株式会社リッツ・PRO All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

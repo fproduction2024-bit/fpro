@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTubeワークフローマネージャー</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="date-display">
+                <span id="current-date">12月30日</span> <span id="current-day">月曜日</span>
+            </div>
+            <h1>動画制作を始めましょう</h1>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Focus & Tools -->
+            <div class="left-col">
+                <!-- Focus Section -->
+                <section class="glass-card focus-section">
+                    <h2><i class="fa-solid fa-bullseye"></i> 現在のタスク</h2>
+
+                    <div id="no-active-task" class="empty-state">
+                        <p>タスクを選択して開始してください</p>
+                    </div>
+
+                    <div id="active-task-container" class="hidden">
+                        <h3 id="active-task-title">Design User Interface</h3>
+
+                        <div class="task-details">
+                            <p id="active-task-desc" class="task-desc"></p>
+
+                            <div id="active-task-prompt" class="prompt-box hidden">
+                                <div class="prompt-header">
+                                    <span><i class="fa-solid fa-terminal"></i> Agent Prompt</span>
+                                    <button id="btn-copy-prompt" class="btn-sm"><i class="fa-regular fa-copy"></i>
+                                        コピー</button>
+                                </div>
+                                <pre id="active-task-prompt-text"></pre>
+                            </div>
+                        </div>
+
+                        <div class="timer-display">
+                            <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+                        </div>
+                        <div class="timer-controls">
+                            <button id="btn-start-timer" class="btn btn-primary"><i class="fa-solid fa-play"></i>
+                                開始</button>
+                            <button id="btn-pause-timer" class="btn btn-secondary hidden"><i
+                                    class="fa-solid fa-pause"></i>
+                                一時停止</button>
+                            <button id="btn-complete-active" class="btn btn-success"><i class="fa-solid fa-check"></i>
+                                完了</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tools Section -->
+                <section class="glass-card tools-section">
+                    <h2><i class="fa-solid fa-toolbox"></i> ツール</h2>
+                    <ul class="tool-list">
+                        <li>
+                            <a href="https://chatgpt.com/" target="_blank" class="tool-link">
+                                <i class="fa-solid fa-robot"></i> ChatGPT
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://genspark.ai/" target="_blank" class="tool-link">
+                                <i class="fa-solid fa-sparkles"></i> Genspark
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.canva.com/" target="_blank" class="tool-link">
+                                <i class="fa-solid fa-palette"></i> Canva
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://fish.audio/" target="_blank" class="tool-link">
+                                <i class="fa-solid fa-microphone-lines"></i> Fish Audio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.ilovepdf.com/" target="_blank" class="tool-link">
+                                <i class="fa-solid fa-file-pdf"></i> iLovePDF
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://studio.youtube.com/" target="_blank" class="tool-link">
+                                <i class="fa-brands fa-youtube"></i> YouTube Studio
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Task List Section -->
+            <section class="glass-card tasks-section">
+                <div class="section-header">
+                    <h2>タスクリスト</h2>
+                    <span id="task-count" class="badge">残り 0 件</span>
+                </div>
+
+                <div class="add-task-wrapper">
+                    <input type="text" id="new-task-input" placeholder="新しいタスクを入力...">
+                    <button id="btn-add-task" class="btn-icon"><i class="fa-solid fa-plus"></i></button>
+                </div>
+
+                <ul id="task-list" class="task-list">
+                    <!-- Tasks will be injected here -->
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

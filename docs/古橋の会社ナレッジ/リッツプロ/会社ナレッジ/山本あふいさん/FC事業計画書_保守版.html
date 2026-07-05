@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC事業計画書【保守シナリオ】｜山本あふい様｜リッツプロ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --primary-light: #16213e;
+            --accent: #c8a96e;
+            --accent-dark: #a8894e;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --white: #ffffff;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --border: #e8e2d8;
+            --success: #2d8a4e;
+            --danger: #c9574c;
+            --warning: #d97706;
+            --gradient-gold: linear-gradient(135deg, #c8a96e 0%, #e8d5a8 50%, #c8a96e 100%);
+            --gradient-red: linear-gradient(135deg, #c9574c, #a8383d);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* ── Cover ── */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0a0a 0%, #2e1010 40%, #3d1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(201, 87, 76, .12) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(201, 87, 76, .07) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: .5rem 2rem;
+            border: 1px solid #c9574c;
+            color: #e8978f;
+            font-size: .8rem;
+            letter-spacing: .3em;
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+
+        .cover h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: .05em;
+        }
+
+        .cover h1 span {
+            color: #e8978f;
+        }
+
+        .cover h1 .sub-tag {
+            display: inline-block;
+            font-size: clamp(.9rem, 2vw, 1.2rem);
+            background: rgba(201, 87, 76, .25);
+            border: 1px solid rgba(201, 87, 76, .5);
+            padding: .3rem 1.2rem;
+            border-radius: 4px;
+            margin-left: .8rem;
+            vertical-align: middle;
+            letter-spacing: .15em;
+            font-weight: 700;
+        }
+
+        .cover-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: .8;
+            margin-bottom: .8rem;
+            letter-spacing: .1em;
+        }
+
+        .cover-meta {
+            font-size: .85rem;
+            opacity: .5;
+        }
+
+        .cover-premise {
+            margin-top: 2rem;
+            display: inline-block;
+            background: rgba(201, 87, 76, .15);
+            border: 1px solid rgba(201, 87, 76, .3);
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            font-size: .85rem;
+            opacity: .85;
+            text-align: left;
+            line-height: 2;
+        }
+
+        .cover-premise strong {
+            color: #e8978f;
+        }
+
+        /* ── Layout ── */
+        section {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--danger);
+            font-size: .75rem;
+            letter-spacing: .3em;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            text-transform: uppercase;
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-red);
+        }
+
+        section h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: var(--primary);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ── Comparison Banner ── */
+        .compare-banner {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin: 2rem 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .compare-side {
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .compare-side.optimistic {
+            background: rgba(200, 169, 110, .05);
+        }
+
+        .compare-side.conservative {
+            background: rgba(201, 87, 76, .04);
+        }
+
+        .compare-side .c-label {
+            font-size: .75rem;
+            letter-spacing: .15em;
+            font-weight: 700;
+            margin-bottom: .5rem;
+        }
+
+        .compare-side.optimistic .c-label {
+            color: var(--accent-dark);
+        }
+
+        .compare-side.conservative .c-label {
+            color: var(--danger);
+        }
+
+        .compare-side .c-num {
+            font-size: 1.6rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .compare-side.optimistic .c-num {
+            color: var(--accent-dark);
+        }
+
+        .compare-side.conservative .c-num {
+            color: var(--danger);
+        }
+
+        .compare-side .c-sub {
+            font-size: .78rem;
+            color: var(--text-light);
+            margin-top: .3rem;
+        }
+
+        .compare-vs {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* ── Table ── */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .9rem;
+        }
+
+        .styled-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .styled-table th {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: .05em;
+        }
+
+        .styled-table td {
+            padding: .9rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .styled-table tbody tr:hover {
+            background: rgba(201, 87, 76, .03);
+        }
+
+        .styled-table .num {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .styled-table .hl {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+
+        .styled-table .hl-g {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .styled-table .hl-r {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .styled-table .hl-w {
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        .styled-table tfoot td {
+            padding: 1rem 1.2rem;
+            font-weight: 700;
+            background: rgba(201, 87, 76, .07);
+            border-top: 2px solid var(--danger);
+        }
+
+        .row-group td {
+            background: rgba(26, 26, 46, .03);
+            font-weight: 700;
+            font-size: .82rem;
+            letter-spacing: .05em;
+            color: var(--text-light);
+        }
+
+        .cost-row td {
+            color: var(--danger);
+        }
+
+        /* ── KPI Grid ── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.6rem 1.4rem;
+            text-align: center;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .07);
+        }
+
+        .kpi-card .kpi-label {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            color: var(--text-light);
+            margin-bottom: .6rem;
+        }
+
+        .kpi-card .kpi-num {
+            font-size: 1.7rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .kpi-card .kpi-sub {
+            font-size: .75rem;
+            color: var(--text-light);
+            margin-top: .3rem;
+        }
+
+        .kpi-card.red-card {
+            background: linear-gradient(135deg, #2e0d0d, #3d1515);
+            border-color: var(--danger);
+        }
+
+        .kpi-card.red-card .kpi-label {
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .kpi-card.red-card .kpi-num {
+            color: #e8978f;
+        }
+
+        .kpi-card.red-card .kpi-sub {
+            color: rgba(255, 255, 255, .4);
+        }
+
+        .kpi-card.warn-card {
+            border-color: var(--warning);
+        }
+
+        .kpi-card.warn-card .kpi-num {
+            color: var(--warning);
+        }
+
+        /* ── Highlight / Warn Box ── */
+        .highlight-box {
+            background: linear-gradient(135deg, #2e0d0d, #3d1515);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 87, 76, .2), transparent 70%);
+        }
+
+        .highlight-box h3 {
+            color: #e8978f;
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            opacity: .9;
+            position: relative;
+            margin-top: .8rem;
+        }
+
+        .highlight-box .big-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #e8978f;
+            display: block;
+            line-height: 1.1;
+            margin: .5rem 0;
+        }
+
+        .highlight-box .big-sub {
+            font-size: .85rem;
+            opacity: .6;
+        }
+
+        .warn-box {
+            background: rgba(201, 87, 76, .06);
+            border: 1px solid rgba(201, 87, 76, .25);
+            border-left: 4px solid var(--danger);
+            border-radius: 0 10px 10px 0;
+            padding: 1.2rem 1.6rem;
+            margin: 1rem 0;
+            font-size: .9rem;
+        }
+
+        .warn-box strong {
+            color: var(--danger);
+        }
+
+        .note-box {
+            background: rgba(200, 169, 110, .06);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem 1.6rem;
+            margin: 1rem 0;
+            font-size: .88rem;
+            color: var(--text-light);
+        }
+
+        .note-box strong {
+            color: var(--primary);
+        }
+
+        /* ── Year Block ── */
+        .year-block {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .year-badge {
+            font-size: 1.4rem;
+            font-weight: 900;
+        }
+
+        .year-badge.red {
+            color: #e8978f;
+        }
+
+        .year-badge.yellow {
+            color: #fcd34d;
+        }
+
+        .year-badge.green {
+            color: #6ee7b7;
+        }
+
+        .year-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .year-period {
+            font-size: .8rem;
+            opacity: .6;
+            margin-left: auto;
+        }
+
+        .year-body {
+            padding: 1.5rem 2rem;
+            background: var(--card-bg);
+        }
+
+        /* ── Cash Flow Visual ── */
+        .cf-bar-wrap {
+            margin: .5rem 0;
+        }
+
+        .cf-bar-row {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            margin-bottom: .5rem;
+        }
+
+        .cf-bar-label {
+            font-size: .8rem;
+            width: 130px;
+            flex-shrink: 0;
+            color: var(--text-light);
+        }
+
+        .cf-bar-track {
+            flex: 1;
+            height: 10px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, .06);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cf-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .cf-bar-fill.positive {
+            background: linear-gradient(90deg, #2d8a4e, #4ade80);
+        }
+
+        .cf-bar-fill.negative {
+            background: var(--gradient-red);
+        }
+
+        .cf-bar-fill.cost {
+            background: linear-gradient(90deg, #6b7280, #9ca3af);
+        }
+
+        .cf-bar-val {
+            font-size: .82rem;
+            font-weight: 700;
+            width: 80px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .cf-bar-val.positive {
+            color: var(--success);
+        }
+
+        .cf-bar-val.negative {
+            color: var(--danger);
+        }
+
+        .cf-bar-val.cost {
+            color: #6b7280;
+        }
+
+        /* ── Scenario compare ── */
+        .scenario-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario-cell {
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            font-size: .88rem;
+        }
+
+        .scenario-cell.opt {
+            background: rgba(200, 169, 110, .08);
+            border: 1px solid rgba(200, 169, 110, .3);
+        }
+
+        .scenario-cell.con {
+            background: rgba(201, 87, 76, .06);
+            border: 1px solid rgba(201, 87, 76, .25);
+        }
+
+        .scenario-cell .s-tag {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            margin-bottom: .4rem;
+        }
+
+        .scenario-cell.opt .s-tag {
+            color: var(--accent-dark);
+        }
+
+        .scenario-cell.con .s-tag {
+            color: var(--danger);
+        }
+
+        .scenario-cell .s-val {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .scenario-cell.opt .s-val {
+            color: var(--accent-dark);
+        }
+
+        .scenario-cell.con .s-val {
+            color: var(--danger);
+        }
+
+        /* ── Footer ── */
+        footer {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: .8rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 3rem 1.2rem;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .scenario-row {
+                grid-template-columns: 1fr;
+            }
+
+            .year-header {
+                flex-wrap: wrap;
+            }
+
+            .year-period {
+                margin-left: 0;
+            }
+
+            .compare-banner {
+                grid-template-columns: 1fr;
+            }
+
+            .compare-vs {
+                padding: .5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== COVER ===== -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="cover-badge">CONSERVATIVE SCENARIO — CONFIDENTIAL</div>
+            <h1>FC事業<span>売上・経費計画書</span><span class="sub-tag">保守版</span></h1>
+            <p class="cover-sub">山本あふい様 ─ 脱毛・ホワイトニングサロン フランチャイズ展開</p>
+            <p class="cover-sub" style="margin-top:.4rem; font-size:.9rem;">計画策定日：2026年2月末締め</p>
+
+            <div class="cover-premise">
+                <strong>【保守シナリオの前提】</strong><br>
+                ✓ 初年度FC加盟は2店舗（採用難航を想定）出店は12月<br>
+                ✓ 2年目5店舗・3年目10店舗の控えめ拡大ペース<br>
+                ✓ 本部運営コスト（人件費・広告・管理費）を毎年計上<br>
+                ✓ 投資回収は3年目以降を想定
+            </div>
+
+            <p class="cover-meta" style="margin-top:1.5rem;">リッツプロ株式会社　策定支援</p>
+        </div>
+    </div>
+
+    <!-- ===== SECTION 01: 楽観との比較 ===== -->
+    <section>
+        <span class="section-label">Comparison</span>
+        <h2>楽観シナリオとの比較</h2>
+
+        <p style="margin-bottom:2rem;">同じ条件で「うまくいった場合」と「厳しく見た場合」を並べています。どちらを基準に意思決定するかが重要です。</p>
+
+        <h3>店舗数・売上の差（3ヵ年累計）</h3>
+
+        <div class="compare-banner">
+            <div class="compare-side optimistic">
+                <div class="c-label">📈 楽観シナリオ（手取り合計）</div>
+                <div class="c-num">8,010万</div>
+                <div class="c-sub">3店→15店→51店<br>リッツプロ手数料控除後</div>
+            </div>
+            <div class="compare-vs">VS</div>
+            <div class="compare-side conservative">
+                <div class="c-label">📉 保守シナリオ（手取り合計）</div>
+                <div class="c-num" style="font-size:1.3rem;">2,775万</div>
+                <div class="c-sub">2店→7店→17店<br>リッツプロ手数料控除後</div>
+            </div>
+        </div>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>比較項目</th>
+                    <th>楽観シナリオ</th>
+                    <th>保守シナリオ</th>
+                    <th>差</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初年度加盟店数</td>
+                    <td>3店舗（9月出店）</td>
+                    <td class="hl-r">2店舗（12月出店）</td>
+                    <td class="hl-r">▲1店舗・▲3ヶ月</td>
+                </tr>
+                <tr>
+                    <td>2年目加盟店数</td>
+                    <td>12店舗</td>
+                    <td class="hl-r">5店舗</td>
+                    <td class="hl-r">▲7店舗</td>
+                </tr>
+                <tr>
+                    <td>3年目加盟店数</td>
+                    <td>36店舗</td>
+                    <td class="hl-r">10店舗</td>
+                    <td class="hl-r">▲26店舗</td>
+                </tr>
+                <tr>
+                    <td>本部運営コスト</td>
+                    <td class="hl-r">未計上</td>
+                    <td class="hl-w">720万円/年</td>
+                    <td class="hl-r">差▲720万/年</td>
+                </tr>
+                <tr>
+                    <td>3ヵ年手取り合計（報酬控除後）</td>
+                    <td class="hl">8,010万円</td>
+                    <td class="hl-r">2,775万円</td>
+                    <td class="hl-r">▲5,235万円</td>
+                </tr>
+                <tr>
+                    <td>3ヵ年純利益（投資・経費全控除）</td>
+                    <td class="hl-g">＋7,210万円</td>
+                    <td class="hl-r">▲185万円</td>
+                    <td class="hl-r">差▲7,395万円</td>
+                </tr>
+                <tr>
+                    <td>投資回収時期</td>
+                    <td class="hl-g">2年目前半</td>
+                    <td class="hl-r">3年目以降</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warn-box">
+            <strong>⚠️ 保守シナリオでは3年間通じて赤字になる可能性がある</strong><br>
+            初年度に800万の初期投資＋720万の運営コスト（計1,520万）に対し、売上は360万。2年目で持ち直すものの、3年累計でも赤字となる厳しい試算です。これがFC展開の現実的なリスクです。
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ===== SECTION 02: 初期投資 ===== -->
+    <section>
+        <span class="section-label">Section 01</span>
+        <h2>初期投資・経費計画（800万円）</h2>
+        <p style="margin-bottom:1rem;">初期投資の配分は楽観シナリオと同じ800万円ですが、<strong>これに加えて毎年の本部運営コストが発生します</strong>。</p>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th style="width:42%">制作・業務項目</th>
+                    <th>内容概要</th>
+                    <th class="num">予算（万円）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-group">
+                    <td colspan="3">▶ 本部・システム構築</td>
+                </tr>
+                <tr>
+                    <td>本部構築</td>
+                    <td>FC本部機能設計・業務フロー設計・SV体制構築支援</td>
+                    <td class="num">150</td>
+                </tr>
+                <tr>
+                    <td>サブスク商品開発</td>
+                    <td>加盟店向けサブスク型サービスメニュー・価格体系設計</td>
+                    <td class="num">100</td>
+                </tr>
+                <tr class="row-group">
+                    <td colspan="3">▶ 法務・制度設計</td>
+                </tr>
+                <tr>
+                    <td>契約書作成（法務）</td>
+                    <td>加盟契約書・秘密保持契約書・情報開示書（法定開示書類）</td>
+                    <td class="num">80</td>
+                </tr>
+                <tr class="row-group">
+                    <td colspan="3">▶ 運営マニュアル・教育</td>
+                </tr>
+                <tr>
+                    <td>マニュアル作成</td>
+                    <td>施術・接客・店舗運営・衛生管理の全マニュアル整備</td>
+                    <td class="num">120</td>
+                </tr>
+                <tr class="row-group">
+                    <td colspan="3">▶ 集客・営業ツール</td>
+                </tr>
+                <tr>
+                    <td>営業資料</td>
+                    <td>加盟候補者向けプレゼン・事業計画説明資料</td>
+                    <td class="num">50</td>
+                </tr>
+                <tr>
+                    <td>加盟店募集資料</td>
+                    <td>パンフレット・説明会資料・FAQ集</td>
+                    <td class="num">80</td>
+                </tr>
+                <tr>
+                    <td>広告LP</td>
+                    <td>加盟店募集専用ランディングページ制作</td>
+                    <td class="num">60</td>
+                </tr>
+                <tr>
+                    <td>広告クリエイティブ</td>
+                    <td>Meta/Instagram向け動画・バナー制作</td>
+                    <td class="num">80</td>
+                </tr>
+                <tr class="row-group">
+                    <td colspan="3">▶ 予備・諸経費</td>
+                </tr>
+                <tr>
+                    <td>予備費・諸経費</td>
+                    <td>修正対応・追加制作・外注費・交通費等</td>
+                    <td class="num">80</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>初期投資 合計（税別）</strong></td>
+                    <td class="num"><strong>800万円</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h3>⚠️ 見落としがちな「毎年かかる本部運営コスト」</h3>
+        <p style="margin-bottom:1rem;">楽観版では計上されていませんでしたが、FC本部を維持・拡販するには<strong>毎年継続して以下のコストが発生</strong>します。</p>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>コスト区分</th>
+                    <th>内容</th>
+                    <th class="num">月額</th>
+                    <th class="num">年額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="cost-row">
+                    <td>SV・管理人件費</td>
+                    <td>スーパーバイザー（巡回・サポート担当）1名分想定</td>
+                    <td class="num">30万円</td>
+                    <td class="num hl-r">360万円</td>
+                </tr>
+                <tr class="cost-row">
+                    <td>本部運営費</td>
+                    <td>システム・ツール・通信・消耗品・オフィス費等</td>
+                    <td class="num">10万円</td>
+                    <td class="num hl-r">120万円</td>
+                </tr>
+                <tr class="cost-row">
+                    <td>広告・集客継続費</td>
+                    <td>Meta広告・SEO・展示会出展など加盟募集費用</td>
+                    <td class="num">20万円</td>
+                    <td class="num hl-r">240万円</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>年間運営コスト合計（税別）</strong></td>
+                    <td class="num"><strong class="hl-r">720万円/年</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="warn-box">
+            <strong>重要：</strong>初期投資800万に加え、毎年720万円の固定コストが発生します。売上がこれを上回らない限り、資金が毎年流出し続けます。
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ===== SECTION 03: 保守シナリオ売上 ===== -->
+    <section>
+        <span class="section-label">Section 02</span>
+        <h2>売上計画【保守シナリオ】</h2>
+        <p style="margin-bottom:2rem;">厳しい現実を直視した保守的な試算です。FC加盟の獲得には時間がかかり、採用難・出店遅延を想定します。</p>
+
+        <!-- 初年度 -->
+        <div class="year-block">
+            <div class="year-header">
+                <span class="year-badge red">1年目</span>
+                <span class="year-title">本部構築・初期加盟2店舗（難航ケース）</span>
+                <span class="year-period">2026年4月 〜 2027年3月</span>
+            </div>
+            <div class="year-body">
+                <div class="warn-box" style="margin-bottom:1.5rem;">
+                    <strong>前提：</strong>加盟案件の発掘・審査・交渉に予想外の時間がかかり、12月末にようやく2店舗が出店。ロイヤルティ収入は1〜3月の3ヶ月分のみ。
+                </div>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>収入/費用区分</th>
+                            <th>計算根拠</th>
+                            <th class="num">金額（税別）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FC加盟金（グロス）</td>
+                            <td>150万円 × 2店舗</td>
+                            <td class="num">300万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ リッツプロ成果報酬（▲）</td>
+                            <td>(150-50万) × 70% × 2店舗</td>
+                            <td class="num hl-r">▲140万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ <strong>加盟金 手取り</strong></td>
+                            <td>(150-50万) × 30% × 2店舗</td>
+                            <td class="num hl"><strong>60万円</strong></td>
+                        </tr>
+                        <tr>
+                            <td>ロイヤルティ収入</td>
+                            <td>10万円 × 2店舗 × 3ヶ月（1〜3月）</td>
+                            <td class="num hl">60万円</td>
+                        </tr>
+                        <tr style="font-weight:700;">
+                            <td>手取り合計</td>
+                            <td>—</td>
+                            <td class="num">120万円</td>
+                        </tr>
+                        <tr class="cost-row">
+                            <td>初期投資（一括）</td>
+                            <td>本部構築〜制作物一式</td>
+                            <td class="num">▲800万円</td>
+                        </tr>
+                        <tr class="cost-row">
+                            <td>本部運営コスト</td>
+                            <td>720万円/年（SV人件費・広告費等）</td>
+                            <td class="num">▲720万円</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>初年度 実質収支</strong></td>
+                            <td class="num"><strong class="hl-r">▲1,400万円</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr); margin-top:1rem;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">手取り合計</div>
+                        <div class="kpi-num" style="font-size:1.3rem; color:var(--accent-dark);">120万円</div>
+                        <div class="kpi-sub">加盟金60万＋ロイヤルティ60万</div>
+                    </div>
+                    <div class="kpi-card warn-card">
+                        <div class="kpi-label">総コスト（初期＋運営）</div>
+                        <div class="kpi-num" style="font-size:1.3rem;">1,520万円</div>
+                        <div class="kpi-sub">初期800万＋運営720万</div>
+                    </div>
+                    <div class="kpi-card red-card">
+                        <div class="kpi-label">実質収支</div>
+                        <div class="kpi-num" style="font-size:1.3rem;">▲1,400万</div>
+                        <div class="kpi-sub">最初の試練、資金調達必須</div>
+                    </div>
+                </div>
+
+                <!-- CF bar chart -->
+                <h3 style="font-size:1rem; margin-top:1.5rem; margin-bottom:.8rem;">収入・支出イメージ</h3>
+                <div class="cf-bar-wrap">
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">FC加盟金</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill positive" style="width:20%"></div>
+                        </div>
+                        <span class="cf-bar-val positive">＋300万</span>
+                    </div>
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">ロイヤルティ</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill positive" style="width:4%"></div>
+                        </div>
+                        <span class="cf-bar-val positive">＋60万</span>
+                    </div>
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">初期投資</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill negative" style="width:53%"></div>
+                        </div>
+                        <span class="cf-bar-val negative">▲800万</span>
+                    </div>
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">本部運営費</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill cost" style="width:48%"></div>
+                        </div>
+                        <span class="cf-bar-val cost">▲720万</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2年目 -->
+        <div class="year-block">
+            <div class="year-header">
+                <span class="year-badge yellow">2年目</span>
+                <span class="year-title">新規5店舗追加・累計7店舗体制・持ち直しフェーズ</span>
+                <span class="year-period">2027年4月 〜 2028年3月</span>
+            </div>
+            <div class="year-body">
+                <div class="note-box" style="margin-bottom:1.5rem;">
+                    <strong>前提：</strong>実績が出始め加盟獲得がやや加速。ただし月2件ペース（年5〜6件）に留まる。出店は10月想定、ロイヤルティは11月〜3月の5ヶ月分。
+                </div>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>収入/費用区分</th>
+                            <th>計算根拠</th>
+                            <th class="num">金額（税別）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FC加盟金（グロス）</td>
+                            <td>200万円 × 5店舗</td>
+                            <td class="num">1,000万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ リッツプロ成果報酬（▲）</td>
+                            <td>(200-50万) × 70% × 5店舗</td>
+                            <td class="num hl-r">▲525万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ <strong>加盟金 手取り</strong></td>
+                            <td>(200-50万) × 30% × 5店舗</td>
+                            <td class="num hl"><strong>225万円</strong></td>
+                        </tr>
+                        <tr>
+                            <td>ロイヤルティ収入（前年2店舗フル稼働）</td>
+                            <td>10万円 × 2店舗 × 12ヶ月</td>
+                            <td class="num">240万円</td>
+                        </tr>
+                        <tr>
+                            <td>ロイヤルティ収入（新規5店舗）</td>
+                            <td>10万円 × 5店舗 × 5ヶ月（11月〜3月）</td>
+                            <td class="num">250万円</td>
+                        </tr>
+                        <tr style="font-weight:700;">
+                            <td>手取り合計</td>
+                            <td>—</td>
+                            <td class="num">715万円</td>
+                        </tr>
+                        <tr class="cost-row">
+                            <td>本部運営コスト</td>
+                            <td>720万円/年</td>
+                            <td class="num">▲720万円</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>2年目 実質収支</strong></td>
+                            <td class="num"><strong class="hl-r">▲5万円</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr); margin-top:1rem;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">手取り合計</div>
+                        <div class="kpi-num" style="font-size:1.3rem; color:var(--accent-dark);">715万円</div>
+                        <div class="kpi-sub">加盟金225万＋ロイヤルティ490万</div>
+                    </div>
+                    <div class="kpi-card warn-card">
+                        <div class="kpi-label">2年目収支</div>
+                        <div class="kpi-num" style="font-size:1.3rem;">▲5万</div>
+                        <div class="kpi-sub">ほぼ収支トントン</div>
+                    </div>
+                    <div class="kpi-card red-card">
+                        <div class="kpi-label">累計収支（2年終了時）</div>
+                        <div class="kpi-num" style="font-size:1.3rem;">▲1,405万</div>
+                        <div class="kpi-sub">まだ累計赤字</div>
+                    </div>
+                </div>
+
+                <div class="cf-bar-wrap" style="margin-top:1rem;">
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">FC加盟金</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill positive" style="width:67%"></div>
+                        </div>
+                        <span class="cf-bar-val positive">＋1,000万</span>
+                    </div>
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">ロイヤルティ</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill positive" style="width:33%"></div>
+                        </div>
+                        <span class="cf-bar-val positive">＋490万</span>
+                    </div>
+                    <div class="cf-bar-row">
+                        <span class="cf-bar-label">本部運営費</span>
+                        <div class="cf-bar-track">
+                            <div class="cf-bar-fill cost" style="width:48%"></div>
+                        </div>
+                        <span class="cf-bar-val cost">▲720万</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3年目 -->
+        <div class="year-block">
+            <div class="year-header">
+                <span class="year-badge green">3年目</span>
+                <span class="year-title">新規10店舗追加・累計17店舗体制・黒字転換</span>
+                <span class="year-period">2028年4月 〜 2029年3月</span>
+            </div>
+            <div class="year-body">
+                <div class="note-box" style="margin-bottom:1.5rem;">
+                    <strong>前提：</strong>2年間の実績・口コミで加盟獲得がさらに加速。10店舗獲得は現実的なライン。10月出店、ロイヤルティ5ヶ月分。
+                </div>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>収入/費用区分</th>
+                            <th>計算根拠</th>
+                            <th class="num">金額（税別）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FC加盟金（グロス）</td>
+                            <td>250万円 × 10店舗</td>
+                            <td class="num">2,500万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ リッツプロ成果報酬（▲）</td>
+                            <td>(250-50万) × 70% × 10店舗</td>
+                            <td class="num hl-r">▲1,400万円</td>
+                        </tr>
+                        <tr>
+                            <td>　└ <strong>加盟金 手取り</strong></td>
+                            <td>(250-50万) × 30% × 10店舗</td>
+                            <td class="num hl"><strong>600万円</strong></td>
+                        </tr>
+                        <tr>
+                            <td>ロイヤルティ収入（累計7店舗フル稼働）</td>
+                            <td>10万円 × 7店舗 × 12ヶ月</td>
+                            <td class="num">840万円</td>
+                        </tr>
+                        <tr>
+                            <td>ロイヤルティ収入（新規10店舗）</td>
+                            <td>10万円 × 10店舗 × 5ヶ月（11月〜3月）</td>
+                            <td class="num">500万円</td>
+                        </tr>
+                        <tr style="font-weight:700;">
+                            <td>手取り合計</td>
+                            <td>—</td>
+                            <td class="num">1,940万円</td>
+                        </tr>
+                        <tr class="cost-row">
+                            <td>本部運営コスト</td>
+                            <td>720万円/年（SV2名体制に増強想定）</td>
+                            <td class="num">▲720万円</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>3年目 実質収支</strong></td>
+                            <td class="num"><strong class="hl-g">＋1,220万円</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr); margin-top:1rem;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">手取り合計</div>
+                        <div class="kpi-num" style="font-size:1.3rem; color:var(--accent-dark);">1,940万円</div>
+                        <div class="kpi-sub">加盟金600万＋ロイヤルティ1,340万</div>
+                    </div>
+                    <div class="kpi-card" style="border-color:var(--success);">
+                        <div class="kpi-label">3年目収支</div>
+                        <div class="kpi-num" style="font-size:1.3rem; color:var(--success);">＋1,220万</div>
+                        <div class="kpi-sub">黒字に転換</div>
+                    </div>
+                    <div class="kpi-card warn-card">
+                        <div class="kpi-label">累計収支（3年終了時）</div>
+                        <div class="kpi-num" style="font-size:1.3rem;">▲185万</div>
+                        <div class="kpi-sub">ほぼ投資回収</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ===== SECTION 04: 収支サマリー ===== -->
+    <section>
+        <span class="section-label">Section 03</span>
+        <h2>3ヵ年 収支サマリー（保守版）</h2>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>区分</th>
+                    <th class="num">初年度</th>
+                    <th class="num">2年目</th>
+                    <th class="num">3年目</th>
+                    <th class="num">3ヵ年累計</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FC加盟金（グロス）</td>
+                    <td class="num">300万円</td>
+                    <td class="num">1,000万円</td>
+                    <td class="num">2,500万円</td>
+                    <td class="num">3,800万円</td>
+                </tr>
+                <tr>
+                    <td>　└ リッツプロ成果報酬（▲）</td>
+                    <td class="num hl-r">▲140万円</td>
+                    <td class="num hl-r">▲525万円</td>
+                    <td class="num hl-r">▲1,400万円</td>
+                    <td class="num hl-r">▲2,065万円</td>
+                </tr>
+                <tr>
+                    <td>　└ <strong>加盟金 手取り</strong></td>
+                    <td class="num hl">60万円</td>
+                    <td class="num hl">225万円</td>
+                    <td class="num hl">600万円</td>
+                    <td class="num hl">885万円</td>
+                </tr>
+                <tr>
+                    <td>ロイヤルティ収入</td>
+                    <td class="num">60万円</td>
+                    <td class="num">490万円</td>
+                    <td class="num">1,340万円</td>
+                    <td class="num hl">1,890万円</td>
+                </tr>
+                <tr>
+                    <td><strong>手取り合計</strong></td>
+                    <td class="num"><strong>120万円</strong></td>
+                    <td class="num"><strong>715万円</strong></td>
+                    <td class="num"><strong>1,940万円</strong></td>
+                    <td class="num"><strong class="hl">2,775万円</strong></td>
+                </tr>
+                <tr>
+                    <td>初期投資</td>
+                    <td class="num hl-r">▲800万円</td>
+                    <td class="num">—</td>
+                    <td class="num">—</td>
+                    <td class="num hl-r">▲800万円</td>
+                </tr>
+                <tr>
+                    <td>本部運営コスト</td>
+                    <td class="num hl-r">▲720万円</td>
+                    <td class="num hl-r">▲720万円</td>
+                    <td class="num hl-r">▲720万円</td>
+                    <td class="num hl-r">▲2,160万円</td>
+                </tr>
+                <tr>
+                    <td><strong>年次損益</strong></td>
+                    <td class="num"><strong class="hl-r">▲1,400万円</strong></td>
+                    <td class="num"><strong class="hl-r">▲5万円</strong></td>
+                    <td class="num"><strong class="hl-g">＋1,220万円</strong></td>
+                    <td class="num">—</td>
+                </tr>
+                <tr>
+                    <td><strong>累計損益</strong></td>
+                    <td class="num"><strong class="hl-r">▲1,400万円</strong></td>
+                    <td class="num"><strong class="hl-r">▲1,405万円</strong></td>
+                    <td class="num"><strong class="hl-r">▲185万円</strong></td>
+                    <td class="num"><strong class="hl-r">▲185万円</strong></td>
+                </tr>
+                <tr>
+                    <td>加盟累計店舗数</td>
+                    <td class="num">2店舗</td>
+                    <td class="num">7店舗</td>
+                    <td class="num">17店舗</td>
+                    <td class="num hl">17店舗</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h3>📌 保守シナリオの結論</h3>
+            <p>3年間の累計損益は <span style="color:#fcd34d; font-weight:900;">約▲185万円</span>（リッツプロ報酬・投資・運営コスト全控除後）</p>
+            <p>リッツプロへの成果報酬（3年累計▲2,065万円）が加わることで、<strong
+                    style="color:#e8978f;">初年度は▲1,400万円の赤字が確定的</strong>です。この期間を乗り越えるための運転資金（最低1,500〜1,800万円）を確保できるかどうかが、FC展開成否の最大の分岐点となります。
+            </p>
+            <p style="margin-top:1.2rem;">3年目末時点のロイヤルティ月額は <strong
+                    style="color:#fcd34d;">月170万円（17店舗×10万円）</strong>。このストック収益が4年目以降の確実な黒字基盤となります。</p>
+        </div>
+
+        <h3>楽観シナリオとの3ヵ年収支比較（リッツプロ報酬控除後）</h3>
+        <div class="scenario-row">
+            <div class="scenario-cell opt">
+                <div class="s-tag">📈 楽観シナリオ（3ヵ年累計純利益）</div>
+                <div class="s-val">＋7,210万円</div>
+                <div style="font-size:.8rem; margin-top:.4rem; color:var(--text-light);">51店舗体制・月510万ロイヤルティ</div>
+            </div>
+            <div class="scenario-cell con">
+                <div class="s-tag">📉 保守シナリオ（3ヵ年累計損益）</div>
+                <div class="s-val">▲185万円</div>
+                <div style="font-size:.8rem; margin-top:.4rem; color:var(--text-light);">17店舗体制・月170万ロイヤルティ</div>
+            </div>
+        </div>
+
+        <div class="warn-box" style="margin-top:1.5rem;">
+            <strong>最終判断のポイント：</strong>どちらのシナリオになるかは「加盟獲得力」が全てです。加盟店募集の仕組み（LP・広告・紹介ネットワーク・説明会）にどれだけ投資・注力できるかが、2つのシナリオの分岐点です。
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ===== SECTION 05: リスク対策 ===== -->
+    <section>
+        <span class="section-label">Section 04</span>
+        <h2>リスクと対策</h2>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>リスク項目</th>
+                    <th>保守版での影響</th>
+                    <th>対策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>加盟獲得の遅延</strong></td>
+                    <td class="hl-r">初年度収入が計画比50%以下</td>
+                    <td>説明会の早期実施・紹介インセンティブ設計</td>
+                </tr>
+                <tr>
+                    <td><strong>運転資金の枯渇</strong></td>
+                    <td class="hl-r">初年度▲1,160万の現金流出</td>
+                    <td>事前に1,500万以上の運転資金を確保</td>
+                </tr>
+                <tr>
+                    <td><strong>加盟店の業績不振</strong></td>
+                    <td class="hl-w">ロイヤルティ未払い・離脱リスク</td>
+                    <td>出店後6ヶ月は集中サポート/SV訪問</td>
+                </tr>
+                <tr>
+                    <td><strong>本部SVコストの増大</strong></td>
+                    <td class="hl-w">店舗数増加でSV人件費が増大</td>
+                    <td>オンライン支援・マニュアル完備で効率化</td>
+                </tr>
+                <tr>
+                    <td><strong>法的トラブル</strong></td>
+                    <td class="hl-r">加盟契約の不備による紛争リスク</td>
+                    <td>FC専門弁護士による法定書類の整備</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>資金計画のポイント</h3>
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);">
+            <div class="kpi-card red-card">
+                <div class="kpi-label">最低限必要な手元資金</div>
+                <div class="kpi-num" style="font-size:1.4rem;">1,500万円</div>
+                <div class="kpi-sub">初期投資800万＋運転資金700万</div>
+            </div>
+            <div class="kpi-card warn-card">
+                <div class="kpi-label">黒字転換時期（単年）</div>
+                <div class="kpi-num" style="font-size:1.4rem;">2年目</div>
+                <div class="kpi-sub">ただし累計は2年目末もまだ赤字</div>
+            </div>
+            <div class="kpi-card" style="border-color:var(--success);">
+                <div class="kpi-label">累計黒字転換時期</div>
+                <div class="kpi-num" style="font-size:1.4rem;">3年目中頃</div>
+                <div class="kpi-sub">最速で2028年秋〜冬頃</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="margin-bottom:.5rem;"><strong>リッツプロ株式会社</strong>　FC事業計画書【保守シナリオ】</p>
+        <p>山本あふい様　脱毛・ホワイトニングサロン フランチャイズ展開計画</p>
+        <p style="margin-top:.5rem; opacity:.7;">策定日：2026年2月末　／　本資料の数値は保守的試算であり、実際の業績を保証するものではありません。</p>
+    </footer>
+
+</body>
+
+</html>

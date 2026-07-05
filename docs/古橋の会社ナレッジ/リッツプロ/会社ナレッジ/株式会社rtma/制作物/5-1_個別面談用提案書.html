@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONサロン フランチャイズのご提案</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #446829;
+            --primary-light: #5A8A35;
+            --primary-dark: #345220;
+            --accent: #BC9B5D;
+            --accent-light: #D4B87A;
+            --accent-dark: #9A7D42;
+            --accent-bg: #FCF8ED;
+            --sage: #E0E7D9;
+            --sage-light: #EDF1E9;
+            --cream: #FCF8ED;
+            --brown: #675045;
+            --terracotta: #8B4C21;
+            --bg-gray: #F5F3EE;
+            --bg-white: #FFFDF9;
+            --text-dark: #2D2A26;
+            --text-body: #4A4540;
+            --text-light: #7A746C;
+            --green: #5A8A35;
+            --red: #C45B4A;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(45, 42, 38, .06)
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background: var(--bg-gray)
+        }
+
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 40px rgba(45, 42, 38, .08)
+        }
+
+        /* COVER */
+        .cover {
+            background: linear-gradient(135deg, #345220, #446829, #5A8A35);
+            color: #fff;
+            padding: 100px 48px 80px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(188, 155, 93, .08)
+        }
+
+        .cover .badge {
+            display: inline-block;
+            background: rgba(188, 155, 93, .25);
+            border: 1px solid rgba(188, 155, 93, .6);
+            color: var(--accent-light);
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1
+        }
+
+        .cover h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.4;
+            position: relative;
+            z-index: 1
+        }
+
+        .cover h1 span {
+            color: var(--accent-light)
+        }
+
+        .cover p {
+            font-size: 14px;
+            opacity: .8;
+            margin-top: 12px;
+            position: relative;
+            z-index: 1
+        }
+
+        .cover .date {
+            margin-top: 32px;
+            font-size: 12px;
+            opacity: .6;
+            position: relative;
+            z-index: 1
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 48px
+        }
+
+        .section.alt {
+            background: var(--bg-gray)
+        }
+
+        .sec-label {
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 6px
+        }
+
+        .sec-title {
+            color: var(--primary);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 16px
+        }
+
+        .section p {
+            margin-bottom: 12px;
+            font-size: 14px
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin: 16px 0
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--sage)
+        }
+
+        tr:nth-child(even) td {
+            background: var(--sage-light)
+        }
+
+        td.hl {
+            color: var(--primary);
+            font-weight: 700
+        }
+
+        /* CARDS */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid var(--sage);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 24px
+        }
+
+        .stat-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent)
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px
+        }
+
+        /* HIGHLIGHT */
+        .hl-box {
+            background: var(--cream);
+            border: 1px solid rgba(188, 155, 93, .25);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 16px 0
+        }
+
+        .hl-box h4 {
+            color: var(--accent-dark);
+            font-size: 14px;
+            margin-bottom: 6px
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, var(--sage-light), var(--sage));
+            border: 1px solid rgba(68, 104, 41, .2);
+            border-radius: var(--radius);
+            padding: 28px;
+            text-align: center;
+            margin: 16px 0
+        }
+
+        .roi-num {
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 42px;
+            font-weight: 800
+        }
+
+        /* STEPS */
+        .timeline {
+            position: relative;
+            padding-left: 32px
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--sage)
+        }
+
+        .tl-item {
+            position: relative;
+            padding: 12px 0 20px
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -26px;
+            top: 16px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif
+        }
+
+        .tl-item h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        .tl-item p {
+            font-size: 13px;
+            color: var(--text-light)
+        }
+
+        /* QUOTE */
+        .quote {
+            background: var(--cream);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 16px 20px;
+            margin: 10px 0;
+            font-size: 13px;
+            font-style: italic
+        }
+
+        /* FAQ */
+        .faq-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--sage)
+        }
+
+        .faq-q {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 14px
+        }
+
+        .faq-q::before {
+            content: 'Q. ';
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+            font-weight: 800
+        }
+
+        .faq-a {
+            margin-top: 4px;
+            font-size: 13px
+        }
+
+        .faq-a::before {
+            content: 'A. ';
+            color: var(--primary);
+            font-weight: 700
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--primary);
+            color: #fff;
+            padding: 48px;
+            text-align: center
+        }
+
+        .cta h2 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 8px
+        }
+
+        .cta p {
+            opacity: .8;
+            font-size: 13px;
+            margin-bottom: 20px
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px
+        }
+
+        /* CUSTOM INSERT */
+        .custom-box {
+            background: var(--cream);
+            border: 2px dashed var(--accent);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            color: var(--accent-dark);
+            font-weight: 600;
+            font-size: 14px;
+            margin: 16px 0
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 28px 48px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-light);
+            border-top: 1px solid var(--sage)
+        }
+
+        /* PRINT */
+        @media print {
+            body {
+                background: #fff
+            }
+
+            .page {
+                box-shadow: none;
+                max-width: 100%
+            }
+
+            .section {
+                padding: 32px 40px;
+                page-break-inside: avoid
+            }
+
+            .cover {
+                padding: 60px 40px
+            }
+
+            .cta-btn {
+                border: 2px solid var(--accent)
+            }
+        }
+
+        @media(max-width:768px) {
+            .section {
+                padding: 32px 20px
+            }
+
+            .cover {
+                padding: 60px 20px
+            }
+
+            .grid-3,
+            .grid-2 {
+                grid-template-columns: 1fr
+            }
+
+            .cover h1 {
+                font-size: 24px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- COVER -->
+        <div class="cover">
+            <div class="badge">FRANCHISE PROPOSAL</div>
+            <h1>黄土よもぎ蒸し専門店<span>「ON」</span><br>フランチャイズのご提案</h1>
+            <p>株式会社rtma — ONサロン FC事業部</p>
+            <div class="date">作成日：2026年 月 日 / 株式会社rtma × リッツプロ</div>
+        </div>
+
+        <!-- ONサロン概要 -->
+        <div class="section">
+            <div class="sec-label">Overview</div>
+            <div class="sec-title">ONサロンの概要</div>
+            <p>黄土よもぎ蒸し専門店「ON」は、「女性が輝き続けるための土台作り」をコンセプトに、累計2万人以上のお客様に本物の温活体験を提供してきた専門店です。</p>
+
+            <div class="grid-3" style="margin-top:20px">
+                <div class="card stat-card">
+                    <div class="stat-num">2万人+</div>
+                    <div class="stat-label">累計来店数</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-num">65%</div>
+                    <div class="stat-label">リピート率</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-num">4年+</div>
+                    <div class="stat-label">直営運営歴</div>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:700;color:var(--text-dark);margin:24px 0 12px">ONの差別化ポイント</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>① 韓国ファンジン正規代理店</h4>
+                    <p style="font-size:13px">日本わずか10社。五色黄土の最高級椅子</p>
+                </div>
+                <div class="card">
+                    <h4>② 希少ハーブ「モリンガ」取扱</h4>
+                    <p style="font-size:13px">90種の栄養素。関東でほぼ唯一</p>
+                </div>
+                <div class="card">
+                    <h4>③ 全品無農薬×自社開発ハーブ</h4>
+                    <p style="font-size:13px">品質を保ちながら原価率8〜15%を実現</p>
+                </div>
+                <div class="card">
+                    <h4>④ 日本一の部屋の広さ</h4>
+                    <p style="font-size:13px">デザイナー監修の空間で高い顧客満足</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ビジネスモデル -->
+        <div class="section alt">
+            <div class="sec-label">Business Model</div>
+            <div class="sec-title">ビジネスモデルの詳細</div>
+
+            <div class="grid-3" style="margin-bottom:20px">
+                <div class="card" style="text-align:center">
+                    <h4>🙌 技術不要</h4>
+                    <p style="font-size:12px">施術技術・資格一切不要</p>
+                </div>
+                <div class="card" style="text-align:center">
+                    <h4>👤 1名運営</h4>
+                    <p style="font-size:12px">4台を1人で無理なく運営</p>
+                </div>
+                <div class="card" style="text-align:center">
+                    <h4>🔄 サブスク型</h4>
+                    <p style="font-size:12px">リピート率65%の積み上げ収益</p>
+                </div>
+            </div>
+
+            <h3 style="font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:12px">他業態FCとの比較</h3>
+            <table>
+                <tr>
+                    <th>比較項目</th>
+                    <th style="background:var(--accent)">ONサロン</th>
+                    <th>飲食FC</th>
+                    <th>エステFC</th>
+                </tr>
+                <tr>
+                    <td>初期投資</td>
+                    <td class="hl">500万円〜</td>
+                    <td>1,000万円〜</td>
+                    <td>500万円〜</td>
+                </tr>
+                <tr>
+                    <td>技術・資格</td>
+                    <td class="hl">不要</td>
+                    <td>調理経験推奨</td>
+                    <td>技術研修必須</td>
+                </tr>
+                <tr>
+                    <td>必要人員</td>
+                    <td class="hl">1名</td>
+                    <td>3名〜</td>
+                    <td>2名〜</td>
+                </tr>
+                <tr>
+                    <td>原価率</td>
+                    <td class="hl">8〜15%</td>
+                    <td>30〜35%</td>
+                    <td>15〜25%</td>
+                </tr>
+                <tr>
+                    <td>クレームリスク</td>
+                    <td class="hl">極低</td>
+                    <td>中</td>
+                    <td>中〜高</td>
+                </tr>
+                <tr>
+                    <td>投資回収</td>
+                    <td class="hl">約14ヶ月</td>
+                    <td>1.5〜3年</td>
+                    <td>1〜2年</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 収益シミュレーション -->
+        <div class="section">
+            <div class="sec-label">Revenue Simulation</div>
+            <div class="sec-title">収益シミュレーション</div>
+
+            <h3 style="font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:12px">4台モデル — 直営12ヶ月実績</h3>
+            <div style="overflow-x:auto">
+                <table>
+                    <tr>
+                        <th>月</th>
+                        <th>体験</th>
+                        <th>サブスク</th>
+                        <th>売上</th>
+                        <th>経費</th>
+                        <th>純利益</th>
+                        <th>利益率</th>
+                    </tr>
+                    <tr>
+                        <td>1月</td>
+                        <td>66</td>
+                        <td>95</td>
+                        <td>1,073,468</td>
+                        <td>800,000</td>
+                        <td class="hl">273,468</td>
+                        <td>25.5%</td>
+                    </tr>
+                    <tr>
+                        <td>2月</td>
+                        <td>52</td>
+                        <td>98</td>
+                        <td>1,024,932</td>
+                        <td>800,000</td>
+                        <td class="hl">224,932</td>
+                        <td>22.0%</td>
+                    </tr>
+                    <tr>
+                        <td>3月</td>
+                        <td>56</td>
+                        <td>99</td>
+                        <td>1,032,838</td>
+                        <td>800,000</td>
+                        <td class="hl">232,838</td>
+                        <td>22.5%</td>
+                    </tr>
+                    <tr>
+                        <td>4月</td>
+                        <td>34</td>
+                        <td>108</td>
+                        <td>1,647,760</td>
+                        <td>900,000</td>
+                        <td class="hl">747,760</td>
+                        <td>45.4%</td>
+                    </tr>
+                    <tr>
+                        <td>5月</td>
+                        <td>35</td>
+                        <td>110</td>
+                        <td>1,241,711</td>
+                        <td>800,000</td>
+                        <td class="hl">441,711</td>
+                        <td>35.6%</td>
+                    </tr>
+                    <tr>
+                        <td>6月</td>
+                        <td>47</td>
+                        <td>115</td>
+                        <td>1,397,284</td>
+                        <td>800,000</td>
+                        <td class="hl">597,284</td>
+                        <td>42.8%</td>
+                    </tr>
+                    <tr>
+                        <td>7月</td>
+                        <td>51</td>
+                        <td>114</td>
+                        <td>1,519,917</td>
+                        <td>900,000</td>
+                        <td class="hl">619,917</td>
+                        <td>40.8%</td>
+                    </tr>
+                    <tr>
+                        <td>8月</td>
+                        <td>41</td>
+                        <td>118</td>
+                        <td>1,148,871</td>
+                        <td>800,000</td>
+                        <td class="hl">348,871</td>
+                        <td>30.4%</td>
+                    </tr>
+                    <tr>
+                        <td>9月</td>
+                        <td>38</td>
+                        <td>119</td>
+                        <td>1,252,032</td>
+                        <td>800,000</td>
+                        <td class="hl">452,032</td>
+                        <td>36.1%</td>
+                    </tr>
+                    <tr>
+                        <td>10月</td>
+                        <td>24</td>
+                        <td>121</td>
+                        <td>1,351,536</td>
+                        <td>800,000</td>
+                        <td class="hl">551,536</td>
+                        <td>40.8%</td>
+                    </tr>
+                    <tr>
+                        <td>11月</td>
+                        <td>49</td>
+                        <td>120</td>
+                        <td>1,270,197</td>
+                        <td>800,000</td>
+                        <td class="hl">470,197</td>
+                        <td>37.0%</td>
+                    </tr>
+                    <tr>
+                        <td>12月</td>
+                        <td>52</td>
+                        <td>123</td>
+                        <td>1,256,648</td>
+                        <td>800,000</td>
+                        <td class="hl">456,648</td>
+                        <td>36.3%</td>
+                    </tr>
+                    <tr style="background:var(--cream)">
+                        <td><b>合計</b></td>
+                        <td><b>545</b></td>
+                        <td>—</td>
+                        <td><b>15,217,194</b></td>
+                        <td><b>9,800,000</b></td>
+                        <td class="hl"><b>5,417,194</b></td>
+                        <td><b>35.6%</b></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="roi-box">
+                <div style="font-size:12px;color:var(--text-light)">年間純利益（4台モデル）</div>
+                <div class="roi-num">¥5,417,194</div>
+                <div style="font-size:13px;color:var(--green);font-weight:600">3年累計：¥16,930,196 / ROI 338%</div>
+            </div>
+
+            <div class="custom-box">
+                📊 ここに面談相手のエリア・条件に合わせた<br>カスタム収支シミュレーションを挿入
+            </div>
+        </div>
+
+        <!-- 開業タイムライン -->
+        <div class="section alt">
+            <div class="sec-label">Timeline</div>
+            <div class="sec-title">開業までのタイムライン</div>
+            <p>契約からグランドオープンまで、約3〜4ヶ月が目安です。</p>
+            <div class="timeline" style="margin-top:20px">
+                <div class="tl-item">
+                    <div class="tl-dot">1</div>
+                    <h4>個別面談・契約</h4>
+                    <p>条件確認・契約締結・事業計画の策定</p>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot">2</div>
+                    <h4>物件選定（約1ヶ月）</h4>
+                    <p>本部アドバイスのもと、立地・物件を選定</p>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot">3</div>
+                    <h4>内装・設備工事（約1ヶ月）</h4>
+                    <p>デザイナー監修の内装 + 椅子・備品搬入</p>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot">4</div>
+                    <h4>研修（約1ヶ月）</h4>
+                    <p>施術研修・接客・オペレーション・集客の全て</p>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot">5</div>
+                    <h4>プレオープン</h4>
+                    <p>テスト運営・オペレーション確認</p>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot">6</div>
+                    <h4>グランドオープン 🎉</h4>
+                    <p>HPB掲載開始 + 集客施策の本格稼働</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 開業費用 -->
+        <div class="section">
+            <div class="sec-label">Investment</div>
+            <div class="sec-title">開業費用の詳細内訳</div>
+
+            <table>
+                <tr>
+                    <th>項目</th>
+                    <th>4台モデル</th>
+                </tr>
+                <tr>
+                    <td>加盟金</td>
+                    <td class="hl">1,000,000円</td>
+                </tr>
+                <tr>
+                    <td>販売研修費・コンサルティング費</td>
+                    <td>500,000円</td>
+                </tr>
+                <tr>
+                    <td>内装デザイン費用</td>
+                    <td>300,000円</td>
+                </tr>
+                <tr>
+                    <td>HP作成・SEO対策費用</td>
+                    <td>300,000円</td>
+                </tr>
+                <tr>
+                    <td>協会認定資格取得費</td>
+                    <td>100,000円</td>
+                </tr>
+                <tr>
+                    <td>よもぎ蒸しセット一式 × 4台</td>
+                    <td>640,000円</td>
+                </tr>
+                <tr>
+                    <td>ガウン・クッション・カバー</td>
+                    <td>296,000円</td>
+                </tr>
+                <tr>
+                    <td>ハーブ・化粧品・お茶</td>
+                    <td>200,000円</td>
+                </tr>
+                <tr style="background:var(--cream)">
+                    <td><b>設備小計</b></td>
+                    <td class="hl"><b>3,336,000円</b></td>
+                </tr>
+                <tr style="background:var(--cream)">
+                    <td><b>総額（不動産・内装含む）</b></td>
+                    <td class="hl"><b>約500万円〜</b></td>
+                </tr>
+            </table>
+
+            <div class="hl-box">
+                <h4>💡 加盟金100万円は今だけの価格</h4>
+                <p style="font-size:13px">FC展開初期のため、現在の加盟金は100万円に設定しています。実績が増えるにつれて段階的に引き上げを予定しています。</p>
+            </div>
+        </div>
+
+        <!-- FC条件 -->
+        <div class="section alt">
+            <div class="sec-label">Contract</div>
+            <div class="sec-title">FC条件・契約内容</div>
+            <table>
+                <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                </tr>
+                <tr>
+                    <td>加盟金</td>
+                    <td class="hl">1,000,000円（税別）</td>
+                </tr>
+                <tr>
+                    <td>ロイヤリティ</td>
+                    <td>月額固定 110,000円（税別）</td>
+                </tr>
+                <tr>
+                    <td>HPB広告費</td>
+                    <td>月額 30,000〜60,000円</td>
+                </tr>
+                <tr>
+                    <td>契約期間</td>
+                    <td>要確認</td>
+                </tr>
+                <tr>
+                    <td>エリア保護</td>
+                    <td>要確認</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- サポート体制 -->
+        <div class="section">
+            <div class="sec-label">Support</div>
+            <div class="sec-title">本部サポート体制</div>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>① 開業前サポート</h4>
+                    <p style="font-size:13px">立地アドバイス・物件選定・事業計画策定・開業スケジュール管理</p>
+                </div>
+                <div class="card">
+                    <h4>② 技術・運営研修</h4>
+                    <p style="font-size:13px">施術研修・オペレーション・接客マニュアル・衛生管理</p>
+                </div>
+                <div class="card">
+                    <h4>③ 集客・販促支援</h4>
+                    <p style="font-size:13px">HPB掲載・運用指導・オープン時集客施策・口コミ獲得戦略</p>
+                </div>
+                <div class="card">
+                    <h4>④ 開業後フォロー</h4>
+                    <p style="font-size:13px">毎月のミーティング・数値分析・改善提案・新メニュー共有</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section alt">
+            <div class="sec-label">FAQ</div>
+            <div class="sec-title">よくある質問</div>
+            <div class="faq-item">
+                <div class="faq-q">未経験でも大丈夫ですか？</div>
+                <div class="faq-a">はい。技術・資格は一切不要です。全加盟オーナーが未経験からスタートしています。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">副業でも可能ですか？</div>
+                <div class="faq-a">はい。スタッフ1名を採用すれば現場に立たずにオーナー経営が可能です。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">開業までの期間は？</div>
+                <div class="faq-a">契約から約3〜4ヶ月が目安です。物件の状況により前後します。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">融資は使えますか？</div>
+                <div class="faq-a">日本政策金融公庫の創業融資等をご利用いただけます。事業計画書の作成もサポートします。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">ロイヤリティは売上に応じて変わりますか？</div>
+                <div class="faq-a">いいえ。月額固定11万円です。売上が伸びるほどオーナー様の手元に残ります。</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta">
+            <h2>次のステップ</h2>
+            <p>ご質問があればいつでもお気軽にご連絡ください。<br>物件見学や詳細な収支シミュレーションもご用意いたします。</p>
+            <a href="#" class="cta-btn">物件見学・詳細相談を申し込む →</a>
+        </div>
+
+        <div class="footer">
+            <p>黄土よもぎ蒸し専門店「ON」FC事業部 — 株式会社rtma / 運営支援：リッツプロ</p>
+            <p style="margin-top:4px">本資料に記載の数値は直営店の実績であり、収益を保証するものではありません。</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

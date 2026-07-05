@@ -1,0 +1,12 @@
+{
+    "name": "interview-guide-app",
+    "version": "1.0.0",
+    "description": "スキルハックス受講生インタビューガイド",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^4.18.0"
+    }
+}

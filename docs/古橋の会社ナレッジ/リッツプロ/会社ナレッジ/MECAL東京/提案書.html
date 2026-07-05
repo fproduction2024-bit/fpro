@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MECAL TOKYO 様向け｜伴走型FC開発支援 ご提案書｜リッツプロ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --primary-light: #16213e;
+            --accent: #c8a96e;
+            --accent-light: #d4bc8a;
+            --accent-dark: #a8894e;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --white: #ffffff;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --border: #e8e2d8;
+            --success: #2d8a4e;
+            --gradient-gold: linear-gradient(135deg, #c8a96e 0%, #e8d5a8 50%, #c8a96e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* Cover */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(200, 169, 110, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(200, 169, 110, 0.05) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                transform: rotate(0deg)
+            }
+
+            50% {
+                transform: rotate(3deg)
+            }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: .5rem 2rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: .8rem;
+            letter-spacing: .3em;
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+
+        .cover h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: .05em;
+        }
+
+        .cover h1 span {
+            color: var(--accent);
+        }
+
+        .cover-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: .8;
+            margin-bottom: 3rem;
+            letter-spacing: .1em;
+        }
+
+        .cover-meta {
+            font-size: .85rem;
+            opacity: .5;
+        }
+
+        /* Section */
+        section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-size: .75rem;
+            letter-spacing: .3em;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            text-transform: uppercase;
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-gold);
+        }
+
+        section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: .75rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            font-size: .9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Table */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .9rem;
+        }
+
+        .styled-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .styled-table th {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: .05em;
+        }
+
+        .styled-table td {
+            padding: .9rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .styled-table tbody tr:hover {
+            background: rgba(200, 169, 110, .05);
+        }
+
+        .styled-table .highlight {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 169, 110, .15), transparent 70%);
+        }
+
+        .highlight-box h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            opacity: .9;
+            position: relative;
+        }
+
+        /* Quote */
+        .quote {
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            background: rgba(200, 169, 110, .06);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: .95rem;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: .5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+        }
+
+        .roadmap-year {
+            font-size: .8rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: .15em;
+        }
+
+        .roadmap-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: .3rem 0;
+        }
+
+        .roadmap-desc {
+            font-size: .9rem;
+            color: var(--text-light);
+        }
+
+        /* Results grid */
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-dark);
+        }
+
+        .result-label {
+            font-size: .8rem;
+            color: var(--text-light);
+            margin-top: .3rem;
+        }
+
+        /* Steps */
+        .step-list {
+            counter-reset: steps;
+            margin: 2rem 0;
+        }
+
+        .step-item {
+            counter-increment: steps;
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .step-item::before {
+            content: counter(steps);
+            position: absolute;
+            left: 1.2rem;
+            top: 1.4rem;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        .step-item h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: .3rem;
+        }
+
+        .step-item p {
+            font-size: .85rem;
+            color: var(--text-light);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-section p {
+            opacity: .8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gradient-gold);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            letter-spacing: .1em;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200, 169, 110, .4);
+        }
+
+        /* Footer */
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: .8rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        /* Pill badge */
+        .pill {
+            display: inline-block;
+            padding: .2rem .8rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .pill-gold {
+            background: rgba(200, 169, 110, .15);
+            color: var(--accent-dark);
+        }
+
+        .pill-green {
+            background: rgba(45, 138, 78, .1);
+            color: var(--success);
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 3rem 1.2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== COVER ==================== -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="cover-badge">CONFIDENTIAL PROPOSAL</div>
+            <h1><span>MECAL TOKYO</span> 様向け<br>伴走型FC開発支援<br>ご提案書</h1>
+            <p class="cover-sub">── フランチャイズ展開 × M&A出口戦略 ──</p>
+            <p class="cover-meta">リッツプロ株式会社｜2026年2月21日</p>
+        </div>
+    </div>
+
+    <!-- ==================== 事業理解 ==================== -->
+    <section>
+        <span class="section-label">Section 01</span>
+        <h2>MECAL TOKYO様の事業理解</h2>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>社名</td>
+                    <td>株式会社メカル開発研究所</td>
+                </tr>
+                <tr>
+                    <td>代表</td>
+                    <td>三宮 夕子</td>
+                </tr>
+                <tr>
+                    <td>所在地</td>
+                    <td>東京都港区南青山3-16-14 プラサーダ青山202号室</td>
+                </tr>
+                <tr>
+                    <td>事業</td>
+                    <td>アイケア・トレーニング専門サロン</td>
+                </tr>
+                <tr>
+                    <td>独自技術</td>
+                    <td>MECALメソッド（EMS機器「エレトレプロ」使用）</td>
+                </tr>
+                <tr>
+                    <td>顧客層</td>
+                    <td>芸能人・経営者・医師・SEワーカー・45歳以上</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>貴社の圧倒的な強み</h3>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🔬</div>
+                <h4>日本初の技術 ─ 独自性</h4>
+                <p>目元の7つの筋肉にアプローチする「アイケア・トレーニング」は日本初。自社開発のEMS機器「エレトレプロ」は他社が模倣できない技術的参入障壁。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👁️</div>
+                <h4>高い専門性</h4>
+                <p>NY7年間のキャリア、まつ毛デザインサロン「Ren」表参道（1年半予約待ち）、医療機関イムスグループとの提携・500人以上の施術実績。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌍</div>
+                <h4>明確な社会的意義</h4>
+                <p>「眼精疲労100%解消」の社会課題挑戦。デジタル社会での子供の目の保護、アスリートの目のメンテナンスケアへの志。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💎</div>
+                <h4>高単価ビジネスモデル</h4>
+                <p>メニュー単価¥15,000〜¥50,000。月2回メンテナンス推奨のリピートモデル。複数コースによるアップセル設計が完成済み。</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== なぜFC展開か ==================== -->
+    <section>
+        <span class="section-label">Section 02</span>
+        <h2>なぜ今、FC展開なのか</h2>
+
+        <div class="highlight-box">
+            <h3>市場機会：眼精疲労市場は爆発的に拡大中</h3>
+            <p>デジタルデバイスの普及 → 眼精疲労は国民病レベルに拡大。
+                リモートワーク定着 → SEワーカー・ビジネスマンの需要は増加する一方。
+                一方で「目のケア」専門FCは市場にほぼ存在しない ── <strong>ブルーオーシャン</strong>です。</p>
+        </div>
+
+        <h3>FC成功の3本柱 × MECAL</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>FC成功の3本柱</th>
+                    <th>MECALの該当ポイント</th>
+                    <th>評価</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>社会性</strong></td>
+                    <td>眼精疲労解消、子供の目の保護、アスリート支援</td>
+                    <td><span class="pill pill-green">◎ 最高</span></td>
+                </tr>
+                <tr>
+                    <td><strong>専門性</strong></td>
+                    <td>日本初のアイケア・トレーニング、独自EMS機器</td>
+                    <td><span class="pill pill-green">◎ 最高</span></td>
+                </tr>
+                <tr>
+                    <td><strong>拡大性</strong></td>
+                    <td>施術プロトコル化済み、EMS機器による再現性</td>
+                    <td><span class="pill pill-green">◎ 最高</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote">
+            リッツプロの経験上、この3要素が揃っている事業はFC展開で高確率で成功します。<br>
+            <strong>MECALはすべてを高水準で満たしている稀有な事業です。</strong>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== ロードマップ ==================== -->
+    <section>
+        <span class="section-label">Section 03</span>
+        <h2>3年ロードマップ</h2>
+
+        <div class="roadmap">
+            <div class="roadmap-item">
+                <div class="roadmap-year">YEAR 1 ── 基盤構築</div>
+                <div class="roadmap-title">直営店モデル標準化 → FC5件獲得</div>
+                <div class="roadmap-desc">表参道店をモデル店に、FCパッケージ・マニュアル・研修プログラムを整備。0次・1次募集で加盟店5件獲得。</div>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-year">YEAR 2 ── 拡大フェーズ</div>
+                <div class="roadmap-title">累計20件 → 主要都市展開</div>
+                <div class="roadmap-desc">東京→大阪→名古屋→福岡とエリア展開。オーナーエンゲージメント強化。年間売上1億円超。</div>
+            </div>
+            <div class="roadmap-item">
+                <div class="roadmap-year">YEAR 3 ── M&A準備・実行</div>
+                <div class="roadmap-title">累計50件以上 → 事業売却</div>
+                <div class="roadmap-desc">ブランド価値最大化。DD準備完了。営業利益×5〜7倍での売却を実現。</div>
+            </div>
+        </div>
+
+        <h3>売上シミュレーション</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>1年目</th>
+                    <th>2年目</th>
+                    <th>3年目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>新規加盟件数</td>
+                    <td>5件</td>
+                    <td>15件</td>
+                    <td>30件</td>
+                </tr>
+                <tr>
+                    <td>累計加盟店数</td>
+                    <td>5件</td>
+                    <td>20件</td>
+                    <td>50件</td>
+                </tr>
+                <tr>
+                    <td>加盟金収入（@300万）</td>
+                    <td>1,500万</td>
+                    <td>4,500万</td>
+                    <td>9,000万</td>
+                </tr>
+                <tr>
+                    <td>ロイヤリティ年額（@月10万）</td>
+                    <td>600万</td>
+                    <td>2,400万</td>
+                    <td>6,000万</td>
+                </tr>
+                <tr>
+                    <td class="highlight"><strong>年間収入合計</strong></td>
+                    <td class="highlight"><strong>2,100万</strong></td>
+                    <td class="highlight"><strong>6,900万</strong></td>
+                    <td class="highlight"><strong>1億5,000万</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box" style="text-align:center;">
+            <h3 style="font-size:1rem;">M&A想定売却額</h3>
+            <p style="font-size:2rem; font-weight:900; color:var(--accent); margin:1rem 0;">2.5億〜3.5億円</p>
+            <p style="font-size:.85rem;">営業利益 5,000万円 × 5〜7倍（マルチプル法）</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== リッツプロの支援内容 ==================== -->
+    <section>
+        <span class="section-label">Section 04</span>
+        <h2>リッツプロのFC開発支援</h2>
+
+        <h3>8ステップのスケールアップ</h3>
+        <div class="step-list">
+            <div class="step-item">
+                <h4>ゴール設定</h4>
+                <p>M&A出口を見据えた3年計画の策定</p>
+            </div>
+            <div class="step-item">
+                <h4>市場調査・ニーズ把握</h4>
+                <p>アイケア市場の競合分析・ターゲット設計</p>
+            </div>
+            <div class="step-item">
+                <h4>戦略設計</h4>
+                <p>エリア戦略・価格戦略・集客戦略</p>
+            </div>
+            <div class="step-item">
+                <h4>パッケージ化</h4>
+                <p>FCパッケージ・ブランドガイドライン制作</p>
+            </div>
+            <div class="step-item">
+                <h4>業務シンプル化</h4>
+                <p>施術プロトコル標準化・研修体系構築 ※ここを飛ばすと失敗します</p>
+            </div>
+            <div class="step-item">
+                <h4>マーケティング実施</h4>
+                <p>LP制作・広告運用・加盟店募集</p>
+            </div>
+            <div class="step-item">
+                <h4>回収＆投資</h4>
+                <p>ROAS管理・効果測定・改善</p>
+            </div>
+            <div class="step-item">
+                <h4>持続的スケールアップ</h4>
+                <p>段階別拡大（10→20→50→100店舗）</p>
+            </div>
+        </div>
+
+        <h3>リッツプロだけの3つの強み</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h4>M&A前提の設計</h4>
+                <p>単なるFC展開ではなく、2〜3年後の事業売却を前提とした戦略を最初から設計。ロイヤリティ設計等、売却額が最大化される構造を作ります。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h4>リスクフリーモデル</h4>
+                <p>広告費・LP制作費はリッツプロが負担。報酬は加盟金からの成果報酬のみ。ロイヤリティには一切手を付けず、M&A時の売却額を最大化。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h4>圧倒的な実績</h4>
+                <p>BUPURA 3年56店舗→13億売却。ドローンスクール1年9ヶ月で20億。某美容サロン148店舗→上場企業売却。</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== MECAL特化提案 ==================== -->
+    <section>
+        <span class="section-label">Section 05</span>
+        <h2>MECALのFC化が成功する3つの理由</h2>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h4>独自機器＝究極の再現性</h4>
+                <p>「エレトレプロ」が施術品質の基盤。人に依存しすぎず、短期間の研修で一定レベルの施術が可能。FC最大の課題「品質の均一化」を機器がカバー。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <h4>明確なポジショニング</h4>
+                <p>「何専門？」→「目元の筋トレ専門」と即答可能。競合不在のブルーオーシャン市場で先行者利益を獲得。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🗺️</div>
+                <h4>複数ターゲット展開</h4>
+                <p>芸能人向け都心プレミアム店、ビジネスマン向けオフィス街店、SEワーカー向けIT集積エリア、将来的にアスリート向け展開も。</p>
+            </div>
+        </div>
+
+        <h3>加盟店オーナー候補像</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>候補</th>
+                    <th>導入メリット</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>美容サロン経営者</td>
+                    <td>新規メニューとして導入、客単価UP</td>
+                </tr>
+                <tr>
+                    <td>整体院・治療院オーナー</td>
+                    <td>眼精疲労メニュー追加、差別化</td>
+                </tr>
+                <tr>
+                    <td>新規開業希望者</td>
+                    <td>美容・健康領域での独立</td>
+                </tr>
+                <tr>
+                    <td>エステティシャン独立希望者</td>
+                    <td>独自技術で差別化した開業</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== FC店舗メニュー設計 ==================== -->
+    <section>
+        <span class="section-label">Section 05-B</span>
+        <h2>FC店舗メニュー設計</h2>
+
+        <div class="highlight-box">
+            <h3>設計思想：「エレトレプロ」が品質を担保する</h3>
+            <p>MECAL本店（表参道）の全メニューをそのままFC化するのではなく、<br>
+                <strong>「エレトレプロ」が施術の7〜8割をカバーできる範囲</strong>に絞ることで、<br>
+                <strong>1週間以内の研修で開業可能</strong>な再現性の高いFC店舗を実現します。
+            </p>
+        </div>
+
+        <h3>本店メニューの再現性分析</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>本店メニュー</th>
+                    <th>価格</th>
+                    <th>FC再現性</th>
+                    <th>判定</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A. ベーシック（アイケア・トレーニング）</td>
+                    <td>¥15,000/40min</td>
+                    <td>EMS機器がガイド、手技負荷が最も低い</td>
+                    <td><span class="pill pill-green">✅ FC向け</span></td>
+                </tr>
+                <tr>
+                    <td>B. リラックス（A＋上半身EMS）</td>
+                    <td>¥25,000/60min</td>
+                    <td>首・肩・背中もEMS対応可</td>
+                    <td><span class="pill pill-green">✅ FC向け</span></td>
+                </tr>
+                <tr>
+                    <td>C. プレミアム（B＋フェイストレーニング）</td>
+                    <td>¥35,000/90min</td>
+                    <td>顔全体の立体的手技が必要</td>
+                    <td><span class="pill pill-gold">❌ 本店限定</span></td>
+                </tr>
+                <tr>
+                    <td>D. ビューティ（C＋まつ毛パーマ）</td>
+                    <td>¥45,000/120min</td>
+                    <td>まつ毛施術は美容師免許必須</td>
+                    <td><span class="pill pill-gold">❌ 本店限定</span></td>
+                </tr>
+                <tr>
+                    <td>まつ毛デザインパーマ</td>
+                    <td>¥33,000/90min</td>
+                    <td>美容師免許＋高度技術</td>
+                    <td><span class="pill pill-gold">❌ 本店限定</span></td>
+                </tr>
+                <tr>
+                    <td>コーラルピーリング</td>
+                    <td>¥33,000/90min</td>
+                    <td>肌再生療法は専門知識必要</td>
+                    <td><span class="pill pill-gold">❌ 本店限定</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote">
+            <strong>C〜Dコースは「表参道本店限定メニュー」</strong>として三宮氏のブランド価値を維持。<br>
+            FC店からの紹介で本店へ送客するアップセル導線も構築可能。
+        </div>
+
+        <!-- 推奨商品 -->
+        <div style="margin-top:3rem;">
+            <h3 style="font-size:1.4rem;">★ 推奨商品：月額¥20,000 サブスクパッケージ</h3>
+
+            <div
+                style="background:linear-gradient(135deg,#c8a96e 0%,#e8d5a8 50%,#c8a96e 100%);border-radius:16px;padding:2.5rem;margin:1.5rem 0;text-align:center;">
+                <p
+                    style="font-size:.85rem;color:var(--primary);font-weight:600;letter-spacing:.2em;margin-bottom:.5rem;">
+                    FC店舗 メイン商品</p>
+                <p style="font-size:2.5rem;font-weight:900;color:var(--primary);margin-bottom:.5rem;">¥20,000<span
+                        style="font-size:1rem;font-weight:400;">/月（税込）</span></p>
+                <p style="font-size:1rem;color:var(--primary);font-weight:500;">MECALアイケア定額プラン ──
+                    月2回のアイケア・トレーニング（40min×2）</p>
+            </div>
+
+            <h3>なぜ月額¥20,000サブスクが最適か</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">💰</div>
+                    <h4>1. お得感と心理的ハードル</h4>
+                    <p>本店Aコース月2回＝¥30,000 → サブスクなら¥20,000。1回あたり¥10,000は新規顧客の心理的ハードルが圧倒的に低い。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📈</div>
+                    <h4>2. M&A価値の最大化</h4>
+                    <p>毎月の継続課金はM&A時に倍率がかかる最重要KPI。会員100名＝月売上200万円の「見える化」された収益基盤。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h4>3. 加盟店経営の安定</h4>
+                    <p>都度来店モデルより売上予測が安定。解約率が低い＝オーナーの安心感＝2店舗目出店率UP。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h4>4. 固定ロイヤリティとの相性</h4>
+                    <p>会員数に連動しない固定ロイヤリティ（¥10万/月）。会員が増えるほど利益率UP → オーナーのモチベーション維持。</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>FC店舗メニュー構成</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>メニュー</th>
+                    <th>価格（税込）</th>
+                    <th>時間</th>
+                    <th>位置づけ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初回体験コース</td>
+                    <td>¥5,000〜7,000</td>
+                    <td>30min</td>
+                    <td>集客用入口（サブスク転換重視）</td>
+                </tr>
+                <tr>
+                    <td>アイケア ベーシック（都度）</td>
+                    <td>¥12,000</td>
+                    <td>40min</td>
+                    <td>サブスク未加入者向け単発</td>
+                </tr>
+                <tr>
+                    <td>アイケア リラックス（都度）</td>
+                    <td>¥20,000</td>
+                    <td>60min</td>
+                    <td>ベーシック＋首肩EMS</td>
+                </tr>
+                <tr style="background:rgba(200,169,110,.12);">
+                    <td><strong>★ サブスク月額プラン</strong></td>
+                    <td class="highlight"><strong>¥20,000/月</strong></td>
+                    <td><strong>40min×月2回</strong></td>
+                    <td><strong>メイン商品</strong></td>
+                </tr>
+                <tr>
+                    <td>サブスク プレミアム</td>
+                    <td>¥30,000/月</td>
+                    <td>リラックス×月2回</td>
+                    <td>上位プラン</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>加盟店の収益シミュレーション（サブスクモデル）</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>6ヶ月目</th>
+                    <th>12ヶ月目</th>
+                    <th>18ヶ月目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>サブスク会員数</td>
+                    <td>30名</td>
+                    <td>80名</td>
+                    <td>120名</td>
+                </tr>
+                <tr>
+                    <td>サブスク月売上</td>
+                    <td>60万</td>
+                    <td>160万</td>
+                    <td>240万</td>
+                </tr>
+                <tr>
+                    <td>都度利用売上</td>
+                    <td>20万</td>
+                    <td>30万</td>
+                    <td>40万</td>
+                </tr>
+                <tr style="background:rgba(200,169,110,.08);">
+                    <td><strong>月売上合計</strong></td>
+                    <td class="highlight"><strong>80万</strong></td>
+                    <td class="highlight"><strong>190万</strong></td>
+                    <td class="highlight"><strong>280万</strong></td>
+                </tr>
+                <tr>
+                    <td>ロイヤリティ（固定）</td>
+                    <td>▲10万</td>
+                    <td>▲10万</td>
+                    <td>▲10万</td>
+                </tr>
+                <tr>
+                    <td>家賃・経費</td>
+                    <td>▲40万</td>
+                    <td>▲40万</td>
+                    <td>▲40万</td>
+                </tr>
+                <tr style="background:rgba(45,138,78,.08);">
+                    <td><strong>月間利益</strong></td>
+                    <td class="highlight"><strong>30万</strong></td>
+                    <td class="highlight"><strong>140万</strong></td>
+                    <td class="highlight"><strong>230万</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box" style="text-align:center;">
+            <h3 style="font-size:1rem;">サブスク会員120名到達時</h3>
+            <p style="font-size:2rem; font-weight:900; color:var(--accent); margin:1rem 0;">月売上 240万円 / 月利益 230万円</p>
+            <p style="font-size:.85rem;">ロイヤリティは固定¥10万のみ → 会員が増えるほどオーナーの利益率が上がる構造</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== 費用 ==================== -->
+    <section>
+        <span class="section-label">Section 06</span>
+        <h2>費用・契約概要</h2>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>金額</th>
+                    <th>備考</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>契約金</td>
+                    <td class="highlight">200万円（税別）</td>
+                    <td>お客様ご負担</td>
+                </tr>
+                <tr>
+                    <td>FCパッケージ制作費</td>
+                    <td>300万円（税別）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>トレーニング＆サポート費</td>
+                    <td>300万円（税別）</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>マーケティング・広告費</td>
+                    <td>約150万円</td>
+                    <td><span class="pill pill-gold">リッツプロ負担</span></td>
+                </tr>
+                <tr>
+                    <td><strong>合計</strong></td>
+                    <td class="highlight"><strong>800万円（税別）</strong></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote">
+            加盟店開発に関するマーケティング費用（LP制作費・広告費）は<strong>完全成果報酬制</strong>のため、リッツプロが負担します。<br>
+            月間の支援先募集数は<strong>「1社」限定</strong>です。必ず社内審査をさせていただきます。
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ==================== 実績 ==================== -->
+    <section>
+        <span class="section-label">Section 07</span>
+        <h2>支援実績</h2>
+
+        <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+            <div class="result-card">
+                <div class="result-number">56店舗</div>
+                <div class="result-label">BUPURA / 3年</div>
+                <p style="font-size:.8rem;color:var(--text-light);margin-top:.5rem;">直営7+FC49 → 13億売却</p>
+            </div>
+            <div class="result-card">
+                <div class="result-number">20億</div>
+                <div class="result-label">ドローンスクール / 1年9ヶ月</div>
+                <p style="font-size:.8rem;color:var(--text-light);margin-top:.5rem;">年商3,000万からスケール</p>
+            </div>
+            <div class="result-card">
+                <div class="result-number">148店舗</div>
+                <div class="result-label">某美容サロン / 4年</div>
+                <p style="font-size:.8rem;color:var(--text-light);margin-top:.5rem;">上場企業に売却</p>
+            </div>
+            <div class="result-card">
+                <div class="result-number">CPA 3.4万</div>
+                <div class="result-label">広告効率</div>
+                <p style="font-size:.8rem;color:var(--text-light);margin-top:.5rem;">契約率10-20%</p>
+            </div>
+        </div>
+
+        <p style="text-align:center;font-size:.85rem;color:var(--text-light);margin-top:1rem;">
+            テレビ出演実績: 乃木坂46 × カンニング竹山「イチバン研究所」/ IMARU 全国放送「リアル」/ 千葉テレビ ほか
+        </p>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <div class="cta-section">
+        <span class="section-label" style="color:var(--accent);">NEXT STEP</span>
+        <h2>次のステップ</h2>
+        <p>
+            リッツプロでは月間1社限定で支援先を募集しています。<br>
+            まずは社内審査にお申し込みいただき、<br>
+            通過した場合に詳細なプラン策定に進みます。
+        </p>
+        <a href="#" class="cta-btn">社内審査に申し込む →</a>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <p><strong>リッツプロ株式会社</strong></p>
+        <p>大阪支店: 大阪府大阪市淀川区新高6-14-9-603室 ｜ 福岡支店: 福岡県福岡市東区香椎照葉7-5-3-4003</p>
+        <p>代表取締役 千三木 峻 ｜ 事業内容: FC支援事業 / 途上国支援事業</p>
+        <br>
+        <p style="font-size:.75rem;opacity:.6;">本資料は株式会社メカル開発研究所様向けに作成された機密資料です。無断での第三者への開示・転載はご遠慮ください。</p>
+    </footer>
+
+</body>
+
+</html>

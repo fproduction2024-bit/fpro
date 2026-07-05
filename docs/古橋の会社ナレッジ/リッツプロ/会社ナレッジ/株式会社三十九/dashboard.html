@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社三十九 — プロジェクト管理ダッシュボード</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --forest: #2a4418; --forest-light: #345520; --forest-lighter: #3d6626;
+            --gold: #BC9B5D; --gold-light: #D4B87A; --gold-dim: rgba(188,155,93,0.15);
+            --cream: #FCF8ED; --sage: #E0E7D9; --brown: #675045;
+            --white: #f0efe8; --gray: #8a8878;
+            --bg: #1a1a14; --card: #232318; --border: #3a3a2e;
+            --green: #5A8A35; --blue: #6b9cd4; --red: #c45a4a;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Noto Sans JP','Inter',sans-serif; background:var(--bg); color:var(--white); line-height:1.7; min-height:100vh; }
+        .layout { display:flex; min-height:100vh; }
+        .sidebar { width:260px; background:var(--forest); border-right:1px solid var(--border); position:fixed; top:0; left:0; bottom:0; overflow-y:auto; z-index:100; }
+        .sidebar-header { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .sidebar-header h1 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--gold); letter-spacing:1px; }
+        .sidebar-header p { font-size:11px; color:rgba(255,255,255,0.5); margin-top:4px; }
+        .nav-section { padding:16px 0 8px; }
+        .nav-section-title { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4); padding:0 24px; margin-bottom:8px; }
+        .nav-link { display:flex; align-items:center; gap:10px; padding:10px 24px; font-size:13px; color:rgba(255,255,255,0.8); text-decoration:none; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+        .nav-link:hover { background:var(--forest-light); color:var(--gold-light); }
+        .nav-link.active { background:var(--gold-dim); color:var(--gold); border-left-color:var(--gold); font-weight:600; }
+        .nav-link .icon { font-size:16px; }
+        .nav-badge { margin-left:auto; font-size:10px; background:var(--forest-lighter); color:rgba(255,255,255,0.5); padding:2px 8px; border-radius:10px; font-weight:600; }
+        .main { flex:1; margin-left:260px; padding:32px 40px; max-width:1100px; }
+        .section { display:none; animation:fadeIn 0.3s ease; }
+        .section.active { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .section-header { margin-bottom:28px; }
+        .section-header h2 { font-family:'Noto Serif JP',serif; font-size:26px; font-weight:700; color:var(--white); display:flex; align-items:center; gap:12px; }
+        .section-header h2 .icon { font-size:28px; }
+        .section-header p { color:var(--gray); font-size:13px; margin-top:6px; }
+        .tabs { display:flex; gap:4px; border-bottom:1px solid var(--border); margin-bottom:0; overflow-x:auto; padding-bottom:0; }
+        .tab-btn { padding:10px 20px; font-size:13px; font-weight:500; color:var(--gray); background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.2s; white-space:nowrap; font-family:inherit; }
+        .tab-btn:hover { color:var(--white); }
+        .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+        .tab-panel { display:none; padding:24px 0; }
+        .tab-panel.active { display:block; }
+        .md-content { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:32px; font-size:14px; line-height:1.8; overflow-x:auto; }
+        .md-content h1 { font-family:'Noto Serif JP',serif; font-size:22px; color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:20px; }
+        .md-content h2 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold-light); margin-top:32px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+        .md-content h3 { font-size:15px; color:var(--white); margin-top:24px; margin-bottom:8px; }
+        .md-content p { margin-bottom:12px; color:#ccc; }
+        .md-content ul,.md-content ol { padding-left:24px; margin-bottom:12px; }
+        .md-content li { margin-bottom:4px; color:#ccc; }
+        .md-content li input[type="checkbox"] { margin-right:6px; accent-color:var(--gold); }
+        .md-content code { background:var(--forest); color:var(--gold-light); padding:2px 6px; border-radius:4px; font-size:13px; }
+        .md-content pre { background:var(--forest); border:1px solid var(--border); border-radius:8px; padding:16px; overflow-x:auto; margin-bottom:16px; }
+        .md-content pre code { background:none; padding:0; }
+        .md-content table { width:100%; border-collapse:collapse; margin-bottom:16px; font-size:13px; }
+        .md-content th { background:var(--forest); color:var(--gold); padding:10px 12px; text-align:left; font-weight:600; border:1px solid var(--border); }
+        .md-content td { padding:8px 12px; border:1px solid var(--border); color:#ccc; }
+        .md-content tr:hover td { background:var(--forest); }
+        .md-content blockquote { border-left:3px solid var(--gold); padding:12px 16px; margin:16px 0; background:var(--gold-dim); border-radius:0 8px 8px 0; color:#ddd; }
+        .md-content strong { color:var(--white); }
+        .md-content hr { border:none; border-top:1px solid var(--border); margin:24px 0; }
+        .overview-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-bottom:32px; }
+        .overview-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; transition:all 0.2s; cursor:pointer; }
+        .overview-card:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+        .overview-card .card-icon { font-size:28px; margin-bottom:12px; }
+        .overview-card .card-title { font-size:14px; font-weight:600; color:var(--white); margin-bottom:4px; }
+        .overview-card .card-desc { font-size:12px; color:var(--gray); }
+        .overview-card .card-count { font-size:24px; font-weight:700; color:var(--gold); margin-top:12px; font-family:'Inter',sans-serif; }
+        .status-bar { display:flex; gap:24px; padding:16px 24px; background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:24px; flex-wrap:wrap; }
+        .status-item { display:flex; align-items:center; gap:8px; font-size:12px; }
+        .status-dot { width:8px; height:8px; border-radius:50%; }
+        .status-dot.green { background:var(--green); }
+        .status-dot.yellow { background:var(--gold); }
+        .status-dot.blue { background:var(--blue); }
+        .preview-frame-container { background:var(--card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+        .preview-toolbar { display:flex; align-items:center; justify-content:space-between; padding:12px 20px; background:var(--forest); border-bottom:1px solid var(--border); font-size:12px; color:var(--gray); }
+        .preview-toolbar a { color:var(--gold); text-decoration:none; font-weight:600; font-size:12px; }
+        .preview-toolbar a:hover { color:var(--gold-light); }
+        .preview-frame { width:100%; height:600px; border:none; background:#fff; }
+        .footer { text-align:center; padding:40px 0 20px; color:var(--gray); font-size:11px; border-top:1px solid var(--border); margin-top:60px; }
+        ::-webkit-scrollbar { width:6px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:var(--gray); }
+
+        /* ── Carte / Form styles ── */
+        .carte-section { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:28px; margin-bottom:20px; }
+        .carte-section-title { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+        .carte-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; }
+        .carte-grid.full { grid-template-columns:1fr; }
+        .carte-field { display:flex; flex-direction:column; gap:4px; }
+        .carte-field label { font-size:12px; font-weight:600; color:var(--gray); }
+        .carte-field input, .carte-field textarea, .carte-field select { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:10px 14px; color:var(--white); font-size:14px; font-family:inherit; transition:border-color 0.2s; }
+        .carte-field input:focus, .carte-field textarea:focus { outline:none; border-color:var(--gold); }
+        .carte-field textarea { min-height:80px; resize:vertical; }
+        .action-item-row { display:grid; grid-template-columns:1fr 120px 120px 100px 32px; gap:8px; align-items:center; margin-bottom:8px; }
+        .action-item-row input, .action-item-row select { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 10px; color:var(--white); font-size:12px; font-family:inherit; }
+        .action-item-row input:focus { outline:none; border-color:var(--gold); }
+        .action-item-row .remove-action { background:none; border:none; color:var(--red); cursor:pointer; font-size:16px; padding:4px; }
+        .action-item-header { display:grid; grid-template-columns:1fr 120px 120px 100px 32px; gap:8px; margin-bottom:6px; font-size:11px; color:var(--gray); font-weight:600; }
+        .minutes-category { font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; margin-right:6px; }
+        .cat-定例 { background:var(--blue); color:#fff; }
+        .cat-臨時 { background:var(--orange); color:#fff; }
+        .cat-ヒアリング { background:var(--green); color:#fff; }
+        .cat-キックオフ { background:var(--gold); color:#000; }
+        .cat-セミナー { background:#9b59b6; color:#fff; }
+        .cat-その他 { background:var(--gray); color:#fff; }
+        .minutes-section-label { font-size:11px; font-weight:700; color:var(--gold); margin-top:10px; margin-bottom:4px; }
+        .minutes-actions-table { width:100%; font-size:12px; border-collapse:collapse; margin-top:4px; }
+        .minutes-actions-table th { text-align:left; color:var(--gray); font-size:11px; padding:4px 8px; border-bottom:1px solid var(--border); }
+        .minutes-actions-table td { padding:4px 8px; border-bottom:1px solid rgba(255,255,255,0.05); }
+        .action-status-done { color:var(--green); }
+        .action-status-progress { color:var(--gold); }
+        .action-status-todo { color:var(--gray); }
+
+        .carte-actions { display:flex; gap:12px; margin-top:20px; justify-content:flex-end; }
+        .btn { padding:10px 24px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; border:none; font-family:inherit; transition:all 0.2s; }
+        .btn-primary { background:var(--gold); color:#000; }
+        .btn-primary:hover { background:var(--gold-light); }
+        .btn-secondary { background:var(--forest); color:var(--white); border:1px solid var(--border); }
+        .btn-secondary:hover { background:var(--forest-light); }
+        .btn-danger { background:var(--red); color:#fff; }
+        .btn-sm { padding:6px 14px; font-size:12px; }
+        .save-toast { position:fixed; bottom:24px; right:24px; background:var(--green); color:#fff; padding:12px 24px; border-radius:8px; font-size:13px; font-weight:600; z-index:999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; }
+        .save-toast.show { opacity:1; transform:translateY(0); }
+
+        /* ── Gantt ── */
+        .gantt-container { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto; }
+        .gantt-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
+        .gantt-toolbar select { background:var(--bg); border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; }
+        .gantt-table { width:100%; border-collapse:collapse; min-width:900px; }
+        .gantt-table th { background:var(--forest); color:var(--gold); padding:8px 10px; font-size:11px; font-weight:600; border:1px solid var(--border); text-align:center; white-space:nowrap; position:sticky; top:0; }
+        .gantt-table td { padding:0; border:1px solid var(--border); height:36px; position:relative; }
+        .gantt-table td.task-name { padding:8px 12px; font-size:13px; color:var(--white); white-space:nowrap; min-width:180px; background:var(--card); }
+        .gantt-table td.task-status { padding:4px 8px; text-align:center; font-size:11px; min-width:70px; }
+        .gantt-bar { position:absolute; top:6px; bottom:6px; border-radius:4px; min-width:4px; cursor:pointer; transition:opacity 0.2s; }
+        .gantt-bar:hover { opacity:0.85; }
+        .gantt-bar.done { background:var(--green); }
+        .gantt-bar.active { background:var(--gold); }
+        .gantt-bar.planned { background:var(--blue); }
+        .gantt-bar.delayed { background:var(--red); }
+        .status-badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:600; }
+        .status-badge.done { background:rgba(90,138,53,0.2); color:var(--green); }
+        .status-badge.active { background:var(--gold-dim); color:var(--gold); }
+        .status-badge.planned { background:rgba(107,156,212,0.2); color:var(--blue); }
+        .status-badge.delayed { background:rgba(196,90,74,0.2); color:var(--red); }
+
+        /* ── Minutes ── */
+        .minutes-list { display:flex; flex-direction:column; gap:16px; }
+        .minutes-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; }
+        .minutes-card .minutes-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+        .minutes-meta { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+        .minutes-card h3 { color:var(--white); font-size:16px; font-weight:600; margin:0; }
+        .minutes-detail { color:#ccc; font-size:13px; line-height:1.8; }
+        .minutes-detail strong { color:var(--gold); }
+        .action-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:13px; }
+        .action-table th { background:var(--forest); color:var(--gold); padding:8px 12px; text-align:left; font-weight:600; border:1px solid var(--border); }
+        .action-table td { padding:8px 12px; border:1px solid var(--border); color:#ccc; }
+
+        /* ── Modal ── */
+        .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:200; align-items:center; justify-content:center; }
+        .modal-overlay.show { display:flex; }
+        .modal { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px; max-width:600px; width:90%; max-height:80vh; overflow-y:auto; }
+        .modal h3 { font-family:'Noto Serif JP',serif; font-size:18px; color:var(--gold); margin-bottom:20px; }
+
+        @media (max-width:768px) {
+            .sidebar { display:none; }
+            .main { margin-left:0; padding:16px; }
+            .overview-grid { grid-template-columns:1fr 1fr; }
+            .carte-grid { grid-template-columns:1fr; }
+            .preview-frame { height:400px; }
+        }
+
+        /* ── Login Info ── */
+        .login-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:12px; }
+        .login-card .login-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+        .login-card .login-title { font-size:14px; font-weight:600; color:var(--white); display:flex; align-items:center; gap:8px; }
+        .login-card .login-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+        .login-field { display:flex; flex-direction:column; gap:2px; }
+        .login-field label { font-size:11px; color:var(--gray); }
+        .login-field .login-val { display:flex; align-items:center; gap:6px; }
+        .login-field input { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--white); font-size:13px; font-family:inherit; flex:1; }
+        .toggle-pw { background:none; border:none; color:var(--gray); cursor:pointer; font-size:14px; padding:4px; }
+        .toggle-pw:hover { color:var(--gold); }
+        .copy-btn { background:none; border:none; color:var(--gray); cursor:pointer; font-size:12px; padding:4px; }
+        .copy-btn:hover { color:var(--gold); }
+
+        /* ── Deliverables ── */
+        .deliverable-group { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; }
+        .deliverable-group h3 { font-family:'Noto Serif JP',serif; font-size:16px; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+        .deliverable-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid rgba(58,58,46,0.5); }
+        .deliverable-item:last-child { border-bottom:none; }
+        .deliverable-check { width:20px; height:20px; accent-color:var(--gold); cursor:pointer; }
+        .deliverable-name { flex:1; font-size:14px; color:var(--white); }
+        .deliverable-status { font-size:11px; font-weight:600; padding:2px 10px; border-radius:10px; }
+        .deliverable-link { color:var(--gold); text-decoration:none; font-size:12px; font-weight:600; }
+        .deliverable-link:hover { color:var(--gold-light); }
+
+        /* ── Manual ── */
+        .manual-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:16px; cursor:pointer; transition:all 0.2s; }
+        .manual-card:hover { border-color:var(--gold); transform:translateY(-1px); }
+        .manual-card h3 { font-size:15px; color:var(--white); margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+        .manual-card p { font-size:13px; color:var(--gray); }
+        .manual-editor { display:none; margin-top:16px; }
+        .manual-editor.open { display:block; }
+        .manual-editor textarea { width:100%; min-height:200px; background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:16px; color:var(--white); font-size:14px; font-family:inherit; line-height:1.7; resize:vertical; }
+
+        /* ── Access Control ── */
+        .access-bar { display:flex; gap:8px; margin-bottom:20px; padding:12px 16px; background:var(--card); border:1px solid var(--border); border-radius:10px; align-items:center; flex-wrap:wrap; }
+        .access-bar label { font-size:12px; color:var(--gray); font-weight:600; }
+        .access-select { background:var(--bg); border:1px solid var(--border); color:var(--white); padding:6px 12px; border-radius:6px; font-family:inherit; font-size:13px; }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h1>🌿 伴走型FC事業支援</h1>
+            <p>プロジェクト管理ダッシュボード</p>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">概要</div>
+            <a class="nav-link active" data-section="overview"><span class="icon">📊</span> ダッシュボード</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">プロジェクト管理</div>
+            <a class="nav-link" data-section="carte"><span class="icon">📋</span> お客様カルテ</a>
+            <a class="nav-link" data-section="gantt"><span class="icon">📅</span> ガントチャート</a>
+            <a class="nav-link" data-section="minutes"><span class="icon">📝</span> 議事録</a>
+            <a class="nav-link" data-section="manual"><span class="icon">📖</span> マニュアル</a>
+            <a class="nav-link" data-section="deliverables"><span class="icon">📦</span> 成果物管理</a>
+            <a class="nav-link" data-section="logins"><span class="icon">🔐</span> ログイン情報</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">広告</div>
+            <a class="nav-link" data-section="ads"><span class="icon">🎨</span> 広告クリエイティブ<span class="nav-badge">4</span></a>
+            <a class="nav-link" data-section="ad-ops"><span class="icon">📈</span> 広告運用設計<span class="nav-badge">1</span></a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Webページ</div>
+            <a class="nav-link" data-section="pages"><span class="icon">🌐</span> LP・Webページ<span class="nav-badge">4</span></a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">セミナー</div>
+            <a class="nav-link" data-section="seminar"><span class="icon">🎓</span> セミナースライド<span class="nav-badge">40枚</span></a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">導線・運用</div>
+            <a class="nav-link" data-section="flow"><span class="icon">🔗</span> 申込み導線<span class="nav-badge">1</span></a>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <!-- ========== Overview ========== -->
+        <div class="section active" id="overview">
+            <div class="section-header">
+                <h2><span class="icon">📊</span> プロジェクト管理ダッシュボード</h2>
+                <p>株式会社三十九 — 伴走型FC事業支援 FC事業支援 全体管理</p>
+            </div>
+            <div class="status-bar">
+                <div class="status-item"><span class="status-dot green"></span> 広告クリエイティブ 4種 完成</div>
+                <div class="status-item"><span class="status-dot green"></span> LP・Webページ 4点 デプロイ済</div>
+                <div class="status-item"><span class="status-dot green"></span> セミナースライド 40枚 完成</div>
+                <div class="status-item"><span class="status-dot blue"></span> 広告運用設計 テスト計画策定済</div>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-card" onclick="navigate('carte')">
+                    <div class="card-icon">📋</div>
+                    <div class="card-title">お客様カルテ</div>
+                    <div class="card-desc">顧客情報・ヒアリング・戦略設計</div>
+                    <div class="card-count">4シート</div>
+                </div>
+                <div class="overview-card" onclick="navigate('gantt')">
+                    <div class="card-icon">📅</div>
+                    <div class="card-title">ガントチャート</div>
+                    <div class="card-desc">プロジェクト進行管理</div>
+                    <div class="card-count" id="gantt-task-count">—</div>
+                </div>
+                <div class="overview-card" onclick="navigate('minutes')">
+                    <div class="card-icon">📝</div>
+                    <div class="card-title">議事録</div>
+                    <div class="card-desc">ミーティング記録・アクション管理</div>
+                    <div class="card-count" id="minutes-count">—</div>
+                </div>
+                <div class="overview-card" onclick="navigate('manual')">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">マニュアル</div>
+                    <div class="card-desc">本部構築・業務マニュアル</div>
+                    <div class="card-count" id="manual-count">—</div>
+                </div>
+                <div class="overview-card" onclick="navigate('deliverables')">
+                    <div class="card-icon">📦</div>
+                    <div class="card-title">成果物管理</div>
+                    <div class="card-desc">本部構築・加盟店開発の成果物</div>
+                    <div class="card-count" id="deliverables-count">—</div>
+                </div>
+                <div class="overview-card" onclick="navigate('logins')">
+                    <div class="card-icon">🔐</div>
+                    <div class="card-title">ログイン情報</div>
+                    <div class="card-desc">各種サービスのアクセス情報</div>
+                    <div class="card-count" id="logins-count">—</div>
+                </div>
+                <div class="overview-card" onclick="navigate('ads')">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">広告クリエイティブ</div>
+                    <div class="card-desc">バナー・動画台本・コピー・カルーセル</div>
+                    <div class="card-count">4種</div>
+                </div>
+                <div class="overview-card" onclick="navigate('pages')">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title">LP・Webページ</div>
+                    <div class="card-desc">FC募集LP・サンクス・セミナー案内・提案書</div>
+                    <div class="card-count">4点</div>
+                </div>
+                <div class="overview-card" onclick="navigate('seminar')">
+                    <div class="card-icon">🎓</div>
+                    <div class="card-title">セミナースライド</div>
+                    <div class="card-desc">FC説明会 全6部構成</div>
+                    <div class="card-count">40枚</div>
+                </div>
+                <div class="overview-card" onclick="navigate('ad-ops')">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">広告運用設計</div>
+                    <div class="card-desc">キャンペーン設計・A/Bテスト計画</div>
+                    <div class="card-count">1式</div>
+                </div>
+                <div class="overview-card" onclick="navigate('flow')">
+                    <div class="card-icon">🔗</div>
+                    <div class="card-title">申込み導線</div>
+                    <div class="card-desc">フォーム・LINE公式・メール</div>
+                    <div class="card-count">3種</div>
+                </div>
+            </div>
+            <div style="margin-top:8px;">
+                <h3 style="font-family:'Noto Serif JP',serif;font-size:16px;color:var(--gold);margin-bottom:16px;">🔗 デプロイ済みページ</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <a href="https://rtma-on-fc-lp.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
+                        <div style="font-size:13px;font-weight:600;">FC募集LP</div>
+                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-lp.surge.sh</div>
+                    </a>
+                    <a href="https://rtma-on-fc-thanks.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
+                        <div style="font-size:13px;font-weight:600;">サンクスページ</div>
+                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-thanks.surge.sh</div>
+                    </a>
+                    <a href="https://rtma-on-fc-seminar.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
+                        <div style="font-size:13px;font-weight:600;">セミナー案内ページ</div>
+                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-seminar.surge.sh</div>
+                    </a>
+                    <a href="https://rtma-on-fc-proposal.surge.sh" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-decoration:none;color:var(--white);transition:all 0.2s;">
+                        <div style="font-size:13px;font-weight:600;">個別面談用提案書</div>
+                        <div style="font-size:11px;color:var(--gray);margin-top:4px;">rtma-on-fc-proposal.surge.sh</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Carte Section ========== -->
+        <div class="section" id="carte">
+            <div class="section-header">
+                <h2><span class="icon">📋</span> お客様カルテ</h2>
+                <p>株式会社三十九 嶋岡様 — 顧客情報・ヒアリング・コンセプト設計</p>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="carte-info">顧客情報</button>
+                <button class="tab-btn" data-target="carte-hearing1">ヒアリング①</button>
+                <button class="tab-btn" data-target="carte-hearing2">ヒアリング②</button>
+            </div>
+
+            <!-- Tab: 顧客情報 -->
+            <div class="tab-panel active" id="carte-info">
+                <div class="carte-section">
+                    <div class="carte-section-title">🏢 基本情報</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>法人名</label><input type="text" id="c-company" value="株式会社三十九"></div>
+                        <div class="carte-field"><label>フリガナ</label><input type="text" id="c-company-kana" value=""></div>
+                        <div class="carte-field"><label>代表者名</label><input type="text" id="c-ceo" value="担当者"></div>
+                        <div class="carte-field"><label>フリガナ</label><input type="text" id="c-ceo-kana" value="タントウシャ"></div>
+                        <div class="carte-field"><label>メールアドレス</label><input type="email" id="c-email"></div>
+                        <div class="carte-field"><label>電話番号</label><input type="tel" id="c-phone"></div>
+                        <div class="carte-field"><label>業種</label><input type="text" id="c-industry" value=""></div>
+                        <div class="carte-field"><label>年商</label><input type="text" id="c-revenue"></div>
+                        <div class="carte-field"><label>決算月</label><input type="text" id="c-fiscal"></div>
+                        <div class="carte-field"><label>SNS情報</label><input type="text" id="c-sns"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🔗 関連リンク・資料</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>LP</label><input type="url" id="c-lp" value=""></div>
+                        <div class="carte-field"><label>スケジュール管理表</label><input type="url" id="c-schedule"></div>
+                        <div class="carte-field"><label>本部マニュアル</label><input type="url" id="c-manual"></div>
+                        <div class="carte-field"><label>UTAGEログイン情報</label><input type="text" id="c-utage"></div>
+                        <div class="carte-field"><label>LINE公式ログイン情報</label><input type="text" id="c-line"></div>
+                        <div class="carte-field"><label>顧客アンケートURL（顧客用）</label><input type="url" id="c-survey-cust"></div>
+                        <div class="carte-field"><label>顧客アンケートURL（管理用）</label><input type="url" id="c-survey-admin"></div>
+                        <div class="carte-field"><label>提案書1（Canva）</label><input type="url" id="c-proposal" value=""></div>
+                        <div class="carte-field"><label>提案書2（Canva）</label><input type="url" id="c-proposal2"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🎥 商談動画</div>
+                    <div class="carte-grid" id="c-mtg-videos">
+                        <div class="carte-field"><label>商談動画①</label><input type="url" id="c-video1" value=""></div>
+                        <div class="carte-field"><label>商談動画②</label><input type="url" id="c-video2" value=""></div>
+                        <div class="carte-field"><label>商談動画③</label><input type="url" id="c-video3"></div>
+                        <div class="carte-field"><label>商談動画④</label><input type="url" id="c-video4"></div>
+                        <div class="carte-field"><label>商談動画⑤</label><input type="url" id="c-video5"></div>
+                        <div class="carte-field"><label>商談動画⑥</label><input type="url" id="c-video6"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📁 セールス用資料</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>事例集（営業資料）</label><input type="url" id="c-case-study" placeholder="https://"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🎬 顧客インタビュー動画</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>顧客インタビュー① 〇〇様</label><input type="url" id="c-interview1" placeholder="https://"></div>
+                        <div class="carte-field"><label>顧客インタビュー② 〇〇様</label><input type="url" id="c-interview2" placeholder="https://"></div>
+                        <div class="carte-field"><label>顧客インタビュー③ 〇〇様</label><input type="url" id="c-interview3" placeholder="https://"></div>
+                    </div>
+                </div>
+                <div class="carte-actions">
+                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
+                </div>
+            </div>
+
+            <!-- Tab: ヒアリング① -->
+            <div class="tab-panel" id="carte-hearing1">
+                <div class="carte-section">
+                    <div class="carte-section-title">🎯 戦略設計</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>◾️ 全社戦略</label><textarea id="h1-strategy-all" placeholder="全社的な方向性・ゴール">
+                            </textarea></div>
+                        <div class="carte-field"><label>◾️ 事業戦略</label><textarea id="h1-strategy-biz" placeholder="事業レベルの戦略">
+                            </textarea></div>
+                        <div class="carte-field"><label>◾️ 機能戦略</label><textarea id="h1-strategy-func" placeholder="機能レベルの戦略">
+                            </textarea></div>
+                        <div class="carte-field"><label>◾️ 財務戦略</label><textarea id="h1-strategy-finance" placeholder="財務面の戦略">
+                            </textarea></div>
+                        <div class="carte-field"><label>ビジネスモデルの優位性</label><textarea id="h1-advantage" placeholder="これらの情報から考えられるビジネスモデルの優位性">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🏁 ゴール</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>◾️ 決算月</label><input type="text" id="h1-fiscal"></div>
+                        <div class="carte-field"><label>◾️ 売却時期</label><input type="text" id="h1-exit-timing"></div>
+                        <div class="carte-field"><label>◾️ 売却額</label><input type="text" id="h1-exit-amount"></div>
+                        <div class="carte-field"><label>◾️ 直営店舗数</label><input type="text" id="h1-direct-shops" value=""></div>
+                        <div class="carte-field"><label>◾️ FC店舗数</label><input type="text" id="h1-fc-shops" value=""></div>
+                        <div class="carte-field"><label>1店舗あたりのロイヤリティ</label><input type="text" id="h1-royalty" value=""></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📊 現状</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>◾️ 直営店舗数</label><input type="text" id="h1-cur-direct" value=""></div>
+                        <div class="carte-field"><label>◾️ FC店舗数</label><input type="text" id="h1-cur-fc" value=""></div>
+                        <div class="carte-field"><label>◾️ 売上</label><input type="text" id="h1-cur-revenue" value=""></div>
+                        <div class="carte-field"><label>◾️ 売上原価率</label><input type="text" id="h1-cur-cogs" value=""></div>
+                        <div class="carte-field"><label>◾️ 人件費比率</label><input type="text" id="h1-cur-labor"></div>
+                        <div class="carte-field"><label>◾️ 営業利益</label><input type="text" id="h1-cur-profit" value=""></div>
+                        <div class="carte-field"><label>◾️ 営業利益率</label><input type="text" id="h1-cur-margin" value=""></div>
+                        <div class="carte-field"><label>◾️ FL比</label><input type="text" id="h1-cur-fl"></div>
+                        <div class="carte-field"><label>◾️ 施術単価</label><input type="text" id="h1-cur-price"></div>
+                        <div class="carte-field"><label>◾️ 人員</label><input type="text" id="h1-cur-staff" value=""></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">💰 キャッシュポイント想定</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>加盟金</label><input type="text" id="h1-cp-entry" value=""></div>
+                        <div class="carte-field"><label>研修費</label><input type="text" id="h1-cp-training"></div>
+                        <div class="carte-field"><label>ロイヤリティ</label><input type="text" id="h1-cp-royalty" value=""></div>
+                        <div class="carte-field"><label>仕入れ</label><input type="text" id="h1-cp-supply"></div>
+                        <div class="carte-field"><label>システム</label><input type="text" id="h1-cp-system"></div>
+                        <div class="carte-field"><label>機械代</label><input type="text" id="h1-cp-machine"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🏗️ 直営出店費用</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>物件取得</label><input type="text" id="h1-cost-property"></div>
+                        <div class="carte-field"><label>内装業者</label><input type="text" id="h1-cost-interior"></div>
+                        <div class="carte-field"><label>消耗品</label><input type="text" id="h1-cost-consumables"></div>
+                        <div class="carte-field"><label>化粧品</label><input type="text" id="h1-cost-cosmetics"></div>
+                        <div class="carte-field"><label>機械</label><input type="text" id="h1-cost-machine"></div>
+                        <div class="carte-field"><label>加盟金</label><input type="text" id="h1-cost-entry"></div>
+                        <div class="carte-field"><label>研修費用</label><input type="text" id="h1-cost-training"></div>
+                        <div class="carte-field"><label>PC</label><input type="text" id="h1-cost-pc"></div>
+                        <div class="carte-field"><label>看板（カッティングシート）</label><input type="text" id="h1-cost-sign"></div>
+                        <div class="carte-field"><label>エアコン</label><input type="text" id="h1-cost-ac"></div>
+                        <div class="carte-field"><label>合計</label><input type="text" id="h1-cost-total" value=""></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🏢 FC出店費用</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>FC出店費用</label><input type="text" id="h1-fc-cost" value=""></div>
+                        <div class="carte-field"><label>FC出店費用 内訳・備考</label><textarea id="h1-fc-cost-detail" placeholder="FC出店に必要な費用の内訳">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📊 FC店のモデル図・経営計画</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>FC店のモデル図・経営計画</label><textarea id="h1-fc-model" placeholder="FC店のビジネスモデル、収支モデル等">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🕐 営業時間</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>営業時間</label><input type="text" id="h1-hours" placeholder="例: 10:00〜22:00（最終受付 21:00）"></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📋 施策（アクション）</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>① ビジネスモデル（成功モデル分析）</label><textarea id="h1-action1" placeholder="総合的な分析">
+                            </textarea></div>
+                    </div>
+                    <div class="carte-section-title" style="font-size:13px;margin-top:12px;">　　① 成功モデル分析 詳細</div>
+                    <div class="carte-grid">
+                        <div class="carte-field"><label>求人媒体</label><input type="text" id="h1-biz-recruit"></div>
+                        <div class="carte-field"><label>掲載期間</label><input type="text" id="h1-biz-period"></div>
+                        <div class="carte-field"><label>費用</label><input type="text" id="h1-biz-cost"></div>
+                        <div class="carte-field"><label>応募数</label><input type="text" id="h1-biz-applicants"></div>
+                        <div class="carte-field"><label>集客</label><input type="text" id="h1-biz-attract"></div>
+                        <div class="carte-field"><label>平均月間集客数</label><input type="text" id="h1-biz-monthly"></div>
+                        <div class="carte-field"><label>客単価</label><input type="text" id="h1-biz-unit-price"></div>
+                    </div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>② 商標登録の申請</label><textarea id="h1-action2">
+                            </textarea></div>
+                        <div class="carte-field"><label>③ 自社業務マニュアルの作成</label><textarea id="h1-action3">
+                            </textarea></div>
+                        <div class="carte-field"><label>④ フランチャイズモデルを作る</label><textarea id="h1-action4">
+                            </textarea></div>
+                        <div class="carte-field"><label>⑤ 加盟店開拓の戦略を立てる</label><textarea id="h1-action5">
+                            </textarea></div>
+                        <div class="carte-field"><label>⑥ FC加盟の基本契約書の作成</label><textarea id="h1-action6" placeholder="クラウドサインへデジタル化予定">
+                            </textarea></div>
+                        <div class="carte-field"><label>⑦ フランチャイズ加盟店を募集</label><textarea id="h1-action7" placeholder="セミナー週2〜3回ペース予定">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🌟 ビジョン・ミッション</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>【ミッション】</label><textarea id="h1-mission" placeholder="企業のミッション">
+                            </textarea></div>
+                        <div class="carte-field"><label>【ビジョン】</label><textarea id="h1-vision">
+                            </textarea></div>
+                        <div class="carte-field"><label>【バリュー】</label><textarea id="h1-value">
+                            </textarea></div>
+                        <div class="carte-field"><label>【スローガン】</label><textarea id="h1-slogan">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🤝 フランチャイズ展開</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>フランチャイズ募集と選定</label><textarea id="h1-fc-recruit" placeholder="FC加盟者の選定基準、募集方法">
+                            </textarea></div>
+                        <div class="carte-field"><label>サポート体制の構築</label><textarea id="h1-fc-support" placeholder="加盟店へのサポート内容、SV体制">
+                            </textarea></div>
+                        <div class="carte-field"><label>継続的な改善</label><textarea id="h1-fc-improve" placeholder="PDCA、改善施策">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">🎨 ブランディングガイドライン（20項目）</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>1. ブランドアイデンティティの確立</label><textarea id="h1-bg1">
+                            </textarea></div>
+                        <div class="carte-field"><label>2. ブランドミッションとビジョン</label><textarea id="h1-bg2">
+                            </textarea></div>
+                        <div class="carte-field"><label>3. ミッション</label><textarea id="h1-bg3">
+                            </textarea></div>
+                        <div class="carte-field"><label>4. ビジョン</label><textarea id="h1-bg4">
+                            </textarea></div>
+                        <div class="carte-field"><label>5. バリュー</label><textarea id="h1-bg5">
+                            </textarea></div>
+                        <div class="carte-field"><label>6. ビジュアルアイデンティティの構築</label><textarea id="h1-bg6">
+                            </textarea></div>
+                        <div class="carte-field"><label>7. ロゴとスローガン</label><textarea id="h1-bg7">
+                            </textarea></div>
+                        <div class="carte-field"><label>8. ロゴデザイン</label><textarea id="h1-bg8">
+                            </textarea></div>
+                        <div class="carte-field"><label>9. スローガン</label><textarea id="h1-bg9">
+                            </textarea></div>
+                        <div class="carte-field"><label>10. ブランド認知度の向上</label><textarea id="h1-bg10">
+                            </textarea></div>
+                        <div class="carte-field"><label>11. ブランドの信頼性と評判の管理</label><textarea id="h1-bg11">
+                            </textarea></div>
+                        <div class="carte-field"><label>12. 顧客体験の向上</label><textarea id="h1-bg12">
+                            </textarea></div>
+                        <div class="carte-field"><label>13. サービスの一貫性</label><textarea id="h1-bg13">
+                            </textarea></div>
+                        <div class="carte-field"><label>14. 価値KPI</label><textarea id="h1-bg14">
+                            </textarea></div>
+                        <div class="carte-field"><label>15. レビュー管理</label><textarea id="h1-bg15">
+                            </textarea></div>
+                        <div class="carte-field"><label>16. 口コミマーケティング</label><textarea id="h1-bg16">
+                            </textarea></div>
+                        <div class="carte-field"><label>17. 内部ブランディング</label><textarea id="h1-bg17">
+                            </textarea></div>
+                        <div class="carte-field"><label>18. 市場の変化に対応</label><textarea id="h1-bg18">
+                            </textarea></div>
+                        <div class="carte-field"><label>19. トレンドの把握</label><textarea id="h1-bg19">
+                            </textarea></div>
+                        <div class="carte-field"><label>20. 柔軟なブランド戦略</label><textarea id="h1-bg20">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-actions">
+                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
+                </div>
+            </div>
+
+            <!-- Tab: ヒアリング② -->
+            <div class="tab-panel" id="carte-hearing2">
+                <div class="carte-section">
+                    <div class="carte-section-title">🎨 ブランド化戦略</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>ブランド化戦略</label><textarea id="h2-brand" placeholder="ブランディングの方向性・戦略">
+                            </textarea></div>
+                        <div class="carte-field"><label>FC募集契約書</label><textarea id="h2-contract" placeholder="契約書の状態・注意点">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📖 マニュアルガイドライン</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>1. 目的と範囲</label><textarea id="h2-manual1">
+                            </textarea></div>
+                        <div class="carte-field"><label>2. 業務フロー（全体フロー図・各ステップの詳細）</label><textarea id="h2-manual2">
+                            </textarea></div>
+                        <div class="carte-field"><label>3. 役割と責任（役割分担・連絡先）</label><textarea id="h2-manual3">
+                            </textarea></div>
+                        <div class="carte-field"><label>4. 手順とプロセス（作業手順・ポイント）</label><textarea id="h2-manual4">
+                            </textarea></div>
+                        <div class="carte-field"><label>5. 使用するツールと資料</label><textarea id="h2-manual5">
+                            </textarea></div>
+                        <div class="carte-field"><label>6. テンプレートとフォーム</label><textarea id="h2-manual6">
+                            </textarea></div>
+                        <div class="carte-field"><label>7. チェックリスト</label><textarea id="h2-manual7">
+                            </textarea></div>
+                        <div class="carte-field"><label>8. 品質管理</label><textarea id="h2-manual8">
+                            </textarea></div>
+                        <div class="carte-field"><label>9. トラブルシューティング</label><textarea id="h2-manual9">
+                            </textarea></div>
+                        <div class="carte-field"><label>10. 教育とトレーニング</label><textarea id="h2-manual10">
+                            </textarea></div>
+                        <div class="carte-field"><label>11. 業務改善（改善提案・活動の記録）</label><textarea id="h2-manual11">
+                            </textarea></div>
+                        <div class="carte-field"><label>12. 更新履歴（更新履歴の記載・改訂の手順）</label><textarea id="h2-manual12">
+                            </textarea></div>
+                        <div class="carte-field"><label>13. 付録（用語集・関連資料）</label><textarea id="h2-manual13">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">📐 事業計画</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>◾️ 市場調査：ターゲット市場のニーズ、競合他社</label><textarea id="h2-market">
+                            </textarea></div>
+                        <div class="carte-field"><label>◾️ SWOT分析</label><textarea id="h2-swot">
+                            </textarea></div>
+                        <div class="carte-field"><label>◾️ 財務計画：初期投資、収益予測、資金調達</label><textarea id="h2-finance">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-section">
+                    <div class="carte-section-title">⚖️ 法務・ブランド・オペレーション</div>
+                    <div class="carte-grid full">
+                        <div class="carte-field"><label>法人設立</label><textarea id="h2-legal">
+                            </textarea></div>
+                        <div class="carte-field"><label>契約書の整備</label><textarea id="h2-legal-contract">
+                            </textarea></div>
+                        <div class="carte-field"><label>ロゴ・ブランディング</label><textarea id="h2-branding">
+                            </textarea></div>
+                        <div class="carte-field"><label>マーケティング戦略</label><textarea id="h2-marketing">
+                            </textarea></div>
+                        <div class="carte-field"><label>業務マニュアルの作成</label><textarea id="h2-ops-manual">
+                            </textarea></div>
+                        <div class="carte-field"><label>研修プログラム</label><textarea id="h2-training">
+                            </textarea></div>
+                        <div class="carte-field"><label>ITシステムの導入</label><textarea id="h2-it">
+                            </textarea></div>
+                    </div>
+                </div>
+                <div class="carte-actions">
+                    <button class="btn btn-primary" onclick="saveCarte()">💾 保存する</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Gantt Section ========== -->
+        <div class="section" id="gantt">
+            <div class="section-header">
+                <h2><span class="icon">📅</span> ガントチャート</h2>
+                <p>プロジェクト進行管理 — タスク一覧とスケジュール</p>
+            </div>
+            <div class="gantt-container">
+                <div class="gantt-toolbar">
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <button class="btn btn-sm btn-secondary" onclick="ganttPrev()">◀</button>
+                        <span id="gantt-month-label" style="font-size:14px;font-weight:600;min-width:120px;text-align:center;">2026年3月</span>
+                        <button class="btn btn-sm btn-secondary" onclick="ganttNext()">▶</button>
+                    </div>
+                    <button class="btn btn-sm btn-primary" onclick="openTaskModal()">＋ タスク追加</button>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="gantt-table" id="gantt-table"></table>
+                </div>
+            </div>
+            <div style="display:flex;gap:16px;margin-top:16px;font-size:12px;color:var(--gray);">
+                <span><span style="display:inline-block;width:12px;height:12px;background:var(--green);border-radius:3px;vertical-align:middle;margin-right:4px;"></span>完了</span>
+                <span><span style="display:inline-block;width:12px;height:12px;background:var(--gold);border-radius:3px;vertical-align:middle;margin-right:4px;"></span>進行中</span>
+                <span><span style="display:inline-block;width:12px;height:12px;background:var(--blue);border-radius:3px;vertical-align:middle;margin-right:4px;"></span>予定</span>
+                <span><span style="display:inline-block;width:12px;height:12px;background:var(--red);border-radius:3px;vertical-align:middle;margin-right:4px;"></span>遅延</span>
+            </div>
+        </div>
+
+        <!-- ========== Minutes Section ========== -->
+        <div class="section" id="minutes">
+            <div class="section-header">
+                <h2><span class="icon">📝</span> 議事録</h2>
+                <p>MTG記録の作成・管理 — アジェンダ・決定事項・AI要約・アクションアイテム</p>
+            </div>
+            <div style="margin-bottom:20px;">
+                <button class="btn btn-primary" onclick="openMinutesModal()">＋ 新規議事録を作成</button>
+            </div>
+            <div class="minutes-list" id="minutes-list"></div>
+        </div>
+
+
+        <!-- ========== Manual Section ========== -->
+        <div class="section" id="manual">
+            <div class="section-header">
+                <h2><span class="icon">📖</span> マニュアル</h2>
+                <p>本部構築・運営に必要なマニュアル一覧</p>
+            </div>
+            <div style="margin-bottom:16px;">
+                <button class="btn btn-primary btn-sm" onclick="addManual()">＋ マニュアル追加</button>
+            </div>
+            <div id="manual-list"></div>
+        </div>
+
+        <!-- ========== Deliverables Section ========== -->
+        <div class="section" id="deliverables">
+            <div class="section-header">
+                <h2><span class="icon">📦</span> 成果物管理</h2>
+                <p>本部構築・加盟店開発に必要な成果物のチェックリスト</p>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="del-hq">本部構築</button>
+                <button class="tab-btn" data-target="del-recruit">加盟店開発</button>
+            </div>
+            <div class="tab-panel active" id="del-hq">
+                <div class="deliverable-group">
+                    <h3>📋 本部構築に必要な成果物</h3>
+                    <div id="del-hq-list"></div>
+                </div>
+            </div>
+            <div class="tab-panel" id="del-recruit">
+                <div class="deliverable-group">
+                    <h3>🚀 加盟店開発に必要な成果物</h3>
+                    <div id="del-recruit-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Logins Section ========== -->
+        <div class="section" id="logins">
+            <div class="section-header">
+                <h2><span class="icon">🔐</span> ログイン情報</h2>
+                <p>各種サービス・ツールのアクセス情報</p>
+            </div>
+            <div style="margin-bottom:16px;">
+                <button class="btn btn-primary btn-sm" onclick="addLogin()">＋ 追加</button>
+            </div>
+            <div id="login-list"></div>
+        </div>
+
+        <!-- ========== Ads Section ========== -->
+        <div class="section" id="ads">
+            <div class="section-header">
+                <h2><span class="icon">🎨</span> 広告クリエイティブ</h2>
+                <p>Meta広告用バナー・動画台本・広告コピー・カルーセル構成</p>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="ad-banner">バナー指示書</button>
+                <button class="tab-btn" data-target="ad-video">動画広告台本</button>
+                <button class="tab-btn" data-target="ad-copy">広告コピー5パターン</button>
+                <button class="tab-btn" data-target="ad-carousel">カルーセル構成</button>
+            </div>
+            <div class="tab-panel active" id="ad-banner"><div class="md-content" id="md-ad-banner"></div></div>
+            <div class="tab-panel" id="ad-video"><div class="md-content" id="md-ad-video"></div></div>
+            <div class="tab-panel" id="ad-copy"><div class="md-content" id="md-ad-copy"></div></div>
+            <div class="tab-panel" id="ad-carousel"><div class="md-content" id="md-ad-carousel"></div></div>
+        </div>
+
+        <!-- ========== Ad Ops Section ========== -->
+        <div class="section" id="ad-ops">
+            <div class="section-header">
+                <h2><span class="icon">📈</span> 広告運用設計</h2>
+                <p>キャンペーン設計書・A/Bテスト計画・KPI目標</p>
+            </div>
+            <div class="md-content" id="md-ad-ops"></div>
+        </div>
+
+        <!-- ========== Web Pages Section ========== -->
+        <div class="section" id="pages">
+            <div class="section-header">
+                <h2><span class="icon">🌐</span> LP・Webページ</h2>
+                <p>FC募集LP・サンクスページ・セミナー案内ページ・個別面談用提案書</p>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="page-lp">FC募集LP</button>
+                <button class="tab-btn" data-target="page-thanks">サンクスページ</button>
+                <button class="tab-btn" data-target="page-seminar">セミナー案内</button>
+                <button class="tab-btn" data-target="page-proposal">提案書</button>
+            </div>
+            <div class="tab-panel active" id="page-lp">
+                <div class="preview-frame-container">
+                    <div class="preview-toolbar"><span>FC募集LP — rtma-on-fc-lp.surge.sh</span><a href="https://rtma-on-fc-lp.surge.sh" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="https://rtma-on-fc-lp.surge.sh" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="tab-panel" id="page-thanks">
+                <div class="preview-frame-container">
+                    <div class="preview-toolbar"><span>サンクスページ — rtma-on-fc-thanks.surge.sh</span><a href="https://rtma-on-fc-thanks.surge.sh" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="https://rtma-on-fc-thanks.surge.sh" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="tab-panel" id="page-seminar">
+                <div class="preview-frame-container">
+                    <div class="preview-toolbar"><span>セミナー案内ページ — rtma-on-fc-seminar.surge.sh</span><a href="https://rtma-on-fc-seminar.surge.sh" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="https://rtma-on-fc-seminar.surge.sh" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="tab-panel" id="page-proposal">
+                <div class="preview-frame-container">
+                    <div class="preview-toolbar"><span>個別面談用提案書 — rtma-on-fc-proposal.surge.sh</span><a href="https://rtma-on-fc-proposal.surge.sh" target="_blank">新規タブで開く ↗</a></div>
+                    <iframe class="preview-frame" src="https://rtma-on-fc-proposal.surge.sh" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Seminar Section ========== -->
+        <div class="section" id="seminar">
+            <div class="section-header">
+                <h2><span class="icon">🎓</span> セミナースライド構成</h2>
+                <p>FC説明会セミナー 全40枚のスライドテキスト・スピーカーノート</p>
+            </div>
+            <div class="md-content" id="md-seminar"></div>
+        </div>
+
+        <!-- ========== Flow Section ========== -->
+        <div class="section" id="flow">
+            <div class="section-header">
+                <h2><span class="icon">🔗</span> 申込み導線</h2>
+                <p>Googleフォーム設計・LINE公式アカウント設定・確認メール</p>
+            </div>
+            <div class="md-content" id="md-flow"></div>
+        </div>
+
+        <div class="footer">
+            黄土よもぎ蒸し専門店「ON」FC事業部 — 株式会社三十九 / 運営支援：リッツプロ
+        </div>
+    </main>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="task-modal">
+    <div class="modal">
+        <h3>📅 タスク追加・編集</h3>
+        <div class="carte-grid">
+            <div class="carte-field"><label>タスク名</label><input type="text" id="modal-task-name"></div>
+            <div class="carte-field"><label>ステータス</label>
+                <select id="modal-task-status">
+                    <option value="planned">予定</option>
+                    <option value="active">進行中</option>
+                    <option value="done">完了</option>
+                    <option value="delayed">遅延</option>
+                </select>
+            </div>
+            <div class="carte-field"><label>開始日</label><input type="date" id="modal-task-start"></div>
+            <div class="carte-field"><label>終了日</label><input type="date" id="modal-task-end"></div>
+        </div>
+        <div class="carte-actions" style="margin-top:20px;">
+            <button class="btn btn-secondary" onclick="closeTaskModal()">キャンセル</button>
+            <button class="btn btn-danger btn-sm" id="modal-delete-btn" onclick="deleteTask()" style="display:none;">削除</button>
+            <button class="btn btn-primary" onclick="saveTask()">保存</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="minutes-modal">
+    <div class="modal" style="max-width:720px;">
+        <h3>📝 議事録</h3>
+        <div class="carte-grid">
+            <div class="carte-field"><label>日付</label><input type="date" id="modal-min-date"></div>
+            <div class="carte-field"><label>会議タイトル</label><input type="text" id="modal-min-title" placeholder="例：第6回 進捗確認MTG"></div>
+        </div>
+        <div class="carte-grid" style="margin-top:12px;">
+            <div class="carte-field"><label>カテゴリ</label>
+                <select id="modal-min-category">
+                    <option value="定例">定例MTG</option>
+                    <option value="臨時">臨時MTG</option>
+                    <option value="ヒアリング">ヒアリング</option>
+                    <option value="キックオフ">キックオフ</option>
+                    <option value="セミナー">セミナー</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+            <div class="carte-field"><label>参加者</label><input type="text" id="modal-min-attendees" placeholder="例：山田氏、佐藤"></div>
+        </div>
+        <div class="carte-grid full" style="margin-top:12px;">
+            <div class="carte-field"><label>会議動画URL</label><input type="url" id="modal-min-video" placeholder="tldv / Zoom等のURL"></div>
+            <div class="carte-field"><label>📋 アジェンダ（議題）</label><textarea id="modal-min-agenda" style="min-height:80px;" placeholder="1. ○○の進捗確認&#10;2. △△の方針決定&#10;3. 次回スケジュール">
+                            </textarea></div>
+            <div class="carte-field"><label>📝 議事内容</label><textarea id="modal-min-content" style="min-height:120px;" placeholder="議論の詳細を記録">
+                            </textarea></div>
+            <div class="carte-field"><label>✅ 決定事項</label><textarea id="modal-min-decisions" style="min-height:80px;" placeholder="・承認された内容&#10;・合意事項&#10;・確定した方針">
+                            </textarea></div>
+            <div class="carte-field"><label>🤖 AI要約</label><textarea id="modal-min-ai-summary" style="min-height:80px;" placeholder="PLAUD NOTE / tldv等のAI要約を貼り付け">
+                            </textarea></div>
+        </div>
+        <div style="margin-top:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <label style="font-size:13px;font-weight:600;color:var(--gold);">🎯 アクションアイテム</label>
+                <button class="btn btn-sm btn-secondary" onclick="addActionItem()" style="font-size:11px;">＋ 追加</button>
+            </div>
+            <div id="modal-action-items"></div>
+        </div>
+        <div class="carte-grid full" style="margin-top:12px;">
+            <div class="carte-field"><label>次回日程</label><input type="text" id="modal-min-next" placeholder="例：2026年3月10日 14:00"></div>
+        </div>
+        <div class="carte-actions" style="margin-top:20px;">
+            <button class="btn btn-secondary" onclick="closeMinutesModal()">キャンセル</button>
+            <button class="btn btn-danger btn-sm" id="modal-min-delete-btn" onclick="deleteMinutes()" style="display:none;">削除</button>
+            <button class="btn btn-primary" onclick="saveMinutes()">保存</button>
+        </div>
+    </div>
+</div>
+
+<div class="save-toast" id="save-toast">✅ 保存しました</div>
+
+<script>
+// ── Navigation ──
+function navigate(sectionId) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    const navEl = document.querySelector(`[data-section="${sectionId}"]`);
+    if (navEl) navEl.classList.add('active');
+    const sec = document.getElementById(sectionId);
+    const firstTab = sec.querySelector('.tab-btn');
+    if (firstTab) {
+        sec.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        sec.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        firstTab.classList.add('active');
+        document.getElementById(firstTab.dataset.target).classList.add('active');
+    }
+}
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => navigate(link.dataset.section));
+});
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const parent = btn.closest('.section');
+        parent.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+    });
+});
+
+// ── Toast ──
+function showToast(msg) {
+    const t = document.getElementById('save-toast');
+    t.textContent = msg || '✅ 保存しました';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ── Carte Save/Load ──
+const CARTE_KEY = 'rtma-carte-data';
+function getCarteFields() {
+    return document.querySelectorAll('#carte input, #carte textarea, #carte select');
+}
+function saveCarte() {
+    const data = {};
+    getCarteFields().forEach(el => { if (el.id) data[el.id] = el.value; });
+    localStorage.setItem(CARTE_KEY, JSON.stringify(data));
+    showToast('✅ カルテを保存しました');
+}
+function loadCarte() {
+    const raw = localStorage.getItem(CARTE_KEY);
+    if (!raw) return;
+    try {
+        const data = JSON.parse(raw);
+        Object.keys(data).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = data[id];
+        });
+    } catch(e) {}
+}
+loadCarte();
+</script>
+
+<script>
+// ── Gantt Chart ──
+const GANTT_KEY = 'rtma-gantt-tasks';
+let ganttYear = 2026, ganttMonth = 2; // 0-indexed: 2 = March
+let editingTaskIdx = -1;
+
+const defaultTasks = [
+    { name:'LP制作（FC募集）', status:'done', start:'2024-11-01', end:'2024-12-15' },
+    { name:'サンクスページ制作', status:'done', start:'2024-12-01', end:'2024-12-20' },
+    { name:'広告クリエイティブ制作', status:'done', start:'2024-12-10', end:'2025-01-15' },
+    { name:'セミナースライド作成', status:'done', start:'2025-01-01', end:'2025-02-10' },
+    { name:'提案書作成', status:'done', start:'2025-01-15', end:'2025-02-20' },
+    { name:'広告運用設計', status:'done', start:'2025-02-01', end:'2025-02-28' },
+    { name:'契約書整備', status:'active', start:'2026-03-01', end:'2026-03-15' },
+    { name:'Meta広告アカウント作成', status:'active', start:'2026-03-03', end:'2026-03-10' },
+    { name:'大阪店オープン準備', status:'active', start:'2026-03-03', end:'2026-03-11' },
+    { name:'写真素材撮影・共有', status:'planned', start:'2026-03-05', end:'2026-03-15' },
+    { name:'セミナー開催（週2-3回）', status:'planned', start:'2026-03-10', end:'2026-04-30' },
+    { name:'クラウドサイン導入', status:'planned', start:'2026-03-10', end:'2026-03-20' },
+    { name:'マニュアル化サポート', status:'planned', start:'2026-03-15', end:'2026-04-15' },
+    { name:'0次募集 加盟店開拓', status:'planned', start:'2026-03-15', end:'2026-05-31' },
+];
+
+function loadGanttTasks() {
+    const raw = localStorage.getItem(GANTT_KEY);
+    if (raw) { try { return JSON.parse(raw); } catch(e){} }
+    return [...defaultTasks];
+}
+function saveGanttTasks(tasks) {
+    localStorage.setItem(GANTT_KEY, JSON.stringify(tasks));
+}
+
+function renderGantt() {
+    const tasks = loadGanttTasks();
+    const table = document.getElementById('gantt-table');
+    const daysInMonth = new Date(ganttYear, ganttMonth + 1, 0).getDate();
+    const monthNames = ['1月','2月','3月','','5月','6月','7月','8月','9月','10月','11月','12月'];
+    document.getElementById('gantt-month-label').textContent = `${ganttYear}年${monthNames[ganttMonth]}`;
+
+    let html = '<thead><tr><th style="min-width:180px;">タスク名</th><th style="min-width:70px;">状態</th>';
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dow = new Date(ganttYear, ganttMonth, d).getDay();
+        const isWeekend = dow === 0 || dow === 6;
+        html += `<th style="min-width:28px;${isWeekend ? 'color:var(--red);' : ''}">${d}</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    tasks.forEach((task, idx) => {
+        const statusLabels = { done:'完了', active:'進行中', planned:'予定', delayed:'遅延' };
+        html += `<tr>`;
+        html += `<td class="task-name" style="cursor:pointer;" onclick="editTask(${idx})">${task.name}</td>`;
+        html += `<td class="task-status"><span class="status-badge ${task.status}">${statusLabels[task.status] || task.status}</span></td>`;
+
+        const tStart = new Date(task.start);
+        const tEnd = new Date(task.end);
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const cellDate = new Date(ganttYear, ganttMonth, d);
+            const dow = cellDate.getDay();
+            const isWeekend = dow === 0 || dow === 6;
+            let bgStyle = isWeekend ? 'background:rgba(255,255,255,0.02);' : '';
+
+            if (cellDate >= tStart && cellDate <= tEnd) {
+                const isFirst = cellDate.getTime() === tStart.getTime() || d === 1;
+                const isLast = cellDate.getTime() === tEnd.getTime() || d === daysInMonth;
+                let barStyle = `position:absolute;top:6px;bottom:6px;`;
+                barStyle += isFirst ? 'left:2px;' : 'left:0;';
+                barStyle += isLast ? 'right:2px;' : 'right:0;';
+                barStyle += isFirst ? 'border-radius:4px 0 0 4px;' : '';
+                barStyle += isLast ? 'border-radius:0 4px 4px 0;' : '';
+                if (isFirst && isLast) barStyle += 'border-radius:4px;';
+                html += `<td style="position:relative;${bgStyle}"><div class="gantt-bar ${task.status}" style="${barStyle}"></div></td>`;
+            } else {
+                html += `<td style="${bgStyle}"></td>`;
+            }
+        }
+        html += '</tr>';
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    // Update count
+    const countEl = document.getElementById('gantt-task-count');
+    if (countEl) countEl.textContent = tasks.length + '件';
+}
+
+function ganttPrev() { ganttMonth--; if (ganttMonth < 0) { ganttMonth = 11; ganttYear--; } renderGantt(); }
+function ganttNext() { ganttMonth++; if (ganttMonth > 11) { ganttMonth = 0; ganttYear++; } renderGantt(); }
+
+function openTaskModal(idx) {
+    editingTaskIdx = idx !== undefined ? idx : -1;
+    const modal = document.getElementById('task-modal');
+    const delBtn = document.getElementById('modal-delete-btn');
+    if (editingTaskIdx >= 0) {
+        const tasks = loadGanttTasks();
+        const t = tasks[editingTaskIdx];
+        document.getElementById('modal-task-name').value = t.name;
+        document.getElementById('modal-task-status').value = t.status;
+        document.getElementById('modal-task-start').value = t.start;
+        document.getElementById('modal-task-end').value = t.end;
+        delBtn.style.display = 'inline-block';
+    } else {
+        document.getElementById('modal-task-name').value = '';
+        document.getElementById('modal-task-status').value = 'planned';
+        document.getElementById('modal-task-start').value = `${ganttYear}-${String(ganttMonth+1).padStart(2,'0')}-01`;
+        document.getElementById('modal-task-end').value = `${ganttYear}-${String(ganttMonth+1).padStart(2,'0')}-15`;
+        delBtn.style.display = 'none';
+    }
+    modal.classList.add('show');
+}
+function closeTaskModal() { document.getElementById('task-modal').classList.remove('show'); }
+function editTask(idx) { openTaskModal(idx); }
+function saveTask() {
+    const tasks = loadGanttTasks();
+    const t = {
+        name: document.getElementById('modal-task-name').value || '新規タスク',
+        status: document.getElementById('modal-task-status').value,
+        start: document.getElementById('modal-task-start').value,
+        end: document.getElementById('modal-task-end').value
+    };
+    if (editingTaskIdx >= 0) { tasks[editingTaskIdx] = t; } else { tasks.push(t); }
+    saveGanttTasks(tasks);
+    closeTaskModal();
+    renderGantt();
+    showToast('✅ タスクを保存しました');
+}
+function deleteTask() {
+    if (editingTaskIdx < 0) return;
+    const tasks = loadGanttTasks();
+    tasks.splice(editingTaskIdx, 1);
+    saveGanttTasks(tasks);
+    closeTaskModal();
+    renderGantt();
+    showToast('🗑️ タスクを削除しました');
+}
+
+renderGantt();
+</script>
+
+<script>
+// ── Minutes ──
+const MIN_KEY = 'rtma-minutes';
+let editingMinIdx = -1;
+
+const defaultMinutes = [
+    { date:'2026-03-03', title:'第5回 進捗確認・広告運用・店舗開発',
+      category:'定例', attendees:'嶋岡氏、古橋',
+      video:'https://tldv.io/app/meetings/69a67b6f8d99ac0013bf03d2/',
+      agenda:'1. 加盟金・契約条件の確認\n2. 大阪オープン準備状況\n3. 広告運用方針\n4. セミナー体制',
+      content:'加盟金の段階的引き上げ方針、大阪オープンの進捗、Meta広告アカウント準備、セミナースケジュールについて議論。',
+      decisions:'・加盟金: 現在100万円（0次・5店舗目まで）→ 再現性確認後150〜200万へ増額\n・大阪オープン: 3月11日（4席モデル）\n・広告予算: 月30〜50万円\n・契約書: クラウドサインへデジタル化\n・0次募集エリア: 関東圏内\n・セミナー: 週2〜3回ペース',
+      aiSummary:'',
+      actionItems:[
+        {task:'大阪初期費用算出', assignee:'嶋岡氏', deadline:'2026-03-07', status:'完了'},
+        {task:'Meta広告アカウント作成', assignee:'嶋岡氏', deadline:'2026-03-05', status:'完了'},
+        {task:'クラウドサイン導入', assignee:'嶋岡氏', deadline:'2026-03-10', status:'進行中'},
+        {task:'契約書共有', assignee:'嶋岡氏', deadline:'2026-03-10', status:'進行中'},
+        {task:'写真素材共有', assignee:'嶋岡氏', deadline:'2026-03-07', status:'完了'},
+        {task:'デザイン制作物ブラッシュアップ', assignee:'古橋', deadline:'2026-03-10', status:'進行中'},
+        {task:'セミナー担当者顔合わせ設定', assignee:'古橋', deadline:'2026-03-14', status:'未着手'},
+        {task:'マニュアル化サポート', assignee:'古橋', deadline:'2026-03-20', status:'未着手'}
+      ],
+      next:'2026年3月10日' },
+    { date:'2024-11-25', title:'第4回 契約書読み合わせ・大阪プロジェクト',
+      category:'定例', attendees:'嶋岡氏、古橋',
+      video:'https://tldv.io/app/meetings/6909504edf24cf0013e1444b',
+      agenda:'', content:'契約金330万円（税込）・分割払い・70/30の利益分配確認。契約書はクラウドサインで送付。大阪プロジェクト・ゼロ次募集について議論。',
+      decisions:'', aiSummary:'', actionItems:[], next:'' },
+    { date:'2024-11-21', title:'第3回 提案・支援パッケージ詳細',
+      category:'定例', attendees:'嶋岡氏、古橋', video:'', agenda:'',
+      content:'2年支援契約300万円の提案。募集資料・セミナー/LP制作・デザインサポート含む。月1〜2件の加盟契約目標。広告費月30〜50万。',
+      decisions:'', aiSummary:'', actionItems:[], next:'' },
+    { date:'2024-11-01', title:'第2回 事業モデル・収益性深掘り',
+      category:'定例', attendees:'嶋岡氏、古橋', video:'', agenda:'',
+      content:'店舗の収益モデル（4台モデル・月次売上予測）の詳細議論。フランチャイズの再現性と出店戦略について。',
+      decisions:'', aiSummary:'', actionItems:[], next:'' },
+    { date:'2024-10-01', title:'第1回 初回ヒアリング・事業概要',
+      category:'ヒアリング', attendees:'嶋岡氏、古橋', video:'', agenda:'',
+      content:'よもぎ蒸しサロンのフランチャイズ展開の可能性について初回ヒアリング。事業モデル・出店戦略・収益性・将来の売却可能性を議論。',
+      decisions:'', aiSummary:'', actionItems:[], next:'' }
+];
+
+function loadMinutes() {
+    const raw = localStorage.getItem(MIN_KEY);
+    if (raw) { try { return JSON.parse(raw); } catch(e){} }
+    return [...defaultMinutes];
+}
+function saveMinutesList(list) { localStorage.setItem(MIN_KEY, JSON.stringify(list)); }
+
+// Action item management in modal
+let modalActionItems = [];
+
+function addActionItem(task='', assignee='', deadline='', status='未着手') {
+    modalActionItems.push({task, assignee, deadline, status});
+    renderActionItemsInModal();
+}
+
+function removeActionItem(idx) {
+    modalActionItems.splice(idx, 1);
+    renderActionItemsInModal();
+}
+
+function renderActionItemsInModal() {
+    const container = document.getElementById('modal-action-items');
+    if (modalActionItems.length === 0) {
+        container.innerHTML = '<div style="color:var(--gray);font-size:12px;padding:8px;">アクションアイテムなし。「＋ 追加」で追加してください。</div>';
+        return;
+    }
+    container.innerHTML = `
+        <div class="action-item-header"><span>タスク内容</span><span>担当</span><span>期限</span><span>ステータス</span><span></span></div>
+        ${modalActionItems.map((a, i) => `
+        <div class="action-item-row">
+            <input type="text" value="${a.task}" placeholder="アクション内容" onchange="modalActionItems[${i}].task=this.value">
+            <input type="text" value="${a.assignee}" placeholder="担当者" onchange="modalActionItems[${i}].assignee=this.value">
+            <input type="date" value="${a.deadline}" onchange="modalActionItems[${i}].deadline=this.value">
+            <select onchange="modalActionItems[${i}].status=this.value">
+                <option value="未着手" ${a.status==='未着手'?'selected':''}>未着手</option>
+                <option value="進行中" ${a.status==='進行中'?'selected':''}>進行中</option>
+                <option value="完了" ${a.status==='完了'?'selected':''}>完了</option>
+            </select>
+            <button class="remove-action" onclick="removeActionItem(${i})">✕</button>
+        </div>`).join('')}`;
+}
+
+function renderMinutes() {
+    const list = loadMinutes();
+    const container = document.getElementById('minutes-list');
+    const countEl = document.getElementById('minutes-count');
+    if (countEl) countEl.textContent = list.length + '回';
+
+    container.innerHTML = list.map((m, i) => {
+        const isLatest = i === 0;
+        const cat = m.category || '定例';
+        const videoBtn = m.video ? `<a href="${m.video}" target="_blank" style="background:var(--gold-dim);color:var(--gold);font-size:12px;font-weight:600;padding:6px 14px;border-radius:8px;text-decoration:none;white-space:nowrap;">🎥 録画</a>` : '';
+
+        // Build detail sections
+        let detailParts = [];
+        if (m.agenda) detailParts.push(`<div class="minutes-section-label">📋 アジェンダ</div><div>${m.agenda.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
+        if (m.content) detailParts.push(`<div class="minutes-section-label">📝 議事内容</div><div>${m.content.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
+        if (m.decisions) detailParts.push(`<div class="minutes-section-label">✅ 決定事項</div><div>${m.decisions.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
+        if (m.aiSummary) detailParts.push(`<div class="minutes-section-label">🤖 AI要約</div><div>${m.aiSummary.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
+
+        // Action items table
+        const actions = m.actionItems || [];
+        if (actions.length > 0) {
+            const statusClass = s => s==='完了'?'action-status-done':s==='進行中'?'action-status-progress':'action-status-todo';
+            const statusIcon = s => s==='完了'?'✅':s==='進行中'?'🔄':'⬜';
+            const actionsHtml = `<div class="minutes-section-label">🎯 アクションアイテム (${actions.filter(a=>a.status==='完了').length}/${actions.length}完了)</div>
+                <table class="minutes-actions-table">
+                    <tr><th>タスク</th><th>担当</th><th>期限</th><th>状態</th></tr>
+                    ${actions.map(a => `<tr><td>${a.task}</td><td>${a.assignee}</td><td>${a.deadline}</td><td class="${statusClass(a.status)}">${statusIcon(a.status)} ${a.status}</td></tr>`).join('')}
+                </table>`;
+            detailParts.push(actionsHtml);
+        } else if (m.actions) {
+            // Backward compat: old format
+            detailParts.push(`<div class="minutes-section-label">🎯 Next Action</div><div>${m.actions.replace(/\\n/g,'<br>').replace(/\n/g,'<br>')}</div>`);
+        }
+
+        return `<div class="minutes-card" style="cursor:pointer;" onclick="editMinutes(${i})">
+            <div class="minutes-header">
+                <div>
+                    <div class="minutes-meta">
+                        ${isLatest ? '<span style="background:var(--gold);color:#000;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;">最新</span>' : ''}
+                        <span class="minutes-category cat-${cat}">${cat}</span>
+                        <span style="color:var(--gray);font-size:12px;">${m.date}</span>
+                        <span style="color:var(--gray);font-size:11px;">👥 ${m.attendees || ''}</span>
+                    </div>
+                    <h3>${m.title}</h3>
+                </div>
+                ${videoBtn}
+            </div>
+            <div class="minutes-detail">${detailParts.join('')}</div>
+        </div>`;
+    }).join('');
+}
+
+function openMinutesModal(idx) {
+    editingMinIdx = idx !== undefined ? idx : -1;
+    const modal = document.getElementById('minutes-modal');
+    const delBtn = document.getElementById('modal-min-delete-btn');
+    if (editingMinIdx >= 0) {
+        const list = loadMinutes();
+        const m = list[editingMinIdx];
+        document.getElementById('modal-min-date').value = m.date;
+        document.getElementById('modal-min-title').value = m.title;
+        document.getElementById('modal-min-category').value = m.category || '定例';
+        document.getElementById('modal-min-attendees').value = m.attendees || '';
+        document.getElementById('modal-min-video').value = m.video || '';
+        document.getElementById('modal-min-agenda').value = m.agenda || '';
+        document.getElementById('modal-min-content').value = m.content || '';
+        document.getElementById('modal-min-decisions').value = m.decisions || '';
+        document.getElementById('modal-min-ai-summary').value = m.aiSummary || '';
+        document.getElementById('modal-min-next').value = m.next || '';
+        modalActionItems = (m.actionItems || []).map(a => ({...a}));
+        delBtn.style.display = 'inline-block';
+    } else {
+        document.getElementById('modal-min-date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('modal-min-title').value = '';
+        document.getElementById('modal-min-category').value = '定例';
+        document.getElementById('modal-min-attendees').value = '';
+        document.getElementById('modal-min-video').value = '';
+        document.getElementById('modal-min-agenda').value = '';
+        document.getElementById('modal-min-content').value = '';
+        document.getElementById('modal-min-decisions').value = '';
+        document.getElementById('modal-min-ai-summary').value = '';
+        document.getElementById('modal-min-next').value = '';
+        modalActionItems = [];
+        delBtn.style.display = 'none';
+    }
+    renderActionItemsInModal();
+    modal.classList.add('show');
+}
+function closeMinutesModal() { document.getElementById('minutes-modal').classList.remove('show'); }
+function editMinutes(idx) { openMinutesModal(idx); }
+
+function saveMinutes() {
+    const list = loadMinutes();
+    const m = {
+        date: document.getElementById('modal-min-date').value,
+        title: document.getElementById('modal-min-title').value || '新規議事録',
+        category: document.getElementById('modal-min-category').value,
+        attendees: document.getElementById('modal-min-attendees').value,
+        video: document.getElementById('modal-min-video').value,
+        agenda: document.getElementById('modal-min-agenda').value,
+        content: document.getElementById('modal-min-content').value,
+        decisions: document.getElementById('modal-min-decisions').value,
+        aiSummary: document.getElementById('modal-min-ai-summary').value,
+        actionItems: modalActionItems.filter(a => a.task.trim() !== ''),
+        next: document.getElementById('modal-min-next').value
+    };
+    if (editingMinIdx >= 0) { list[editingMinIdx] = m; } else { list.unshift(m); }
+    saveMinutesList(list);
+    closeMinutesModal();
+    renderMinutes();
+    showToast('✅ 議事録を保存しました');
+}
+function deleteMinutes() {
+    if (editingMinIdx < 0) return;
+    const list = loadMinutes();
+    list.splice(editingMinIdx, 1);
+    saveMinutesList(list);
+    closeMinutesModal();
+    renderMinutes();
+    showToast('🗑️ 議事録を削除しました');
+}
+
+renderMinutes();
+</script>
+
+<script>
+// ── Markdown Content (from original dashboard) ──
+const mdContent = {};
+const externalMd = {};
+
+// Ad Banner
+mdContent['md-ad-banner'] = `# 伴走型FC事業支援 FC募集 — 静止画バナーデザイン指示書
+
+> 画像生成AI（Canva AI / Midjourney / DALL-E）またはデザイナーへの指示書
+
+---
+
+## パターンA：収益訴求（正方形 1080×1080px）
+**メインコピー：** 年間純利益 542万円
+**サブコピー：** 4台・1名運営のサロンビジネス
+**CTA：** 無料セミナー開催中 ▶
+
+## パターンB：未経験訴求
+**メインコピー：** 技術ゼロでも、開業できた。
+**サブコピー：** 未経験から2ヶ月で黒字化したオーナーの声
+
+## パターンC：低投資訴求
+**メインコピー：** 500万円で、始まる。
+**サブコピー：** マンションの1室から。14ヶ月で投資回収。
+
+## パターンD：市場訴求
+**メインコピー：** 温活ブーム × サブスク収益
+
+## パターンE：ライフスタイル訴求
+**メインコピー：** 1人で、自分のペースで。
+
+## 共通デザインルール
+| 項目 | 指定 |
+|------|------|
+| メインカラー | フォレストグリーン #446829 |
+| アクセント | ゴールド #BC9B5D |
+| 数字フォント | Inter（Black or ExtraBold） |
+| 日本語フォント | Noto Sans JP（Bold or Black） |`;
+
+// Ad Video
+mdContent['md-ad-video'] = `# 伴走型FC事業支援 FC募集 — 動画広告台本（15〜30秒）
+
+## パターンA：嶋岡さん出演バージョン（トーキングヘッド）
+**尺：30秒 / 形式：縦型9:16**
+
+| 秒数 | テロップ |
+|------|----------|
+| 0〜3秒 | **技術ゼロ。資格ゼロ。年収500万超。** |
+| 3〜8秒 | 黄土よもぎ蒸し専門店「ON」 |
+| 8〜15秒 | ✅技術不要 ✅1名運営 ✅マンションでOK |
+| 15〜22秒 | 📊年間純利益 **542万円** / 利益率 **35.6%** |
+| 22〜27秒 | 「2ヶ月で黒字化しました」 |
+| 27〜30秒 | 🎓 **無料セミナー開催中** |
+
+## パターンB：テキスト＋BGMバージョン（ナレーションなし）
+**尺：25秒 / 形式：縦型9:16**`;
+
+// Ad Copy
+mdContent['md-ad-copy'] = `# 伴走型FC事業支援 FC募集 — Meta広告コピー 5パターン
+
+## パターン1：副業を探している会社員向け
+**見出し：** 副業OK。現場に立たなくていいサロンFC
+
+## パターン2：脱サラ・独立願望がある方向け
+**見出し：** 未経験から2ヶ月で黒字化したサロン開業
+
+## パターン3：既に法人を持つ経営者向け
+**見出し：** 原価率8%。利益率35%超のFC事業
+
+## パターン4：女性・美容に興味がある方向け
+**見出し：** 技術がなくても始められる。自分のサロン
+
+## パターン5：投資・資産形成に興味がある方向け
+**見出し：** 500万円→3年で1,693万円。ROI 338%`;
+
+// Ad Carousel
+mdContent['md-ad-carousel'] = `# 伴走型FC事業支援 FC募集 — カルーセル広告構成
+
+## パターンA：ビジネスモデル紹介型
+1. **年間純利益542万円のサロンビジネス**
+2. **技術不要。たった1人で運営できます**
+3. **原価率8〜15%。サブスクで安定収益**
+4. **2ヶ月で黒字化した実際のオーナーの声**
+5. **まずは無料セミナーへ** → CTA
+
+## パターンB：他業態比較型
+1. **FCビジネス、どれを選ぶ？**
+2. 飲食FC: 初期1,000万〜 / 技術必要 ×
+3. エステFC: 初期500万〜 / 技術研修必須 △
+4. 伴走型FC事業支援: 500万〜 / 技術不要 / 14ヶ月回収 ◎
+5. **無料セミナーで詳しく解説します** → CTA`;
+
+// Seminar
+externalMd['md-seminar'] = `# 伴走型FC事業支援 FC募集 — セミナースライド構成
+> 合計40枚（Canva ワイドスクリーン 16:9）
+
+## 第1部：共感・信頼構築（5枚） スライド1〜5
+## 第2部：市場の可能性（4枚） スライド6〜9
+## 第3部：ONのビジネスモデル（11枚） スライド10〜20
+## 第4部：収益データ（7枚） スライド21〜27
+- **年間純利益 ¥5,417,194**（利益率35.6%）
+- **3年累計純利益 ¥16,930,196**
+## 第5部：オーナーの声（4枚） スライド28〜31
+## 第6部：FC概要・CTA（9枚） スライド32〜40`;
+
+// Flow
+externalMd['md-flow'] = `# 伴走型FC事業支援 FC募集 — 申込み導線
+
+## 3-1. セミナー申込フォーム設計（Googleフォーム）
+| # | 項目名 | 形式 | 必須 |
+|---|--------|------|------|
+| 1 | お名前 | 記述式 | ✅ |
+| 2 | メールアドレス | 記述式 | ✅ |
+| 3 | 電話番号 | 記述式 | ✅ |
+| 4 | ご年齢 | プルダウン | ✅ |
+| 5 | 現在のご職業 | プルダウン | ✅ |
+| 6 | 開業への関心度 | ラジオボタン | ✅ |
+
+## 3-2. LINE公式アカウント設定内容
+リッチメニュー構成（2行×3列）
+
+## 3-3. 申込確認メール
+- メール1：申込完了直後（自動返信）
+- メール2：前日リマインド`;
+
+// Ad Ops
+externalMd['md-ad-ops'] = `# 伴走型FC事業支援 FC募集 — 広告運用設計
+
+## キャンペーン全体構成
+📁 キャンペーン：【リード】伴走型FC事業支援FC募集_2026年3月
+├── 📂 広告セット1：起業・副業関心層
+├── 📂 広告セット2：美容・健康関心層
+└── 📂 広告セット3：投資・資産形成関心層
+
+## KPI目標値
+| 指標 | 目標 | 判断基準 |
+|------|------|----------|
+| CTR | 1.0%以上 | 0.5%以下なら改善 |
+| CPC | ¥300以下 | ¥500超なら要改善 |
+| CPL | ¥5,000以下 | ¥8,000超なら停止検討 |
+
+## 4週間運用スケジュール
+| 週 | やること |
+|----|----------|
+| Week 1 | 全広告配信開始（触らない） |
+| Week 2 | CTR・CPC確認 |
+| Week 3 | 勝ちクリエイティブに予算集中 |
+| Week 4 | 月次レポート・翌月計画 |`;
+
+// Render
+Object.keys(mdContent).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = marked.parse(mdContent[id]);
+});
+Object.keys(externalMd).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = marked.parse(externalMd[id]);
+});
+</script>
+
+
+<script>
+// ── Manual Section ──
+const MANUAL_KEY = 'rtma-manuals';
+const defaultManuals = [
+    { title:'業務フロー・施術マニュアル', desc:'施術の9ステップフロー、接客手順、開店・閉店チェックリスト', content:'# 業務フロー・施術マニュアル\n\n## 施術フロー（9ステップ）\n1. 予約確認・準備\n2. お客様お出迎え\n3. カウンセリング\n4. よもぎ蒸し準備（ハーブセット）\n5. お客様着替え\n6. よもぎ蒸し施術（40分）\n7. 施術終了・お茶提供\n8. 次回予約確認\n9. お見送り・後片付け' },
+    { title:'FC加盟オーナー研修プログラム', desc:'新規オーナー向け研修カリキュラム、スケジュール、評価基準', content:'' },
+    { title:'集客・マーケティングマニュアル', desc:'HPB運用、Instagram投稿ガイド、LINE公式運用ルール', content:'' },
+    { title:'衛生管理・安全基準マニュアル', desc:'清掃チェックリスト、衛生基準、緊急時対応', content:'' },
+    { title:'経理・数値管理マニュアル', desc:'日次売上報告、月次報告フォーマット、PL管理', content:'' },
+    { title:'サブスク会員管理マニュアル', desc:'会員プラン説明、入退会処理、契約更新手順', content:'' },
+];
+
+function loadManuals() {
+    const raw = localStorage.getItem(MANUAL_KEY);
+    if (raw) { try { return JSON.parse(raw); } catch(e){} }
+    return [...defaultManuals];
+}
+function saveManuals(list) { localStorage.setItem(MANUAL_KEY, JSON.stringify(list)); }
+
+function renderManuals() {
+    const list = loadManuals();
+    const container = document.getElementById('manual-list');
+    const countEl = document.getElementById('manual-count');
+    if (countEl) countEl.textContent = list.length + '件';
+    container.innerHTML = list.map((m, i) => `
+        <div class="manual-card" onclick="toggleManual(${i}, event)">
+            <h3>📄 ${m.title} <span style="font-size:11px;color:var(--gray);font-weight:400;margin-left:auto;">${m.content ? '✅ 作成済み' : '📝 未作成'}</span></h3>
+            <p>${m.desc}</p>
+            <div class="manual-editor" id="manual-editor-${i}">
+                <textarea id="manual-content-${i}" placeholder="マニュアル内容をMarkdownで記述...">${m.content || ''}</textarea>
+                <div style="display:flex;gap:8px;margin-top:8px;justify-content:flex-end;">
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();deleteManual(${i})">削除</button>
+                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();saveManualContent(${i})">保存</button>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+function toggleManual(idx, event) {
+    const editor = document.getElementById(`manual-editor-${idx}`);
+    editor.classList.toggle('open');
+}
+function saveManualContent(idx) {
+    const list = loadManuals();
+    list[idx].content = document.getElementById(`manual-content-${idx}`).value;
+    saveManuals(list);
+    renderManuals();
+    showToast('✅ マニュアルを保存しました');
+}
+function addManual() {
+    const title = prompt('マニュアルタイトル：');
+    if (!title) return;
+    const list = loadManuals();
+    list.push({ title, desc:'', content:'' });
+    saveManuals(list);
+    renderManuals();
+}
+function deleteManual(idx) {
+    const list = loadManuals();
+    list.splice(idx, 1);
+    saveManuals(list);
+    renderManuals();
+    showToast('🗑️ 削除しました');
+}
+renderManuals();
+
+// ── Deliverables Section ──
+const DEL_KEY = 'rtma-deliverables';
+const defaultDeliverables = {
+    hq: [
+        { name:'お客様カルテ（ヒアリングシート）', done:true, link:'#', linkLabel:'カルテ' },
+        { name:'ガントチャート / スケジュール管理', done:true, link:'#', linkLabel:'ガント' },
+        { name:'MTG議事録シート', done:true, link:'#', linkLabel:'議事録' },
+        { name:'商標登録の申請', done:false, link:'', linkLabel:'' },
+        { name:'FC加盟基本契約書', done:false, link:'', linkLabel:'' },
+        { name:'業務マニュアル（施術フロー）', done:false, link:'', linkLabel:'' },
+        { name:'研修プログラム', done:false, link:'', linkLabel:'' },
+        { name:'衛生管理マニュアル', done:false, link:'', linkLabel:'' },
+        { name:'サブスク会員管理マニュアル', done:false, link:'', linkLabel:'' },
+        { name:'経理・数値管理マニュアル', done:false, link:'', linkLabel:'' },
+        { name:'集客マーケティングマニュアル', done:false, link:'', linkLabel:'' },
+        { name:'クラウドサイン導入・契約デジタル化', done:false, link:'', linkLabel:'' },
+    ],
+    recruit: [
+        { name:'FC募集LP', done:true, link:'https://rtma-on-fc-lp.surge.sh', linkLabel:'LP' },
+        { name:'セミナースライド（40枚）', done:true, link:'#', linkLabel:'スライド' },
+        { name:'個別面談用提案書', done:true, link:'https://rtma-on-fc-proposal.surge.sh', linkLabel:'提案書' },
+        { name:'広告クリエイティブ（4種）', done:true, link:'#', linkLabel:'広告' },
+        { name:'広告運用設計', done:true, link:'#', linkLabel:'運用設計' },
+        { name:'セミナー案内ページ', done:true, link:'https://rtma-on-fc-seminar.surge.sh', linkLabel:'案内' },
+        { name:'サンクスページ', done:true, link:'https://rtma-on-fc-thanks.surge.sh', linkLabel:'サンクス' },
+        { name:'申込み導線（フォーム・LINE・メール）', done:true, link:'#', linkLabel:'導線' },
+        { name:'営業資料（事例集）', done:false, link:'', linkLabel:'' },
+        { name:'顧客インタビュー動画', done:false, link:'', linkLabel:'' },
+        { name:'広告レポート / PL管理シート', done:false, link:'', linkLabel:'※後日追加' },
+    ]
+};
+
+function loadDeliverables() {
+    const raw = localStorage.getItem(DEL_KEY);
+    if (raw) { try { return JSON.parse(raw); } catch(e){} }
+    return JSON.parse(JSON.stringify(defaultDeliverables));
+}
+function saveDeliverables(data) { localStorage.setItem(DEL_KEY, JSON.stringify(data)); }
+
+function renderDeliverables() {
+    const data = loadDeliverables();
+    ['hq', 'recruit'].forEach(type => {
+        const container = document.getElementById(`del-${type}-list`);
+        const items = data[type];
+        container.innerHTML = items.map((item, i) => {
+            const statusClass = item.done ? 'done' : 'planned';
+            const statusText = item.done ? '完了' : '未着手';
+            const linkEl = item.link && item.link !== '#' ? `<a class="deliverable-link" href="${item.link}" target="_blank" onclick="event.stopPropagation();">${item.linkLabel || '開く'} ↗</a>` : '';
+            return `<div class="deliverable-item">
+                <input type="checkbox" class="deliverable-check" ${item.done ? 'checked' : ''} onchange="toggleDeliverable('${type}',${i},this.checked)">
+                <span class="deliverable-name">${item.name}</span>
+                <span class="deliverable-status status-badge ${statusClass}">${statusText}</span>
+                ${linkEl}
+            </div>`;
+        }).join('');
+    });
+    // Update count
+    const all = [...data.hq, ...data.recruit];
+    const done = all.filter(x => x.done).length;
+    const countEl = document.getElementById('deliverables-count');
+    if (countEl) countEl.textContent = `${done}/${all.length}`;
+}
+
+function toggleDeliverable(type, idx, checked) {
+    const data = loadDeliverables();
+    data[type][idx].done = checked;
+    saveDeliverables(data);
+    renderDeliverables();
+    showToast(checked ? '✅ 完了にしました' : '⬜ 未着手に戻しました');
+}
+renderDeliverables();
+
+// ── Login Info Section ──
+const LOGIN_KEY = 'rtma-logins';
+const defaultLogins = [
+    { service:'Meta広告マネージャ', icon:'📊', url:'https://business.facebook.com/', user:'', password:'', note:'嶋岡氏がアカウント作成予定' },
+    { service:'UTAGE', icon:'🔧', url:'', user:'', password:'', note:'' },
+    { service:'LINE公式アカウント', icon:'💬', url:'', user:'', password:'', note:'伴走型FC事業支援 FC事業説明会' },
+    { service:'ホットペッパービューティー (HPB)', icon:'💇', url:'', user:'', password:'', note:'集客メインチャネル' },
+    { service:'クラウドサイン', icon:'📝', url:'', user:'', password:'', note:'契約書デジタル化用' },
+    { service:'surge.sh（デプロイ）', icon:'🌐', url:'https://ritzpro-sanjuku-dashboard.surge.sh', user:'hiroshifuruhashi.imp@gmail.com', password:'', note:'LP・ダッシュボード公開用' },
+];
+
+function loadLogins() {
+    const raw = localStorage.getItem(LOGIN_KEY);
+    if (raw) { try { return JSON.parse(raw); } catch(e){} }
+    return [...defaultLogins];
+}
+function saveLogins(list) { localStorage.setItem(LOGIN_KEY, JSON.stringify(list)); }
+
+function renderLogins() {
+    const list = loadLogins();
+    const container = document.getElementById('login-list');
+    const countEl = document.getElementById('logins-count');
+    if (countEl) countEl.textContent = list.length + '件';
+    container.innerHTML = list.map((l, i) => `
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-title">${l.icon} ${l.service}</div>
+                <div style="display:flex;gap:4px;">
+                    <button class="btn btn-danger btn-sm" onclick="deleteLogin(${i})" style="padding:4px 8px;font-size:11px;">×</button>
+                </div>
+            </div>
+            <div class="login-grid">
+                <div class="login-field">
+                    <label>URL</label>
+                    <div class="login-val">
+                        <input type="text" value="${l.url || ''}" onchange="updateLogin(${i},'url',this.value)" placeholder="https://...">
+                        ${l.url ? `<a href="${l.url}" target="_blank" class="copy-btn">↗</a>` : ''}
+                    </div>
+                </div>
+                <div class="login-field">
+                    <label>メモ</label>
+                    <input type="text" value="${l.note || ''}" onchange="updateLogin(${i},'note',this.value)" placeholder="備考">
+                </div>
+                <div class="login-field">
+                    <label>ユーザー名 / ID</label>
+                    <div class="login-val">
+                        <input type="text" value="${l.user || ''}" onchange="updateLogin(${i},'user',this.value)" placeholder="user@example.com">
+                        <button class="copy-btn" onclick="copyText('${l.user}')">📋</button>
+                    </div>
+                </div>
+                <div class="login-field">
+                    <label>パスワード</label>
+                    <div class="login-val">
+                        <input type="password" id="pw-${i}" value="${l.password || ''}" onchange="updateLogin(${i},'password',this.value)" placeholder="••••••">
+                        <button class="toggle-pw" onclick="togglePw(${i})">👁</button>
+                        <button class="copy-btn" onclick="copyText(document.getElementById('pw-${i}').value)">📋</button>
+                    </div>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+function updateLogin(idx, field, value) {
+    const list = loadLogins();
+    list[idx][field] = value;
+    saveLogins(list);
+    showToast('✅ 保存しました');
+}
+function togglePw(idx) {
+    const el = document.getElementById(`pw-${idx}`);
+    el.type = el.type === 'password' ? 'text' : 'password';
+}
+function copyText(txt) {
+    if (!txt) return;
+    navigator.clipboard.writeText(txt).then(() => showToast('📋 コピーしました'));
+}
+function addLogin() {
+    const service = prompt('サービス名：');
+    if (!service) return;
+    const list = loadLogins();
+    list.push({ service, icon:'🔑', url:'', user:'', password:'', note:'' });
+    saveLogins(list);
+    renderLogins();
+}
+function deleteLogin(idx) {
+    const list = loadLogins();
+    list.splice(idx, 1);
+    saveLogins(list);
+    renderLogins();
+    showToast('🗑️ 削除しました');
+}
+renderLogins();
+</script>
+
+</body>
+</html>

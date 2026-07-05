@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>リッツプロ｜マーケティング施策ロードマップ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --teal-light: #1A6B70;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .06)
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg-gray);
+            color: var(--text-body);
+            line-height: 1.7
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 60px 20px 50px;
+            text-align: center
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 8px
+        }
+
+        .hero .sub {
+            font-size: 15px;
+            opacity: .8;
+            margin-bottom: 16px
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, .2);
+            border: 1px solid rgba(232, 101, 10, .5);
+            color: var(--orange-light);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: -30px 16px 30px;
+            position: relative;
+            z-index: 2
+        }
+
+        .s-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee
+        }
+
+        .s-card .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--orange)
+        }
+
+        .s-card .lbl {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 16px;
+            padding: 8px;
+            background: #fff;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow)
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-light);
+            font-family: inherit;
+            transition: .2s
+        }
+
+        .tab-btn.active {
+            background: var(--teal);
+            color: #fff
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: var(--bg-gray)
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block
+        }
+
+        /* Section */
+        .section {
+            padding: 40px 16px
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 6px
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 24px
+        }
+
+        /* Roadmap Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--teal), var(--orange), var(--green))
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--teal);
+            background: #fff;
+            z-index: 1
+        }
+
+        .timeline-item.phase-1::before {
+            border-color: var(--red)
+        }
+
+        .timeline-item.phase-2::before {
+            border-color: var(--orange)
+        }
+
+        .timeline-item.phase-3::before {
+            border-color: #f59e0b
+        }
+
+        .timeline-item.phase-4::before {
+            border-color: var(--green)
+        }
+
+        .timeline-item.phase-5::before {
+            border-color: #3b82f6
+        }
+
+        .timeline-item.phase-6::before {
+            border-color: #8b5cf6
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff
+        }
+
+        .phase-1 .phase-badge {
+            background: var(--red)
+        }
+
+        .phase-2 .phase-badge {
+            background: var(--orange)
+        }
+
+        .phase-3 .phase-badge {
+            background: #f59e0b
+        }
+
+        .phase-4 .phase-badge {
+            background: var(--green)
+        }
+
+        .phase-5 .phase-badge {
+            background: #3b82f6
+        }
+
+        .phase-6 .phase-badge {
+            background: #8b5cf6
+        }
+
+        .tl-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee
+        }
+
+        .tl-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px
+        }
+
+        .deliverable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px
+        }
+
+        .d-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 10px 12px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+            font-size: 13px;
+            border-left: 3px solid var(--teal)
+        }
+
+        .d-item.critical {
+            border-left-color: var(--orange);
+            background: var(--orange-bg)
+        }
+
+        .d-item .icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .d-item .d-name {
+            font-weight: 500;
+            color: var(--text-dark)
+        }
+
+        .d-item .d-desc {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 2px
+        }
+
+        /* 8-Step Grid */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px
+        }
+
+        .step-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--teal);
+            position: relative
+        }
+
+        .step-card.critical-step {
+            border-top-color: var(--orange)
+        }
+
+        .step-num {
+            position: absolute;
+            top: -14px;
+            left: 16px;
+            background: var(--teal);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter';
+            font-size: 13px;
+            font-weight: 700
+        }
+
+        .step-card.critical-step .step-num {
+            background: var(--orange)
+        }
+
+        .step-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 8px 0
+        }
+
+        .step-card ul {
+            list-style: none;
+            font-size: 12px
+        }
+
+        .step-card li {
+            padding: 3px 0;
+            border-bottom: 1px solid #f3f4f6
+        }
+
+        .step-card li::before {
+            content: '▸ ';
+            color: var(--orange)
+        }
+
+        /* Funnel */
+        .funnel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin: 20px 0
+        }
+
+        .funnel-stage {
+            text-align: center;
+            padding: 16px 12px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            min-width: 120px;
+            clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%, 15% 50%);
+            margin-left: -20px
+        }
+
+        .funnel-stage:first-child {
+            clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+            margin-left: 0
+        }
+
+        .funnel-stage:nth-child(1) {
+            background: #ef4444
+        }
+
+        .funnel-stage:nth-child(2) {
+            background: var(--orange)
+        }
+
+        .funnel-stage:nth-child(3) {
+            background: #f59e0b
+        }
+
+        .funnel-stage:nth-child(4) {
+            background: var(--green)
+        }
+
+        .funnel-stage:nth-child(5) {
+            background: #3b82f6
+        }
+
+        .funnel-stage:nth-child(6) {
+            background: #8b5cf6
+        }
+
+        .funnel-stage .f-num {
+            font-family: 'Inter';
+            font-size: 20px;
+            font-weight: 800;
+            display: block
+        }
+
+        /* HQ Checklist */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .cl-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow)
+        }
+
+        .cl-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .cl-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px solid #f3f4f6
+        }
+
+        .cl-item .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .dot.done {
+            background: var(--green)
+        }
+
+        .dot.wip {
+            background: var(--orange)
+        }
+
+        .dot.todo {
+            background: #d1d5db
+        }
+
+        /* Client Overview */
+        .client-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px
+        }
+
+        .client-card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--teal)
+        }
+
+        .client-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px
+        }
+
+        .client-card .c-type {
+            font-size: 11px;
+            color: var(--orange);
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .client-card .c-items {
+            font-size: 12px;
+            color: var(--text-light)
+        }
+
+        .client-card .c-items span {
+            display: inline-block;
+            background: var(--bg-gray);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 11px
+        }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .hero h1 {
+                font-size: 24px
+            }
+
+            .summary-grid,
+            .step-grid,
+            .checklist-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .funnel {
+                flex-direction: column
+            }
+
+            .funnel-stage {
+                clip-path: none;
+                margin-left: 0;
+                border-radius: 8px;
+                width: 100%
+            }
+
+            .deliverable-grid {
+                grid-template-columns: 1fr
+            }
+
+            .tab-nav {
+                gap: 4px
+            }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 12px
+            }
+        }
+
+        @media(max-width:480px) {
+
+            .summary-grid,
+            .step-grid,
+            .checklist-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="container">
+            <div class="badge">📋 RITZ PRO × F PRODUCTION</div>
+            <h1>マーケティング施策 ロードマップ</h1>
+            <p class="sub">顧客向け制作物・施策の全体像を可視化｜本部構築 × 加盟店開発</p>
+        </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="container">
+        <div class="summary-grid">
+            <div class="s-card">
+                <div class="num">2</div>
+                <div class="lbl">サービス軸</div>
+            </div>
+            <div class="s-card">
+                <div class="num">6</div>
+                <div class="lbl">制作フェーズ</div>
+            </div>
+            <div class="s-card">
+                <div class="num">42+</div>
+                <div class="lbl">制作物アイテム</div>
+            </div>
+            <div class="s-card">
+                <div class="num">8</div>
+                <div class="lbl">スケールアップSTEP</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB NAV -->
+    <div class="container">
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="showTab('overview')">📊 全体像</button>
+            <button class="tab-btn" onclick="showTab('roadmap')">🗺️ ロードマップ</button>
+            <button class="tab-btn" onclick="showTab('hq')">🏗️ 本部構築</button>
+            <button class="tab-btn" onclick="showTab('recruit')">📢 加盟店開発</button>
+            <button class="tab-btn" onclick="showTab('8step')">🚀 8ステップ</button>
+            <button class="tab-btn" onclick="showTab('clients')">👥 顧客一覧</button>
+        </div>
+    </div>
+
+    <!-- TAB: OVERVIEW -->
+    <div id="overview" class="tab-content active">
+        <div class="section container">
+            <div class="section-label">OVERVIEW</div>
+            <div class="section-title">加盟店獲得ファネル — 全体フロー</div>
+            <div class="funnel">
+                <div class="funnel-stage">
+                    <div class="f-num">①</div>Meta広告
+                </div>
+                <div class="funnel-stage">
+                    <div class="f-num">②</div>LP
+                </div>
+                <div class="funnel-stage">
+                    <div class="f-num">③</div>申込導線
+                </div>
+                <div class="funnel-stage">
+                    <div class="f-num">④</div>セミナー
+                </div>
+                <div class="funnel-stage">
+                    <div class="f-num">⑤</div>個別面談
+                </div>
+                <div class="funnel-stage">
+                    <div class="f-num">⑥</div>契約
+                </div>
+            </div>
+
+            <div style="margin-top:32px">
+                <div class="section-title" style="font-size:20px">リッツプロの2本柱</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                    <div class="tl-card" style="border-top:3px solid var(--teal)">
+                        <h3>🏗️ 本部構築（HQ Construction）</h3>
+                        <p style="font-size:13px;margin-bottom:12px">FC本部の仕組みづくり・マニュアル化・契約整備</p>
+                        <div style="font-size:12px;color:var(--text-light)">
+                            <div>• MVV策定・ブランディング</div>
+                            <div>• 業務マニュアル構築（13章構成）</div>
+                            <div>• FC契約書・法務整備</div>
+                            <div>• 研修プログラム設計</div>
+                            <div>• 収益モデル・事業計画作成</div>
+                            <div>• オペレーションシステム構築</div>
+                        </div>
+                    </div>
+                    <div class="tl-card" style="border-top:3px solid var(--orange)">
+                        <h3>📢 加盟店開発（Franchisee Recruitment）</h3>
+                        <p style="font-size:13px;margin-bottom:12px">加盟希望者の募集・選定・契約獲得</p>
+                        <div style="font-size:12px;color:var(--text-light)">
+                            <div>• Meta広告クリエイティブ制作</div>
+                            <div>• LP制作・ピクセル設置</div>
+                            <div>• LINE/申込フォーム構築</div>
+                            <div>• FC説明セミナー運営</div>
+                            <div>• 提案書・シミュレーション作成</div>
+                            <div>• A/Bテスト・広告運用最適化</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: ROADMAP -->
+    <div id="roadmap" class="tab-content">
+        <div class="section container">
+            <div class="section-label">ROADMAP</div>
+            <div class="section-title">制作物タイムライン — 6フェーズ</div>
+            <div class="timeline">
+
+                <div class="timeline-item phase-1">
+                    <span class="phase-badge">Phase 1 — 広告クリエイティブ</span>
+                    <div class="tl-card">
+                        <h3>🎨 Meta広告用クリエイティブ制作</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">🖼️</span>
+                                <div>
+                                    <div class="d-name">静止画バナー（正方形）</div>
+                                    <div class="d-desc">1080×1080px × 3〜5パターン</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">📱</span>
+                                <div>
+                                    <div class="d-name">静止画バナー（縦型）</div>
+                                    <div class="d-desc">1080×1920px × 3〜5パターン</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🎬</span>
+                                <div>
+                                    <div class="d-name">動画広告（ショート）</div>
+                                    <div class="d-desc">15〜30秒 × 2〜3パターン</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">✍️</span>
+                                <div>
+                                    <div class="d-name">広告コピー（テキスト）</div>
+                                    <div class="d-desc">メインテキスト+見出し × 3〜5本</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🔄</span>
+                                <div>
+                                    <div class="d-name">カルーセル広告</div>
+                                    <div class="d-desc">3〜5枚スライド × 1〜2パターン</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📸</span>
+                                <div>
+                                    <div class="d-name">写真・動画素材撮影</div>
+                                    <div class="d-desc">店舗内観・施術風景・代表出演</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item phase-2">
+                    <span class="phase-badge">Phase 2 — ランディングページ</span>
+                    <div class="tl-card">
+                        <h3>🌐 LP制作・計測タグ設置</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">📄</span>
+                                <div>
+                                    <div class="d-name">FC募集LP（メインページ）</div>
+                                    <div class="d-desc">HTML レスポンシブ・10セクション構成</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">📊</span>
+                                <div>
+                                    <div class="d-name">Metaピクセル設置</div>
+                                    <div class="d-desc">LP + サンクスページに設置</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">✅</span>
+                                <div>
+                                    <div class="d-name">サンクスページ</div>
+                                    <div class="d-desc">CV計測用リダイレクト先</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📈</span>
+                                <div>
+                                    <div class="d-name">コンバージョンイベント設定</div>
+                                    <div class="d-desc">Lead/CompleteRegistration等</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item phase-3">
+                    <span class="phase-badge">Phase 3 — 申込み導線</span>
+                    <div class="tl-card">
+                        <h3>📋 申込フォーム・LINE構築</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">📝</span>
+                                <div>
+                                    <div class="d-name">セミナー申込フォーム</div>
+                                    <div class="d-desc">名前・連絡先・開業希望時期</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">💚</span>
+                                <div>
+                                    <div class="d-name">LINE公式アカウント設定</div>
+                                    <div class="d-desc">リッチメニュー+自動応答</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📧</span>
+                                <div>
+                                    <div class="d-name">申込確認メール/LINE</div>
+                                    <div class="d-desc">自動返信テンプレート</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🔗</span>
+                                <div>
+                                    <div class="d-name">UTAGE/LINE連携設定</div>
+                                    <div class="d-desc">ステップ配信シナリオ構築</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item phase-4">
+                    <span class="phase-badge">Phase 4 — セミナー</span>
+                    <div class="tl-card">
+                        <h3>🎤 FC説明セミナー体制構築</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">📖</span>
+                                <div>
+                                    <div class="d-name">セミナー台本</div>
+                                    <div class="d-desc">90〜120分・6部構成</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">🎨</span>
+                                <div>
+                                    <div class="d-name">セミナースライド</div>
+                                    <div class="d-desc">Canva/PPT 33〜50枚</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🎥</span>
+                                <div>
+                                    <div class="d-name">セミナー録画（アーカイブ）</div>
+                                    <div class="d-desc">Zoom収録 → 配信用</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📃</span>
+                                <div>
+                                    <div class="d-name">セミナー案内ページ</div>
+                                    <div class="d-desc">日時・内容・講師紹介</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📊</span>
+                                <div>
+                                    <div class="d-name">収益シミュレーション資料</div>
+                                    <div class="d-desc">月次・3年計画の図表</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item phase-5">
+                    <span class="phase-badge">Phase 5 — 個別面談・契約</span>
+                    <div class="tl-card">
+                        <h3>🤝 クロージング資料整備</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">📑</span>
+                                <div>
+                                    <div class="d-name">個別面談用提案書</div>
+                                    <div class="d-desc">HTML/PDF 詳細資料</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">📜</span>
+                                <div>
+                                    <div class="d-name">FC契約書</div>
+                                    <div class="d-desc">業務委託契約書</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📋</span>
+                                <div>
+                                    <div class="d-name">FC加盟申込書</div>
+                                    <div class="d-desc">フォーム or PDF</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📊</span>
+                                <div>
+                                    <div class="d-name">事業計画書テンプレート</div>
+                                    <div class="d-desc">加盟検討者向け収支シミュレーション</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🎬</span>
+                                <div>
+                                    <div class="d-name">顧客インタビュー動画</div>
+                                    <div class="d-desc">加盟オーナーの声 × 3本</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item phase-6">
+                    <span class="phase-badge">Phase 6 — 広告運用設定</span>
+                    <div class="tl-card">
+                        <h3>⚙️ 広告アカウント・運用体制</h3>
+                        <div class="deliverable-grid">
+                            <div class="d-item critical"><span class="icon">🔧</span>
+                                <div>
+                                    <div class="d-name">Metaビジネスマネージャ設定</div>
+                                    <div class="d-desc">アカウント作成・認証</div>
+                                </div>
+                            </div>
+                            <div class="d-item critical"><span class="icon">💳</span>
+                                <div>
+                                    <div class="d-name">広告アカウント作成</div>
+                                    <div class="d-desc">支払方法・タイムゾーン設定</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">📏</span>
+                                <div>
+                                    <div class="d-name">キャンペーン設計書</div>
+                                    <div class="d-desc">ターゲティング・予算・KPI設計</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">🧪</span>
+                                <div>
+                                    <div class="d-name">A/Bテスト計画</div>
+                                    <div class="d-desc">クリエイティブ×コピー×ターゲット</div>
+                                </div>
+                            </div>
+                            <div class="d-item"><span class="icon">👥</span>
+                                <div>
+                                    <div class="d-name">パートナーアクセス設定</div>
+                                    <div class="d-desc">リッツプロをパートナー追加</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: HQ -->
+    <div id="hq" class="tab-content">
+        <div class="section container">
+            <div class="section-label">HQ CONSTRUCTION</div>
+            <div class="section-title">🏗️ 本部構築 — 制作物チェックリスト</div>
+            <div class="checklist-grid">
+
+                <div class="cl-card">
+                    <h4>📐 戦略設計</h4>
+                    <div class="cl-item"><span class="dot todo"></span>全社戦略ヒアリング</div>
+                    <div class="cl-item"><span class="dot todo"></span>事業戦略・機能戦略策定</div>
+                    <div class="cl-item"><span class="dot todo"></span>財務戦略（PL/BS/CF分析）</div>
+                    <div class="cl-item"><span class="dot todo"></span>ゴール設定（売却時期・額・店舗数）</div>
+                    <div class="cl-item"><span class="dot todo"></span>市場調査・SWOT分析</div>
+                    <div class="cl-item"><span class="dot todo"></span>競合調査レポート</div>
+                </div>
+
+                <div class="cl-card">
+                    <h4>🎯 MVV・ブランディング</h4>
+                    <div class="cl-item"><span class="dot todo"></span>ミッション策定</div>
+                    <div class="cl-item"><span class="dot todo"></span>ビジョン策定</div>
+                    <div class="cl-item"><span class="dot todo"></span>バリュー策定</div>
+                    <div class="cl-item"><span class="dot todo"></span>スローガン策定</div>
+                    <div class="cl-item"><span class="dot todo"></span>ロゴ・カラー・フォント設計</div>
+                    <div class="cl-item"><span class="dot todo"></span>ブランディングガイドライン</div>
+                </div>
+
+                <div class="cl-card">
+                    <h4>📚 マニュアル構築（13章）</h4>
+                    <div class="cl-item"><span class="dot todo"></span>1. 目的と範囲</div>
+                    <div class="cl-item"><span class="dot todo"></span>2. 業務フロー（全体フロー図）</div>
+                    <div class="cl-item"><span class="dot todo"></span>3. 役割と責任</div>
+                    <div class="cl-item"><span class="dot todo"></span>4. 手順とプロセス</div>
+                    <div class="cl-item"><span class="dot todo"></span>5. テンプレートとフォーム</div>
+                    <div class="cl-item"><span class="dot todo"></span>6. チェックリスト</div>
+                    <div class="cl-item"><span class="dot todo"></span>7. 品質管理</div>
+                    <div class="cl-item"><span class="dot todo"></span>8. トラブルシューティング</div>
+                    <div class="cl-item"><span class="dot todo"></span>9. 教育とトレーニング</div>
+                    <div class="cl-item"><span class="dot todo"></span>10. 業務改善</div>
+                    <div class="cl-item"><span class="dot todo"></span>11-13. 更新履歴・付録・用語集</div>
+                </div>
+
+                <div class="cl-card">
+                    <h4>⚖️ 法務・契約整備</h4>
+                    <div class="cl-item"><span class="dot todo"></span>FC基本契約書</div>
+                    <div class="cl-item"><span class="dot todo"></span>業務委託契約書</div>
+                    <div class="cl-item"><span class="dot todo"></span>商標登録申請</div>
+                    <div class="cl-item"><span class="dot todo"></span>利用規約</div>
+                    <div class="cl-item"><span class="dot todo"></span>合意解約書テンプレート</div>
+                </div>
+
+                <div class="cl-card">
+                    <h4>💰 収益モデル設計</h4>
+                    <div class="cl-item"><span class="dot todo"></span>キャッシュポイント設計</div>
+                    <div class="cl-item"><span class="dot todo"></span>加盟金・研修費・ロイヤリティ設計</div>
+                    <div class="cl-item"><span class="dot todo"></span>直営出店費用算出</div>
+                    <div class="cl-item"><span class="dot todo"></span>FC出店費用算出</div>
+                    <div class="cl-item"><span class="dot todo"></span>FC店モデル図・経営計画</div>
+                    <div class="cl-item"><span class="dot todo"></span>M&A売却額シミュレーション</div>
+                </div>
+
+                <div class="cl-card">
+                    <h4>🎓 研修・オペレーション</h4>
+                    <div class="cl-item"><span class="dot todo"></span>研修プログラム設計</div>
+                    <div class="cl-item"><span class="dot todo"></span>研修資料作成</div>
+                    <div class="cl-item"><span class="dot todo"></span>ITシステム導入（POS/CRM）</div>
+                    <div class="cl-item"><span class="dot todo"></span>サポート体制構築</div>
+                    <div class="cl-item"><span class="dot todo"></span>ESG/SDGs活動設計</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: RECRUIT -->
+    <div id="recruit" class="tab-content">
+        <div class="section container">
+            <div class="section-label">FRANCHISEE RECRUITMENT</div>
+            <div class="section-title">📢 加盟店開発 — 制作物マップ</div>
+
+            <div
+                style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px">
+                <h3 style="font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:16px">📊 想定KPI（参考値）</h3>
+                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;text-align:center">
+                    <div style="padding:12px;background:var(--bg-gray);border-radius:8px">
+                        <div style="font-family:Inter;font-size:22px;font-weight:800;color:var(--orange)">¥3.4万</div>
+                        <div style="font-size:11px;color:var(--text-light)">申込CPA</div>
+                    </div>
+                    <div style="padding:12px;background:var(--bg-gray);border-radius:8px">
+                        <div style="font-family:Inter;font-size:22px;font-weight:800;color:var(--orange)">50%</div>
+                        <div style="font-size:11px;color:var(--text-light)">着席率</div>
+                    </div>
+                    <div style="padding:12px;background:var(--bg-gray);border-radius:8px">
+                        <div style="font-family:Inter;font-size:22px;font-weight:800;color:var(--orange)">¥6万</div>
+                        <div style="font-size:11px;color:var(--text-light)">着席CPA</div>
+                    </div>
+                    <div style="padding:12px;background:var(--bg-gray);border-radius:8px">
+                        <div style="font-family:Inter;font-size:22px;font-weight:800;color:var(--orange)">10-20%</div>
+                        <div style="font-size:11px;color:var(--text-light)">契約率</div>
+                    </div>
+                    <div style="padding:12px;background:var(--bg-gray);border-radius:8px">
+                        <div style="font-family:Inter;font-size:22px;font-weight:800;color:var(--orange)">¥50-100万</div>
+                        <div style="font-size:11px;color:var(--text-light)">月間広告費目安</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checklist-grid">
+                <div class="cl-card">
+                    <h4>🎨 広告クリエイティブ</h4>
+                    <div class="cl-item"><span class="dot todo"></span>静止画バナー（正方形）×3〜5</div>
+                    <div class="cl-item"><span class="dot todo"></span>静止画バナー（縦型）×3〜5</div>
+                    <div class="cl-item"><span class="dot todo"></span>動画広告（15〜30秒）×2〜3</div>
+                    <div class="cl-item"><span class="dot todo"></span>広告コピー ×3〜5</div>
+                    <div class="cl-item"><span class="dot todo"></span>カルーセル広告 ×1〜2</div>
+                    <div class="cl-item"><span class="dot todo"></span>写真・動画素材撮影</div>
+                </div>
+                <div class="cl-card">
+                    <h4>🌐 LP・計測</h4>
+                    <div class="cl-item"><span class="dot todo"></span>FC募集LP（10セクション構成）</div>
+                    <div class="cl-item"><span class="dot todo"></span>Metaピクセル設置</div>
+                    <div class="cl-item"><span class="dot todo"></span>サンクスページ</div>
+                    <div class="cl-item"><span class="dot todo"></span>CVイベント設定</div>
+                    <div class="cl-item"><span class="dot todo"></span>申込フォーム</div>
+                    <div class="cl-item"><span class="dot todo"></span>LINE公式アカウント設定</div>
+                </div>
+                <div class="cl-card">
+                    <h4>🎤 セミナー・面談</h4>
+                    <div class="cl-item"><span class="dot todo"></span>セミナー台本（6部構成）</div>
+                    <div class="cl-item"><span class="dot todo"></span>セミナースライド（33〜50枚）</div>
+                    <div class="cl-item"><span class="dot todo"></span>収益シミュレーション資料</div>
+                    <div class="cl-item"><span class="dot todo"></span>セミナー録画・アーカイブ</div>
+                    <div class="cl-item"><span class="dot todo"></span>個別面談用提案書</div>
+                    <div class="cl-item"><span class="dot todo"></span>事業計画書テンプレート</div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top:24px;background:var(--orange-bg);border:1px solid rgba(232,101,10,.2);border-radius:var(--radius);padding:20px">
+                <h4 style="color:var(--orange);margin-bottom:8px">⚡ 最短着手順序（STEP式）</h4>
+                <div style="font-size:13px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                    <div><strong>STEP 1: 最小構成で広告開始</strong><br>LP + ピクセル + バナー3枚 + コピー3本 + 申込フォーム + Meta設定</div>
+                    <div><strong>STEP 2: セミナー体制構築</strong><br>スライド制作 + セミナー案内ページ + LINE設定</div>
+                    <div><strong>STEP 3: CVR改善</strong><br>動画広告 + カルーセル + 提案書 + A/Bテスト本格運用</div>
+                    <div><strong>STEP 4: 契約体制整備</strong><br>FC契約書 + 加盟申込書 + 事業計画書テンプレート</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: 8STEP -->
+    <div id="8step" class="tab-content">
+        <div class="section container">
+            <div class="section-label">SCALE-UP</div>
+            <div class="section-title">🚀 最短スケールアップ 8ステップ</div>
+            <div class="step-grid">
+
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h4>明確なゴール設定</h4>
+                    <ul>
+                        <li>出口戦略の策定</li>
+                        <li>売却時期・金額の算出</li>
+                        <li>目標店舗数の設定</li>
+                        <li>M&A売却額シミュレーション</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h4>市場調査・ニーズ把握</h4>
+                    <ul>
+                        <li>ターゲット市場分析</li>
+                        <li>競合調査レポート</li>
+                        <li>SWOT分析</li>
+                        <li>エリアマーケティング</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h4>戦略設計</h4>
+                    <ul>
+                        <li>全社→事業→機能→財務戦略</li>
+                        <li>専門性の定義</li>
+                        <li>社会性（ESG/SDGs）設計</li>
+                        <li>拡大性の検証</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h4>パッケージ化・ブランド化</h4>
+                    <ul>
+                        <li>FCパッケージ制作</li>
+                        <li>ロゴ・ブランドガイドライン</li>
+                        <li>提案書・説明資料</li>
+                        <li>Webサイト・SEO</li>
+                    </ul>
+                </div>
+
+                <div class="step-card critical-step">
+                    <div class="step-num">5</div>
+                    <h4>⚠️ 業務シンプル化・効率化</h4>
+                    <ul>
+                        <li>教育期間の圧縮</li>
+                        <li>品質許容の設計</li>
+                        <li>業務マニュアル構築（13章）</li>
+                        <li>ITシステム導入</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">6</div>
+                    <h4>マーケティング実施</h4>
+                    <ul>
+                        <li>0次募集（テスト）</li>
+                        <li>1次募集（本格開始）</li>
+                        <li>2次募集（スケール拡大）</li>
+                        <li>Meta広告・LP・セミナー</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">7</div>
+                    <h4>回収＆投資（ROAS管理）</h4>
+                    <ul>
+                        <li>広告費の最適化</li>
+                        <li>CPA/CPL管理</li>
+                        <li>A/Bテスト運用</li>
+                        <li>クリエイティブ更新</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">8</div>
+                    <h4>持続的スケールアップ</h4>
+                    <ul>
+                        <li>既存オーナー複数出店促進</li>
+                        <li>エンゲージメント施策</li>
+                        <li>ブランド認知拡大</li>
+                        <li>M&A準備・DD対応</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div
+                style="margin-top:32px;background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)">
+                <h3 style="font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:16px">📈 段階別拡大ロードマップ</h3>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
+                    <div
+                        style="padding:16px;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-radius:8px;border:1px solid rgba(16,185,129,.2)">
+                        <div style="font-family:Inter;font-size:28px;font-weight:800;color:var(--green)">〜10</div>
+                        <div style="font-size:12px;font-weight:700;color:var(--text-dark)">再現性重視</div>
+                        <div style="font-size:11px;color:var(--text-light);margin-top:4px">直営3店＋モデル店</div>
+                    </div>
+                    <div
+                        style="padding:16px;background:var(--orange-bg);border-radius:8px;border:1px solid rgba(232,101,10,.2)">
+                        <div style="font-family:Inter;font-size:28px;font-weight:800;color:var(--orange)">〜20</div>
+                        <div style="font-size:12px;font-weight:700;color:var(--text-dark)">エンゲージメント重視</div>
+                        <div style="font-size:11px;color:var(--text-light);margin-top:4px">オーナーと直接会う</div>
+                    </div>
+                    <div
+                        style="padding:16px;background:rgba(59,130,246,.05);border-radius:8px;border:1px solid rgba(59,130,246,.2)">
+                        <div style="font-family:Inter;font-size:28px;font-weight:800;color:#3b82f6">〜50</div>
+                        <div style="font-size:12px;font-weight:700;color:var(--text-dark)">マーケティング絞込</div>
+                        <div style="font-size:11px;color:var(--text-light);margin-top:4px">効果的な5〜7手法に集中</div>
+                    </div>
+                    <div
+                        style="padding:16px;background:rgba(139,92,246,.05);border-radius:8px;border:1px solid rgba(139,92,246,.2)">
+                        <div style="font-family:Inter;font-size:28px;font-weight:800;color:#8b5cf6">〜100</div>
+                        <div style="font-size:12px;font-weight:700;color:var(--text-dark)">複数出店率向上</div>
+                        <div style="font-size:11px;color:var(--text-light);margin-top:4px">既存オーナーの多店舗化</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB: CLIENTS -->
+    <div id="clients" class="tab-content">
+        <div class="section container">
+            <div class="section-label">CLIENTS</div>
+            <div class="section-title">👥 顧客一覧 — 現在の支援先</div>
+            <div class="client-grid">
+
+                <div class="client-card">
+                    <h4>株式会社rtma（ONサロン）</h4>
+                    <div class="c-type">黄土よもぎ蒸し専門店 — FC加盟店開発</div>
+                    <div class="c-items">
+                        <span>セミナー台本 ✅</span><span>競合調査 ✅</span><span>基本情報整理 ✅</span><span>ダッシュボード ✅</span>
+                        <span>LP制作 🔲</span><span>広告クリエイティブ 🔲</span><span>スライド制作 🔲</span><span>Meta広告設定 🔲</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>株式会社マインド</h4>
+                    <div class="c-type">FC加盟説明会・事業モデル設計</div>
+                    <div class="c-items">
+                        <span>FC加盟説明資料 ✅</span><span>収支シミュレーション ✅</span><span>提案書 ✅</span><span>戦略的提案プレゼン ✅</span>
+                        <span>契約書整備 ✅</span><span>保証金モデル設計 ✅</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>Birth 小林さん（肌REVO）</h4>
+                    <div class="c-type">美容サロン — 求人・採用支援</div>
+                    <div class="c-items">
+                        <span>求人原稿 ✅</span><span>採用ヒアリング ✅</span><span>ミッション策定 ✅</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>浦郷さん（Valoom）</h4>
+                    <div class="c-type">ヘアサロンシェアリング — FC支援</div>
+                    <div class="c-items">
+                        <span>ミーティング議事録 ✅</span><span>戦略設計 🔲</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>遠山さん</h4>
+                    <div class="c-type">FC支援 — 提案・競合分析</div>
+                    <div class="c-items">
+                        <span>提案書 ✅</span><span>競合分析 ✅</span><span>初回商談議事録 ✅</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>MECAL東京</h4>
+                    <div class="c-type">FC支援 — 提案</div>
+                    <div class="c-items">
+                        <span>提案書 ✅</span>
+                    </div>
+                </div>
+
+                <div class="client-card">
+                    <h4>株式会社三十九</h4>
+                    <div class="c-type">FC支援 — 契約整備</div>
+                    <div class="c-items">
+                        <span>業務委託契約書 ✅</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER CTA -->
+    <div style="background:var(--teal);color:#fff;padding:40px 20px;text-align:center;margin-top:40px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:2px;opacity:.7;margin-bottom:8px">RITZ PRO × F
+            PRODUCTION</div>
+        <div style="font-size:20px;font-weight:900;margin-bottom:8px">マーケティング施策ロードマップ</div>
+        <div style="font-size:13px;opacity:.7">最終更新: 2026年3月11日｜制作: Antigravity AI</div>
+    </div>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

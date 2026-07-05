@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロライン 売上・利益成長シミュレーション</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #0F172A;
+            --card: #1E293B;
+            --card-hover: #263548;
+            --teal: #0EA5E9;
+            --teal-dim: rgba(14, 165, 233, .15);
+            --orange: #F97316;
+            --orange-dim: rgba(249, 115, 22, .15);
+            --green: #22C55E;
+            --green-dim: rgba(34, 197, 94, .15);
+            --red: #EF4444;
+            --red-dim: rgba(239, 68, 68, .15);
+            --purple: #A855F7;
+            --purple-dim: rgba(168, 85, 247, .15);
+            --yellow: #EAB308;
+            --yellow-dim: rgba(234, 179, 8, .15);
+            --text: #F1F5F9;
+            --text-dim: #94A3B8;
+            --text-muted: #64748B;
+            --border: #334155;
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px 60px
+        }
+
+        /* === HEADER === */
+        .hero {
+            text-align: center;
+            padding: 48px 20px 36px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(14, 165, 233, .08), transparent 60%), radial-gradient(circle at 70% 50%, rgba(249, 115, 22, .06), transparent 60%);
+            pointer-events: none
+        }
+
+        .hero h1 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--teal), var(--orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px
+        }
+
+        .hero .subtitle {
+            color: var(--text-dim);
+            font-size: .95rem
+        }
+
+        /* GAP CARDS */
+        .gap-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 32px 0
+        }
+
+        .gap-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: .3s
+        }
+
+        .gap-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--teal)
+        }
+
+        .gap-card .label {
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px
+        }
+
+        .gap-card .current {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dim)
+        }
+
+        .gap-card .arrow {
+            color: var(--teal);
+            font-size: 1.2rem;
+            margin: 4px 0
+        }
+
+        .gap-card .target {
+            font-size: 2rem;
+            font-weight: 800
+        }
+
+        .gap-card .diff {
+            font-size: .85rem;
+            margin-top: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block
+        }
+
+        .gap-card.revenue .target {
+            color: var(--teal)
+        }
+
+        .gap-card.revenue .diff {
+            background: var(--teal-dim);
+            color: var(--teal)
+        }
+
+        .gap-card.profit .target {
+            color: var(--green)
+        }
+
+        .gap-card.profit .diff {
+            background: var(--green-dim);
+            color: var(--green)
+        }
+
+        .gap-card.margin .target {
+            color: var(--orange)
+        }
+
+        .gap-card.margin .diff {
+            background: var(--orange-dim);
+            color: var(--orange)
+        }
+
+        /* SECTION */
+        .section {
+            margin-top: 48px
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .section-title .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem
+        }
+
+        /* STRATEGY CARDS */
+        .strat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px
+        }
+
+        .strat-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            border-left: 4px solid;
+            transition: .3s;
+            cursor: default
+        }
+
+        .strat-card:hover {
+            background: var(--card-hover);
+            transform: translateY(-2px)
+        }
+
+        .strat-card .num {
+            font-size: .7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px
+        }
+
+        .strat-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px
+        }
+
+        .strat-card .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px
+        }
+
+        .strat-card .metric {
+            background: rgba(255, 255, 255, .04);
+            border-radius: 8px;
+            padding: 8px 12px
+        }
+
+        .strat-card .metric .ml {
+            font-size: .65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .strat-card .metric .mv {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 2px
+        }
+
+        .strat-card .timing {
+            margin-top: 10px;
+            font-size: .8rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .s1 {
+            border-color: var(--teal)
+        }
+
+        .s1 .num,
+        .s1 h3 {
+            color: var(--teal)
+        }
+
+        .s2 {
+            border-color: var(--orange)
+        }
+
+        .s2 .num,
+        .s2 h3 {
+            color: var(--orange)
+        }
+
+        .s3 {
+            border-color: var(--purple)
+        }
+
+        .s3 .num,
+        .s3 h3 {
+            color: var(--purple)
+        }
+
+        .s4 {
+            border-color: var(--green)
+        }
+
+        .s4 .num,
+        .s4 h3 {
+            color: var(--green)
+        }
+
+        .s5 {
+            border-color: var(--yellow)
+        }
+
+        .s5 .num,
+        .s5 h3 {
+            color: var(--yellow)
+        }
+
+        .s6 {
+            border-color: #EC4899
+        }
+
+        .s6 .num,
+        .s6 h3 {
+            color: #EC4899
+        }
+
+        /* CHART */
+        .chart-wrapper {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border)
+        }
+
+        .chart-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap
+        }
+
+        .chart-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: .85rem;
+            font-family: inherit;
+            transition: .2s
+        }
+
+        .chart-tab.active {
+            background: var(--teal-dim);
+            border-color: var(--teal);
+            color: var(--teal)
+        }
+
+        .chart-tab:hover:not(.active) {
+            border-color: var(--text-muted)
+        }
+
+        canvas {
+            width: 100% !important;
+            max-height: 400px
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 16px;
+            justify-content: center
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .8rem;
+            color: var(--text-dim)
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px
+        }
+
+        /* SCENARIO TABLE */
+        .scenario-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border)
+        }
+
+        .scenario-table th {
+            background: rgba(255, 255, 255, .03);
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: .8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .scenario-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: .9rem
+        }
+
+        .scenario-table tr:last-child td {
+            border-bottom: none
+        }
+
+        .scenario-table tr:hover td {
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .scenario-label {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .scenario-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: .75rem;
+            font-weight: 600
+        }
+
+        .badge-success {
+            background: var(--green-dim);
+            color: var(--green)
+        }
+
+        .badge-warning {
+            background: var(--yellow-dim);
+            color: var(--yellow)
+        }
+
+        .badge-danger {
+            background: var(--red-dim);
+            color: var(--red)
+        }
+
+        /* GANTT */
+        .gantt {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border);
+            overflow-x: auto
+        }
+
+        .gantt-row {
+            display: grid;
+            grid-template-columns: 160px repeat(6, 1fr);
+            align-items: center;
+            gap: 0;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04)
+        }
+
+        .gantt-row:last-child {
+            border-bottom: none
+        }
+
+        .gantt-row.header {
+            font-size: .75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .gantt-label {
+            font-size: .8rem;
+            font-weight: 600;
+            padding-right: 12px
+        }
+
+        .gantt-cell {
+            height: 28px;
+            position: relative
+        }
+
+        .gantt-bar {
+            height: 100%;
+            border-radius: 6px;
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .65rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .9);
+            transition: .3s
+        }
+
+        .gantt-bar:hover {
+            filter: brightness(1.2);
+            transform: scaleY(1.15)
+        }
+
+        .gantt-bar.prep {
+            opacity: .4;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(255, 255, 255, .1) 4px, rgba(255, 255, 255, .1) 8px)
+        }
+
+        /* PROFIT MARGIN */
+        .margin-track {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            height: 200px;
+            padding: 0 20px;
+            justify-content: center
+        }
+
+        .margin-month {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            max-width: 80px
+        }
+
+        .margin-bar-wrap {
+            width: 100%;
+            height: 160px;
+            position: relative;
+            display: flex;
+            align-items: flex-end
+        }
+
+        .margin-bar {
+            width: 100%;
+            border-radius: 8px 8px 4px 4px;
+            transition: height .8s ease;
+            position: relative;
+            min-height: 10px
+        }
+
+        .margin-bar .val {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .75rem;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .margin-label {
+            font-size: .7rem;
+            color: var(--text-muted);
+            font-weight: 600
+        }
+
+        /* ROI */
+        .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        @media(max-width:700px) {
+            .roi-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .roi-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px;
+            border: 1px solid var(--border)
+        }
+
+        .roi-card h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .roi-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04);
+            font-size: .85rem
+        }
+
+        .roi-item:last-child {
+            border-bottom: none
+        }
+
+        .roi-item .rl {
+            color: var(--text-dim)
+        }
+
+        .roi-item .rv {
+            font-weight: 600
+        }
+
+        /* TOOLTIP */
+        .tooltip {
+            position: absolute;
+            background: #1a2744;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: .8rem;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+            opacity: 0;
+            transition: opacity .2s
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: .75rem
+        }
+
+        /* TAB SELECTORS SCENARIO */
+        .tab-selector {
+            display: flex;
+            background: rgba(0, 0, 0, .3);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+            margin-bottom: 20px;
+            width: fit-content
+        }
+
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: inherit;
+            font-size: .85rem;
+            cursor: pointer;
+            transition: .2s;
+            font-weight: 500
+        }
+
+        .tab-btn.active {
+            background: var(--teal);
+            color: white
+        }
+
+        /* ANIMATION */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .animate {
+            animation: fadeUp .6s ease forwards;
+            opacity: 0
+        }
+
+        .d1 {
+            animation-delay: .1s
+        }
+
+        .d2 {
+            animation-delay: .2s
+        }
+
+        .d3 {
+            animation-delay: .3s
+        }
+
+        .d4 {
+            animation-delay: .4s
+        }
+
+        .d5 {
+            animation-delay: .5s
+        }
+
+        .d6 {
+            animation-delay: .6s
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- HERO -->
+        <div class="hero animate">
+            <h1>📊 プロライン 成長シミュレーション</h1>
+            <p class="subtitle">進行期 残り6ヶ月（2026年3月〜8月）— 売上・利益 目標達成ロードマップ</p>
+        </div>
+
+        <!-- GAP SUMMARY -->
+        <div class="gap-row">
+            <div class="gap-card revenue animate d1">
+                <div class="label">月間売上</div>
+                <div class="current">2,300万</div>
+                <div class="arrow">↓</div>
+                <div class="target">3,000万</div>
+                <div class="diff">+700万/月（+30.4%）</div>
+            </div>
+            <div class="gap-card profit animate d2">
+                <div class="label">月間利益</div>
+                <div class="current">560万</div>
+                <div class="arrow">↓</div>
+                <div class="target">1,000万</div>
+                <div class="diff">+440万/月（+78.6%）</div>
+            </div>
+            <div class="gap-card margin animate d3">
+                <div class="label">利益率</div>
+                <div class="current">24.3%</div>
+                <div class="arrow">↓</div>
+                <div class="target">33.3%</div>
+                <div class="diff">+9.0pt</div>
+            </div>
+        </div>
+
+        <!-- STRATEGY CARDS -->
+        <div class="section animate d2">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--teal-dim);color:var(--teal)">🎯</span>施策別インパクト（標準ケース）</div>
+            <div class="strat-grid">
+                <div class="strat-card s1">
+                    <div class="num">施策 ①</div>
+                    <h3>Brain案件（村上セールスファネル）</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:var(--teal)">300万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">80%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">240万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">面談数</div>
+                            <div class="mv">75件</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 4月〜稼働（自動配信構築済み）</div>
+                </div>
+                <div class="strat-card s5">
+                    <div class="num">施策 ⑤</div>
+                    <h3>構築代行ハウスリストローンチ</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:var(--yellow)">400万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">60%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">240万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">案件数</div>
+                            <div class="mv">6件/月</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 4月〜稼働（3月に準備・告知）</div>
+                </div>
+                <div class="strat-card s2">
+                    <div class="num">施策 ②</div>
+                    <h3>YOLO's関連（横展開）</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:var(--orange)">180万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">65%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">117万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">導入社数</div>
+                            <div class="mv">3社/月</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 4月〜稼働（VC提案並行）</div>
+                </div>
+                <div class="strat-card s4">
+                    <div class="num">施策 ④</div>
+                    <h3>勉強会ゲスト登壇</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:var(--green)">80万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">80%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">64万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">獲得件数</div>
+                            <div class="mv">3件/月</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 3月〜即稼働可能</div>
+                </div>
+                <div class="strat-card s3">
+                    <div class="num">施策 ③</div>
+                    <h3>講師向け研修</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:var(--purple)">80万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">75%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">60万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">研修人数</div>
+                            <div class="mv">4名/月</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 5月〜稼働（3-4月にコンテンツ開発）</div>
+                </div>
+                <div class="strat-card s6">
+                    <div class="num">施策 ⑥</div>
+                    <h3>既存ユーザーアップセル</h3>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="ml">月間売上</div>
+                            <div class="mv" style="color:#EC4899">80万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">利益率</div>
+                            <div class="mv" style="color:var(--green)">90%</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">月間利益</div>
+                            <div class="mv">72万</div>
+                        </div>
+                        <div class="metric">
+                            <div class="ml">移行数</div>
+                            <div class="mv">80件/月</div>
+                        </div>
+                    </div>
+                    <div class="timing">📅 4月〜稼働（ステップ配信で自動促進）</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTHLY CHART -->
+        <div class="section animate d3">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--orange-dim);color:var(--orange)">📈</span>月次シミュレーション推移</div>
+            <div class="chart-wrapper">
+                <div class="tab-selector">
+                    <button class="tab-btn active" onclick="switchChart('revenue')">売上</button>
+                    <button class="tab-btn" onclick="switchChart('profit')">利益</button>
+                </div>
+                <canvas id="mainChart" height="380"></canvas>
+                <div class="chart-legend" id="chartLegend"></div>
+            </div>
+        </div>
+
+        <!-- 3 SCENARIOS -->
+        <div class="section animate d4">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--green-dim);color:var(--green)">🔄</span>3シナリオ比較（8月時点 月間数値）</div>
+            <table class="scenario-table">
+                <thead>
+                    <tr>
+                        <th>シナリオ</th>
+                        <th>月間売上</th>
+                        <th>月間利益</th>
+                        <th>利益率</th>
+                        <th>目標達成</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="scenario-label"><span class="scenario-dot"
+                                    style="background:var(--yellow)"></span>控えめ</span></td>
+                        <td style="font-weight:700">2,860万</td>
+                        <td style="font-weight:700">870万</td>
+                        <td>30.4%</td>
+                        <td><span class="badge badge-warning">売上あと140万</span></td>
+                    </tr>
+                    <tr style="background:rgba(14,165,233,.05)">
+                        <td><span class="scenario-label"><span class="scenario-dot"
+                                    style="background:var(--teal)"></span><strong>標準（推奨）</strong></span></td>
+                        <td style="font-weight:700;color:var(--teal)">3,420万</td>
+                        <td style="font-weight:700;color:var(--green)">1,093万</td>
+                        <td style="color:var(--green)">32.0%</td>
+                        <td><span class="badge badge-success">✅ 達成</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="scenario-label"><span class="scenario-dot"
+                                    style="background:var(--orange)"></span>最大</span></td>
+                        <td style="font-weight:700">4,050万</td>
+                        <td style="font-weight:700">1,395万</td>
+                        <td>34.4%</td>
+                        <td><span class="badge badge-success">✅ 大幅達成</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+                <div
+                    style="background:var(--card);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border)">
+                    <div style="font-size:.75rem;color:var(--yellow);font-weight:600;margin-bottom:8px">⚠️ 控えめケースの前提
+                    </div>
+                    <div style="font-size:.8rem;color:var(--text-dim);line-height:1.7">
+                        各施策の下限値で計算。Brain月40件面談、ハウスリスト月4件成約、YOLO's月1〜2社導入。ランプアップに時間がかかるケース。
+                    </div>
+                </div>
+                <div
+                    style="background:var(--card);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--teal)">
+                    <div style="font-size:.75rem;color:var(--teal);font-weight:600;margin-bottom:8px">✅ 標準ケースの前提</div>
+                    <div style="font-size:.8rem;color:var(--text-dim);line-height:1.7">
+                        中央値で計算。Brain月75件面談、ハウスリスト月6件、YOLO's月3社。4月以降の施策は初月50%→翌月フル稼働。
+                    </div>
+                </div>
+                <div
+                    style="background:var(--card);border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border)">
+                    <div style="font-size:.75rem;color:var(--orange);font-weight:600;margin-bottom:8px">🚀 最大ケースの前提
+                    </div>
+                    <div style="font-size:.8rem;color:var(--text-dim);line-height:1.7">
+                        上限値で計算。Brain月100件面談、ハウスリスト月10件、YOLO's月5社導入。全施策が順調に立ち上がるケース。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFIT MARGIN CHART -->
+        <div class="section animate d5">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--green-dim);color:var(--green)">💰</span>利益率の月次推移（標準ケース）</div>
+            <div class="chart-wrapper">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                    <div style="font-size:.8rem;color:var(--text-dim)">目標ライン: 33.3%</div>
+                    <div style="font-size:.8rem;color:var(--text-muted)">現状: 24.3%</div>
+                </div>
+                <div class="margin-track" id="marginTrack"></div>
+            </div>
+        </div>
+
+        <!-- GANTT CHART -->
+        <div class="section animate d4">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--purple-dim);color:var(--purple)">🗓️</span>施策タイムライン</div>
+            <div class="gantt">
+                <div class="gantt-row header">
+                    <div></div>
+                    <div>3月</div>
+                    <div>4月</div>
+                    <div>5月</div>
+                    <div>6月</div>
+                    <div>7月</div>
+                    <div>8月</div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:var(--green)">④ 勉強会</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0">稼働</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--green);width:100%;left:0"></div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:var(--teal)">① Brain</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:var(--teal);width:100%;left:0">準備</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--teal);width:100%;left:0;opacity:.6">50%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--teal);width:100%;left:0">100%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--teal);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--teal);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--teal);width:100%;left:0"></div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:var(--yellow)">⑤ ハウスリスト</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:var(--yellow);width:100%;left:0">準備</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--yellow);width:100%;left:0;opacity:.6">50%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--yellow);width:100%;left:0">100%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--yellow);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--yellow);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--yellow);width:100%;left:0"></div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:var(--orange)">② YOLO's</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:var(--orange);width:100%;left:0">提案</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--orange);width:100%;left:0;opacity:.6">50%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--orange);width:100%;left:0">100%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--orange);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--orange);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--orange);width:100%;left:0"></div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:#EC4899">⑥ アップセル</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:#EC4899;width:100%;left:0">設計</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:#EC4899;width:100%;left:0;opacity:.6">50%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:#EC4899;width:100%;left:0">100%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:#EC4899;width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:#EC4899;width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:#EC4899;width:100%;left:0"></div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label" style="color:var(--purple)">③ 講師研修</div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:var(--purple);width:100%;left:0">開発</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar prep" style="background:var(--purple);width:100%;left:0">開発</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--purple);width:100%;left:0;opacity:.6">50%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--purple);width:100%;left:0">100%</div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--purple);width:100%;left:0"></div>
+                    </div>
+                    <div class="gantt-cell">
+                        <div class="gantt-bar" style="background:var(--purple);width:100%;left:0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI COMPARISON -->
+        <div class="section animate d5">
+            <div class="section-title"><span class="icon"
+                    style="background:var(--red-dim);color:var(--red)">💡</span>投資対効果：前期 vs 今期施策</div>
+            <div class="roi-grid">
+                <div class="roi-card" style="border-color:var(--red)">
+                    <h4><span style="color:var(--red)">❌</span> 前期：Web広告・動画広告</h4>
+                    <div class="roi-item"><span class="rl">投資額</span><span class="rv"
+                            style="color:var(--red)">数百万〜</span></div>
+                    <div class="roi-item"><span class="rl">効果</span><span class="rv"
+                            style="color:var(--red)">微妙（峯口氏談）</span></div>
+                    <div class="roi-item"><span class="rl">問題点</span><span class="rv">課題認識が低い層に刺さりにくい</span></div>
+                    <div class="roi-item"><span class="rl">持続性</span><span class="rv"
+                            style="color:var(--red)">止めたらゼロ</span></div>
+                    <div class="roi-item"><span class="rl">ROI</span><span class="rv" style="color:var(--red)">低い</span>
+                    </div>
+                </div>
+                <div class="roi-card" style="border-color:var(--green)">
+                    <h4><span style="color:var(--green)">✅</span> 今期：推奨施策ポートフォリオ</h4>
+                    <div class="roi-item"><span class="rl">構築キャパ拡大</span><span class="rv" style="color:var(--green)">→
+                            案件数 × 2〜3倍</span></div>
+                    <div class="roi-item"><span class="rl">講師研修コンテンツ開発</span><span class="rv"
+                            style="color:var(--green)">→ レバレッジ ◎</span></div>
+                    <div class="roi-item"><span class="rl">成功事例動画制作</span><span class="rv" style="color:var(--green)">→
+                            CVR大幅UP</span></div>
+                    <div class="roi-item"><span class="rl">持続性</span><span class="rv"
+                            style="color:var(--green)">仕組みが残る</span></div>
+                    <div class="roi-item"><span class="rl">ROI</span><span class="rv"
+                            style="color:var(--green)">非常に高い</span></div>
+                </div>
+            </div>
+            <div
+                style="background:var(--card);border-radius:var(--radius-sm);padding:20px;margin-top:16px;border:1px solid var(--border)">
+                <div style="font-size:.9rem;font-weight:700;color:var(--orange);margin-bottom:10px">💰 お金をかけるべき場所（優先順位）
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+                    <div style="background:rgba(255,255,255,.03);padding:14px;border-radius:10px">
+                        <div style="font-size:.7rem;color:var(--teal);font-weight:600">1st Priority</div>
+                        <div style="font-size:.9rem;font-weight:600;margin-top:4px">構築パートナー育成</div>
+                        <div style="font-size:.75rem;color:var(--text-dim);margin-top:4px">案件キャパを2〜3倍に拡大</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);padding:14px;border-radius:10px">
+                        <div style="font-size:.7rem;color:var(--orange);font-weight:600">2nd Priority</div>
+                        <div style="font-size:.9rem;font-weight:600;margin-top:4px">研修コンテンツ開発</div>
+                        <div style="font-size:.75rem;color:var(--text-dim);margin-top:4px">動画教材＋テンプレート制作</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,.03);padding:14px;border-radius:10px">
+                        <div style="font-size:.7rem;color:var(--green);font-weight:600">3rd Priority</div>
+                        <div style="font-size:.9rem;font-weight:600;margin-top:4px">成功事例の動画化</div>
+                        <div style="font-size:.75rem;color:var(--text-dim);margin-top:4px">ビールバー事例等をプロモ動画に</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            プロライン成長シミュレーション — 作成日: 2026年3月10日 — データマーケティング株式会社 × 古橋 | 数値は推定値であり、実績を保証するものではありません
+        </div>
+    </div>
+
+    <script>
+        // === DATA ===
+        const colors = {
+            s1: '#0EA5E9', s2: '#F97316', s3: '#A855F7',
+            s4: '#22C55E', s5: '#EAB308', s6: '#EC4899',
+            base: '#334155', target: 'rgba(255,255,255,.15)'
+        };
+        const months = ['3月', '4月', '5月', '6月', '7月', '8月'];
+        const baseRevenue = 2300;
+        const baseProfit = 560;
+
+        // Standard scenario monthly additions (on top of base)
+        const scenarioData = {
+            revenue: {
+                standard: {
+                    s1: [0, 150, 300, 300, 300, 300],   // Brain
+                    s2: [0, 90, 180, 180, 180, 180],   // YOLO's
+                    s3: [0, 0, 40, 80, 80, 80],   // 講師研修
+                    s4: [80, 80, 80, 80, 80, 80],   // 勉強会
+                    s5: [0, 200, 400, 400, 400, 400],   // ハウスリスト
+                    s6: [0, 40, 80, 80, 80, 80]    // アップセル
+                },
+                conservative: {
+                    s1: [0, 80, 150, 150, 150, 150],
+                    s2: [0, 50, 100, 100, 100, 100],
+                    s3: [0, 0, 25, 50, 50, 50],
+                    s4: [50, 50, 50, 50, 50, 50],
+                    s5: [0, 100, 200, 200, 200, 200],
+                    s6: [0, 20, 50, 50, 50, 50]
+                },
+                optimistic: {
+                    s1: [0, 250, 500, 500, 500, 500],
+                    s2: [0, 150, 300, 300, 300, 300],
+                    s3: [0, 0, 75, 150, 150, 150],
+                    s4: [100, 100, 150, 150, 150, 150],
+                    s5: [0, 350, 700, 700, 700, 700],
+                    s6: [0, 50, 100, 100, 100, 100]
+                }
+            },
+            profit: {
+                standard: {
+                    s1: [0, 120, 240, 240, 240, 240],
+                    s2: [0, 59, 117, 117, 117, 117],
+                    s3: [0, 0, 30, 60, 60, 60],
+                    s4: [64, 64, 64, 64, 64, 64],
+                    s5: [0, 120, 240, 240, 240, 240],
+                    s6: [0, 36, 72, 72, 72, 72]
+                },
+                conservative: {
+                    s1: [0, 64, 120, 120, 120, 120],
+                    s2: [0, 30, 60, 60, 60, 60],
+                    s3: [0, 0, 19, 38, 38, 38],
+                    s4: [40, 40, 40, 40, 40, 40],
+                    s5: [0, 50, 100, 100, 100, 100],
+                    s6: [0, 18, 45, 45, 45, 45]
+                },
+                optimistic: {
+                    s1: [0, 200, 400, 400, 400, 400],
+                    s2: [0, 98, 195, 195, 195, 195],
+                    s3: [0, 0, 56, 113, 113, 113],
+                    s4: [80, 80, 120, 120, 120, 120],
+                    s5: [0, 210, 420, 420, 420, 420],
+                    s6: [0, 45, 90, 90, 90, 90]
+                }
+            }
+        };
+
+        const stratNames = ['① Brain', '② YOLO\'s', '③ 講師研修', '④ 勉強会', '⑤ ハウスリスト', '⑥ アップセル'];
+        const stratKeys = ['s1', 's2', 's3', 's4', 's5', 's6'];
+        const stratColors = [colors.s1, colors.s2, colors.s3, colors.s4, colors.s5, colors.s6];
+
+        let currentChart = 'revenue';
+        let currentScenario = 'standard';
+
+        // === CHART RENDERING ===
+        function drawChart() {
+            const canvas = document.getElementById('mainChart');
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = (rect.width - 48) * dpr;
+            canvas.height = 380 * dpr;
+            canvas.style.width = (rect.width - 48) + 'px';
+            canvas.style.height = '380px';
+            ctx.scale(dpr, dpr);
+            const W = rect.width - 48;
+            const H = 380;
+            ctx.clearRect(0, 0, W, H);
+
+            const data = scenarioData[currentChart][currentScenario];
+            const base = currentChart === 'revenue' ? baseRevenue : baseProfit;
+            const targetVal = currentChart === 'revenue' ? 3000 : 1000;
+
+            // Calculate stacked values
+            const stacked = months.map((_, mi) => {
+                let vals = stratKeys.map(k => data[k][mi]);
+                return vals;
+            });
+            const totals = stacked.map((vals, mi) => base + vals.reduce((a, b) => a + b, 0));
+            const maxVal = Math.max(...totals, targetVal) * 1.15;
+
+            const padL = 60, padR = 20, padT = 30, padB = 50;
+            const chartW = W - padL - padR;
+            const chartH = H - padT - padB;
+            const barW = chartW / months.length;
+            const barInner = barW * 0.55;
+
+            // Grid lines
+            const gridSteps = 5;
+            ctx.strokeStyle = 'rgba(255,255,255,.06)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#64748B';
+            ctx.font = '11px Inter, sans-serif';
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= gridSteps; i++) {
+                const val = Math.round(maxVal / gridSteps * i);
+                const y = padT + chartH - (val / maxVal * chartH);
+                ctx.beginPath();
+                ctx.moveTo(padL, y);
+                ctx.lineTo(W - padR, y);
+                ctx.stroke();
+                ctx.fillText(val.toLocaleString() + '万', padL - 8, y + 4);
+            }
+
+            // Target line
+            const targetY = padT + chartH - (targetVal / maxVal * chartH);
+            ctx.strokeStyle = currentChart === 'revenue' ? colors.s1 : colors.s4;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 4]);
+            ctx.beginPath();
+            ctx.moveTo(padL, targetY);
+            ctx.lineTo(W - padR, targetY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = currentChart === 'revenue' ? colors.s1 : colors.s4;
+            ctx.textAlign = 'left';
+            ctx.font = 'bold 11px Inter, sans-serif';
+            ctx.fillText('目標 ' + targetVal.toLocaleString() + '万', W - padR + 4 > W ? padL + 4 : W - padR - 90, targetY - 6);
+
+            // Bars
+            months.forEach((m, mi) => {
+                const x = padL + barW * mi + (barW - barInner) / 2;
+
+                // Base bar
+                const baseH = base / maxVal * chartH;
+                const baseY = padT + chartH - baseH;
+                const r = 4;
+                ctx.fillStyle = colors.base;
+                roundRect(ctx, x, baseY, barInner, baseH, r, true);
+
+                // Stacked additions
+                let cumH = baseH;
+                stratKeys.forEach((k, si) => {
+                    const val = data[k][mi];
+                    if (val <= 0) return;
+                    const segH = val / maxVal * chartH;
+                    const segY = padT + chartH - cumH - segH;
+                    ctx.fillStyle = stratColors[si];
+                    ctx.globalAlpha = 0.85;
+                    roundRect(ctx, x, segY, barInner, segH, si === stratKeys.length - 1 || stratKeys.slice(si + 1).every(sk => data[sk][mi] === 0) ? r : 0, true);
+                    ctx.globalAlpha = 1;
+                    cumH += segH;
+                });
+
+                // Total label
+                const total = totals[mi];
+                ctx.fillStyle = total >= targetVal ? colors.s4 : '#F1F5F9';
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(total.toLocaleString(), x + barInner / 2, padT + chartH - cumH - 8);
+
+                // Month label
+                ctx.fillStyle = '#94A3B8';
+                ctx.font = '12px "Noto Sans JP", sans-serif';
+                ctx.fillText(m, x + barInner / 2, padT + chartH + 20);
+            });
+
+            // Update legend
+            const legendEl = document.getElementById('chartLegend');
+            legendEl.innerHTML = `<div class="legend-item"><span class="legend-dot" style="background:${colors.base}"></span>既存事業</div>` +
+                stratNames.map((n, i) => `<div class="legend-item"><span class="legend-dot" style="background:${stratColors[i]}"></span>${n}</div>`).join('');
+        }
+
+        function roundRect(ctx, x, y, w, h, r, fill) {
+            if (h < 1) return;
+            r = Math.min(r, h / 2, w / 2);
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h);
+            ctx.lineTo(x, y + h);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+            if (fill) ctx.fill();
+        }
+
+        function switchChart(type) {
+            currentChart = type;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            drawChart();
+        }
+
+        // === PROFIT MARGIN BARS ===
+        function renderMarginBars() {
+            const track = document.getElementById('marginTrack');
+            const profitData = scenarioData.profit.standard;
+            const revenueData = scenarioData.revenue.standard;
+            const margins = months.map((_, mi) => {
+                const totalRevenue = baseRevenue + stratKeys.reduce((s, k) => s + revenueData[k][mi], 0);
+                const totalProfit = baseProfit + stratKeys.reduce((s, k) => s + profitData[k][mi], 0);
+                return (totalProfit / totalRevenue * 100);
+            });
+
+            track.innerHTML = months.map((m, i) => {
+                const pct = margins[i];
+                const h = (pct / 40) * 140;
+                const isTarget = pct >= 33.3;
+                const color = isTarget ? 'var(--green)' : pct >= 28 ? 'var(--teal)' : 'var(--orange)';
+                return `<div class="margin-month">
+      <div class="margin-bar-wrap">
+        <div class="margin-bar" style="height:${h}px;background:${color}">
+          <div class="val" style="color:${color}">${pct.toFixed(1)}%</div>
+        </div>
+      </div>
+      <div class="margin-label">${m}</div>
+    </div>`;
+            }).join('');
+
+            // Add target line
+            const targetH = (33.3 / 40) * 140;
+            const targetLine = document.createElement('div');
+            targetLine.style.cssText = `position:absolute;left:20px;right:20px;bottom:${targetH + 30}px;border-top:2px dashed var(--green);opacity:.4`;
+            track.style.position = 'relative';
+            track.appendChild(targetLine);
+        }
+
+        // === INIT ===
+        window.addEventListener('load', () => {
+            drawChart();
+            renderMarginBars();
+        });
+        window.addEventListener('resize', drawChart);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【第零話】もしも年商10億社長が全てを失ったら──スキル0から最短で稼ぐ全戦略</title>
+    <meta name="description" content="スキルハックス動画講座 第零話。年商10億・受講生3万人超の迫佑樹が、ゼロから副業で成果を出す全体像を5分で解説。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #f8f9fb;
+            color: #333;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* ── Header ── */
+        .ep-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px 32px;
+        }
+
+        .ep-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            letter-spacing: .5px;
+        }
+
+        .ep-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 900;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .ep-title .accent {
+            color: #60a5fa;
+        }
+
+        .ep-meta {
+            font-size: 13px;
+            opacity: .7;
+        }
+
+        /* ── Timer ── */
+        .timer-bar {
+            background: #fff3cd;
+            color: #856404;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .timer-bar .icon {
+            margin-right: 4px;
+        }
+
+        /* ── Video ── */
+        .video-section {
+            background: #000;
+            padding: 0;
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #111;
+        }
+
+        .video-placeholder .insert-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .video-placeholder .insert-note strong {
+            color: #60a5fa;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        /* ── Content ── */
+        .content {
+            background: #fff;
+            padding: 32px 24px;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid #2563eb;
+            line-height: 1.5;
+        }
+
+        .learn-list {
+            list-style: none;
+            margin: 0 0 24px;
+        }
+
+        .learn-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .learn-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        .content p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .highlight-box {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 24px 0;
+            border: 1px solid #dbeafe;
+        }
+
+        .highlight-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .voice-quote {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* ── Next Preview ── */
+        .next-section {
+            background: linear-gradient(180deg, #fff 0%, #f0f4ff 100%);
+            padding: 32px 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .next-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            letter-spacing: .5px;
+        }
+
+        .next-section h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .next-section ul {
+            list-style: none;
+            margin: 0 0 16px;
+        }
+
+        .next-section ul li {
+            font-size: 14px;
+            color: #555;
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+
+        .next-section ul li::before {
+            content: '▸';
+            color: #2563eb;
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        /* ── Present Preview ── */
+        .present-preview {
+            background: #fff;
+            border: 2px dashed #dbeafe;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .present-preview .pp-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .present-preview .pp-list {
+            font-size: 13px;
+            color: #555;
+            text-align: left;
+        }
+
+        .present-preview .pp-list span {
+            display: block;
+            padding: 2px 0;
+        }
+
+        /* ── Form ── */
+        .form-section {
+            background: #fff;
+            padding: 32px 24px 40px;
+            border-top: 3px solid #2563eb;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color .2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #06C755 0%, #05a848 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 8px;
+            transition: opacity .2s;
+            box-shadow: 0 4px 14px rgba(6, 199, 85, .3);
+        }
+
+        .submit-btn:hover {
+            opacity: .9;
+        }
+
+        .submit-btn .sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .micro-copy {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: #bbb;
+            background: #f8f9fb;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <!-- ── Header ── -->
+        <header class="ep-header">
+            <div class="ep-badge">🎬 第零話（全4話）</div>
+            <h1 class="ep-title">
+                もしも<span class="accent">年商10億社長</span>が<br>
+                全てを失ったら──<br>
+                スキル0から最短で稼ぐ全戦略
+            </h1>
+            <p class="ep-meta">講師：迫 佑樹（株式会社ブレイン 代表取締役）</p>
+        </header>
+
+        <!-- ── Timer ── -->
+        <div class="timer-bar">
+            <span class="icon">⏰</span> この動画の視聴期限：あと <strong>3日間</strong>
+        </div>
+
+        <!-- ── Video ── -->
+        <section class="video-section">
+            <div class="video-placeholder">
+                <div class="insert-note">
+                    <strong>▶ ここに第零話の動画を挿入</strong>
+                    Vimeo or YouTube（限定公開）を埋め込み
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Content ── -->
+        <section class="content">
+            <h2>この動画で手に入るもの</h2>
+            <ul class="learn-list">
+                <li>年商10億を達成した迫佑樹が「もしゼロからやり直すなら」の完全ロードマップ</li>
+                <li>なぜ「勉強は2日で十分」なのか──初月から稼ぐ人の動き方</li>
+                <li>スキルは3割、残り7割は○○──副業で挫折する本当の原因</li>
+                <li>月50〜80万を目指せる「人生攻略ロードマップ」の全体像</li>
+            </ul>
+
+            <p>
+                法人化わずか2年で年商10億を達成し、<br>
+                累計<strong>3万人以上</strong>を指導してきた迫佑樹が、<br>
+                <strong>「1年間ブログを書いて稼ぎは273円」</strong>だった<br>
+                泥臭い過去から辿り着いた"本質"をお話しします。
+            </p>
+
+            <div class="highlight-box">
+                <div class="label">💡 この動画シリーズのコンセプト</div>
+                <p>
+                    「新しいことを勉強するのをやめて、<br>
+                    今すぐ稼ぎ始めませんか？」<br><br>
+                    ノウハウを知っても稼げない。<br>
+                    大事なのは<strong>「体系的なスキル習得」×「正しい順番」</strong>だけ。<br>
+                    全4話＋特別動画で、あなたの副業の第一歩を<br>
+                    迫佑樹が徹底サポートします。
+                </p>
+            </div>
+
+            <div class="voice-quote">
+                💬 受講生の声<br>
+                「動画編集のスキルを身につけてたった3ヶ月で月100万円を達成できました。何十億円の事業に成長した先輩もいて、ここでの出会いが人生を変えました」<br>
+                ──未経験からスタートした受講生
+            </div>
+        </section>
+
+        <!-- ── Next Preview ── -->
+        <section class="next-section">
+            <div class="next-badge">📺 次のプレゼント</div>
+            <h3>【第一話】なぜ「勉強熱心な人」ほど<br>副業で1円も稼げないのか</h3>
+            <ul>
+                <li>ノウハウコレクターから脱却する方法</li>
+                <li>スキル提供型副業が「最もリスクが低い」理由</li>
+                <li>成果が出る人と出ない人の決定的な違い</li>
+            </ul>
+            <p style="font-size:14px;color:#555;">
+                次の動画では、累計3万人のデータから判明した「成果が出る人だけが知っている真実」をお伝えします。
+            </p>
+
+            <div class="present-preview">
+                <div class="pp-title">🎁 全話視聴者限定プレゼント（5大特典）</div>
+                <div class="pp-list">
+                    <span>❶ スキルチェックリスト</span>
+                    <span>❷ 初案件獲得テンプレート集</span>
+                    <span>❸ 案件獲得ロードマップ</span>
+                    <span>❹ 副業スキルマッチングシート</span>
+                    <span>❺ 副業ゼロイチ 90日間ロードマップ</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Form ── -->
+        <section class="form-section" id="form">
+            <h2>感想を送信して<br>第一話を受け取る</h2>
+            <p class="form-note">
+                期限内に感想を送信した方だけに、続きの動画をお届けしています。<br>
+                一言でも構いませんので、ぜひご感想をお送りください。
+            </p>
+
+            <form>
+                <div class="form-group">
+                    <label>お名前</label>
+                    <input type="text" placeholder="例：田中 太郎">
+                </div>
+                <div class="form-group">
+                    <label>動画のご感想</label>
+                    <textarea placeholder="動画を見て感じたこと、気づき、印象に残ったことなどをお聞かせください。"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    感想を送信して第一話を受け取る ▶
+                    <span class="sub">💬 送信後、1分以内にLINEで第一話をお届けします</span>
+                </button>
+            </form>
+
+            <p class="micro-copy">
+                ※ いただいた感想は迫佑樹が全て目を通しています。<br>
+                ※ 視聴期限を過ぎると、このページは閲覧できなくなります。
+            </p>
+        </section>
+
+        <!-- ── Footer ── -->
+        <footer class="footer">
+            <p>© Skill Hacks by Brain Inc.</p>
+            <p>※ 本ページの内容は個人の経験に基づくものであり、結果を保証するものではありません。</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

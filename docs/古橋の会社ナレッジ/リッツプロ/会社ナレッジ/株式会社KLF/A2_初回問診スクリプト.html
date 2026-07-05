@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初回問診スクリプト — KLF スタッフマニュアル</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-light: #10896B;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-light: #F59E0B;
+            --amber-pale: #FEF3C7;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --white: #FAFAFA;
+            --bg: #F1F5F2;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --blue: #1D4ED8;
+            --blue-pale: #DBEAFE;
+            --purple: #7C3AED;
+            --purple-pale: #EDE9FE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .top-bar {
+            background: var(--mint);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .top-bar .sub {
+            color: rgba(255, 255, 255, .75);
+            font-size: 12px;
+        }
+
+        .badge-staff {
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, var(--mint) 0%, var(--mint-light) 100%);
+            color: #fff;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+        }
+
+        .intro-box h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .intro-box p {
+            font-size: 13.5px;
+            opacity: .9;
+            line-height: 1.7;
+        }
+
+        .intro-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .intro-meta span {
+            background: rgba(255, 255, 255, .2);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Phase block */
+        .phase {
+            margin-bottom: 40px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .phase-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--mint);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .phase-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--slate);
+        }
+
+        .phase-sub {
+            font-size: 13px;
+            color: var(--slate-light);
+            margin-top: 2px;
+        }
+
+        /* Script block */
+        .script-block {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .sb-header {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--mint-mid);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sb-header:hover {
+            background: var(--mint-pale);
+        }
+
+        .sb-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--slate);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sb-toggle {
+            font-size: 18px;
+            color: var(--slate-light);
+            transition: transform .3s;
+        }
+
+        .sb-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .sb-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .sb-content.open {
+            display: block;
+        }
+
+        /* Purpose / Script rows */
+        .meta-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .meta-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .mb-goal {
+            background: var(--mint-pale);
+            color: var(--mint);
+        }
+
+        .mb-type {
+            background: var(--blue-pale);
+            color: var(--blue);
+        }
+
+        .mb-caution {
+            background: var(--red-pale);
+            color: var(--red);
+        }
+
+        .mb-tip {
+            background: var(--amber-pale);
+            color: var(--amber);
+        }
+
+        .purpose {
+            background: var(--mint-pale);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .purpose strong {
+            color: var(--mint);
+            font-weight: 700;
+        }
+
+        /* Staff line */
+        .dialog {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .line {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .line-speaker {
+            width: 52px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 6px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .line-speaker.staff {
+            background: var(--mint);
+            color: #fff;
+        }
+
+        .line-speaker.pt {
+            background: var(--slate-mid);
+            color: #fff;
+        }
+
+        .line-text {
+            font-size: 14px;
+            color: var(--slate-mid);
+            line-height: 1.75;
+        }
+
+        .line-text.staff-line {
+            background: var(--mint-pale);
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+        }
+
+        .line-text.pt-line {
+            background: #F1F5F9;
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            color: var(--slate-light);
+        }
+
+        /* Tip box */
+        .tip-box {
+            background: var(--amber-pale);
+            border: 1px solid var(--amber-light);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 10px;
+        }
+
+        .tip-box .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .caution-box {
+            background: var(--red-pale);
+            border: 1px solid #FECACA;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 10px;
+        }
+
+        .caution-box .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .check-item::before {
+            content: '☐';
+            font-size: 16px;
+            color: var(--mint);
+            flex-shrink: 0;
+            margin-top: -2px;
+        }
+
+        /* Quick ref */
+        .quick-ref {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--mint-mid);
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .qr-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .qr-card {
+            background: var(--mint-pale);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+
+        .qr-card .qr-q {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--mint);
+            margin-bottom: 6px;
+        }
+
+        .qr-card .qr-a {
+            font-size: 13px;
+            color: var(--slate-mid);
+            line-height: 1.6;
+        }
+
+        .section-div {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--mint-mid), transparent);
+            margin: 32px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 60px;
+        }
+
+        @media(max-width:700px) {
+            .top-bar {
+                padding: 14px 20px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .line-speaker {
+                width: 42px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div>
+            <h1>💬 初回問診スクリプト</h1>
+            <div class="sub">KLF スタッフ用 — ヒアリングから説明方針確定まで</div>
+        </div>
+        <span class="badge-staff">STAFF ONLY</span>
+    </div>
+
+    <div class="container">
+
+        <div class="intro-box">
+            <h2>📌 このスクリプトの目的</h2>
+            <p>初回問診は「信頼を作る」フェーズ。まだ何も施術していない段階で、患者に<strong>「この人なら任せられる」</strong>と思ってもらうことがゴール。<br>
+                来院経路・症状・説明レベルの3点を確認し、患者ひとりひとりに合わせたトークへ移行する。</p>
+            <div class="intro-meta">
+                <span>⏱️ 所要時間：5〜10分</span>
+                <span>🎯 フロー位置：STEP 1</span>
+                <span>✅ 全患者タイプに共通</span>
+            </div>
+        </div>
+
+        <!-- PHASE A -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">A</div>
+                <div>
+                    <div class="phase-title">来院経路・基本情報の確認</div>
+                    <div class="phase-sub">集客チャネルを確認し、本日の費用免除などの特典を伝える</div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">📍 Google予約・ホットペッパー経由の場合</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="meta-row">
+                        <span class="meta-badge mb-goal">来院経路確認</span>
+                        <span class="meta-badge mb-tip">特典説明</span>
+                    </div>
+                    <div class="purpose"><strong>目的：</strong>来院チャネルに応じた特典（骨盤矯正クーポン）を伝え、お得感＝来てよかった感を早めに作る。</div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">今日はGoogleで予約いただいた〇〇さんですね、ありがとうございます。<br>
+                                Googleで予約いただいた方は、今日の骨盤矯正のクーポンが使えますので、その分はかかりません。
+                            </div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者</span>
+                            <div class="line-text pt-line">（来院経路を答える）</div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 ポイント</div>
+                        来院経路はデータとして重要。どの集客が効いているかをスタッフが把握しておく。ホットペッパーの場合はポイント使用額も確認。
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">📅 産後患者のパターン確認（来院経緯）</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="meta-row">
+                        <span class="meta-badge mb-type">🤱 産後専用</span>
+                        <span class="meta-badge mb-goal">インサイト把握</span>
+                    </div>
+                    <div class="purpose"><strong>目的：</strong>産後患者には「最初から決めてた」vs「悩んで来た」で、ニーズの深さが異なる。来院理由を明確にしてトークをカスタマイズ。
+                    </div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                産後で来てくれる人って、産む前から「産後は行こう」と決めてた人と、産んでから症状が出てきて来る人がいるんですけど、どっちが近いですか？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者A</span>
+                            <div class="line-text pt-line">もともとここを選んでおいて、産後来ようと思ってました</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者B</span>
+                            <div class="line-text pt-line">なんか仙骨が痛くて、産後だからかなと思って来ました</div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 A（最初から決めてた）の場合</div>
+                        意識が高く、継続意欲あり。より詳しい説明を喜んでくれる可能性が高い。継続プランの提案がしやすい。
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 B（症状で来た）の場合</div>
+                        まず「その症状は治せます」という安心感を先に与える。説明よりも即効性の感覚が大事。
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /phase A -->
+
+        <div class="section-div"></div>
+
+        <!-- PHASE B -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">B</div>
+                <div>
+                    <div class="phase-title">症状・悩みのヒアリング</div>
+                    <div class="phase-sub">具体的な症状と日常生活への影響を引き出す</div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">💬 主訴・悩みを聞く（産後・腰痛・むくみ共通）</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="meta-row">
+                        <span class="meta-badge mb-goal">ニーズ把握</span>
+                        <span class="meta-badge mb-type">全タイプ共通</span>
+                    </div>
+                    <div class="purpose">
+                        <strong>目的：</strong>症状の「表面」だけでなく、日常生活への影響（抱っこ・仕事・育児）まで掘り下げることで、患者自身が問題の深刻さを認識する。</div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                今日はどんな症状でお越しですか？腰痛？産後の骨盤まわり？それとももう少し詳しく...<br>例えば抱っこしてて痛くなるとか、座ってる時につらいとか、どんな場面が一番しんどいですか？
+                            </div>
+                        </div>
+                    </div>
+                    <div class="checklist">
+                        <div class="check-item">痛みの部位を具体的に聞く（腰？お尻？仙骨？膝？）</div>
+                        <div class="check-item">いつから始まったか、悪化のきっかけはあるか確認する</div>
+                        <div class="check-item">日常生活への影響（育児・仕事・趣味）を引き出す</div>
+                        <div class="check-item">今まで他の整骨院・整形外科に行ったことがあるか確認する</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">🦴 急性期（3日以内の怪我）への対応</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content">
+                    <div class="meta-row">
+                        <span class="meta-badge mb-caution">⚠️ 急性期専用</span>
+                        <span class="meta-badge mb-type">痛み・怪我</span>
+                    </div>
+                    <div class="purpose">
+                        <strong>目的：</strong>急性期（受傷後3日以内）はもみほぐしNGをかつ、アドレナリンで痛みが見えにくくなっている仕組みを説明。患者の不安を減らしつつ正しいケアを伝える。
+                    </div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                ピキッてなった時って、中で筋肉が少し切れてる状態なんですよ。で、揉みほぐすと血流が良くなって、中から血がどんどん出てきちゃうんです。腫れの正体ってじつは中の出血なんですよね。
+                            </div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                だから怪我した最初の3日間はNGがあって、<strong>①温めること、②お酒を飲むこと、③わざわざ痛いとこを探すこと（どこが痛いかやってみる動作）</strong>、この3つはやってはいけないんです。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 追記トーク</div>
+                        「アドレナリンが出てるから、怪我した直後は痛みが出にくいんですよ。だから昨日は大丈夫だったのに今日から痛くなってきた、ってパターンが多いんです。」
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /phase B -->
+
+        <div class="section-div"></div>
+
+        <!-- PHASE C -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">C</div>
+                <div>
+                    <div class="phase-title">説明レベルの確認・今日の方向性の設定</div>
+                    <div class="phase-sub">患者の「受け取り方」に合わせてトークをカスタマイズする</div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">🎯 甘口・中口・辛口の確認</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="meta-row">
+                        <span class="meta-badge mb-goal">トーク設計</span>
+                        <span class="meta-badge mb-type">全タイプ共通</span>
+                    </div>
+                    <div class="purpose"><strong>目的：</strong>詳しく聞きたい患者には深く説明し、とりあえずやってほしい患者には簡潔に済ませる。「聞かされすぎた」という不満を防ぐ。
+                    </div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">ちょっとお聞きしたいんですけど、今日の話の受け取り方について。<br>
+                                なるべく詳しく知りたい派か、とりあえず治してくれればいいわって感じか、どっちが近いですか？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者A</span>
+                            <div class="line-text pt-line">詳しく聞きたいです</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者B</span>
+                            <div class="line-text pt-line">なるべく簡単でいいです／子どものお迎えが◯時です</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">（詳しく希望の場合）じゃあ甘口・中口・辛口で言ったらどのレベルで話しましょうか？</div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 辛口指定の場合</div>
+                        インボディの数値や体の状態をありのままに伝えてOK。「辛口OK」と言われた場合は「正直に言うと〜」という形で信頼感のある伝え方が可能。
+                    </div>
+                    <div class="caution-box">
+                        <div class="tip-label">⚠️ 時間制限がある場合</div>
+                        「お迎えが◯時です」など時間制限がある場合は、今日やる治療と料金の説明だけを優先し、詳細説明は次回に回す。
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title">⏰ 時間制限がある患者への調整</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content">
+                    <div class="purpose"><strong>目的：</strong>患者の時間を尊重しながら、今日の最低限の説明と施術を確実に行う。</div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">今日、何時までとかあります？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者</span>
+                            <div class="line-text pt-line">2時半にお迎えがあります</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                わかりました。じゃあここだけは知っておいた方がいいっていうポイントだけ絞ってお話しますね。感覚的に言うと今日は12時半〜1時くらいには終わるように動きます。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /phase C -->
+
+        <!-- Quick reference -->
+        <div class="quick-ref">
+            <div class="qr-title">📋 問診チェックリスト（必須確認事項）</div>
+            <div class="qr-grid">
+                <div class="qr-card">
+                    <div class="qr-q">✅ 来院経路</div>
+                    <div class="qr-a">Google／ホットペッパー／知人紹介／その他<br>→ 特典適用確認</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-q">✅ 症状・悩み</div>
+                    <div class="qr-a">部位・期間・日常生活への影響<br>→ 他院の通院歴もチェック</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-q">✅ 受け取り方</div>
+                    <div class="qr-a">詳しく／簡単で OK<br>甘口・中口・辛口</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-q">✅ 時間制限</div>
+                    <div class="qr-a">何時まで来られるか<br>→ 内容・ペースを調整</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-q">✅ 産後の場合</div>
+                    <div class="qr-a">来院パターン確認<br>子どもの月齢・人数・授乳中か</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-q">✅ 急性期チェック</div>
+                    <div class="qr-a">3日以内の怪我ならNGトークを先に<br>もみほぐしNG・温めNG</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            KLF スタッフマニュアル A-2 / 初回問診スクリプト &nbsp;|&nbsp; 制作：リッツプロ &nbsp;|&nbsp; 2026年4月
+        </div>
+    </div>
+
+    <script>
+        function toggleBlock(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.sb-toggle');
+            content.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>

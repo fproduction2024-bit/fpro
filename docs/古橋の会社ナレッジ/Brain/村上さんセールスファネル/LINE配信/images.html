@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE配信用 CTA画像一覧</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a2e;
+            color: #fff;
+            font-family: 'Noto Sans JP', sans-serif;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #a855f7;
+        }
+
+        .page-sub {
+            text-align: center;
+            color: #888;
+            margin-bottom: 48px;
+            font-size: 14px;
+        }
+
+        .category-title {
+            font-size: 22px;
+            color: #c084fc;
+            margin: 48px 0 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .category-desc {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        .image-label {
+            color: #a1a1aa;
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .image-label span {
+            background: rgba(168, 85, 247, 0.2);
+            color: #c084fc;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+
+        .image-wrapper {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ========== A: HEADER IMAGES 1040x1040 ========== */
+        .header-img {
+            width: 520px;
+            height: 520px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* Will be overridden per image */
+        }
+
+        /* A-1: Present list header */
+        .a1 {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1e1040 40%, #0a0a1a 100%);
+            padding: 36px 32px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .a1 .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 20px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .a1 .title-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .a1 .main-title {
+            font-size: 26px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #c084fc, #f0abfc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .a1 .sub-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e9d5ff;
+            margin-bottom: 20px;
+        }
+
+        .a1 .presents-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 12px;
+            text-align: left;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .a1 .present-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            color: #d4d4d8;
+            padding: 5px 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .a1 .present-item .check {
+            color: #a855f7;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .a1 .free-tag {
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .a1::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .a1::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* A-2: Consultation header */
+        .a2 {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0c1a30 40%, #0a0a1a 100%);
+            padding: 36px 32px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .a2 .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 20px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .a2 .main-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .a2 .highlight {
+            color: #60a5fa;
+        }
+
+        .a2 .sub-title {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .a2 .merits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .a2 .merit-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 12px;
+            padding: 14px 16px;
+            text-align: left;
+        }
+
+        .a2 .merit-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .a2 .merit-text {
+            font-size: 13px;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .a2 .merit-text strong {
+            color: #93c5fd;
+        }
+
+        .a2 .free-label {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fbbf24;
+            letter-spacing: 2px;
+        }
+
+        .a2 .time-label {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* A-3: Chirami-se header */
+        .a3 {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #0a0a1a 100%);
+            padding: 32px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .a3 .badge {
+            display: inline-block;
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            margin-bottom: 16px;
+        }
+
+        .a3 .main-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .a3 .cards {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .a3 .card {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: left;
+        }
+
+        .a3 .card-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: rgba(168, 85, 247, 0.4);
+            margin-bottom: 4px;
+        }
+
+        .a3 .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e9d5ff;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .a3 .card-desc {
+            font-size: 11px;
+            color: #a1a1aa;
+            line-height: 1.6;
+        }
+
+        .a3 .card-tag {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 10px;
+            background: rgba(168, 85, 247, 0.1);
+            color: #c084fc;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .a3 .bottom-text {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        /* A-4: Customer voices */
+        .a4 {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1030 50%, #0a0a1a 100%);
+            padding: 32px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .a4 .badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            margin-bottom: 14px;
+        }
+
+        .a4 .main-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .a4 .voices {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .a4 .voice-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px 18px;
+            text-align: left;
+            position: relative;
+        }
+
+        .a4 .voice-stars {
+            color: #fbbf24;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .a4 .voice-text {
+            font-size: 12px;
+            color: #d4d4d8;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .a4 .voice-author {
+            font-size: 11px;
+            color: #71717a;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .a4 .satisfaction {
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .a4 .satisfaction .number {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #4ade80;
+        }
+
+        /* ========== B: CTA BUTTONS ========== */
+        .btn-img {
+            width: 520px;
+            height: 120px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 900;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+
+        .btn-img .btn-icon {
+            font-size: 26px;
+        }
+
+        .btn-img .sub-text {
+            position: absolute;
+            bottom: 14px;
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .b1 {
+            background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(168, 85, 247, 0.4);
+        }
+
+        .b2 {
+            background: linear-gradient(135deg, #059669, #10b981, #34d399);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(16, 185, 129, 0.4);
+        }
+
+        .b3 {
+            background: linear-gradient(135deg, #ea580c, #f97316, #fb923c);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(249, 115, 22, 0.4);
+        }
+
+        .b4 {
+            background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(245, 158, 11, 0.4);
+        }
+
+        .b5 {
+            background: linear-gradient(135deg, #6d28d9, #8b5cf6, #a78bfa);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ========== C: CONTENT IMAGES ========== */
+        .content-img {
+            width: 520px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        /* C-1: Flow diagram */
+        .c1 {
+            background: linear-gradient(180deg, #0a0a1a, #111827);
+            padding: 32px;
+            text-align: center;
+        }
+
+        .c1 .flow-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #c084fc;
+            margin-bottom: 24px;
+        }
+
+        .c1 .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .c1 .flow-step {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 12px;
+            padding: 16px 12px;
+            width: 140px;
+            text-align: center;
+        }
+
+        .c1 .flow-step.active {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.08);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+
+        .c1 .flow-step-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .c1 .flow-step-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #e9d5ff;
+            margin-bottom: 3px;
+        }
+
+        .c1 .flow-step-desc {
+            font-size: 10px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+
+        .c1 .flow-arrow {
+            color: #a855f7;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* C-2: Merit 4-point */
+        .c2 {
+            background: linear-gradient(180deg, #0a0a1a, #111827);
+            padding: 28px;
+        }
+
+        .c2 .c2-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .c2 .merit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .c2 .merit-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .c2 .merit-box-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .c2 .merit-box-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #e9d5ff;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .c2 .merit-box-desc {
+            font-size: 10px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+
+        /* C-3: 4 types */
+        .c3 {
+            background: linear-gradient(180deg, #0a0a1a, #111827);
+            padding: 28px;
+            text-align: center;
+        }
+
+        .c3 .c3-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .c3 .types-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .c3 .type-card {
+            border-radius: 12px;
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid;
+        }
+
+        .c3 .type-card.type-a {
+            background: rgba(168, 85, 247, 0.06);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .c3 .type-card.type-b {
+            background: rgba(59, 130, 246, 0.06);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .c3 .type-card.type-c {
+            background: rgba(34, 197, 94, 0.06);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .c3 .type-card.type-d {
+            background: rgba(249, 115, 22, 0.06);
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .c3 .type-label {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .c3 .type-a .type-label {
+            color: #c084fc;
+        }
+
+        .c3 .type-b .type-label {
+            color: #60a5fa;
+        }
+
+        .c3 .type-c .type-label {
+            color: #4ade80;
+        }
+
+        .c3 .type-d .type-label {
+            color: #fb923c;
+        }
+
+        .c3 .type-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .c3 .type-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .c3 .type-desc {
+            font-size: 10px;
+            color: #71717a;
+            line-height: 1.4;
+        }
+
+        /* ========== D: URGENCY BANNERS ========== */
+        .urgency-img {
+            width: 520px;
+            height: 140px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .d1 {
+            background: linear-gradient(135deg, #1a1a2e, #1e1040);
+            border: 2px solid rgba(249, 115, 22, 0.5);
+        }
+
+        .d1 .urgency-icon {
+            font-size: 28px;
+        }
+
+        .d1 .urgency-main {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fb923c;
+        }
+
+        .d1 .urgency-sub {
+            font-size: 13px;
+            color: #a1a1aa;
+        }
+
+        .d2 {
+            background: linear-gradient(135deg, #1a0a0a, #2a0a0a);
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .d2 .urgency-icon {
+            font-size: 28px;
+        }
+
+        .d2 .urgency-main {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ef4444;
+        }
+
+        .d2 .urgency-sub {
+            font-size: 13px;
+            color: #fca5a5;
+        }
+
+        .d2 .pulse {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+        }
+
+        .d3 {
+            background: linear-gradient(135deg, #1a1a0a, #2a1a0a);
+            border: 2px solid rgba(234, 179, 8, 0.5);
+        }
+
+        .d3 .urgency-icon {
+            font-size: 28px;
+        }
+
+        .d3 .urgency-main {
+            font-size: 28px;
+            font-weight: 900;
+            color: #eab308;
+        }
+
+        .d3 .urgency-sub {
+            font-size: 13px;
+            color: #a1a1aa;
+        }
+
+        .d3-variants {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        /* Utility */
+        .row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>LINE配信用 CTA画像一覧</h1>
+    <p class="page-sub">Brain ブースターパッケージ｜全15枚（右クリック→画像を保存 で書き出し可能）</p>
+
+    <!-- ==================== A: HEADER IMAGES ==================== -->
+    <h2 class="category-title">A. ヘッダー画像（1040×1040px → ここでは520×520で表示）</h2>
+    <p class="category-desc">LINEリッチメッセージの冒頭に表示するビジュアル。Retinaディスプレイ対応で2倍サイズ推奨。</p>
+
+    <!-- A-1 -->
+    <div class="image-wrapper">
+        <p class="image-label">A-1: プレゼント一覧ヘッダー <span>シナリオ① ステップ1</span></p>
+        <div class="header-img a1">
+            <div class="badge">🎁 期間限定 無料プレゼント</div>
+            <div class="title-icon">📦</div>
+            <div class="main-title">ブースターパッケージ</div>
+            <div class="sub-title">10大特典</div>
+            <div class="presents-grid">
+                <div class="present-item"><span class="check">✓</span> Brain販売 月50万ロードマップ</div>
+                <div class="present-item"><span class="check">✓</span> 値段設計テンプレート</div>
+                <div class="present-item"><span class="check">✓</span> 最短で月5万円の3ステップ</div>
+                <div class="present-item"><span class="check">✓</span> スキル選定チェックリスト</div>
+                <div class="present-item"><span class="check">✓</span> 仕組み化チェックシート</div>
+                <div class="present-item"><span class="check">✓</span> KPI設計テンプレート</div>
+                <div class="present-item"><span class="check">✓</span> アフィリ月10万戦略ガイド</div>
+                <div class="present-item"><span class="check">✓</span> X運用テンプレート</div>
+                <div class="present-item"><span class="check">✓</span> ビジネスモデル構築全体像</div>
+                <div class="present-item"><span class="check">✓</span> 成功者インタビュー集</div>
+            </div>
+            <div class="free-tag">✨ 全て無料で受け取れます ✨</div>
+        </div>
+    </div>
+
+    <!-- A-2 -->
+    <div class="image-wrapper">
+        <p class="image-label">A-2: 面談ご案内ヘッダー <span>シナリオ② ステップ2</span></p>
+        <div class="header-img a2">
+            <div class="badge">📅 特別なご案内</div>
+            <div class="main-title"><span class="highlight">無料</span>個別面談</div>
+            <div class="sub-title">あなたのステージに合わせた完全カスタマイズのアドバイス</div>
+            <div class="merits">
+                <div class="merit-item">
+                    <div class="merit-icon">🎯</div>
+                    <div class="merit-text"><strong>Brain活用戦略</strong>をあなた専用にご提案</div>
+                </div>
+                <div class="merit-item">
+                    <div class="merit-icon">📋</div>
+                    <div class="merit-text">10大特典の<strong>実践的な活用法</strong>をレクチャー</div>
+                </div>
+                <div class="merit-item">
+                    <div class="merit-icon">🗺️</div>
+                    <div class="merit-text">今後の<strong>ロードマップ</strong>を個別設計</div>
+                </div>
+            </div>
+            <div class="free-label">完全無料</div>
+            <div class="time-label">60分間のマンツーマン面談</div>
+        </div>
+    </div>
+
+    <!-- A-3 -->
+    <div class="image-wrapper">
+        <p class="image-label">A-3: チラ見せヘッダー <span>シナリオ② ステップ4（あと5日）</span></p>
+        <div class="header-img a3">
+            <div class="badge">👀 反響の大きい特典をご紹介</div>
+            <div class="main-title">ブースターパッケージから<br>2つをピックアップ</div>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-number">01</div>
+                    <div class="card-title">Brain販売で月50万円を達成するロードマップ</div>
+                    <div class="card-desc">Phase 0〜4のステップバイステップ。テーマ選定から安定収益化まで完全網羅。</div>
+                    <div class="card-tag">ロードマップ</div>
+                </div>
+                <div class="card">
+                    <div class="card-number">06</div>
+                    <div class="card-title">年商1億経営者のKPI設計テンプレート</div>
+                    <div class="card-desc">売上を因数分解。ボトルネックを数値で把握。感覚経営から脱却。</div>
+                    <div class="card-tag">テンプレート</div>
+                </div>
+            </div>
+            <div class="bottom-text">▼ 面談で活用法をカスタマイズ ▼</div>
+        </div>
+    </div>
+
+    <!-- A-4 -->
+    <div class="image-wrapper">
+        <p class="image-label">A-4: お客様の声ヘッダー <span>シナリオ② ステップ5（あと4日）</span></p>
+        <div class="header-img a4">
+            <div class="badge">💬 面談参加者のリアルな声</div>
+            <div class="main-title">参加者の声</div>
+            <div class="voices">
+                <div class="voice-card">
+                    <div class="voice-stars">★★★★★</div>
+                    <div class="voice-text">「自分に何が足りないか、30分で明確になりました。個別の壁打ちが一番効果的だと実感しました。」</div>
+                    <div class="voice-author">— コンテンツ販売者 Kさん</div>
+                </div>
+                <div class="voice-card">
+                    <div class="voice-stars">★★★★★</div>
+                    <div class="voice-text">「面談で教えてもらったロードマップ通りに進めたら、2ヶ月目で10万円を超えました。」</div>
+                    <div class="voice-author">— 副業初心者 Tさん</div>
+                </div>
+                <div class="voice-card">
+                    <div class="voice-stars">★★★★★</div>
+                    <div class="voice-text">「年商3000万から伸び悩んでいましたが、KPIの考え方で具体的な打ち手が見えました。」</div>
+                    <div class="voice-author">— 経営者 Mさん</div>
+                </div>
+            </div>
+            <div class="satisfaction">満足度 <span class="number">92</span>%</div>
+        </div>
+    </div>
+
+
+    <!-- ==================== B: CTA BUTTONS ==================== -->
+    <h2 class="category-title">B. CTAボタン画像</h2>
+    <p class="category-desc">LINEリッチメッセージのタップ可能なCTAボタン。</p>
+
+    <div class="row">
+        <!-- B-1 -->
+        <div class="image-wrapper">
+            <p class="image-label">B-1: 受け取りたいボタン <span>シナリオ① ステップ1〜8</span></p>
+            <div class="btn-img b1">
+                <span class="btn-icon">🎁</span>
+                プレゼントを受け取りたい
+                <span class="sub-text">▼ タップして面談予約のご案内を受け取る</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- B-2 -->
+    <div class="image-wrapper">
+        <p class="image-label">B-2: 面談予約ボタン <span>シナリオ② ステップ2〜12</span></p>
+        <div class="btn-img b2">
+            <span class="btn-icon">📅</span>
+            無料面談を予約する
+            <span class="sub-text">▼ 60分間のマンツーマン面談（完全無料）</span>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <!-- B-3 -->
+        <div class="image-wrapper">
+            <p class="image-label">B-3: 再チャンスボタン <span>シナリオ① ステップ9〜11</span></p>
+            <div class="btn-img b3">
+                <span class="btn-icon">⚡</span>
+                再チャンスで受け取る
+                <span class="sub-text">▼ タップで受取期限が2日間延長されます</span>
+            </div>
+        </div>
+
+        <!-- B-4 -->
+        <div class="image-wrapper">
+            <p class="image-label">B-4: 期限延長ボタン <span>シナリオ② ステップ13〜15</span></p>
+            <div class="btn-img b4">
+                <span class="btn-icon">🔄</span>
+                期限を延長する
+                <span class="sub-text">▼ タップで予約期限が7日間延長されます</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- B-5 -->
+        <div class="image-wrapper">
+            <p class="image-label">B-5: 面談参加でGETボタン <span>面談完了後に送信</span></p>
+            <div class="btn-img b5">
+                <span class="btn-icon">🏆</span>
+                面談参加でプレゼントGET
+                <span class="sub-text">▼ 専用会員サイトにアクセスできます</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- ==================== C: CONTENT IMAGES ==================== -->
+    <h2 class="category-title">C. コンテンツ画像</h2>
+    <p class="category-desc">テキストの説明を補強するビジュアル素材。</p>
+
+    <!-- C-1 -->
+    <div class="image-wrapper">
+        <p class="image-label">C-1: 受取フロー図 <span>シナリオ① ステップ3</span></p>
+        <div class="content-img c1">
+            <div class="flow-title">🎁 プレゼント受取の流れ</div>
+            <div class="flow-steps">
+                <div class="flow-step active">
+                    <div class="flow-step-icon">📦</div>
+                    <div class="flow-step-label">STEP 1</div>
+                    <div class="flow-step-desc">ブースターパッケージ<br>を受け取る</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">📅</div>
+                    <div class="flow-step-label">STEP 2</div>
+                    <div class="flow-step-desc">無料面談で<br>活用法をご案内</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-icon">🏆</div>
+                    <div class="flow-step-label">STEP 3</div>
+                    <div class="flow-step-desc">会員サイト<br>アクセス権GET</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- C-2 -->
+    <div class="image-wrapper">
+        <p class="image-label">C-2: 面談メリット4点 <span>シナリオ② ステップ7（あと2日）</span></p>
+        <div class="content-img c2">
+            <div class="c2-title">📋 面談で得られること</div>
+            <div class="merit-grid">
+                <div class="merit-box">
+                    <div class="merit-box-icon">🎯</div>
+                    <div class="merit-box-title">稼ぎやすい<br>ポジション特定</div>
+                    <div class="merit-box-desc">あなたの強みを活かせる最適領域を発見</div>
+                </div>
+                <div class="merit-box">
+                    <div class="merit-box-icon">🗺️</div>
+                    <div class="merit-box-title">3ヶ月<br>ロードマップ</div>
+                    <div class="merit-box-desc">最短で結果を出すためのステップを設計</div>
+                </div>
+                <div class="merit-box">
+                    <div class="merit-box-icon">📊</div>
+                    <div class="merit-box-title">10大特典の<br>活用優先順位</div>
+                    <div class="merit-box-desc">あなたに最も効果的な順番をアドバイス</div>
+                </div>
+                <div class="merit-box">
+                    <div class="merit-box-icon">🚀</div>
+                    <div class="merit-box-title">最初の一手の<br>アドバイス</div>
+                    <div class="merit-box-desc">今すぐ取り組むべき具体的なアクション</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- C-3 -->
+    <div class="image-wrapper">
+        <p class="image-label">C-3: 4属性マップ <span>シナリオ② ステップ3（あと6日）</span></p>
+        <div class="content-img c3">
+            <div class="c3-title">👤 あなたはどのタイプ？</div>
+            <div class="types-grid">
+                <div class="type-card type-a">
+                    <div class="type-label">Type A</div>
+                    <div class="type-icon">📝</div>
+                    <div class="type-name">コンテンツホルダー</div>
+                    <div class="type-desc">専門知識を持ち<br>Brainで販売したい方</div>
+                </div>
+                <div class="type-card type-b">
+                    <div class="type-label">Type B</div>
+                    <div class="type-icon">🚀</div>
+                    <div class="type-name">0→1 初心者</div>
+                    <div class="type-desc">まだ稼いだことがなく<br>最初の収益を得たい方</div>
+                </div>
+                <div class="type-card type-c">
+                    <div class="type-label">Type C</div>
+                    <div class="type-icon">📈</div>
+                    <div class="type-name">売上あり経営者</div>
+                    <div class="type-desc">すでに売上があるが<br>スケールに壁がある方</div>
+                </div>
+                <div class="type-card type-d">
+                    <div class="type-label">Type D</div>
+                    <div class="type-icon">🔗</div>
+                    <div class="type-name">アフィリエイター</div>
+                    <div class="type-desc">他人の商品を紹介して<br>報酬を得たい方</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== D: URGENCY BANNERS ==================== -->
+    <h2 class="category-title">D. 緊急性バナー</h2>
+    <p class="category-desc">締切・残枠・最終日などの緊急性を演出するバナー画像。</p>
+
+    <div class="row">
+        <!-- D-1 -->
+        <div class="image-wrapper">
+            <p class="image-label">D-1: 残枠わずかバナー <span>シナリオ② ステップ6（あと3日）</span></p>
+            <div class="urgency-img d1">
+                <div class="urgency-icon">⚠️</div>
+                <div class="urgency-main">今週の面談枠 残り3枠</div>
+                <div class="urgency-sub">※先着順のためお早めにご予約ください</div>
+            </div>
+        </div>
+
+        <!-- D-2 -->
+        <div class="image-wrapper">
+            <p class="image-label">D-2: 本日終了バナー <span>シナリオ①⑤ / シナリオ②⑩</span></p>
+            <div class="urgency-img d2">
+                <div class="pulse"></div>
+                <div class="urgency-icon">🔴</div>
+                <div class="urgency-main">本日 24:00 で終了</div>
+                <div class="urgency-sub">この機会を逃すと二度と受け取れません</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d3-variants row">
+        <!-- D-3 (4h) -->
+        <div class="image-wrapper">
+            <p class="image-label">D-3a: あと4時間 <span>シナリオ①⑥ / シナリオ②⑪</span></p>
+            <div class="urgency-img d3">
+                <div class="urgency-icon">⏰</div>
+                <div class="urgency-main">あと 4 時間で消失</div>
+                <div class="urgency-sub">今すぐボタンを押してください</div>
+            </div>
+        </div>
+
+        <!-- D-3 (2h) -->
+        <div class="image-wrapper">
+            <p class="image-label">D-3b: あと2時間 <span>シナリオ①⑦ / シナリオ②⑫</span></p>
+            <div class="urgency-img d3">
+                <div class="urgency-icon">⏰</div>
+                <div class="urgency-main">あと 2 時間で消失</div>
+                <div class="urgency-sub">後悔しないうちに今すぐ確認を</div>
+            </div>
+        </div>
+
+        <!-- D-3 (1h) -->
+        <div class="image-wrapper">
+            <p class="image-label">D-3c: あと1時間 <span>シナリオ①⑧</span></p>
+            <div class="urgency-img d3">
+                <div class="urgency-icon">⏰</div>
+                <div class="urgency-main">あと 1 時間で消失</div>
+                <div class="urgency-sub">最終リマインド</div>
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align:center; color:#555; margin-top: 60px; font-size: 13px;">
+        制作完了：全15枚 ｜ ブラウザのスクリーンショット機能で画像化してください
+    </p>
+
+</body>
+
+</html>

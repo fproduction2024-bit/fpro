@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古橋 TODO ダッシュボード</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --card: #222639;
+            --border: rgba(255, 255, 255, 0.08);
+            --white: #f0f0f5;
+            --gray: #8b8fa3;
+            --text: #c8cad3;
+            --accent-blue: #4f8cff;
+            --accent-purple: #a47cff;
+            --accent-green: #34d399;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-teal: #2dd4bf;
+            --accent-pink: #f472b6;
+            --radius: 14px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Top Bar ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 17, 23, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* ── Stats Bar ── */
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            padding: 20px 32px;
+            overflow-x: auto;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 140px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--gray);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Filters ── */
+        .filters {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 32px 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gray);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        /* ── Project Sections ── */
+        .content {
+            padding: 0 32px 60px;
+        }
+
+        .project-section {
+            margin-bottom: 28px;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            padding: 8px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .project-header:hover .project-name {
+            color: var(--white);
+        }
+
+        .project-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .project-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            transition: color 0.2s;
+        }
+
+        .project-count {
+            font-size: 11px;
+            color: var(--gray);
+            background: rgba(255, 255, 255, 0.06);
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        .project-toggle {
+            margin-left: auto;
+            color: var(--gray);
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .project-section.collapsed .project-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .project-section.collapsed .task-list {
+            display: none;
+        }
+
+        /* ── Task List ── */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .task-item:hover {
+            background: var(--card);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .task-item.done {
+            opacity: 0.45;
+        }
+
+        .task-item.done .task-text {
+            text-decoration: line-through;
+        }
+
+        .task-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid var(--gray);
+            flex-shrink: 0;
+            margin-top: 1px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-item.done .task-check {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .task-item.done .task-check::after {
+            content: '✓';
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .task-body {
+            flex: 1;
+        }
+
+        .task-text {
+            font-size: 13px;
+            color: var(--white);
+            line-height: 1.5;
+        }
+
+        .task-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .task-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .tag-urgent {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+        }
+
+        .tag-this-week {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .tag-next {
+            background: rgba(79, 140, 255, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .tag-waiting {
+            background: rgba(164, 124, 255, 0.15);
+            color: var(--accent-purple);
+        }
+
+        .tag-done {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent-green);
+        }
+
+        .task-due {
+            font-size: 10px;
+            color: var(--gray);
+        }
+
+        .task-assignee {
+            font-size: 10px;
+            color: var(--gray);
+            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 6px;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+
+            .topbar,
+            .stats-bar,
+            .filters,
+            .content {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .stats-bar {
+                gap: 8px;
+            }
+
+            .stat-card {
+                min-width: 100px;
+                padding: 12px;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .chat-panel {
+                width: 100% !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                height: 100vh !important;
+                border-radius: 0 !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════════
+           VIEW TOGGLE
+           ═══════════════════════════════════════════ */
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            padding: 0 32px 16px;
+        }
+
+        .view-toggle-btn {
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gray);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .view-toggle-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .view-toggle-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        /* ═══════════════════════════════════════════
+           GANTT CHART
+           ═══════════════════════════════════════════ */
+        .gantt-container {
+            padding: 0 32px 60px;
+            display: none;
+        }
+
+        .gantt-container.active {
+            display: block;
+        }
+
+        .gantt-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .gantt-scroll {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        .gantt-table {
+            min-width: 1000px;
+            width: 100%;
+        }
+
+        /* Gantt Header */
+        .gantt-header {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: var(--card);
+        }
+
+        .gantt-label-col {
+            min-width: 240px;
+            width: 240px;
+            flex-shrink: 0;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .gantt-timeline-header {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gantt-weeks {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gantt-week {
+            flex: 1;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gray);
+            border-right: 1px solid var(--border);
+        }
+
+        .gantt-week.current {
+            color: var(--accent-blue);
+            background: rgba(79, 140, 255, 0.05);
+        }
+
+        .gantt-days {
+            display: flex;
+        }
+
+        .gantt-day {
+            flex: 1;
+            text-align: center;
+            padding: 4px 0;
+            font-size: 9px;
+            color: rgba(139, 143, 163, 0.6);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .gantt-day.today {
+            color: var(--accent-blue);
+            font-weight: 700;
+            background: rgba(79, 140, 255, 0.08);
+        }
+
+        .gantt-day.weekend {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Gantt Rows */
+        .gantt-project-group {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gantt-project-row {
+            display: flex;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .gantt-project-label {
+            min-width: 240px;
+            width: 240px;
+            flex-shrink: 0;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gantt-project-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .gantt-task-row {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.15s;
+        }
+
+        .gantt-task-row:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .gantt-task-label {
+            min-width: 240px;
+            width: 240px;
+            flex-shrink: 0;
+            padding: 6px 16px 6px 32px;
+            font-size: 12px;
+            color: var(--text);
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gantt-task-label.done {
+            text-decoration: line-through;
+            opacity: 0.4;
+        }
+
+        .gantt-task-label .priority-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .gantt-timeline-cell {
+            flex: 1;
+            position: relative;
+            min-height: 32px;
+        }
+
+        .gantt-bar {
+            position: absolute;
+            top: 5px;
+            height: 22px;
+            border-radius: 6px;
+            opacity: 0.85;
+            transition: opacity 0.2s, transform 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            font-size: 10px;
+            color: #fff;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gantt-bar:hover {
+            opacity: 1;
+            transform: scaleY(1.15);
+            z-index: 1;
+        }
+
+        .gantt-bar.done {
+            opacity: 0.3;
+        }
+
+        .gantt-today-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-red);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .gantt-today-line::after {
+            content: '今日';
+            position: absolute;
+            top: -18px;
+            left: -12px;
+            font-size: 9px;
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+
+        .gantt-empty {
+            flex: 1;
+            display: flex;
+        }
+
+        .gantt-day-col {
+            flex: 1;
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .gantt-day-col.weekend {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .gantt-day-col.today-col {
+            background: rgba(79, 140, 255, 0.04);
+        }
+
+        /* ═══════════════════════════════════════════
+           AI CHAT PANEL
+           ═══════════════════════════════════════════ */
+
+        /* ── Floating Button ── */
+        .chat-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 140, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chat-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(79, 140, 255, 0.55);
+        }
+
+        .chat-fab.open {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .chat-fab .pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            animation: fabPulse 2s ease-out infinite;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        @keyframes fabPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* ── Chat Panel ── */
+        .chat-panel {
+            position: fixed;
+            bottom: 96px;
+            right: 28px;
+            z-index: 998;
+            width: 400px;
+            height: 540px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chat-panel.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ── Chat Header ── */
+        .chat-header {
+            padding: 16px 20px;
+            background: rgba(34, 38, 57, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .chat-header-info {
+            flex: 1;
+        }
+
+        .chat-header-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .chat-header-subtitle {
+            font-size: 10px;
+            color: var(--gray);
+        }
+
+        .chat-settings-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .chat-settings-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* ── Messages ── */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        .chat-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.6;
+            animation: msgIn 0.3s ease-out;
+        }
+
+        @keyframes msgIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-msg.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #4f8cff, #6366f1);
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-msg.ai {
+            align-self: flex-start;
+            background: var(--card);
+            color: var(--white);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-msg.system {
+            align-self: center;
+            background: rgba(79, 140, 255, 0.1);
+            color: var(--accent-blue);
+            font-size: 11px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .chat-msg .action-badge {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent-green);
+        }
+
+        /* typing indicator */
+        .chat-typing {
+            align-self: flex-start;
+            padding: 12px 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            border-bottom-left-radius: 4px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .chat-typing span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gray);
+            animation: typeDot 1.4s infinite;
+        }
+
+        .chat-typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .chat-typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typeDot {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            30% {
+                transform: translateY(-6px);
+                opacity: 1;
+            }
+        }
+
+        /* ── Input ── */
+        .chat-input-area {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            background: rgba(34, 38, 57, 0.6);
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            resize: none;
+            min-height: 40px;
+            max-height: 100px;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .chat-input::placeholder {
+            color: var(--gray);
+        }
+
+        .chat-send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── API Key Setup ── */
+        .api-key-setup {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 24px;
+            gap: 16px;
+            text-align: center;
+        }
+
+        .api-key-setup .setup-icon {
+            font-size: 40px;
+            margin-bottom: 4px;
+        }
+
+        .api-key-setup h3 {
+            font-size: 16px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .api-key-setup p {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .api-key-setup input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .api-key-setup input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .api-key-setup button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .api-key-setup button:hover {
+            opacity: 0.9;
+        }
+
+        .api-key-setup a {
+            color: var(--accent-blue);
+            font-size: 11px;
+            text-decoration: none;
+        }
+
+        .api-key-setup a:hover {
+            text-decoration: underline;
+        }
+
+        /* ═══════════════════════════════════════════
+           DAILY LOG PANEL
+           ═══════════════════════════════════════════ */
+        .daily-log-container {
+            padding: 0 32px 60px;
+            display: none;
+        }
+
+        .daily-log-container.active {
+            display: block;
+        }
+
+        .daily-log-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .daily-log-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .daily-log-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            flex: 1;
+        }
+
+        .daily-log-date {
+            padding: 7px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--white);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .daily-log-date:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .daily-log-section {
+            margin-bottom: 20px;
+        }
+
+        .daily-log-section label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .daily-log-section.new-tasks label {
+            color: var(--accent-blue);
+        }
+
+        .daily-log-section.memo-section label {
+            color: var(--accent-orange);
+        }
+
+        .daily-log-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.7;
+            transition: border-color 0.2s;
+        }
+
+        .daily-log-textarea:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .daily-log-textarea::placeholder {
+            color: rgba(139, 143, 163, 0.5);
+        }
+
+        .daily-log-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            align-items: center;
+        }
+
+        .daily-log-btn {
+            padding: 12px 28px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .daily-log-btn.primary {
+            background: linear-gradient(135deg, #4f8cff, #a47cff);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(79, 140, 255, 0.35);
+        }
+
+        .daily-log-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(79, 140, 255, 0.5);
+        }
+
+        .daily-log-btn.primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .daily-log-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--gray);
+        }
+
+        .daily-log-btn.secondary:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .daily-log-result {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: var(--bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text);
+            display: none;
+            white-space: pre-wrap;
+        }
+
+        .daily-log-result.visible {
+            display: block;
+            animation: msgIn 0.3s ease-out;
+        }
+
+        .daily-log-hint {
+            font-size: 11px;
+            color: var(--gray);
+            line-height: 1.7;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+            margin-top: 16px;
+        }
+
+        .daily-log-hint strong {
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topbar">
+        <h1>⚡ 古橋 TODO</h1>
+        <div class="topbar-right">
+            <span id="dateDisplay"></span>
+        </div>
+    </div>
+
+    <div class="stats-bar" id="statsBar"></div>
+
+    <div class="filters" id="filterBar">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="urgent">🔴 至急</button>
+        <button class="filter-btn" data-filter="this-week">🟡 今週</button>
+        <button class="filter-btn" data-filter="waiting">🟣 先方待ち</button>
+        <button class="filter-btn" data-filter="done">✅ 完了</button>
+    </div>
+
+    <div class="view-toggle">
+        <button class="view-toggle-btn active" data-view="list" onclick="switchView('list')">📋 リスト</button>
+        <button class="view-toggle-btn" data-view="gantt" onclick="switchView('gantt')">📊 ガントチャート</button>
+        <button class="view-toggle-btn" data-view="calendar" onclick="switchView('calendar')">📅 カレンダー</button>
+        <button class="view-toggle-btn" data-view="dailylog" onclick="switchView('dailylog')">📓 日報</button>
+    </div>
+
+    <div class="content" id="content"></div>
+    <div class="gantt-container" id="ganttContainer"></div>
+    <div class="gantt-container" id="calendarContainer" style="display:none;"></div>
+
+    <!-- ═══ DAILY LOG PANEL ═══ -->
+    <div class="daily-log-container" id="dailyLogContainer">
+        <div class="daily-log-wrapper">
+            <div class="daily-log-header">
+                <h2>📓 日報 → TODO 自動更新</h2>
+                <input type="date" class="daily-log-date" id="dailyLogDate">
+            </div>
+
+            <div class="daily-log-section">
+                <label>✅ 今日やったこと（完了タスク）</label>
+                <textarea class="daily-log-textarea" id="dailyLogDone"
+                    placeholder="例：\n- [x] valoomのLPデザイン確認（リッツプロ）\n- [x] LINEシナリオ第一話を書いた（スキルハックス）" rows="6"></textarea>
+            </div>
+
+            <div class="daily-log-section new-tasks">
+                <label>➕ 明日やること / 新規タスク</label>
+                <textarea class="daily-log-textarea" id="dailyLogNew"
+                    placeholder="例：\n- [リッツプロ] valoomのセールスシナリオ修正 (priority: urgent)\n- [fpro] セールスLINEシナリオ最終確認 (priority: this-week)"
+                    rows="5"></textarea>
+            </div>
+
+            <div class="daily-log-section memo-section">
+                <label>💡 気づき・メモ（任意）</label>
+                <textarea class="daily-log-textarea" id="dailyLogMemo" placeholder="ミーティング内容、アイデア、懸念点など..."
+                    rows="3"></textarea>
+            </div>
+
+            <div class="daily-log-actions">
+                <button class="daily-log-btn primary" id="dailyLogSubmitBtn" onclick="submitDailyLog()">
+                    🔄 AIでTODO更新
+                </button>
+                <button class="daily-log-btn secondary" onclick="clearDailyLog()">
+                    🗑 クリア
+                </button>
+            </div>
+
+            <div class="daily-log-result" id="dailyLogResult"></div>
+
+            <div class="daily-log-hint">
+                <strong>使い方：</strong><br>
+                • 今日完了したタスクを「今日やったこと」に書いて <strong>🔄 AIでTODO更新</strong> を押すだけ<br>
+                • AIが内容を読み取り、該当タスクを自動で完了 ✅ にします<br>
+                • 新しいタスクも追記すれば自動でTODOリストに追加されます<br>
+                • Gemini APIキーが必要です（右下 💬 → ⚙ から設定）
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ AI CHAT ═══ -->
+    <button class="chat-fab" id="chatFab" onclick="toggleChat()">
+        <span class="pulse"></span>
+        💬
+    </button>
+
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-header-icon">🤖</div>
+            <div class="chat-header-info">
+                <div class="chat-header-title">TODO アシスタント</div>
+                <div class="chat-header-subtitle">Gemini AI でタスクを管理</div>
+            </div>
+            <button class="chat-settings-btn" onclick="showApiKeySetup()" title="APIキー設定">⚙</button>
+        </div>
+
+        <!-- API Key Setup View -->
+        <div class="api-key-setup" id="apiKeySetup" style="display:none;">
+            <div class="setup-icon">⚙️</div>
+            <h3>設定</h3>
+            <p style="font-weight:600;color:var(--white);margin-top:4px;">Gemini API キー</p>
+            <input type="password" id="apiKeyInput" placeholder="AIza... を貼り付け">
+            <a href="https://aistudio.google.com/apikey" target="_blank">🔗 APIキーを取得する（無料）</a>
+            <p style="font-weight:600;color:var(--white);margin-top:8px;">📅 Google Calendar 連携（任意）</p>
+            <p>GASのデプロイURLを貼り付けると予定を取得できます</p>
+            <input type="text" id="gasUrlInput" placeholder="https://script.google.com/macros/s/xxx/exec">
+            <button onclick="saveApiKey()">保存して開始</button>
+        </div>
+
+        <!-- Chat View -->
+        <div class="chat-messages" id="chatMessages" style="display:none;"></div>
+        <div class="chat-input-area" id="chatInputArea" style="display:none;">
+            <textarea class="chat-input" id="chatInput" placeholder="タスクの追加・完了・編集を話しかけてください..." rows="1"></textarea>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendMessage()">▶</button>
+        </div>
+    </div>
+
+    <script>
+        // ──────────── DATA ────────────
+        const PROJECTS = [
+            {
+                id: 'rtma',
+                name: '株式会社rtma（ONサロン）',
+                color: '#34d399',
+                tasks: [
+                    { text: 'デザイン制作物のブラッシュアップ（LP・バナー・広告）', priority: 'urgent', due: '3月中旬' },
+                    { text: 'セミナー担当者との顔合わせZoom設定', priority: 'this-week', due: '3/10まで' },
+                    { text: 'マニュアル化サポート（暗黙知→形式知）', priority: 'next' },
+                    { text: '広告代理店の選定（RIDE or 他）', priority: 'this-week' },
+                    { text: 'プロラインのシナリオ設計（申込→自動返信→セミナー案内→リマインド）', priority: 'next' },
+                    { text: 'LPフォームのaction先をプロライン受け先に差し替え', priority: 'next', depends: 'プロライン設定後' },
+                    { text: 'Meta広告アカウント開設手順書を嶋岡さんに送付', priority: 'this-week' },
+                    { text: '嶋岡さんからの備品リスト・大阪初期費用内訳の受領', priority: 'waiting', assignee: '嶋岡' },
+                    { text: '嶋岡さんからのMeta広告アカウント作成完了', priority: 'waiting', assignee: '嶋岡' },
+                    { text: '嶋岡さんからのクラウドサイン導入', priority: 'waiting', assignee: '嶋岡' },
+                    { text: '嶋岡さんからの既存契約書の共有', priority: 'waiting', assignee: '嶋岡' },
+                    { text: '大阪店舗オープン（3/11）の結果確認', priority: 'next', due: '3/11以降' },
+                ]
+            },
+            {
+                id: 'birth',
+                name: 'Birth 小林さん',
+                color: '#4f8cff',
+                tasks: [
+                    { text: '進捗確認・次回ミーティング調整', priority: 'next' },
+                ]
+            },
+            {
+                id: 'mecal',
+                name: 'MECAL東京',
+                color: '#f59e0b',
+                tasks: [
+                    { text: '案件状況の確認', priority: 'next' },
+                ]
+            },
+            {
+                id: 'mind',
+                name: '株式会社マインド',
+                color: '#a47cff',
+                tasks: [
+                    { text: '案件状況の確認・フォローアップ', priority: 'next' },
+                ]
+            },
+            {
+                id: 'toyama',
+                name: '遠山さん',
+                color: '#2dd4bf',
+                tasks: [
+                    { text: '案件状況の確認', priority: 'next' },
+                ]
+            },
+            {
+                id: 'itk',
+                name: 'itk（飲食店採用）',
+                color: '#f472b6',
+                tasks: [
+                    { text: 'プロライン導入提案のフォローアップ', priority: 'next' },
+                    { text: '飲食店採用ソリューションの進捗確認', priority: 'next' },
+                ]
+            },
+            {
+                id: 'mikata',
+                name: 'エンジニアのミカタ',
+                color: '#fb923c',
+                tasks: [
+                    { text: 'SES求職者LINE自動化提案の展開', priority: 'next' },
+                    { text: 'プロライン導入・人件費削減シミュレーション更新', priority: 'next' },
+                ]
+            },
+            {
+                id: 'yolos-general',
+                name: "YOLO's（全体）",
+                color: '#fbbf24',
+                tasks: [
+                    { text: 'プロライン VC投資先導入提案の展開', priority: 'next' },
+                    { text: 'ラーメン店クーポン施策（大阪王将含む）の進捗', priority: 'next' },
+                    { text: 'SOD提携の進捗確認', priority: 'next' },
+                ]
+            },
+            {
+                id: 'tangleseed',
+                name: 'タングルシード',
+                color: '#818cf8',
+                tasks: [
+                    { text: 'YouTube動画コンテンツ（ゼンタングル紹介）の制作進行', priority: 'next' },
+                    { text: 'TangleSeedウェブサイトのSEO改善', priority: 'next' },
+                    { text: '2026年6月大型イベントの企画', priority: 'next' },
+                    { text: '企業提携・JV提携先の開拓', priority: 'next' },
+                ]
+            },
+            {
+                id: 'fpro',
+                name: 'Fプロダクション',
+                color: '#e879f9',
+                tasks: [
+                    { text: 'COMPASSファネルの運用・改善', priority: 'next' },
+                    { text: 'e-Harborファネルの運用・改善', priority: 'next' },
+                ]
+            },
+        ];
+
+        // ──────────── RENDER ────────────
+        const dateEl = document.getElementById('dateDisplay');
+        function updateClock() {
+            const now = new Date();
+            dateEl.textContent = now.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' })
+                + ' ' + now.toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function renderStats() {
+            const all = PROJECTS.flatMap(p => p.tasks);
+            const urgent = all.filter(t => t.priority === 'urgent' && !t.done);
+            const thisWeek = all.filter(t => t.priority === 'this-week' && !t.done);
+            const waiting = all.filter(t => t.priority === 'waiting' && !t.done);
+            const done = all.filter(t => t.done);
+            const open = all.filter(t => !t.done);
+
+            document.getElementById('statsBar').innerHTML = `
+                <div class="stat-card"><div class="stat-number" style="color:var(--white)">${all.length}</div><div class="stat-label">全タスク</div></div>
+                <div class="stat-card"><div class="stat-number" style="color:var(--accent-red)">${urgent.length}</div><div class="stat-label">至急</div></div>
+                <div class="stat-card"><div class="stat-number" style="color:var(--accent-orange)">${thisWeek.length}</div><div class="stat-label">今週</div></div>
+                <div class="stat-card"><div class="stat-number" style="color:var(--accent-purple)">${waiting.length}</div><div class="stat-label">先方待ち</div></div>
+                <div class="stat-card"><div class="stat-number" style="color:var(--accent-green)">${done.length}</div><div class="stat-label">完了</div></div>
+                <div class="stat-card"><div class="stat-number" style="color:var(--accent-blue)">${PROJECTS.length}</div><div class="stat-label">案件数</div></div>
+            `;
+        }
+
+        function renderProjects(filter = 'all') {
+            const contentEl = document.getElementById('content');
+            contentEl.innerHTML = '';
+
+            PROJECTS.forEach(project => {
+                let tasks = project.tasks;
+
+                if (filter === 'urgent') tasks = tasks.filter(t => t.priority === 'urgent');
+                else if (filter === 'this-week') tasks = tasks.filter(t => t.priority === 'this-week');
+                else if (filter === 'waiting') tasks = tasks.filter(t => t.priority === 'waiting');
+                else if (filter === 'done') tasks = tasks.filter(t => t.done);
+
+                if (tasks.length === 0) return;
+
+                const openCount = tasks.filter(t => !t.done).length;
+
+                const section = document.createElement('div');
+                section.className = 'project-section';
+                section.innerHTML = `
+                    <div class="project-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                        <span class="project-dot" style="background:${project.color}"></span>
+                        <span class="project-name">${project.name}</span>
+                        <span class="project-count">${openCount} 件</span>
+                        <span class="project-toggle">▼</span>
+                    </div>
+                    <div class="task-list">
+                        ${tasks.map((task, i) => `
+                            <div class="task-item ${task.done ? 'done' : ''}" data-project="${project.id}" data-index="${i}" onclick="toggleTask('${project.id}', ${project.tasks.indexOf(task)})">
+                                <div class="task-check"></div>
+                                <div class="task-body">
+                                    <div class="task-text">${task.text}</div>
+                                    <div class="task-meta">
+                                        ${priorityTag(task.priority)}
+                                        ${task.due ? `<span class="task-due">📅 ${task.due}</span>` : ''}
+                                        ${task.assignee ? `<span class="task-assignee">👤 ${task.assignee}</span>` : ''}
+                                        ${task.depends ? `<span class="task-due">⏳ ${task.depends}</span>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                contentEl.appendChild(section);
+            });
+        }
+
+        function priorityTag(p) {
+            const map = {
+                'urgent': '<span class="task-tag tag-urgent">至急</span>',
+                'this-week': '<span class="task-tag tag-this-week">今週</span>',
+                'next': '<span class="task-tag tag-next">次のアクション</span>',
+                'waiting': '<span class="task-tag tag-waiting">先方待ち</span>',
+            };
+            return map[p] || '';
+        }
+
+        function toggleTask(projectId, taskIndex) {
+            const project = PROJECTS.find(p => p.id === projectId);
+            if (project) {
+                project.tasks[taskIndex].done = !project.tasks[taskIndex].done;
+                if (project.tasks[taskIndex].done) {
+                    project.tasks[taskIndex].priority = 'done';
+                }
+                saveState();
+                renderStats();
+                renderProjects(currentFilter);
+            }
+        }
+
+        // ── Filters ──
+        let currentFilter = 'all';
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderProjects(currentFilter);
+            });
+        });
+
+        // ── LocalStorage persistence ──
+        function saveState() {
+            const state = {};
+            PROJECTS.forEach(p => {
+                state[p.id] = p.tasks.map(t => ({ done: !!t.done, text: t.text, priority: t.priority, due: t.due, assignee: t.assignee, depends: t.depends }));
+            });
+            localStorage.setItem('furuhashi-todo-state', JSON.stringify(state));
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem('furuhashi-todo-state');
+                if (!raw) return;
+                const state = JSON.parse(raw);
+                PROJECTS.forEach(p => {
+                    if (state[p.id]) {
+                        // Restore full task data from saved state
+                        p.tasks = state[p.id].map((s, i) => {
+                            const orig = p.tasks[i] || {};
+                            return {
+                                text: s.text || orig.text || '',
+                                priority: s.priority || orig.priority || 'next',
+                                done: !!s.done,
+                                due: s.due || orig.due,
+                                assignee: s.assignee || orig.assignee,
+                                depends: s.depends || orig.depends,
+                            };
+                        });
+                    }
+                });
+            } catch (e) { }
+        }
+
+        // ── Init ──
+        loadState();
+        renderStats();
+        renderProjects();
+
+
+        // ═══════════════════════════════════════════
+        //  AI CHAT LOGIC
+        // ═══════════════════════════════════════════
+
+        const GEMINI_MODEL = 'gemini-2.5-flash-preview-05-20';
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+        let chatOpen = false;
+        let chatHistory = [];
+        let calendarEvents = []; // Google Calendar events
+
+        // ── Calendar Fetch ──
+        async function fetchCalendarEvents() {
+            const gasUrl = localStorage.getItem('gas-calendar-url');
+            if (!gasUrl) return;
+            try {
+                const res = await fetch(gasUrl + '?daysBack=7&daysForward=30');
+                const data = await res.json();
+                if (data.success) {
+                    calendarEvents = data.events;
+                    localStorage.setItem('calendar-events-cache', JSON.stringify({ ts: Date.now(), events: data.events }));
+                }
+            } catch (e) {
+                // Try cache
+                try {
+                    const cache = JSON.parse(localStorage.getItem('calendar-events-cache') || '{}');
+                    if (cache.events) calendarEvents = cache.events;
+                } catch (e2) { }
+            }
+        }
+
+        // Load cache on init
+        try {
+            const cache = JSON.parse(localStorage.getItem('calendar-events-cache') || '{}');
+            if (cache.events) calendarEvents = cache.events;
+        } catch (e) { }
+        // Fetch fresh data
+        fetchCalendarEvents();
+
+        // ── Toggle Chat ──
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+            document.getElementById('chatFab').classList.toggle('open', chatOpen);
+
+            if (chatOpen) {
+                const hasKey = !!localStorage.getItem('gemini-api-key');
+                if (hasKey) {
+                    showChatView();
+                    if (chatHistory.length === 0) {
+                        const calStatus = calendarEvents.length > 0 ? `\n\n📅 Googleカレンダー連携中（${calendarEvents.length}件の予定を認識）` : '\n\n📅 カレンダー連携するには ⚙ からGAS URLを設定';
+                        addMessage('ai', 'こんにちは！タスクの追加・完了・編集・削除をお手伝いします 🚀\n\n例:\n• 「rtmaに新しいタスク追加して」\n• 「嶋岡さんの備品リスト完了にして」\n• 「今週の予定教えて」' + calStatus);
+                    }
+                } else {
+                    showApiKeySetup();
+                }
+                setTimeout(() => document.getElementById('chatInput')?.focus(), 300);
+            }
+        }
+
+        function showChatView() {
+            document.getElementById('apiKeySetup').style.display = 'none';
+            document.getElementById('chatMessages').style.display = 'flex';
+            document.getElementById('chatInputArea').style.display = 'flex';
+        }
+
+        function showApiKeySetup() {
+            document.getElementById('apiKeySetup').style.display = 'flex';
+            document.getElementById('chatMessages').style.display = 'none';
+            document.getElementById('chatInputArea').style.display = 'none';
+            // Pre-fill existing values
+            const existingKey = localStorage.getItem('gemini-api-key') || '';
+            const existingGas = localStorage.getItem('gas-calendar-url') || '';
+            document.getElementById('apiKeyInput').value = existingKey;
+            const gasInput = document.getElementById('gasUrlInput');
+            if (gasInput) gasInput.value = existingGas;
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (!key) return;
+            localStorage.setItem('gemini-api-key', key);
+            const gasUrl = document.getElementById('gasUrlInput')?.value.trim();
+            if (gasUrl) {
+                localStorage.setItem('gas-calendar-url', gasUrl);
+                fetchCalendarEvents();
+            }
+            showChatView();
+            if (chatHistory.length === 0) {
+                addMessage('ai', '設定を保存しました ✅\nタスクの管理をお手伝いします！何でも話しかけてください。');
+            }
+            document.getElementById('chatInput').focus();
+        }
+
+        // ── Messages ──
+        function addMessage(role, text) {
+            const el = document.getElementById('chatMessages');
+            const msg = document.createElement('div');
+            msg.className = `chat-msg ${role}`;
+            msg.innerHTML = text.replace(/\n/g, '<br>');
+            el.appendChild(msg);
+            el.scrollTop = el.scrollHeight;
+            if (role !== 'system') {
+                chatHistory.push({ role, text });
+            }
+        }
+
+        function addTypingIndicator() {
+            const el = document.getElementById('chatMessages');
+            const typing = document.createElement('div');
+            typing.className = 'chat-typing';
+            typing.id = 'typingIndicator';
+            typing.innerHTML = '<span></span><span></span><span></span>';
+            el.appendChild(typing);
+            el.scrollTop = el.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            document.getElementById('typingIndicator')?.remove();
+        }
+
+        // ── Build system prompt ──
+        function buildSystemPrompt() {
+            const taskSnapshot = PROJECTS.map(p => ({
+                id: p.id,
+                name: p.name,
+                tasks: p.tasks.map((t, i) => ({
+                    index: i,
+                    text: t.text,
+                    priority: t.done ? 'done' : t.priority,
+                    done: !!t.done,
+                    due: t.due || null,
+                    assignee: t.assignee || null,
+                }))
+            }));
+
+            return `あなたは「古橋TODOダッシュボード」のAIアシスタントです。
+ユーザーの自然言語の指示を理解して、タスクの追加・完了・削除・編集を行います。
+
+## 現在のタスクデータ
+${JSON.stringify(taskSnapshot, null, 2)}
+
+## Googleカレンダーの予定
+${calendarEvents.length > 0 ? JSON.stringify(calendarEvents.map(e => ({ title: e.title, start: e.start, end: e.end, allDay: e.allDay, location: e.location, calendar: e.calendar })), null, 2) : '（カレンダー未連携）'}
+
+## 利用可能な優先度
+- urgent: 至急
+- this-week: 今週
+- next: 次のアクション
+- waiting: 先方待ち
+
+## 回答フォーマット
+必ず以下のJSON形式で回答してください。他のテキストは含めないでください。
+
+{
+  "message": "ユーザーへの返答メッセージ（日本語）",
+  "actions": [
+    {
+      "type": "ADD_TASK",
+      "projectId": "プロジェクトID",
+      "task": { "text": "タスク内容", "priority": "urgent|this-week|next|waiting", "due": "期日（任意）", "assignee": "担当者（任意）" }
+    },
+    {
+      "type": "COMPLETE_TASK",
+      "projectId": "プロジェクトID",
+      "taskIndex": 0
+    },
+    {
+      "type": "DELETE_TASK",
+      "projectId": "プロジェクトID",
+      "taskIndex": 0
+    },
+    {
+      "type": "EDIT_TASK",
+      "projectId": "プロジェクトID",
+      "taskIndex": 0,
+      "updates": { "text": "新しいテキスト", "priority": "新しい優先度" }
+    },
+    {
+      "type": "ADD_PROJECT",
+      "project": { "id": "新しいID", "name": "プロジェクト名", "color": "#カラー" }
+    }
+  ]
+}
+
+## ルール
+- actionsが不要な質問（一覧表示やカレンダー確認など）の場合は actions: [] にしてください
+- ユーザーの予定を聞かれたらGoogleカレンダーの情報を参照して回答してください
+- カレンダーの予定とタスクの関連性を考慮してアドバイスしてください
+- ユーザーが曖昧な場合は確認してください
+- 複数タスクの一括操作も可能です
+- タスクのインデックスは0から始まります
+- 新しいプロジェクトを追加する場合は ADD_PROJECT を使ってください
+- DELETE_TASKで複数削除する場合、インデックスは大きい方から順に指定してください
+- messageは親しみやすくフレンドリーに書いてください`;
+        }
+
+        // ── Send to Gemini ──
+        async function callGemini(userMessage) {
+            const apiKey = localStorage.getItem('gemini-api-key');
+            if (!apiKey) {
+                showApiKeySetup();
+                return null;
+            }
+
+            const conversationHistory = chatHistory.slice(-10).map(m => ({
+                role: m.role === 'user' ? 'user' : 'model',
+                parts: [{ text: m.text }]
+            }));
+
+            const body = {
+                system_instruction: {
+                    parts: [{ text: buildSystemPrompt() }]
+                },
+                contents: conversationHistory,
+                generationConfig: {
+                    temperature: 0.3,
+                    responseMimeType: 'application/json',
+                }
+            };
+
+            const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+
+            if (!res.ok) {
+                const err = await res.text();
+                if (res.status === 400 || res.status === 403) {
+                    throw new Error('APIキーが無効です。設定を確認してください。');
+                }
+                throw new Error(`API Error: ${res.status}`);
+            }
+
+            const data = await res.json();
+            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (!text) throw new Error('No response from Gemini');
+
+            return JSON.parse(text);
+        }
+
+        // ── Execute actions ──
+        function executeActions(actions) {
+            if (!actions || actions.length === 0) return [];
+            const results = [];
+
+            for (const action of actions) {
+                try {
+                    switch (action.type) {
+                        case 'ADD_TASK': {
+                            const project = PROJECTS.find(p => p.id === action.projectId);
+                            if (project) {
+                                project.tasks.push({
+                                    text: action.task.text,
+                                    priority: action.task.priority || 'next',
+                                    due: action.task.due,
+                                    assignee: action.task.assignee,
+                                    depends: action.task.depends,
+                                });
+                                results.push(`✅ タスク追加: ${action.task.text}`);
+                            } else {
+                                results.push(`⚠️ プロジェクト「${action.projectId}」が見つかりません`);
+                            }
+                            break;
+                        }
+                        case 'COMPLETE_TASK': {
+                            const project = PROJECTS.find(p => p.id === action.projectId);
+                            if (project && project.tasks[action.taskIndex]) {
+                                project.tasks[action.taskIndex].done = !project.tasks[action.taskIndex].done;
+                                const status = project.tasks[action.taskIndex].done ? '完了' : '未完了に戻し';
+                                results.push(`✅ ${status}: ${project.tasks[action.taskIndex].text}`);
+                            }
+                            break;
+                        }
+                        case 'DELETE_TASK': {
+                            const project = PROJECTS.find(p => p.id === action.projectId);
+                            if (project && project.tasks[action.taskIndex]) {
+                                const removed = project.tasks.splice(action.taskIndex, 1)[0];
+                                results.push(`🗑️ 削除: ${removed.text}`);
+                            }
+                            break;
+                        }
+                        case 'EDIT_TASK': {
+                            const project = PROJECTS.find(p => p.id === action.projectId);
+                            if (project && project.tasks[action.taskIndex]) {
+                                const task = project.tasks[action.taskIndex];
+                                if (action.updates.text) task.text = action.updates.text;
+                                if (action.updates.priority) task.priority = action.updates.priority;
+                                if (action.updates.due !== undefined) task.due = action.updates.due;
+                                if (action.updates.assignee !== undefined) task.assignee = action.updates.assignee;
+                                results.push(`✏️ 編集: ${task.text}`);
+                            }
+                            break;
+                        }
+                        case 'ADD_PROJECT': {
+                            PROJECTS.push({
+                                id: action.project.id,
+                                name: action.project.name,
+                                color: action.project.color || '#6b7280',
+                                tasks: [],
+                            });
+                            results.push(`📁 プロジェクト追加: ${action.project.name}`);
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    results.push(`❌ エラー: ${e.message}`);
+                }
+            }
+
+            // Save & re-render
+            saveState();
+            renderStats();
+            renderProjects(currentFilter);
+
+            return results;
+        }
+
+        // ── Send message flow ──
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const btn = document.getElementById('chatSendBtn');
+            const text = input.value.trim();
+            if (!text) return;
+
+            // Show user message
+            addMessage('user', text);
+            input.value = '';
+            input.style.height = 'auto';
+            btn.disabled = true;
+
+            addTypingIndicator();
+
+            try {
+                const result = await callGemini(text);
+                removeTypingIndicator();
+
+                if (!result) return;
+
+                // Execute any actions
+                const actionResults = executeActions(result.actions);
+
+                // Show AI response
+                let response = result.message || '';
+                if (actionResults.length > 0) {
+                    response += '\n\n' + actionResults.join('\n');
+                }
+                addMessage('ai', response);
+
+            } catch (err) {
+                removeTypingIndicator();
+                if (err.message.includes('APIキーが無効')) {
+                    addMessage('system', '⚠️ APIキーが無効です。⚙ ボタンから再設定してください。');
+                } else {
+                    addMessage('system', `⚠️ エラーが発生しました: ${err.message}`);
+                }
+            } finally {
+                btn.disabled = false;
+                input.focus();
+            }
+        }
+
+        // ── Key event ──
+        document.getElementById('chatInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Auto-resize textarea
+        document.getElementById('chatInput').addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+        });
+
+
+        // ═══════════════════════════════════════════
+        //  VIEW TOGGLE & GANTT CHART
+        // ═══════════════════════════════════════════
+
+        let currentView = 'list';
+
+        function switchView(view) {
+            currentView = view;
+            document.querySelectorAll('.view-toggle-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.view === view);
+            });
+            document.getElementById('content').style.display = view === 'list' ? 'block' : 'none';
+            document.getElementById('filterBar').style.display = view === 'list' ? 'flex' : 'none';
+            document.getElementById('ganttContainer').style.display = view === 'gantt' ? 'block' : 'none';
+            document.getElementById('calendarContainer').style.display = view === 'calendar' ? 'block' : 'none';
+            document.getElementById('dailyLogContainer').style.display = view === 'dailylog' ? 'block' : 'none';
+            if (view === 'gantt') renderGantt();
+            if (view === 'calendar') renderCalendarView();
+        }
+
+        function renderCalendarView() {
+            const container = document.getElementById('calendarContainer');
+            if (calendarEvents.length === 0) {
+                const gasUrl = localStorage.getItem('gas-calendar-url');
+                container.innerHTML = `<div style="text-align:center;padding:60px 32px;">
+                    <div style="font-size:48px;margin-bottom:16px;">📅</div>
+                    <h3 style="color:var(--white);margin-bottom:8px;">${gasUrl ? 'カレンダーを読み込み中...' : 'Googleカレンダー未連携'}</h3>
+                    <p style="color:var(--gray);font-size:13px;">${gasUrl ? 'リロードしてみてください' : '右下の💬チャット → ⚙ からGAS URLを設定してください'}</p>
+                </div>`;
+                return;
+            }
+
+            // Group events by date
+            const grouped = {};
+            calendarEvents.forEach(ev => {
+                const dateKey = new Date(ev.start).toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' });
+                if (!grouped[dateKey]) grouped[dateKey] = [];
+                grouped[dateKey].push(ev);
+            });
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let html = '<div class="gantt-wrapper" style="padding:20px;">';
+            html += '<h2 style="color:var(--white);font-size:18px;font-weight:700;margin-bottom:20px;">📅 Googleカレンダー連携</h2>';
+
+            Object.keys(grouped).forEach(dateKey => {
+                const events = grouped[dateKey];
+                const evDate = new Date(events[0].start);
+                evDate.setHours(0, 0, 0, 0);
+                const isToday = evDate.getTime() === today.getTime();
+                const isPast = evDate < today;
+
+                html += `<div style="margin-bottom:16px;${isPast ? 'opacity:0.5;' : ''}">
+                    <div style="font-size:13px;font-weight:700;color:${isToday ? 'var(--accent-blue)' : 'var(--white)'};margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+                        ${isToday ? '<span style="background:var(--accent-blue);color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;">TODAY</span>' : ''}
+                        ${dateKey}
+                    </div>`;
+
+                events.forEach(ev => {
+                    const startTime = ev.allDay ? '終日' : new Date(ev.start).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+                    const endTime = ev.allDay ? '' : ' - ' + new Date(ev.end).toLocaleTimeString('ja-JP', { hour: '2-digit', minute: '2-digit' });
+
+                    html += `<div style="display:flex;align-items:flex-start;gap:12px;padding:8px 12px;background:var(--bg);border-radius:8px;margin-bottom:4px;border-left:3px solid ${ev.color || 'var(--accent-teal)'};">
+                        <div style="min-width:80px;font-size:12px;color:var(--accent-teal);font-weight:600;">${startTime}${endTime}</div>
+                        <div>
+                            <div style="font-size:13px;color:var(--white);">${ev.title}</div>
+                            ${ev.location ? `<div style="font-size:10px;color:var(--gray);margin-top:2px;">📍 ${ev.location}</div>` : ''}
+                            ${ev.calendar !== 'default' ? `<div style="font-size:10px;color:var(--gray);margin-top:2px;">📁 ${ev.calendar}</div>` : ''}
+                        </div>
+                    </div>`;
+                });
+
+                html += '</div>';
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function renderGantt() {
+            const container = document.getElementById('ganttContainer');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Timeline: 2 weeks before + 4 weeks after = 6 weeks
+            const startDate = new Date(today);
+            startDate.setDate(startDate.getDate() - 14);
+            startDate.setDate(startDate.getDate() - startDate.getDay()); // Align to Sunday
+            const totalDays = 42; // 6 weeks
+
+            // Generate day array
+            const days = [];
+            for (let i = 0; i < totalDays; i++) {
+                const d = new Date(startDate);
+                d.setDate(d.getDate() + i);
+                days.push(d);
+            }
+
+            // Group days into weeks
+            const weeks = [];
+            for (let i = 0; i < days.length; i += 7) {
+                weeks.push(days.slice(i, i + 7));
+            }
+
+            // Day names
+            const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+
+            // Build header
+            let headerHTML = `<div class="gantt-header">
+                <div class="gantt-label-col">タスク</div>
+                <div class="gantt-timeline-header">
+                    <div class="gantt-weeks">${weeks.map(w => {
+                const wStart = w[0];
+                const isCurrent = w.some(d => d.getTime() === today.getTime());
+                return `<div class="gantt-week ${isCurrent ? 'current' : ''}">${wStart.getMonth() + 1}/${wStart.getDate()}〜</div>`;
+            }).join('')}</div>
+                    <div class="gantt-days">${days.map(d => {
+                const isToday = d.getTime() === today.getTime();
+                const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                return `<div class="gantt-day ${isToday ? 'today' : ''} ${isWeekend ? 'weekend' : ''}">${d.getDate()}<br>${dayNames[d.getDay()]}</div>`;
+            }).join('')}</div>
+                </div>
+            </div>`;
+
+            // Helper: parse due string to Date
+            function parseDue(due) {
+                if (!due) return null;
+                const m = due.match(/(\d{1,2})[\/月](\d{1,2})/);
+                if (m) {
+                    const date = new Date(today.getFullYear(), parseInt(m[1]) - 1, parseInt(m[2]));
+                    return date;
+                }
+                if (due.includes('中旬')) {
+                    const mm = due.match(/(\d{1,2})月/);
+                    if (mm) return new Date(today.getFullYear(), parseInt(mm[1]) - 1, 15);
+                }
+                if (due.includes('上旬')) {
+                    const mm = due.match(/(\d{1,2})月/);
+                    if (mm) return new Date(today.getFullYear(), parseInt(mm[1]) - 1, 5);
+                }
+                if (due.includes('下旬')) {
+                    const mm = due.match(/(\d{1,2})月/);
+                    if (mm) return new Date(today.getFullYear(), parseInt(mm[1]) - 1, 25);
+                }
+                return null;
+            }
+
+            // Helper: get task date range
+            function getTaskRange(task) {
+                const dueDate = parseDue(task.due);
+                let end, start;
+                if (dueDate) {
+                    end = new Date(dueDate);
+                    start = new Date(end);
+                    start.setDate(start.getDate() - (task.priority === 'urgent' ? 2 : 5));
+                } else {
+                    // Auto-assign based on priority
+                    start = new Date(today);
+                    end = new Date(today);
+                    switch (task.priority) {
+                        case 'urgent':
+                            end.setDate(end.getDate() + 2);
+                            break;
+                        case 'this-week':
+                            end.setDate(end.getDate() + 5);
+                            break;
+                        case 'waiting':
+                            start.setDate(start.getDate() + 3);
+                            end.setDate(end.getDate() + 14);
+                            break;
+                        default:
+                            start.setDate(start.getDate() + 2);
+                            end.setDate(end.getDate() + 10);
+                    }
+                }
+                return { start, end };
+            }
+
+            // Helper: calc bar position
+            function calcBarPos(taskStart, taskEnd) {
+                const timelineStart = startDate.getTime();
+                const dayMs = 86400000;
+                const leftDay = Math.max(0, (taskStart.getTime() - timelineStart) / dayMs);
+                const rightDay = Math.min(totalDays, (taskEnd.getTime() - timelineStart) / dayMs + 1);
+                if (rightDay <= 0 || leftDay >= totalDays) return null;
+                const leftPct = (leftDay / totalDays) * 100;
+                const widthPct = ((rightDay - leftDay) / totalDays) * 100;
+                return { left: leftPct, width: Math.max(widthPct, 100 / totalDays) };
+            }
+
+            // Priority colors
+            const prioColors = {
+                'urgent': 'var(--accent-red)',
+                'this-week': 'var(--accent-orange)',
+                'next': 'var(--accent-blue)',
+                'waiting': 'var(--accent-purple)',
+                'done': 'var(--accent-green)',
+            };
+
+            // Day column backgrounds
+            function dayColsHTML() {
+                return days.map(d => {
+                    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+                    const isToday = d.getTime() === today.getTime();
+                    return `<div class="gantt-day-col ${isWeekend ? 'weekend' : ''} ${isToday ? 'today-col' : ''}"></div>`;
+                }).join('');
+            }
+
+            // Today line position
+            const todayOffset = (today.getTime() - startDate.getTime()) / 86400000;
+            const todayPct = (todayOffset / totalDays) * 100;
+
+            // Build rows
+            let rowsHTML = '';
+            PROJECTS.forEach(project => {
+                const visibleTasks = project.tasks.filter(t => !t.done || currentFilter === 'done');
+                if (visibleTasks.length === 0 && project.tasks.length === 0) return;
+
+                // Project header row
+                rowsHTML += `<div class="gantt-project-group">`;
+                rowsHTML += `<div class="gantt-project-row">
+                    <div class="gantt-project-label">
+                        <span class="gantt-project-dot" style="background:${project.color}"></span>
+                        ${project.name}
+                    </div>
+                    <div class="gantt-timeline-cell">
+                        <div class="gantt-empty">${dayColsHTML()}</div>
+                    </div>
+                </div>`;
+
+                // Task rows
+                project.tasks.forEach(task => {
+                    const range = getTaskRange(task);
+                    const pos = calcBarPos(range.start, range.end);
+                    const prio = task.done ? 'done' : (task.priority || 'next');
+                    const barColor = prioColors[prio] || prioColors['next'];
+
+                    rowsHTML += `<div class="gantt-task-row">
+                        <div class="gantt-task-label ${task.done ? 'done' : ''}">
+                            <span class="priority-dot" style="background:${barColor}"></span>
+                            <span title="${task.text}">${task.text}</span>
+                        </div>
+                        <div class="gantt-timeline-cell">
+                            <div class="gantt-empty">${dayColsHTML()}</div>
+                            ${pos ? `<div class="gantt-bar ${task.done ? 'done' : ''}" style="left:${pos.left}%;width:${pos.width}%;background:${barColor}" title="${task.text}">${task.text}</div>` : ''}
+                            ${todayPct >= 0 && todayPct <= 100 ? `<div class="gantt-today-line" style="left:${todayPct}%"></div>` : ''}
+                        </div>
+                    </div>`;
+                });
+
+                rowsHTML += `</div>`;
+            });
+
+            container.innerHTML = `<div class="gantt-wrapper"><div class="gantt-scroll"><div class="gantt-table">
+                ${headerHTML}
+                ${rowsHTML}
+            </div></div></div>`;
+        }
+
+        // ═══════════════════════════════════════════
+        //  DAILY LOG LOGIC
+        // ═══════════════════════════════════════════
+
+        // Set today's date as default
+        (function initDailyLog() {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            document.getElementById('dailyLogDate').value = `${y}-${m}-${d}`;
+        })();
+
+        function clearDailyLog() {
+            document.getElementById('dailyLogDone').value = '';
+            document.getElementById('dailyLogNew').value = '';
+            document.getElementById('dailyLogMemo').value = '';
+            const result = document.getElementById('dailyLogResult');
+            result.classList.remove('visible');
+        }
+
+        async function submitDailyLog() {
+            const apiKey = localStorage.getItem('gemini-api-key');
+            if (!apiKey) {
+                alert('Gemini APIキーが設定されていません。\n右下の 💬 ボタン → ⚙ から設定してください。');
+                return;
+            }
+
+            const doneText = document.getElementById('dailyLogDone').value.trim();
+            const newText = document.getElementById('dailyLogNew').value.trim();
+            const memoText = document.getElementById('dailyLogMemo').value.trim();
+            const dateVal = document.getElementById('dailyLogDate').value;
+
+            if (!doneText && !newText) {
+                alert('「今日やったこと」か「明日やること」のどちらかを入力してください。');
+                return;
+            }
+
+            const btn = document.getElementById('dailyLogSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ 解析中...';
+
+            const logContent = [
+                dateVal ? `日付: ${dateVal}` : '',
+                doneText ? `## ✅ 今日やったこと\n${doneText}` : '',
+                newText ? `## 📝 明日やること / 新規タスク\n${newText}` : '',
+                memoText ? `## 💡 メモ\n${memoText}` : '',
+            ].filter(Boolean).join('\n\n');
+
+            const taskSnapshot = PROJECTS.map(p => ({
+                id: p.id,
+                name: p.name,
+                tasks: p.tasks.map((t, i) => ({ index: i, text: t.text, done: !!t.done, priority: t.priority }))
+            }));
+
+            const systemPrompt = `あなたは「古橋TODOダッシュボード」の日報解析AIです。
+日報テキストを読み取り、完了したタスクと新しいタスクを特定してJSON形式で返してください。
+
+## 現在のタスクデータ
+${JSON.stringify(taskSnapshot, null, 2)}
+
+## プロジェクトID マッピング
+- リッツプロ関連 → rtma, valoom, birth, birth, mecal, mind, toyama 等
+- スキルハックス・Fプロダクション → fpro
+- YOLO's → yolos-general
+- タングルシード → tangleseed
+- itk → itk
+- エンジニアのミカタ → mikata
+
+## 回答フォーマット（JSON）
+{
+  "summary": "処理内容の簡潔なサマリー（日本語）",
+  "actions": [
+    { "type": "COMPLETE_TASK", "projectId": "プロジェクトID", "taskIndex": 0 },
+    { "type": "ADD_TASK", "projectId": "プロジェクトID", "task": { "text": "タスク内容", "priority": "urgent|this-week|next|waiting" } }
+  ]
+}
+
+## ルール
+- 日報の「今日やったこと」の [x] のついた行 → COMPLETE_TASK（既存タスクと照合して最も近いものを選ぶ）
+- 日報の「明日やること」の行 → ADD_TASK
+- 既存タスクに一致するものが見つからない場合、COMPLETE_TASTは省略してOK
+- priority は括弧内に書かれていれば従う。なければ 'next' を使う
+- actionsが空でも可`;
+
+            try {
+                const body = {
+                    system_instruction: { parts: [{ text: systemPrompt }] },
+                    contents: [{ role: 'user', parts: [{ text: `以下の日報を解析してTODOを更新してください:\n\n${logContent}` }] }],
+                    generationConfig: { temperature: 0.2, responseMimeType: 'application/json' }
+                };
+
+                const res = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body),
+                });
+
+                if (!res.ok) throw new Error(`API Error: ${res.status}`);
+
+                const data = await res.json();
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) throw new Error('No response');
+
+                const result = JSON.parse(text);
+                const actionResults = executeActions(result.actions || []);
+
+                const resultEl = document.getElementById('dailyLogResult');
+                let output = `📓 ${dateVal} の日報を処理しました\n\n`;
+                if (result.summary) output += `${result.summary}\n\n`;
+                if (actionResults.length > 0) {
+                    output += actionResults.join('\n');
+                } else {
+                    output += '変更なし（一致するタスクが見つかりませんでした）';
+                }
+                resultEl.textContent = output;
+                resultEl.classList.add('visible');
+
+            } catch (err) {
+                const resultEl = document.getElementById('dailyLogResult');
+                resultEl.textContent = `❌ エラー: ${err.message}`;
+                resultEl.classList.add('visible');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '🔄 AIでTODO更新';
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

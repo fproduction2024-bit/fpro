@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロライン 今後の方針 提案（案）</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #0C4A4E;
+            --teal-mid: #145B60;
+            --teal-light: #1A7A82;
+            --orange: #E8650A;
+            --orange-light: #F08040;
+            --orange-pale: #FFF3EC;
+            --text: #1E2B2E;
+            --text-light: #6B7B7D;
+            --white: #FFFFFF;
+            --bg: #F5F8F8;
+            --card-bg: #FFFFFF;
+            --border: #D8E5E6;
+            --success: #1F9E5E;
+            --warn: #C75000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        /* ─── COVER ─── */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #061E20 0%, #0C4A4E 45%, #145B60 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 70%;
+            height: 140%;
+            background: radial-gradient(ellipse, rgba(232,101,10,.15) 0%, transparent 65%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(ellipse, rgba(232,101,10,.08) 0%, transparent 65%);
+            animation: pulse 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: .8; }
+        }
+
+        .cover-inner {
+            position: relative;
+            z-index: 2;
+            padding: 3rem 2rem;
+            max-width: 800px;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: .45rem 1.8rem;
+            border: 1px solid rgba(232,101,10,.7);
+            color: var(--orange-light);
+            font-size: .72rem;
+            letter-spacing: .35em;
+            margin-bottom: 2.2rem;
+            border-radius: 2px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .cover h1 {
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            letter-spacing: .04em;
+            line-height: 1.35;
+            margin-bottom: 1.2rem;
+        }
+
+        .cover h1 .accent { color: var(--orange-light); }
+
+        .cover-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: .72;
+            letter-spacing: .08em;
+            margin-bottom: .5rem;
+        }
+
+        .cover-kpi-row {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin: 2.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .cover-kpi {
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px;
+            padding: 1.1rem 1.6rem;
+            min-width: 160px;
+            backdrop-filter: blur(6px);
+        }
+
+        .cover-kpi .ck-label {
+            font-size: .68rem;
+            letter-spacing: .1em;
+            opacity: .55;
+            margin-bottom: .25rem;
+        }
+
+        .cover-kpi .ck-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--orange-light);
+            line-height: 1.1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cover-kpi .ck-sub {
+            font-size: .68rem;
+            opacity: .5;
+            margin-top: .2rem;
+        }
+
+        .cover-meta {
+            font-size: .8rem;
+            opacity: .42;
+            margin-top: 2rem;
+            letter-spacing: .08em;
+        }
+
+        /* ─── NAV ─── */
+        .toc {
+            background: var(--teal);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,.2);
+        }
+
+        .toc-inner {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .toc-inner::-webkit-scrollbar { display: none; }
+
+        .toc-item {
+            padding: .9rem 1.3rem;
+            font-size: .77rem;
+            letter-spacing: .05em;
+            color: rgba(255,255,255,.6);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            text-decoration: none;
+            transition: color .2s, border-color .2s;
+            display: block;
+            font-weight: 500;
+        }
+
+        .toc-item:hover {
+            color: var(--white);
+            border-color: var(--orange);
+        }
+
+        /* ─── LAYOUT ─── */
+        section {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .sec-label {
+            display: inline-block;
+            color: var(--orange);
+            font-size: .7rem;
+            letter-spacing: .3em;
+            font-weight: 700;
+            margin-bottom: .5rem;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+
+        section > h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--teal);
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            position: relative;
+        }
+
+        section > h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 54px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--orange-light));
+            border-radius: 2px;
+        }
+
+        .lead {
+            color: var(--text-light);
+            font-size: .95rem;
+            margin-bottom: 2.5rem;
+            max-width: 760px;
+            line-height: 2;
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* ─── CARDS ─── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.6rem 1.4rem;
+            text-align: center;
+            transition: transform .25s, box-shadow .25s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px rgba(12,74,78,.1);
+        }
+
+        .kpi-card .kl { font-size: .72rem; letter-spacing: .08em; color: var(--text-light); margin-bottom: .5rem; }
+        .kpi-card .kn { font-size: 1.8rem; font-weight: 900; color: var(--teal); line-height: 1.2; font-family: 'Inter', sans-serif; }
+        .kpi-card .ks { font-size: .72rem; color: var(--text-light); margin-top: .4rem; line-height: 1.6; }
+
+        .kpi-card.dark {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+            border-color: var(--teal-light);
+        }
+        .kpi-card.dark .kl, .kpi-card.dark .ks { color: rgba(255,255,255,.5); }
+        .kpi-card.dark .kn { color: var(--orange-light); }
+
+        /* ─── HIGHLIGHT BOX ─── */
+        .hl-box {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+            color: var(--white);
+            border-radius: 18px;
+            padding: 2.5rem 2.8rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hl-box::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,101,10,.18), transparent 70%);
+        }
+
+        .hl-box h3 {
+            color: var(--orange-light);
+            font-size: 1.05rem;
+            margin-bottom: .8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hl-box p, .hl-box ul {
+            opacity: .9;
+            position: relative;
+            z-index: 1;
+            line-height: 2;
+        }
+
+        .hl-box ul {
+            list-style: none;
+            margin-top: .8rem;
+        }
+
+        .hl-box ul li {
+            padding-left: 1.4rem;
+            position: relative;
+            margin-bottom: .3rem;
+        }
+
+        .hl-box ul li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--orange-light);
+            font-size: .65rem;
+            top: .4rem;
+        }
+
+        .hl-box .big-num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--orange-light);
+            display: block;
+            line-height: 1.1;
+            margin: .6rem 0 .3rem;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── PILLAR CARDS ─── */
+        .pillar-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .pillar-header {
+            background: var(--teal);
+            color: var(--white);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pillar-num {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--orange-light);
+            font-family: 'Inter', sans-serif;
+            line-height: 1;
+            min-width: 2rem;
+        }
+
+        .pillar-title-wrap .pt { font-size: 1.05rem; font-weight: 700; }
+        .pillar-title-wrap .ps { font-size: .78rem; opacity: .6; margin-top: .15rem; }
+
+        .pillar-body {
+            background: var(--card-bg);
+            padding: 1.8rem 2rem;
+        }
+
+        /* ─── ROUTE CARDS ─── */
+        .route-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .route-grid { grid-template-columns: 1fr; }
+        }
+
+        .route-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .route-header {
+            padding: .9rem 1.4rem;
+            font-weight: 700;
+            font-size: .9rem;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .route-header.a { background: rgba(12,74,78,.1); color: var(--teal); border-bottom: 1px solid var(--border); }
+        .route-header.b { background: rgba(232,101,10,.08); color: var(--warn); border-bottom: 1px solid var(--border); }
+
+        .route-badge {
+            display: inline-block;
+            padding: .15rem .7rem;
+            border-radius: 20px;
+            font-size: .72rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .route-badge.a { background: var(--teal); color: var(--white); }
+        .route-badge.b { background: var(--orange); color: var(--white); }
+
+        .route-body {
+            padding: 1.2rem 1.4rem;
+            font-size: .9rem;
+            line-height: 1.85;
+        }
+
+        /* ─── BULLET LIST ─── */
+        .bullet-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+            margin: 1rem 0;
+        }
+
+        .bullet-list li {
+            padding-left: 1.4rem;
+            position: relative;
+            font-size: .92rem;
+            line-height: 1.75;
+        }
+
+        .bullet-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-size: .65rem;
+            top: .38rem;
+        }
+
+        .bullet-list.teal li::before { color: var(--teal); }
+        .bullet-list.check li::before { content: '✓'; color: var(--success); font-size: .78rem; top: .28rem; }
+
+        /* ─── FLOW STEPS ─── */
+        .flow-steps {
+            display: flex;
+            gap: 0;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 140px;
+            position: relative;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -14px;
+            top: 46%;
+            transform: translateY(-50%);
+            color: var(--orange);
+            font-size: 1.4rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .flow-step-inner {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            margin: 0 .6rem;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .flow-step-inner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(12,74,78,.1);
+        }
+
+        .step-icon { font-size: 1.5rem; margin-bottom: .4rem; }
+        .step-label { font-size: .68rem; letter-spacing: .08em; color: var(--text-light); margin-bottom: .2rem; }
+        .step-title { font-size: .85rem; font-weight: 700; color: var(--teal); line-height: 1.45; }
+
+        /* ─── TABLE ─── */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .9rem;
+        }
+
+        .styled-table thead { background: var(--teal); color: var(--white); }
+        .styled-table th { padding: .9rem 1.2rem; text-align: left; font-weight: 600; font-size: .84rem; }
+        .styled-table td { padding: .85rem 1.2rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .styled-table tbody tr:hover { background: rgba(12,74,78,.03); }
+        .styled-table .num { text-align: right; font-family: 'Inter', sans-serif; }
+        .styled-table .hl { color: var(--orange); font-weight: 700; }
+        .styled-table .hl-g { color: var(--success); font-weight: 700; }
+        .styled-table .row-group td {
+            background: rgba(12,74,78,.06);
+            font-weight: 700;
+            font-size: .78rem;
+            letter-spacing: .05em;
+            color: var(--teal);
+        }
+
+        .styled-table tfoot td {
+            padding: 1rem 1.2rem;
+            font-weight: 700;
+            background: var(--orange-pale);
+            border-top: 2px solid var(--orange);
+            color: var(--warn);
+        }
+
+        /* ─── NOTE / WARN BOXES ─── */
+        .note-box {
+            background: rgba(12,74,78,.05);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--teal);
+            border-radius: 8px;
+            padding: 1.1rem 1.5rem;
+            margin: 1.2rem 0;
+            font-size: .88rem;
+            color: var(--text-light);
+            line-height: 1.85;
+        }
+
+        .note-box strong { color: var(--teal); }
+
+        .warn-box {
+            background: var(--orange-pale);
+            border: 1px solid rgba(232,101,10,.25);
+            border-left: 4px solid var(--orange);
+            border-radius: 8px;
+            padding: 1.1rem 1.5rem;
+            margin: 1.2rem 0;
+            font-size: .88rem;
+            color: var(--text);
+            line-height: 1.85;
+        }
+
+        .warn-box strong { color: var(--warn); }
+
+        /* ─── SECTION BLOCK ─── */
+        .content-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem 2.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .content-block h3 {
+            color: var(--teal);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            padding-bottom: .8rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ─── SUMMARY PILLARS ─── */
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .three-col { grid-template-columns: 1fr; }
+        }
+
+        .pillar-mini {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--orange);
+            border-radius: 12px;
+            padding: 1.5rem 1.4rem;
+            text-align: center;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .pillar-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(12,74,78,.1);
+        }
+
+        .pillar-mini .pm-icon { font-size: 1.8rem; margin-bottom: .5rem; }
+        .pillar-mini .pm-title { font-size: .95rem; font-weight: 700; color: var(--teal); line-height: 1.5; margin-bottom: .4rem; }
+        .pillar-mini .pm-desc { font-size: .8rem; color: var(--text-light); line-height: 1.75; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            text-align: center;
+            font-size: .8rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 640px) {
+            section { padding: 3.5rem 1.2rem; }
+            .flow-steps { flex-direction: column; }
+            .flow-step::after { display: none; }
+            .hl-box { padding: 1.8rem 1.4rem; }
+            .pillar-body { padding: 1.4rem 1.4rem; }
+        }
+
+        h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--teal);
+            margin: 1.6rem 0 .6rem;
+        }
+
+        .indent-block {
+            border-left: 3px solid var(--border);
+            margin: .8rem 0 .8rem 1rem;
+            padding: .4rem 0 .4rem 1.2rem;
+            color: var(--text-light);
+            font-size: .9rem;
+            line-height: 1.9;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+    <div class="cover-inner">
+        <div class="cover-badge">Business Proposal — Draft</div>
+        <h1>プロライン<br><span class="accent">今後の方針</span><br>提案（案）</h1>
+        <p class="cover-desc">ツール会社として「売上の質」を重視した成長方針の整理</p>
+
+        <div class="cover-kpi-row">
+            <div class="cover-kpi">
+                <div class="ck-label">基本方針</div>
+                <div class="ck-num">継続利用の積み上げ</div>
+                <div class="ck-sub">短期売上より売上の「質」を重視</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">重点施策 2本柱</div>
+                <div class="ck-num">アフィリ × 構築代行</div>
+                <div class="ck-sub">カード登録アカウントを両輪で増やす</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">収益インパクト（試算）</div>
+                <div class="ck-num">年間 1,000万前後</div>
+                <div class="ck-sub">解約されにくい質の高い売上として</div>
+            </div>
+        </div>
+
+        <p class="cover-meta">提案日：2026年4月</p>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+    <div class="toc-inner">
+        <a class="toc-item" href="#sec-policy">１ 基本方針</a>
+        <a class="toc-item" href="#sec-affili">２-① アフィリエイト促進</a>
+        <a class="toc-item" href="#sec-kouchiku">２-② 構築代行支援</a>
+        <a class="toc-item" href="#sec-simulation">３ 収益インパクト</a>
+        <a class="toc-item" href="#sec-summary">４ まとめ</a>
+    </div>
+</nav>
+
+
+<!-- ===== 01: 基本方針 ===== -->
+<section id="sec-policy">
+    <span class="sec-label">Section 01 — Basic Policy</span>
+    <h2>１．基本方針</h2>
+    <p class="lead">
+        プロラインをツール会社として伸ばしていくのであれば、
+        短期売上ではなく、継続売上につながる<strong>「売上の質」</strong>を重視すべきと考えます。
+    </p>
+
+    <div class="content-block">
+        <h3>現状の課題認識</h3>
+        <p style="font-size:.92rem; line-height:1.95; color:var(--text-light);">
+            現在の勉強会施策や、コンサル型の見せ方を取り入れた売り方は、短期的な売上をつくることはできます。<br>
+            ただし、それだけでは、<strong style="color:var(--text);">「プロラインというツールが実際に使われ、継続的に利用される状態」が増えた</strong>とは言えません。
+        </p>
+    </div>
+
+    <div class="hl-box">
+        <h3>🎯 ツール会社として本当に重要なこと</h3>
+        <p>プロラインを活用して成果が出る案件数が増え、<br>
+        その結果として<strong style="color:var(--orange-light);">継続課金につながるアカウントが積み上がること</strong>です。</p>
+    </div>
+
+    <h4>この考え方に立つと、今後取り組むべき方向性は以下の3点です</h4>
+
+    <div class="three-col" style="margin-top:1.2rem;">
+        <div class="pillar-mini">
+            <div class="pm-icon">🔨</div>
+            <div class="pm-title">構築代行案件数を増やす</div>
+            <div class="pm-desc">プロラインが実際に活用される案件を増やすことが根本</div>
+        </div>
+        <div class="pillar-mini">
+            <div class="pm-icon">📈</div>
+            <div class="pm-title">カード登録・継続利用アカウントを増やす</div>
+            <div class="pm-desc">案件の結果として積み上がる、本質的な収益の源泉</div>
+        </div>
+        <div class="pillar-mini">
+            <div class="pm-icon">🛡️</div>
+            <div class="pm-title">解約されにくい長期売上基盤をつくる</div>
+            <div class="pm-desc">使われ続けるツールになることで企業価値が高まる</div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ===== 02: アフィリエイト ===== -->
+<section id="sec-affili">
+    <span class="sec-label">Section 02 — Pillar 1</span>
+    <h2>２-①　アフィリエイト促進を強化する</h2>
+    <p class="lead">
+        アフィリエイトは単なる販促施策ではなく、
+        外部販売網を広げ、低コストで継続課金アカウントを増やしていくための
+        <strong>主戦略の一つ</strong>として位置づけるべきと考えます。
+    </p>
+
+    <div class="pillar-card">
+        <div class="pillar-header">
+            <div class="pillar-num">①</div>
+            <div class="pillar-title-wrap">
+                <div class="pt">アフィリエイト促進強化</div>
+                <div class="ps">外部販売網の拡大・継続課金アカウントの増加</div>
+            </div>
+        </div>
+        <div class="pillar-body">
+
+            <h4>具体的にやること</h4>
+
+            <ul class="bullet-list">
+                <li>実際に成果を出しているアフィリエイターの活動内容を整理し、<strong>再現可能な形でマニュアル化</strong>する</li>
+                <li>認定コンサル・アフィリエイター向けに<strong>Zoom勉強会を定期実施</strong>する</li>
+            </ul>
+
+            <div class="indent-block">
+                勉強会は、必要に応じて外部講師に依頼し、<strong>期限付き・予算付き</strong>で運用する<br>
+                勉強会自体を<strong>商品化</strong>し、費用回収＋追加収益化まで設計する
+            </div>
+
+            <div class="note-box" style="margin-top:1.5rem;">
+                <strong>この施策で期待できること</strong>
+                <ul class="bullet-list teal" style="margin-top:.6rem;">
+                    <li>アフィリエイターの活動再現性が高まる</li>
+                    <li>紹介件数・アカウント連携数の増加が見込める</li>
+                    <li>継続課金アカウントの増加につながる</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h4>アフィリエイトの動線イメージ</h4>
+
+    <div class="flow-steps">
+        <div class="flow-step">
+            <div class="flow-step-inner">
+                <div class="step-icon">📋</div>
+                <div class="step-label">STEP 1</div>
+                <div class="step-title">マニュアル整備<br>再現可能な型を作る</div>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-inner">
+                <div class="step-icon">🎓</div>
+                <div class="step-label">STEP 2</div>
+                <div class="step-title">Zoom勉強会<br>（商品化・有償化）</div>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-inner">
+                <div class="step-icon">🤝</div>
+                <div class="step-label">STEP 3</div>
+                <div class="step-title">アフィリエイター<br>が案件を紹介</div>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-step-inner">
+                <div class="step-icon">📊</div>
+                <div class="step-label">STEP 4</div>
+                <div class="step-title">継続課金アカウント<br>が積み上がる</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ===== 03: 構築代行 ===== -->
+<section id="sec-kouchiku">
+    <span class="sec-label">Section 03 — Pillar 2</span>
+    <h2>２-②　構築代行プレイヤーを応援する仕組みを作る</h2>
+    <p class="lead">
+        プロライン本体がすべてを自社で抱えるのではなく、
+        <strong>案件を取れる人・構築できる人が動きやすい基盤を整えること</strong>が重要と考えます。
+        そのための進め方として、2つのルートが考えられます。
+    </p>
+
+    <div class="route-grid">
+        <div class="route-card">
+            <div class="route-header a">
+                <span class="route-badge a">ルート A</span>
+                仕事を取れる人が動き、プロラインが仲介・支援する
+            </div>
+            <div class="route-body">
+                すでに案件を取れる人が受注し、<br>
+                その一部の実装・設定作業をプロライン側で支援できるようにする形。<br><br>
+                外部で受注した案件の実装部分をプロラインが担い、
+                発注者とも構築者ともwin-winの関係をつくる。
+            </div>
+        </div>
+        <div class="route-card">
+            <div class="route-header b">
+                <span class="route-badge b">ルート B</span>
+                誰でも使える構築代行フォーマットを本体が整備する
+            </div>
+            <div class="route-body">
+                プロライン本体が構築の「型」を整備し、<br>
+                「何を用意すれば案件が作れるか」を明確にして提供する方法。<br><br>
+                動画と配信文面があれば、残りの実装部分を進められるように標準化していくイメージ。
+            </div>
+        </div>
+    </div>
+
+    <div class="content-block">
+        <h3>ルートBで標準化する実装項目（案）</h3>
+        <ul class="bullet-list">
+            <li>フォーム（作成・接続）</li>
+            <li>コンテンツページ</li>
+            <li>シナリオ構築</li>
+            <li>メッセージ設定</li>
+            <li>必要最低限の画像整備</li>
+        </ul>
+        <div class="note-box" style="margin-top:1rem;">
+            <strong>※ 補足：</strong>画像やコンテンツページのリッチ化については、工数・費用対効果を踏まえ別途検討。
+            文章作成は<strong>AI活用を前提</strong>とし、人は最終確認と設定作業に集中する。
+        </div>
+    </div>
+
+    <div class="content-block" style="margin-top:1.5rem;">
+        <h3>このルートの狙い</h3>
+        <ul class="bullet-list check">
+            <li>構築代行の再現性を高める</li>
+            <li>一部の優秀な人に依存しすぎない体制をつくる</li>
+            <li>プロラインコンサルタントや外部プレイヤーが案件を回しやすくする</li>
+        </ul>
+    </div>
+
+    <div class="warn-box" style="margin-top:2rem;">
+        <strong>⚠️ 現状課題：プロラインコンサルタントの単価設定について</strong><br><br>
+        現状のプロラインコンサルタントの時給5,000円前後の設定は、発注側から見るとやや高く、案件を依頼しづらい状況です。
+        その結果、仕事が回りにくくなり、外部の構築代行プレイヤーから見ても使いづらい体制になっている可能性があります。
+    </div>
+
+    <h4>そのため今後は…</h4>
+
+    <ul class="bullet-list" style="margin-top:.5rem;">
+        <li><strong>高単価な時給型で抱えるのではなく</strong>、型化・標準化した作業をより実務的な単価で回せるようにする</li>
+        <li>文章作成はAI活用を前提とし、<strong>人は最終確認と設定作業に集中</strong>する</li>
+        <li>本体は「構築代行を自社で抱える」のではなく、<strong>「構築代行が回りやすい基盤」を作ることに集中</strong>する</li>
+    </ul>
+
+    <h4>具体的にやるべきこと</h4>
+
+    <ul class="bullet-list" style="margin-top:.5rem;">
+        <li>構築代行案件を再現しやすい<strong>テンプレート・フォーマットを整備</strong>する</li>
+        <li>コンテンツページ・メッセージ・画像・設定導線を<strong>標準化</strong>する</li>
+        <li>実装作業はAIと定型化を前提に、<strong>最小工数で回せる体制</strong>を作る</li>
+        <li>本体は「基盤づくり」に集中し、構築プレイヤーが動きやすい環境を整える</li>
+    </ul>
+</section>
+
+<hr class="divider">
+
+
+<!-- ===== 04: 収益インパクト ===== -->
+<section id="sec-simulation">
+    <span class="sec-label">Section 04 — Revenue Impact</span>
+    <h2>３．収益インパクトについて</h2>
+    <p class="lead">
+        この施策で生まれる売上は、単発で終わる売上ではありません。
+        <strong>継続利用アカウントの積み上げによる、解約されにくい質の高い売上</strong>として評価すべきです。
+    </p>
+
+    <div class="content-block">
+        <h3>構築代行プレイヤーが育った場合のシミュレーション</h3>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>想定</th>
+                    <th class="num">試算値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>構築代行プレイヤー 1人あたりの年間インパクト</td>
+                    <td>月3件前後の受注×継続課金</td>
+                    <td class="num hl">250万〜300万円</td>
+                </tr>
+                <tr>
+                    <td>プレイヤー 5人体制の場合</td>
+                    <td>5人 × 250〜300万円</td>
+                    <td class="num hl">年間 約1,000万円前後</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <strong>短期的には派手に見えないかもしれないが…</strong><br>
+            この売上は継続利用アカウントの積み上げによるものであり、
+            長期的な企業価値を高める「質の高い売上」として評価すべきです。
+            コンサル型の一時売上と異なり、積み上がるサブスク売上はそのまま企業の評価倍率に乗ります。
+        </div>
+    </div>
+
+    <div class="hl-box">
+        <h3>💡 なぜこの売上が重要なのか</h3>
+        <ul>
+            <li>継続課金アカウントとして積み上がるため、<strong style="color:var(--orange-light);">解約されにくい売上基盤</strong>になる</li>
+            <li>勉強会・コンサル型の「見せかけの売上」とは異なり、<strong style="color:var(--orange-light);">ツールが実際に使われた結果</strong>として発生する</li>
+            <li>積み上がるほど企業価値（M&A評価含む）に直結する<strong style="color:var(--orange-light);">ストックビジネスの本質</strong></li>
+        </ul>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ===== 05: まとめ ===== -->
+<section id="sec-summary">
+    <span class="sec-label">Section 05 — Summary</span>
+    <h2>４．まとめ</h2>
+    <p class="lead">
+        ツール会社として本質的に伸ばしていくためには、<br>
+        「プロラインを使って成果が出る案件数を増やし、その結果として継続利用アカウントを積み上げる」ことが最重要です。
+    </p>
+
+    <div class="three-col">
+        <div class="pillar-mini">
+            <div class="pm-icon">📣</div>
+            <div class="pm-title">アフィリエイト促進</div>
+            <div class="pm-desc">マニュアル化・勉強会の商品化で外部販売網を拡大し、継続課金アカウントを増やす</div>
+        </div>
+        <div class="pillar-mini">
+            <div class="pm-icon">🤝</div>
+            <div class="pm-title">構築代行プレイヤー支援</div>
+            <div class="pm-desc">案件を取れる人・構築できる人が動きやすい基盤づくりに本体が集中する</div>
+        </div>
+        <div class="pillar-mini">
+            <div class="pm-icon">⚙️</div>
+            <div class="pm-title">型化・標準化による<br>再現性の確立</div>
+            <div class="pm-desc">AIと定型化を活用し、最小工数で継続的に回せる体制を整える</div>
+        </div>
+    </div>
+
+    <div class="hl-box" style="margin-top:2rem;">
+        <h3>🚀 結論：短期売上ではなく、継続売上につながる"質の良い売上"を</h3>
+        <p>
+            今後は、この3点を軸に、<br>
+            <strong style="color:var(--orange-light);">短期売上ではなく、継続売上につながる"質の良い売上"を増やしていく方針</strong>で進めるのがよいと考えます。
+        </p>
+        <p style="margin-top:1rem; font-size:.9rem; opacity:.65;">
+            以上、ご検討のほどよろしくお願いいたします。
+        </p>
+    </div>
+</section>
+
+
+<footer>
+    <p style="margin-bottom:.4rem;">プロライン 今後の方針 提案（案）</p>
+    <p>2026年4月 ／ Confidential — 社外秘</p>
+</footer>
+
+</body>
+</html>

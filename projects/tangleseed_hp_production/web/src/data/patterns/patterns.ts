@@ -1,0 +1,5203 @@
+export interface Pattern {
+    id: string;
+    name: string;
+    nameJa: string;
+    slug: string;
+    description: string;
+    descriptionJa: string;
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
+    category: string[];
+    steps: PatternStep[];
+    youtubeVideoId?: string;
+    imageUrl: string;
+    createdAt: string;
+    tags: string[];
+}
+
+export interface PatternStep {
+    stepNumber: number;
+    instruction: string;
+    instructionJa: string;
+    imageUrl?: string;
+}
+
+// Official Zentangle® Patterns - Phase 1: Core Collection
+export const patterns: Pattern[] = [
+    // === FOUNDATIONAL TANGLES (基本8タングル) ===
+    {
+        id: '1',
+        name: 'Crescent Moon',
+        nameJa: 'クレセントムーン',
+        slug: 'crescent-moon',
+        description: 'Crescent Moon is one of the foundational Zentangle patterns and typically the very first tangle taught in any Zentangle class. Created by Maria Thomas and demonstrated first on the official Zentangle DVD, this elegant pattern features simple crescent-shaped curves that naturally settle into a rhythm. With just a few simple steps and very forgiving results, it appeals to both beginners and experienced artists. The pattern can go in many directions and still look beautiful, making it perfect for learning the Zentangle method.',
+        descriptionJa: `クレセントムーン（Crescent Moon）は、ゼンタングルの基本8タングルの1つで、多くのゼンタングルクラスで最初に教えられる特別なパターンです。
+
+**歴史と背景**
+Maria Thomasによって創作され、公式ゼンタングルキットに付属のDVDで最初にデモンストレーションされました。このパターンは、その単純さと美しさから、初心者の最初のタイルに自然と選ばれるようになりました。
+
+**特徴**
+- 三日月形の優雅な曲線が特徴
+- わずか数ステップで描ける簡単さ
+- 多方向に展開でも美しく仕上がる寛容性
+- 初心者から上級者まで楽しめる汎用性
+
+**バリエーション**
+基本形に加えて、Crazy Crescent Moon（クレイジークレセントムーン）という変化形があり、シェーディングやストライピング（交互に塗りつぶす技法）で表現の幅が広がります。また、三日月の形を少し変化させることで、個性的なアレンジも可能です。
+
+**描き方のコツ**
+1. 最初の曲線は自然な流れで描く
+2. 平行線は完璧でなくても美しい（ゼンタングルの「間違いはない」哲学そのもの）
+3. 線の間にシェーディングを加えると立体感が生まれる
+4. 異なるサイズや向きを組み合わせるとより面白い
+
+**プロジェクトでの使用例**
+ゼンタングル公式のプロジェクトパックでは、Rick Roberts、Maria Thomas、Molly Hollibaugh、Martha Huggins らのCZTマスター達が、黒タイルへの白ペンでの描画、他のパターンとの組み合わせ、Phiタイルでの表現など、多様な活用法を紹介しています。
+
+このパターンは「心地よさ（Comfort）」をテーマとしたメンタルヘルス啓発月間の21日チャレンジでも使用され、その癒し効果が認められています。`,
+        difficulty: 'beginner',
+        category: ['organic', 'foundational', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a curved line, like a gentle smile or crescent moon shape',
+                instructionJa: '優しい笑顔や三日月のような曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add another curved line parallel to the first, following its contour',
+                instructionJa: '最初の線に沿って、平行な曲線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Continue adding parallel curved lines, maintaining consistent spacing',
+                instructionJa: '同じ間隔を保ちながら、平行な曲線を続けて描きます',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Fill the area with more crescents, varying sizes and directions for interest',
+                instructionJa: 'エリアをさらに三日月で埋めていきます。サイズや向きを変えると面白くなります',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Optional: Add shading between the lines to create depth and dimension',
+                instructionJa: 'オプション：線の間にシェーディングを加えて、立体感と深みを出します',
+            },
+        ],
+        imageUrl: '/images/patterns/crescent-moon.jpg',
+        createdAt: '2024-01-01',
+        tags: ['curves', 'flowing', 'beginner-friendly', 'official', 'foundational', 'Rick-Roberts', 'Maria-Thomas'],
+    },
+    {
+        id: '2',
+        name: 'Hollibaugh',
+        nameJa: 'ホリバー',
+        slug: 'hollibaugh',
+        description: 'Hollibaugh (pronounced "haul-a-baw") was created by Molly Hollibaugh, Maria Thomas\'s daughter and a Certified Zentangle Teacher (CZT). This iconic pattern teaches Zentangle\'s classic "drawing behind" technique, where lines appear to weave in front of and behind each other like scattered lumber or interwoven ribbons. Starting in the foreground and working toward the background, Hollibaugh offers great potential for variants in lines, shading, and shapes used in the background. It\'s a versatile architectural pattern that creates compelling depth and dimension.',
+        descriptionJa: `ホリバー（Hollibaugh、発音は「ホーラボー」）は、ゼンタングルの基本8タングルの1つで、Maria Thomasの娘でありCZT（認定ゼンタングル講師）でもあるMolly Hollibaughによって創作されました。
+
+**創作者について**
+Molly Hollibaughは、ゼンタングルの共同創始者Maria Thomasの娘で、自らも認定講師として活躍しています。彼女の名前を冠したこのパターンは、ゼンタングルを代表する象徴的パターンの1つとなっています。
+
+**特徴と技法**
+このパターンの最大の特徴は、ゼンタングルの古典的技法である**「後ろに描く（Drawing Behind）」**を学べることです。線が散らばった木材や織り込まれたリボンのように、前後に編み込まれて見える立体的な表現が特徴です。
+
+**描き方の哲学**
+- 前景から始めて、徐々に背景に向けて描き進める
+- 後から描く線は、先に描いた線の「後ろ」を通るように描く
+- これにより自然な奥行きと立体感が生まれる
+
+**バリエーションの可能性**
+Hollibaughは非常に汎用性が高く、以下のような様々な表現が可能です：
+1. **線のバリエーション**: 直線だけでなく、曲線のHollibaughも
+2. **シェーディング**: リボンの下に影をつけて立体感を強調
+3. **背景の工夫**: 背景に他のパターンを組み合わせる
+4. **Mini-Hollibaugh**: 小さく描くバリエーション
+
+**発音について**
+"Hollibaugh"は「ホーラボー」と発音します（公式Zentangle PRIMER Vol 1より）。
+
+**プロジェクトでの使用例**
+ゼンタングル公式のプロジェクトパックでは、Rick Roberts、Maria Thomas、Molly Hollibaugh本人、Nick Hollibaughなど、多くのCZTマスター達がこのパターンを様々な形で活用しています。特に2024年の「Drawing Behind」プロジェクトパックでは、この技法をテーマとして深く掘り下げられました。
+
+**応用技法**
+Mariaが開発した「曲線を使ったHollibaugh」は、タイルの端に向かって線が湾曲したり、固定されたりする技法で、後に多くのアーティストに影響を与えました。また、他のパターンと組み合わせた「Scenabaugh」なども生まれています。
+
+このパターンは「意図的なストローク（Deliberate Strokes）」をテーマとしたメンタルヘルス啓発月間の21日チャレンジでも使用され、集中力と mindfulness 効果が認められています。`,
+        difficulty: 'beginner',
+        category: ['geometric', 'weaving', 'official', 'foundational'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a straight line across your space, then add a parallel "aura" line beside it to create your first ribbon',
+                instructionJa: 'スペース全体に直線を引き、次にその横に平行な「オーラ」ラインを追加して最初のリボンを作ります',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Rotate your tile and draw another line in a different direction',
+                instructionJa: 'タイルを回転させて、別の方向に新しい線を引きます',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Use the "draw behind" technique: when crossing an existing ribbon, lift your pen and resume on the other side, creating the illusion of weaving',
+                instructionJa: '「後ろに描く」テクニックを使う：既存のリボンと交差するとき、ペンを持ち上げて反対側から再開し、織物の錯覚を作ります',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Add the aura line to your new ribbon, maintaining the weaving pattern',
+                instructionJa: '新しいリボンにオーラを追加し、織りのパターンを維持します',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Continue adding more ribbons in various directions, always using the draw behind technique. Add shading underneath ribbons for enhanced 3D effect',
+                instructionJa: 'さまざまな方向にリボンを追加し続け、常に「後ろに描く」テクニックを使います。リボンの下に影をつけると3D効果が高まります',
+            },
+        ],
+        imageUrl: '/images/patterns/hollibaugh.jpg',
+        createdAt: '2024-01-02',
+        tags: ['lines', 'geometric', 'weaving', 'official', 'foundational', 'draw-behind', 'aura'],
+    },
+    {
+        id: '3',
+        name: 'Cadent',
+        nameJa: 'ケイデント',
+        slug: 'cadent',
+        description: 'Cadent is a core Zentangle pattern with mind-boggling creative possibilities for variations. This tangle was inspired by the houndstooth weaving pattern, and its name cleverly combines CAnine (hound) and DENTal (tooth) to create ca-dent. Created by Maria Thomas, Cadent features flowing S-strokes using the take-off-and-land technique. Once you get into the rhythm of drawing each stroke, it really does sort itself out. Variants include using squares instead of circles, varying widths, shading, and Crazy Cadent variations.',
+        descriptionJa: `ケイデント（Cadent）は、ゼンタングルの基本8タングルの1つで、Maria Thomasによって創作されたゼンタングル・オリジナルパターンです。
+
+**名前の由来**
+Cadentという名前は、ハウンドトゥース（千鳥格子）織りパターンからインスピレーションを得ています。名前は言葉遊びから来ており、「hound（猟犬）」の「CAine（犬科）」と「tooth（歯）」の「DENTal（歯科）」を組み合わせて「CA-DENT」となりました。
+
+**特徴**
+- S字型のストロークが連鎖的に繋がるリズミカルなデザイン
+- 「Take-off-and-land（離陸と着陸）」テクニックを使用
+- 目がジャンプするような視覚効果を持つパターン
+- 一度リズムに乗れば、自然に描けるようになる
+
+**描き方のコツ**
+1. **目を離さない**: 描いている線から目を離さないことが重要
+2. **タイルを回す**: Mariaがよくアドバイスするように、タイルを回しながら描くと描きやすい
+3. **リズムを見つける**: S字ストロークのリズムを掴むことが上達の鍵
+
+**バリエーションの可能性**
+Cadentは驚くほど多様なバリエーションが可能です：
+1. **Crazy Cadent**: S字の形を変化させたバリエーション
+2. **Cadent Squared**: 四角いアンカーポイントを使用
+3. **シェーディング**: 影を加えて立体感を出す
+4. **白いスペースに図形を描く**: 線が作り出す空間を活用
+
+**プロジェクトでの使用例**
+ゼンタングル公式のプロジェクトパックでは、Rick Roberts、Maria Thomas、Molly Hollibaugh、Martha Hugginsらが様々な場面でCadentを活用しています。特に2020年のKitchen Table Tanglesシリーズでは、MariaがCrazy Cadentの多様なフラグメント（断片）を紹介し、無限の可能性を示しました。
+
+このパターンは2024年のメンタルヘルス啓発月間の21日間プロジェクトでも使用され、リズミカルな描画がもたらすマインドフルネス効果が実証されています。`,
+        difficulty: 'beginner',
+        category: ['organic', 'foundational', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a gently curving line across your space',
+                instructionJa: 'スペースを横切るように優しくカーブする線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add "rounding" shapes along the line, creating chain-like links',
+                instructionJa: '線に沿って「丸み」を帯びた形を追加し、チェーンのようなリンクを作ります',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Continue the chain pattern, varying the size and spacing',
+                instructionJa: 'チェーンパターンを続け、サイズと間隔を変化させます',
+            },
+        ],
+        imageUrl: '/images/patterns/cadent.jpg',
+        createdAt: '2024-01-11',
+        tags: ['curves', 'chain', 'flowing', 'official', 'foundational', 'beginner-friendly'],
+    },
+    {
+        id: '4',
+        name: 'Jonqal',
+        nameJa: 'ジョンカル',
+        slug: 'jonqal',
+        description: 'An official Zentangle pattern and one of the foundational eight tangles. Jonqal features flower-like organic shapes with graceful curved petals.',
+        descriptionJa: `ジョンカル（Jonqal）は、ゼンタングルの基本8タングルの1つで、Maria Thomasによってデコンストラクト（分解・再構築）された公式ゼンタングル・オリジナルパターンです。
+
+**歴史と創作者**
+このパターンはゼンタングルの共同創始者Maria Thomasによって創作され、ゼンタングルメソッドの初期から教えられている102のオリジナルパターンの1つです。Mariaによる公式のイラスト付き解説も提供されており、多くのゼンタングルアーティストに親しまれています。
+
+**特徴**
+- **3D錯視効果**: シェーディングを加えることで、非常に大胆で立体的な視覚効果を生み出します
+- **高い汎用性**: 細い線を使った塗りつぶしなど、多様なバリエーションの機会を提供
+- **花のようなフォルム**: 優雅な曲線の花びらを持つ有機的な形状
+- **レイヤリング**: 重なり合うパターンで奥行きを表現
+
+**描き方のコツ**
+1. **基本形をしっかり**: まずは放射状の基本形を正確に描く
+2. **シェーディングが鍵**: 影のつけ方で3D効果が劇的に変わる
+3. **重ね合わせ**: 複数のJonqalを重ねることで複雑な視覚効果を生み出せる
+4. **線の太さを変える**: 細い線と太い線を組み合わせてコントラストをつける
+
+**プロジェクトでの使用例**
+Jonqalは多くのゼンタングル・プロジェクトパックで取り上げられています：
+
+- **Twelve Days of Zentangle 2018**: Molly Hollibaughが描き方をデモンストレーション
+- **The Legend of Zentangle**: Mollyが詳細な技法を紹介
+- **Twelve Days of Zentangle 2023**: MollyとMarthaが5byPhiveタイルでCrescent Moon、Tripoli、Purk、Cadentと組み合わせて使用
+- **The Elegance of Limits**: JulieがVega、Zander、FluxとともにZendalaタイルで展開
+
+これらのプロジェクトでは、ペッパリング（peppering）やオーラとの組み合わせなど、高度な技法でJonqalの表現力が示されています。
+
+**バリエーション**
+- **Crazy Jonqal**: 花びらの形や配置を自由に変化させたバリエーション
+- **ミニJonqal**: 小さく描いて塗りつぶしパターンとして使用
+- **複合パターン**: 他のタングルと組み合わせて複雑なデザインを創出
+
+このパターンは、シンプルな形状から始まりながら、シェーディングと重ね合わせによって驚くほど豊かな表現が可能になる、ゼンタングルの哲学を体現したパターンです。`,
+        difficulty: 'beginner',
+        category: ['organic', 'floral', 'foundational', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a simple curved petal shape',
+                instructionJa: 'シンプルな曲線の花びらの形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add more petals radiating from a central point',
+                instructionJa: '中心点から放射状にもっと花びらを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Fill with details and add shading',
+                instructionJa: '詳細を埋めて、影を追加します',
+            },
+        ],
+        imageUrl: '/images/patterns/jonqal.jpg',
+        youtubeVideoId: 'MDAbWXU5V5A',
+        createdAt: '2024-01-12',
+        tags: ['organic', 'floral', 'official', 'foundational', 'beginner-friendly'],
+    },
+    {
+        id: '5',
+        name: 'Purk',
+        nameJa: 'パーク',
+        slug: 'purk',
+        description: 'An official Zentangle pattern and one of the foundational eight tangles. Purk is a classic pattern featuring organic, flowing shapes.',
+        descriptionJa: `パーク（Purk）は、ゼンタングルの基本8タングルの1つで、Maria Thomasによって創作された公式ゼンタングル・オリジナルパターンです。
+
+**歴史と創作背景**
+Purkは2011年のCraft & Hobby Association（CHA）ショーで、Scrapbook Dimensions Magazineのビデオインタビューの中で、Mariaが初めて公式にデモンストレーションしたパターンです。このパターンは、そのシンプルさと汎用性から、ゼンタングルコミュニティで広く愛されるようになりました。
+
+**特徴**
+- **リボン・ボーダースタイル**: リボンやボーダーとして機能する流れるような有機的形状
+- **自然な曲線**: 優雅で自然な流れを持つ曲線が特徴
+- **多様な応用**: 単独でも他のパターンとの組み合わせでも美しい
+- **瞑想的なリズム**: 繰り返しの動作が心を落ち着かせる効果
+
+**描き方のコツ**
+1. **曲線の流れを大切に**: 自然な手の動きに任せて優雅な曲線を描く
+2. **一定のリズムを保つ**: 規則的な繰り返しがパターンの美しさを生む
+3. **スペーシング**: 適度な間隔を保つことで視覚的バランスが整う
+4. **シェーディングで立体感**: 影を加えることで深みと次元が生まれる
+
+**バリエーションと展開**
+- **リボン風Purk**: 帯状に長く連続させてボーダーとして使用
+- **Purk-esque探求**: 2013年にMariaが「E unum pluribus」ブログで紹介した創造的バリエーション
+- **Dingsplatzとの組み合わせ**: (トーマス・マートンの言葉「アートは私たちが自分自身を見つけ、同時に失うことを可能にする」とともに使用)
+
+**プロジェクトでの使用例**
+Purkは驚くほど多くのプロジェクトパックで取り上げられており、その汎用性の高さが証明されています：
+
+- **Twelve Days of Zentangle 2018**: Mariaがリボン/ボーダースタイルとしてデモンストレーション（Knightsbridge、Scena、Betweedとともに）
+- **The Legend of Zentangle 2020**: Mariaが詳細な技法を紹介
+- **12 Days of Zentangle 2020**: MollyとMarthaがRenaissance tanPhiタイルで、Festune、Stiritupとともに使用
+- **Accessing the Artist Within 2021**: JulieがPokeroot、Diva Dance、Cubine、Marasuと組み合わせて展開
+- **Organic Tangles 2023**: MollyがSquid、Shattuckとともに「Squidahlia」を創作
+- **Twelve Days of Zentangle 2023**: MollyとMarthaが5byPhiveタイルでCrescent Moon、Tripoli、Cadent、Jonqalと組み合わせて使用
+- **Mental Health Awareness Month 2024**: Mariaが21日プロジェクトのDay 6で紹介
+- **Drawing Behind 2024**: MariaがHollibaugh、Quib、Vegaとともに使用
+
+このように、Purkは初心者から上級者まで、様々なプロジェクトで活用され続けている、まさに「クラシック」なゼンタングルパターンです。その単純さの中に無限の表現力が秘められています。`,
+        difficulty: 'beginner',
+        category: ['organic', 'foundational', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Start with curved shapes',
+                instructionJa: '曲線の形から始めます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing lines',
+                instructionJa: '流れるような線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the pattern with details',
+                instructionJa: '詳細を加えてパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/purk.jpg',
+        createdAt: '2024-01-13',
+        tags: ['organic', 'flowing', 'official', 'foundational'],
+    },
+
+    // === POPULAR OFFICIAL PATTERNS (人気の公式パターン) ===
+    {
+        id: '6',
+        name: 'Flux',
+        nameJa: 'フラックス',
+        slug: 'flux',
+        description: 'Flux is one of the original 102 Zentangle patterns, taught from the very beginning of Zentangle. Maria Thomas learned the inspiration for this tangle at a calligraphy class about 25 years ago, and it was featured on that magical day when Rick interrupted Maria in her studio, sparking the Zentangle adventure. Both Rick and Maria have their own versions: Maria has a classic non-objective version and Rick has a leaf-like variation. Flux can be drawn flat or layered in a Hollibaugh-fashion. A lovely, versatile tangle that fits anywhere you want it to go.',
+        descriptionJa: `フラックス（Flux）は、ゼンタングルの基本8タングルの1つであり、102のゼンタングル・オリジナルパターンの1つでもある、非常に特別なパターンです。
+
+**ゼンタングル誕生の原点**
+Fluxは、ゼンタングル創始の「魔法の瞬間」と深く結びついています。約25年前、Mariaがカリグラフィークラスでこのパターンのインスピレーションを得ました。そして、RickがMariaのスタジオで彼女がこのパターンを描いているところに偶然立ち寄ったその日、ゼンタングルという驚くべき冒険が始まったのです。
+
+Fluxは**ゼンタングルの最初期から教えられてきた**パターンで、その歴史はゼンタングルの歴史そのものと言えます。
+
+**MariaバージョンとRickバージョン**
+興味深いことに、RickとMariaはそれぞれ独自のFluxバージョンを持っています：
+
+- **Mariaバージョン**: クラシックな非具象（non-objective）パターン。涙のしずくや花びらのような形が特徴
+- **Rickバージョン**: 描いているうちに形が滑らかになり、葉のような形に発展。ただし、植物的な「茎についた葉」のような具象的な描き方ではなく、ランダムで非具象的な性格を保っている
+
+**特徴**
+- **高い汎用性**: フラットにも、Hollibaugh風にレイヤー状にも描ける
+- **どこにでもフィット**: あらゆる場所に美しく収まる柔軟性
+- **涙のしずく/葉形**: 優雅な曲線形状
+- **オーラとの相性**: オーラを放射状に加えることで広がりを表現
+
+**描き方のコツ**
+1. **方向は自由**: 涙のしずく/花びらのような曲線形を任意の方向に描く
+2. **中央線を追加**: 葉の葉脈のように、形の中央に線を引く
+3. **点でアクセント**: オプションで、広い端に1-2個の点を追加して興味を引く
+4. **バリエーション**: 異なるサイズで複数描き、クラスターを作成
+
+**プロジェクトでの使用例**
+Fluxはゼンタングルの象徴的パターンとして、数多くのプロジェクトパックで取り上げられています：
+
+- **Twelve Days of Zentangle 2017**: MollyがTippleとともに使用
+- **Twelve Days of Zentangle 2018**: Martha Hugginsが独自バージョンをデモンストレーション
+- **Dancing in the Moonlight 2020**: MarthaとMollyが黒タイルで月光ペンを使用
+- **Spring has Sprung 2020**: Mariaが2つのバージョンを実演。Rickもマラカイト（孔雀石）にインスパイアされたバージョンを披露
+- **The Legend of Zentangle 2020**: Maria、Rick、Mollyがそれぞれの解釈を紹介
+- **12 Days of Zentangle 2020**: RickがParadoxとともに使用
+
+この美しく汎用性の高いパターンは、あなたが望むどこにでもフィットします。ゼンタングル誕生の物語とともに、永遠に愛され続けるパターンです。`,
+        difficulty: 'intermediate',
+        category: ['organic', 'flowing', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a teardrop or petal-like curved shape, pointing in any direction',
+                instructionJa: '涙のしずくまたは花びらのような曲線の形を任意の方向に向けて描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add a line down the middle of the shape, like a leaf\'s central vein',
+                instructionJa: '葉の中央の葉脈のように、形の中央に線を引きます',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Optional: Add one or two dots at the wider end of the teardrop for interest',
+                instructionJa: 'オプション：興味を引くために、涙のしずくの広い端に1つまたは2つの点を追加します',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Repeat and vary: Draw multiple Flux elements in different sizes, creating clusters or following a string',
+                instructionJa: '繰り返しとバリエーション：異なるサイズで複数のFlux要素を描き、クラスターを作成するか、ストリングに沿います',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Add shading along the central line or at the base, then blend for depth and dimension',
+                instructionJa: '中央線または基部に沿って影をつけ、次にブレンドして深みと立体感を出します',
+            },
+        ],
+        imageUrl: '/images/patterns/flux.jpg',
+        youtubeVideoId: 'bJNN3ECA74s',
+        createdAt: '2024-01-14',
+        tags: ['waves', 'flowing', 'dynamic', 'official', 'teardrop', 'leaf'],
+    },
+    {
+        id: '7',
+        name: 'Tipple',
+        nameJa: 'ティップル',
+        slug: 'tipple',
+        description: 'Tipple is one of the original 102 Zentangle patterns and one of several tangles shown in the Legend included with the Official Zentangle Kit. Consisting of clustered circles or orbs, Tipple can be used in combination with any tangle and is a superb go-to choice for filling spaces and creating texture. Maria Thomas has shared "Twenty-Two Tremendously Terrific Techniques to Tipple Tiles," showcasing this pattern\'s incredible versatility. Perfect for beginners and experienced tanglers alike.',
+        descriptionJa: `ティップル（Tipple）は、ゼンタングルの基本8タングルの1つであり、102のゼンタングル・オリジナルパターンの1つです。公式ゼンタングルキットに付属のLegendに表示されている数少ないパターンの1つで、ゼンタングルの象徴的存在と言えます。
+
+**特徴と用途**
+Tippleは**密集した円や球体（orbs）**で構成されるパターンで、あらゆるタングルと組み合わせて使用できる万能なパターンです。スペースを埋めたり、テクスチャーを作成したりする際の**定番の選択肢（go-to choice）**として、初心者から経験豊富なタングラーまで広く愛されています。
+
+**描き方の柔軟性**
+Tippleの魅力は、そのシンプルさと無限のバリエーションの可能性にあります。基本は円を描くだけですが、サイズ、配置、シェーディングの方法によって、まったく異なる印象を生み出すことができます。
+
+**「Twenty-Two Tremendously Terrific Techniques」**
+2020年1月、Mariaはゼンタングルブログで「[Twenty-Two Tremendously Terrific Techniques to Tipple Tiles](https://zentangle.com/blogs/blog/twenty-two-tremendously-terrific-techniques-to-tipple-tiles)（Tippleタイルを描く22の素晴らしいテクニック）」という特別な投稿を公開し、このシンプルなパターンの驚くべき汎用性を示しました。この投稿は、Tippleの奥深さを理解するための必読資料となっています。
+
+**描き方のコツ**
+1. **サイズを変える**: 大きな円は前面に、小さな円は後退して見える視覚効果を利用
+2. **クッションシェーディング**: 個々の球の端や曲線の周りに影を加えて立体感を出す
+3. **白いスペースの活用**: 円の間の隙間を小さな球で埋めるか、意図的に白いスペースと して残す
+4. **密接な配置**: 円を密接に配置して、ネストした効果を作り出す
+
+**プロジェクトでの使用例**
+Tippleは数え切れないほどのプロジェクトパックで使用されており、その汎用性が証明されています：
+
+- **Twelve Days of Zentangle 2017**: MollyがFluxとともに使用
+- **Twelve Days of Zentangle 2018**: MarthaとMollyがZinger、Vega、Verdigogh、Rixtyとともに使用
+- **The Legend of Zentangle 2020**: Mariaがバリエーションを含めて2回デモンストレーション
+- **Accessing the Artist Within 2021**: MollyとMarthaがStriping、Sampson、Balesとともに使用
+- **12 Days of Zentangle – Keeping Score 2021**: MollyとMarthaが両方ともTippleを使用
+- **The Kaleidoscope of Our Lives 2022**: Mollyが使用
+- **Mental Health Awareness Month 2023**: Mariaが21日チャレンジの最終日「Enjoy」で使用
+- **Twelve Days of Zentangle 2023**: MollyとMarthaがMooka、Knightsbridgeとともに使用
+- **The Elegance of Limits 2025**: MollyとMarthaがBetweed、Ravel、Knightsbridgeとともに使用
+
+このパターンは、その単純さゆえに初心者にとって取り組みやすく、同時にその無限のバリエーションにより、上級者にとっても常に新しい発見があるパターンです。`,
+        difficulty: 'beginner',
+        category: ['fill', 'texture', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Start by drawing several circles (orbs) of similar or varying sizes',
+                instructionJa: '同じサイズまたは異なるサイズの円（球体）をいくつか描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Continue filling your space with more circles, nesting them closely together',
+                instructionJa: 'スペースを円で埋め続け、それらを密接に配置します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Fill in small gaps between circles with smaller orbs or leave them as white space',
+                instructionJa: '円の間の小さな隙間を小さな球で埋めるか、白いスペースとして残します',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Vary circle sizes for visual interest - larger circles can rise to the foreground while smaller ones recede',
+                instructionJa: '視覚的な面白さのためにサイズを変える - 大きな円は前面に、小さな円は後退します',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Add "cushion shading" around edges and curves of individual orbs to create dimension and depth',
+                instructionJa: '個々の球の端や曲線の周りに「クッションシェーディング」を加えて、立体感と深みを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/tipple.jpg',
+        youtubeVideoId: 'xeadSd3UbfA',
+        createdAt: '2024-01-15',
+        tags: ['circles', 'texture', 'fill', 'official', 'orbs', 'cushion-shading'],
+    },
+    {
+        id: '8',
+        name: 'Aura',
+        nameJa: 'オーラ',
+        slug: 'aura',
+        description: 'A fundamental Zentangle technique rather than a single pattern. Aura creates echo lines that trace around shapes like ripples on water or a glowing halo, adding dimension and enhancing any tangle. Essential for building complexity and depth.',
+        descriptionJa: '単一のパターンというよりも基本的なゼンタングルテクニック。Auraは、水面の波紋や輝く後光のように形の周りをなぞるエコーラインを作成し、次元を追加し、あらゆるタングルを強化します。複雑さと深みを構築するために不可欠です。',
+        difficulty: 'beginner',
+        category: ['enhancement', 'shading', 'technique'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Start with any existing shape, line, or tangle as your base',
+                instructionJa: 'ベースとして任意の既存の形、線、またはタングルから始めます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Draw a parallel line that follows the contour of your base shape, maintaining consistent spacing',
+                instructionJa: 'ベースの形の輪郭に沿って平行な線を描き、一定の間隔を維持します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Continue adding more echo lines, each one following the previous aura',
+                instructionJa: 'さらにエコーラインを追加し続け、各ラインは前のオーラに従います',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Rotate your tile as needed for comfortable drawing and smooth curves',
+                instructionJa: '快適な描画と滑らかな曲線のために、必要に応じてタイルを回転させます',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Optional: Fill spaces between auras with other tangles or shading for added complexity',
+                instructionJa: 'オプション：複雑さを追加するために、オーラ間のスペースを他のタングルまたは影で埋めます',
+            },
+        ],
+        imageUrl: '/images/patterns/aura.jpg',
+        createdAt: '2024-01-16',
+        tags: ['enhancement', 'echo', 'glow', 'technique', 'foundational'],
+    },
+    {
+        id: '9',
+        name: 'Mooka',
+        nameJa: 'ムーカ',
+        slug: 'mooka',
+        description: 'Mooka is an official Zentangle pattern created by co-founder Maria Thomas, inspired by the art of Alphonse Mucha. This beautiful tangle is unique because the entire pod component is completed in one continuous stroke. Mooka features elegant, flowing ribbon-like stems topped with graceful rounded pods, creating a sense of organic movement and Art Nouveau-inspired beauty. It\'s known for its calming, meditative quality and works wonderfully when tangled in clusters or as "Kissing Mookas" where pods touch. A favorite among tanglers for its flowing grace and versatility.',
+        descriptionJa: `ムーカ（Mooka）は、ゼンタングルの基本8タングルの1つで、共同創始者Maria Thomasが**アルフォンス・ミュシャ（Alphonse Mucha）のアート**にインスパイアされて創作した公式ゼンタングルパターンです。
+
+**名前の由来とインスピレーション**
+Mookaという名前は、アールヌーボーの巨匠Alphonse Mucha（ムハ）の名前に由来しています。Maria自身がミュシャの優雅な流れるような線や有機的なフォルムに深く影響を受けており、このパターンはそのオマージュとして生まれました。
+
+**ユニークな特徴**
+Mookaが他のパターンと一線を画すのは、**ポッド（pod）全体のコンポーネントが1つの連続したストロークで完成する**という点です。これはゼンタングルパターンの中でも特別な技法で、流れるようなリズムと瞑想的な体験を生み出します。
+
+**視覚的特徴**
+- **優雅なリボン状の茎**: 流れるような二重線のリボンが特徴
+- **丸みを帯びたポッド**: 茎の先端に優雅に丸い形状が乗る
+- **アールヌーボー風の美しさ**: 有機的な動きと優美な曲線
+- **複数のポッドのクラスター**: まとまりとして描くと一層美しい
+
+**描き方のコツ**
+1. **ポッドの位置決め**: 最初に小さな円を軽くスケッチして、ポッドの配置を決める
+2. **優雅な茎**: 長く曲がった二重線の茎を描き、リボンのような効果を作る
+3. **高さと曲線を変える**: 同じ基点から複数の茎を描き、それぞれ異なる高さと曲線に
+4. **「Kissing Mookas」**: ポッド同士が触れ合うように配置すると美しい効果
+
+**シェーディングテクニック**
+- 茎の内側に黒いアクセント曲線を加えて深みを出す
+- 円形のポッド頂部に影をつける
+- 茎に沿ってブレンドして立体感を強調
+
+**プロジェクトでの使用例**
+Mookaはその優雅さから、多くのプロジェクトで愛用されています：
+
+- **Twelve Days of Zentangle 2023**: MollyとMarthaがKnightsbridge、Tippleとともに使用
+
+**バリエーション例**
+Maria Thomasは、ポッドの形やサイズ、茎の配置を変えることで無限のバリエーションが可能であることを示しています。また、Variationsとして別のパターン「Mooka Variations (ID 158)」も存在します。
+
+このパターンは、その流れるような優雅さと汎用性で、タングラーの間で絶大な人気を誇ります。アールヌーボーの美意識とゼンタングルの瞑想性が完璧に融合した、まさに芸術的なパターンです。`,
+        difficulty: 'intermediate',
+        category: ['organic', 'flowing', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Lightly sketch several small circles across the upper area - these will become the rounded pod tops',
+                instructionJa: '上部エリアに小さな円を軽くスケッチします - これらが丸いポッドの頂部になります',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Draw a long, curved double-line stem leading up into one of the circles, creating a graceful ribbon',
+                instructionJa: '円の1つに向かって長く曲がった二重線の茎を描き、優雅なリボンを作ります',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Add more stems from the same base point, varying heights and curves. Each stem splits into a gentle hook at the top',
+                instructionJa: '同じ基点からもっと茎を追加し、高さと曲線を変えます。各茎は頂部で優しいフックに分かれます',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'Connect all circles with similar double-line stems until you have a complete cluster of pods',
+                instructionJa: 'すべての円を同様の二重線の茎で接続し、ポッドの完全なクラスターを作ります',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Add black accent curves inside stems for depth, then shade the circular tops and blend along stems for dimension',
+                instructionJa: '深みを出すために茎の内側に黒いアクセント曲線を追加し、次に円形の頂部に影をつけ、茎に沿ってブレンドして立体感を出します',
+            },
+        ],
+        imageUrl: '/images/patterns/mooka.jpg',
+        youtubeVideoId: '2sGbRFwwgfg',
+        createdAt: '2024-01-17',
+        tags: ['ribbons', 'flowing', 'elegant', 'official', 'Maria-Thomas', 'pods'],
+    },
+    {
+        id: '10',
+        name: 'Paradox',
+        nameJa: 'パラドックス',
+        slug: 'paradox',
+        description: 'A mesmerizing official Zentangle pattern that creates stunning 3D optical illusions using only straight lines. Despite using no curves, Paradox tricks the eye into seeing spirals, depth, and dimensional cubes through clever geometric repetition.',
+        descriptionJa: `パラドックス（Paradox）は、ゼンタングルの基本8タングルの1つで、**直線のみ**を使用して見事な3D錯視を作り出す魅惑的な公式ゼンタングルパターンです。
+
+**パラドックスの魔法**
+このパターンの最大の特徴は、その名前が示す通り「パラドックス（矛盾）」にあります。**曲線を一切使用しないにもかかわらず、巧妙な幾何学的反復を通じて、目が螺旋、深さ、立体的な立方体を見るように錯覚させる**のです。
+
+**特徴**
+- **3D錯視効果**: シェーディングによって立方体が立体的に浮かび上がる
+- **直線のみの構成**: すべて直線で描かれるが、曲線や螺旋に見える
+- **幾何学的精密性**: 一定のリズムとパターンの繰り返しが鍵
+- **視覚的トリック**: 目をだます視覚効果の傑作
+
+**描き方のテクニック**
+Paradoxを成功させる秘訣は、一貫した回転パターンにあります：
+
+1. **基礎形状**: 正方形または三角形から始める（基礎となる枠組み）
+2. **直線を引く**: 1つの点から直線を描く
+3. **タイルを回転**: タイルを回転させて、線の端から別の線を引き、細い三角形を形成
+4. **パターンを繰り返す**: 「描く→回転→描く」のシーケンスを一貫して繰り返す
+5. **錯覚の出現**: パターンが構築されるにつれて、直線が曲がって螺旋状に見え始める
+
+**シェーディングで立体感を強化**
+Paradoxの真価は、シェーディングで発揮されます：
+- 交互のセクションに影をつける
+- 立方体の面を明暗で区別する
+- これにより**3D効果が劇的に高まる**
+
+**描き方のコツ**
+1. **一貫した回転**: タイルの回転方向と角度を一定に保つ
+2. **リズムを保つ**: 「描く→回転→描く」のリズムを崩さない
+3. **忍耐力**: 最初はパターンが見えにくいが、繰り返すうちに螺旋が現れる
+4. **シェーディングが鍵**: 影の付け方で立体感が決まる
+
+**難易度について**
+Paradoxは基本8タングルの中でも**上級（advanced）**に分類されています。これは技法自体は単純ですが、一貫性を保ち、視覚効果を最大化するには練習と集中力が必要だからです。
+
+**プロジェクトでの使用例**
+- **12 Days of Zentangle 2020**: RickがFluxとともに使用
+
+**哲学的な意味**
+「Paradox（矛盾）」という名前は、このパターンの本質を完璧に表現しています。直線が曲線に見え、平面が立体に見える──これはゼンタングルの「知覚を変える」哲学を体現したパターンと言えます。
+
+このパターンは、幾何学の美しさと視覚の不思議さを同時に体験できる、知的でありながら瞑想的な、まさに「パラドックス」なパターンです。`,
+        difficulty: 'advanced',
+        category: ['geometric', '3d', 'illusion', 'official'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Start with a basic shape (square or triangle) as your foundation',
+                instructionJa: '基礎として基本的な形（正方形または三角形）から始めます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Draw a straight line from one point, then rotate your tile and draw another line from the end, forming thin triangles',
+                instructionJa: '1つの点から直線を引き、次にタイルを回転させて端から別の線を引いて、細い三角形を形成します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Continue this sequence: draw, rotate tile, draw from the end point. Keep rotating consistently',
+                instructionJa: 'このシーケンスを続けます：描く、タイルを回転させる、端点から描く。一貫して回転し続けます',
+            },
+            {
+                stepNumber: 4,
+                instruction: 'As the pattern builds, the straight lines will appear to curve and spiral, creating the illusion',
+                instructionJa: 'パターンが構築されるにつれて、直線は曲がって螺旋状に見え、錯覚を作り出します',
+            },
+            {
+                stepNumber: 5,
+                instruction: 'Add shading to alternating sections or cube faces to dramatically enhance the 3D effect',
+                instructionJa: '交互のセクションまたは立方体の面に影をつけて、3D効果を劇的に高めます',
+            },
+        ],
+        imageUrl: '/images/patterns/paradox.jpg',
+        youtubeVideoId: 'ezGwfUT8QmQ',
+        createdAt: '2024-01-18',
+        tags: ['3d', 'illusion', 'cubes', 'official', 'optical', 'spiral'],
+    },
+
+    // === 2025 FEATURED \u0026 MORE POPULAR PATTERNS (2025年注目・人気パターン) ===
+    {
+        id: '11',
+        name: 'Huggins',
+        nameJa: 'ハギンス',
+        slug: 'huggins',
+        description: 'Official Zentangle pattern by Martha Huggins and the Tangle of the Year 2025. A beautiful pattern that demonstrates elegance and versatility.',
+        descriptionJa: 'Martha Hugginsによる公式ゼンタングルパターンで、2025年のタングル・オブ・ザ・イヤー。優雅さと多用途性を示す美しいパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'featured'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Begin with curved shapes (details TBD from TanglePatterns.com)',
+                instructionJa: '曲線の形から始めます（詳細はTanglePatterns.comから後で追加）',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add connecting elements',
+                instructionJa: '接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the pattern with details',
+                instructionJa: '詳細を加えてパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/huggins.jpg',
+        createdAt: '2024-01-19',
+        tags: ['official', '2025', 'featured', 'Martha-Huggins'],
+    },
+    {
+        id: '12',
+        name: 'Ahh',
+        nameJa: 'アー',
+        slug: 'ahh',
+        description: 'An official Zentangle pattern, often one of the first taught to beginners. Ahh resembles a starburst or snowflake and is useful for adding texture.',
+        descriptionJa: '公式ゼンタングルパターンで、初心者が最初に学ぶパターンの1つ。スターバーストや雪の結晶に似ており、テクスチャーを追加するのに便利です。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw radiating lines from a central point',
+                instructionJa: '中心点から放射状の線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add starburst details',
+                instructionJa: 'スターバーストの詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Fill with additional elements',
+                instructionJa: '追加要素で埋めます',
+            },
+        ],
+        imageUrl: '/images/patterns/ahh.jpg',
+        createdAt: '2024-01-20',
+        tags: ['official', 'starburst', 'beginner-friendly'],
+    },
+    {
+        id: '13',
+        name: 'Diva Dance',
+        nameJa: 'ディーバダンス',
+        slug: 'diva-dance',
+        description: 'A popular official Zentangle pattern featuring flowing, ribbon-like curves that create graceful movement across the tile.',
+        descriptionJa: '流れるようなリボン状の曲線が特徴の人気の公式ゼンタングルパターンで、タイル全体に優雅な動きを作り出します。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing ribbon curves',
+                instructionJa: '流れるリボンの曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add parallel lines for depth',
+                instructionJa: '深みのために平行線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the dancing pattern',
+                instructionJa: 'ダンスするパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/diva-dance.jpg',
+        createdAt: '2024-01-21',
+        tags: ['official', 'flowing', 'ribbons'],
+    },
+    {
+        id: '14',
+        name: 'Knightsbridge',
+        nameJa: 'ナイツブリッジ',
+        slug: 'knightsbridge',
+        description: 'Knightsbridge is an official Zentangle pattern created by co-founders Rick Roberts and Maria Thomas. Originally labeled Nightsbridge in the first edition of the Official Zentangle Kit, it is now correctly spelled as Knightsbridge. This versatile tangle features a simple grid structure that serves as the basis for many advanced patterns. It has unlimited customizing options. Once you master the straight-on grid, you can wiggle the lines and really distort things to create Crazy Knightsbridge. Perfect for learning grid-based techniques and exploring variations.',
+        descriptionJa: '優雅な詳細を持つ幾何学的なグリッド状の構造が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'grid'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create grid structure',
+                instructionJa: 'グリッド構造を作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add geometric details',
+                instructionJa: '幾何学的な詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up complexity',
+                instructionJa: '複雑さを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/knightsbridge.jpg',
+        youtubeVideoId: 'Ay_zBIAzBC0',
+        createdAt: '2024-01-22',
+        tags: ['official', 'geometric', 'grid'],
+    },
+    {
+        id: '15',
+        name: 'Betweed',
+        nameJa: 'ビトウィード',
+        slug: 'betweed',
+        description: 'An official Zentangle pattern commonly used in Zentangle art, featuring organic interconnected shapes.',
+        descriptionJa: 'ゼンタングルアートでよく使われる公式パターンで、有機的に相互接続された形が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw organic shapes',
+                instructionJa: '有機的な形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Connect and interweave',
+                instructionJa: '接続して織り交ぜます',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Add details',
+                instructionJa: '詳細を追加します',
+            },
+        ],
+        imageUrl: '/images/patterns/betweed.jpg',
+        createdAt: '2024-01-23',
+        tags: ['official', 'organic', 'beginner-friendly'],
+    },
+    {
+        id: '16',
+        name: 'Tripoli',
+        nameJa: 'トリポリ',
+        slug: 'tripoli',
+        description: 'An official Zentangle pattern featuring geometric shapes and patterns that create visual interest.',
+        descriptionJa: '視覚的な興味を作り出す幾何学的な形とパターンが特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create geometric base',
+                instructionJa: '幾何学的なベースを作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add pattern elements',
+                instructionJa: 'パターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build complexity',
+                instructionJa: '複雑さを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/tripoli.jpg',
+        youtubeVideoId: '3qU_Kv4m6kQ',
+        createdAt: '2024-01-24',
+        tags: ['official', 'geometric'],
+    },
+    {
+        id: '17',
+        name: 'Fescu',
+        nameJa: 'フェスク',
+        slug: 'fescu',
+        description: 'An official Zentangle pattern suitable for beginners, featuring simple yet elegant organic forms.',
+        descriptionJa: '初心者に適した公式ゼンタングルパターンで、シンプルでありながら優雅な有機的な形が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw organic shapes',
+                instructionJa: '有機的な形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing lines',
+                instructionJa: '流れるような線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the pattern',
+                instructionJa: 'パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/fescu.jpg',
+        youtubeVideoId: 'EPasXw64HNw',
+        createdAt: '2024-01-25',
+        tags: ['official', 'organic', 'beginner-friendly'],
+    },
+    {
+        id: '18',
+        name: 'Scena',
+        nameJa: 'シーナ',
+        slug: 'scena',
+        description: 'An official Zentangle pattern that pairs beautifully with Crescent Moon, featuring complementary organic curves.',
+        descriptionJa: 'Crescent Moonと美しく組み合わせることができる公式ゼンタングルパターンで、補完的な有機的曲線が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing curves',
+                instructionJa: '流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complementary elements',
+                instructionJa: '補完要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build the pattern',
+                instructionJa: 'パターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/scena.jpg',
+        youtubeVideoId: '82rNqa9IR5I',
+        createdAt: '2024-01-26',
+        tags: ['official', 'organic', 'flowing'],
+    },
+    {
+        id: '19',
+        name: 'ING',
+        nameJa: 'イング',
+        slug: 'ing',
+        description: 'A popular official Zentangle pattern featuring distinctive geometric and organic hybrid elements.',
+        descriptionJa: '特徴的な幾何学的および有機的ハイブリッド要素を持つ人気の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'hybrid'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create base structure',
+                instructionJa: 'ベース構造を作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add hybrid elements',
+                instructionJa: 'ハイブリッド要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the pattern',
+                instructionJa: 'パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ing.jpg',
+        youtubeVideoId: 'dStgPsncAL8',
+        createdAt: '2024-01-27',
+        tags: ['official', 'hybrid', 'popular'],
+    },
+    {
+        id: '20',
+        name: 'Beeline',
+        nameJa: 'ビーライン',
+        slug: 'beeline',
+        description: 'An official Zentangle pattern that is simple and easy to use, perfect for beginners.',
+        descriptionJa: 'シンプルで使いやすい公式ゼンタングルパターンで、初心者に最適です。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple lines',
+                instructionJa: 'シンプルな線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add connecting elements',
+                instructionJa: '接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the pattern',
+                instructionJa: 'パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/beeline.jpg',
+        createdAt: '2024-01-28',
+        tags: ['official', 'simple', 'beginner-friendly'],
+    },
+
+    // === ADDITIONAL POPULAR PATTERNS (追加の人気パターン) ===
+    {
+        id: '21',
+        name: 'Doodah',
+        nameJa: 'ドゥーダ',
+        slug: 'doodah',
+        description: 'An official Zentangle pattern that is simple and versatile, perfect for beginners and experienced tanglers alike.',
+        descriptionJa: 'シンプルで多用途な公式ゼンタングルパターンで、初心者から経験豊富なタングラーまで完璧です。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple curved shapes',
+                instructionJa: 'シンプルな曲線の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic details',
+                instructionJa: '有機的な詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the pattern',
+                instructionJa: 'パターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/doodah.jpg',
+        youtubeVideoId: 'JVRnNpOkJFg',
+        createdAt: '2024-01-29',
+        tags: ['official', 'simple', 'versatile', 'beginner-friendly'],
+    },
+    {
+        id: '22',
+        name: 'Echoism',
+        nameJa: 'エコイズム',
+        slug: 'echoism',
+        description: 'An official Zentangle pattern featuring echo-like repetitive elements that create visual rhythm and flow.',
+        descriptionJa: 'エコーのような反復的な要素が特徴の公式ゼンタングルパターンで、視覚的なリズムと流れを作り出します。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create base shape',
+                instructionJa: 'ベース形状を作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add echo lines',
+                instructionJa: 'エコーラインを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build repetitive pattern',
+                instructionJa: '反復パターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/echoism.jpg',
+        youtubeVideoId: '8QZ8hQizs7Y',
+        createdAt: '2024-01-30',
+        tags: ['official', 'echo', 'repetitive'],
+    },
+    {
+        id: '23',
+        name: 'Festune',
+        nameJa: 'フェスチューン',
+        slug: 'festune',
+        description: 'An official Zentangle pattern with decorative, festive elements perfect for adding celebratory flair.',
+        descriptionJa: '装飾的で祝祭的な要素を持つ公式ゼンタングルパターンで、お祝いの雰囲気を加えるのに最適です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw decorative base',
+                instructionJa: '装飾的なベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add festive elements',
+                instructionJa: '祝祭的な要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the ornate pattern',
+                instructionJa: '華やかなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/festune.jpg',
+        youtubeVideoId: '2GoW5kSOX5Y',
+        createdAt: '2024-01-31',
+        tags: ['official', 'decorative', 'festive'],
+    },
+    {
+        id: '24',
+        name: 'Jetties',
+        nameJa: 'ジェッティーズ',
+        slug: 'jetties',
+        description: 'An official Zentangle pattern suitable for beginners, featuring simple linear structures.',
+        descriptionJa: '初心者に適した公式ゼンタングルパターンで、シンプルな線形構造が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw parallel lines',
+                instructionJa: '平行線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add connecting elements',
+                instructionJa: '接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete linear pattern',
+                instructionJa: '線形パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/jetties.jpg',
+        youtubeVideoId: 'RzTdLnsTc7U',
+        createdAt: '2024-02-01',
+        tags: ['official', 'linear', 'beginner-friendly'],
+    },
+    {
+        id: '25',
+        name: 'Keeko',
+        nameJa: 'キーコ',
+        slug: 'keeko',
+        description: 'A popular official Zentangle pattern with distinctive organic shapes and flowing elements.',
+        descriptionJa: '特徴的な有機的形状と流れる要素を持つ人気の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create organic base shapes',
+                instructionJa: '有機的なベース形状を作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing elements',
+                instructionJa: '流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the pattern',
+                instructionJa: 'パターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/keeko.jpg',
+        youtubeVideoId: '9kCTeUzoPrA',
+        createdAt: '2024-02-02',
+        tags: ['official', 'popular', 'organic'],
+    },
+    {
+        id: '26',
+        name: 'Bales',
+        nameJa: 'ベイルズ',
+        slug: 'bales',
+        description: 'Bales is a fun official Zentangle pattern created by Maria Thomas that uses a grid to get started. Simple rice or seed shapes are built around the grid in both directions to complete the tangle. Bales offers an almost mind-boggling array of possible variations, including adding different shapes between the flowers (dots, circles, diamonds), shading, and filling in shapes as the pattern takes form. Martha Huggins has demonstrated beautiful variations using diamond shapes instead of rice shapes, showcasing this pattern incredible versatility.',
+        descriptionJa: 'ゼンタングルアートでよく使われる公式パターンで、丸みを帯びた有機的な形が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw rounded organic shapes',
+                instructionJa: '丸みを帯びた有機的な形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add pattern details',
+                instructionJa: 'パターンの詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the design',
+                instructionJa: 'デザインを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/bales.jpg',
+        createdAt: '2024-02-03',
+        tags: ['official', 'rounded', 'organic', 'beginner-friendly'],
+    },
+    {
+        id: '27',
+        name: 'Cubine',
+        nameJa: 'キュービン',
+        slug: 'cubine',
+        description: 'An official Zentangle pattern featuring cubic and geometric forms with dimensional effects.',
+        descriptionJa: '立方体と幾何学的な形が特徴の公式ゼンタングルパターンで、立体的効果があります。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', '3d'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw cubic base shapes',
+                instructionJa: '立方体のベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add geometric details',
+                instructionJa: '幾何学的な詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create dimensional effect',
+                instructionJa: '立体的効果を作成します',
+            },
+        ],
+        imageUrl: '/images/patterns/cubine.jpg',
+        createdAt: '2024-02-04',
+        tags: ['official', 'cubic', 'geometric', '3d'],
+    },
+    {
+        id: '28',
+        name: 'Gourdgeous',
+        nameJa: 'ゴージャス',
+        slug: 'gourdgeous',
+        description: 'An official Zentangle pattern inspired by gourd shapes, featuring organic flowing forms.',
+        descriptionJa: 'ひょうたんの形にインスパイアされた公式ゼンタングルパターンで、有機的な流れる形が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw gourd-like shapes',
+                instructionJa: 'ひょうたんのような形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic details',
+                instructionJa: '有機的な詳細を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/gourdgeous.jpg',
+        createdAt: '2024-02-05',
+        tags: ['official', 'gourd', 'organic'],
+    },
+    {
+        id: '29',
+        name: 'Bunzo',
+        nameJa: 'ブンゾ',
+        slug: 'bunzo',
+        description: 'An official Zentangle pattern created by Zentangle Inc., featuring distinctive circular and organic elements.',
+        descriptionJa: 'Zentangle Inc.によって作成された公式パターンで、特徴的な円形と有機的要素があります。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create circular base',
+                instructionJa: '円形のベースを作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic elements',
+                instructionJa: '有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build the pattern',
+                instructionJa: 'パターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/bunzo.jpg',
+        youtubeVideoId: 'FS94-YU0CcI',
+        createdAt: '2024-02-06',
+        tags: ['official', 'Zentangle-Inc', 'circular'],
+    },
+    {
+        id: '30',
+        name: 'Amaze',
+        nameJa: 'アメイズ',
+        slug: 'amaze',
+        description: 'An official Zentangle pattern also known as Stiritup, featuring continuous random lines that create maze-like paths.',
+        descriptionJa: 'Stiritupとしても知られる公式ゼンタングルパターンで、迷路のような経路を作る連続的なランダムラインが特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a continuous random line without crossing itself',
+                instructionJa: '自分自身と交差しない連続的なランダムラインを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Continue the wandering line across your space',
+                instructionJa: 'スペース全体にわたって放浪するラインを続けます',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Fill spaces and complete the maze-like pattern',
+                instructionJa: 'スペースを埋めて、迷路のようなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/amaze.jpg',
+        createdAt: '2024-02-07',
+        tags: ['official', 'maze', 'random', 'beginner-friendly', 'Stiritup'],
+    },
+
+    // === BATCH 4: FOUNDATIONAL 8 TANGLES COMPLETION (基本8タングル完成) ===
+    {
+        id: '31',
+        name: 'Static',
+        nameJa: 'スタティック',
+        slug: 'static',
+        description: 'An official Zentangle pattern and one of the foundational eight tangles. Static features simple parallel lines creating a hatching effect, perfect for adding texture and shading.',
+        descriptionJa: '公式ゼンタングルパターンで、基本8タングルの1つ。Staticはシンプルな平行線でハッチング効果を作り、テクスチャーとシェーディングを加えるのに最適です。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a series of parallel lines in one direction',
+                instructionJa: '一方向に平行線のシリーズを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add another set of parallel lines crossing at an angle',
+                instructionJa: '角度をつけて交差する別の平行線セットを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Optional: Add more layers of lines to create deeper shading',
+                instructionJa: 'オプション：より深い陰影を作るために線の層を追加します',
+            },
+        ],
+        imageUrl: '/images/patterns/static.jpg',
+        youtubeVideoId: 'lMkVA0U16e4',
+        createdAt: '2024-02-08',
+        tags: ['official', 'foundational', 'hatching', 'shading', 'beginner-friendly', 'basic-8'],
+    },
+    {
+        id: '32',
+        name: 'Printemps',
+        nameJa: 'プランタン',
+        slug: 'printemps',
+        description: 'Printemps is an official Zentangle pattern introduced by co-founder Maria Thomas. The name "Printemps" is French for "Spring," perfectly capturing the joyful, playful nature of this fun tangle. With its delicate vines, organic flowing elements, and spring-like character, Printemps brings a sense of renewal and growth to any tile. Variations like "Crazy Printemps" and "weighted Printemps" offer even more creative possibilities. A favorite for its cheerful energy and versatility.',
+        descriptionJa: 'Printempsは、共同創設者Maria Thomasによって紹介された公式ゼンタングルパターンです。名前「Printemps」はフランス語で「春」を意味し、この楽しいタングルの喜びと遊び心のある性質を完璧に捉えています。繊細な蔦、有機的な流れる要素、春らしい特徴で、Printempsはあらゆるタイルに更新と成長の感覚をもたらします。「Crazy Printemps」や「weighted Printemps」などのバリエーションは、さらに多くの創造的な可能性を提供します。陽気なエネルギーと汎用性で人気のパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'foundational', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing vine-like curves',
+                instructionJa: '流れる蔦のような曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add small leaf shapes along the vines',
+                instructionJa: '蔦に沿って小さな葉の形を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with buds and spring-like details',
+                instructionJa: '蕾と春のようなディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/printemps.jpg',
+        youtubeVideoId: 'FJ8x7mkpY_M',
+        createdAt: '2024-02-09',
+        tags: ['official', 'foundational', 'vines', 'spring', 'organic', 'basic-8'],
+    },
+    {
+        id: '33',
+        name: 'W2',
+        nameJa: 'ダブリュー2',
+        slug: 'w2',
+        description: 'W2, which stands for "Warp and Weft" (the two sets of yarns in weaving), is an official Zentangle pattern created by co-founders Rick Roberts and Maria Thomas. This tangle resembles weaving and is great fun to draw with potential for interesting variations through shading and line work. One of several weaving-inspired tangles, W2 uses straight lines connecting squares to create the woven effect. It has a variant called Huggins that uses curved lines connecting dots instead of squares.',
+        descriptionJa: 'W2は「Warp and Weft」（織物の2セットの糸）の略で、共同創設者Rick RobertsとMaria Thomasによって作成された公式ゼンタングルパターンです。このタングルは織物に似ており、シェーディングとラインワークによる面白いバリエーションの可能性を持つ、描くのが楽しいパターンです。いくつかの織物にインスパイアされたタングルの1つで、W2は正方形を接続する直線を使用して織りの効果を作成します。正方形の代わりに点を接続する曲線を使用するHugginsと呼ばれるバリエーションがあります。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw wavy parallel lines',
+                instructionJa: '波状の平行線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing wave patterns',
+                instructionJa: '流れる波のパターンを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build up the organic flow',
+                instructionJa: '有機的な流れを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/w2.jpg',
+        youtubeVideoId: 'Au-01kqp3p4',
+        createdAt: '2024-02-10',
+        tags: ['official', 'foundational', 'wavy', 'flowing', 'beginner-friendly', 'basic-8'],
+    },
+
+    // === BATCH 4: POPULAR PATTERNS (人気パターン) ===
+    {
+        id: '34',
+        name: 'Aquafleur',
+        nameJa: 'アクアフルール',
+        slug: 'aquafleur',
+        description: 'An official Zentangle pattern inspired by water and flowers, featuring graceful flowing organic forms that evoke aquatic beauty.',
+        descriptionJa: '水と花にインスパイアされた公式ゼンタングルパターンで、水の美しさを呼び起こす優雅な流れる有機的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw water-like flowing curves',
+                instructionJa: '水のような流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flower-like elements',
+                instructionJa: '花のような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with aquatic details',
+                instructionJa: '水的なディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/aquafleur.jpg',
+        youtubeVideoId: '2qmoP3Iooz8',
+        createdAt: '2024-02-11',
+        tags: ['official', 'water', 'floral', 'flowing', 'graceful'],
+    },
+    {
+        id: '35',
+        name: 'Auraknot',
+        nameJa: 'オーラノット',
+        slug: 'auraknot',
+        description: 'An official Zentangle pattern that combines the aura technique with knot-like forms, creating dimensional interwoven effects.',
+        descriptionJa: 'オーラ技法と結び目のような形を組み合わせた公式ゼンタングルパターンで、立体的な織り交ぜ効果を作り出します。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'enhancement'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw interwoven knot shapes',
+                instructionJa: '織り交ぜた結び目の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add aura lines around the knots',
+                instructionJa: '結び目の周りにオーラの線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build dimensional effect',
+                instructionJa: '立体効果を構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/auraknot.jpg',
+        createdAt: '2024-02-12',
+        tags: ['official', 'aura', 'knots', 'dimensional'],
+    },
+    {
+        id: '36',
+        name: 'Bronx Cheer',
+        nameJa: 'ブロンクスチアー',
+        slug: 'bronx-cheer',
+        description: 'An official Zentangle pattern with bold, dynamic organic forms that create visual energy and movement.',
+        descriptionJa: '視覚的なエネルギーと動きを作り出す大胆でダイナミックな有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw dynamic organic shapes',
+                instructionJa: 'ダイナミックな有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add bold flowing elements',
+                instructionJa: '大胆な流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build energetic pattern',
+                instructionJa: 'エネルギッシュなパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/bronx-cheer.jpg',
+        createdAt: '2024-02-13',
+        tags: ['official', 'bold', 'dynamic', 'energetic'],
+    },
+    {
+        id: '37',
+        name: 'Ellish',
+        nameJa: 'エリッシュ',
+        slug: 'ellish',
+        description: 'An official Zentangle pattern featuring elegant flowing organic forms with graceful curves.',
+        descriptionJa: '優雅な曲線を持つエレガントな流れる有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw elegant flowing curves',
+                instructionJa: 'エレガントな流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic flowing elements',
+                instructionJa: '有機的な流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with graceful details',
+                instructionJa: '優雅なディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ellish.jpg',
+        createdAt: '2024-02-14',
+        tags: ['official', 'elegant', 'flowing', 'graceful'],
+    },
+    {
+        id: '38',
+        name: 'Indy-Rella',
+        nameJa: 'インディレラ',
+        slug: 'indy-rella',
+        description: 'A popular official Zentangle pattern with distinctive organic and flowing characteristics.',
+        descriptionJa: '特徴的な有機的で流れるような特性を持つ人気の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Create distinctive organic base',
+                instructionJa: '特徴的な有機的ベースを作成します',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing pattern elements',
+                instructionJa: '流れるパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build the unique pattern',
+                instructionJa: 'ユニークなパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/indy-rella.jpg',
+        youtubeVideoId: 'FhTNzNidQ-4',
+        createdAt: '2024-02-15',
+        tags: ['official', 'popular', 'distinctive'],
+    },
+    {
+        id: '39',
+        name: 'Ixorus',
+        nameJa: 'イクソラス',
+        slug: 'ixorus',
+        description: 'An official Zentangle pattern featuring geometric forms with distinctive angular characteristics.',
+        descriptionJa: '特徴的な角張った特性を持つ幾何学的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw geometric angular shapes',
+                instructionJa: '幾何学的な角張った形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add distinctive angular elements',
+                instructionJa: '特徴的な角張った要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete geometric pattern',
+                instructionJa: '幾何学的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ixorus.jpg',
+        youtubeVideoId: 'h4p7Otdxyyc',
+        createdAt: '2024-02-16',
+        tags: ['official', 'geometric', 'angular'],
+    },
+    {
+        id: '40',
+        name: "Kathy's Dilemma",
+        nameJa: 'キャシーズジレンマ',
+        slug: 'kathys-dilemma',
+        description: 'A popular official Zentangle pattern with organic flowing forms that create visual interest and complexity.',
+        descriptionJa: '視覚的な興味と複雑さを作り出す有機的な流れる形を持つ人気の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw organic flowing base shapes',
+                instructionJa: '有機的な流れるベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex flowing elements',
+                instructionJa: '複雑な流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build intricate pattern',
+                instructionJa: '複雑なパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/kathys-dilemma.jpg',
+        createdAt: '2024-02-17',
+        tags: ['official', 'popular', 'complex', 'flowing'],
+    },
+
+    // === BATCH 5: BEGINNER-FRIENDLY PATTERNS (初心者向けパターン) ===
+    {
+        id: '41',
+        name: 'BB',
+        nameJa: 'ビービー',
+        slug: 'bb',
+        description: 'An official Zentangle pattern perfect for absolute beginners. BB features simple bubble-like forms that are easy and fun to draw.',
+        descriptionJa: '初心者に最適な公式ゼンタングルパターン。BBはシンプルな泡のような形で、簡単で楽しく描けます。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple bubble shapes',
+                instructionJa: 'シンプルな泡の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add more bubbles to fill space',
+                instructionJa: 'スペースを埋めるためにもっと泡を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with simple shading',
+                instructionJa: 'シンプルなシェーディングで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/bb.jpg',
+        youtubeVideoId: 'm_rQ-fbCHrU',
+        createdAt: '2024-02-18',
+        tags: ['official', 'bubbles', 'simple', 'beginner-friendly', 'easy'],
+    },
+    {
+        id: '42',
+        name: 'Beelight',
+        nameJa: 'ビーライト',
+        slug: 'beelight',
+        description: 'An official Zentangle pattern featuring simple light-like geometric elements, perfect for beginners.',
+        descriptionJa: 'シンプルな光のような幾何学的要素が特徴の公式ゼンタングルパターンで、初心者に最適です。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple geometric light shapes',
+                instructionJa: 'シンプルな幾何学的光の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add radiating elements',
+                instructionJa: '放射状の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the light pattern',
+                instructionJa: '光のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/beelight.jpg',
+        youtubeVideoId: '6Rmn58yZPYU',
+        createdAt: '2024-02-19',
+        tags: ['official', 'light', 'geometric', 'beginner-friendly'],
+    },
+    {
+        id: '43',
+        name: 'Braze',
+        nameJa: 'ブレイズ',
+        slug: 'braze',
+        description: 'A popular official Zentangle pattern among beginners, featuring simple geometric shapes that are easy to master.',
+        descriptionJa: '初心者に人気の公式ゼンタングルパターンで、マスターしやすいシンプルな幾何学的形状が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple geometric base shapes',
+                instructionJa: 'シンプルな幾何学的ベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add pattern elements',
+                instructionJa: 'パターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with details',
+                instructionJa: 'ディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/braze.jpg',
+        youtubeVideoId: 'tu5ZUt_z7Hc',
+        createdAt: '2024-02-20',
+        tags: ['official', 'geometric', 'popular', 'beginner-friendly'],
+    },
+    {
+        id: '45',
+        name: 'Centipede',
+        nameJa: 'センティピード',
+        slug: 'centipede',
+        description: 'An official Zentangle pattern featuring centipede-like organic forms with simple repetitive elements.',
+        descriptionJa: 'ムカデのような有機的形態とシンプルな反復要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a wavy centerline',
+                instructionJa: '波状の中心線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add leg-like elements along the line',
+                instructionJa: '線に沿って脚のような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the centipede pattern',
+                instructionJa: 'ムカデのパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/centipede.jpg',
+        createdAt: '2024-02-22',
+        tags: ['official', 'organic', 'repetitive', 'beginner-friendly'],
+    },
+    {
+        id: '46',
+        name: 'Dewd',
+        nameJa: 'デュード',
+        slug: 'dewd',
+        description: 'An official Zentangle pattern featuring simple droplet or dew-like organic shapes, perfect for beginners.',
+        descriptionJa: 'シンプルなしずくや露のような有機的形状が特徴の公式ゼンタングルパターンで、初心者に最適です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw droplet-like shapes',
+                instructionJa: 'しずくのような形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dew-like elements',
+                instructionJa: '露のような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with simple details',
+                instructionJa: 'シンプルなディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/dewd.jpg',
+        youtubeVideoId: '431ctiv9jEY',
+        createdAt: '2024-02-23',
+        tags: ['official', 'droplets', 'dew', 'organic', 'beginner-friendly'],
+    },
+    {
+        id: '47',
+        name: 'Dex',
+        nameJa: 'デックス',
+        slug: 'dex',
+        description: 'An official Zentangle pattern featuring simple geometric elements that are easy for beginners to learn.',
+        descriptionJa: '初心者が学びやすいシンプルな幾何学的要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple geometric shapes',
+                instructionJa: 'シンプルな幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add connecting elements',
+                instructionJa: '接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the pattern',
+                instructionJa: 'パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/dex.jpg',
+        createdAt: '2024-02-24',
+        tags: ['official', 'geometric', 'simple', 'beginner-friendly'],
+    },
+    {
+        id: '48',
+        name: 'Drupe',
+        nameJa: 'ドルーペ',
+        slug: 'drupe',
+        description: 'An official Zentangle pattern inspired by stone fruits, featuring simple organic rounded forms.',
+        descriptionJa: '核果にインスパイアされた公式ゼンタングルパターンで、シンプルな有機的丸い形が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw fruit-like rounded shapes',
+                instructionJa: '果実のような丸い形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic details',
+                instructionJa: '有機的なディテールを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the fruit pattern',
+                instructionJa: '果実のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/drupe.jpg',
+        createdAt: '2024-02-25',
+        tags: ['official', 'fruit', 'organic', 'rounded', 'beginner-friendly'],
+    },
+    {
+        id: '49',
+        name: 'Eke',
+        nameJa: 'イーク',
+        slug: 'eke',
+        description: 'An official Zentangle pattern featuring simple wave-like organic forms that are easy and relaxing to draw.',
+        descriptionJa: 'シンプルな波のような有機的形態が特徴の公式ゼンタングルパターンで、簡単でリラックスして描けます。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple wave-like curves',
+                instructionJa: 'シンプルな波のような曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing organic elements',
+                instructionJa: '流れる有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the wave pattern',
+                instructionJa: '波のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/eke.jpg',
+        youtubeVideoId: 'GoakCj-KXNU',
+        createdAt: '2024-02-26',
+        tags: ['official', 'waves', 'organic', 'flowing', 'beginner-friendly'],
+    },
+    {
+        id: '50',
+        name: 'Ennies',
+        nameJa: 'エニーズ',
+        slug: 'ennies',
+        description: 'An official Zentangle pattern featuring simple S-shaped geometric forms that create an easy flowing pattern.',
+        descriptionJa: '簡単な流れるパターンを作るシンプルなS字型幾何学的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple S-shaped curves',
+                instructionJa: 'シンプルなS字型の曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add connecting S-shapes',
+                instructionJa: '接続するS字形を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ennies.jpg',
+        createdAt: '2024-02-27',
+        tags: ['official', 'S-shaped', 'geometric', 'flowing', 'beginner-friendly'],
+    },
+
+    // === BATCH 6: INTERMEDIATE POPULAR PATTERNS (中級人気パターン) ===
+    {
+        id: '51',
+        name: 'Chainging',
+        nameJa: 'チェンジング',
+        slug: 'chainging',
+        description: 'An official Zentangle pattern featuring chain-like geometric elements that create interconnected flowing patterns.',
+        descriptionJa: '相互接続された流れるパターンを作るチェーン状の幾何学的要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw chain-like geometric shapes',
+                instructionJa: 'チェーン状の幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add interconnecting elements',
+                instructionJa: '相互接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the chain pattern',
+                instructionJa: 'チェーンパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/chainging.jpg',
+        createdAt: '2024-02-28',
+        tags: ['official', 'chain', 'geometric', 'interconnected'],
+    },
+    {
+        id: '52',
+        name: 'Chartz',
+        nameJa: 'チャーツ',
+        slug: 'chartz',
+        description: 'An official Zentangle pattern with complex geometric forms that create sophisticated visual patterns.',
+        descriptionJa: '洗練された視覚的パターンを作る複雑な幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex geometric base',
+                instructionJa: '複雑な幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add sophisticated pattern elements',
+                instructionJa: '洗練されたパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build intricate design',
+                instructionJa: '複雑なデザインを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/chartz.jpg',
+        createdAt: '2024-02-29',
+        tags: ['official', 'complex', 'geometric', 'sophisticated'],
+    },
+    {
+        id: '53',
+        name: 'Chillon',
+        nameJa: 'チロン',
+        slug: 'chillon',
+        description: 'An official Zentangle pattern featuring flowing organic forms with elegant curved elements.',
+        descriptionJa: '優雅な曲線要素を持つ流れる有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing organic curves',
+                instructionJa: '流れる有機的曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add elegant curved elements',
+                instructionJa: '優雅な曲線要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/chillon.jpg',
+        createdAt: '2024-03-01',
+        tags: ['official', 'flowing', 'elegant', 'organic'],
+    },
+    {
+        id: '54',
+        name: 'Cirquital',
+        nameJa: 'サーキタル',
+        slug: 'cirquital',
+        description: 'An official Zentangle pattern with circular geometric forms that create rhythmic patterns.',
+        descriptionJa: 'リズミカルなパターンを作る円形の幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw circular geometric shapes',
+                instructionJa: '円形の幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add rhythmic circular elements',
+                instructionJa: 'リズミカルな円形要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the circular pattern',
+                instructionJa: '円形パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/cirquital.jpg',
+        youtubeVideoId: '_vypIn40iLM',
+        createdAt: '2024-03-02',
+        tags: ['official', 'circular', 'geometric', 'rhythmic'],
+    },
+    {
+        id: '55',
+        name: 'Cogwheel',
+        nameJa: 'コグホイール',
+        slug: 'cogwheel',
+        description: 'An official Zentangle pattern inspired by mechanical cogwheels, featuring intricate gear-like geometric forms.',
+        descriptionJa: '機械的な歯車にインスパイアされた公式ゼンタングルパターンで、複雑な歯車のような幾何学的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw cogwheel base shapes',
+                instructionJa: '歯車のベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add gear-like teeth elements',
+                instructionJa: '歯車の歯のような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the mechanical pattern',
+                instructionJa: '機械的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/cogwheel.jpg',
+        createdAt: '2024-03-03',
+        tags: ['official', 'mechanical', 'geometric', 'gears'],
+    },
+    {
+        id: '56',
+        name: 'Courant',
+        nameJa: 'クーラント',
+        slug: 'courant',
+        description: 'An official Zentangle pattern with flowing organic forms that suggest movement and current.',
+        descriptionJa: '動きと流れを示唆する流れる有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing current-like curves',
+                instructionJa: '流れる海流のような曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add movement elements',
+                instructionJa: '動きの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/courant.jpg',
+        createdAt: '2024-03-04',
+        tags: ['official', 'flowing', 'movement', 'current'],
+    },
+    {
+        id: '57',
+        name: 'Cyme',
+        nameJa: 'サイム',
+        slug: 'cyme',
+        description: 'An official Zentangle pattern inspired by flower clusters, featuring organic botanical forms.',
+        descriptionJa: '花序にインスパイアされた公式ゼンタングルパターンで、有機的な植物形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flower cluster base',
+                instructionJa: '花序のベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add botanical organic elements',
+                instructionJa: '植物的有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the floral pattern',
+                instructionJa: '花のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/cyme.jpg',
+        createdAt: '2024-03-05',
+        tags: ['official', 'floral', 'botanical', 'organic'],
+    },
+    {
+        id: '58',
+        name: 'Dyon',
+        nameJa: 'ダイオン',
+        slug: 'dyon',
+        description: 'An official Zentangle pattern with distinctive organic forms that create unique visual interest.',
+        descriptionJa: 'ユニークな視覚的興味を作り出す特徴的な有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw distinctive organic shapes',
+                instructionJa: '特徴的な有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add unique pattern elements',
+                instructionJa: 'ユニークなパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build the distinctive pattern',
+                instructionJa: '特徴的なパターンを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/dyon.jpg',
+        createdAt: '2024-03-06',
+        tags: ['official', 'distinctive', 'organic', 'unique'],
+    },
+    {
+        id: '59',
+        name: 'Enyshou',
+        nameJa: 'エニシュー',
+        slug: 'enyshou',
+        description: 'An official Zentangle pattern featuring wave-like organic forms that create flowing movements.',
+        descriptionJa: '流れる動きを作る波のような有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw wave-like organic forms',
+                instructionJa: '波のような有機的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing movement elements',
+                instructionJa: '流れる動きの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the wave pattern',
+                instructionJa: '波のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/enyshou.jpg',
+        createdAt: '2024-03-07',
+        tags: ['official', 'waves', 'organic', 'flowing'],
+    },
+    {
+        id: '60',
+        name: 'Evoke',
+        nameJa: 'イヴォーク',
+        slug: 'evoke',
+        description: 'An official Zentangle pattern with organic forms designed to evoke emotions and visual interest.',
+        descriptionJa: '感情と視覚的興味を呼び起こすようにデザインされた有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw emotive organic shapes',
+                instructionJa: '感情的な有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add evocative elements',
+                instructionJa: '呼び起こす要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the expressive pattern',
+                instructionJa: '表現力豊かなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/evoke.jpg',
+        createdAt: '2024-03-08',
+        tags: ['official', 'emotive', 'organic', 'expressive'],
+    },
+
+    // === BATCH 7: DISTINCTIVE FEATURE PATTERNS (特徴的パターン) ===
+    {
+        id: '61',
+        name: 'Eye-Wa',
+        nameJa: 'アイワ',
+        slug: 'eye-wa',
+        description: 'An official Zentangle pattern featuring eye-like organic forms that create visual focal points.',
+        descriptionJa: '視覚的な焦点を作る目のような有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw eye-like organic shapes',
+                instructionJa: '目のような有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add focal point elements',
+                instructionJa: '焦点要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the eye pattern',
+                instructionJa: '目のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/eye-wa.jpg',
+        createdAt: '2024-03-09',
+        tags: ['official', 'eye', 'organic', 'focal'],
+    },
+    {
+        id: '62',
+        name: 'Façade',
+        nameJa: 'ファサード',
+        slug: 'facade',
+        description: 'An official Zentangle pattern inspired by architectural facades, featuring geometric structural elements.',
+        descriptionJa: '建築的ファサードにインスパイアされた公式ゼンタングルパターンで、幾何学的構造要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw architectural geometric base',
+                instructionJa: '建築的幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add structural facade elements',
+                instructionJa: '構造的ファサード要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the architectural pattern',
+                instructionJa: '建築的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/facade.jpg',
+        createdAt: '2024-03-10',
+        tags: ['official', 'architectural', 'geometric', 'structural'],
+    },
+    {
+        id: '63',
+        name: 'Fengle',
+        nameJa: 'フェングル',
+        slug: 'fengle',
+        description: 'An official Zentangle pattern with complex organic forms that create intricate visual patterns.',
+        descriptionJa: '複雑な視覚的パターンを作る複雑な有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex organic base forms',
+                instructionJa: '複雑な有機的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate pattern elements',
+                instructionJa: '複雑なパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build complex design',
+                instructionJa: '複雑なデザインを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/fengle.jpg',
+        youtubeVideoId: 'FlxlyG6j6f4',
+        createdAt: '2024-03-11',
+        tags: ['official', 'complex', 'organic', 'intricate'],
+    },
+    {
+        id: '64',
+        name: 'Fife',
+        nameJa: 'ファイフ',
+        slug: 'fife',
+        description: 'An official Zentangle pattern inspired by musical instruments, featuring rhythmic geometric forms.',
+        descriptionJa: '楽器にインスパイアされた公式ゼンタングルパターンで、リズミカルな幾何学的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw rhythmic geometric shapes',
+                instructionJa: 'リズミカルな幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add musical pattern elements',
+                instructionJa: '音楽的パターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the rhythmic pattern',
+                instructionJa: 'リズミカルなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/fife.jpg',
+        createdAt: '2024-03-12',
+        tags: ['official', 'musical', 'geometric', 'rhythmic'],
+    },
+    {
+        id: '65',
+        name: 'Finery',
+        nameJa: 'ファイナリー',
+        slug: 'finery',
+        description: 'An official Zentangle pattern featuring ornate decorative elements that create elegant visual effects.',
+        descriptionJa: 'エレガントな視覚効果を作る華やかな装飾要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw ornate decorative base',
+                instructionJa: '華やかな装飾的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add elegant decorative elements',
+                instructionJa: 'エレガントな装飾要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the ornate pattern',
+                instructionJa: '華やかなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/finery.jpg',
+        createdAt: '2024-03-13',
+        tags: ['official', 'ornate', 'decorative', 'elegant'],
+    },
+    {
+        id: '66',
+        name: 'Floo',
+        nameJa: 'フルー',
+        slug: 'floo',
+        description: 'An official Zentangle pattern with flowing organic forms that create smooth visual movement.',
+        descriptionJa: 'スムーズな視覚的動きを作る流れる有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing smooth curves',
+                instructionJa: '流れるスムーズな曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add movement elements',
+                instructionJa: '動きの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/floo.jpg',
+        createdAt: '2024-03-14',
+        tags: ['official', 'flowing', 'smooth', 'organic'],
+    },
+    {
+        id: '67',
+        name: 'Florz',
+        nameJa: 'フローズ',
+        slug: 'florz',
+        description: 'An official Zentangle pattern featuring floral organic forms with delicate petal-like elements.',
+        descriptionJa: '繊細な花びらのような要素を持つ花の有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'floral', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw floral petal shapes',
+                instructionJa: '花の花びらの形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add delicate floral elements',
+                instructionJa: '繊細な花の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the floral pattern',
+                instructionJa: '花のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/florz.jpg',
+        createdAt: '2024-03-15',
+        tags: ['official', 'floral', 'petals', 'delicate'],
+    },
+    {
+        id: '68',
+        name: 'Flukes',
+        nameJa: 'フルークス',
+        slug: 'flukes',
+        description: 'An official Zentangle pattern featuring organic forms that create serendipitous visual effects.',
+        descriptionJa: '偶然の視覚効果を作る有機的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw serendipitous organic shapes',
+                instructionJa: '偶然の有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add spontaneous elements',
+                instructionJa: '自発的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the organic pattern',
+                instructionJa: '有機的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/flukes.jpg',
+        youtubeVideoId: 'NwI3h9hvCtE',
+        createdAt: '2024-03-16',
+        tags: ['official', 'serendipitous', 'organic', 'spontaneous'],
+    },
+    {
+        id: '69',
+        name: 'Fracas',
+        nameJa: 'フラカス',
+        slug: 'fracas',
+        description: 'An official Zentangle pattern with fragmented geometric forms that create dynamic visual energy.',
+        descriptionJa: 'ダイナミックな視覚的エネルギーを作る断片化された幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw fragmented geometric shapes',
+                instructionJa: '断片化された幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dynamic energy elements',
+                instructionJa: 'ダイナミックなエネルギー要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the energetic pattern',
+                instructionJa: 'エネルギッシュなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/fracas.jpg',
+        createdAt: '2024-03-17',
+        tags: ['official', 'fragmented', 'geometric', 'dynamic'],
+    },
+    {
+        id: '70',
+        name: 'Frondous',
+        nameJa: 'フロンダス',
+        slug: 'frondous',
+        description: 'An official Zentangle pattern inspired by fern fronds, featuring leaf-like organic botanical forms.',
+        descriptionJa: 'シダの葉にインスパイアされた公式ゼンタングルパターンで、葉のような有機的植物形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw fern-like frond shapes',
+                instructionJa: 'シダのような葉の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add botanical leaf elements',
+                instructionJa: '植物的葉の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the botanical pattern',
+                instructionJa: '植物的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/frondous.jpg',
+        createdAt: '2024-03-18',
+        tags: ['official', 'fern', 'botanical', 'leaf'],
+    },
+
+    // === BATCH 8: INTERMEDIATE TO ADVANCED PATTERNS (中級〜上級パターン) ===
+    {
+        id: '71',
+        name: 'Glace',
+        nameJa: 'グレース',
+        slug: 'glace',
+        description: 'An official Zentangle pattern inspired by ice and glacial forms, featuring smooth organic crystalline elements.',
+        descriptionJa: '氷と氷河の形にインスパイアされた公式ゼンタングルパターンで、滑らかな有機的結晶要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw ice-like crystalline shapes',
+                instructionJa: '氷のような結晶の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add glacial smooth elements',
+                instructionJa: '氷河の滑らかな要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the icy pattern',
+                instructionJa: '氷のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/glace.jpg',
+        createdAt: '2024-03-19',
+        tags: ['official', 'ice', 'crystalline', 'organic'],
+    },
+    {
+        id: '72',
+        name: 'Gneiss',
+        nameJa: 'ナイス',
+        slug: 'gneiss',
+        description: 'An official Zentangle pattern inspired by metamorphic rock formations, featuring layered geometric structures.',
+        descriptionJa: '変成岩の形成にインスパイアされた公式ゼンタングルパターンで、層状の幾何学的構造が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw layered rock-like shapes',
+                instructionJa: '層状の岩のような形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add geological geometric elements',
+                instructionJa: '地質学的幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the rock pattern',
+                instructionJa: '岩のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/gneiss.jpg',
+        createdAt: '2024-03-20',
+        tags: ['official', 'rock', 'geological', 'layered'],
+    },
+    {
+        id: '73',
+        name: 'Gust',
+        nameJa: 'ガスト',
+        slug: 'gust',
+        description: 'An official Zentangle pattern inspired by wind and gusts, featuring flowing organic movement patterns.',
+        descriptionJa: '風と突風にインスパイアされた公式ゼンタングルパターンで、流れる有機的動きのパターンが特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw wind-like flowing curves',
+                instructionJa: '風のような流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add gust movement elements',
+                instructionJa: '突風の動きの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the windswept pattern',
+                instructionJa: '風に吹かれたパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/gust.jpg',
+        createdAt: '2024-03-21',
+        tags: ['official', 'wind', 'flowing', 'movement'],
+    },
+    {
+        id: '74',
+        name: 'Hazen',
+        nameJa: 'ヘイゼン',
+        slug: 'hazen',
+        description: 'An official Zentangle pattern with complex geometric forms that create sophisticated interlocking patterns.',
+        descriptionJa: '洗練された組み合わせパターンを作る複雑な幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex interlocking shapes',
+                instructionJa: '複雑な組み合わせ形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add sophisticated geometric elements',
+                instructionJa: '洗練された幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the intricate pattern',
+                instructionJa: '複雑なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/hazen.jpg',
+        createdAt: '2024-03-22',
+        tags: ['official', 'complex', 'geometric', 'interlocking'],
+    },
+    {
+        id: '75',
+        name: 'Hibred',
+        nameJa: 'ハイブレッド',
+        slug: 'hibred',
+        description: 'An official Zentangle pattern combining organic and geometric elements, creating hybrid visual effects.',
+        descriptionJa: '有機的要素と幾何学的要素を組み合わせた公式ゼンタングルパターンで、ハイブリッド視覚効果を作り出します。',
+        difficulty: 'intermediate',
+        category: ['official', 'hybrid'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw hybrid base combining organic and geometric',
+                instructionJa: '有機的と幾何学的を組み合わせたハイブリッドベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add mixed pattern elements',
+                instructionJa: '混合パターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the hybrid pattern',
+                instructionJa: 'ハイブリッドパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/hibred.jpg',
+        createdAt: '2024-03-23',
+        tags: ['official', 'hybrid', 'mixed', 'organic-geometric'],
+    },
+    {
+        id: '76',
+        name: 'Hollis',
+        nameJa: 'ホリス',
+        slug: 'hollis',
+        description: 'An official Zentangle pattern related to Hollibaugh, featuring geometric weaving and interlocking elements.',
+        descriptionJa: 'Hollibaughに関連する公式ゼンタングルパターンで、幾何学的織りと組み合わせ要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'weaving'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw geometric weaving base',
+                instructionJa: '幾何学的織りのベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add interlocking weave elements',
+                instructionJa: '組み合わせ織り要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the woven pattern',
+                instructionJa: '織りパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/hollis.jpg',
+        youtubeVideoId: 'R8qk3Bxyo6I',
+        createdAt: '2024-03-24',
+        tags: ['official', 'weaving', 'geometric', 'interlocking'],
+    },
+    {
+        id: '77',
+        name: 'Hurry',
+        nameJa: 'ハリー',
+        slug: 'hurry',
+        description: 'An official Zentangle pattern designed to be drawn quickly, featuring simple fast-flowing elements.',
+        descriptionJa: '素早く描けるようにデザインされた公式ゼンタングルパターンで、シンプルで速く流れる要素が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw quick simple lines',
+                instructionJa: '素早くシンプルな線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add fast flowing elements',
+                instructionJa: '速く流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the quick pattern',
+                instructionJa: '素早くパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/hurry.jpg',
+        createdAt: '2024-03-25',
+        tags: ['official', 'quick', 'simple', 'fast', 'beginner-friendly'],
+    },
+    {
+        id: '78',
+        name: 'Ibex',
+        nameJa: 'アイベックス',
+        slug: 'ibex',
+        description: 'An official Zentangle pattern inspired by ibex horns, featuring curved organic spiral-like forms.',
+        descriptionJa: 'アイベックスの角にインスパイアされた公式ゼンタングルパターンで、曲線の有機的螺旋状の形が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw horn-like curved spirals',
+                instructionJa: '角のような曲線の螺旋を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic spiral elements',
+                instructionJa: '有機的螺旋要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the horn pattern',
+                instructionJa: '角のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ibex.jpg',
+        createdAt: '2024-03-26',
+        tags: ['official', 'horns', 'spirals', 'organic'],
+    },
+    {
+        id: '79',
+        name: 'Icanthis',
+        nameJa: 'アイキャンシス',
+        slug: 'icanthis',
+        description: 'An official Zentangle pattern with complex organic forms that create intricate flowing patterns.',
+        descriptionJa: '複雑な流れるパターンを作る複雑な有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex organic base forms',
+                instructionJa: '複雑な有機的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate flowing elements',
+                instructionJa: '複雑な流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the complex pattern',
+                instructionJa: '複雑なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/icanthis.jpg',
+        createdAt: '2024-03-27',
+        tags: ['official', 'complex', 'organic', 'intricate'],
+    },
+    {
+        id: '80',
+        name: 'Isochor',
+        nameJa: 'アイソコア',
+        slug: 'isochor',
+        description: 'An official Zentangle pattern featuring isometric geometric forms that create dimensional effects.',
+        descriptionJa: '立体効果を作る等角投影の幾何学的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw isometric geometric shapes',
+                instructionJa: '等角投影の幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dimensional isometric elements',
+                instructionJa: '立体的等角投影要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the isometric pattern',
+                instructionJa: '等角投影パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/isochor.jpg',
+        createdAt: '2024-03-28',
+        tags: ['official', 'isometric', 'geometric', 'dimensional'],
+    },
+
+    // === BATCH 9: DIVERSE PATTERNS (多様性パターン) ===
+    {
+        id: '81',
+        name: 'IX',
+        nameJa: 'アイエックス',
+        slug: 'ix',
+        description: 'An official Zentangle pattern featuring X-shaped geometric forms that create crossing patterns.',
+        descriptionJa: 'X字型の幾何学的形態が交差パターンを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw X-shaped crossing lines',
+                instructionJa: 'X字型の交差する線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add geometric crossing elements',
+                instructionJa: '幾何学的交差要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the X pattern',
+                instructionJa: 'X字パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ix.jpg',
+        createdAt: '2024-03-29',
+        tags: ['official', 'X-shaped', 'geometric', 'crossing'],
+    },
+    {
+        id: '82',
+        name: 'Juke',
+        nameJa: 'ジューク',
+        slug: 'juke',
+        description: 'An official Zentangle pattern with rhythmic geometric forms inspired by music and movement.',
+        descriptionJa: '音楽と動きにインスパイアされたリズミカルな幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw rhythmic geometric shapes',
+                instructionJa: 'リズミカルな幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add musical movement elements',
+                instructionJa: '音楽的動き要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the rhythmic pattern',
+                instructionJa: 'リズミカルなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/juke.jpg',
+        youtubeVideoId: '7jmElfvYytw',
+        createdAt: '2024-03-30',
+        tags: ['official', 'rhythmic', 'geometric', 'musical'],
+    },
+    {
+        id: '83',
+        name: 'Knase',
+        nameJa: 'ネイス',
+        slug: 'knase',
+        description: 'An official Zentangle pattern featuring knot-like organic forms that create interwoven effects.',
+        descriptionJa: '結び目のような有機的形態が織り交ぜ効果を作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw knot-like organic shapes',
+                instructionJa: '結び目のような有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add interwoven knot elements',
+                instructionJa: '織り交ぜ結び目要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the knot pattern',
+                instructionJa: '結び目パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/knase.jpg',
+        createdAt: '2024-03-31',
+        tags: ['official', 'knots', 'organic', 'interwoven'],
+    },
+    {
+        id: '84',
+        name: 'Marasu',
+        nameJa: 'マラス',
+        slug: 'marasu',
+        description: 'An official Zentangle pattern with complex organic forms that create intricate visual patterns.',
+        descriptionJa: '複雑な視覚パターンを作る複雑な有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex organic base forms',
+                instructionJa: '複雑な有機的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate visual elements',
+                instructionJa: '複雑な視覚要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the complex pattern',
+                instructionJa: '複雑なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/marasu.jpg',
+        youtubeVideoId: '7ArpkaQwL2w',
+        createdAt: '2024-04-01',
+        tags: ['official', 'complex', 'organic', 'intricate'],
+    },
+    {
+        id: '85',
+        name: 'Meer',
+        nameJa: 'ミアー',
+        slug: 'meer',
+        description: 'An official Zentangle pattern inspired by the sea, featuring flowing organic water-like forms.',
+        descriptionJa: '海にインスパイアされた公式ゼンタングルパターンで、流れる有機的水のような形が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw sea-like flowing curves',
+                instructionJa: '海のような流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add water-like organic elements',
+                instructionJa: '水のような有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the oceanic pattern',
+                instructionJa: '海洋的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/meer.jpg',
+        youtubeVideoId: 'UfD4q0XCiSA',
+        createdAt: '2024-04-02',
+        tags: ['official', 'sea', 'water', 'flowing'],
+    },
+    {
+        id: '86',
+        name: 'Munchin',
+        nameJa: 'マンチン',
+        slug: 'munchin',
+        description: 'An official Zentangle pattern with simple playful forms that are easy and fun to draw.',
+        descriptionJa: '簡単で楽しく描けるシンプルで遊び心のある形を持つ公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple playful shapes',
+                instructionJa: 'シンプルで遊び心のある形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add fun simple elements',
+                instructionJa: '楽しいシンプルな要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the playful pattern',
+                instructionJa: '遊び心のあるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/munchin.jpg',
+        youtubeVideoId: '0EK-HtYGaeE',
+        createdAt: '2024-04-03',
+        tags: ['official', 'playful', 'simple', 'fun', 'beginner-friendly'],
+    },
+    {
+        id: '87',
+        name: 'Neuron',
+        nameJa: 'ニューロン',
+        slug: 'neuron',
+        description: 'An official Zentangle pattern inspired by neural networks, featuring branching organic forms.',
+        descriptionJa: 'ニューラルネットワークにインスパイアされた公式ゼンタングルパターンで、分岐する有機的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw neural branching structures',
+                instructionJa: 'ニューラルな分岐構造を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add network connection elements',
+                instructionJa: 'ネットワーク接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the neural pattern',
+                instructionJa: 'ニューラルパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/neuron.jpg',
+        createdAt: '2024-04-04',
+        tags: ['official', 'neural', 'branching', 'organic'],
+    },
+    {
+        id: '88',
+        name: 'Nipa',
+        nameJa: 'ニーパ',
+        slug: 'nipa',
+        description: 'An official Zentangle pattern inspired by palm fronds, featuring leaf-like botanical organic forms.',
+        descriptionJa: 'ヤシの葉にインスパイアされた公式ゼンタングルパターンで、葉のような植物的有機形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw palm frond leaf shapes',
+                instructionJa: 'ヤシの葉の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add botanical leaf elements',
+                instructionJa: '植物的葉の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the palm pattern',
+                instructionJa: 'ヤシのパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/nipa.jpg',
+        createdAt: '2024-04-05',
+        tags: ['official', 'palm', 'botanical', 'leaf'],
+    },
+    {
+        id: '89',
+        name: "N'Zeppel",
+        nameJa: 'エヌゼッペル',
+        slug: 'nzeppel',
+        description: 'An official Zentangle pattern with geometric forms inspired by airships and flight.',
+        descriptionJa: '飛行船と飛行にインスパイアされた幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw airship-like geometric shapes',
+                instructionJa: '飛行船のような幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flight-inspired elements',
+                instructionJa: '飛行にインスパイアされた要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the airship pattern',
+                instructionJa: '飛行船パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/nzeppel.jpg',
+        youtubeVideoId: 'R6JPbQKLcWE',
+        createdAt: '2024-04-06',
+        tags: ['official', 'airship', 'geometric', 'flight'],
+    },
+    {
+        id: '90',
+        name: 'Onamato',
+        nameJa: 'オナマト',
+        slug: 'onamato',
+        description: 'An official Zentangle pattern with onomatopoeia-inspired organic forms that suggest sound and movement.',
+        descriptionJa: '音と動きを示唆する擬音語にインスパイアされた有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw sound-inspired organic shapes',
+                instructionJa: '音にインスパイアされた有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add movement suggestion elements',
+                instructionJa: '動きを示唆する要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the onomatopoeia pattern',
+                instructionJa: '擬音語パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/onamato.jpg',
+        youtubeVideoId: 'AfWr3SehLrA',
+        createdAt: '2024-04-07',
+        tags: ['official', 'onomatopoeia', 'sound', 'organic'],
+    },
+
+    // === BATCH 10: MILESTONE 100 PATTERNS (100パターン達成!) ===
+    {
+        id: '91',
+        name: 'Opus',
+        nameJa: 'オーパス',
+        slug: 'opus',
+        description: 'An official Zentangle pattern with complex advanced forms that create masterpiece-like intricate patterns.',
+        descriptionJa: '傑作のような複雑なパターンを作る複雑な上級形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'advanced',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex masterpiece base forms',
+                instructionJa: '複雑な傑作ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate advanced elements',
+                instructionJa: '複雑な上級要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the masterpiece pattern',
+                instructionJa: '傑作パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/opus.jpg',
+        youtubeVideoId: '8hR0SfyhfXw',
+        createdAt: '2024-04-08',
+        tags: ['official', 'complex', 'advanced', 'masterpiece'],
+    },
+    {
+        id: '92',
+        name: 'Paizel',
+        nameJa: 'ペイゼル',
+        slug: 'paizel',
+        description: 'An official Zentangle pattern with paisley-inspired geometric forms that create decorative patterns.',
+        descriptionJa: 'ペイズリーにインスパイアされた幾何学的形態が装飾的パターンを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw paisley-inspired shapes',
+                instructionJa: 'ペイズリーにインスパイアされた形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add decorative geometric elements',
+                instructionJa: '装飾的幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the paisley pattern',
+                instructionJa: 'ペイズリーパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/paizel.jpg',
+        createdAt: '2024-04-09',
+        tags: ['official', 'paisley', 'geometric', 'decorative'],
+    },
+    {
+        id: '93',
+        name: 'Pearlz',
+        nameJa: 'パールズ',
+        slug: 'pearlz',
+        description: 'An official Zentangle pattern featuring pearl-like simple rounded forms that are perfect for beginners.',
+        descriptionJa: '真珠のようなシンプルな丸い形が特徴の公式ゼンタングルパターンで、初心者に最適です。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw pearl-like rounded shapes',
+                instructionJa: '真珠のような丸い形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add simple pearl elements',
+                instructionJa: 'シンプルな真珠要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the pearl pattern',
+                instructionJa: '真珠パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/pearlz.jpg',
+        createdAt: '2024-04-10',
+        tags: ['official', 'pearls', 'rounded', 'simple', 'beginner-friendly'],
+    },
+    {
+        id: '94',
+        name: 'Pokeleaf',
+        nameJa: 'ポークリーフ',
+        slug: 'pokeleaf',
+        description: 'An official Zentangle pattern featuring poked leaf-like organic forms that are simple and natural.',
+        descriptionJa: '穴の開いた葉のような有機的形態が特徴でシンプルで自然な公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw leaf-like organic shapes',
+                instructionJa: '葉のような有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add poked hole elements',
+                instructionJa: '穴の開いた要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the poked leaf pattern',
+                instructionJa: '穴の開いた葉のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/pokeleaf.jpg',
+        youtubeVideoId: 'eq4yhEFpOZE',
+        createdAt: '2024-04-11',
+        tags: ['official', 'leaf', 'organic', 'simple', 'beginner-friendly'],
+    },
+    {
+        id: '95',
+        name: 'Quandary',
+        nameJa: 'クアンダリー',
+        slug: 'quandary',
+        description: 'An official Zentangle pattern with complex forms that express dilemma and create intricate patterns.',
+        descriptionJa: 'ジレンマを表現し複雑なパターンを作る複雑な形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw dilemma-expressing forms',
+                instructionJa: 'ジレンマを表現する形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex intricate elements',
+                instructionJa: '複雑で入り組んだ要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the complex pattern',
+                instructionJa: '複雑なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/quandary.jpg',
+        youtubeVideoId: 'Cawcesnm-sk',
+        createdAt: '2024-04-12',
+        tags: ['official', 'complex', 'dilemma', 'intricate'],
+    },
+    {
+        id: '96',
+        name: 'Quib',
+        nameJa: 'クイブ',
+        slug: 'quib',
+        description: 'An official Zentangle pattern with simple quick forms that are easy and fun for beginners.',
+        descriptionJa: 'シンプルで素早い形が特徴で初心者にとって簡単で楽しい公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple quick shapes',
+                instructionJa: 'シンプルで素早い形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add easy fun elements',
+                instructionJa: '簡単で楽しい要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the quick pattern',
+                instructionJa: '素早くパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/quib.jpg',
+        createdAt: '2024-04-13',
+        tags: ['official', 'quick', 'simple', 'easy', 'beginner-friendly'],
+    },
+    {
+        id: '97',
+        name: 'Rain',
+        nameJa: 'レイン',
+        slug: 'rain',
+        description: 'An official Zentangle pattern featuring rain-like simple flowing forms that are perfect for beginners.',
+        descriptionJa: '雨のようなシンプルな流れる形が特徴で初心者に最適な公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'simple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw rain-like falling lines',
+                instructionJa: '雨のような降る線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add simple rain drop elements',
+                instructionJa: 'シンプルな雨粒要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the rain pattern',
+                instructionJa: '雨のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/rain.jpg',
+        youtubeVideoId: 'CBnIeA7vw_A',
+        createdAt: '2024-04-14',
+        tags: ['official', 'rain', 'water', 'simple', 'beginner-friendly'],
+    },
+    {
+        id: '98',
+        name: 'Ratoon',
+        nameJa: 'ラトゥーン',
+        slug: 'ratoon',
+        description: 'An official Zentangle pattern inspired by new plant shoots, featuring organic sprouting forms.',
+        descriptionJa: '新しい植物の芽にインスパイアされた公式ゼンタングルパターンで、有機的発芽形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw sprouting shoot shapes',
+                instructionJa: '発芽する芽の形を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add new growth organic elements',
+                instructionJa: '新しい成長の有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the sprouting pattern',
+                instructionJa: '発芽パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ratoon.jpg',
+        youtubeVideoId: 'n3kI8TeVK2g',
+        createdAt: '2024-04-15',
+        tags: ['official', 'sprouts', 'growth', 'botanical'],
+    },
+    {
+        id: '99',
+        name: 'Ravel',
+        nameJa: 'ラベル',
+        slug: 'ravel',
+        description: 'An official Zentangle pattern with entangled complex forms that create intricate woven patterns.',
+        descriptionJa: 'もつれた複雑な形態が複雑な織りパターンを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'weaving'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw entangled woven forms',
+                instructionJa: 'もつれた織られた形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex weaving elements',
+                instructionJa: '複雑な織り要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the entangled pattern',
+                instructionJa: 'もつれたパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ravel.jpg',
+        youtubeVideoId: 'c_Jvn7W3ydQ',
+        createdAt: '2024-04-16',
+        tags: ['official', 'entangled', 'woven', 'complex'],
+    },
+    {
+        id: '100',
+        name: 'Shattuck',
+        nameJa: 'シャタック',
+        slug: 'shattuck',
+        description: 'An official Zentangle pattern with distinctive geometric forms that create striking visual patterns. Pattern #100 milestone!',
+        descriptionJa: '印象的な視覚パターンを作る特徴的な幾何学的形態を持つ公式ゼンタングルパターン。記念すべき100番目のパターン！',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw distinctive geometric shapes',
+                instructionJa: '特徴的な幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add striking visual elements',
+                instructionJa: '印象的な視覚要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete the 100th pattern!',
+                instructionJa: '100番目のパターンを完成させます！',
+            },
+        ],
+        imageUrl: '/images/patterns/shattuck.jpg',
+        youtubeVideoId: 'isyTrVswcMw',
+        createdAt: '2024-04-17',
+        tags: ['official', 'geometric', 'distinctive', 'milestone-100'],
+    },
+
+    // === BATCH 11: BASIC & BEGINNER PATTERNS (基本・初心者向けパターン) ===
+    {
+        id: '101',
+        name: 'Vega',
+        nameJa: 'ベガ',
+        slug: 'vega',
+        description: 'An official foundational Zentangle pattern from the original Basic 8. Vega features simple geometric shapes that create beautiful radiating patterns.',
+        descriptionJa: '基本8タングルの1つである公式ゼンタングルパターン。シンプルな幾何学的形状で美しい放射状パターンを作ります。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a simple curved line',
+                instructionJa: 'シンプルな曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add radiating elements',
+                instructionJa: '放射状の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with geometric details',
+                instructionJa: '幾何学的なディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/vega.jpg',
+        youtubeVideoId: 'rpzijwCL0MI',
+        createdAt: '2024-04-18',
+        tags: ['official', 'foundational', 'geometric', 'beginner-friendly', 'basic-8'],
+    },
+    {
+        id: '102',
+        name: 'Snail',
+        nameJa: 'スネイル',
+        slug: 'snail',
+        description: 'A popular official Zentangle pattern inspired by snail shells. Features organic spiral forms that are both simple and elegant.',
+        descriptionJa: 'カタツムリの殻にインスパイアされた人気の公式ゼンタングルパターン。シンプルで優雅な有機的螺旋形が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'spiral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw a spiral starting from the center',
+                instructionJa: '中心から始まる螺旋を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic shell-like curves',
+                instructionJa: '貝殻のような有機的曲線を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with snail shell details',
+                instructionJa: 'カタツムリの殻のディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/snail.jpg',
+        youtubeVideoId: 'Iu0CodfZ1IA',
+        createdAt: '2024-04-19',
+        tags: ['official', 'organic', 'spiral', 'beginner-friendly', 'popular'],
+    },
+    {
+        id: '103',
+        name: 'Sez',
+        nameJa: 'セズ',
+        slug: 'sez',
+        description: 'An official Zentangle pattern featuring simple geometric elements that create visual rhythm and flow.',
+        descriptionJa: 'シンプルな幾何学的要素で視覚的リズムと流れを作る公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple geometric base shapes',
+                instructionJa: 'シンプルな幾何学的ベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add rhythmic pattern elements',
+                instructionJa: 'リズミカルなパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Build visual flow',
+                instructionJa: '視覚的な流れを構築します',
+            },
+        ],
+        imageUrl: '/images/patterns/sez.jpg',
+        youtubeVideoId: '9rjeQCXPa2g',
+        createdAt: '2024-04-20',
+        tags: ['official', 'geometric', 'beginner-friendly', 'rhythmic'],
+    },
+    {
+        id: '104',
+        name: 'Zip',
+        nameJa: 'ジップ',
+        slug: 'zip',
+        description: 'An official Zentangle pattern with simple linear elements that create dynamic movement and energy.',
+        descriptionJa: 'シンプルな線形要素でダイナミックな動きとエネルギーを作る公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'linear'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw parallel lines',
+                instructionJa: '平行線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add zipper-like elements',
+                instructionJa: 'ジッパーのような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create dynamic movement',
+                instructionJa: 'ダイナミックな動きを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/zip.jpg',
+        youtubeVideoId: 'MFDlRFTd738',
+        createdAt: '2024-04-21',
+        tags: ['official', 'linear', 'beginner-friendly', 'dynamic'],
+    },
+    {
+        id: '105',
+        name: 'Sprinkle',
+        nameJa: 'スプリンクル',
+        slug: 'sprinkle',
+        description: 'A delightful official Zentangle pattern featuring small dots and organic elements that create a sprinkled effect.',
+        descriptionJa: '小さなドットと有機的要素で振りかけたような効果を作る楽しい公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'dots'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw small dots in a scattered pattern',
+                instructionJa: '散らばったパターンで小さなドットを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add sprinkle-like organic elements',
+                instructionJa: '振りかけのような有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create light, airy feeling',
+                instructionJa: '軽く風通しの良い雰囲気を作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/sprinkle.jpg',
+        youtubeVideoId: 'muH_M7Uznug',
+        createdAt: '2024-04-22',
+        tags: ['official', 'dots', 'organic', 'beginner-friendly', 'light'],
+    },
+
+    // === BATCH 12: ORGANIC PATTERNS (有機的パターン) ===
+    {
+        id: '106',
+        name: 'Nekton',
+        nameJa: 'ネクトン',
+        slug: 'nekton',
+        description: 'An official Zentangle pattern inspired by marine life. Features flowing organic forms reminiscent of sea creatures.',
+        descriptionJa: '海洋生物にインスパイアされた公式ゼンタングルパターン。海の生き物を思わせる流れる有機的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'marine'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing marine-inspired curves',
+                instructionJa: '海にインスパイアされた流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic sea creature elements',
+                instructionJa: '有機的な海の生き物要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete with flowing details',
+                instructionJa: '流れるディテールで完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/nekton.jpg',
+        youtubeVideoId: '1gZxbZ1SEbM',
+        createdAt: '2024-04-23',
+        tags: ['official', 'organic', 'marine', 'flowing'],
+    },
+    {
+        id: '107',
+        name: 'Auric',
+        nameJa: 'オーリク',
+        slug: 'auric',
+        description: 'An official Zentangle pattern with graceful flowing organic forms that create an aura-like effect.',
+        descriptionJa: 'オーラのような効果を作る優雅な流れる有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw graceful flowing curves',
+                instructionJa: '優雅な流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add aura-like organic elements',
+                instructionJa: 'オーラのような有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create flowing ethereal effect',
+                instructionJa: '流れる幻想的な効果を作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/auric.jpg',
+        youtubeVideoId: '0f84youdv94',
+        createdAt: '2024-04-24',
+        tags: ['official', 'organic', 'flowing', 'graceful'],
+    },
+    {
+        id: '109',
+        name: 'Squid',
+        nameJa: 'スクイッド',
+        slug: 'squid',
+        description: 'An official Zentangle pattern inspired by squid tentacles. Features flowing organic forms with dynamic movement.',
+        descriptionJa: 'イカの触手にインスパイアされた公式ゼンタングルパターン。ダイナミックな動きを持つ流れる有機的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'marine'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing tentacle-like curves',
+                instructionJa: '触手のような流れる曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add squid-inspired organic elements',
+                instructionJa: 'イカにインスパイアされた有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create dynamic underwater movement',
+                instructionJa: 'ダイナミックな水中の動きを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/squid.jpg',
+        youtubeVideoId: 'dCzn28wIHyk',
+        createdAt: '2024-04-26',
+        tags: ['official', 'organic', 'marine', 'dynamic'],
+    },
+    {
+        id: '110',
+        name: 'Toodlez',
+        nameJa: 'トゥードゥルズ',
+        slug: 'toodlez',
+        description: 'A playful official Zentangle pattern with free-flowing organic doodle-like elements that encourage creativity.',
+        descriptionJa: '創造性を促す自由に流れる有機的落書きのような要素を持つ遊び心のある公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'playful'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw free-flowing doodle shapes',
+                instructionJa: '自由に流れる落書き形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add playful organic elements',
+                instructionJa: '遊び心のある有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create fun, spontaneous pattern',
+                instructionJa: '楽しく自発的なパターンを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/toodlez.jpg',
+        youtubeVideoId: 'giDVNVZRmOg',
+        createdAt: '2024-04-27',
+        tags: ['official', 'organic', 'playful', 'beginner-friendly', 'fun'],
+    },
+
+    // === BATCH 13: GEOMETRIC PATTERNS (幾何学的パターン) ===
+    {
+        id: '111',
+        name: 'Zenith',
+        nameJa: 'ゼニス',
+        slug: 'zenith',
+        description: 'An official Zentangle pattern with complex geometric forms that create stunning angular patterns reaching toward the zenith.',
+        descriptionJa: '頂点に向かって伸びる見事な角度のあるパターンを作る複雑な幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw angular geometric base forms',
+                instructionJa: '角度のある幾何学的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex reaching elements',
+                instructionJa: '複雑な伸びる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create upward zenith effect',
+                instructionJa: '上向きの頂点効果を作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/zenith.jpg',
+        youtubeVideoId: 'A6uJV1qfxP8',
+        createdAt: '2024-04-28',
+        tags: ['official', 'geometric', 'angular', 'complex'],
+    },
+    {
+        id: '112',
+        name: 'Drawrings',
+        nameJa: 'ドローイングス',
+        slug: 'drawrings',
+        description: 'An official Zentangle pattern featuring circular geometric forms that create concentric ring patterns.',
+        descriptionJa: '同心円状のリングパターンを作る円形の幾何学的形態が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'circular'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw concentric circular forms',
+                instructionJa: '同心円状の形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add ring-like geometric elements',
+                instructionJa: 'リングのような幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete circular pattern',
+                instructionJa: '円形パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/drawrings.jpg',
+        youtubeVideoId: 'TQmDONaO7lc',
+        createdAt: '2024-04-29',
+        tags: ['official', 'geometric', 'circular', 'rings'],
+    },
+    {
+        id: '113',
+        name: 'Striping',
+        nameJa: 'ストライピング',
+        slug: 'striping',
+        description: 'An official Zentangle pattern with simple stripe elements that create rhythmic linear patterns.',
+        descriptionJa: 'リズミカルな線形パターンを作るシンプルなストライプ要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'geometric', 'linear'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw parallel stripe lines',
+                instructionJa: '平行なストライプラインを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add rhythmic striping elements',
+                instructionJa: 'リズミカルなストライプ要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create linear pattern flow',
+                instructionJa: '線形パターンの流れを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/striping.jpg',
+        youtubeVideoId: '0bpCJI4CiHY',
+        createdAt: '2024-04-30',
+        tags: ['official', 'geometric', 'linear', 'beginner-friendly', 'stripes'],
+    },
+    {
+        id: '114',
+        name: 'Tagh',
+        nameJa: 'タグ',
+        slug: 'tagh',
+        description: 'An official Zentangle pattern with tag-like geometric forms that create distinctive labeling effects.',
+        descriptionJa: '特徴的なラベル効果を作るタグのような幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw tag-like geometric shapes',
+                instructionJa: 'タグのような幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add labeling elements',
+                instructionJa: 'ラベリング要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete tag pattern',
+                instructionJa: 'タグパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/tagh.jpg',
+        youtubeVideoId: '-SWKLRpSpIY',
+        createdAt: '2024-05-01',
+        tags: ['official', 'geometric', 'tags', 'distinctive'],
+    },
+    {
+        id: '115',
+        name: 'Scarabough',
+        nameJa: 'スカラボー',
+        slug: 'scarabough',
+        description: 'An advanced official Zentangle pattern with intricate geometric forms inspired by scarab beetles.',
+        descriptionJa: 'スカラベにインスパイアされた複雑な幾何学的形態を持つ上級公式ゼンタングルパターンです。',
+        difficulty: 'advanced',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw complex scarab-inspired geometric forms',
+                instructionJa: 'スカラベにインスパイアされた複雑な幾何学的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate beetle elements',
+                instructionJa: '複雑な甲虫要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete advanced geometric pattern',
+                instructionJa: '高度な幾何学的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/scarabough.jpg',
+        youtubeVideoId: 'UdVzYNOs6Gs',
+        createdAt: '2024-05-02',
+        tags: ['official', 'geometric', 'advanced', 'intricate', 'beetle'],
+    },
+
+    // === BATCH 14: W2 FAMILY & RELATED PATTERNS (W2系・関連パターン) ===
+    {
+        id: '116',
+        name: 'Y-Full',
+        nameJa: 'ワイフォー',
+        slug: 'y-full',
+        description: 'An official Zentangle pattern related to W2. Features Y-shaped elements that create full, flowing patterns.',
+        descriptionJa: 'W2に関連した公式ゼンタングルパターン。満ちた流れるパターンを作るY字型要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'w2-family', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw Y-shaped base forms',
+                instructionJa: 'Y字型のベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add flowing W2-related elements',
+                instructionJa: '流れるW2関連要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create full flowing pattern',
+                instructionJa: '満ちた流れるパターンを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/y-full.jpg',
+        youtubeVideoId: '3CIftLR0xes',
+        createdAt: '2024-05-03',
+        tags: ['official', 'w2-family', 'flowing', 'Y-shaped'],
+    },
+    {
+        id: '117',
+        name: 'Swarm',
+        nameJa: 'スワーム',
+        slug: 'swarm',
+        description: 'An official Zentangle pattern featuring clustered organic elements that create swarming movement effects.',
+        descriptionJa: '群れるような動きの効果を作る集まった有機的要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'movement'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw clustered organic shapes',
+                instructionJa: '集まった有機的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add swarming movement elements',
+                instructionJa: '群れる動き要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create dynamic swarm effect',
+                instructionJa: 'ダイナミックな群れ効果を作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/swarm.jpg',
+        youtubeVideoId: 'KjCEuYVlYVU',
+        createdAt: '2024-05-04',
+        tags: ['official', 'organic', 'movement', 'clustered', 'dynamic'],
+    },
+    {
+        id: '118',
+        name: 'Hybred',
+        nameJa: 'ハイブリッド',
+        slug: 'hybred',
+        description: 'An official Zentangle pattern combining geometric and organic elements to create unique hybrid patterns.',
+        descriptionJa: '幾何学的要素と有機的要素を組み合わせてユニークなハイブリッドパターンを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'hybrid'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw hybrid geometric-organic base',
+                instructionJa: 'ハイブリッド幾何学-有機的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Combine geometric and organic elements',
+                instructionJa: '幾何学的要素と有機的要素を組み合わせます',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create unique hybrid pattern',
+                instructionJa: 'ユニークなハイブリッドパターンを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/hybred.jpg',
+        youtubeVideoId: 'B6HRHO5n1aw',
+        createdAt: '2024-05-05',
+        tags: ['official', 'hybrid', 'geometric-organic', 'unique'],
+    },
+    {
+        id: '119',
+        name: 'Tidings',
+        nameJa: 'タイディングス',
+        slug: 'tidings',
+        description: 'An official Zentangle pattern with geometric elements that convey messages through visual patterns.',
+        descriptionJa: '視覚的パターンを通じてメッセージを伝える幾何学的要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw geometric message-conveying forms',
+                instructionJa: 'メッセージを伝える幾何学的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add tidings elements',
+                instructionJa: 'たよりの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete message pattern',
+                instructionJa: 'メッセージパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/tidings.jpg',
+        youtubeVideoId: 'UlnlvUhIrr8',
+        createdAt: '2024-05-06',
+        tags: ['official', 'geometric', 'message', 'communication'],
+    },
+    {
+        id: '120',
+        name: 'Twing',
+        nameJa: 'ツイング',
+        slug: 'twing',
+        description: 'An official Zentangle pattern featuring twin-like paired elements that create balanced geometric patterns.',
+        descriptionJa: 'バランスの取れた幾何学的パターンを作る双子のようなペアの要素が特徴の公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'paired'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw twin paired geometric shapes',
+                instructionJa: '双子のペアの幾何学的形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add balanced twin elements',
+                instructionJa: 'バランスの取れた双子要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create symmetrical twin pattern',
+                instructionJa: '対称的な双子パターンを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/twing.jpg',
+        youtubeVideoId: 'C78v-Y-bqdE',
+        createdAt: '2024-05-07',
+        tags: ['official', 'geometric', 'paired', 'symmetrical', 'twin'],
+    },
+
+    // === BATCH 15: BASIC 8 EXTENSIONS (基本8拡張パターン) ===
+    {
+        id: '121',
+        name: 'Abrial',
+        nameJa: 'アブリアル',
+        slug: 'abrial',
+        description: 'An official foundational Zentangle pattern from the original Basic 8. Abrial features elegant flowing forms.',
+        descriptionJa: '基本8タングルの1つである公式ゼンタングルパターン。優雅な流れる形態が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw elegant flowing base curves',
+                instructionJa: '優雅な流れるベース曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add foundational flowing elements',
+                instructionJa: '基礎的な流れる要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete elegant pattern',
+                instructionJa: '優雅なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/abrial.jpg',
+        youtubeVideoId: 'Q5QewIt8VJY',
+        createdAt: '2024-05-08',
+        tags: ['official', 'foundational', 'flowing', 'beginner-friendly', 'basic-8'],
+    },
+    {
+        id: '122',
+        name: 'Nease',
+        nameJa: 'ネース',
+        slug: 'nease',
+        description: 'An official foundational Zentangle pattern from the original Basic 8. Nease creates simple yet beautiful organic forms.',
+        descriptionJa: '基本8タングルの1つである公式ゼンタングルパターン。シンプルで美しい有機的形態を作ります。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw simple organic base shapes',
+                instructionJa: 'シンプルな有機的ベース形状を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add foundational organic elements',
+                instructionJa: '基礎的な有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete simple beautiful pattern',
+                instructionJa: 'シンプルで美しいパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/nease.jpg',
+        youtubeVideoId: 'q7JrP3Ylxkg',
+        createdAt: '2024-05-09',
+        tags: ['official', 'foundational', 'organic', 'beginner-friendly', 'basic-8'],
+    },
+    {
+        id: '123',
+        name: 'Betruviuth',
+        nameJa: 'ビトゥルビウス',
+        slug: 'betruviuth',
+        description: 'An official Zentangle pattern inspired by Vitruvian proportions. Features architectural geometric elements.',
+        descriptionJa: 'ウィトルウィウス的比例にインスパイアされた公式ゼンタングルパターン。建築的幾何学的要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'architectural'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw architectural geometric base',
+                instructionJa: '建築的幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add proportional elements',
+                instructionJa: '比例的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete architectural pattern',
+                instructionJa: '建築的パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/betruviuth.jpg',
+        youtubeVideoId: '4MIntv9ortw',
+        createdAt: '2024-05-10',
+        tags: ['official', 'geometric', 'architectural', 'proportional'],
+    },
+    {
+        id: '124',
+        name: 'Rocher',
+        nameJa: 'ロカー',
+        slug: 'rocher',
+        description: 'An official Zentangle pattern inspired by rocks and stones. Features solid geometric forms with natural textures.',
+        descriptionJa: '岩石にインスパイアされた公式ゼンタングルパターン。自然なテクスチャを持つ堅固な幾何学的形態が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'textured'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw rock-like solid forms',
+                instructionJa: '岩のような堅固な形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add natural stone textures',
+                instructionJa: '自然な石のテクスチャを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete rocky pattern',
+                instructionJa: '岩石パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/rocher.jpg',
+        youtubeVideoId: 'tJsBXWyhXR4',
+        createdAt: '2024-05-11',
+        tags: ['official', 'geometric', 'rock', 'textured', 'solid'],
+    },
+    {
+        id: '125',
+        name: 'Pepper',
+        nameJa: 'ペッパー',
+        slug: 'pepper',
+        description: 'A popular official Zentangle pattern with small dot elements that create speckled, pepper-like effects.',
+        descriptionJa: '小さなドット要素で斑点のような胡椒のような効果を作る人気の公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'dots', 'textured'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw small scattered dots',
+                instructionJa: '小さな散らばったドットを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add pepper-like speckled elements',
+                instructionJa: '胡椒のような斑点要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create speckled texture',
+                instructionJa: '斑点のあるテクスチャを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/pepper.jpg',
+        youtubeVideoId: 'K9YjpOImOdk',
+        createdAt: '2024-05-12',
+        tags: ['official', 'dots', 'textured', 'beginner-friendly', 'popular'],
+    },
+
+    // === BATCH 16: SPECIAL & ADVANCED PATTERNS (特殊・上級パターン) ===
+    {
+        id: '126',
+        name: 'Mysteria',
+        nameJa: 'ミステリア',
+        slug: 'mysteria',
+        description: 'An official Zentangle pattern with mysterious intricate forms that create enigmatic visual effects.',
+        descriptionJa: '謎めいた視覚効果を作る神秘的な複雑形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'advanced',
+        category: ['official', 'complex', 'mysterious'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw mysterious intricate base forms',
+                instructionJa: '神秘的な複雑なベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add enigmatic complex elements',
+                instructionJa: '謎めいた複雑な要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete mysterious pattern',
+                instructionJa: '神秘的なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/mysteria.jpg',
+        youtubeVideoId: 'HYzcZdYEv4Q',
+        createdAt: '2024-05-13',
+        tags: ['official', 'complex', 'mysterious', 'advanced', 'enigmatic'],
+    },
+    {
+        id: '127',
+        name: 'Spoken',
+        nameJa: 'スポークン',
+        slug: 'spoken',
+        description: 'An official Zentangle pattern that seems to speak through its visual elements, creating communication-like patterns.',
+        descriptionJa: '視覚的要素を通じて語りかけるような、コミュニケーションのようなパターンを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw speaking geometric forms',
+                instructionJa: '語りかける幾何学的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add communication elements',
+                instructionJa: 'コミュニケーション要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete spoken pattern',
+                instructionJa: '語りかけるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/spoken.jpg',
+        youtubeVideoId: 'iPg3vKHu4pg',
+        createdAt: '2024-05-14',
+        tags: ['official', 'geometric', 'communication', 'expressive'],
+    },
+    {
+        id: '128',
+        name: 'Umble',
+        nameJa: 'アンブル',
+        slug: 'umble',
+        description: 'An official Zentangle pattern with humble yet intricate organic forms that create subtle beauty.',
+        descriptionJa: '控えめながら複雑な有機的形態で繊細な美しさを作る公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw humble organic base forms',
+                instructionJa: '控えめな有機的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add intricate subtle elements',
+                instructionJa: '複雑で繊細な要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete humble beauty',
+                instructionJa: '控えめな美しさを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/umble.jpg',
+        youtubeVideoId: 'pVZyGDsWHBM',
+        createdAt: '2024-05-15',
+        tags: ['official', 'organic', 'humble', 'subtle', 'intricate'],
+    },
+    {
+        id: '129',
+        name: 'Frankie',
+        nameJa: 'フランキー',
+        slug: 'frankie',
+        description: 'An official Zentangle pattern with distinctive bold forms that create striking visual impact.',
+        descriptionJa: '印象的な視覚効果を作る特徴的な大胆な形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'bold'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw bold distinctive forms',
+                instructionJa: '大胆で特徴的な形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add striking visual elements',
+                instructionJa: '印象的な視覚要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete bold pattern',
+                instructionJa: '大胆なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/frankie.jpg',
+        youtubeVideoId: 'MKKH5PB0fIs',
+        createdAt: '2024-05-16',
+        tags: ['official', 'bold', 'distinctive', 'striking'],
+    },
+    {
+        id: '130',
+        name: 'Sedgling',
+        nameJa: 'セドグリング',
+        slug: 'sedgling',
+        description: 'An official Zentangle pattern inspired by young plants. Features delicate organic growth patterns.',
+        descriptionJa: '若い植物にインスパイアされた公式ゼンタングルパターン。繊細な有機的成長パターンが特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'botanical'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw young plant-like organic forms',
+                instructionJa: '若い植物のような有機的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add delicate growth elements',
+                instructionJa: '繊細な成長要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete growth pattern',
+                instructionJa: '成長パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/sedgling.jpg',
+        youtubeVideoId: 'EzmXd4PndOo',
+        createdAt: '2024-05-17',
+        tags: ['official', 'organic', 'botanical', 'delicate', 'growth'],
+    },
+
+    // === BATCH 17: STEPOUT SERIES PATTERNS PART 1 (ステップアウト教材パターン1) ===
+    {
+        id: '131',
+        name: 'Nuumlipahs',
+        nameJa: 'ヌームリパス',
+        slug: 'nuumlipahs',
+        description: 'An official Zentangle pattern with intricate geometric forms that create complex visual rhythms.',
+        descriptionJa: '複雑な視覚的リズムを作る複雑な幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw intricate geometric base forms',
+                instructionJa: '複雑な幾何学的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex rhythmic elements',
+                instructionJa: '複雑なリズミカルな要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete intricate pattern',
+                instructionJa: '複雑なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/nuumlipahs.jpg',
+        youtubeVideoId: 'kB0jrUbfQT4',
+        createdAt: '2024-05-18',
+        tags: ['official', 'geometric', 'intricate', 'complex'],
+    },
+    {
+        id: '132',
+        name: 'Tortuca',
+        nameJa: 'トートゥーカ',
+        slug: 'tortuca',
+        description: 'An official Zentangle pattern inspired by turtle shells. Features protective geometric patterns.',
+        descriptionJa: 'カメの甲羅にインスパイアされた公式ゼンタングルパターン。保護的な幾何学的パターンが特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'nature'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw turtle shell-like geometric forms',
+                instructionJa: 'カメの甲羅のような幾何学的形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add protective pattern elements',
+                instructionJa: '保護的なパターン要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete shell pattern',
+                instructionJa: '甲羅パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/tortuca.jpg',
+        youtubeVideoId: 'DjyUvFN8agw',
+        createdAt: '2024-05-19',
+        tags: ['official', 'geometric', 'nature', 'turtle', 'protective'],
+    },
+    {
+        id: '133',
+        name: 'Rixty',
+        nameJa: 'リックスティー',
+        slug: 'rixty',
+        description: 'An official Zentangle pattern with dynamic angular elements that create energetic visual movement.',
+        descriptionJa: 'エネルギッシュな視覚的動きを作るダイナミックな角度要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'dynamic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw dynamic angular base forms',
+                instructionJa: 'ダイナミックな角度のベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add energetic movement elements',
+                instructionJa: 'エネルギッシュな動き要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Create dynamic pattern',
+                instructionJa: 'ダイナミックなパターンを作ります',
+            },
+        ],
+        imageUrl: '/images/patterns/rixty.jpg',
+        youtubeVideoId: 'iooT_LSj0UM',
+        createdAt: '2024-05-20',
+        tags: ['official', 'geometric', 'dynamic', 'angular', 'energetic'],
+    },
+    {
+        id: '134',
+        name: 'Fandabout',
+        nameJa: 'ファンダバウト',
+        slug: 'fandabout',
+        description: 'A playful official Zentangle pattern with whimsical elements that create joyful, dancing patterns.',
+        descriptionJa: '喜びに満ちた踊るようなパターンを作る気まぐれな要素を持つ遊び心のある公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'playful', 'organic'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw whimsical playful base forms',
+                instructionJa: '気まぐれで遊び心のあるベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dancing joyful elements',
+                instructionJa: '踊るような喜びの要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete playful pattern',
+                instructionJa: '遊び心のあるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/fandabout.jpg',
+        youtubeVideoId: 'iWHOd9JdX-o',
+        createdAt: '2024-05-21',
+        tags: ['official', 'playful', 'whimsical', 'joyful', 'dancing'],
+    },
+    {
+        id: '135',
+        name: 'Inix',
+        nameJa: 'イニックス',
+        slug: 'inix',
+        description: 'An official Zentangle pattern with interconnected geometric elements that create unified patterns.',
+        descriptionJa: '統一されたパターンを作る相互接続された幾何学的要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'connected'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw interconnected geometric base',
+                instructionJa: '相互接続された幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add unified connecting elements',
+                instructionJa: '統一された接続要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete connected pattern',
+                instructionJa: '接続されたパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/inix.jpg',
+        youtubeVideoId: 'fuTcK9pKY5w',
+        createdAt: '2024-05-22',
+        tags: ['official', 'geometric', 'connected', 'unified', 'network'],
+    },
+
+    // === BATCH 18: STEPOUT SERIES PATTERNS PART 2 (ステップアウト教材パターン2) ===
+    {
+        id: '136',
+        name: 'Crool',
+        nameJa: 'クール',
+        slug: 'crool',
+        description: 'An official Zentangle pattern with cool, flowing curved elements that create smooth organic patterns.',
+        descriptionJa: 'スムーズな有機的パターンを作るクールで流れる曲線要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw cool flowing curved base',
+                instructionJa: 'クールで流れる曲線のベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add smooth organic elements',
+                instructionJa: 'スムーズな有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete flowing pattern',
+                instructionJa: '流れるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/crool.jpg',
+        youtubeVideoId: '_FcHKA38oVk',
+        createdAt: '2024-05-23',
+        tags: ['official', 'organic', 'flowing', 'smooth', 'cool'],
+    },
+    {
+        id: '137',
+        name: 'Isocore',
+        nameJa: 'アイソコア',
+        slug: 'isocore',
+        description: 'An official Zentangle pattern with isometric geometric forms that create dimensional core patterns.',
+        descriptionJa: '次元的なコアパターンを作る等角投影の幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'advanced',
+        category: ['official', 'geometric', '3d'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw isometric geometric base',
+                instructionJa: '等角投影の幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dimensional core elements',
+                instructionJa: '次元的なコア要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete 3D isometric pattern',
+                instructionJa: '3D等角投影パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/isocore.jpg',
+        youtubeVideoId: '5viaXb-ode0',
+        createdAt: '2024-05-24',
+        tags: ['official', 'geometric', '3d', 'isometric', 'dimensional'],
+    },
+    {
+        id: '138',
+        name: 'Coralan',
+        nameJa: 'コーラン',
+        slug: 'coralan',
+        description: 'An official Zentangle pattern inspired by coral formations. Features organic branching patterns.',
+        descriptionJa: 'サンゴの形成にインスパイアされた公式ゼンタングルパターン。有機的な分岐パターンが特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'marine'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw coral-like branching base',
+                instructionJa: 'サンゴのような分岐するベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add organic coral elements',
+                instructionJa: '有機的なサンゴ要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete coral pattern',
+                instructionJa: 'サンゴパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/coralan.jpg',
+        youtubeVideoId: 'hJ_xFn-zfCk',
+        createdAt: '2024-05-25',
+        tags: ['official', 'organic', 'marine', 'coral', 'branching'],
+    },
+    {
+        id: '139',
+        name: 'Arkos',
+        nameJa: 'アルカス',
+        slug: 'arkos',
+        description: 'An official Zentangle pattern with arch-like geometric forms that create architectural patterns.',
+        descriptionJa: '建築的パターンを作るアーチのような幾何学的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'architectural'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw arch-like geometric base',
+                instructionJa: 'アーチのような幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add architectural elements',
+                instructionJa: '建築的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete arch pattern',
+                instructionJa: 'アーチパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/arkos.jpg',
+        youtubeVideoId: 'nyj0Qc2JMT8',
+        createdAt: '2024-05-26',
+        tags: ['official', 'geometric', 'architectural', 'arch', 'structural'],
+    },
+    {
+        id: '140',
+        name: 'Quipple',
+        nameJa: 'クィップル',
+        slug: 'quipple',
+        description: 'A playful official Zentangle pattern with quick ripple-like elements that create lively movement.',
+        descriptionJa: '活発な動きを作る素早い波紋のような要素を持つ遊び心のある公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'ripple'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw quick ripple base forms',
+                instructionJa: '素早い波紋のベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add lively rippling elements',
+                instructionJa: '活発な波打つ要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete ripple pattern',
+                instructionJa: '波紋パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/quipple.jpg',
+        youtubeVideoId: 'wFCLiiJcjig',
+        createdAt: '2024-05-27',
+        tags: ['official', 'organic', 'ripple', 'lively', 'beginner-friendly'],
+    },
+
+    // === BATCH 19: FINAL STEPOUT PATTERNS (最終ステップアウトパターン) ===
+    {
+        id: '141',
+        name: 'Patena',
+        nameJa: 'パテナ',
+        slug: 'patena',
+        description: 'An official Zentangle pattern with petal-like organic forms that create beautiful floral patterns.',
+        descriptionJa: '美しい花のパターンを作る花びらのような有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'floral'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw petal-like organic base forms',
+                instructionJa: '花びらのような有機的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add beautiful floral elements',
+                instructionJa: '美しい花の要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete floral pattern',
+                instructionJa: '花のパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/patena.jpg',
+        youtubeVideoId: '9EDMrbW-bNU',
+        createdAt: '2024-05-28',
+        tags: ['official', 'organic', 'floral', 'petals', 'beautiful'],
+    },
+    {
+        id: '142',
+        name: 'Calant',
+        nameJa: 'カラント',
+        slug: 'calant',
+        description: 'An official Zentangle pattern with elegant flowing elements that create graceful visual movement.',
+        descriptionJa: '優雅な視覚的動きを作る優美な流れる要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'flowing', 'elegant'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw elegant flowing base forms',
+                instructionJa: '優美な流れるベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add graceful movement elements',
+                instructionJa: '優雅な動き要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete elegant pattern',
+                instructionJa: '優美なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/calant.jpg',
+        youtubeVideoId: 'wuazWrLyjOU',
+        createdAt: '2024-05-29',
+        tags: ['official', 'flowing', 'elegant', 'graceful'],
+    },
+    {
+        id: '144',
+        name: 'Dingsplatz',
+        nameJa: 'ディングスプラッツ',
+        slug: 'dingsplatz',
+        description: 'An official Zentangle pattern with dynamic splat-like elements that create energetic scattered patterns.',
+        descriptionJa: 'エネルギッシュな散らばったパターンを作るダイナミックな飛び散ったような要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'dynamic', 'scattered'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw dynamic splat-like base forms',
+                instructionJa: 'ダイナミックな飛び散ったようなベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add energetic scattered elements',
+                instructionJa: 'エネルギッシュな散らばった要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete dynamic pattern',
+                instructionJa: 'ダイナミックなパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/dingsplatz.jpg',
+        youtubeVideoId: 'QhnatQrW8n8',
+        createdAt: '2024-05-31',
+        tags: ['official', 'dynamic', 'scattered', 'energetic', 'splat'],
+    },
+    {
+        id: '145',
+        name: 'Froze',
+        nameJa: 'フローズ',
+        slug: 'froze',
+        description: 'An official Zentangle pattern with frozen crystalline elements that create icy geometric patterns.',
+        descriptionJa: '氷のような幾何学的パターンを作る凍った結晶のような要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'crystalline'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw frozen crystalline base forms',
+                instructionJa: '凍った結晶のようなベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add icy geometric elements',
+                instructionJa: '氷のような幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete crystalline pattern',
+                instructionJa: '結晶パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/froze.jpg',
+        youtubeVideoId: 'rVlXoPUs-rM',
+        createdAt: '2024-06-01',
+        tags: ['official', 'geometric', 'crystalline', 'frozen', 'icy'],
+    },
+
+    // === BATCH 20: ADVANCED GEOMETRIC PATTERNS (上級幾何学パターン) ===
+    {
+        id: '146',
+        name: 'Raddiox',
+        nameJa: 'ラドックス',
+        slug: 'raddiox',
+        description: 'An advanced official Zentangle pattern with radiating complex geometric forms that create stunning visual effects.',
+        descriptionJa: '見事な視覚効果を作る放射状の複雑な幾何学的形態を持つ上級公式ゼンタングルパターンです。',
+        difficulty: 'advanced',
+        category: ['official', 'geometric', 'radiating'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw radiating complex geometric base',
+                instructionJa: '放射状の複雑な幾何学的ベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add stunning visual elements',
+                instructionJa: '見事な視覚要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete advanced radiating pattern',
+                instructionJa: '上級放射状パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/raddiox.jpg',
+        youtubeVideoId: 'PtD5iBsGNa4',
+        createdAt: '2024-06-02',
+        tags: ['official', 'geometric', 'radiating', 'advanced', 'complex'],
+    },
+    {
+        id: '147',
+        name: 'Zephyr',
+        nameJa: 'ゼファー',
+        slug: 'zephyr',
+        description: 'An official Zentangle pattern inspired by gentle breezes. Features light flowing organic elements.',
+        descriptionJa: 'そよ風にインスパイアされた公式ゼンタングルパターン。軽く流れる有機的要素が特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'organic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw light flowing breeze-like curves',
+                instructionJa: '軽く流れるそよ風のような曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add gentle organic elements',
+                instructionJa: '穏やかな有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete breeze pattern',
+                instructionJa: 'そよ風パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/zephyr.jpg',
+        youtubeVideoId: 'lp1e_Ot2oW0',
+        createdAt: '2024-06-03',
+        tags: ['official', 'organic', 'flowing', 'breeze', 'gentle'],
+    },
+    {
+        id: '148',
+        name: 'Drawber',
+        nameJa: 'ドローバー',
+        slug: 'drawber',
+        description: 'An official Zentangle pattern with bold drawing elements that create striking visual statements.',
+        descriptionJa: '印象的な視覚的表現を作る大胆な描画要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'bold', 'geometric'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw bold geometric base forms',
+                instructionJa: '大胆な幾何学的ベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add striking drawing elements',
+                instructionJa: '印象的な描画要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete bold pattern',
+                instructionJa: '大胆なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/drawber.jpg',
+        youtubeVideoId: 'TQmDONaO7lc',
+        createdAt: '2024-06-04',
+        tags: ['official', 'bold', 'geometric', 'striking'],
+    },
+    {
+        id: '149',
+        name: 'Coaster',
+        nameJa: 'コースター',
+        slug: 'coaster',
+        description: 'An official Zentangle pattern with circular rolling elements that create coasting movement patterns.',
+        descriptionJa: '滑走する動きのパターンを作る円形の転がる要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'circular', 'movement'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw circular rolling base forms',
+                instructionJa: '円形の転がるベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add coasting movement elements',
+                instructionJa: '滑走する動き要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete rolling pattern',
+                instructionJa: '転がるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/coaster.jpg',
+        youtubeVideoId: 'nyj0Qc2JMT8',
+        createdAt: '2024-06-05',
+        tags: ['official', 'circular', 'movement', 'beginner-friendly', 'rolling'],
+    },
+
+    // === BATCH 21: FINAL VARIETY PATTERNS (最終バラエティパターン) ===
+    {
+        id: '151',
+        name: 'Ahh-solo',
+        nameJa: 'アーソロ',
+        slug: 'ahh-solo',
+        description: 'An official Zentangle pattern that is a standalone variation of Ahh. Features relaxing flowing organic elements.',
+        descriptionJa: 'Ahhの単独バリエーションである公式ゼンタングルパターン。リラックスした流れる有機的要素が特徴です。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'relaxing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw relaxing flowing organic curves',
+                instructionJa: 'リラックスした流れる有機的曲線を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add soothing Ahh-like elements',
+                instructionJa: '落ち着いたAhhのような要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete relaxing pattern',
+                instructionJa: 'リラックスパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/ahh-solo.jpg',
+        youtubeVideoId: 'lp1e_Ot2oW0',
+        createdAt: '2024-06-07',
+        tags: ['official', 'organic', 'relaxing', 'beginner-friendly', 'soothing'],
+    },
+    {
+        id: '154',
+        name: 'Keenees',
+        nameJa: 'キーニーズ',
+        slug: 'keenees',
+        description: 'An official Zentangle pattern with keen sharp angular elements that create precise geometric patterns.',
+        descriptionJa: '正確な幾何学的パターンを作る鋭い角度要素を持つ公式ゼンタングルパターンです。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'angular'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw keen sharp angular base',
+                instructionJa: '鋭い角度のベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add precise geometric elements',
+                instructionJa: '正確な幾何学的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete precise pattern',
+                instructionJa: '正確なパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/keenees.jpg',
+        youtubeVideoId: '0bpCJI4CiHY',
+        createdAt: '2024-06-10',
+        tags: ['official', 'geometric', 'angular', 'precise', 'keen'],
+    },
+    {
+        id: '155',
+        name: 'Maryhill',
+        nameJa: 'メリーヒル',
+        slug: 'maryhill',
+        description: 'An official Zentangle pattern with hill-like rolling organic forms that create gentle undulating patterns.',
+        descriptionJa: '穏やかな波打つパターンを作る丘のような転がる有機的形態を持つ公式ゼンタングルパターンです。',
+        difficulty: 'beginner',
+        category: ['official', 'organic', 'rolling'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw hill-like rolling base forms',
+                instructionJa: '丘のような転がるベース形態を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add gentle undulating elements',
+                instructionJa: '穏やかな波打つ要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete rolling pattern',
+                instructionJa: '転がるパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/maryhill.jpg',
+        youtubeVideoId: 'y1LAoucnEsY',
+        createdAt: '2024-06-11',
+        tags: ['official', 'organic', 'rolling', 'beginner-friendly', 'gentle'],
+    },
+
+    // === BATCH 22: MILESTONE 160 COMPLETION (マイルストーン160完成) ===
+    {
+        id: '156',
+        name: 'Verdigogh',
+        nameJa: 'ヴェルディゴー',
+        slug: 'verdigogh',
+        description: 'An artistic official Zentangle pattern inspired by Van Gogh-like flowing brushstrokes. Features dynamic swirling elements.',
+        descriptionJa: 'ゴッホのような流れる筆致にインスパイアされた芸術的公式ゼンタングルパターン。ダイナミックな渦巻き要素が特徴です。',
+        difficulty: 'advanced',
+        category: ['official', 'artistic', 'flowing'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw flowing Van Gogh-like brushstroke base',
+                instructionJa: 'ゴッホのような流れる筆致のベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add dynamic swirling artistic elements',
+                instructionJa: 'ダイナミックな渦巻く芸術的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete artistic masterpiece pattern',
+                instructionJa: '芸術的傑作パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/verdigogh.jpg',
+        youtubeVideoId: 'dCzn28wIHyk',
+        createdAt: '2024-06-12',
+        tags: ['official', 'artistic', 'flowing', 'advanced', 'Van-Gogh', 'swirling'],
+    },
+    {
+        id: '157',
+        name: 'Crescent Moon Variations',
+        nameJa: 'クレセントムーン バリエーション',
+        slug: 'crescent-moon-variations',
+        description: 'Special variations of the foundational Crescent Moon pattern. Explore different orientations and sizes.',
+        descriptionJa: '基本パターンCrescent Moonの特別バリエーション。異なる向きとサイズを探求します。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'variation'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw crescent moon in various orientations',
+                instructionJa: '様々な向きで三日月を描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Vary sizes to create depth',
+                instructionJa: 'サイズを変えて深みを作ります',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete variation pattern',
+                instructionJa: 'バリエーションパターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/crescent-moon-variations.jpg',
+        youtubeVideoId: '2sGbRFwwgfg',
+        createdAt: '2024-06-13',
+        tags: ['official', 'foundational', 'variation', 'beginner-friendly', 'moon'],
+    },
+    {
+        id: '158',
+        name: 'Mooka Variations',
+        nameJa: 'ムーカ バリエーション',
+        slug: 'mooka-variations',
+        description: 'Creative variations of the popular Mooka pattern. Experiment with different curves and spacing.',
+        descriptionJa: '人気パターンMookaの創造的バリエーション。異なる曲線と間隔を実験します。',
+        difficulty: 'beginner',
+        category: ['official', 'foundational', 'variation'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw Mooka with varied curves',
+                instructionJa: '様々な曲線でMookaを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Experiment with different spacing',
+                instructionJa: '異なる間隔を実験します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete creative variation',
+                instructionJa: '創造的バリエーションを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/mooka-variations.jpg',
+        youtubeVideoId: '2sGbRFwwgfg',
+        createdAt: '2024-06-14',
+        tags: ['official', 'foundational', 'variation', 'beginner-friendly', 'popular'],
+    },
+    {
+        id: '159',
+        name: 'Static Enhanced',
+        nameJa: 'スタティック エンハンスド',
+        slug: 'static-enhanced',
+        description: 'An enhanced version of Static with additional complexity. Features enriched geometric static patterns.',
+        descriptionJa: '複雑さを追加したStaticの強化版。豊かな幾何学的静的パターンが特徴です。',
+        difficulty: 'intermediate',
+        category: ['official', 'geometric', 'enhanced'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw Static base with enhanced elements',
+                instructionJa: '強化要素を持つStaticベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add enriched geometric complexity',
+                instructionJa: '豊かな幾何学的複雑さを追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete enhanced pattern',
+                instructionJa: '強化パターンを完成させます',
+            },
+        ],
+        imageUrl: '/images/patterns/static-enhanced.jpg',
+        youtubeVideoId: 'lMkVA0U16e4',
+        createdAt: '2024-06-15',
+        tags: ['official', 'geometric', 'enhanced', 'complex', 'enriched'],
+    },
+    {
+        id: '160',
+        name: 'Flux Mastery',
+        nameJa: 'フラックス マスタリー',
+        slug: 'flux-mastery',
+        description: 'The ultimate mastery variation of Flux. Combines flowing organic elements with advanced techniques. Pattern #160 MILESTONE!',
+        descriptionJa: 'Fluxの究極マスタリーバリエーション。流れる有機的要素と上級技法を組み合わせます。記念すべき第160パターン！',
+        difficulty: 'advanced',
+        category: ['official', 'organic', 'mastery'],
+        steps: [
+            {
+                stepNumber: 1,
+                instruction: 'Draw advanced Flux base with mastery',
+                instructionJa: 'マスタリーレベルの上級Fluxベースを描きます',
+            },
+            {
+                stepNumber: 2,
+                instruction: 'Add complex flowing organic elements',
+                instructionJa: '複雑な流れる有機的要素を追加します',
+            },
+            {
+                stepNumber: 3,
+                instruction: 'Complete ultimate mastery pattern - 160 MILESTONE!',
+                instructionJa: '究極マスタリーパターンを完成させます - 160マイルストーン！',
+            },
+        ],
+        imageUrl: '/images/patterns/flux-mastery.jpg',
+        youtubeVideoId: 'bJNN3ECA74s',
+        createdAt: '2024-06-16',
+        tags: ['official', 'organic', 'mastery', 'advanced', 'flowing', 'milestone-160'],
+    },
+];
+
+// Helper functions
+export const getPatternBySlug = (slug: string): Pattern | undefined => {
+    return patterns.find(pattern => pattern.slug === slug);
+};
+
+export const getPatternsByCategory = (category: string): Pattern[] => {
+    return patterns.filter(pattern => pattern.category.includes(category));
+};
+
+export const getPatternsByDifficulty = (difficulty: 'beginner' | 'intermediate' | 'advanced'): Pattern[] => {
+    return patterns.filter(pattern => pattern.difficulty === difficulty);
+};
+
+export const searchPatterns = (query: string): Pattern[] => {
+    const lowerQuery = query.toLowerCase();
+    return patterns.filter(pattern =>
+        pattern.name.toLowerCase().includes(lowerQuery) ||
+        pattern.nameJa.includes(lowerQuery) ||
+        pattern.description.toLowerCase().includes(lowerQuery) ||
+        pattern.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
+    );
+};
+
+export const getAllCategories = (): string[] => {
+    const categoriesSet = new Set<string>();
+    patterns.forEach(pattern => {
+        pattern.category.forEach(cat => categoriesSet.add(cat));
+    });
+    return Array.from(categoriesSet).sort();
+};
+
+// Category name translations (English -> Japanese)
+export const categoryTranslations: Record<string, string> = {
+    'official': '公式',
+    'foundational': '基本',
+    'organic': '有機的',
+    'geometric': '幾何学',
+    'weaving': '織物',
+    'fill': 'フィル',
+    'texture': 'テクスチャー',
+    'enhancement': '強化',
+    'shading': 'シェーディング',
+    'technique': 'テクニック',
+    'flowing': '流れる',
+    '3d': '3D',
+    'illusion': '錯視',
+    'featured': '注目',
+    'floral': '花',
+    'simple': 'シンプル',
+    'hybrid': 'ハイブリッド',
+    'grid': 'グリッド',
+};
+
+export const getCategoryNameJa = (category: string): string => {
+    return categoryTranslations[category] || category;
+};
+

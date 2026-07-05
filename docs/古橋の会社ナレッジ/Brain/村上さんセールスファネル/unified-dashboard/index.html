@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブースターパッケージ 統合ダッシュボード</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #F97316;
+            --orange-dark: #EA580C;
+            --orange-deep: #C2410C;
+            --orange-light: #FB923C;
+            --gold: #F59E0B;
+            --green: #10b981;
+            --green-dark: #059669;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --bg: #FFFBF5;
+            --bg-white: #fff;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #888;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg);
+            line-height: 1.7
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #7C2D12, #B8510D, #EA580C);
+            color: #fff;
+            padding: 80px 0 70px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(251, 146, 60, 0.25), transparent 70%);
+            border-radius: 50%
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #FED7AA;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            letter-spacing: 1px
+        }
+
+        .hero h1 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 12px
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #FBBF24, #FDE68A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .hero .sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 600px;
+            line-height: 1.8
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: -40px;
+            position: relative;
+            z-index: 2
+        }
+
+        .summary-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .summary-card .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1
+        }
+
+        .summary-card .num span {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light)
+        }
+
+        .summary-card .label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 6px
+        }
+
+        .summary-card .change {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--green);
+            margin-top: 4px
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            padding: 6px;
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            flex-wrap: wrap
+        }
+
+        .tab-nav button {
+            flex: 1;
+            min-width: 100px;
+            padding: 14px 8px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .tab-nav button.active {
+            background: var(--orange);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3)
+        }
+
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block
+        }
+
+        .sec-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .sec-title {
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            line-height: 1.4
+        }
+
+        .sec-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.8
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow)
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px
+        }
+
+        .card-icon.orange {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--orange)
+        }
+
+        .card-icon.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green)
+        }
+
+        .card-icon.red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red)
+        }
+
+        .card-icon.blue {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue)
+        }
+
+        .card-icon.gold {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--gold)
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 700
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px
+        }
+
+        .flow-visual {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow)
+        }
+
+        .flow-step {
+            padding: 16px 20px;
+            border-left: 4px solid var(--orange);
+            border-radius: 0 12px 12px 0;
+            background: rgba(249, 115, 22, 0.03);
+            margin-bottom: 4px
+        }
+
+        .flow-step.green-border {
+            border-left-color: var(--green);
+            background: rgba(16, 185, 129, 0.03)
+        }
+
+        .flow-step .step-name {
+            font-weight: 700;
+            font-size: 15px
+        }
+
+        .flow-step .step-detail {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 2px
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--orange);
+            font-size: 18px;
+            margin: 2px 0
+        }
+
+        .checklist {
+            list-style: none
+        }
+
+        .checklist li {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px
+        }
+
+        .checklist li:last-child {
+            border-bottom: none
+        }
+
+        .status {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px
+        }
+
+        .status.done {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green)
+        }
+
+        .status.wip {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--orange)
+        }
+
+        .status.todo {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red)
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 36px;
+            margin: 24px 0
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--orange), var(--green));
+            border-radius: 2px
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 16px 20px;
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            box-shadow: var(--shadow)
+        }
+
+        .timeline-item::before {
+            content: attr(data-day);
+            position: absolute;
+            left: -36px;
+            top: 16px;
+            width: 28px;
+            height: 28px;
+            background: var(--orange);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif
+        }
+
+        .timeline-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px
+        }
+
+        .timeline-item p {
+            font-size: 13px;
+            color: var(--text-body);
+            line-height: 1.7
+        }
+
+        .timeline-item .tag {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-bottom: 8px
+        }
+
+        .present-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .present-card-sm {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow)
+        }
+
+        .present-card-sm .p-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--orange);
+            opacity: 0.5
+        }
+
+        .present-card-sm h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin: 4px 0
+        }
+
+        .p-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block
+        }
+
+        .p-tag.a {
+            background: rgba(249, 115, 22, 0.08);
+            color: var(--orange)
+        }
+
+        .p-tag.b {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--green)
+        }
+
+        .p-tag.c {
+            background: rgba(245, 158, 11, 0.08);
+            color: var(--gold)
+        }
+
+        .p-tag.d {
+            background: rgba(239, 68, 68, 0.08);
+            color: var(--red)
+        }
+
+        .p-tag.all {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--blue)
+        }
+
+        .highlight-box {
+            background: rgba(249, 115, 22, 0.04);
+            border-left: 4px solid var(--orange);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin-top: 24px
+        }
+
+        .highlight-box h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 20px
+        }
+
+        th {
+            background: #FFF7ED;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        td {
+            padding: 12px 16px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 14px
+        }
+
+        td.highlight {
+            font-weight: 700;
+            color: var(--orange)
+        }
+
+        /* JOURNEY */
+        .journey-flow {
+            display: flex;
+            gap: 0;
+            margin: 32px 0;
+            overflow-x: auto
+        }
+
+        .phase-col {
+            flex: 1;
+            min-width: 160px
+        }
+
+        .phase-head {
+            padding: 14px 16px;
+            text-align: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px
+        }
+
+        .phase-head .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            display: block;
+            line-height: 1
+        }
+
+        .phase-head .plabel {
+            font-size: 12px;
+            margin-top: 2px;
+            opacity: .85
+        }
+
+        .ph1 .phase-head {
+            background: #F97316
+        }
+
+        .ph2 .phase-head {
+            background: #EA580C
+        }
+
+        .ph3 .phase-head {
+            background: #C2410C
+        }
+
+        .ph4 .phase-head {
+            background: #10B981
+        }
+
+        .ph5 .phase-head {
+            background: #059669
+        }
+
+        .phase-body {
+            background: var(--bg-white);
+            border: 1px solid #f0e8df;
+            border-top: none;
+            padding: 16px 12px;
+            min-height: 160px
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        .phase-item .emoji {
+            font-size: 16px;
+            flex-shrink: 0
+        }
+
+        .phase-item .st {
+            margin-left: auto;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-weight: 800;
+            flex-shrink: 0
+        }
+
+        .st.ok {
+            background: #ECFDF5;
+            color: #059669
+        }
+
+        .st.ng {
+            background: #FFF7ED;
+            color: #EA580C
+        }
+
+        .arrow-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--orange);
+            font-weight: 900;
+            padding: 0 4px;
+            min-width: 24px
+        }
+
+        /* IMAGE SPEC */
+        .img-spec-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px
+        }
+
+        .img-spec-card h4 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .img-spec-card .spec-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 50px
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px
+        }
+
+        .spec-item {
+            background: #FFF7ED;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 12px
+        }
+
+        .spec-item .spec-id {
+            font-family: 'Inter';
+            font-weight: 800;
+            color: var(--orange);
+            margin-bottom: 4px
+        }
+
+        .spec-item .spec-name {
+            font-weight: 700;
+            margin-bottom: 2px
+        }
+
+        .spec-item .spec-detail {
+            color: var(--text-light);
+            font-size: 11px
+        }
+
+        .progress-bar {
+            background: #f0e8df;
+            border-radius: 50px;
+            height: 24px;
+            max-width: 500px;
+            margin: 16px auto;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--green), var(--green-dark));
+            height: 100%;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            padding: 32px 0;
+            font-size: 12px;
+            margin-top: 60px
+        }
+
+        @media(max-width:768px) {
+            .summary-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .grid-2,
+            .grid-3,
+            .present-grid,
+            .spec-grid {
+                grid-template-columns: 1fr
+            }
+
+            .journey-flow {
+                flex-direction: column
+            }
+
+            .arrow-col {
+                transform: rotate(90deg);
+                padding: 4px 0
+            }
+
+            .tab-nav button {
+                font-size: 11px;
+                padding: 10px 6px;
+                min-width: auto
+            }
+        }
+
+
+        .accordion {
+            margin: 16px 0
+        }
+
+        .acc-item {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            overflow: hidden;
+            background: var(--bg-white)
+        }
+
+        .acc-header {
+            padding: 14px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background .2s;
+            user-select: none
+        }
+
+        .acc-header:hover {
+            background: #FFF7ED
+        }
+
+        .acc-header .acc-num {
+            font-family: 'Inter';
+            font-size: 11px;
+            font-weight: 800;
+            color: #fff;
+            background: var(--orange);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0
+        }
+
+        .acc-header .acc-num.green {
+            background: var(--green)
+        }
+
+        .acc-header .acc-num.red {
+            background: var(--red)
+        }
+
+        .acc-header .acc-arrow {
+            margin-left: auto;
+            transition: transform .2s;
+            font-size: 12px;
+            color: var(--text-light)
+        }
+
+        .acc-header.open .acc-arrow {
+            transform: rotate(180deg)
+        }
+
+        .acc-body {
+            display: none;
+            padding: 0 20px 20px;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text-body)
+        }
+
+        .acc-body.open {
+            display: block
+        }
+
+        .msg-bubble {
+            background: #FFF7ED;
+            border-radius: 0 16px 16px 16px;
+            padding: 16px 20px;
+            margin: 8px 0;
+            position: relative;
+            border: 1px solid #FFEDD5
+        }
+
+        .msg-bubble::before {
+            content: 'LINE';
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            background: var(--green);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 1px 8px;
+            border-radius: 4px
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">Brain × 村上セールスチーム</div>
+            <h1><span>セールスファネル</span><br>統合ダッシュボード</h1>
+            <p class="sub">カスタマージャーニー・制作物管理・LINEシナリオ・プレゼント・LINE画像発注書——すべてを一元管理する統合ダッシュボード。</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="num" style="color:var(--green)">18<span>/22</span></div>
+                <div class="label">制作物 完了/合計</div>
+                <div class="change">進捗率 82%</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">10<span>本</span></div>
+                <div class="label">プレゼントコンテンツ</div>
+                <div class="change">✅ 全て制作済み</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">25<span>ステップ</span></div>
+                <div class="label">LINEシナリオ合計</div>
+                <div class="change">✅ テキスト完成</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">4<span>属性</span></div>
+                <div class="label">ターゲットセグメント</div>
+                <div class="change">A/B/C/D 分類</div>
+            </div>
+        </div>
+    </div>
+
+    <section style="padding-top:80px">
+        <div class="container">
+            <div class="tab-nav">
+                <button class="active" onclick="showTab('journey')">🗺️ ジャーニー</button>
+                <button onclick="showTab('overview')">📋 概要</button>
+                <button onclick="showTab('deliverables')">📦 制作物</button>
+                <button onclick="showTab('scenario')">💬 シナリオ</button>
+                <button onclick="showTab('presents')">🎁 プレゼント</button>
+                <button onclick="showTab('imgspec')">🖼️ 画像発注書</button>
+                <button onclick="showTab('progress')">🚀 進捗管理</button>
+                <button onclick="showTab('resources')">📂 リソース</button>
+            </div>
+
+
+            <div id="journey" class="tab-content">
+                <div class="sec-label">customer journey</div>
+                <div class="sec-title">カスタマージャーニー × 制作物マップ</div>
+                <div class="sec-desc">認知→興味→検討→行動→定着の5フェーズで、各接点の制作物とステータスを可視化。</div>
+                <div style="text-align:center;margin-bottom:16px">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:82%">82%</div>
+                    </div>
+                    <div style="font-size:13px;font-weight:700;color:var(--text-body)">進捗率 82%（15/22件完了）</div>
+                </div>
+                <div class="journey-flow">
+                    <div class="phase-col ph1">
+                        <div class="phase-head"><span class="num">①</span><span class="plabel">認知</span></div>
+                        <div class="phase-body">
+                            <div class="phase-item"><span class="emoji">🖼️</span>OGPバナー×10<span class="st ok">✅</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">📝</span>Brain記事<span class="st ng">⚠️</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">🐦</span>X投稿テンプレ<span class="st ng">⚠️</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">🤝</span>アフィリ素材<span class="st ng">⚠️</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-col">→</div>
+                    <div class="phase-col ph2">
+                        <div class="phase-head"><span class="num">②</span><span class="plabel">興味</span></div>
+                        <div class="phase-body">
+                            <div class="phase-item"><span class="emoji">🌐</span>LP v2<span class="st ok">✅</span></div>
+                            <div class="phase-item"><span class="emoji">💚</span>LINE導線<span class="st ok">✅</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-col">→</div>
+                    <div class="phase-col ph3">
+                        <div class="phase-head"><span class="num">③</span><span class="plabel">検討</span></div>
+                        <div class="phase-body">
+                            <div class="phase-item"><span class="emoji">💬</span>シナリオ① 2日<span class="st ok">✅</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">💬</span>シナリオ② 7日<span class="st ok">✅</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">🎨</span>LINE画像15枚<span class="st ng">⚠️</span>
+                            </div>
+                            <div class="phase-item"><span class="emoji">⚙️</span>プロライン実装<span class="st ok">✅</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-col">→</div>
+                    <div class="phase-col ph4">
+                        <div class="phase-head"><span class="num">④</span><span class="plabel">行動</span></div>
+                        <div class="phase-body">
+                            <div class="phase-item"><span class="emoji">📋</span>予約コピー<span class="st ok">✅</span></div>
+                            <div class="phase-item"><span class="emoji">📅</span>予約ページ<span class="st ok">✅</span></div>
+                            <div class="phase-item"><span class="emoji">🎥</span>Zoom面談<span class="st ok">✅</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-col">→</div>
+                    <div class="phase-col ph5">
+                        <div class="phase-head"><span class="num">⑤</span><span class="plabel">定着</span></div>
+                        <div class="phase-body">
+                            <div class="phase-item"><span class="emoji">🎁</span>10大特典<span class="st ok">✅</span></div>
+                            <div class="phase-item"><span class="emoji">🌐</span>会員サイト<span class="st ok">✅</span></div>
+                            <div class="phase-item"><span class="emoji">📩</span>自動MSG<span class="st ok">✅</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top:24px;border-left-color:var(--red)">
+                    <h4>🚀 ファネル稼働に必要な最優先タスク</h4>
+                    <div class="grid-3" style="margin-top:12px">
+                        <div class="card" style="text-align:center;padding:20px">
+                            <div style="font-family:Inter;font-size:32px;font-weight:900;color:var(--orange)">1</div>
+                            <div style="font-weight:700;font-size:14px">面談予約ページ</div>
+                            <div style="font-size:11px;color:var(--text-light)">Calendly連携</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:20px">
+                            <div style="font-family:Inter;font-size:32px;font-weight:900;color:var(--orange)">2</div>
+                            <div style="font-weight:700;font-size:14px">LINE画像15枚</div>
+                            <div style="font-size:11px;color:var(--text-light)">発注書タブ参照</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:20px">
+                            <div style="font-family:Inter;font-size:32px;font-weight:900;color:var(--orange)">3</div>
+                            <div style="font-weight:700;font-size:14px">プロライン実装</div>
+                            <div style="font-size:11px;color:var(--text-light)">シナリオ設定</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="imgspec" class="tab-content">
+                <div class="sec-label">line image spec</div>
+                <div class="sec-title">LINE画像 制作発注書（全15枚）</div>
+                <div class="sec-desc">2シナリオ分のCTA画像・バナー制作リスト。実質デザインパターン8種類。オレンジテーマ統一。</div>
+
+                <div class="img-spec-card">
+                    <h4>🖼️ A. ヘッダー画像（4枚）<span class="spec-badge"
+                            style="background:rgba(249,115,22,0.1);color:var(--orange)">1040×1040px</span></h4>
+                    <p style="font-size:13px;color:var(--text-light)">メッセージ冒頭に付ける目を引くビジュアル。LINEリッチメッセージ用。</p>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <div class="spec-id">A-1</div>
+                            <div class="spec-name">プレゼント一覧ヘッダー</div>
+                            <div class="spec-detail">シナリオ① Step1（登録直後）<br>📦 10大特典ロゴ＋特典名一覧表示</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">A-2</div>
+                            <div class="spec-name">面談ご案内ヘッダー</div>
+                            <div class="spec-detail">シナリオ② Step2（面談告知）<br>「無料個別面談」3メリットをアイコン付き配置</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">A-3</div>
+                            <div class="spec-name">チラ見せヘッダー</div>
+                            <div class="spec-detail">シナリオ② Step4（あと5日）<br>特典内容をモックアップ風に紹介</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">A-4</div>
+                            <div class="spec-name">お客様の声ヘッダー</div>
+                            <div class="spec-detail">シナリオ② Step5（あと4日）<br>参加者3名の引用カード＋★評価</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img-spec-card">
+                    <h4>🔘 B. CTAボタン画像（5種）<span class="spec-badge"
+                            style="background:rgba(16,185,129,0.1);color:var(--green)">タップ可能</span></h4>
+                    <p style="font-size:13px;color:var(--text-light)">リッチメッセージ/カルーセルでタップできるボタン画像。テンプレ差替パターン。</p>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <div class="spec-id">B-1</div>
+                            <div class="spec-name">🎁 今すぐ受け取る</div>
+                            <div class="spec-detail">オレンジ（メインCTA）<br>シナリオ① Step1〜8で使用</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">B-2</div>
+                            <div class="spec-name">📅 無料面談を予約する</div>
+                            <div class="spec-detail">グリーン（予約系）<br>シナリオ② Step2〜12で使用</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">B-3</div>
+                            <div class="spec-name">⚡ 再チャンスで受け取る</div>
+                            <div class="spec-detail">レッド（緊急）<br>シナリオ① Step9〜11</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">B-4</div>
+                            <div class="spec-name">🔄 期限を延長する</div>
+                            <div class="spec-detail">レッド（緊急）<br>シナリオ② Step13〜15</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">B-5</div>
+                            <div class="spec-name">📦 プレゼントを見る</div>
+                            <div class="spec-detail">オレンジ<br>シナリオ② Step1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img-spec-card">
+                    <h4>📊 C. コンテンツ画像（3枚）<span class="spec-badge"
+                            style="background:rgba(59,130,246,0.1);color:var(--blue)">説明補強</span></h4>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <div class="spec-id">C-1</div>
+                            <div class="spec-name">受取フロー図</div>
+                            <div class="spec-detail">シナリオ① Step3<br>STEP1→2→3の流れを図解</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">C-2</div>
+                            <div class="spec-name">面談メリット4点</div>
+                            <div class="spec-detail">シナリオ② Step7（あと2日）<br>4象限チェックリスト風</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">C-3</div>
+                            <div class="spec-name">面談内容まとめ</div>
+                            <div class="spec-detail">シナリオ② Step3（あと6日）<br>4属性「こんな方におすすめ」図解</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="img-spec-card">
+                    <h4>⏰ D. 緊急性バナー（3種）<span class="spec-badge"
+                            style="background:rgba(239,68,68,0.1);color:var(--red)">締切演出</span></h4>
+                    <div class="spec-grid">
+                        <div class="spec-item">
+                            <div class="spec-id">D-1</div>
+                            <div class="spec-name">⚠️ 残枠わずか</div>
+                            <div class="spec-detail">「今週の面談枠 残り3枠」<br>シナリオ② Step6</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">D-2</div>
+                            <div class="spec-name">🔴 本日終了</div>
+                            <div class="spec-detail">「本日24:00で終了」<br>シナリオ①⑤ / シナリオ②⑩</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-id">D-3</div>
+                            <div class="spec-name">⏰ ラスト◯時間</div>
+                            <div class="spec-detail">「あと○時間で消失」<br>4h/2h/1hの3パターン差替</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>📋 制作優先順位</h4>
+                    <table style="box-shadow:none;margin:8px 0 0">
+                        <thead>
+                            <tr>
+                                <th>優先度</th>
+                                <th>画像</th>
+                                <th>理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🔴 最優先</td>
+                                <td class="highlight">A-1, B-1, B-2, A-2</td>
+                                <td>最初に目にする＆全ステップで頻出</td>
+                            </tr>
+                            <tr>
+                                <td>🟡 次に</td>
+                                <td>B-3, B-4, B-5, D-1〜D-3</td>
+                                <td>先頭戻し・締切演出で必須</td>
+                            </tr>
+                            <tr>
+                                <td>🟢 後で</td>
+                                <td>A-3, A-4, C-1〜C-3</td>
+                                <td>テキストでも代替可</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 style="font-size:18px;font-weight:800;margin:32px 0 16px">📍 使用箇所マッピング</h3>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3 style="font-size:15px;margin-bottom:12px">シナリオ① 画像マップ</h3>
+                        <table style="box-shadow:none;margin:0;font-size:12px">
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>内容</th>
+                                    <th>画像</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>登録直後</td>
+                                    <td class="highlight">A-1 + B-1</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>再案内</td>
+                                    <td>B-1</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>流れ共有</td>
+                                    <td class="highlight">C-1 + B-1</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>最終日</td>
+                                    <td class="highlight">D-2 + B-1</td>
+                                </tr>
+                                <tr>
+                                    <td>6-8</td>
+                                    <td>カウントダウン</td>
+                                    <td class="highlight">D-3 + B-1</td>
+                                </tr>
+                                <tr>
+                                    <td>9-11</td>
+                                    <td>先頭に戻す</td>
+                                    <td>B-3, B-4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <h3 style="font-size:15px;margin-bottom:12px">シナリオ② 画像マップ</h3>
+                        <table style="box-shadow:none;margin:0;font-size:12px">
+                            <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>内容</th>
+                                    <th>画像</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>お礼</td>
+                                    <td class="highlight">B-5</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>面談告知</td>
+                                    <td class="highlight">A-2 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>メリット</td>
+                                    <td class="highlight">C-3 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>チラ見せ</td>
+                                    <td class="highlight">A-3 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>お客様の声</td>
+                                    <td class="highlight">A-4 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>残枠</td>
+                                    <td class="highlight">D-1 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>具体化</td>
+                                    <td class="highlight">C-2 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>10-12</td>
+                                    <td>クロージング</td>
+                                    <td>D-2, D-3 + B-2</td>
+                                </tr>
+                                <tr>
+                                    <td>13-15</td>
+                                    <td>先頭に戻す</td>
+                                    <td>B-4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top:24px">
+                    <h4>🎨 デザインガイドライン</h4>
+                    <table style="box-shadow:none;margin:8px 0 0;font-size:13px">
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>仕様</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>背景</td>
+                                <td>オレンジグラデーション（#7C2D12 → #F97316）</td>
+                            </tr>
+                            <tr>
+                                <td>CTA色</td>
+                                <td>オレンジ #F97316 / グリーン #10B981 / レッド #EF4444</td>
+                            </tr>
+                            <tr>
+                                <td>テキスト</td>
+                                <td>白 #FFFFFF / サブ rgba(255,255,255,0.7)</td>
+                            </tr>
+                            <tr>
+                                <td>フォント</td>
+                                <td>Noto Sans JP (Bold) / Inter (Bold)</td>
+                            </tr>
+                            <tr>
+                                <td>方針</td>
+                                <td>LP（brain-booster-pkg.surge.sh）とトンマナ統一</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 1: 概要 -->
+            <div id="overview" class="tab-content active">
+                <div class="sec-label">funnel overview</div>
+                <div class="sec-title">ファネル全体フロー</div>
+                <div class="sec-desc">Brain LINE登録者をプレゼント訴求で反応させ、面談予約へ導く2段階シナリオ構成。</div>
+
+                <div class="flow-visual">
+                    <div class="flow-step">
+                        <div class="step-name">① Brain LINE登録</div>
+                        <div class="step-detail">Brain経由でLINE友だち追加</div>
+                        <div style="margin-top:8px"><a href="https://c2b3yqig.autosns.app/line" target="_blank"
+                                style="display:inline-block;background:var(--green);color:#fff;padding:6px 16px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">💚
+                                友だち追加URL →</a></div>
+                    </div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step">
+                        <div class="step-name">② シナリオ①：プレゼント紹介（2日締切・11ステップ）</div>
+                        <div class="step-detail">10大特典の"存在"を紹介。「受け取りたい」ボタンで興味表明。未反応者は先頭に戻す。</div>
+                    </div>
+                    <div class="flow-arrow">↓ 受け取りたいボタン押下</div>
+                    <div class="flow-step orange-border">
+                        <div class="step-name">③ シナリオ②：面談予約誘導（7日締切・14ステップ）</div>
+                        <div class="step-detail">面談メリット訴求 → お客様の声 → 残枠演出 → 最終リマインド。未反応者は先頭に戻す。</div>
+                    </div>
+                    <div class="flow-arrow">↓ 面談予約</div>
+                    <div class="flow-step green-border">
+                        <div class="step-name">④ Zoom面談（村上さんセールスチーム）</div>
+                        <div class="step-detail">60分マンツーマン面談。属性に応じてコミット/ハックス/その他商材を提案。</div>
+                    </div>
+                    <div class="flow-arrow">↓ 面談完了</div>
+                    <div class="flow-step green-border">
+                        <div class="step-name">⑤ プレゼント送付（会員サイト）</div>
+                        <div class="step-detail">brain-booster-pkg.surge.sh の専用ページURLをLINEで送付。</div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top:32px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">🎯</div>
+                            <h3>ターゲット4属性</h3>
+                        </div>
+                        <table style="box-shadow:none;margin:0">
+                            <thead>
+                                <tr>
+                                    <th>属性</th>
+                                    <th>ターゲット像</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>A</strong></td>
+                                    <td>コンテンツホルダー（専門知識でBrain販売したい人）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>B</strong></td>
+                                    <td>0→1 初心者（まだ稼いだことがない人）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>C</strong></td>
+                                    <td>売上あり経営者（スケールに壁がある人）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>D</strong></td>
+                                    <td>アフィリエイター（紹介報酬で稼ぎたい人）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon green">💰</div>
+                            <h3>KPI設計</h3>
+                        </div>
+                        <table style="box-shadow:none;margin:0">
+                            <thead>
+                                <tr>
+                                    <th>指標</th>
+                                    <th>目標値</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1面談あたり単価</td>
+                                    <td class="highlight">3万〜5万円</td>
+                                </tr>
+                                <tr>
+                                    <td>コミット提案率</td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>ハックス提案率</td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>価値提供のみ</td>
+                                    <td>40%</td>
+                                </tr>
+                                <tr>
+                                    <td>その他提案</td>
+                                    <td>60%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>💡 村上さんの強み</h4>
+                    <p style="font-size:14px">
+                        マーケはなし。<strong>完全にセールス特化</strong>。「素の人でもある程度会話できればもう仕上げますよ」——Zoomに来てもらえれば、そこからは任せてというスタンス。だからこそ<strong>LINE→面談予約の接続導線</strong>が最も重要。
+                    </p>
+                </div>
+
+                <div class="grid-3" style="margin-top:32px">
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon orange" style="margin:0 auto 12px">👥</div>
+                        <h3 style="margin-bottom:6px">セールスチーム</h3>
+                        <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--orange)">5<span
+                                style="font-size:14px">名</span></div>
+                        <p style="color:var(--text-light);font-size:13px">村上さん＋4名体制</p>
+                    </div>
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon green" style="margin:0 auto 12px">📅</div>
+                        <h3 style="margin-bottom:6px">面談形式</h3>
+                        <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--green)">60<span
+                                style="font-size:14px">分</span></div>
+                        <p style="color:var(--text-light);font-size:13px">Zoom個別面談</p>
+                    </div>
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon orange" style="margin:0 auto 12px">🎁</div>
+                        <h3 style="margin-bottom:6px">プレゼント</h3>
+                        <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--orange)">10<span
+                                style="font-size:14px">大特典</span></div>
+                        <p style="color:var(--text-light);font-size:13px">面談着座で全て提供</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: 制作物一覧 -->
+            <div id="deliverables" class="tab-content">
+                <div class="sec-label">deliverables</div>
+                <div class="sec-title">制作物一覧 ＆ ステータス</div>
+                <div class="sec-desc">Phase 1（テキストベース・最短構築パターン）の制作物と進捗状況。</div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">📝</div>
+                            <h3>設計書・企画書</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">完了</span>LINE構築設計書（全体設計・KPI）</li>
+                            <li><span class="status done">完了</span>プロライン確認用 企画書</li>
+                            <li><span class="status done">完了</span>LINE画像 制作仕様書（15枚分）</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon green">💬</div>
+                            <h3>LINEシナリオ原稿</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">完了</span>シナリオ①：プレゼント受取（11ステップ）</li>
+                            <li><span class="status done">完了</span>シナリオ②：面談予約誘導（14ステップ）</li>
+                            <li><span class="status done">完了</span>面談予約ページ コピーライティング</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">🌐</div>
+                            <h3>LP・Webページ</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">完了</span>LP v1 パターンA（クリーム×ゴールド版）</li>
+                            <li><span class="status done">完了</span>LP v2（オレンジテーマ・9セクション高CV構成）</li>
+                            <li><span class="status done">完了</span>プレゼント受取Webアプリ<br><small
+                                    style="color:var(--text-light);margin-left:68px">brain-booster-pkg.surge.sh
+                                    にデプロイ済（2026-03-09更新）</small></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon blue">🎁</div>
+                            <h3>プレゼントコンテンツ</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">完了</span>10大特典コンテンツ（Markdown形式）</li>
+                        </ul>
+                        <p style="font-size:13px;color:var(--text-light);margin-top:12px">属性A向け×2, B向け×2, C向け×2, D向け×2,
+                            全属性共通×2 = 計10本</p>
+                    </div>
+                </div>
+
+                <div style="margin-top:32px">
+                    <h3 style="font-size:20px;font-weight:800;margin-bottom:16px">⚠️ 未制作・要対応アイテム</h3>
+                    <div class="grid-2">
+                        <div class="card" style="border-left:4px solid var(--red)">
+                            <div class="card-header">
+                                <div class="card-icon red">🖼️</div>
+                                <h3>LINE配信用画像（15枚）</h3>
+                            </div>
+                            <p style="font-size:13px">仕様書は完成済。ヘッダー4枚、CTAボタン5種、コンテンツ3枚、緊急性バナー3種の実制作が必要。</p>
+                        </div>
+                        <div class="card" style="border-left:4px solid var(--red)">
+                            <div class="card-header">
+                                <div class="card-icon red">📅</div>
+                                <h3>面談予約ページ構築</h3>
+                            </div>
+                            <p style="font-size:13px">コピーライティングは完成済。Calendly等との連携＆ページ本体の構築が必要。</p>
+                        </div>
+                        <div class="card" style="border-left:4px solid var(--orange)">
+                            <div class="card-header">
+                                <div class="card-icon orange">⚙️</div>
+                                <h3>プロライン実装</h3>
+                            </div>
+                            <p style="font-size:13px">シナリオ原稿をプロラインに設定。シナリオ遷移、先頭に戻す、タグ管理の実装。</p>
+                        </div>
+                        <div class="card" style="border-left:4px solid var(--text-light)">
+                            <div class="card-header">
+                                <div class="card-icon blue">🎬</div>
+                                <h3>Phase 2（将来対応）</h3>
+                            </div>
+                            <p style="font-size:13px">教育動画、15問アンケート分岐、属性別シナリオ。Phase 1稼働後に着手。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: LINEシナリオ -->
+            <div id="scenario" class="tab-content">
+                <div class="sec-label">line scenario</div>
+                <div class="sec-title">LINEシナリオ設計：2段階自動ファネル</div>
+                <div class="sec-desc">Skill Hacks式「2日締切＋先頭戻し」＋ Brain式「プレゼント段階解放」を統合した2シナリオ構成。</div>
+
+                <div class="grid-2" style="margin-bottom:24px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">📩</div>
+                            <h3>シナリオ①の構造</h3>
+                        </div>
+                        <p style="font-size:14px"><strong style="color:var(--orange)">プレゼント受取 2日締切＋先頭に戻す</strong></p>
+                        <p style="font-size:13px;margin-top:8px">✅ 全11ステップ<br>✅ 2日間の締切でプレゼントの"存在"を紹介<br>✅
+                            「受け取りたい」ボタンでシナリオ②へ遷移<br>✅ 未反応者は「先頭に戻す」でリサイクル</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">📅</div>
+                            <h3>シナリオ②の構造</h3>
+                        </div>
+                        <p style="font-size:14px"><strong style="color:var(--orange)">面談予約誘導 7日締切＋先頭に戻す</strong></p>
+                        <p style="font-size:13px;margin-top:8px">✅ 全14ステップ＋面談後送信<br>✅ 7日間で面談メリット・事例・緊急性を訴求<br>✅
+                            面談完了後にプレゼントURL送付<br>✅ 未反応者は「先頭に戻す」でリサイクル</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size:18px;font-weight:800;margin-bottom:16px">シナリオ① タイムライン</h3>
+                <div class="timeline">
+                    <div class="timeline-item" data-day="1">
+                        <div class="tag">即時配信</div>
+                        <h4>📦 プレゼント存在の紹介</h4>
+                        <p>10大特典のリスト提示。受取条件は「面談参加」と明示。明後日24時の締切を設定。</p>
+                    </div>
+                    <div class="timeline-item" data-day="2">
+                        <div class="tag">再案内</div>
+                        <h4>🔔 コンテンツ再送</h4>
+                        <p>見逃し防止リマインド。期限内にボタンを押した人だけに面談案内を送ると予告。</p>
+                    </div>
+                    <div class="timeline-item" data-day="3">
+                        <div class="tag">流れ共有</div>
+                        <h4>📋 受取までのSTEP説明</h4>
+                        <p>STEP1→2→3の流れを図解。面談で得られる3つのメリットを具体化。</p>
+                    </div>
+                    <div class="timeline-item" data-day="4">
+                        <div class="tag">明日終了</div>
+                        <h4>⚠️ 行動しないリスク訴求</h4>
+                        <p>お客様の声を引用。「面談参加が条件」を再度強調。</p>
+                    </div>
+                    <div class="timeline-item" data-day="5">
+                        <div class="tag">最終日</div>
+                        <h4>🔴 締切当日＋お客様の声</h4>
+                        <p>受取方法の再説明。面談参加者の成功事例を紹介。</p>
+                    </div>
+                    <div class="timeline-item" data-day="6">
+                        <div class="tag">カウントダウン</div>
+                        <h4>⏰ 残り4h → 2h → 1h</h4>
+                        <p>3段階のリマインド配信。「ボタンを押すだけでOK」のハードル低下施策。</p>
+                    </div>
+                    <div class="timeline-item" data-day="↺">
+                        <div class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange)">先頭に戻す</div>
+                        <h4>🔄 再チャンス（3ステップ）</h4>
+                        <p>締切後に「お問い合わせがあった」体で再チャンスを提供。期限を延長して先頭に戻す。</p>
+                    </div>
+                </div>
+
+                <h3 style="font-size:18px;font-weight:800;margin:32px 0 16px">シナリオ② タイムライン</h3>
+                <div class="timeline">
+                    <div class="timeline-item" data-day="1">
+                        <div class="tag">お礼</div>
+                        <h4>✨ 興味表明のお礼＋面談案内</h4>
+                        <p>プレゼント準備完了を伝達。面談で得られるもの3点を提示。予約リンク設置。</p>
+                    </div>
+                    <div class="timeline-item" data-day="2">
+                        <div class="tag">メリット</div>
+                        <h4>📅 面談メリットのまとめ</h4>
+                        <p>面談内容の詳細。専用会員サイトのアクセス権プレゼントを告知。</p>
+                    </div>
+                    <div class="timeline-item" data-day="3">
+                        <div class="tag">チラ見せ</div>
+                        <h4>👀 特典内容の一部公開</h4>
+                        <p>反響の大きい特典2つを具体的に紹介。「残りは面談で」の誘導。</p>
+                    </div>
+                    <div class="timeline-item" data-day="4">
+                        <div class="tag">事例</div>
+                        <h4>💬 参加者の声・事例紹介</h4>
+                        <p>面談参加者3名のリアルな声。具体的な成果の数字を提示。</p>
+                    </div>
+                    <div class="timeline-item" data-day="5">
+                        <div class="tag">緊急性</div>
+                        <h4>⚡ 残り枠わずか</h4>
+                        <p>「残り3枠」の演出。92%の満足度データでクロージング。</p>
+                    </div>
+                    <div class="timeline-item" data-day="6">
+                        <div class="tag">具体化</div>
+                        <h4>✅ 面談で得られるもの4点</h4>
+                        <p>ポジション特定・ロードマップ・活用優先順位・最初の一手を具体化。</p>
+                    </div>
+                    <div class="timeline-item" data-day="7">
+                        <div class="tag" style="background:rgba(249,115,22,0.2);color:var(--orange)">🔥 クロージング</div>
+                        <h4>📅 最終リマインド（4ステップ）</h4>
+                        <p>明日終了→夜リマインド→本日終了16h→残4h→残2h の5段階クロージング。</p>
+                    </div>
+                    <div class="timeline-item" data-day="↺">
+                        <div class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange)">先頭に戻す</div>
+                        <h4>🔄 予約延長チャンス（3ステップ）</h4>
+                        <p>7日間の延長を提示。先頭に戻して再シナリオ開始。</p>
+                    </div>
+                </div>
+
+
+                <div style="margin-top:40px">
+                    <h3 style="font-size:20px;font-weight:900;margin-bottom:8px">📱 配信テキスト全文</h3>
+                    <p style="font-size:13px;color:var(--text-light);margin-bottom:16px">クリックで各ステップの配信文章を展開できます。</p>
+
+                    <h4 style="font-size:16px;font-weight:800;margin-bottom:12px;color:var(--orange)">
+                        シナリオ①：プレゼント受取（2日締切・11ステップ）</h4>
+                    <div class="accordion">
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">１</span>
+                                １. 登録直後｜プレゼントの存在を紹介＋受取条件を明示（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【期間限定のご案内】<br>ご登録ありがとうございます！<br><br>Brainを本気で活用したいあなたに<br>特別なプレゼントをご用意しました。<br><br>━━━━━━━━━━━━━━<br>📦
+                                    ブースターパッケージ（10大特典）<br>━━━━━━━━━━━━━━<br><br>✅ Brain販売で月50万円ロードマップ<br>✅
+                                    コンテンツの値段設計テンプレート<br>✅ 初心者が最短で月5万円を作る3ステップ<br>✅ 稼げるスキル選定チェックリスト<br>✅
+                                    売上の壁を突破する仕組み化チェックシート<br>✅ 年商1億経営者のKPI設計テンプレート<br>✅ アフィリエイトで月10万円稼ぐ戦略ガイド<br>✅
+                                    SNSフォロワー最速X運用テンプレート<br>✅ 迫さん直伝・ビジネスモデル構築の全体像<br>✅
+                                    Brain成功者インタビュー集<br><br>これら10大特典を**全て無料**でお届けします。<br><br>▼受け取り方法▼<br>Brainの専門家との**無料個別面談**にご参加いただいた方全員にプレゼント！<br><br>ご興味のある方は下のボタンを**明後日24時まで**に押してください👇<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">２</span>
+                                ２. 再案内する（コンテンツ再送）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【プレゼント企画のご案内】<br>10大特典「ブースターパッケージ」の受付期限は明後日24時までとなっております。<br>（見逃し防止のために期限を設けています）<br><br>期限内にボタンを押していただいた方だけに、<br>プレゼントの受け取りに必要な**面談予約のご案内**をお送りします。<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">３</span>
+                                ３. 今後の流れを共有（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">プレゼント受取までの流れを共有します。<br><br>●STEP1：「受け取りたい」ボタンを押す ←
+                                    今ココ！<br>●STEP2：Brainの専門家との無料個別面談を予約<br>●STEP3：面談に参加 →
+                                    全10特典のプレゼントを受け取り！<br><br>面談では60分間、あなたの現在のステージに合わせて<br>●最適なBrain活用戦略のご提案<br>●今後3ヶ月のロードマップ個別設計<br>●今すぐ取り組むべき最初の一手のアドバイス<br><br>を完全カスタマイズでお伝えします。<br><br>面談に参加するだけで10大特典が全て手に入ります。<br>まずは以下のボタンを押してください。<br><br>本日は以上です。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">４</span>
+                                ４. 明日終了｜行動しないことで失うものに触れる（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">プレゼント企画の受付期限が**明日まで**になりましたので、ご連絡いたします。<br><br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]にお届け予定の【ブースターパッケージ（10大特典）】。<br><br>すでにこのプレゼントを受け取った方からは<br>・「ロードマップ通りに進めて初月で3万円の売上が出ました！」<br>・「値段設計テンプレで商品単価を2倍にできました」<br>・「KPIシートがなかったら、今もまだ感覚で経営してたと思います」<br>などの嬉しいご報告をいただいています。<br><br>ただし、プレゼントを受け取るには<br>**無料個別面談への参加が条件**となっています。<br><br>面談では、あなたのステージに合わせた**完全個別のアドバイス**もお伝えしますので、プレゼント＋面談の両方で得られるものは計り知れません。<br><br>明日の24時を過ぎると、面談のご案内をお届けできなくなりますのでご注意ください。<br><br>本日のご連絡は以上です。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">５</span>
+                                ５. 最終日｜受け取り方法の再説明＋お客様の声（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    本日がプレゼント企画の受付**最終日**となりました。<br><br>もう一度、プレゼントの受け取り方を説明させていただきますと、<br>●下のボタンを押す（本日中）<br>●届いた面談予約の案内から日程を選ぶ<br>●面談に参加
+                                    →
+                                    10大特典を全てプレゼント！<br><br>面談参加者の声もいただいています。<br><br>『自分に何が足りないか、30分で明確になりました。プレゼントのテンプレも実践的で驚きました。』<br>『面談で教えてもらったロードマップ通りに進めたら、2ヶ月目で売上10万円を超えました。』<br>といった内容で、本当に嬉しく思っています。<br><br>ぜひ、期限までにボタンを押してください。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">６</span>
+                                ６. 残り4時間の通知（250文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    度々失礼いたします。<br><br>【ブースターパッケージ（10大特典）】の受付期限まで、**あと4時間**となりました。<br><br>ボタンを押すと、面談予約のご案内をお送りします。<br>面談に参加するだけで10大特典が全て手に入ります。<br><br>この機会を逃して寝てしまうのは、非常にもったいないので、ぜひ今すぐボタンを押しておいてください。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">７</span>
+                                ７. あと2時間（150文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    夜分遅くに失礼致します。あと２時間です。ボタンを押すだけでOKです。<br><br>※ボタンを押した後に届く面談予約は、後日ゆっくりお選びいただけます。<br>今はボタンだけ押しておいていただければ大丈夫です。<br><br>きっと後悔しないと思います。よろしくお願いします。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">８</span>
+                                ８. あと1時間（50文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">※あと1時間で受付が終了します（最終リマインド）<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">プレゼントを受け取りたい</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">９</span>
+                                ９. [先頭に戻す] 受付締め切りました（シナリオ先頭に戻す）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble"><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]、こんにちは。おとつい締め切りとなった【ブースターパッケージ（10大特典）】ですが、このプレゼントには<br><br>・Brain販売で月50万円を最短で達成するロードマップ<br>・初心者でも最短月5万を作る完全3ステップ<br>・年商1億経営者が実践するKPI設計テンプレート<br>・アフィリエイトで月10万稼ぐ戦略ガイド<br>これらが含まれていました。<br><br>さらに、プレゼント受取に必要な**無料個別面談**では<br>あなた専用のBrain活用アドバイスも受けられる予定でした。<br><br>今回、「忙しくてボタンを押す時間が取れませんでした」<br>「もう一度チャンスをもらえませんか？」というお問い合わせをいただき、もう一度だけチャンスを設けました。<br><br>タップしないと永久にプレゼントも面談も受けられませんのでご注意ください。<br><br>以下を、一度だけ押してください！！！<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">再チャンスで参加する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">10</span>
+                                10. [先頭に戻す] 最終日（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    ※タップしないと以下の特典が受けられませんのでご注意ください。<br><br>・Brain販売で月50万円ロードマップ<br>・コンテンツの値段設計テンプレート<br>・初心者が最短月5万円を作る3ステップ<br>・稼げるスキル選定チェックリスト<br>・その他6つの実践テンプレート＆ガイド<br><br>＋
+                                    受取に必要な【無料個別面談】のご案内<br><br>受付期限をあと２日間だけ延長できます。本日中に押さない場合は全てのプレゼントが永久にお届けできなくなります。<br><br>これを押さない場合、終了です。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">期限を延長する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">11</span>
+                                11. [先頭に戻す] 最終告知（250文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    夜分遅くに失礼致します。<br><br>【ブースターパッケージ（10大特典）】の再チャンス、最後のメッセージとなります。以下を押せば、受付期限が２日間延長されます。<br><br>※これをタップしないと、10大特典＋無料個別面談の機会が全て失われますのでご注意ください。<br><br>ボタンの期限は、あと２時間だけです。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">期限を延長する</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="font-size:16px;font-weight:800;margin:24px 0 12px;color:var(--orange)">
+                        シナリオ②：面談予約誘導（7日締切・14ステップ＋面談後MSG）</h4>
+                    <div class="accordion">
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num green">１</span>
+                                １. 興味表明のお礼＋面談のご案内
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">ボタンを押していただき、ありがとうございます！<br><br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]に【ブースターパッケージ（10大特典）】を<br>お届けする準備が整いました。<br><br>━━━━━━━━━━━━━━━━━<br>プレゼントの受け取り方法<br>━━━━━━━━━━━━━━━━━<br><br>Brainの専門家との**無料個別面談（60分）**に<br>ご参加いただいた方全員にプレゼントをお届けします。<br><br>面談では、プレゼントをお渡しするだけでなく<br>●あなたに最適なBrain活用戦略のご提案<br>●プレゼント内容の実践的な活用法<br>●今後のロードマップの個別設計<br><br>を完全カスタマイズでお伝えします。<br><br>面談枠には限りがありますので、お早めにご予約ください。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">無料面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">２</span>
+                                ２. 面談で得られるメリットのまとめ（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">【あと6日】<br>改めて、今回の面談で得られるものをまとめます。<br><br>━━━━━━━━━━━━━━━━━<br>📅
+                                    無料個別面談（60分）の内容<br>━━━━━━━━━━━━━━━━━<br><br>●あなたのステージ（初心者/コンテンツホルダー/経営者/アフィリエイター）に合わせた完全カスタマイズのアドバイス<br>●プレゼント10大特典の**最も効果的な使い方**をレクチャー<br>●今後3ヶ月〜6ヶ月のロードマップを一緒に設計<br><br>━━━━━━━━━━━━━━━━━<br>🎁
+                                    面談参加者全員に<br>━━━━━━━━━━━━━━━━━<br><br>【ブースターパッケージ（10大特典）】をプレゼント！<br>専用会員サイトのアクセス権をお渡しします。<br><br>「何から手をつければいいかわからない」という方にこそ受けていただきたい内容です。<br><br>ぜひ、面談の詳細をチェックしてください。<br>本日は以上です。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談の詳細を見る</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">３</span>
+                                ３. プレゼント内容の一部チラ見せ（350文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【あと5日】<br>こんにちは。<br><br>面談参加者にお届けするブースターパッケージの中から、<br>特に反響が大きい特典を2つだけご紹介します。<br><br>📋【特典1：Brain販売で月50万円を達成するロードマップ】<br><br>Phase
+                                    0〜4まで、テーマ選定から安定収益化まで完全にステップ化。<br>「何を」「どの順番で」やればいいかが一目でわかります。<br><br>📋【特典6：年商1億経営者のKPI設計テンプレート】<br><br>売上を因数分解して、どこがボトルネックなのかを数値で把握できるテンプレート。感覚経営から脱却できると大好評です。<br><br>これらを含む10大特典が、面談参加で**全て手に入ります**。<br><br>しかも面談では、あなたに最適な使い方まで個別にアドバイス。<br>テンプレートを渡すだけでなく、一緒に活用法を設計します。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">４</span>
+                                ４. 面談参加者の声・事例紹介
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【あと4日】<br>こんにちは。<br><br>実際に面談を受けた方から<br>嬉しいお声をいただいています。<br><br>「自分に何が足りないか、30分で明確になりました。<br>今まで色んな教材を買ってきましたが、こういう個別の壁打ちが一番効果的だと実感しました。<br>しかもプレゼントまでもらえるなんて、参加しない理由がありませんでした。」<br><br>「副業で始めたBrainですが、面談で教えてもらったロードマップ通りに進めたら、2ヶ月目で10万円を超えました。独学だったら半年かかっていたと思います。」<br><br>「年商3000万から伸び悩んでいましたが、KPIの考え方を教えてもらって、具体的に何を変えればいいかがクリアになりました。」<br><br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]も、ぜひ一歩踏み出してみてください。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">５</span>
+                                ５. 「残り枠わずか」緊急性の演出
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【あと3日】<br>こんにちは。<br><br>お知らせがあります。<br><br>今週の面談枠ですが、<br>残り**3枠**となりました。<br><br>面談は1対1で60分間、<br>あなたのためだけの時間を確保してお話しますので、<br>どうしても**受付人数に限り**があります。<br><br>面談を受けた方の**92%**が<br>「受けてよかった」と回答してくださっています。<br><br>迷われているのでしたら、<br>まずは枠だけ確保しておくことをおすすめします。<br>（日程変更は後からでも可能です）<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">残りの枠を確認する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">６</span>
+                                ６. 面談で得られるものの具体化
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【あと2日】<br>こんにちは。<br><br>面談の締め切りが近づいてきましたので、<br>改めて面談で得られるものを具体的にお送りします。<br><br>面談では、あなたの状況をヒアリングした上で<br><br>✅
+                                    あなたの「稼ぎやすいポジション」の特定<br>✅ 最短で結果を出すための3ヶ月ロードマップ<br>✅ プレゼント10大特典の活用優先順位<br>✅
+                                    今すぐ取り組むべき「最初の一手」のアドバイス<br><br>これらを**完全カスタマイズ**でお伝えします。<br><br>さらに、面談参加者全員に<br>【ブースターパッケージ10大特典】をその場でプレゼント。<br><br>60分の面談で<br>「個別アドバイス＋10大特典」<br>が両方手に入る、他にはない機会です。<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">７</span>
+                                ７. 最終リマインド（明日終了）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【明日終了】<br>おはようございます。<br>本日と明日で面談予約を一旦締め切りますので、ご連絡させていただきました。<br><br>明日やろうだと忘れてしまうかもしれないので、<br>気になっているのでしたら、ぜひ予約してみてください。<br><br>Brainで成果を出している人に共通しているのは<br>「一人で悩まず、早い段階でプロに相談した」<br>ということです。<br><br>独学で半年かかることが、<br>面談の60分で一気に解決することも珍しくありません。<br><br>しかも10大特典付き。<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]もぜひ飛び込んでみてください。<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">８</span>
+                                ８. 明日終了の夜リマインド
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    こんばんは。<br><br>朝ご連絡した通り、面談予約の受付は明日までです。<br><br>もう一度まとめると、この面談では<br>・あなたのステージに合わせた完全カスタマイズのアドバイス<br>・Brain活用ロードマップの個別設計<br>・10大特典の使いこなし方レクチャー<br><br>に加えて、参加者全員に<br>【ブースターパッケージ10大特典（専用会員サイトアクセス権）】<br>を**その場でプレゼント**。<br><br>これらが**完全無料**で受けられます。<br><br>あと28時間で終了です！<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">９</span>
+                                ９. 【本日終了】※あと16時間※
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    【本日終了】※あと16時間※<br>おはようございます。<br>本日で面談予約を一旦締め切ります。<br><br>面談予約の締め切りは、<br>あなたがBrainで成果を出すための<br>●個別ロードマップ設計<br>●10大特典のプレゼント<br>の機会が失われてしまうことを意味しています。<br><br>ぜひこの機会を逃さないでください。<br><br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談を予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">10</span>
+                                10. ※あと4時間※
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    ※あと4時間※<br>こんばんは。<br><br>今朝お知らせした件ですが、今晩24時が最終期限になります。<br><br>面談に参加すると<br>✅
+                                    完全カスタマイズのBrain活用アドバイス<br>✅ 3ヶ月ロードマップの個別設計<br>✅
+                                    ブースターパッケージ10大特典のプレゼント<br><br>これら全てが手に入ります。<br><br>あと4時間です。<br><br>お急ぎください！<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">今すぐ予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num ">11</span>
+                                11. ※あと2時間※（150文字以下）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    夜分遅くに失礼致します。あと２時間です。<br><br>本日までにご予約がない場合、<br>【ブースターパッケージ10大特典】も<br>【個別アドバイス】も<br>全て失われてしまいます。<br><br>内容には自信があるのですが、<br>今までの経験上、成功してきた人は一瞬で決める人です。<br><br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]の決断を、後悔させないと思います。よろしくお願いします。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">今すぐ予約する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">12</span>
+                                12. [先頭に戻す] 面談予約終了のお知らせ
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble"><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]、こんにちは。<br><br>おとつい、無料個別面談の予約が締め切りとなりました。<br><br>本当にたくさんのご応募、ありがとうございました。<br><br>さて、<span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]は、今回はご参加されませんでしたが、<br>何か気になる点や、参加しにくい点があったでしょうか？<br><br>もし、「まだ迷っている・・・」ということであれば、<br>あと**7日間**、面談予約期間を延長させていただきますので、<br>遠慮なく以下のボタンを押してください。<br><br>＊募集は今から**2日間だけ**です！<br>＊押さない方は当企画はここで終了となります。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">面談予約を延長する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">13</span>
+                                13. [先頭に戻す] 最終日
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    無料個別面談の予約期間をあと7日間だけ延長できます。<br><br>面談に参加すれば10大特典も全て受け取れます。<br><br>これを押さない場合、終了です。<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">延長する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num red">14</span>
+                                14. [先頭に戻す] 最終告知
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">
+                                    夜分遅くに失礼致します。<br><br>無料個別面談の予約、再チャンスの最後のメッセージとなります。<br>以下を押せば、予約期限が**7日間**延長されます。<br><br>※これをタップしない場合は終了となります。<br><br>ボタンの期限は、あと2時間だけです。<br>では、ありがとうございました！<br>↓↓↓<br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">延長する</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-item">
+                            <div class="acc-header" onclick="toggleAcc(this)">
+                                <span class="acc-num green">15</span>
+                                ◆ 面談終了後に送信するメッセージ（手動 or 面談完了トリガー）
+                                <span class="acc-arrow">▼</span>
+                            </div>
+                            <div class="acc-body">
+                                <div class="msg-bubble">&gt; ※ 面談が完了した方に対してのみ送信。<br>&gt; ※ プロラインの手動送信 or Webhook
+                                    で自動送信。<br><br><span
+                                        style="display:inline-block;background:var(--orange);color:#fff;padding:4px 16px;border-radius:8px;font-weight:700;font-size:13px;margin:4px 0">[snsnamesan</span>]、本日は面談にご参加いただき<br>本当にありがとうございました！<br><br>お約束していた【ブースターパッケージ10大特典】を<br>お届けします。<br><br>▼
+                                    以下の専用ページからお受け取りください
+                                    ▼<br>https://brain-booster-pkg.surge.sh<br><br>このページはあなた専用のプレゼントページです。<br>ぜひブックマークしていつでもご活用ください。<br><br>本日お伝えした内容と合わせて、<br>Brainでの成果に繋げていただければ嬉しいです。<br><br>今後ともよろしくお願いいたします！
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>📋 面談完了後の自動メッセージ</h4>
+                    <p style="font-size:14px">
+                        面談完了者にLINEでプレゼントページURL（<strong>brain-booster-pkg.surge.sh</strong>）を自動送付。「ブックマークしていつでもご活用ください」のメッセージ付き。
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 4: プレゼント -->
+            <div id="presents" class="tab-content">
+                <div class="sec-label">booster package</div>
+                <div class="sec-title">ブースターパッケージ 10大特典</div>
+                <div class="sec-desc">4属性（コンテンツホルダー/初心者/経営者/アフィリエイター）すべてに対応する10本のコンテンツ。Markdown形式で制作済み。</div>
+
+                <div class="present-grid">
+                    <div class="present-card-sm">
+                        <div class="p-num">01</div>
+                        <h4>Brain販売で月50万円を達成するロードマップ</h4><span class="p-tag a">A: コンテンツホルダー</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">02</div>
+                        <h4>コンテンツの値段設計テンプレート</h4><span class="p-tag a">A: コンテンツホルダー</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">03</div>
+                        <h4>初心者が最短で月5万円を作る3ステップ</h4><span class="p-tag b">B: 初心者</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">04</div>
+                        <h4>稼げるスキル選定チェックリスト</h4><span class="p-tag b">B: 初心者</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">05</div>
+                        <h4>売上の壁を突破する仕組み化チェックシート</h4><span class="p-tag c">C: 経営者</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">06</div>
+                        <h4>年商1億経営者が実践するKPI設計テンプレート</h4><span class="p-tag c">C: 経営者</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">07</div>
+                        <h4>Brainアフィリエイトで月10万円稼ぐ戦略ガイド</h4><span class="p-tag d">D: アフィリエイター</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">08</div>
+                        <h4>SNSフォロワーを最速で伸ばすX運用テンプレート</h4><span class="p-tag d">D: アフィリエイター</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">09</div>
+                        <h4>迫さん直伝 ビジネスモデル構築の全体像</h4><span class="p-tag all">全属性共通</span>
+                    </div>
+                    <div class="present-card-sm">
+                        <div class="p-num">10</div>
+                        <h4>Brain成功者インタビュー集</h4><span class="p-tag all">全属性共通</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top:32px">
+                    <h4>🌐 プレゼント受取ページ</h4>
+                    <p style="font-size:14px"><strong>URL:</strong> <a href="https://brain-booster-pkg.surge.sh"
+                            target="_blank"
+                            style="color:var(--orange)">brain-booster-pkg.surge.sh</a><br>ダーク×パープルのWebアプリ。タイプ別タブフィルター＆モーダル詳細表示機能付き。デプロイ済み。
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 5: 進捗管理 -->
+            <div id="progress" class="tab-content">
+                <div class="sec-label">progress tracker</div>
+                <div class="sec-title">Phase 1 進捗管理</div>
+                <div class="sec-desc">最短構築パターン（動画なし・テキストベース）の進捗状況。</div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">✅</div>
+                        <h3>Phase 1 — 完了タスク</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status done">完了</span>ファネル全体設計書の作成</li>
+                        <li><span class="status done">完了</span>プレゼント10大特典コンテンツの作成（Markdown×10本）</li>
+                        <li><span class="status done">完了</span>LINEシナリオ①原稿（プレゼント受取・11ステップ）</li>
+                        <li><span class="status done">完了</span>LINEシナリオ②原稿（面談予約誘導・14ステップ）</li>
+                        <li><span class="status done">完了</span>面談予約ページ コピーライティング</li>
+                        <li><span class="status done">完了</span>LP制作（2パターン：クリーム版・ダーク版）</li>
+                        <li><span class="status done">完了</span>プレゼント受取Webアプリ（surge.shデプロイ済み）</li>
+                        <li><span class="status done">完了</span>プロライン確認用企画書</li>
+                        <li><span class="status done">完了</span>LINE画像制作仕様書</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top:20px">
+                    <div class="card-header">
+                        <div class="card-icon red">🔴</div>
+                        <h3>Phase 1 — 未完了タスク</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status todo">未着手</span>LINE配信用画像の制作（15枚：ヘッダー4/ボタン5/コンテンツ3/バナー3）</li>
+                        <li><span class="status done">完了</span>面談予約ページの構築（Calendly等連携）</li>
+                        <li><span class="status done">完了</span>プロラインへのシナリオ実装（2シナリオ・先頭に戻し設定）</li>
+                        <li><span class="status todo">未着手</span>プレゼントコンテンツのPDF化（Markdown→PDF変換）</li>
+                        <li><span class="status todo">未着手</span>タグ設計・実装（興味あり/面談予約済/面談完了）</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top:20px">
+                    <div class="card-header">
+                        <div class="card-icon blue">🔵</div>
+                        <h3>Phase 2 — 本格版（将来対応）</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status todo">未着手</span>迫さんの面玉動画の撮影・編集</li>
+                        <li><span class="status todo">未着手</span>属性分類アンケート（15問）の設計・実装</li>
+                        <li><span class="status todo">未着手</span>属性別教育シナリオ（A〜D 各タイプ別）</li>
+                        <li><span class="status todo">未着手</span>動画→感想→アンケート→プレゼント出し分けフロー</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box" style="margin-top:32px">
+                    <h4>📋 構築の優先順位</h4>
+                    <table style="box-shadow:none;margin:0;margin-top:12px">
+                        <thead>
+                            <tr>
+                                <th>優先度</th>
+                                <th>タスク</th>
+                                <th>概要</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🔴 最優先</td>
+                                <td class="highlight">LINE画像15枚の制作</td>
+                                <td>シナリオに必要な画像の実制作</td>
+                            </tr>
+                            <tr>
+                                <td>🔴 最優先</td>
+                                <td class="highlight">プロライン実装</td>
+                                <td>シナリオ設定・先頭に戻す・タグ管理</td>
+                            </tr>
+                            <tr>
+                                <td>🟡 次に</td>
+                                <td>面談予約ページ構築</td>
+                                <td>Calendly連携・ページデザイン</td>
+                            </tr>
+                            <tr>
+                                <td>🟡 次に</td>
+                                <td>プレゼントPDF化</td>
+                                <td>Markdown→PDF変換・デザイン整形</td>
+                            </tr>
+                            <tr>
+                                <td>🟢 後で</td>
+                                <td>Phase 2 動画・アンケート</td>
+                                <td>Phase 1稼働後に着手</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div id="resources" class="tab-content">
+                <div class="sec-label">resource hub</div>
+                <div class="sec-title">📂 制作物リソースハブ</div>
+                <div class="sec-desc">この企画の全制作物へのリンク集。ダッシュボードから全てアクセスできます。</div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">🌐</div>
+                            <h3>デプロイ済みWebページ</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">LIVE</span><a href="https://brain-booster-pkg.surge.sh"
+                                    target="_blank" style="color:var(--orange);font-weight:700">LP v2（オレンジテーマ）→</a></li>
+                            <li><span class="status done">LIVE</span><a href="https://brain-booster-dashboard.surge.sh"
+                                    target="_blank" style="color:var(--orange);font-weight:700">統合ダッシュボード（このページ）→</a>
+                            </li>
+                            <li><span class="status done"
+                                    style="background:rgba(16,185,129,0.1);color:var(--green)">LINE</span><a
+                                    href="https://c2b3yqig.autosns.app/line" target="_blank"
+                                    style="color:var(--green);font-weight:700">💚 友だち追加URL（プロライン）→</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon green">📝</div>
+                            <h3>設計書・企画書</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">MD</span><a href="docs/LINE構築設計書.md" target="_blank"
+                                    style="color:var(--green);font-weight:700">LINE構築設計書 →</a></li>
+                            <li><span class="status done">MD</span><a href="docs/企画書_プロライン確認用.md" target="_blank"
+                                    style="color:var(--green);font-weight:700">プロライン確認用 企画書 →</a></li>
+                            <li><span class="status done">MD</span><a href="docs/画像制作概要.md" target="_blank"
+                                    style="color:var(--green);font-weight:700">LINE画像 制作仕様書 →</a></li>
+                            <li><span class="status done">TXT</span><a href="docs/面談予約ページ_コピー.txt" target="_blank"
+                                    style="color:var(--green);font-weight:700">面談予約ページ コピー →</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon gold">💬</div>
+                            <h3>LINEシナリオ原稿</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">MD</span><a href="docs/01_プレゼント受取_2日締切+先頭に戻す.md"
+                                    target="_blank" style="color:var(--gold);font-weight:700">シナリオ① プレゼント受取（11ステップ）→</a>
+                            </li>
+                            <li><span class="status done">MD</span><a href="docs/02_面談予約誘導_7日締切+先頭に戻す.md"
+                                    target="_blank" style="color:var(--gold);font-weight:700">シナリオ② 面談予約誘導（14ステップ）→</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon blue">🎁</div>
+                            <h3>10大特典コンテンツ</h3>
+                        </div>
+                        <ul class="checklist">
+                            <li><span class="status done">MD</span><a href="docs/01_Brain販売で月50万円を達成するロードマップ.md"
+                                    target="_blank">01 ロードマップ → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/02_コンテンツの値段設計テンプレート.md"
+                                    target="_blank">02 値段設計テンプレート → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/03_初心者が最短で月5万円を作る3ステップ.md"
+                                    target="_blank">03 月5万円の3ステップ → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/04_稼げるスキル選定チェックリスト.md"
+                                    target="_blank">04 スキル選定チェックリスト → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/05_売上の壁を突破する仕組み化チェックシート.md"
+                                    target="_blank">05 仕組み化チェックシート → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/06_年商1億経営者が実践するKPI設計テンプレート.md"
+                                    target="_blank">06 KPI設計テンプレート → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/07_Brainアフィリエイトで月10万円稼ぐ戦略ガイド.md"
+                                    target="_blank">07 アフィリエイト戦略ガイド → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/08_SNSフォロワーを最速で伸ばすX運用テンプレート.md"
+                                    target="_blank">08 X運用テンプレート → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/09_迫さん直伝ビジネスモデル構築の全体像.md"
+                                    target="_blank">09 ビジネスモデル全体像 → </a></li>
+                            <li><span class="status done">MD</span><a href="docs/10_Brain成功者インタビュー集.md"
+                                    target="_blank">10 成功者インタビュー集 → </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">🖼️</div>
+                            <h3>OGPバナー 10パターン（1200×630px）</h3>
+                        </div>
+                        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px">
+                            <a href="banners/ogp_01_ten_free.png" target="_blank"><img src="banners/ogp_01_ten_free.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="01"></a>
+                            <a href="banners/ogp_02_formula.png" target="_blank"><img src="banners/ogp_02_formula.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="02"></a>
+                            <a href="banners/ogp_03_pain_what.png" target="_blank"><img
+                                    src="banners/ogp_03_pain_what.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="03"></a>
+                            <a href="banners/ogp_04_pain_wall.png" target="_blank"><img
+                                    src="banners/ogp_04_pain_wall.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="04"></a>
+                            <a href="banners/ogp_05_sako.png" target="_blank"><img src="banners/ogp_05_sako.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="05"></a>
+                            <a href="banners/ogp_06_type.png" target="_blank"><img src="banners/ogp_06_type.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="06"></a>
+                            <a href="banners/ogp_07_proof_50.png" target="_blank"><img src="banners/ogp_07_proof_50.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="07"></a>
+                            <a href="banners/ogp_08_system.png" target="_blank"><img src="banners/ogp_08_system.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="08"></a>
+                            <a href="banners/ogp_09_reveal.png" target="_blank"><img src="banners/ogp_09_reveal.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="09"></a>
+                            <a href="banners/ogp_10_weapons.png" target="_blank"><img src="banners/ogp_10_weapons.png"
+                                    style="width:100%;border-radius:8px;border:1px solid #eee" alt="10"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Brain セールスファネル 統合ダッシュボード — 村上さんセールスチーム × マンキーさんマーケ構築</p>
+        <p style="margin-top:4px">© F Production / YOLO's. Last updated: 2026-03-09 05:38</p>
+    </footer>
+
+    <script>
+
+        function toggleAcc(el) {
+            el.classList.toggle('open');
+            el.nextElementSibling.classList.toggle('open');
+        }
+
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 20, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+
+</html>

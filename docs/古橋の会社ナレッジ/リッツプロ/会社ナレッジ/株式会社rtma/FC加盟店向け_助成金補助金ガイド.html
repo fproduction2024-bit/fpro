@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>よもぎ蒸しサロン ON FC加盟 | 助成金・補助金活用ガイド</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --orange: #E8650A;
+            --orange-action: #F97316;
+            --teal: #0C4A4E;
+            --teal-light: #14706E;
+            --white: #FFFFFF;
+            --gray-bg: #F8F9FB;
+            --orange-bg: #FFF7F0;
+            --green: #10B981;
+            --green-bg: #ECFDF5;
+            --red: #EF4444;
+            --text-dark: #1A1A2E;
+            --text-body: #444444;
+            --text-muted: #888;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, .06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, .08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, .12);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-body);
+            background: var(--gray-bg);
+            line-height: 1.8;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, #0A6B6E 50%, var(--teal-light) 100%);
+            color: var(--white);
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(249, 115, 22, .15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 100px;
+            padding: 6px 18px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .hero h1 {
+            font-size: clamp(24px, 5vw, 38px);
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--orange-action);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            font-weight: 400;
+            opacity: .85;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ---------- Layout ---------- */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 56px 0;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            color: var(--orange);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        /* ---------- Summary Cards (top) ---------- */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: -32px 0 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .summary-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform .2s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .summary-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .summary-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--teal);
+            line-height: 1.1;
+        }
+
+        .summary-num small {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .summary-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        /* ---------- Grant Cards ---------- */
+        .grant-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, .04);
+            transition: box-shadow .2s;
+        }
+
+        .grant-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .grant-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 22px 24px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .grant-rank {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            color: var(--white);
+        }
+
+        .rank-a {
+            background: linear-gradient(135deg, var(--orange), var(--orange-action));
+        }
+
+        .rank-b {
+            background: linear-gradient(135deg, var(--teal), var(--teal-light));
+        }
+
+        .rank-c {
+            background: linear-gradient(135deg, #6366F1, #818CF8);
+        }
+
+        .grant-info {
+            flex: 1;
+        }
+
+        .grant-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .grant-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 100px;
+            letter-spacing: .02em;
+        }
+
+        .tag-amount {
+            background: var(--orange-bg);
+            color: var(--orange);
+        }
+
+        .tag-rate {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .tag-type {
+            background: #EEF2FF;
+            color: #6366F1;
+        }
+
+        .grant-toggle {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--gray-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: transform .3s;
+        }
+
+        .grant-card.open .grant-toggle {
+            transform: rotate(180deg);
+        }
+
+        .grant-body {
+            display: none;
+            padding: 0 24px 24px;
+            border-top: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        .grant-card.open .grant-body {
+            display: block;
+        }
+
+        .grant-body h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--teal);
+            margin: 18px 0 8px;
+        }
+
+        .grant-body ul {
+            padding-left: 20px;
+        }
+
+        .grant-body li {
+            margin-bottom: 6px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: var(--orange-bg);
+            border-left: 4px solid var(--orange);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 16px 20px;
+            margin-top: 14px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .highlight-box strong {
+            color: var(--orange);
+        }
+
+        /* ---------- Model Table ---------- */
+        .model-table-wrap {
+            overflow-x: auto;
+            margin: 24px 0;
+        }
+
+        .model-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            min-width: 520px;
+        }
+
+        .model-table th {
+            background: var(--teal);
+            color: var(--white);
+            font-weight: 700;
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 13px;
+            letter-spacing: .03em;
+        }
+
+        .model-table th:first-child {
+            border-radius: var(--radius-sm) 0 0 0;
+        }
+
+        .model-table th:last-child {
+            border-radius: 0 var(--radius-sm) 0 0;
+        }
+
+        .model-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        .model-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .model-table tr:nth-child(even) td {
+            background: var(--gray-bg);
+        }
+
+        .model-table .amount {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--teal);
+        }
+
+        .model-table .total-row td {
+            background: var(--orange-bg) !important;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .model-table .total-row .amount {
+            color: var(--orange);
+            font-size: 18px;
+        }
+
+        /* ---------- Caution Section ---------- */
+        .caution-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 28px 24px;
+            border-left: 5px solid var(--red);
+            margin-bottom: 20px;
+        }
+
+        .caution-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 12px;
+        }
+
+        .caution-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .caution-item .icon {
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        /* ---------- Flow ---------- */
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+
+        .flow-line {
+            flex-shrink: 0;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flow-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal), var(--teal-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-connector {
+            width: 2px;
+            flex: 1;
+            background: linear-gradient(to bottom, var(--teal), rgba(12, 74, 78, .2));
+            min-height: 20px;
+        }
+
+        .flow-step:last-child .flow-connector {
+            display: none;
+        }
+
+        .flow-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .flow-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .flow-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ---------- CTA ---------- */
+        .cta-section {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 48px 24px;
+            border-radius: var(--radius);
+            margin: 0 20px 48px;
+            max-width: 880px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(249, 115, 22, .15), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 900;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cta-section p {
+            font-size: 14px;
+            opacity: .85;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--orange), var(--orange-action));
+            color: var(--white);
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 14px 36px;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(249, 115, 22, .3);
+            transition: transform .2s, box-shadow .2s;
+            position: relative;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(249, 115, 22, .4);
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(0, 0, 0, .06);
+        }
+
+        footer strong {
+            color: var(--text-dark);
+        }
+
+        /* ---------- Print ---------- */
+        @media print {
+            .hero {
+                padding: 32px 20px;
+            }
+
+            .grant-body {
+                display: block !important;
+            }
+
+            .grant-toggle {
+                display: none;
+            }
+
+            .cta-section {
+                display: none;
+            }
+
+            section {
+                padding: 24px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== Hero ===== -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-badge">📋 FC加盟検討者向け資料</div>
+            <h1>よもぎ蒸しサロン ON<br>FC加盟で使える<br><em>助成金・補助金</em>ガイド</h1>
+            <p class="hero-sub">初期費用を最大限に抑えて、安心して開業するための公的支援制度をまとめました。</p>
+        </div>
+    </header>
+
+    <!-- ===== Summary Cards ===== -->
+    <div class="container">
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-icon">💰</div>
+                <div class="summary-num">7<small>件+</small></div>
+                <div class="summary-label">活用可能な制度数</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">📉</div>
+                <div class="summary-num">~200<small>万円</small></div>
+                <div class="summary-label">補助金で圧縮可能な金額</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-icon">🏪</div>
+                <div class="summary-num">~500<small>万円</small></div>
+                <div class="summary-label">FC初期投資目安（4台モデル）</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Section 1: 補助金（可能性が高い） ===== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Recommended</div>
+            <p class="section-title">✅ 活用可能性が高い補助金・助成金</p>
+
+            <!-- 1. 小規模事業者持続化補助金 -->
+            <div class="grant-card open" id="grant-1">
+                <div class="grant-header" onclick="toggleGrant('grant-1')">
+                    <div class="grant-rank rank-a">A</div>
+                    <div class="grant-info">
+                        <div class="grant-name">小規模事業者持続化補助金</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">最大 200万円</span>
+                            <span class="tag tag-rate">補助率 2/3</span>
+                            <span class="tag tag-type">経済産業省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>小規模事業者の販路開拓・生産性向上を支援する補助金。FC加盟事業者も申請可能で、サロン開業に最も使いやすい制度の一つです。</p>
+
+                    <h4>💴 補助額</h4>
+                    <ul>
+                        <li><strong>通常枠</strong>：上限 50万円</li>
+                        <li><strong>創業枠</strong>：上限 200万円（開業直後でも申請可能）</li>
+                        <li><strong>賃金引上げ枠</strong>：上限 200万円</li>
+                    </ul>
+
+                    <h4>🎯 対象経費（よもぎ蒸しサロンで使える例）</h4>
+                    <ul>
+                        <li>よもぎ蒸し設備の購入費（壺・椅子・タイマー等）</li>
+                        <li>内装工事費</li>
+                        <li>広告宣伝費（ホットペッパービューティー掲載料、チラシ等）</li>
+                        <li>Webサイト制作費</li>
+                        <li>予約管理システム導入費</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡
+                            ポイント：</strong>FC加盟金自体は対象外ですが、開業時に必要な設備・広告・内装費に幅広く使えるため、初期投資の大部分をカバーできます。商工会議所への相談が必要です。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. IT導入補助金 -->
+            <div class="grant-card" id="grant-2">
+                <div class="grant-header" onclick="toggleGrant('grant-2')">
+                    <div class="grant-rank rank-a">A</div>
+                    <div class="grant-info">
+                        <div class="grant-name">IT導入補助金（デジタル化・AI導入補助金）</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">最大 450万円</span>
+                            <span class="tag tag-rate">補助率 1/2〜4/5</span>
+                            <span class="tag tag-type">経済産業省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>中小企業がITツールを導入する際の費用を補助する制度。2026年度からは「デジタル化・AI導入補助金」に名称変更予定。</p>
+
+                    <h4>🎯 対象経費（サロンで使える例）</h4>
+                    <ul>
+                        <li>予約管理システム（ホットペッパー連携含む）</li>
+                        <li>顧客管理CRM・カルテシステム</li>
+                        <li>POSレジ・会計・決済ソフト</li>
+                        <li>勤怠管理システム</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>インボイス対応の経理システム等は補助率が最大4/5まで引き上げられる特別枠もあり。サロン運営のデジタル化に最適です。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. キャリアアップ助成金 -->
+            <div class="grant-card" id="grant-3">
+                <div class="grant-header" onclick="toggleGrant('grant-3')">
+                    <div class="grant-rank rank-a">A</div>
+                    <div class="grant-info">
+                        <div class="grant-name">キャリアアップ助成金</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">1人あたり最大 80万円</span>
+                            <span class="tag tag-rate">要件充足で受給可</span>
+                            <span class="tag tag-type">厚生労働省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>非正規雇用スタッフ（パート・アルバイト）を正社員に転換した際に受給できる助成金。要件を満たせばほぼ確実に受給できるのが特徴です。</p>
+
+                    <h4>💴 助成額（正社員化コース）</h4>
+                    <ul>
+                        <li>有期→正規：1人あたり <strong>80万円</strong>（中小企業）</li>
+                        <li>無期→正規：1人あたり <strong>40万円</strong>（中小企業）</li>
+                    </ul>
+
+                    <h4>🎯 よもぎ蒸しサロンでの活用例</h4>
+                    <ul>
+                        <li>オープン時にアルバイトとして採用 → 半年後に正社員転換</li>
+                        <li>4台モデルでスタッフ1名を正社員化すれば80万円受給</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>補助金と違い、要件を満たしていれば「審査落ち」がほぼありません。スタッフを雇用する場合、計画的に活用すれば確実に受給できます。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 人材開発支援助成金 -->
+            <div class="grant-card" id="grant-4">
+                <div class="grant-header" onclick="toggleGrant('grant-4')">
+                    <div class="grant-rank rank-b">B</div>
+                    <div class="grant-info">
+                        <div class="grant-name">人材開発支援助成金</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">経費の最大 75%</span>
+                            <span class="tag tag-rate">+賃金助成</span>
+                            <span class="tag tag-type">厚生労働省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>従業員の職業訓練・スキルアップにかかる経費と訓練期間中の賃金を助成する制度。FC本部の研修プログラムに活用できます。</p>
+
+                    <h4>🎯 対象となる研修例</h4>
+                    <ul>
+                        <li>よもぎ蒸しの施術技術研修（本部プログラム）</li>
+                        <li>接客・ホスピタリティ研修</li>
+                        <li>クロージング（サブスク提案）のセールス研修</li>
+                        <li>衛生管理・安全研修</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>ON本部が研修プログラムを「助成金対応メニュー」として整備すれば、加盟店が活用しやすくなります。研修費の負担を大幅に軽減できます。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 業務改善助成金 -->
+            <div class="grant-card" id="grant-5">
+                <div class="grant-header" onclick="toggleGrant('grant-5')">
+                    <div class="grant-rank rank-b">B</div>
+                    <div class="grant-info">
+                        <div class="grant-name">業務改善助成金</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">最大 600万円</span>
+                            <span class="tag tag-rate">設備投資+賃上げ</span>
+                            <span class="tag tag-type">厚生労働省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>生産性向上に資する設備投資を行い、事業場内の最低賃金を引き上げた事業者に支給される助成金。</p>
+
+                    <h4>🎯 サロンでの活用例</h4>
+                    <ul>
+                        <li>業務効率化のための設備導入（自動受付システム等）</li>
+                        <li>洗濯機の導入によるクリーニングコスト削減</li>
+                        <li>予約・顧客管理システムの導入</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>最低賃金の引上げ額に応じて助成上限が変動します。生産性向上と賃上げを両立する場合に有効です。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 2: 条件付き ===== -->
+    <section style="background: var(--white);">
+        <div class="container">
+            <div class="section-label">Conditional</div>
+            <p class="section-title">🔶 条件次第で活用可能な制度</p>
+
+            <!-- 6. 東京都創業助成事業 -->
+            <div class="grant-card" id="grant-6">
+                <div class="grant-header" onclick="toggleGrant('grant-6')">
+                    <div class="grant-rank rank-c">★</div>
+                    <div class="grant-info">
+                        <div class="grant-name">東京都創業助成事業<span
+                                style="font-size:12px;color:var(--text-muted);margin-left:8px;">東京都内限定</span></div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">最大 400万円</span>
+                            <span class="tag tag-rate">助成率 2/3</span>
+                            <span class="tag tag-type">東京都</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>東京都内で創業または創業5年未満の事業者を対象に、家賃・広告費・備品・人件費など幅広い経費を最長2年間助成する制度。</p>
+
+                    <h4>💴 助成額</h4>
+                    <ul>
+                        <li>助成限度額：<strong>400万円</strong>（下限100万円）</li>
+                        <li>対象期間：最長2年間</li>
+                    </ul>
+
+                    <h4>🎯 対象経費</h4>
+                    <ul>
+                        <li>賃貸物件の家賃</li>
+                        <li>広告宣伝費（ホットペッパー等）</li>
+                        <li>備品・設備購入費</li>
+                        <li>人件費</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>蔵前エリアなど東京都内での出店であれば最も手厚い制度。ただし競争率が高いため、事業計画書の完成度が重要です。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 地域雇用開発助成金 -->
+            <div class="grant-card" id="grant-7">
+                <div class="grant-header" onclick="toggleGrant('grant-7')">
+                    <div class="grant-rank rank-c">★</div>
+                    <div class="grant-info">
+                        <div class="grant-name">地域雇用開発助成金<span
+                                style="font-size:12px;color:var(--text-muted);margin-left:8px;">地方出店限定</span></div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">設備+人数に応じて</span>
+                            <span class="tag tag-rate">最大3年間支給</span>
+                            <span class="tag tag-type">厚生労働省</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>雇用機会が不足する地域で事業所を設置し、地域の求職者を雇い入れる事業主に支給される助成金。地方出店時に有力な選択肢。</p>
+
+                    <h4>⚠️ 注意事項</h4>
+                    <ul>
+                        <li><strong>東京都、大阪府、神奈川県、千葉県、埼玉県、愛知県</strong>は原則対象外</li>
+                        <li>300万円以上の設備投資が必要</li>
+                        <li>対象地域在住者を2名以上雇用が条件</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>地方での出店を検討する加盟オーナー向け。新規開業の場合、1回目の支給額が2倍になる特例あり。1年ごとに最大3回支給されます。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. 自治体独自の制度 -->
+            <div class="grant-card" id="grant-8">
+                <div class="grant-header" onclick="toggleGrant('grant-8')">
+                    <div class="grant-rank rank-c">★</div>
+                    <div class="grant-info">
+                        <div class="grant-name">各自治体の創業支援制度</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">自治体により異なる</span>
+                            <span class="tag tag-type">市区町村</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>多くの自治体が独自の創業支援補助金を設けています。出店エリアの自治体に確認することで、追加の支援を受けられる可能性があります。</p>
+
+                    <h4>🔍 確認方法</h4>
+                    <ul>
+                        <li>出店予定の市区町村の公式サイトで「創業支援」「開業補助金」を検索</li>
+                        <li>地元の商工会議所に相談</li>
+                        <li><a href="https://mirasapo-plus.go.jp/" target="_blank"
+                                style="color:var(--teal);font-weight:700;">ミラサポplus</a>（中小企業庁の支援ポータル）で検索</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 3: 融資 ===== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Financing</div>
+            <p class="section-title">🏦 併用推奨：日本政策金融公庫の創業融資</p>
+
+            <div class="grant-card open" id="grant-9">
+                <div class="grant-header" onclick="toggleGrant('grant-9')">
+                    <div class="grant-rank rank-b">💴</div>
+                    <div class="grant-info">
+                        <div class="grant-name">新規開業・スタートアップ支援資金</div>
+                        <div class="grant-tags">
+                            <span class="tag tag-amount">最大 7,200万円</span>
+                            <span class="tag tag-rate">低金利 1〜3%台</span>
+                            <span class="tag tag-type">日本政策金融公庫</span>
+                        </div>
+                    </div>
+                    <div class="grant-toggle">▼</div>
+                </div>
+                <div class="grant-body">
+                    <h4>📌 概要</h4>
+                    <p>政府系金融機関による創業者向け融資制度。無担保・無保証で利用でき、民間金融機関よりも有利な条件で資金調達が可能です。</p>
+
+                    <h4>💴 融資条件</h4>
+                    <ul>
+                        <li>融資限度額：<strong>7,200万円</strong>（うち運転資金4,800万円）</li>
+                        <li>金利：年 <strong>1〜3%台</strong>（優遇制度あり）</li>
+                        <li>担保・保証人：<strong>原則不要</strong></li>
+                        <li>自己資金要件：撤廃（ただし一定の自己資金があると審査に有利）</li>
+                    </ul>
+
+                    <h4>🎯 よもぎ蒸しFC加盟での活用</h4>
+                    <ul>
+                        <li>FC加盟金（100万円〜）の調達</li>
+                        <li>物件取得費用・保証金</li>
+                        <li>内装工事費・設備購入費</li>
+                        <li>オープン後の運転資金</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <strong>💡 ポイント：</strong>ON FCモデルは初期投資が約500万円と低いため、自己資金100〜200万円 +
+                        公庫融資300〜400万円で十分に開業可能。FCモデルの再現性の高さは融資審査でもプラス材料になります。返済は事業収益から行うため、サブスク売上が安定すれば無理のない返済計画が立てられます。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 4: シミュレーション ===== -->
+    <section style="background: var(--white);">
+        <div class="container">
+            <div class="section-label">Simulation</div>
+            <p class="section-title">📊 資金調達モデルプラン</p>
+            <p style="margin-bottom:16px;font-size:14px;color:var(--text-muted);">ON FC 4台モデル（初期投資約500万円）の場合の活用イメージ</p>
+
+            <div class="model-table-wrap">
+                <table class="model-table">
+                    <thead>
+                        <tr>
+                            <th>資金源</th>
+                            <th>活用制度</th>
+                            <th style="text-align:right;">金額目安</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>自己資金</td>
+                            <td>—</td>
+                            <td style="text-align:right;" class="amount">100〜200万円</td>
+                        </tr>
+                        <tr>
+                            <td>融資</td>
+                            <td>日本政策金融公庫</td>
+                            <td style="text-align:right;" class="amount">300〜400万円</td>
+                        </tr>
+                        <tr>
+                            <td>設備・内装・広告</td>
+                            <td>小規模事業者持続化補助金<br><small style="color:var(--text-muted);">（創業枠）</small></td>
+                            <td style="text-align:right;" class="amount">最大 200万円</td>
+                        </tr>
+                        <tr>
+                            <td>ITツール導入</td>
+                            <td>IT導入補助金</td>
+                            <td style="text-align:right;" class="amount">50〜100万円</td>
+                        </tr>
+                        <tr>
+                            <td>スタッフ研修</td>
+                            <td>人材開発支援助成金</td>
+                            <td style="text-align:right;" class="amount">研修費の75%</td>
+                        </tr>
+                        <tr>
+                            <td>スタッフ正社員化</td>
+                            <td>キャリアアップ助成金</td>
+                            <td style="text-align:right;" class="amount">最大 80万円/人</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2">💰 補助金・助成金による圧縮可能額</td>
+                            <td style="text-align:right;" class="amount">最大 約200万円+</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box" style="margin-top:24px;">
+                <strong>📝 実質的な自己負担イメージ：</strong><br>
+                初期投資500万円 − 補助金200万円 = <strong style="color:var(--teal);font-size:18px;">実質 約300万円</strong><br>
+                うち融資で300万円を調達すれば、<strong>自己資金は最少で100万円程度</strong>から開業可能です。
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 5: 申請の流れ ===== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Process</div>
+            <p class="section-title">📋 補助金活用の基本ステップ</p>
+
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-line">
+                        <div class="flow-dot">1</div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>事業計画の策定</h4>
+                        <p>出店エリア・ターゲット・収支計画を明確にした事業計画書を作成。FC本部からの支援情報も盛り込みます。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-line">
+                        <div class="flow-dot">2</div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>補助金の選定・申請</h4>
+                        <p>出店地域・事業内容に合った補助金を選定。商工会議所への相談を経て申請書を提出します。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-line">
+                        <div class="flow-dot">3</div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>交付決定を待つ</h4>
+                        <p>⚠️ <strong>交付決定前の設備発注・工事着手は補助対象外になります。</strong>必ず交付決定後に着手してください。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-line">
+                        <div class="flow-dot">4</div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>開業・事業実施</h4>
+                        <p>交付決定後、設備購入・内装工事等を実施し、サロンをオープン。領収書・証拠書類を保管します。</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-line">
+                        <div class="flow-dot">5</div>
+                        <div class="flow-connector"></div>
+                    </div>
+                    <div class="flow-content">
+                        <h4>実績報告・補助金受給</h4>
+                        <p>事業完了後に実績報告書を提出。審査後、補助金が振り込まれます。（後払い精算方式）</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Section 6: 注意事項 ===== -->
+    <section style="background: var(--white);">
+        <div class="container">
+            <div class="section-label">Important</div>
+            <p class="section-title">⚠️ 申請時の重要な注意事項</p>
+
+            <div class="caution-card">
+                <h3>必ずご確認ください</h3>
+                <div class="caution-item">
+                    <div class="icon">🚫</div>
+                    <div><strong>FC加盟金は補助対象外：</strong>ほぼ全ての補助金で、フランチャイズ加盟金そのものは補助対象になりません。内装・設備・広告等の「事業経費」に対して活用する形です。
+                    </div>
+                </div>
+                <div class="caution-item">
+                    <div class="icon">⏰</div>
+                    <div><strong>交付決定前の着手はNG：</strong>補助金の交付決定を受ける前に設備発注や工事を始めると、その費用は補助対象外になります。スケジュール管理が重要です。</div>
+                </div>
+                <div class="caution-item">
+                    <div class="icon">💳</div>
+                    <div><strong>後払い精算方式：</strong>補助金は事業実施後の精算払いが基本です。先に自己資金（または融資）で立て替える必要があります。</div>
+                </div>
+                <div class="caution-item">
+                    <div class="icon">📝</div>
+                    <div><strong>事業計画書の品質が重要：</strong>特に補助金は審査制のため、具体的で説得力のある事業計画書の作成が採択の鍵となります。</div>
+                </div>
+                <div class="caution-item">
+                    <div class="icon">📅</div>
+                    <div><strong>公募スケジュールの確認：</strong>各補助金の公募期間は年度内に複数回。最新の公募情報を中小企業庁や各省庁のサイトで確認してください。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section>
+        <div class="cta-section">
+            <h2>まずはお気軽にご相談ください</h2>
+            <p>補助金の活用方法から融資の進め方まで、<br>ONフランチャイズ本部が開業をサポートいたします。</p>
+            <a href="#" class="cta-btn">FC加盟について相談する →</a>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <p>本資料は2026年3月時点の情報を基に作成しています。<br>各制度の詳細・最新情報は所管省庁・自治体の公式情報をご確認ください。</p>
+        <p style="margin-top:8px;"><strong>よもぎ蒸しサロン ON フランチャイズ本部</strong>｜株式会社 rtma</p>
+    </footer>
+
+    <script>
+        function toggleGrant(id) {
+            const card = document.getElementById(id);
+            card.classList.toggle('open');
+        }
+    </script>
+
+</body>
+
+</html>

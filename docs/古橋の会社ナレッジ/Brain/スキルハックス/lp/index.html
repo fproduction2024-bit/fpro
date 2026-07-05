@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【無料プレゼント】副業で稼ぐ全ステップ動画講座4本 + 5大特典 | Skill Hacks</title>
+  <meta name="description" content="3万人以上の受講実績。LINE登録するだけで、副業ゼロイチを完全サポートする動画4本＋5大プレゼントを全部無料で受け取れます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --brand: #1a56db;
+      --brand-dark: #0f3a96;
+      --brand-light: #e8f0fe;
+      --accent: #f97316;
+      --green: #16a34a;
+      --green-grd: linear-gradient(135deg, #16a34a, #15803d);
+      --red: #dc2626;
+      --yellow: #fbbf24;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg-cream: #f8f9fa;
+      --bg-blue: #eff6ff;
+      --max-w: 800px;
+      --radius: 14px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      background: #fff;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ━━━━━ FLOATING CTA ━━━━━ */
+    #float-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: rgba(15, 26, 58, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      border-top: 2px solid var(--brand);
+    }
+
+    #float-cta.visible {
+      transform: translateY(0);
+    }
+
+    #float-cta .text {
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 700;
+      display: none;
+    }
+
+    #float-cta .btn {
+      background: var(--green-grd);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.5);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #float-cta .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.6);
+    }
+
+    @media(min-width:600px) {
+      #float-cta .text {
+        display: block;
+      }
+    }
+
+    /* ━━━━━ CTA BUTTON ━━━━━ */
+    .cta-wrap {
+      text-align: center;
+      margin: 40px 0 16px;
+    }
+
+    .cta-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: var(--green-grd);
+      color: #fff;
+      padding: 20px 40px;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: 900;
+      text-decoration: none;
+      line-height: 1.4;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 6px 24px rgba(22, 163, 74, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-btn span {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(22, 163, 74, 0.55);
+    }
+
+    .cta-micro {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* ━━━━━ REVEAL ━━━━━ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ━━━━━ ① HERO ━━━━━ */
+    .hero {
+      background: linear-gradient(160deg, #0f172a 0%, #1e3a8a 55%, #1e40af 100%);
+      color: #fff;
+      padding: 56px 0 68px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 65% 0%, rgba(99, 102, 241, 0.25) 0%, transparent 60%);
+    }
+
+    .hero .container {
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      color: #fde68a;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-badges span {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-present-num {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(52px, 13vw, 80px);
+      font-weight: 900;
+      line-height: 1;
+      color: #fbbf24;
+      letter-spacing: -2px;
+    }
+
+    .hero-present-label {
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 900;
+      color: #fff;
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+
+    .hero-main-copy {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 900;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .hero-main-copy .hl {
+      background: linear-gradient(transparent 56%, rgba(251, 191, 36, 0.4) 56%);
+    }
+
+    .hero-sub-copy {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .hero-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 28px 0;
+    }
+
+    .hero-item {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: left;
+    }
+
+    .hero-item .tag {
+      font-size: 10px;
+      color: #fbbf24;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .hero-item .name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    @media(max-width:480px) {
+      .hero-items {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ━━━━━ SECTION COMMON ━━━━━ */
+    .section {
+      padding: 72px 0;
+    }
+
+    .section.bg-cream {
+      background: var(--bg-cream);
+    }
+
+    .section.bg-blue {
+      background: var(--bg-blue);
+    }
+
+    .section.bg-dark {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: clamp(20px, 4.5vw, 28px);
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .section-title .red {
+      color: var(--red);
+    }
+
+    .section-title .acc {
+      color: var(--accent);
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    .sep {
+      width: 40px;
+      height: 3px;
+      background: var(--brand);
+      border-radius: 2px;
+      margin: 0 auto 32px;
+    }
+
+    /* ━━━━━ VIDEO CARD ━━━━━ */
+    .video-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .video-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 3px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .video-card-header {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .ep-number {
+      background: linear-gradient(160deg, #1a56db, #1e3a8a);
+      color: #fff;
+      min-width: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 12px;
+      flex-shrink: 0;
+    }
+
+    .ep-number .ep {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+    }
+
+    .ep-number .num {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .ep-info {
+      padding: 20px 20px 20px;
+      flex: 1;
+    }
+
+    .ep-duration {
+      font-size: 11px;
+      color: var(--brand);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .ep-title {
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+    .video-card-body {
+      padding: 0 20px 20px;
+    }
+
+    .ep-reveal-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-blue);
+      color: var(--brand);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+
+    .ep-spoilers {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ep-spoilers li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .ep-spoilers li .chk {
+      color: var(--green);
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .ep-spoilers li strong {
+      color: var(--dark);
+    }
+
+    .ep-teaser {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 13px;
+      font-style: italic;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    .ep-teaser strong {
+      color: #fbbf24;
+      font-style: normal;
+    }
+
+    /* VSL special */
+    .video-card.vsl .ep-number {
+      background: linear-gradient(160deg, #c2410c, #9a3412);
+    }
+
+    /* ━━━━━ PRESENT STRIP ━━━━━ */
+    .present-strip {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+      padding: 56px 0;
+    }
+
+    .present-strip .section-title {
+      color: #fff;
+      text-align: center;
+    }
+
+    .present-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .present-item {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .present-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .present-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: #fbbf24;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .present-name {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .present-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+    }
+
+    /* ━━━━━ FLOW ━━━━━ */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .flow-step::after {
+      content: '';
+      position: absolute;
+      left: 23px;
+      top: 52px;
+      bottom: -24px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .flow-step:last-child::after {
+      display: none;
+    }
+
+    .flow-step .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-body {
+      padding: 10px 0 32px;
+      flex: 1;
+    }
+
+    .flow-body h3 {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .flow-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ━━━━━ PROFILE ━━━━━ */
+    .profile-box {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    }
+
+    .profile-name {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .profile-role {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .profile-stat {
+      background: var(--bg-cream);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .profile-stat .num {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--brand);
+    }
+
+    .profile-stat .lbl {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .story-q {
+      background: var(--bg-blue);
+      border-left: 3px solid var(--brand);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    @media(max-width:480px) {
+      .profile-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ━━━━━ FINAL CTA ━━━━━ */
+    .final-cta {
+      background: linear-gradient(160deg, #0f172a, #1e3a8a);
+      color: #fff;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .final-cta .section-title {
+      color: #fff;
+    }
+
+    .final-cta .section-sub {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .guarantee-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin: 28px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .guarantee-box .icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .guarantee-box h4 {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fbbf24;
+      margin-bottom: 4px;
+    }
+
+    .guarantee-box p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 28px;
+      text-align: left;
+    }
+
+    .checklist li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .checklist li .chk {
+      color: #fbbf24;
+      flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #070d1a;
+      color: rgba(255, 255, 255, 0.35);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ━━━ FLOATING CTA ━━━ -->
+  <div id="float-cta">
+    <div class="text">🎁 今すぐ無料でプレゼントをGET</div>
+    <a href="#line-cta" class="btn">▼ LINE登録して受け取る</a>
+  </div>
+
+  <!-- ━━━━━ ① HERO ━━━━━ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">累計3万人の受講データが示した「稼げない理由」</div>
+
+      <div class="hero-badges">
+        <span>3万人以上の受講実績</span><span>副業ゼロイチ特化</span><span>完全無料</span>
+      </div>
+
+      <h1 class="hero-main-copy">
+        副業を始めて3ヶ月。<br>
+        <span class="hl">結果を出す人と、収益ゼロのまま終わる人の</span><br>
+        たった1つの違い。
+      </h1>
+
+      <p class="hero-sub-copy">勉強熱心なのに稼げない人には、共通したパターンがある。<br>その「見えない壁」の正体と、最短で突き破る方法を<br>3万人のデータから解説します。</p>
+
+      <div class="hero-items reveal">
+        <div class="hero-item">
+          <div class="tag">🎬 第1話 / 約10分</div>
+          <div class="name">稼げない本当の理由が分かる。273円から始まった話</div>
+        </div>
+        <div class="hero-item">
+          <div class="tag">🎬 第2話 / 約25分</div>
+          <div class="name">最短で稼ぐ人だけが持つ「3つの武器」を全公開</div>
+        </div>
+        <div class="hero-item">
+          <div class="tag">🎬 第3話 / 約25分</div>
+          <div class="name">「安くて手厚い」が存在しなかった理由と、その逆を作った決断</div>
+        </div>
+        <div class="hero-item">
+          <div class="tag">🎬 最終話 / 約60分</div>
+          <div class="name">半年後のリアルな未来と、今すぐ一歩を踏み出す方法</div>
+        </div>
+      </div>
+
+      <div class="cta-wrap reveal">
+        <div class="cta-badge">▶ 今すぐ無料で受け取れます</div>
+        <a href="#line-cta" class="cta-btn">
+          LINE友だち登録して全部受け取る
+          <span>▼ 無料・30秒で完了 ▼</span>
+        </a>
+        <p class="cta-micro" style="color:rgba(255,255,255,0.5);">※ 勧誘・営業は一切ありません</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ ② 動画の中身を大公開 ━━━━━ -->
+  <section class="section bg-cream">
+    <div class="container">
+      <p class="eyebrow reveal">🎬 副業ゼロでも稼げるようになる動画シリーズ、全4本</p>
+      <h2 class="section-title reveal">副業未経験でも、<br><span class="red">この動画4本を見るだけで<br>最初の収益が出せるようになります</span></h2>
+      <p class="section-sub reveal">
+        「何から始めればいいか分からない」「勉強したのに1円も稼げていない」<br>そんな人が、この動画を見て初めて動き出せた──という話を、3万人の受講データの中で何度も見てきました。<br><br>知識ではなく、「正しい順番」と「動ける環境」さえあれば、副業で稼ぐことは再現できます。
+      </p>
+      <div class="sep reveal"></div>
+
+      <div class="video-cards">
+
+        <!-- 第1話 -->
+        <div class="video-card reveal">
+          <div class="video-card-header">
+            <div class="ep-number">
+              <div class="ep">EPISODE</div>
+              <div class="num">01</div>
+            </div>
+            <div class="ep-info">
+              <div class="ep-duration">📹 約10分 ／ 導入・コアメッセージ</div>
+              <div class="ep-title">なぜ「勉強熱心な人」ほど<br>副業で1円も稼げないのか</div>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="ep-reveal-label">📋 この動画で分かること</div>
+            <ul class="ep-spoilers">
+              <li><span class="chk">✓</span><span>「ノウハウを知ること」に価値がない理由。<strong>インプット習慣がなぜ成果を妨げるのか</strong>を解説</span></li>
+              <li><span class="chk">✓</span><span>1年毎日ブログを書いて<strong>273円しか稼げなかった僕</strong>が、年商10億になれた「たった1つの気づき」</span>
+              </li>
+              <li><span class="chk">✓</span><span>成果が出る人と出ない人の<strong>決定的な違い</strong>。才能ではない、やり方だ</span></li>
+              <li><span class="chk">✓</span><span>スキル副業が「物販やアフィリエイト」より<strong>リスクが低く再現性が高い</strong>理由</span></li>
+              <li><span class="chk">✓</span><span>動画編集で案件獲得に必要なのは<strong>たった5つのスキルだけ</strong>（残りは全部不要）</span></li>
+            </ul>
+            <div class="ep-teaser">
+              「本を読んで、YouTube見て、note買って……それでも1円も稼げない。<strong>僕もそうでした、1年間ずっと。</strong>でも今日、その理由が完全に分かります。」</div>
+          </div>
+        </div>
+
+        <!-- 第2話 -->
+        <div class="video-card reveal">
+          <div class="video-card-header">
+            <div class="ep-number">
+              <div class="ep">EPISODE</div>
+              <div class="num">02</div>
+            </div>
+            <div class="ep-info">
+              <div class="ep-duration">📹 約25分 ／ 3つの武器・受講生事例</div>
+              <div class="ep-title">3万人のデータで判明した<br>「最短で稼ぐ人」だけが持っている3つの武器</div>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="ep-reveal-label">📋 この動画で分かること</div>
+            <ul class="ep-spoilers">
+              <li><span class="chk">✓</span><span>最短で稼いだ人たちには、共通して持っている<strong>「3つのもの」</strong>がある</span></li>
+              <li><span class="chk">✓</span><span>スキルさえあれば稼げると思っていた人ほど、<strong>見落としているあるもの</strong>の正体</span></li>
+              <li><span class="chk">✓</span><span>「一人で頑張る」が最も危険な理由。<strong>挫折が起きる構造</strong>と、その回避法</span></li>
+              <li><span
+                  class="chk">✓</span><span>主婦・大学生・40代会社員……<strong>まったく異なるバックグラウンド</strong>の3人が、なぜ同じように稼げたのか</span></li>
+            </ul>
+            <div class="ep-teaser">「スキルだけでは足りない。<strong>Skill ＋ ○○ ＝ Skill Hacks。</strong>この○○の正体は、第3話で全て明かします。」</div>
+          </div>
+        </div>
+
+        <!-- 第3話 -->
+        <div class="video-card reveal">
+          <div class="video-card-header">
+            <div class="ep-number">
+              <div class="ep">EPISODE</div>
+              <div class="num">03</div>
+            </div>
+            <div class="ep-info">
+              <div class="ep-duration">📹 約25分 ／ 業界の構造・迫が出した決断</div>
+              <div class="ep-title">なぜ僕は業界を全部敵に回す覚悟で「この仕組み」を作ったのか</div>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="ep-reveal-label">📋 この動画で分かること</div>
+            <ul class="ep-spoilers">
+              <li><span
+                  class="chk">✓</span><span>スキル教育の業界が「ある構造」によって成り立っている理由。<strong>それを知ると、今まで稼げなかった理由が腑に落ちる</strong></span>
+              </li>
+              <li><span class="chk">✓</span><span>「本当に稼げるようになりたいなら」迫が選んだ選択肢と、<strong>それが業界を敵に回すことになった経緯</strong></span>
+              </li>
+              <li><span class="chk">✓</span><span>副業で最初に稼いだお金を、<strong>そのまま消えないお金に変えるための考え方</strong></span></li>
+            </ul>
+            <div class="ep-teaser">
+              「これを作ると決めたとき、業界の人間に何を言われるか分かっていた。<strong>それでもやらなければいけなかった理由が、この動画にあります。</strong>」</div>
+          </div>
+        </div>
+
+        <!-- VSL -->
+        <div class="video-card vsl reveal">
+          <div class="video-card-header">
+            <div class="ep-number">
+              <div class="ep">VSL</div>
+              <div class="num">04</div>
+            </div>
+            <div class="ep-info">
+              <div class="ep-duration">📹 約60分 ／ スキルハックスの全貌・Q&A・決断のとき</div>
+              <div class="ep-title">「3本見たあなたは本気の人だ」<br>──最終話からしか伝えないこと</div>
+            </div>
+          </div>
+          <div class="video-card-body">
+            <div class="ep-reveal-label">📋 この動画で分かること</div>
+            <ul class="ep-spoilers">
+              <li><span class="chk">✓</span><span>3本を見てきたあなたへ。<strong>「半年後の自分」を一緒にリアルにイメージするパート</strong></span></li>
+              <li><span class="chk">✓</span><span>「向いていないんじゃないか」「自分には無理かも」という<strong>全ての不安に迫が正面から答える</strong></span>
+              </li>
+              <li><span class="chk">✓</span><span>「稼ぐ」が目的ではなく、<strong>稼いだ先に何があるのか</strong>。迫が初めて語る、教育を続ける根っこの理由</span>
+              </li>
+              <li><span class="chk">✓</span><span><strong>「唯一の失敗は、何もしないこと」</strong>──この動画を最後まで見たあなたへのメッセージ</span></li>
+            </ul>
+            <div class="ep-teaser" style="border-left:3px solid #f97316;">
+              「3本の動画を全部見たあなたは、それだけで上位数%の本気の人です。<strong>あとは一歩踏み出すだけ。</strong>その一歩を一緒に考えるための動画です。」</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta-wrap reveal">
+        <div class="cta-badge">🎬 動画4本 今すぐ無料で受け取れます</div>
+        <a href="#line-cta" class="cta-btn">
+          LINE友だち登録して動画を受け取る
+          <span>▼ 無料・30秒で完了 ▼</span>
+        </a>
+        <p class="cta-micro">※ 勧誘・営業は一切ありません</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ ③ 5大プレゼント ━━━━━ -->
+  <section class="present-strip">
+    <div class="container">
+      <p class="eyebrow reveal" style="color:#fbbf24; text-align:center;">🎁 動画を全部見た方への追加プレゼント</p>
+      <h2 class="section-title reveal" style="color:#fff; text-align:center;">
+        4本の動画を見終えたあなたに、<br>実践に役立つ5つの特典を<br>まとめてお渡しします</h2>
+
+      <div class="present-list">
+        <div class="present-item reveal">
+          <div class="present-icon">📊</div>
+          <div>
+            <div class="present-num">PRESENT 01</div>
+            <div class="present-name">副業スキルマッチング診断シート</div>
+            <div class="present-desc">「自分に何が向いてるか分からない」──
+              10問に答えるだけで、最適なスキルが即座に判明。動画編集・プログラミング・ライティング・デザインの4スキルを多角的に比較できます。</div>
+          </div>
+        </div>
+        <div class="present-item reveal">
+          <div class="present-icon">🗺️</div>
+          <div>
+            <div class="present-num">PRESENT 02</div>
+            <div class="present-name">副業ゼロイチ 90日ロードマップ</div>
+            <div class="present-desc">
+              Day1〜Day90の全ステップを完全可視化。スキル選定→習得→初案件→月10万円達成までの地図として何度でも使えます。「何から手をつければいいか」がゼロになります。</div>
+          </div>
+        </div>
+        <div class="present-item reveal">
+          <div class="present-icon">📝</div>
+          <div>
+            <div class="present-num">PRESENT 03</div>
+            <div class="present-name">初案件獲得テンプレート集</div>
+            <div class="present-desc">プロフィール文・提案文・納品メッセージをコピペするだけでOK。「応募するのが怖い」という最初のハードルを、テンプレートの力でゼロにします。</div>
+          </div>
+        </div>
+        <div class="present-item reveal">
+          <div class="present-icon">✅</div>
+          <div>
+            <div class="present-num">PRESENT 04</div>
+            <div class="present-name">スキルチェックリスト</div>
+            <div class="present-desc">
+              「今すぐ営業に行っていいか？」を一目で判断できるチェックリスト。職種別（動画編集・プログラミング・ライティング・デザイン）に必要スキルを完全網羅。全部埋まったら即応募GO！</div>
+          </div>
+        </div>
+        <div class="present-item reveal">
+          <div class="present-icon">💹</div>
+          <div>
+            <div class="present-num">PRESENT 05</div>
+            <div class="present-name">副業収支シミュレーター</div>
+            <div class="present-desc">スキル・単価・稼働時間を入力すると、月収・年収・手取り・時給が全自動計算。「本当に稼げるの？」という不安を数字で先に解消。稼ぐ前から未来が見えます。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-wrap reveal" style="margin-top:40px;">
+        <div class="cta-badge" style="background:#fbbf24; color:#0f172a;">🎁 動画4本＋5大プレゼントを全部もらう</div>
+        <a href="#line-cta" class="cta-btn">
+          今すぐLINEで全部受け取る
+          <span>▼ 無料・30秒で完了 ▼</span>
+        </a>
+        <p class="cta-micro" style="color:rgba(255,255,255,0.5);">※ 勧誘・営業は一切ありません ※ いつでもブロック可能</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ ④ 受け取り方 ━━━━━ -->
+  <section class="section bg-blue">
+    <div class="container">
+      <p class="eyebrow reveal">受け取り方</p>
+      <h2 class="section-title reveal">たった30秒で<br><span class="acc">全部受け取れます</span></h2>
+      <div class="sep reveal"></div>
+
+      <div class="flow">
+        <div class="flow-step reveal">
+          <div class="step-num">1</div>
+          <div class="flow-body">
+            <h3>LINEの友だちに追加する</h3>
+            <p>下のボタンからスキルハックスの公式LINEを友だち追加。30秒で完了します。</p>
+          </div>
+        </div>
+        <div class="flow-step reveal">
+          <div class="step-num">2</div>
+          <div class="flow-body">
+            <h3>第1話の動画が届く</h3>
+            <p>登録直後にLINEへ第1話の動画URLが届きます。「なぜ勉強熱心な人ほど稼げないのか」から始まります。</p>
+          </div>
+        </div>
+        <div class="flow-step reveal">
+          <div class="step-num">3</div>
+          <div class="flow-body">
+            <h3>稼げる人の考え方が、動画で届く</h3>
+            <p>第1話から順番に動画が届きます。「なぜ稼げないのか」「どう動けばいいのか」——結果を出せる人になるための考え方を、1本ずつ丁寧にお伝えしていきます。</p>
+          </div>
+        </div>
+        <div class="flow-step reveal">
+          <div class="step-num">4</div>
+          <div class="flow-body">
+            <h3>全4本を見終えたら特典も届く</h3>
+            <p>動画シリーズを見終えると、副業の実践に役立つ5つの特典をまとめてお届けします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ ⑤ プロフィール ━━━━━ -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow reveal">この動画を作った人</p>
+      <h2 class="section-title reveal">副業273円から<br>年商10億を達成した男</h2>
+      <div class="sep reveal"></div>
+
+      <div class="profile-box reveal">
+        <div class="profile-name">迫 佑樹（さこ ゆうき）</div>
+        <div class="profile-role">株式会社ブレイン 代表取締役 / Skill Hacks 主宰</div>
+        <div class="profile-stats">
+          <div class="profile-stat">
+            <div class="num">3万+</div>
+            <div class="lbl">副業スキル習得の累計受講者数</div>
+          </div>
+          <div class="profile-stat">
+            <div class="num">年商10億+</div>
+            <div class="lbl">事業流通規模</div>
+          </div>
+          <div class="profile-stat">
+            <div class="num">ベストセラー</div>
+            <div class="lbl">著書『人生攻略ロードマップ』</div>
+          </div>
+        </div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.85;">
+          知識共有プラットフォーム「Brain」を運営。AbemaTV出演・大学講義・著書『人生攻略ロードマップ』ベストセラー。</p>
+        <div class="story-q">
+          <strong>副業を始めた最初の1年間、稼いだのは「273円」でした。</strong><br><br>
+          食費1日300円。大学の学食のカレーをラップに包んで持ち帰り、授業中ずっとカレーの匂いがしていたのが僕です。<br><br>
+          転機は、プログラミングスクールの同期がブログで月100万円を稼いでいると知った瞬間。「才能ではない。何をやるか・どの順番でやるかだ」<br><br>
+          そこからスキルを正しい順番で身につけ、273円→年商10億に。その全メソッドを、この動画4本に詰め込みました。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━ ⑥ 最終CTA ━━━━━ -->
+  <section class="final-cta" id="line-cta">
+    <div class="container">
+      <div class="sep" style="background:#fbbf24;"></div>
+      <h2 class="section-title reveal">今すぐLINEに登録して<br>動画4本＋5大プレゼントを<br>全部受け取ってください</h2>
+      <p class="section-sub reveal">副業で最初の一歩を踏み出すために必要なものが、全部ここにあります。</p>
+
+      <div class="guarantee-box reveal">
+        <div class="icon">🛡️</div>
+        <div>
+          <h4>完全無料・勧誘一切なし</h4>
+          <p>登録後に届くのは動画コンテンツとプレゼントのみです。しつこい営業・DM・電話は一切ありません。不要な場合はいつでもブロックできます。</p>
+        </div>
+      </div>
+
+      <ul class="checklist reveal">
+        <li><span class="chk">🎬</span>第1話「なぜ勉強熱心な人ほど副業で1円も稼げないのか」（約10分）</li>
+        <li><span class="chk">🎬</span>第2話「3万人のデータで判明した、最短で稼ぐ人だけが持つ3つの武器」（約25分）</li>
+        <li><span class="chk">🎬</span>第3話「"安くて手厚い"が存在しなかった理由と、その逆を作った決断」（約25分）</li>
+        <li><span class="chk">🎬</span>最終話「3本見たあなたへ。半年後の自分と、最初の一歩の踏み出し方」（約60分）</li>
+        <li><span class="chk">🎁</span>副業スキルマッチング診断シート</li>
+        <li><span class="chk">🎁</span>副業ゼロイチ 90日ロードマップ</li>
+        <li><span class="chk">🎁</span>初案件獲得テンプレート集</li>
+        <li><span class="chk">🎁</span>スキルチェックリスト</li>
+        <li><span class="chk">🎁</span>副業収支シミュレーター</li>
+      </ul>
+
+      <div class="cta-wrap reveal" style="margin-top:36px;">
+        <div class="cta-badge" style="background:#fbbf24; color:#0f172a;">✨ 全て今すぐ無料でもらえます</div>
+        <a href="#" class="cta-btn" id="line-final">
+          今すぐLINEに登録して全部受け取る
+          <span>▼ 無料・30秒で完了 ▼</span>
+        </a>
+        <p class="cta-micro" style="color:rgba(255,255,255,0.4);">※ 勧誘・営業は一切ありません ※ いつでもブロックできます</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© Skill Hacks by Brain Inc. All rights reserved.</p>
+    <p style="margin-top:8px;">
+      <a href="#">特定商取引法に基づく表示</a> ／
+      <a href="#">プライバシーポリシー</a> ／
+      <a href="#">お問い合わせ</a>
+    </p>
+    <p style="margin-top:10px;">※ 本ページの成果・実績は個人の取り組みによるものです。同等の成果を保証するものではありません。</p>
+  </footer>
+
+  <script>
+    // Floating CTA
+    const floatCta = document.getElementById('float-cta');
+    window.addEventListener('scroll', () => {
+      floatCta.classList.toggle('visible', window.scrollY > 500);
+    });
+
+    // Reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>

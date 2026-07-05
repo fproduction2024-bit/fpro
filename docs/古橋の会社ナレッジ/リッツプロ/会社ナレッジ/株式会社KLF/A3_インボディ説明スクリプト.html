@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インボディ説明スクリプト — KLF スタッフマニュアル</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-light: #10896B;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --amber-light: #F59E0B;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F1F5F2;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --blue: #1D4ED8;
+            --blue-pale: #DBEAFE;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .top-bar {
+            background: var(--mint);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .top-bar .sub {
+            color: rgba(255, 255, 255, .75);
+            font-size: 12px;
+        }
+
+        .badge-staff {
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        /* Inbody visual */
+        .inbody-card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--mint-mid);
+            padding: 28px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 12px rgba(11, 110, 79, .06);
+        }
+
+        .inbody-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bar chart visual */
+        .bar-chart-area {
+            padding: 20px;
+            background: #FAFFFE;
+            border-radius: 12px;
+            border: 1px solid var(--mint-mid);
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--slate-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .bar-label {
+            width: 70px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--slate-mid);
+            text-align: right;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 28px;
+            background: #F3F4F6;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            transition: width .8s;
+        }
+
+        .bar-val {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--slate-mid);
+        }
+
+        .bar-ok {
+            background: linear-gradient(90deg, #10896B, #17B896);
+        }
+
+        .bar-high {
+            background: linear-gradient(90deg, #D97706, #F59E0B);
+        }
+
+        .bar-low {
+            background: linear-gradient(90deg, #DC2626, #EF4444);
+        }
+
+        .bar-100 {
+            background: rgba(203, 213, 225, .3);
+            border: 1px dashed #94A3B8;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--slate-light);
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+        }
+
+        /* Type cards */
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .type-card {
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 2px solid transparent;
+        }
+
+        .type-card.c-type {
+            background: #FFF8F4;
+            border-color: #FBBF24;
+        }
+
+        .type-card.ideal-type {
+            background: var(--green-pale);
+            border-color: #86EFAC;
+        }
+
+        .type-card.atype {
+            background: var(--blue-pale);
+            border-color: #93C5FD;
+        }
+
+        .type-card .type-name {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .type-card .type-desc {
+            font-size: 12.5px;
+            color: var(--slate-mid);
+            line-height: 1.6;
+        }
+
+        .type-card .type-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .badge-warn {
+            background: var(--amber-pale);
+            color: var(--amber);
+        }
+
+        .badge-ok {
+            background: var(--green-pale);
+            color: var(--green);
+        }
+
+        .badge-info {
+            background: var(--blue-pale);
+            color: var(--blue);
+        }
+
+        /* Metric cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .metric-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid var(--mint-mid);
+        }
+
+        .metric-card .m-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--slate-light);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-card .m-value-area {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .metric-card .m-value {
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .metric-card .m-unit {
+            font-size: 13px;
+            color: var(--slate-light);
+        }
+
+        .metric-card .m-standard {
+            font-size: 11px;
+            color: var(--slate-light);
+            margin-bottom: 8px;
+        }
+
+        .metric-card .m-status {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .status-ok {
+            background: var(--green-pale);
+            color: var(--green);
+        }
+
+        .status-warn {
+            background: var(--amber-pale);
+            color: var(--amber);
+        }
+
+        .status-bad {
+            background: var(--red-pale);
+            color: var(--red);
+        }
+
+        /* Script block */
+        .script-section {
+            margin-bottom: 36px;
+        }
+
+        .ss-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--mint-mid);
+        }
+
+        .script-block {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .sb-header {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--mint-mid);
+            cursor: pointer;
+        }
+
+        .sb-header:hover {
+            background: var(--mint-pale);
+        }
+
+        .sb-title-text {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--slate);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sb-toggle {
+            font-size: 18px;
+            color: var(--slate-light);
+            transition: transform .3s;
+        }
+
+        .sb-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .sb-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .sb-content.open {
+            display: block;
+        }
+
+        .purpose {
+            background: var(--mint-pale);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .purpose strong {
+            color: var(--mint);
+        }
+
+        .dialog {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .line {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .line-speaker {
+            width: 52px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 6px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .line-speaker.staff {
+            background: var(--mint);
+            color: #fff;
+        }
+
+        .line-speaker.pt {
+            background: var(--slate-mid);
+            color: #fff;
+        }
+
+        .line-text.staff-line {
+            background: var(--mint-pale);
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-mid);
+        }
+
+        .line-text.pt-line {
+            background: #F1F5F9;
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-light);
+        }
+
+        .tip-box {
+            background: var(--amber-pale);
+            border: 1px solid var(--amber-light);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 10px;
+        }
+
+        .tip-box .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--mint-pale), #F0FAF7);
+            border: 2px solid var(--mint-mid);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 12px;
+        }
+
+        .highlight-box .hl-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--mint);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            color: var(--slate-mid);
+            line-height: 1.75;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 60px;
+        }
+
+        @media(max-width:700px) {
+            .top-bar {
+                padding: 14px 20px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div>
+            <h1>📊 インボディ説明スクリプト</h1>
+            <div class="sub">KLF スタッフ用 — 数値を使った体の現状説明と納得獲得</div>
+        </div>
+        <span class="badge-staff">STAFF ONLY</span>
+    </div>
+
+    <div class="container">
+
+        <!-- Inbody visual overview -->
+        <div class="inbody-card">
+            <div class="inbody-title">📈 インボディ数値の見方（ビジュアルガイド）</div>
+
+            <div class="bar-chart-area">
+                <div class="chart-title">体重・筋肉・体脂肪 バランスグラフ（典型例）</div>
+                <div class="bar-row">
+                    <div class="bar-label">体重</div>
+                    <div class="bar-track">
+                        <div class="bar-fill bar-ok" style="width:70%">70%</div>
+                        <div class="bar-val">標準</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">筋肉量</div>
+                    <div class="bar-track">
+                        <div class="bar-fill bar-low" style="width:55%">55%</div>
+                        <div class="bar-val">⚠ 低い</div>
+                    </div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">体脂肪</div>
+                    <div class="bar-track">
+                        <div class="bar-fill bar-high" style="width:85%">85%</div>
+                        <div class="bar-val">⚠ やや高</div>
+                    </div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#10896B;"></div>標準（100%）
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#DC2626;"></div>低い（要改善）
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background:#D97706;"></div>高い（要改善）
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body type cards -->
+            <div class="type-grid">
+                <div class="type-card c-type">
+                    <div class="type-badge badge-warn">⚠️ C型（逆矢印）</div>
+                    <div class="type-name">筋肉が最も短い状態</div>
+                    <div class="type-desc">筋肉量 < 体重 < 体脂肪<br>体が最も負担を感じるパターン。痛み・歪みが出やすい。</div>
+                </div>
+                <div class="type-card ideal-type">
+                    <div class="type-badge badge-ok">✅ 理想型</div>
+                    <div class="type-name">全て100%ライン付近</div>
+                    <div class="type-desc">筋肉・体重・体脂肪がほぼ横並び<br>体への負担が最も少なく、怪我しにくい。</div>
+                </div>
+                <div class="type-card atype">
+                    <div class="type-badge badge-info">📊 A型（改善中）</div>
+                    <div class="type-name">筋肉↑・体脂肪↓を目指す</div>
+                    <div class="type-desc">治療・運動・栄養で徐々に理想型へ移行<br>正しい方向性で頑張っている状態。</div>
+                </div>
+            </div>
+
+            <!-- Key metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="m-label">体脂肪率</div>
+                    <div class="m-value-area"><span class="m-value" style="color:var(--amber);">28%</span><span
+                            class="m-unit">/ 超えたら...</span></div>
+                    <div class="m-standard">基準：28%以下（女性）</div>
+                    <span class="m-status status-warn">隠れ肥満ライン</span>
+                </div>
+                <div class="metric-card">
+                    <div class="m-label">細胞外水分比</div>
+                    <div class="m-value-area"><span class="m-value" style="color:var(--mint);">0.380</span></div>
+                    <div class="m-standard">0.380以下：筋肉質・非むくみ型</div>
+                    <span class="m-status status-ok">良い数値</span>
+                </div>
+                <div class="metric-card">
+                    <div class="m-label">Vバー（部位別脂肪）</div>
+                    <div class="m-value-area"><span class="m-value" style="color:var(--red);">80%</span><span
+                            class="m-unit">/ 超えると...</span></div>
+                    <div class="m-standard">80%超：その部位は痩せれるサイン</div>
+                    <span class="m-status status-warn">体幹に集中しがち</span>
+                </div>
+                <div class="metric-card">
+                    <div class="m-label">タンパク質量</div>
+                    <div class="m-value-area"><span class="m-value" style="color:var(--slate-mid);">6.9</span><span
+                            class="m-unit">kg~</span></div>
+                    <div class="m-standard">産後は通常の2倍必要とも言われる</div>
+                    <span class="m-status status-warn">不足しがち</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script sections -->
+        <div class="script-section">
+            <div class="ss-title">💬 Step1：3本棒グラフの説明スクリプト</div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title-text">📊 C型（逆矢印）の説明</div>
+                    <span class="sb-toggle open">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="purpose"><strong>目的：</strong>体のアンバランスさを「自分事」として認識させる。責めるのではなく「原因がわかってよかった」という方向で。</div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                体重・筋肉・体脂肪の3本が棒グラフになってるんですけど、全部キロ計算なんですね。<br>見た時に、この筋肉量の棒グラフが一番短いのってわかります？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者</span>
+                            <div class="line-text pt-line">あ、確かに。</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                一番短いってことは、この筋肉の棒で体重と体脂肪を全部支えてることになるんですよ。<br>筋肉からすると100%以上頑張っても支えきれない状態なんです。<br>この上に抱っこも加わったら、痛みが出て当然ですよね。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 反応別のフォロートーク</div>
+                        「ショック」→「でも原因がわかったので改善できます。逆にこれが分からないまま頑張る方がリスクなんですよ」<br>
+                        「知ってた」→「じゃあどう改善するかの方向性を一緒に決めましょう」
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title-text">📉 体脂肪率28%ラインの説明</div>
+                    <span class="sb-toggle">▼</span>
+                </div>
+                <div class="sb-content">
+                    <div class="purpose"><strong>目的：</strong>体重が標準でも「隠れ肥満」になりえることを数値で示す。体重の呪縛を外す。</div>
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">体脂肪率って計算式があって、体脂肪の量 ÷ 体重で出るんです。<br>今だと〇〇 ÷
+                                △△で○○%になってますね。<br>女性は28%超えると「肥満」扱いになってしまうんですよ。</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                〇〇さんの体重は標準なんですけど、体脂肪率が28%を超えてるから「隠れ肥満」の状態なんです。<br>体重で見たら普通でも、中身で見たら違う、ってことですね。</div>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <div class="hl-label">☆ 核心フレーズ</div>
+                        <p>「体重が重いのが肥満じゃなくて、体脂肪率が高いのが肥満なんですよ。<br>逆に体重は重くても体脂肪率が低ければ肥満じゃない。<br>だから体重計の数字じゃなくて、中身を見ることが大事なんです。」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-section">
+            <div class="ss-title">💬 Step2：部位別体脂肪（Vバー）の説明</div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title-text">🗺️ 体幹に脂肪が集まりがちな解説</div>
+                    <span class="sb-toggle open">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                じゃあ今の脂肪が「どこについてるか」って話なんですけど、これが部位別に見れるんですよ。<br>右腕・左腕・体幹・右足・左足ってそれぞれ出るんですけど、80%が標準ラインで、超えてると「痩せれるゾーンにいる」ってことなんですね。
+                            </div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                見てみると全部超えてるんですけど、特に体幹が○○%ってなってますね。<br>体幹ってお腹・背中・お尻のあたりのことで、そこに脂肪が集まりやすい傾向があります。<br>なんとなく当たってますか？
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-label">💡 80%ラインの言い換え</div>
+                        「80%超えてるとこって、痩せれる余地があるゾーンです。80%未満のとこは逆に脂肪が少なすぎる可能性もあって、まず体幹をターゲットにするのが効率的です。」
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-section">
+            <div class="ss-title">💬 Step3：細胞外水分比（0.380）の説明</div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title-text">💧 むくみ・筋肉質の判定</div>
+                    <span class="sb-toggle open">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                ここの細胞外水分比っていう数字、0.380っていうのが標準の標準なんですよ。<br>これが高ければ高いほど「むくんでる」状態で、低ければ低いほど「筋肉の質が良い」んです。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="type-grid" style="margin-top:14px;">
+                        <div class="type-card" style="background:var(--green-pale);border-color:#86EFAC;">
+                            <div class="type-badge badge-ok">✅ 0.380以下</div>
+                            <div class="type-name">良い数値</div>
+                            <div class="type-desc">筋肉の質が高い。もともと運動経験がある人に多い。産後でこの数値は珍しくて優秀。</div>
+                        </div>
+                        <div class="type-card" style="background:var(--amber-pale);border-color:#FCD34D;">
+                            <div class="type-badge badge-warn">⚠️ 0.380超え</div>
+                            <div class="type-name">むくみ傾向</div>
+                            <div class="type-desc">細胞の外に水分が漏れ出している状態。筋肉に脂肪が混じっているサーロインステーキ現象が起きている可能性。</div>
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top:16px;">
+                        <div class="hl-label">0.380超えの場合のトーク</div>
+                        <p>「この数字が高い場合、筋肉量が多く見えてもそれが本物じゃない可能性があるんです。<br>脂肪が筋肉に入り込んでるから太く見えてるだけで、実際の筋肉は少ない可能性があります。<br>これが下がってくれれば、その分本物の筋肉が増えてる証拠になりますよ。」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="script-section">
+            <div class="ss-title">💬 Step4：タンパク質・栄養の説明</div>
+
+            <div class="script-block">
+                <div class="sb-header" onclick="toggleBlock(this)">
+                    <div class="sb-title-text">🥩 筋肉の材料（タンパク質）の話</div>
+                    <span class="sb-toggle open">▼</span>
+                </div>
+                <div class="sb-content open">
+                    <div class="dialog">
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">筋肉をつけるって言いますけど、筋肉の材料って何かわかりますか？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker pt">患者</span>
+                            <div class="line-text pt-line">タンパク質ですか？</div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                そうです！で、このインボディで見ると今のタンパク質量が〇〇kgって出てるんですね。<br>基準の下限が6.9kgで、産後の方だと通常の2倍必要とも言われてる。<br>なぜかって言うと、授乳でもタンパク質を使ってますし、産後でケアが必要な体だから消費が多いんです。
+                            </div>
+                        </div>
+                        <div class="line">
+                            <span class="line-speaker staff">先生</span>
+                            <div class="line-text staff-line">
+                                タンパク質が不足してる状態で筋トレ頑張っても、ガソリンのない車を走らせてるようなもので体がやつれていくんですよ。<br>産後に抜け毛が増えたり、肌が荒れたりするのもこれが原因の一つです。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <div class="hl-label">☆ガソリンなし車のフレーズ</div>
+                        <p>「材料（タンパク質）なしで筋肉をつけようとすると体がやつれていく。<br>まず材料を補給することが先決なんです。」</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            KLF スタッフマニュアル A-3 / インボディ説明スクリプト &nbsp;|&nbsp; 制作：リッツプロ &nbsp;|&nbsp; 2026年4月
+        </div>
+    </div>
+
+    <script>
+        function toggleBlock(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.sb-toggle');
+            content.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>

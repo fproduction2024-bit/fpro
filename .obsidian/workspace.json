@@ -1,0 +1,247 @@
+{
+  "main": {
+    "id": "f29131edbc13040d",
+    "type": "split",
+    "children": [
+      {
+        "id": "23e9f8499dec011f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "050c0585a14722d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5ch-bbs/node_modules/eslint-plugin-react/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "f382d9b254f7db01",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "グラフビュー"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "599d2806e99761ab",
+    "type": "split",
+    "children": [
+      {
+        "id": "1ad464489ad03f8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2af9f7a4b4f80858",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "ファイルエクスプローラ"
+            }
+          },
+          {
+            "id": "86dd5cb2292e9c0f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "検索"
+            }
+          },
+          {
+            "id": "334cc6e30da17980",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "ブックマーク"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300.5
+  },
+  "right": {
+    "id": "8b36a39a39071a42",
+    "type": "split",
+    "children": [
+      {
+        "id": "9ca7dce2e6b4a82c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "26d2a533bea1c9c3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "【メガバンク】ガチの１日（地獄の出社編）_Transcript.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "【メガバンク】ガチの１日（地獄の出社編）_Transcriptへのバックリンク"
+            }
+          },
+          {
+            "id": "125680847ef5576f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "【メガバンク】ガチの１日（地獄の出社編）_Transcript.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "【メガバンク】ガチの１日（地獄の出社編）_Transcriptからのアウトゴーイングリンク"
+            }
+          },
+          {
+            "id": "65e5974ce3d52ee8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "タグ"
+            }
+          },
+          {
+            "id": "e8499802889a38e7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "すべてのプロパティ"
+            }
+          },
+          {
+            "id": "b59774a6921580f1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "【メガバンク】ガチの１日（地獄の出社編）_Transcript.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "【メガバンク】ガチの１日（地獄の出社編）_Transcriptのアウトライン"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:クイックスイッチャーを開く": false,
+      "graph:グラフビューを開く": false,
+      "canvas:新規キャンバスを作成": false,
+      "daily-notes:今日のデイリーノートを開く": false,
+      "templates:テンプレートを挿入": false,
+      "command-palette:コマンドパレットを開く": false,
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "f382d9b254f7db01",
+  "lastOpenFiles": [
+    "projects/proline_extractor/friends_debug.png",
+    "projects/proline_extractor/templates/index.html",
+    "projects/proline_extractor/templates",
+    "projects/proline_extractor/query_range.py",
+    "projects/proline_extractor/debug_output.txt",
+    "projects/proline_extractor/debug_sheets.py",
+    "plaud_exports/新規録音 34.md",
+    "plaud_exports/新規録音 33.md",
+    "plaud_exports/新規録音 30.md",
+    "plaud_exports/新規録音 30.json",
+    "plaud_exports/plaud_processed.json",
+    "plaud_exports/plaud_output.md",
+    "plaud_exports/plaud_output.json",
+    "plaud_exports/README.md",
+    "plaud_exports/12-18 週次会議_営業戦略と組織体制の強化.md",
+    "plaud_exports/12-17 相談セッション_ ウェルビーイング出版 堀口さん _ ターゲット設計_オファー再構築_架電_面談ファネル最適化.md",
+    "plaud_exports/12-17 営業戦略と個別案件に関するコンサルティング.md",
+    "plaud_exports/12-17 コンサルテーション_ 新貝様 - 中小スーパーマーケット向け事業のスケールアップ.md",
+    "plaud_exports/12-17 コンサルティング_思想家 森崎氏の事業拡大戦略.md",
+    "plaud_exports/12-10 新業態_スナキャバ_のフランチャイズ化構想に関する事業評価.md",
+    "plaud_exports/12-08 経済的自由と_週休5日_を実現するための思考法と実践戦略.md",
+    "plaud_exports/12-03 会議_ スクール事業拡大計画と広告_KPI分離設計.md",
+    "plaud_exports/12-03 コンサルテーション_内田さん - 売上停滞と商品ラインナップ拡充.md",
+    "plaud_exports",
+    "projects/proline_extractor/config.json",
+    "12-03 コンサルテーション_内田さん - 売上停滞と商品ラインナップ拡充.md",
+    "12-03 会議_ スクール事業拡大計画と広告_KPI分離設計.md",
+    "12-08 経済的自由と_週休5日_を実現するための思考法と実践戦略.md",
+    "12-10 新業態_スナキャバ_のフランチャイズ化構想に関する事業評価.md",
+    "12-17 コンサルティング_思想家 森崎氏の事業拡大戦略.md",
+    "12-17 コンサルテーション_ 新貝様 - 中小スーパーマーケット向け事業のスケールアップ.md",
+    "12-17 相談セッション_ ウェルビーイング出版 堀口さん _ ターゲット設計_オファー再構築_架電_面談ファネル最適化.md",
+    "12-17 営業戦略と個別案件に関するコンサルティング.md",
+    "12-18 週次会議_営業戦略と組織体制の強化.md",
+    "新規録音 34.md",
+    "新規録音 33.md",
+    "projects/proline_extractor/dashboard_debug.png",
+    "docs/古橋の会社ナレッジ/タングルシード/02_企業提携・JV/書店提携案プレゼン資料2026/06_今日決めたいこと.png",
+    "docs/古橋の会社ナレッジ/タングルシード/02_企業提携・JV/書店提携案プレゼン資料2026/05_90日プラン.png",
+    "docs/古橋の会社ナレッジ/タングルシード/02_企業提携・JV/書店提携案プレゼン資料2026/04_MVV実装.png",
+    "docs/古橋の会社ナレッジ/タングルシード/02_企業提携・JV/書店提携案プレゼン資料2026/03_3者のWinWin設計.png",
+    "docs/古橋の会社ナレッジ/タングルシード/02_企業提携・JV/書店提携案プレゼン資料2026/02_講師の課題.png",
+    "docs/古橋の会社ナレッジ/タングルシード/書店提携案プレゼン資料2026/06_今日決めたいこと.png",
+    "docs/古橋の会社ナレッジ/タングルシード/書店提携案プレゼン資料2026/05_90日プラン.png",
+    "docs/古橋の会社ナレッジ/タングルシード/書店提携案プレゼン資料2026/04_MVV実装.png",
+    "docs/古橋の会社ナレッジ/タングルシード/書店提携案プレゼン資料2026/03_3者のWinWin設計.png"
+  ]
+}

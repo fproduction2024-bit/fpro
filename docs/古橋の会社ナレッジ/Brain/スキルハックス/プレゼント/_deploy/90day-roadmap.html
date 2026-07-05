@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>副業ゼロイチ 90日ロードマップ | Skill Hacks 全話視聴者限定特典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --blue: #2563eb;
+            --blue-light: #eff6ff;
+            --blue-mid: #dbeafe;
+            --orange: #F06543;
+            --green: #16a34a;
+            --green-light: #f0fdf4;
+            --bg: #f8f9fb;
+            --white: #fff;
+            --text: #1a1a2e;
+            --sub: #555;
+            --muted: #999;
+            --border: #e8e8e8;
+            --radius: 10px
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px
+        }
+
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 32px 20px 28px;
+            text-align: center
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .accent {
+            color: #34d399
+        }
+
+        .sub-txt {
+            font-size: 13px;
+            opacity: .75
+        }
+
+        /* Phase Nav */
+        .phase-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--blue-mid);
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch
+        }
+
+        .phase-nav-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            gap: 5px;
+            min-width: max-content
+        }
+
+        .phase-btn {
+            padding: 5px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--sub);
+            background: var(--white);
+            white-space: nowrap;
+            text-decoration: none;
+            transition: all .2s
+        }
+
+        .phase-btn:hover,
+        .phase-btn.active {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue)
+        }
+
+        /* Main */
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px 16px 60px
+        }
+
+        /* Overview */
+        .overview {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 20px
+        }
+
+        .overview h2 {
+            font-size: .95rem;
+            font-weight: 900;
+            margin-bottom: 12px
+        }
+
+        .phase-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 6px
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: .85rem
+        }
+
+        .timeline-item.p1 {
+            background: linear-gradient(135deg, #eff6ff, #fff)
+        }
+
+        .timeline-item.p2 {
+            background: linear-gradient(135deg, #f0fdf4, #fff)
+        }
+
+        .timeline-item.p3 {
+            background: linear-gradient(135deg, #fffbeb, #fff)
+        }
+
+        .timeline-item.p4 {
+            background: linear-gradient(135deg, #fff7ed, #fff)
+        }
+
+        .timeline-item.p5 {
+            background: linear-gradient(135deg, #fdf4ff, #fff)
+        }
+
+        .phase-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .p1 .phase-dot {
+            background: var(--blue)
+        }
+
+        .p2 .phase-dot {
+            background: var(--green)
+        }
+
+        .p3 .phase-dot {
+            background: #f59e0b
+        }
+
+        .p4 .phase-dot {
+            background: var(--orange)
+        }
+
+        .p5 .phase-dot {
+            background: #a855f7
+        }
+
+        .timeline-label {
+            font-weight: 700;
+            min-width: 80px;
+            font-size: .8rem;
+            color: var(--text)
+        }
+
+        .timeline-desc {
+            flex: 1;
+            color: var(--sub);
+            font-size: .82rem
+        }
+
+        .timeline-income {
+            font-weight: 700;
+            font-size: .82rem;
+            white-space: nowrap
+        }
+
+        .p1 .timeline-income {
+            color: var(--muted)
+        }
+
+        .p2 .timeline-income {
+            color: var(--green)
+        }
+
+        .p3 .timeline-income {
+            color: #f59e0b
+        }
+
+        .p4 .timeline-income {
+            color: var(--orange)
+        }
+
+        .p5 .timeline-income {
+            color: #a855f7
+        }
+
+        /* Phase Card */
+        .phase-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            overflow: hidden;
+            scroll-margin-top: 56px
+        }
+
+        .phase-head {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .phase-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: .8rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff
+        }
+
+        .ph1 .phase-num {
+            background: var(--blue)
+        }
+
+        .ph2 .phase-num {
+            background: var(--green)
+        }
+
+        .ph3 .phase-num {
+            background: #f59e0b
+        }
+
+        .ph4 .phase-num {
+            background: var(--orange)
+        }
+
+        .ph5 .phase-num {
+            background: #a855f7
+        }
+
+        .phase-head h2 {
+            font-size: 1rem;
+            font-weight: 900;
+            flex: 1;
+            line-height: 1.4
+        }
+
+        .phase-days {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            white-space: nowrap;
+            color: #fff
+        }
+
+        .ph1 .phase-days {
+            background: var(--blue)
+        }
+
+        .ph2 .phase-days {
+            background: var(--green)
+        }
+
+        .ph3 .phase-days {
+            background: #f59e0b
+        }
+
+        .ph4 .phase-days {
+            background: var(--orange)
+        }
+
+        .ph5 .phase-days {
+            background: #a855f7
+        }
+
+        .phase-body {
+            padding: 20px
+        }
+
+        .sub-head {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin: 16px 0 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            border-bottom: 1px solid var(--blue-mid);
+            padding-bottom: 4px
+        }
+
+        .sub-head:first-child {
+            margin-top: 0
+        }
+
+        /* Danger col */
+        .ph3 .sub-head,
+        .ph4 .sub-head,
+        .ph5 .sub-head {
+            color: var(--orange);
+            border-color: #fde4d8
+        }
+
+        /* Action table */
+        .tbl-wrap {
+            overflow-x: auto;
+            margin: 8px 0 14px
+        }
+
+        .tbl-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .82rem
+        }
+
+        .tbl-wrap th {
+            background: #f0f4ff;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--blue-mid);
+            color: var(--blue)
+        }
+
+        .tbl-wrap td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--sub);
+            vertical-align: top
+        }
+
+        .ph3 .tbl-wrap th,
+        .ph4 .tbl-wrap th,
+        .ph5 .tbl-wrap th {
+            background: var(--orange-light, #fff4f1);
+            color: var(--orange);
+            border-color: #fde4d8
+        }
+
+        /* Checklist */
+        .ck-compact {
+            list-style: none
+        }
+
+        .ck-compact li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: .88rem;
+            color: var(--sub);
+            border-bottom: 1px solid #f5f5f5
+        }
+
+        .ck-compact li::before {
+            content: '□';
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-size: .9rem
+        }
+
+        /* Pitfalls */
+        .pitfall-item {
+            background: #fff8f8;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 8px
+        }
+
+        .pitfall-title {
+            font-size: .85rem;
+            font-weight: 700;
+            color: #dc2626;
+            margin-bottom: 4px
+        }
+
+        .pitfall-body {
+            font-size: .82rem;
+            color: var(--sub);
+            line-height: 1.7
+        }
+
+        /* Tip */
+        .tip-box {
+            background: var(--blue-light);
+            border-left: 3px solid var(--blue);
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--sub);
+            margin: 12px 0;
+            line-height: 1.7
+        }
+
+        .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 4px;
+            display: block
+        }
+
+        /* Salary sim */
+        .sim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin: 10px 0
+        }
+
+        .sim-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center
+        }
+
+        .sim-label {
+            font-size: .75rem;
+            color: var(--muted);
+            margin-bottom: 4px
+        }
+
+        .sim-value {
+            font-size: 1.1rem;
+            font-weight: 900
+        }
+
+        .sim-card.goal .sim-value {
+            color: #a855f7
+        }
+
+        .sim-card.p1v .sim-value {
+            color: var(--muted)
+        }
+
+        .sim-card.p2v .sim-value {
+            color: var(--green)
+        }
+
+        .sim-card.p3v .sim-value {
+            color: #f59e0b
+        }
+
+        .sim-card.p4v .sim-value {
+            color: var(--orange)
+        }
+
+        /* Beyond */
+        .beyond-card {
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 20px
+        }
+
+        .beyond-card h3 {
+            font-size: 1rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+            color: #34d399
+        }
+
+        .step-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            align-items: flex-start
+        }
+
+        .step-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 2px
+        }
+
+        .step-content {
+            flex: 1
+        }
+
+        .step-title {
+            font-size: .9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px
+        }
+
+        .step-desc {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.6
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, .08);
+            border-left: 3px solid #34d399;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            font-size: .84rem;
+            color: rgba(255, 255, 255, .8);
+            font-style: italic;
+            line-height: 1.7;
+            margin-top: 16px
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: var(--muted);
+            background: var(--white);
+            border-top: 1px solid var(--border)
+        }
+
+        @media(max-width:600px) {
+            .sim-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .timeline-item {
+                flex-wrap: wrap
+            }
+
+            .timeline-income {
+                margin-left: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="badge">🎁 全話視聴者限定特典⑤</div>
+        <h1>🚀 副業ゼロイチ<span class="accent"> 90日ロードマップ</span></h1>
+        <p class="sub-txt">スキルゼロ・実績ゼロから、90日間で「月10万円の副業収入」を目指すための完全計画。</p>
+    </header>
+
+    <nav class="phase-nav">
+        <div class="phase-nav-inner">
+            <a href="#phase1" class="phase-btn">Phase1 スキル選定</a>
+            <a href="#phase2" class="phase-btn">Phase2 ポートフォリオ</a>
+            <a href="#phase3" class="phase-btn">Phase3 営業開始</a>
+            <a href="#phase4" class="phase-btn">Phase4 安定受注</a>
+            <a href="#phase5" class="phase-btn">Phase5 月10万円</a>
+            <a href="#beyond" class="phase-btn">その先へ</a>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <!-- Overview -->
+        <div class="overview">
+            <h2>💰 90日間 月収推移シミュレーション</h2>
+            <div class="sim-grid">
+                <div class="sim-card p1v">
+                    <div class="sim-label">Phase 1-2（Day 1〜14）</div>
+                    <div class="sim-value">0円</div>
+                </div>
+                <div class="sim-card p2v">
+                    <div class="sim-label">Phase 3（Day 15〜21）</div>
+                    <div class="sim-value">〜5,000円</div>
+                </div>
+                <div class="sim-card p3v">
+                    <div class="sim-label">Phase 4（Day 22〜60）</div>
+                    <div class="sim-value">3〜5万円</div>
+                </div>
+                <div class="sim-card goal">
+                    <div class="sim-label">Phase 5（Day 61〜90）</div>
+                    <div class="sim-value">🎯 10万円</div>
+                </div>
+            </div>
+            <p style="font-size:.8rem;color:var(--muted);margin-top:8px">※ 学習ペースや案件の取り方で個人差があります。目安としてお使いください。</p>
+
+            <div style="margin-top:16px">
+                <h2 style="font-size:.95rem;font-weight:900;margin-bottom:10px">📍 全体マップ</h2>
+                <div class="phase-timeline">
+                    <div class="timeline-item p1">
+                        <div class="phase-dot"></div><span class="timeline-label">Phase 1</span><span
+                            class="timeline-desc">Day 1〜7 スキル選定・環境準備・学習開始</span><span class="timeline-income">0円</span>
+                    </div>
+                    <div class="timeline-item p2">
+                        <div class="phase-dot"></div><span class="timeline-label">Phase 2</span><span
+                            class="timeline-desc">Day 8〜14 ポートフォリオ・提案文を整える</span><span class="timeline-income">0円</span>
+                    </div>
+                    <div class="timeline-item p3">
+                        <div class="phase-dot"></div><span class="timeline-label">Phase 3</span><span
+                            class="timeline-desc">Day 15〜21 営業開始・初受注へ</span><span class="timeline-income">〜5,000円</span>
+                    </div>
+                    <div class="timeline-item p4">
+                        <div class="phase-dot"></div><span class="timeline-label">Phase 4</span><span
+                            class="timeline-desc">Day 22〜60 初案件獲得・安定受注</span><span class="timeline-income">3〜5万円</span>
+                    </div>
+                    <div class="timeline-item p5">
+                        <div class="phase-dot"></div><span class="timeline-label">Phase 5</span><span
+                            class="timeline-desc">Day 61〜90 月10万円達成・仕組み化</span><span class="timeline-income">10万円</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 1 -->
+        <div class="phase-card ph1" id="phase1">
+            <div class="phase-head">
+                <div class="phase-num">1</div>
+                <h2>スキル選定・環境準備・学習開始</h2>
+                <span class="phase-days">Day 1〜7</span>
+            </div>
+            <div class="phase-body">
+                <div class="sub-head">Day 1〜2：スキルを選ぶ</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>アクション</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>診断シートを使う</td>
+                                <td>副業スキルマッチング診断でタイプを確認</td>
+                            </tr>
+                            <tr>
+                                <td>市場調査をする</td>
+                                <td>クラウドワークスで各スキルの案件数・相場を確認</td>
+                            </tr>
+                            <tr>
+                                <td>1つに決める</td>
+                                <td>迷ったら直感で選ぶ。合わなければ途中で変えてもOK</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">Day 3〜5：環境を整える</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>アクション</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ツールを準備</td>
+                                <td>必要なソフトをインストール（Premiere Pro / Photoshop 等）</td>
+                            </tr>
+                            <tr>
+                                <td>アカウント登録</td>
+                                <td>クラウドワークス・ランサーズに登録</td>
+                            </tr>
+                            <tr>
+                                <td>学習環境</td>
+                                <td>毎日の学習時間と場所を決める（例：21時〜23時）</td>
+                            </tr>
+                            <tr>
+                                <td>学習開始</td>
+                                <td>選んだスキルの基礎学習に着手</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">⚠️ Phase 1の落とし穴</div>
+                <div class="pitfall-item">
+                    <div class="pitfall-title">スキル選びで迷い続ける</div>
+                    <div class="pitfall-body">3日経ってもまだ調べてる ──→ 迷ったら「案件数が多い × 直感でやりたい方」。合わなければ後から変更OK。</div>
+                </div>
+                <div class="pitfall-item">
+                    <div class="pitfall-title">「もう少し調べてから」症候群</div>
+                    <div class="pitfall-body">情報収集が目的化 ──→ 調査は2日まで。3日目には必ず学習動画を再生する。</div>
+                </div>
+                <div class="sub-head">完了条件</div>
+                <ul class="ck-compact">
+                    <li>取り組むスキルを1つ決めた</li>
+                    <li>必要なツール・ソフトをインストールした</li>
+                    <li>クラウドワークスに登録した</li>
+                    <li>毎日の学習スケジュールを決めた</li>
+                    <li>基礎学習を開始した</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-card ph2" id="phase2">
+            <div class="phase-head">
+                <div class="phase-num">2</div>
+                <h2>ポートフォリオ・提案文準備</h2>
+                <span class="phase-days">Day 8〜14</span>
+            </div>
+            <div class="phase-body">
+                <div class="sub-head">Day 8〜11：サンプル作品を作る</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>スキル</th>
+                                <th>作るもの（数）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>動画編集</td>
+                                <td>YouTube編集サンプル（1本）</td>
+                            </tr>
+                            <tr>
+                                <td>ライティング</td>
+                                <td>SEO記事 3,000字（2本）</td>
+                            </tr>
+                            <tr>
+                                <td>デザイン</td>
+                                <td>バナー（3枚）＋サムネイル（2枚）</td>
+                            </tr>
+                            <tr>
+                                <td>プログラミング</td>
+                                <td>架空のLPコーディング（1ページ）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">Day 12〜14：ポートフォリオ・提案文を整える</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>アクション</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>まとめる</td>
+                                <td>サンプルをGoogleドライブ / Notionにまとめる</td>
+                            </tr>
+                            <tr>
+                                <td>URLを発行</td>
+                                <td>共有リンクを作成（提案文に貼れるように）</td>
+                            </tr>
+                            <tr>
+                                <td>プロフィール完成</td>
+                                <td>クラウドワークスのプロフィール文を完成させる</td>
+                            </tr>
+                            <tr>
+                                <td>提案文を準備</td>
+                                <td>テンプレート集を使って提案文のベースを用意する</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pitfall-item pitfall-item" style="background:#f0fdf4;border-color:#86efac">
+                    <div class="pitfall-title" style="color:var(--green)">✅ Phase 2のポイント</div>
+                    <div class="pitfall-body">「完璧な作品」を作ろうとしない。「70点を3つ」が「100点を0個」より100倍価値がある。技術が成熟するのを待っていたら一生案件は取れない。
+                    </div>
+                </div>
+                <div class="sub-head">完了条件</div>
+                <ul class="ck-compact">
+                    <li>サンプル作品を規定数制作した</li>
+                    <li>ポートフォリオURLを用意した</li>
+                    <li>クラウドワークスのプロフィールが完成した</li>
+                    <li>提案文のベースを用意した</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-card ph3" id="phase3">
+            <div class="phase-head">
+                <div class="phase-num">3</div>
+                <h2>営業開始</h2>
+                <span class="phase-days">Day 15〜21</span>
+            </div>
+            <div class="phase-body">
+                <p style="font-size:.9rem;color:var(--sub);margin-bottom:12px">
+                    案件に応募して、初受注を目指す。<strong>1日3件以上</strong>の応募が目標。</p>
+                <div class="sub-head">Day 15〜17：集中応募期間</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>アクション</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>案件を探す</td>
+                                <td>「新着順」で自分のスキルに合う案件を毎日チェック</td>
+                            </tr>
+                            <tr>
+                                <td>1日3件以上応募</td>
+                                <td>返信率は10〜20%なので数が重要</td>
+                            </tr>
+                            <tr>
+                                <td>差別化する</td>
+                                <td>相手のチャンネル/サイトを分析して提案文に反映</td>
+                            </tr>
+                            <tr>
+                                <td>テスト提案</td>
+                                <td>「まず1本テストで」を積極的に提案</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">応募テクニック集</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>時間帯</th>
+                                <th>効果</th>
+                                <th>理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>朝 8〜10時</td>
+                                <td>★★★★★</td>
+                                <td>クライアントが出勤後にチェック</td>
+                            </tr>
+                            <tr>
+                                <td>昼 12〜13時</td>
+                                <td>★★★★☆</td>
+                                <td>昼休みにチェックするクライアントが多い</td>
+                            </tr>
+                            <tr>
+                                <td>夜 20〜22時</td>
+                                <td>★★★☆☆</td>
+                                <td>ライバルが多い。でも案件も多い</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tip-box"><span class="tip-label">💡 ワンポイントアドバイス</span>夜に提案文を「下書き保存」→
+                    翌朝8〜9時に送信。これが最も返信率が高いパターン。</div>
+                <div class="sub-head">完了条件</div>
+                <ul class="ck-compact">
+                    <li>10件以上の案件に応募した</li>
+                    <li>1件以上の案件を受注した</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-card ph4" id="phase4">
+            <div class="phase-head">
+                <div class="phase-num">4</div>
+                <h2>初案件獲得・安定受注</h2>
+                <span class="phase-days">Day 22〜60</span>
+            </div>
+            <div class="phase-body">
+                <div class="sub-head">Day 22〜30：初案件の納品</div>
+                <ul class="ck-compact">
+                    <li>50%進捗でクライアントに中間報告する</li>
+                    <li>丁寧なメッセージと共に納品物を提出</li>
+                    <li>★5 の評価をもらうことを意識する</li>
+                </ul>
+                <div class="pitfall-item" style="background:#f0fdf4;border-color:#86efac">
+                    <div class="pitfall-title" style="color:var(--green)">✅ Phase 4のポイント</div>
+                    <div class="pitfall-body">初案件は「稼ぐ」より「実績を作る」ことが目的。相場より少し安くても、丁寧に取り組んで★5評価を取る。</div>
+                </div>
+
+                <div class="sub-head">Day 31〜60：実績を積む・単価を上げる</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>アクション</th>
+                                <th>詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>継続応募</td>
+                                <td>毎日1〜2件は新規案件に応募を続ける</td>
+                            </tr>
+                            <tr>
+                                <td>リピート打診</td>
+                                <td>納品後に「今後もお仕事があればぜひ」と一言添える</td>
+                            </tr>
+                            <tr>
+                                <td>実績3件突破</td>
+                                <td>★5評価を3件以上集める → 信頼度が大幅UP</td>
+                            </tr>
+                            <tr>
+                                <td>相場通りの価格に戻す</td>
+                                <td>初期の割引価格から通常価格に戻す</td>
+                            </tr>
+                            <tr>
+                                <td>2つ目のスキル学習開始</td>
+                                <td>スキルの掛け合わせで単価UPを目指す</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">⚠️ Phase 4の落とし穴</div>
+                <div class="pitfall-item">
+                    <div class="pitfall-title">安い案件から抜け出せない</div>
+                    <div class="pitfall-body">値上げが怖い ──→ 実績3件超えたら値上げ。品質が良ければクライアントは離れない。</div>
+                </div>
+                <div class="pitfall-item">
+                    <div class="pitfall-title">キャパオーバー</div>
+                    <div class="pitfall-body">受けすぎて品質が下がる ──→ 同時に抱える案件は3件まで。</div>
+                </div>
+                <div class="sub-head">完了条件</div>
+                <ul class="ck-compact">
+                    <li>実績が3件以上になった</li>
+                    <li>単価を初期から20%以上UPした</li>
+                    <li>リピートクライアントが1名以上いる</li>
+                    <li>月3万円以上の副業収入を達成した</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-card ph5" id="phase5">
+            <div class="phase-head">
+                <div class="phase-num">5</div>
+                <h2>月10万円達成・仕組み化</h2>
+                <span class="phase-days">Day 61〜90</span>
+            </div>
+            <div class="phase-body">
+                <div class="sub-head">月10万円の達成パターン例</div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>スキル</th>
+                                <th>単価</th>
+                                <th>件数</th>
+                                <th>합계</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>動画編集</td>
+                                <td>8,000円/本</td>
+                                <td>13本</td>
+                                <td>104,000円</td>
+                            </tr>
+                            <tr>
+                                <td>デザイン</td>
+                                <td>バナー5,000円×10枚＋LP50,000円×1件</td>
+                                <td>—</td>
+                                <td>100,000円</td>
+                            </tr>
+                            <tr>
+                                <td>プログラミング</td>
+                                <td>LP50,000円</td>
+                                <td>2件</td>
+                                <td>100,000円</td>
+                            </tr>
+                            <tr>
+                                <td>ライティング</td>
+                                <td>文字単価2円×5,000字</td>
+                                <td>10本</td>
+                                <td>100,000円</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-head">Day 61〜70：収入源を複数化</div>
+                <ul class="ck-compact">
+                    <li>クラウドワークス ＋ ランサーズ ＋ ココナラの3つで案件を回す</li>
+                    <li>信頼関係のあるクライアントとプラットフォーム外で直接契約（手数料削減）</li>
+                    <li>「動画編集＋サムネ5枚セット○○円」のようなパッケージを作る</li>
+                </ul>
+                <div class="sub-head">Day 71〜90：効率化・月10万円突破</div>
+                <ul class="ck-compact">
+                    <li>よく使うテンプレートや型を作り、作業時間を短縮する</li>
+                    <li>「月○本の動画編集で月額○万円」の継続契約を目指す</li>
+                    <li>全クライアントに単価見直しを提案する</li>
+                    <li>X（Twitter）で学びや実績を発信 → 直接依頼の導線を作る</li>
+                </ul>
+                <div class="tip-box"><span class="tip-label">💡
+                        ワンポイントアドバイス</span>「技術が成熟してから月10万円を目指そう」ではなく、「月10万円を回しながら技術を磨く」が正しい順番。</div>
+                <div class="sub-head">完了条件</div>
+                <ul class="ck-compact">
+                    <li>月10万円の副業収入を達成した</li>
+                    <li>直接取引のクライアントが1名以上いる</li>
+                    <li>月額契約（継続案件）を1つ以上持っている</li>
+                    <li>X（Twitter）で副業の学びを発信し始めた</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Beyond -->
+        <div class="beyond-card" id="beyond">
+            <h3>🌟 人生攻略ロードマップ ── 月10万円の「その先」</h3>
+            <div class="step-item">
+                <div class="step-icon">①</div>
+                <div class="step-content">
+                    <div class="step-title" style="color:#34d399">スキルで時間単価を最大化する ← 今ここを完了！</div>
+                    <div class="step-desc">スキルを身につけて、自分の1時間あたりの価値を最大限に高める。</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-icon">②</div>
+                <div class="step-content">
+                    <div class="step-title">仕組みと発信で「分身」を作る</div>
+                    <div class="step-desc">X/YouTubeで発信 → フォロワーから直接依頼が来る。テンプレート・教材を作って販売 → 自分が寝ている間にも売れる。</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-icon">③</div>
+                <div class="step-content">
+                    <div class="step-title">外注化・投資で資産を増やす</div>
+                    <div class="step-desc">案件のディレクション → 作業は外注パートナーに依頼。余剰資金を投資へ → お金がお金を産む状態を作る。</div>
+                </div>
+            </div>
+            <div class="quote-box">
+                「いきなりステップ③の投資からやる人がいるけど、元本が少ないんだから意味がない。<strong
+                    style="color:#fff">まずは自分の時給を最大化する。それが全ての始まり。</strong>」<br>── 迫 佑樹
+            </div>
+            <div
+                style="margin-top:20px;padding:16px;background:rgba(255,255,255,.08);border-radius:8px;font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.8;text-align:center">
+                90日で人生は変わります。でも、変えるのはこのロードマップではなく、あなた自身の行動です。<br>
+                「今日が一番若い日」── 迷ったら、1ミリでも前に進んでください。<br><br>
+                もし伴走してくれる環境が必要だと感じたら、ぜひスキルハックスへ。<br>
+                <strong style="color:#34d399">── 迫 佑樹</strong>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>© Skill Hacks by Brain Inc. ｜ スキルハックス 全話視聴者限定特典</p>
+        <p style="margin-top:6px">※ 本コンテンツの内容は個人の経験に基づくものであり、成果を保証するものではありません。</p>
+    </footer>
+
+    <script>
+        // Phase nav scroll highlight
+        const phcards = document.querySelectorAll('[id^="phase"],[id="beyond"]');
+        const navBtns = document.querySelectorAll('.phase-btn');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            phcards.forEach(c => { if (window.scrollY >= c.offsetTop - 80) current = c.id; });
+            navBtns.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+        });
+    </script>
+</body>
+
+</html>

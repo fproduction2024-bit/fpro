@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>itk 飲食人材リスト活用 ダッシュボード</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background: var(--bg-white);
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 101, 10, 0.15) 0%, transparent 70%);
+            border-radius: 50%
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.2);
+            border: 1px solid rgba(232, 101, 10, 0.5);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--orange-light);
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px
+        }
+
+        .hero h1 span {
+            color: var(--orange-light)
+        }
+
+        .hero p.sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 640px
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2
+        }
+
+        .summary-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .summary-card .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1
+        }
+
+        .summary-card .num span {
+            font-size: 16px;
+            font-weight: 600
+        }
+
+        .summary-card .label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 8px
+        }
+
+        .summary-card .change {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px
+        }
+
+        .up {
+            color: var(--orange)
+        }
+
+        .down {
+            color: var(--red)
+        }
+
+        section {
+            padding: 80px 0
+        }
+
+        section.alt {
+            background: var(--bg-gray)
+        }
+
+        .sec-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .sec-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4
+        }
+
+        .sec-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin-bottom: 40px
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0
+        }
+
+        .card-icon.orange {
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange)
+        }
+
+        .card-icon.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green)
+        }
+
+        .card-icon.red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red)
+        }
+
+        .card-icon.teal {
+            background: rgba(12, 74, 78, 0.1);
+            color: var(--teal)
+        }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.7
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            font-size: 14px
+        }
+
+        thead {
+            background: var(--teal);
+            color: #fff
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-gray)
+        }
+
+        tbody tr:hover {
+            background: var(--orange-bg)
+        }
+
+        td.highlight {
+            font-weight: 700;
+            color: var(--orange)
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px
+        }
+
+        .highlight-box {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin: 24px 0
+        }
+
+        .highlight-box h4 {
+            color: var(--orange);
+            font-size: 16px;
+            margin-bottom: 12px
+        }
+
+        .flow-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 700px;
+            margin: 0 auto 32px
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--orange);
+            background: var(--bg-gray)
+        }
+
+        .flow-step.green-border {
+            border-left-color: var(--green)
+        }
+
+        .flow-step.teal-border {
+            border-left-color: var(--teal)
+        }
+
+        .flow-step .step-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-dark)
+        }
+
+        .flow-step .step-detail {
+            font-size: 13px;
+            color: var(--text-light)
+        }
+
+        .flow-arrow-down {
+            text-align: center;
+            color: var(--orange);
+            font-size: 20px;
+            margin: 2px 0
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius);
+            padding: 36px;
+            text-align: center;
+            margin: 32px 0
+        }
+
+        .roi-box .roi-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--green)
+        }
+
+        .roi-box .roi-label {
+            font-size: 16px;
+            margin-top: 8px;
+            color: var(--text-body)
+        }
+
+        .steps {
+            display: flex;
+            gap: 20px;
+            margin: 32px 0
+        }
+
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative
+        }
+
+        .step-num-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin: 0 auto 12px
+        }
+
+        .step-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px
+        }
+
+        .step-item p {
+            font-size: 13px;
+            color: var(--text-light)
+        }
+
+        .step-item::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 14px;
+            font-size: 20px;
+            color: var(--text-light)
+        }
+
+        .step-item:last-child::after {
+            display: none
+        }
+
+        .cta {
+            background: var(--teal);
+            padding: 60px 0;
+            text-align: center;
+            color: #fff
+        }
+
+        .cta h2 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px
+        }
+
+        .cta p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px
+        }
+
+        .big-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--orange);
+            line-height: 1
+        }
+
+        /* LINE Scenario Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 32px 0
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--orange), var(--green))
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 20px 24px;
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow)
+        }
+
+        .timeline-item::before {
+            content: attr(data-day);
+            position: absolute;
+            left: -40px;
+            top: 20px;
+            width: 32px;
+            height: 32px;
+            background: var(--teal);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700
+        }
+
+        .timeline-item.cta-day::before {
+            background: var(--orange)
+        }
+
+        .timeline-item h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px
+        }
+
+        .timeline-item p {
+            font-size: 13px;
+            color: var(--text-body)
+        }
+
+        .timeline-item .tag {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-bottom: 8px
+        }
+
+        /* Simulation Chart */
+        .sim-batch {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            overflow: hidden
+        }
+
+        .sim-batch-header {
+            background: var(--teal);
+            color: #fff;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .sim-batch-header .batch-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 800
+        }
+
+        .sim-batch-body {
+            padding: 20px
+        }
+
+        .sim-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-size: 13px
+        }
+
+        .sim-bar-label {
+            width: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-dark);
+            flex-shrink: 0
+        }
+
+        .sim-bar-track {
+            flex: 1;
+            height: 28px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .sim-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            transition: width 1s ease
+        }
+
+        .sim-bar-fill.orange {
+            background: linear-gradient(90deg, var(--orange), var(--orange-light))
+        }
+
+        .sim-bar-fill.green {
+            background: linear-gradient(90deg, var(--green), #34d399)
+        }
+
+        .sim-bar-fill.teal {
+            background: linear-gradient(90deg, var(--teal), #1a8a8f)
+        }
+
+        .sim-bar-value {
+            width: 80px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--text-dark);
+            flex-shrink: 0
+        }
+
+        .improvement-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px
+        }
+
+        /* Tab Nav */
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e5e7eb
+        }
+
+        .tab-nav button {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            background: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s
+        }
+
+        .tab-nav button.active {
+            color: var(--orange);
+            border-bottom-color: var(--orange)
+        }
+
+        .tab-nav button:hover {
+            color: var(--text-dark)
+        }
+
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block
+        }
+
+        .total-row td {
+            background: var(--orange-bg) !important;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        /* === ACTION STEPS === */
+        .action-phase {
+            margin-bottom: 32px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid #e5e7eb;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            color: #fff;
+        }
+
+        .phase-prep {
+            background: linear-gradient(135deg, #64748b, #475569);
+        }
+
+        .phase-test {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+        }
+
+        .phase-improve {
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+        }
+
+        .phase-scale {
+            background: linear-gradient(135deg, var(--teal), #0E5A5F);
+        }
+
+        .phase-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .phase-title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .phase-period {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .action-list {
+            padding: 8px 0;
+            background: #fff;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 24px;
+            border-bottom: 1px solid #f3f4f6;
+            transition: background 0.2s;
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-item:hover {
+            background: #fafbfc;
+        }
+
+        .action-who {
+            flex-shrink: 0;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            min-width: 60px;
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .action-who.itk {
+            background: rgba(12, 74, 78, 0.1);
+            color: var(--teal);
+            border: 1px solid rgba(12, 74, 78, 0.2);
+        }
+
+        .action-who.yolos {
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+        }
+
+        .action-who.both {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .action-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .action-detail p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* === GANTT CHART === */
+        .gantt-container {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .gantt-header {
+            display: flex;
+            background: var(--teal);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .gantt-label-col {
+            flex: 0 0 180px;
+            padding: 10px 14px;
+            font-size: 13px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gantt-timeline {
+            flex: 1;
+            display: flex;
+            position: relative;
+        }
+
+        .gantt-header .gantt-timeline {
+            display: flex;
+        }
+
+        .gantt-month {
+            flex: 1;
+            text-align: center;
+            padding: 10px 4px;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 12px;
+        }
+
+        .gantt-row {
+            display: flex;
+            border-bottom: 1px solid #f3f4f6;
+            min-height: 40px;
+            align-items: center;
+        }
+
+        .gantt-row:hover {
+            background: #fafbfc;
+        }
+
+        .gantt-row .gantt-label-col {
+            font-size: 12px;
+            color: var(--text-body);
+            border-right: 1px solid #e5e7eb;
+            font-weight: 500;
+        }
+
+        .gantt-row .gantt-timeline {
+            position: relative;
+            height: 28px;
+        }
+
+        .gantt-bar {
+            position: absolute;
+            height: 20px;
+            top: 4px;
+            border-radius: 10px;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .gantt-bar:hover {
+            opacity: 1;
+        }
+
+        .gantt-bar.itk {
+            background: linear-gradient(90deg, var(--teal), #14757B);
+        }
+
+        .gantt-bar.yolos {
+            background: linear-gradient(90deg, var(--orange), var(--orange-light));
+        }
+
+        .gantt-bar.both {
+            background: linear-gradient(90deg, var(--green), #34D399);
+        }
+
+        .gantt-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--orange), transparent);
+            margin: 0;
+        }
+
+        /* === STEPS SUMMARY === */
+        .steps-summary {
+            margin-top: 40px;
+            padding: 32px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(12, 74, 78, 0.04), rgba(232, 101, 10, 0.04));
+            border: 2px solid rgba(12, 74, 78, 0.15);
+        }
+
+        .steps-summary h4 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding: 6px 0 6px 28px;
+            font-size: 14px;
+            color: var(--text-body);
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+            color: var(--teal);
+        }
+
+        /* === MONTHLY IMPACT === */
+        .monthly-impact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .mi-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .mi-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .mi-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .mi-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .mi-num span {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-left: 4px;
+        }
+
+        .mi-num.big {
+            font-size: 32px;
+        }
+
+        .mi-sub {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .mi-highlight {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.02));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .mi-highlight .mi-num {
+            color: var(--green);
+        }
+
+        .mi-annual {
+            background: linear-gradient(135deg, rgba(232, 101, 10, 0.08), rgba(232, 101, 10, 0.02));
+            border-color: rgba(232, 101, 10, 0.3);
+        }
+
+        .mi-annual .mi-num {
+            color: var(--orange);
+        }
+
+        /* === SMS PATTERNS === */
+        .sms-patterns {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sms-card {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .sms-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .sms-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: var(--bg-gray);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sms-badge {
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .sms-badge.a {
+            background: var(--teal);
+        }
+
+        .sms-badge.b {
+            background: #6366f1;
+        }
+
+        .sms-badge.c {
+            background: #8b5cf6;
+        }
+
+        .sms-badge.d {
+            background: var(--orange);
+        }
+
+        .sms-badge.e {
+            background: var(--green);
+        }
+
+        .sms-target {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .sms-body {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .sms-hook {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 12px;
+        }
+
+        .sms-text {
+            background: #f0f4f8;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+        }
+
+        /* === HEARING ITEMS === */
+        .hearing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .hearing-card {
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #fff;
+        }
+
+        .hearing-card-header {
+            padding: 14px 20px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hearing-card-header span {
+            font-size: 18px;
+        }
+
+        @media(max-width:768px) {
+            .summary-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .hero h1 {
+                font-size: 26px
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+
+            .steps {
+                flex-direction: column
+            }
+
+            .step-item::after {
+                display: none
+            }
+
+            .big-number {
+                font-size: 56px
+            }
+
+            .tab-nav button {
+                font-size: 13px;
+                padding: 12px 8px
+            }
+
+            .gantt-label-col {
+                flex: 0 0 110px;
+                font-size: 11px !important;
+                padding: 8px 8px !important;
+            }
+
+            .gantt-month {
+                font-size: 10px;
+                padding: 8px 2px;
+            }
+
+            .action-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .action-who {
+                align-self: flex-start;
+            }
+
+            .steps-summary .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .monthly-impact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hearing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hearing-card[style*="grid-column"] {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">itk × YOLO's ④飲食人材リスト活用PJT</div>
+            <h1><span>既存リストの面談予約施策</span></h1>
+            <p class="sub">SMS配信でLINE登録を獲得し、ステップ配信で教育・信頼構築。温まった求職者だけが面談に来る自動ファネルを構築します。</p>
+        </div>
+    </section>
+
+    <!-- SUMMARY CARDS -->
+    <div class="container">
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="num">15<span>万件</span></div>
+                <div class="label">既存求職者リスト</div>
+                <div class="change up">SMS配信対象</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">3,000<span>件</span></div>
+                <div class="label">1バッチあたりのSMS配信数</div>
+                <div class="change up">段階的に改善</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">232<span>件〜</span></div>
+                <div class="label">想定着座数（3ヶ月）</div>
+                <div class="change up">段階改善後</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">1.6<span>億円〜</span></div>
+                <div class="label">紹介フィー売上ポテンシャル</div>
+                <div class="change up">成約率10% × フィー70万円</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB NAVIGATION -->
+    <section style="padding-top:100px">
+        <div class="container">
+            <div class="tab-nav">
+                <button class="active" onclick="showTab('policy')">📋 運用方針</button>
+                <button onclick="showTab('line')">💬 LINE設計</button>
+                <button onclick="showTab('simulation')">📊 収益シミュレーション</button>
+                <button onclick="showTab('steps')">🚀 実行ステップ</button>
+            </div>
+
+            <!-- ========== TAB 1: 運用方針 ========== -->
+            <div id="policy" class="tab-content active">
+                <div class="sec-label">operation policy</div>
+                <div class="sec-title">運用方針：SMS → LINE → 面談 自動ファネル</div>
+                <div class="sec-desc">15万リストを段階的に活用し、データドリブンで改善しながらLINE登録→面談予約を最大化します。</div>
+
+                <div class="flow-visual">
+                    <div class="flow-step">
+                        <div>
+                            <div class="step-name">Step 1：リストセグメント＆SMS配信</div>
+                            <div class="step-detail">3,000件ずつ段階配信。反応率を見ながら文面・セグメントを改善</div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="flow-step teal-border">
+                        <div>
+                            <div class="step-name">Step 2：LINE友だち登録（LP経由）</div>
+                            <div class="step-detail">SMS→LP→LINE登録。登録特典「給与相場レポート」で登録率UP</div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="flow-step">
+                        <div>
+                            <div class="step-name">Step 3：7日間ステップ配信（自動教育）</div>
+                            <div class="step-detail">価値提供→信頼構築→面談CTA。動画なしテキストベースで即構築</div>
+                        </div>
+                    </div>
+                    <div class="flow-arrow-down">↓</div>
+                    <div class="flow-step green-border">
+                        <div>
+                            <div class="step-name">Step 4：面談予約＆着座 → 紹介成約</div>
+                            <div class="step-detail">温まった求職者だけが面談に来る。面談→紹介成約で紹介フィー売上が発生</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-top:40px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">📱</div>
+                            <h3>SMS配信戦略</h3>
+                        </div>
+                        <p><strong style="color:var(--orange)">段階配信方式</strong>を採用。3,000件ずつ配信し、各バッチの反応率を測定。</p>
+                        <p style="margin-top:12px">✅ バッチごとにA/Bテスト実施<br>✅ セグメント別に文面を最適化<br>✅ 到達率・CTR・LINE登録率を追跡<br>✅
+                            utageで配信管理・自動化</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon teal">🎯</div>
+                            <h3>セグメント分類</h3>
+                        </div>
+                        <table style="box-shadow:none;margin:0">
+                            <thead>
+                                <tr>
+                                    <th>ランク</th>
+                                    <th>条件</th>
+                                    <th>優先度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>A</strong></td>
+                                    <td>紹介実績あり・1年以内接触</td>
+                                    <td>★★★</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>B</strong></td>
+                                    <td>応募あり・1〜3年以内接触</td>
+                                    <td>★★☆</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>C</strong></td>
+                                    <td>登録のみ・3年以上接触なし</td>
+                                    <td>★☆☆</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SMS文面パターン -->
+                <div style="margin-top:40px">
+                    <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">📝 SMS文面パターン（5パターン）</h3>
+                    <p style="color:var(--text-light);margin-bottom:24px;font-size:14px">
+                        A/Bテスト用に5種類の文面を用意。セグメントや配信時期に応じて使い分け、反応率の高いパターンを特定します。</p>
+
+                    <div class="sms-patterns">
+
+                        <div class="sms-card">
+                            <div class="sms-header">
+                                <span class="sms-badge a">パターン A</span>
+                                <span class="sms-target">高優先度向け（紹介実績あり）</span>
+                            </div>
+                            <div class="sms-body">
+                                <div class="sms-hook">🎯 訴求軸：パーソナル × 給与レポート</div>
+                                <pre class="sms-text">【itk】○○様
+以前ご利用いただきありがとうございました。
+飲食業界の【最新給与相場レポート】を無料でお届けしています。
+✅ 職種別の平均年収データ
+✅ 好条件の非公開求人情報
+✅ 転職市場のリアルな動向
+▼ 無料で受け取る（LINE登録）
+https://lin.ee/xxxxx
+※配信停止はLINE内で可能です
+itkキャリアサポート</pre>
+                            </div>
+                        </div>
+
+                        <div class="sms-card">
+                            <div class="sms-header">
+                                <span class="sms-badge b">パターン B</span>
+                                <span class="sms-target">中優先度向け（1〜3年前接触）</span>
+                            </div>
+                            <div class="sms-body">
+                                <div class="sms-hook">🎯 訴求軸：市場データ × 好奇心</div>
+                                <pre class="sms-text">【itk】飲食業界で働く方へ
+2026年の飲食業界、給与が上がっている職種をご存知ですか？
+今LINEに登録いただくと👇全て無料でお届けします
+✅ 2026年 職種別給与レポート
+✅ 非公開の好条件求人
+✅ キャリアアップのノウハウ
+▼ 今すぐ無料で受け取る
+https://lin.ee/xxxxx
+itkキャリアサポート</pre>
+                            </div>
+                        </div>
+
+                        <div class="sms-card">
+                            <div class="sms-header">
+                                <span class="sms-badge c">パターン C</span>
+                                <span class="sms-target">低優先度向け（3年以上接触なし）</span>
+                            </div>
+                            <div class="sms-body">
+                                <div class="sms-hook">🎯 訴求軸：悩み共感 × 解決提示</div>
+                                <pre class="sms-text">飲食業界の転職、こんな悩みはありませんか？
+「給料が上がらない…」
+「休みが取れない…」
+「将来が不安…」
+itkのLINEに登録すると好条件の求人情報を無料でお届け🎁
+▼ 3秒で登録
+https://lin.ee/xxxxx
+※不要な場合はこのまま無視してください</pre>
+                            </div>
+                        </div>
+
+                        <div class="sms-card">
+                            <div class="sms-header">
+                                <span class="sms-badge d">パターン D</span>
+                                <span class="sms-target">全セグメント対応（限定訴求）</span>
+                            </div>
+                            <div class="sms-body">
+                                <div class="sms-hook">🎯 訴求軸：希少性 × 緊急性</div>
+                                <pre class="sms-text">【期間限定】飲食業界の非公開求人
+今週だけ公開中の厳選求人があります👀
+
+🔒 年収500万以上の料理長ポジション
+🔒 土日休みの飲食マネージャー職
+🔒 オープニング求人（好条件多数）
+
+▼ 非公開求人を見る（LINE登録）
+https://lin.ee/xxxxx
+※枠が埋まり次第終了します
+itkキャリアサポート</pre>
+                            </div>
+                        </div>
+
+                        <div class="sms-card">
+                            <div class="sms-header">
+                                <span class="sms-badge e">パターン E</span>
+                                <span class="sms-target">全セグメント対応（実績訴求）</span>
+                            </div>
+                            <div class="sms-body">
+                                <div class="sms-hook">🎯 訴求軸：成功事例 × 数字</div>
+                                <pre class="sms-text">【itk】年収を50万円UPさせた転職事例
+飲食業界20年の実績を持つitkから
+転職成功者のリアルな事例をお届けします💰
+
+📊 ホールスタッフ→店長で年収+80万円
+📊 調理師→料理長で年収+120万円
+📊 独立前のキャリア設計事例
+
+▼ 成功事例＆最新求人を受け取る
+https://lin.ee/xxxxx
+itkキャリアサポート</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>💡 運用の核心ロジック</h4>
+                    <p style="font-size:14px">
+                        求職者は<strong>「理念共感」ではなく「待遇」</strong>で動く（斎藤社長の知見）。SMSでは「あなたの市場価値が上がっている」「好条件の非公開求人がある」という<strong>実利訴求</strong>でLINE登録を促す。LINEでは給与データ・成功事例・非公開求人という<strong>具体的な数字</strong>で信頼を構築し、面談に着座させる。
+                    </p>
+                </div>
+
+                <div class="grid-3" style="margin-top:32px">
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon orange" style="margin:0 auto 12px">⚡</div>
+                        <h3 style="margin-bottom:8px">構築期間</h3>
+                        <div style="font-family:'Inter';font-size:34px;font-weight:800;color:var(--orange)">2<span
+                                style="font-size:16px">週間</span></div>
+                        <p style="color:var(--text-light);font-size:13px">LINE+utage構築完了</p>
+                    </div>
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon teal" style="margin:0 auto 12px">🔄</div>
+                        <h3 style="margin-bottom:8px">改善サイクル</h3>
+                        <div style="font-family:'Inter';font-size:34px;font-weight:800;color:var(--teal)">1<span
+                                style="font-size:16px">週間</span></div>
+                        <p style="color:var(--text-light);font-size:13px">バッチごとにPDCA</p>
+                    </div>
+                    <div class="card" style="text-align:center">
+                        <div class="card-icon green" style="margin:0 auto 12px">📊</div>
+                        <h3 style="margin-bottom:8px">レポート</h3>
+                        <div style="font-family:'Inter';font-size:34px;font-weight:800;color:var(--green)">週次</div>
+                        <p style="color:var(--text-light);font-size:13px">KPI追跡レポート</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== TAB 2: LINE設計 ========== -->
+            <div id="line" class="tab-content">
+                <div class="sec-label">line architecture</div>
+                <div class="sec-title">LINE設計：登録〜面談予約の自動化フロー</div>
+                <div class="sec-desc">Brain / Skill Hacks / SES求職者LINE の実績あるシナリオパターンをベースに、飲食求職者向けに最適化。</div>
+
+                <div class="grid-2" style="margin-bottom:32px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon orange">🏷️</div>
+                            <h3>アカウント設計</h3>
+                        </div>
+                        <p><strong>アカウント名</strong>：itk キャリアサポート</p>
+                        <p style="margin-top:8px"><strong style="color:var(--orange)">リッチメニュー 6ブロック構成</strong></p>
+                        <p style="margin-top:4px;font-size:13px">📊 給与相場を見る ｜ 🔍 求人を探す ｜ 📅 無料相談予約<br>💡 転職ノウハウ ｜ ⭐ 成功事例
+                            ｜ ❓ よくある質問</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon green">🎁</div>
+                            <h3>登録特典設計</h3>
+                        </div>
+                        <p><strong style="color:var(--green)">「2026年版 飲食業界 給与レポート」</strong></p>
+                        <p style="margin-top:8px;font-size:13px">✅ 職種別の平均年収データ<br>✅ エリア別の求人倍率<br>✅ 好条件を掴む人の共通点<br>→
+                            <strong>面談参加者にフル版を提供</strong>（Brain方式）
+                        </p>
+                    </div>
+                </div>
+
+                <div class="sec-label" style="margin-top:40px">step scenario</div>
+                <div class="sec-title" style="margin-bottom:8px">7日間ステップ配信シナリオ</div>
+                <p style="font-size:14px;color:var(--text-light);margin-bottom:24px">Skill Hacks式「2日締切＋先頭戻し」＋
+                    Brain式「プレゼント段階解放」＋ SES式「5日間教育→面談」を統合</p>
+
+                <div class="timeline">
+                    <div class="timeline-item" data-day="D0">
+                        <div class="tag">即時配信</div>
+                        <h4>🎉 あいさつ＋給与レポート（ダイジェスト版）</h4>
+                        <p>登録直後に自動送信。「itkは飲食業界専門20年」の信頼提示 + 給与レポートのダイジェスト版を即提供。<strong>全文は面談参加者に提供</strong>と予告。</p>
+                    </div>
+                    <div class="timeline-item" data-day="D1">
+                        <div class="tag">価値提供</div>
+                        <h4>💰 「年収50万アップした人の共通点」</h4>
+                        <p>転職成功者の事例紹介。<strong>待遇改善</strong>にフォーカス（給与UP・土日休み取得など具体的な数字）。求職者の「自分もこうなれるかも」を刺激。</p>
+                    </div>
+                    <div class="timeline-item" data-day="D3">
+                        <div class="tag">アンケート</div>
+                        <h4>📋 セグメントアンケート（30秒）</h4>
+                        <p>希望職種・エリア・重視する条件を3問で回答。回答者にはパーソナライズされた求人情報を配信。<strong>アンケート回答者は面談予約率2〜3倍</strong>（Brain実証済み）。
+                        </p>
+                    </div>
+                    <div class="timeline-item" data-day="D4">
+                        <div class="tag">市場情報</div>
+                        <h4>📈 「飲食業界、"買い手市場"は終わった」</h4>
+                        <p>求人倍率・人手不足データを提示。<strong>今がチャンス</strong>の緊急性を訴求。「動かない＝損をしている」と感じさせる。</p>
+                    </div>
+                    <div class="timeline-item" data-day="D5">
+                        <div class="tag">非公開求人</div>
+                        <h4>🔒 「非公開求人のご案内」</h4>
+                        <p>好条件の求人を2〜3件紹介（土日休み / 年収UP / 駅チカなど）。<strong>具体的な待遇提示</strong>で面談への動機付け。</p>
+                    </div>
+                    <div class="timeline-item cta-day" data-day="D7">
+                        <div class="tag" style="background:rgba(232,101,10,0.2)">🔥 面談CTA</div>
+                        <h4>📅 「無料キャリア相談のご案内」</h4>
+                        <p><strong>クロージング配信</strong>。「30分・無料・無理な勧誘なし」の安心感。Skill
+                            Hacks式の<strong>締切演出</strong>：「今週の面談枠は残りわずか」。面談予約カレンダーリンク送付。</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🔄 未予約者フォロー（SES式ループ配信）</h4>
+                    <p style="font-size:14px"><strong>Day7で予約しなかった人への長期フォロー</strong>を自動化。人力では絶対にできない「寝かせてから刈り取る」戦略。</p>
+                    <p style="font-size:13px;margin-top:8px;color:var(--text-light)">Day 14：セグメント別の厳選求人を再送｜Day
+                        30：「新着の好条件求人」通知｜Day 60：最終リマインド</p>
+                </div>
+
+                <div class="grid-2" style="margin-top:32px">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon red">🚨</div>
+                            <h3>離脱防止施策（Skill Hacks式）</h3>
+                        </div>
+                        <p style="font-size:13px">✅ <strong>2日締切</strong>：給与レポートに視聴期限を設け行動を促す<br>✅
+                            <strong>先頭戻し</strong>：未反応者に「もう一度だけチャンス」を提供<br>✅
+                            <strong>残り○時間通知</strong>：4時間前・2時間前・1時間前リマインド<br>✅ <strong>感想送信で次のプレゼント解放</strong>：エンゲージメント向上
+                        </p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon green">📊</div>
+                            <h3>追跡KPI</h3>
+                        </div>
+                        <table style="box-shadow:none;margin:0;font-size:13px">
+                            <thead>
+                                <tr>
+                                    <th>指標</th>
+                                    <th>目標</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ステップ配信開封率</td>
+                                    <td>60〜70%</td>
+                                </tr>
+                                <tr>
+                                    <td>アンケート回答率</td>
+                                    <td>30〜40%</td>
+                                </tr>
+                                <tr>
+                                    <td>面談予約率（全登録者）</td>
+                                    <td>8〜12%</td>
+                                </tr>
+                                <tr>
+                                    <td>面談着座率</td>
+                                    <td>70〜85%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== TAB 3: 収益シミュレーション ========== -->
+            <div id="simulation" class="tab-content">
+                <div class="sec-label">interactive simulation</div>
+                <div class="sec-title">収益シミュレーション：パラメータ調整可能</div>
+                <div class="sec-desc">スライダーで各CVR値を調整すると、全バッチの数値がリアルタイムに再計算されます。後半バッチは改善係数が自動で加算されます。</div>
+
+                <!-- コントロールパネル -->
+                <div class="card" style="border:2px solid var(--orange);margin-bottom:32px">
+                    <div class="card-header">
+                        <div class="card-icon orange">⚙️</div>
+                        <h3>シミュレーション パラメータ（Batch 1 基準値）</h3>
+                    </div>
+                    <p style="font-size:13px;color:var(--text-light);margin-bottom:20px">
+                        スライダーを動かすと全バッチの数値がリアルタイムに再計算されます。後半バッチには改善係数が自動加算されます。</p>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px" id="sliders">
+                        <div class="slider-group">
+                            <label>📱 SMS到達率<span class="slider-val" id="v-reach">85</span>%</label>
+                            <input type="range" id="s-reach" min="50" max="100" value="85" step="1">
+                        </div>
+                        <div class="slider-group">
+                            <label>👆 クリック率（CTR）<span class="slider-val" id="v-ctr">3.0</span>%</label>
+                            <input type="range" id="s-ctr" min="0.5" max="10" value="3.0" step="0.1">
+                        </div>
+                        <div class="slider-group">
+                            <label>💚 LINE登録率<span class="slider-val" id="v-line">20</span>%</label>
+                            <input type="range" id="s-line" min="5" max="80" value="20" step="1">
+                        </div>
+                        <div class="slider-group">
+                            <label>📅 面談予約率<span class="slider-val" id="v-book">6</span>%</label>
+                            <input type="range" id="s-book" min="1" max="25" value="6" step="0.5">
+                        </div>
+                        <div class="slider-group">
+                            <label>🪑 面談着座率<span class="slider-val" id="v-seat">65</span>%</label>
+                            <input type="range" id="s-seat" min="30" max="100" value="65" step="1">
+                        </div>
+                        <div class="slider-group">
+                            <label>🤝 紹介成約率<span class="slider-val" id="v-close">10</span>%</label>
+                            <input type="range" id="s-close" min="3" max="30" value="10" step="1">
+                        </div>
+                        <div class="slider-group" style="grid-column:span 2">
+                            <label>💰 紹介フィー単価<span class="slider-val" id="v-fee">70</span>万円</label>
+                            <input type="range" id="s-fee" min="30" max="150" value="70" step="5">
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .slider-group {
+                        margin-bottom: 4px
+                    }
+
+                    .slider-group label {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: var(--text-dark);
+                        margin-bottom: 6px
+                    }
+
+                    .slider-val {
+                        font-family: 'Inter', sans-serif;
+                        font-weight: 800;
+                        color: var(--orange);
+                        font-size: 18px;
+                        margin-left: auto
+                    }
+
+                    input[type=range] {
+                        width: 100%;
+                        -webkit-appearance: none;
+                        height: 8px;
+                        border-radius: 4px;
+                        background: linear-gradient(90deg, var(--orange) 0%, #f0f0f0 0%);
+                        outline: none;
+                        cursor: pointer
+                    }
+
+                    input[type=range]::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        width: 22px;
+                        height: 22px;
+                        border-radius: 50%;
+                        background: var(--orange);
+                        border: 3px solid #fff;
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                        cursor: pointer;
+                        transition: transform 0.15s
+                    }
+
+                    input[type=range]::-webkit-slider-thumb:hover {
+                        transform: scale(1.15)
+                    }
+
+                    .sim-result-grid {
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 16px;
+                        margin-bottom: 32px
+                    }
+
+                    .sim-result-card {
+                        background: var(--bg-white);
+                        border: 1px solid #e5e7eb;
+                        border-radius: var(--radius);
+                        padding: 20px;
+                        text-align: center;
+                        box-shadow: var(--shadow)
+                    }
+
+                    .sim-result-card .r-num {
+                        font-family: 'Inter', sans-serif;
+                        font-size: 28px;
+                        font-weight: 800;
+                        line-height: 1
+                    }
+
+                    .sim-result-card .r-label {
+                        font-size: 12px;
+                        color: var(--text-light);
+                        margin-top: 6px
+                    }
+
+                    @media(max-width:768px) {
+                        #sliders {
+                            grid-template-columns: 1fr !important
+                        }
+
+                        .slider-group[style*="grid-column"] {
+                            grid-column: span 1 !important
+                        }
+
+                        .sim-result-grid {
+                            grid-template-columns: 1fr 1fr
+                        }
+                    }
+                </style>
+
+                <!-- バッチ別結果 -->
+                <div id="batch-results"></div>
+
+                <!-- 累計サマリー -->
+                <div class="roi-box" id="total-summary"></div>
+
+                <!-- テーブル -->
+                <table style="margin-top:32px" id="sim-table">
+                    <thead>
+                        <tr>
+                            <th>フェーズ</th>
+                            <th>配信数</th>
+                            <th>LINE登録</th>
+                            <th>面談予約</th>
+                            <th>着座</th>
+                            <th>紹介成約</th>
+                            <th>フィー売上</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sim-tbody"></tbody>
+                </table>
+
+                <!-- 改善による数値変化 -->
+                <div class="highlight-box" style="margin-top:32px" id="improvement-box"></div>
+
+                <!-- ボトムカード -->
+                <div class="grid-2" style="margin-top:32px" id="bottom-cards"></div>
+
+                <!-- 月次売上インパクト -->
+                <div class="monthly-impact" style="margin-top:48px">
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">📅 軌道に乗った後の月次売上インパクト</h3>
+                    <p style="color:var(--text-light);margin-bottom:24px;font-size:14px">
+                        テスト・改善フェーズ完了後、最適化されたCVRで毎月安定的にSMS配信を続けた場合の月間売上シミュレーションです。</p>
+
+                    <div class="monthly-impact-grid" id="monthly-impact-content"></div>
+
+                    <div class="monthly-note"
+                        style="margin-top:16px;padding:16px 20px;background:rgba(16,185,129,0.06);border-left:4px solid var(--green);border-radius:0 8px 8px 0">
+                        <p style="font-size:13px;color:var(--text-body);margin:0">💡 <strong>上記は「Batch
+                                11-50」の最適化済みCVRを元に月間換算した想定値です。</strong><br>スライダーで基準値を変更すると、月次売上も自動で再計算されます。</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+                (function () {
+                    const batches = [
+                        { name: 'Batch 1（テスト）', label: 'Batch 1（Week 1〜2）', count: 3000, improve: 0 },
+                        { name: 'Batch 2〜3（改善①）', label: 'Batch 2〜3（Week 3〜4）', count: 6000, improve: 1, badge: '文面改善済' },
+                        { name: 'Batch 4〜10（改善②）', label: 'Batch 4〜10（Month 2）', count: 21000, improve: 2, badge: 'LP＋シナリオ改善済' },
+                        { name: 'Batch 11〜50（本番）', label: 'Batch 11〜50（Month 3）', count: 120000, improve: 3, badge: '全面最適化', highlight: true }
+                    ];
+                    // 改善係数: バッチが進むにつれ各CVRに足される値
+                    const improveDelta = { ctr: 0.5, line: 5, book: 1, seat: 2.5 };
+
+                    const ids = ['reach', 'ctr', 'line', 'book', 'seat', 'close', 'fee'];
+                    const sliders = {}, vals = {};
+                    ids.forEach(id => {
+                        sliders[id] = document.getElementById('s-' + id);
+                        vals[id] = document.getElementById('v-' + id);
+                    });
+
+                    function fmt(n) { return n >= 10000 ? n.toLocaleString() : n < 10 ? n : n.toLocaleString(); }
+
+                    function updateSliderBg(slider) {
+                        const pct = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+                        slider.style.background = `linear-gradient(90deg, var(--orange) ${pct}%, #e5e7eb ${pct}%)`;
+                    }
+
+                    function recalc() {
+                        const base = {
+                            reach: +sliders.reach.value,
+                            ctr: +sliders.ctr.value,
+                            line: +sliders.line.value,
+                            book: +sliders.book.value,
+                            seat: +sliders.seat.value,
+                            close: +sliders.close.value,
+                            fee: +sliders.fee.value
+                        };
+
+                        // Update display values
+                        vals.reach.textContent = base.reach;
+                        vals.ctr.textContent = base.ctr.toFixed(1);
+                        vals.line.textContent = base.line;
+                        vals.book.textContent = base.book % 1 === 0 ? base.book : base.book.toFixed(1);
+                        vals.seat.textContent = base.seat;
+                        vals.close.textContent = base.close;
+                        vals.fee.textContent = base.fee;
+
+                        ids.forEach(id => updateSliderBg(sliders[id]));
+
+                        let totalSent = 0, totalLine = 0, totalBook = 0, totalSeat = 0, totalClose = 0, totalRevenue = 0;
+                        let batchHTML = '';
+                        let tbodyHTML = '';
+                        const ctrValues = [], bookValues = [];
+
+                        batches.forEach((b, i) => {
+                            const imp = b.improve;
+                            const r = base.reach / 100;
+                            const ctr = Math.min((base.ctr + imp * improveDelta.ctr) / 100, 1);
+                            const lineR = Math.min((base.line + imp * improveDelta.line) / 100, 1);
+                            const bookR = Math.min((base.book + imp * improveDelta.book) / 100, 1);
+                            const seatR = Math.min((base.seat + imp * improveDelta.seat) / 100, 1);
+                            const closeR = base.close / 100;
+                            const fee = base.fee;
+
+                            const reached = Math.round(b.count * r);
+                            const clicked = Math.round(reached * ctr);
+                            const lined = Math.round(clicked * lineR);
+                            const booked = Math.round(lined * bookR);
+                            const seated = Math.round(booked * seatR);
+                            const closed = Math.round(seated * closeR);
+                            const revenue = closed * fee;
+
+                            totalSent += b.count;
+                            totalLine += lined;
+                            totalBook += booked;
+                            totalSeat += seated;
+                            totalClose += closed;
+                            totalRevenue += revenue;
+
+                            ctrValues.push((ctr * 100).toFixed(1));
+                            bookValues.push((bookR * 100).toFixed(1));
+
+                            const headerStyle = b.highlight ? ' style="background:var(--orange)"' : '';
+                            const badgeHTML = b.badge ? `<span class="improvement-badge" style="margin-left:12px${b.highlight ? ';background:rgba(255,255,255,0.2);color:#fff' : ''}">${b.badge}</span>` : '';
+
+                            const barData = [
+                                { label: 'SMS到達', pct: base.reach, val: fmt(reached), cls: 'orange' },
+                                { label: 'クリック', pct: Math.min(ctr * 100 * 10, 100), val: fmt(clicked), cls: 'teal', dispPct: (ctr * 100).toFixed(1) + '%' },
+                                { label: 'LINE登録', pct: Math.min(lineR * 100 * 1.5, 100), val: fmt(lined), cls: 'green', dispPct: Math.round(lineR * 100) + '%' },
+                                { label: '面談予約', pct: Math.min(bookR * 100 * 3, 100), val: fmt(booked), cls: 'orange', dispPct: (bookR * 100).toFixed(1) + '%' },
+                                { label: '着座', pct: Math.min(seatR * 100, 100), val: fmt(seated), cls: 'green', dispPct: Math.round(seatR * 100) + '%' },
+                            ];
+
+                            batchHTML += `<div class="sim-batch"><div class="sim-batch-header"${headerStyle}><span>${b.label}${badgeHTML}</span><span class="batch-num">${fmt(b.count)}件</span></div><div class="sim-batch-body">`;
+                            barData.forEach(d => {
+                                const dispLabel = d.dispPct || (d.pct + '%');
+                                batchHTML += `<div class="sim-bar-row"><div class="sim-bar-label">${d.label}</div><div class="sim-bar-track"><div class="sim-bar-fill ${d.cls}" style="width:${Math.max(d.pct, 3)}%">${dispLabel}</div></div><div class="sim-bar-value">${d.val}</div></div>`;
+                            });
+                            if (i === 0) batchHTML += `<p style="font-size:12px;color:var(--text-light);margin-top:8px">※ 初回バッチ。反応率データを収集しベースラインを確定するフェーズ。</p>`;
+                            batchHTML += '</div></div>';
+
+                            // table row
+                            const trClass = '';
+                            tbodyHTML += `<tr><td>${b.name}</td><td>${fmt(b.count)}</td><td>${fmt(lined)}</td><td>${fmt(booked)}</td><td>${fmt(seated)}</td><td>${closed}名</td><td class="highlight">${revenue > 0 ? fmt(revenue) + '万円' : '—'}</td></tr>`;
+                        });
+
+                        // total row
+                        tbodyHTML += `<tr class="total-row"><td><strong>合計</strong></td><td><strong>${fmt(totalSent)}</strong></td><td><strong>${fmt(totalLine)}</strong></td><td><strong>${fmt(totalBook)}</strong></td><td><strong>${fmt(totalSeat)}</strong></td><td><strong>${totalClose}名</strong></td><td class="highlight" style="font-size:16px"><strong>${fmt(totalRevenue)}万円</strong></td></tr>`;
+
+                        document.getElementById('batch-results').innerHTML = batchHTML;
+                        document.getElementById('sim-tbody').innerHTML = tbodyHTML;
+
+                        // total summary
+                        document.getElementById('total-summary').innerHTML = `
+                        <div style="font-size:14px;color:var(--text-light);margin-bottom:8px">3ヶ月間 累計着座見込み</div>
+                        <div class="roi-num">${fmt(totalSeat)}<span style="font-size:24px">件</span></div>
+                        <div class="roi-label">紹介成約率${base.close}%の場合 → ${totalClose}名成約 → <strong style="color:var(--green);font-size:24px">紹介フィー約${fmt(totalRevenue)}万円</strong></div>`;
+
+                        // improvement box
+                        document.getElementById('improvement-box').innerHTML = `
+                        <h4>📈 改善による数値変化（自動加算）</h4>
+                        <div class="grid-2" style="margin-top:16px">
+                        <div>
+                            <p style="font-size:13px"><strong>クリック率の推移</strong></p>
+                            <p style="font-size:13px;color:var(--text-light)">Batch 1: ${ctrValues[0]}% → Batch 2-3: ${ctrValues[1]}% → Batch 4-10: ${ctrValues[2]}% → Batch 11-50: <strong style="color:var(--green)">${ctrValues[3]}%</strong></p>
+                            <p style="font-size:12px;color:var(--text-light);margin-top:4px">改善方法：SMS文面A/Bテスト、セグメント別パーソナライズ</p>
+                        </div>
+                        <div>
+                            <p style="font-size:13px"><strong>面談予約率の推移</strong></p>
+                            <p style="font-size:13px;color:var(--text-light)">Batch 1: ${bookValues[0]}% → Batch 2-3: ${bookValues[1]}% → Batch 4-10: ${bookValues[2]}% → Batch 11-50: <strong style="color:var(--green)">${bookValues[3]}%</strong></p>
+                            <p style="font-size:12px;color:var(--text-light);margin-top:4px">改善方法：ステップ配信シナリオ最適化、非公開求人の拡充</p>
+                        </div></div>`;
+
+                        // bottom cards
+                        document.getElementById('bottom-cards').innerHTML = `
+                        <div class="card" style="text-align:center">
+                            <div class="card-icon orange" style="margin:0 auto 12px">🤝</div>
+                            <h3 style="margin-bottom:8px">紹介成約見込み（3ヶ月累計）</h3>
+                            <div style="font-family:'Inter';font-size:28px;font-weight:800;color:var(--orange)">${totalClose}<span style="font-size:14px">名</span></div>
+                            <p style="color:var(--text-light);font-size:13px">着座${fmt(totalSeat)}名 × 紹介成約率${base.close}%</p>
+                        </div>
+                        <div class="card" style="text-align:center;border-color:rgba(16,185,129,0.3)">
+                            <div class="card-icon green" style="margin:0 auto 12px">💰</div>
+                            <h3 style="margin-bottom:8px">紹介フィー売上（3ヶ月累計）</h3>
+                            <div style="font-family:'Inter';font-size:28px;font-weight:800;color:var(--green)">${fmt(totalRevenue)}<span style="font-size:14px">万円</span></div>
+                            <p style="color:var(--text-light);font-size:13px">${totalClose}名 × 紹介フィー${base.fee}万円</p>
+                        </div>`;
+
+                        // Monthly revenue impact (steady-state using optimized Batch 11-50 rates)
+                        const monthlySMS = 60000; // 月間SMS配信数の想定（60,000件/月）
+                        const mImp = 3; // Batch 11-50 の改善係数
+                        const mReach = monthlySMS * (base.reach / 100);
+                        const mCtr = Math.min((base.ctr + mImp * improveDelta.ctr) / 100, 1);
+                        const mLineR = Math.min((base.line + mImp * improveDelta.line) / 100, 1);
+                        const mBookR = Math.min((base.book + mImp * improveDelta.book) / 100, 1);
+                        const mSeatR = Math.min((base.seat + mImp * improveDelta.seat) / 100, 1);
+                        const mCloseR = base.close / 100;
+                        const mClicked = Math.round(mReach * mCtr);
+                        const mLined = Math.round(mClicked * mLineR);
+                        const mBooked = Math.round(mLined * mBookR);
+                        const mSeated = Math.round(mBooked * mSeatR);
+                        const mClosed = Math.round(mSeated * mCloseR);
+                        const mRevenue = mClosed * base.fee;
+
+                        document.getElementById('monthly-impact-content').innerHTML = `
+                        <div class="mi-card">
+                            <div class="mi-label">📨 月間SMS配信</div>
+                            <div class="mi-num">${fmt(monthlySMS)}<span>件</span></div>
+                        </div>
+                        <div class="mi-card">
+                            <div class="mi-label">💚 LINE登録</div>
+                            <div class="mi-num">${fmt(mLined)}<span>件/月</span></div>
+                            <div class="mi-sub">登録率 ${Math.round(mLineR * 100)}%（最適化後）</div>
+                        </div>
+                        <div class="mi-card">
+                            <div class="mi-label">🪑 着座</div>
+                            <div class="mi-num">${fmt(mSeated)}<span>件/月</span></div>
+                            <div class="mi-sub">予約率 ${(mBookR * 100).toFixed(1)}% × 着座率 ${Math.round(mSeatR * 100)}%</div>
+                        </div>
+                        <div class="mi-card">
+                            <div class="mi-label">🤝 紹介成約</div>
+                            <div class="mi-num">${mClosed}<span>名/月</span></div>
+                            <div class="mi-sub">成約率 ${base.close}%</div>
+                        </div>
+                        <div class="mi-card mi-highlight">
+                            <div class="mi-label">💰 月次紹介フィー売上</div>
+                            <div class="mi-num big">${fmt(mRevenue)}<span>万円/月</span></div>
+                            <div class="mi-sub">${mClosed}名 × ${base.fee}万円</div>
+                        </div>
+                        <div class="mi-card mi-annual">
+                            <div class="mi-label">📈 年間換算</div>
+                            <div class="mi-num big">${fmt(mRevenue * 12)}<span>万円/年</span></div>
+                            <div class="mi-sub">${fmt(mRevenue)}万円 × 12ヶ月</div>
+                        </div>`;
+
+                        // Update hero summary cards too
+                        const summaryCards = document.querySelectorAll('.summary-card');
+                        if (summaryCards[2]) {
+                            summaryCards[2].querySelector('.num').innerHTML = fmt(totalSeat) + '<span>件〜</span>';
+                        }
+                        if (summaryCards[3]) {
+                            const rev = totalRevenue >= 10000 ? (totalRevenue / 10000).toFixed(1) + '<span>億円〜</span>' : fmt(totalRevenue) + '<span>万円〜</span>';
+                            summaryCards[3].querySelector('.num').innerHTML = rev;
+                        }
+                    }
+
+                    // Attach listeners
+                    ids.forEach(id => {
+                        sliders[id].addEventListener('input', recalc);
+                    });
+                    recalc();
+                })();
+            </script>
+
+            <!-- ========== TAB 4: 実行ステップ ========== -->
+            <div id="steps" class="tab-content">
+                <div class="section-label">ACTION PLAN & GANTT CHART</div>
+                <h2 class="section-title">itk様 実行ステップ＆スケジュール</h2>
+                <p style="color:var(--text-light);margin-bottom:40px">
+                    プロジェクト開始から3ヶ月間の具体的なアクションプランとスケジュールです。<br>各フェーズでitk様にご対応いただく内容を明確化しています。</p>
+
+                <!-- PHASE 0: 準備 -->
+                <div class="action-phase">
+                    <div class="phase-header phase-prep">
+                        <div class="phase-icon">⚙️</div>
+                        <div>
+                            <div class="phase-title">Phase 0：事前準備</div>
+                            <div class="phase-period">キックオフ前 〜 Week 1</div>
+                        </div>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">求職者リストのデータ抽出・共有</div>
+                                <p>既存DBから15万件のリストをCSV等で抽出。氏名・電話番号・登録日・希望職種などの項目を含む</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">LINE公式アカウントの開設</div>
+                                <p>LINE for Businessにてビジネスアカウントを取得。認証済みアカウント申請を推奨</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">utage（SMS配信ツール）のセットアップ</div>
+                                <p>SMS配信環境の構築、リストのインポート・クレンジング、セグメント分け</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">LINE登録用LP＆リッチメニュー制作</div>
+                                <p>SMS → LINE登録への導線設計。LP制作、リッチメニューのデザイン・設定</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">ステップ配信シナリオ構築</div>
+                                <p>7日間のLINEナーチャリングシナリオ設計・メッセージ作成・utage連携設定</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who both">共同</div>
+                            <div class="action-detail">
+                                <div class="action-name">SMS文面の確認・承認</div>
+                                <p>求職者に送信するSMS文面のドラフトをYOLO'sが作成 → itk様にて内容確認・承認</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 1: テスト配信 -->
+                <div class="action-phase">
+                    <div class="phase-header phase-test">
+                        <div class="phase-icon">🧪</div>
+                        <div>
+                            <div class="phase-title">Phase 1：テスト配信</div>
+                            <div class="phase-period">Week 1 〜 Week 2（Batch 1: 3,000件）</div>
+                        </div>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">Batch 1 SMS配信実行</div>
+                                <p>3,000件のテストバッチを送信。A/Bテスト用に2パターンの文面を用意</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">反応データ計測・レポート</div>
+                                <p>到達率・クリック率・LINE登録率のベースライン数値を計測しitk様に共有</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">LINE登録者への面談対応体制準備</div>
+                                <p>LINE経由で面談予約が入った際の対応フロー・担当者のアサインを確定</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who both">共同</div>
+                            <div class="action-detail">
+                                <div class="action-name">テスト結果の振り返りMTG</div>
+                                <p>Batch 1の結果を元に、改善ポイント洗い出し。次バッチの文面・LP修正を決定</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 2: 改善配信 -->
+                <div class="action-phase">
+                    <div class="phase-header phase-improve">
+                        <div class="phase-icon">📈</div>
+                        <div>
+                            <div class="phase-title">Phase 2：改善＆拡大配信</div>
+                            <div class="phase-period">Week 3 〜 Week 4（Batch 2-3: 6,000件）</div>
+                        </div>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">SMS文面・LP改善＆Batch 2-3配信</div>
+                                <p>テスト結果を反映した改善版SMS＆LPで6,000件に配信。セグメント別最適化を実施</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">ステップ配信シナリオ最適化</div>
+                                <p>開封率・タップ率データを元にLINEシナリオの改善。メッセージ内容・配信タイミング調整</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">面談実施＆フィードバック共有</div>
+                                <p>LINE経由の面談を実施し、求職者の質・マッチ度をYOLO'sにフィードバック</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">非公開求人・注目求人の提供</div>
+                                <p>LINEコンテンツの訴求力を高めるため、注目度の高い求人情報をYOLO'sに共有</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3: 本格展開 -->
+                <div class="action-phase">
+                    <div class="phase-header phase-scale">
+                        <div class="phase-icon">🚀</div>
+                        <div>
+                            <div class="phase-title">Phase 3：本格展開</div>
+                            <div class="phase-period">Month 2 〜 Month 3（Batch 4-50: 141,000件）</div>
+                        </div>
+                    </div>
+                    <div class="action-list">
+                        <div class="action-item">
+                            <div class="action-who yolos">YOLO's</div>
+                            <div class="action-detail">
+                                <div class="action-name">大規模バッチ配信の実行</div>
+                                <p>最適化済みのSMS文面・LPで残り141,000件に段階的に配信。週次で進捗共有</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">面談体制のスケールアップ</div>
+                                <p>LINE登録者増加に合わせ、面談対応キャパシティの確保。必要に応じて担当者増員</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who itk">itk</div>
+                            <div class="action-detail">
+                                <div class="action-name">紹介成約の推進</div>
+                                <p>面談した求職者の企業紹介・選考フォロー・入社決定まで推進</p>
+                            </div>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-who both">共同</div>
+                            <div class="action-detail">
+                                <div class="action-name">週次KPIレビュー＆改善</div>
+                                <p>SMS→LINE→面談→成約のファネルデータを週次で共有。PDCAサイクルを継続</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GANTT CHART -->
+                <div style="margin-top:56px">
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">📅 プロジェクトスケジュール</h3>
+                    <p style="color:var(--text-light);margin-bottom:32px;font-size:14px">3ヶ月間のガントチャート。色分け：<span
+                            style="color:var(--teal);font-weight:700">■ itk様</span>　<span
+                            style="color:var(--orange);font-weight:700">■ YOLO's</span>　<span
+                            style="color:var(--green);font-weight:700">■ 共同</span></p>
+
+                    <div class="gantt-container">
+                        <div class="gantt-header">
+                            <div class="gantt-label-col">タスク</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-month"><span>準備期間</span></div>
+                                <div class="gantt-month"><span>Week 1-2</span></div>
+                                <div class="gantt-month"><span>Week 3-4</span></div>
+                                <div class="gantt-month"><span>Month 2</span></div>
+                                <div class="gantt-month"><span>Month 3</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Gantt Rows -->
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">データ抽出・リスト共有</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:0%;width:16%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">LINE公式アカウント開設</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:0%;width:12%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">utageセットアップ</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:2%;width:16%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">LP・リッチメニュー制作</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:4%;width:16%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">ステップ配信構築</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:6%;width:14%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">SMS文面確認・承認</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar both" style="left:14%;width:6%"></div>
+                            </div>
+                        </div>
+
+                        <div class="gantt-divider"></div>
+
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">Batch 1 テスト配信</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:20%;width:10%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">反応データ分析</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:25%;width:12%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">面談対応体制準備</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:20%;width:15%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">テスト振り返りMTG</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar both" style="left:35%;width:5%"></div>
+                            </div>
+                        </div>
+
+                        <div class="gantt-divider"></div>
+
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">Batch 2-3 改善配信</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:40%;width:10%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">シナリオ最適化</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:40%;width:15%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">面談実施・フィードバック</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:40%;width:20%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">非公開求人の提供</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:42%;width:12%"></div>
+                            </div>
+                        </div>
+
+                        <div class="gantt-divider"></div>
+
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">大規模バッチ配信</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar yolos" style="left:55%;width:40%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">面談体制スケールアップ</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:55%;width:20%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">紹介成約の推進</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar itk" style="left:60%;width:38%"></div>
+                            </div>
+                        </div>
+                        <div class="gantt-row">
+                            <div class="gantt-label-col">週次KPIレビュー</div>
+                            <div class="gantt-timeline">
+                                <div class="gantt-bar both" style="left:40%;width:58%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUMMARY CALLOUT -->
+                <div class="steps-summary">
+                    <h4>📌 itk様にご準備いただくもの（まとめ）</h4>
+                    <div class="grid-2" style="margin-top:20px">
+                        <div>
+                            <p style="font-weight:700;margin-bottom:8px;color:var(--teal)">🏁 開始前に必要なもの</p>
+                            <ul class="checklist">
+                                <li>求職者リストデータ（CSV）</li>
+                                <li>LINE公式アカウントの開設</li>
+                                <li>SMS文面の確認・承認</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p style="font-weight:700;margin-bottom:8px;color:var(--teal)">🔄 運用中に必要なこと</p>
+                            <ul class="checklist">
+                                <li>面談対応の担当者アサイン</li>
+                                <li>面談結果のフィードバック共有</li>
+                                <li>注目求人情報の提供</li>
+                                <li>週次MTGへの参加（30分程度）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HEARING ITEMS -->
+                <div style="margin-top:48px">
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">📋 キックオフ時ヒアリング事項</h3>
+                    <p style="color:var(--text-light);margin-bottom:28px;font-size:14px">
+                        構築に必要な情報をitk様から事前にヒアリングさせていただきます。</p>
+
+                    <div class="hearing-grid">
+
+                        <div class="hearing-card">
+                            <div class="hearing-card-header"
+                                style="background:linear-gradient(135deg, var(--teal), #0E5A5F)">
+                                <span>📱</span> LINE公式アカウント
+                            </div>
+                            <ul class="checklist" style="padding:20px">
+                                <li>認証済みアカウント：取得済み or これから申請するか</li>
+                                <li>アカウント名の希望（例：itkキャリアサポート）</li>
+                                <li>ロゴ・アイコン素材の有無</li>
+                            </ul>
+                        </div>
+
+                        <div class="hearing-card">
+                            <div class="hearing-card-header"
+                                style="background:linear-gradient(135deg, var(--orange), var(--orange-dark))">
+                                <span>📝</span> SMS配信設定
+                            </div>
+                            <ul class="checklist" style="padding:20px">
+                                <li>送信者名の表記（「itk」で良いか）</li>
+                                <li>配信NGリストの有無</li>
+                                <li>配信可能な時間帯</li>
+                                <li>既存のオプトアウト対応ルール</li>
+                            </ul>
+                        </div>
+
+                        <div class="hearing-card" style="grid-column:1/-1">
+                            <div class="hearing-card-header"
+                                style="background:linear-gradient(135deg, #6366f1, #4f46e5)">
+                                <span>🎯</span> 求人コンテンツ素材 ← 最重要
+                            </div>
+                            <div class="grid-2" style="padding:20px;gap:24px">
+                                <ul class="checklist">
+                                    <li><strong>転職成功事例</strong>：年収UP・待遇改善した求職者のエピソード（匿名可）を3〜5件</li>
+                                    <li><strong>よくある転職失敗パターン</strong>：求職者が陥りがちな失敗例</li>
+                                    <li><strong>飲食業界のトレンド変化</strong>：昔と今で求人傾向はどう変わったか（コロナ前後、人手不足、待遇改善等）</li>
+                                    <li><strong>職種別の給与相場感</strong>：ホール・調理・店長・料理長・SVなど主要職種の年収レンジ</li>
+                                    <li><strong>非公開求人の提供可否</strong>：LINEコンテンツに使える注目求人を共有可能か</li>
+                                </ul>
+                                <ul class="checklist">
+                                    <li><strong>年収レンジの公開範囲</strong>：給与レポートに掲載OKな年収帯・職種</li>
+                                    <li><strong>人気の求人条件</strong>：今の求職者が一番重視する条件は？</li>
+                                    <li><strong>itk経由のメリット</strong>：直接応募や他社エージェントとの差別化ポイント</li>
+                                    <li><strong>求職者からの頻出質問</strong>：面談時によく聞かれるTOP5</li>
+                                    <li><strong>業界の数字ファクト</strong>：有効求人倍率、離職率、平均勤続年数などの使えるデータ</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="hearing-card" style="grid-column:1/-1">
+                            <div class="hearing-card-header"
+                                style="background:linear-gradient(135deg, var(--green), #059669)">
+                                <span>👥</span> ターゲット像・定性データ
+                            </div>
+                            <div class="grid-2" style="padding:20px;gap:24px">
+                                <ul class="checklist">
+                                    <li><strong>15万リストの属性構成</strong>：年齢層・性別・職種・エリアなどの大まかな分布</li>
+                                    <li><strong>典型的な求職者ペルソナ</strong>：「30代・調理師・年収350万・休み少ない」など代表的な人物像</li>
+                                    <li><strong>転職動機のパターン</strong>：給与不満？労働環境？キャリアアップ？独立志向？</li>
+                                    <li><strong>過去の掘り起こし経験</strong>：以前リスト掘り起こしを試みた経験はあるか、その結果は？</li>
+                                </ul>
+                                <ul class="checklist">
+                                    <li><strong>成約しやすい人材の特徴</strong>：過去の紹介成約データから見える「決まりやすい人」の傾向</li>
+                                    <li><strong>離脱しやすいポイント</strong>：面談→紹介→成約の中で離脱が多い箇所は？</li>
+                                    <li><strong>求職者の情報収集手段</strong>：LINE・メール・電話どれが一番反応が良いか体感値</li>
+                                    <li><strong>季節変動</strong>：繁忙期（4月・10月等）は転職意欲が高まるなどの傾向はあるか</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="hearing-card">
+                            <div class="hearing-card-header"
+                                style="background:linear-gradient(135deg, #64748b, #475569)">
+                                <span>⚖️</span> コンプライアンス
+                            </div>
+                            <ul class="checklist" style="padding:20px">
+                                <li>SMS文面の社内承認フロー（承認者は誰か）</li>
+                                <li>トーン＆マナー（カジュアル/フォーマル・絵文字可否）</li>
+                                <li>個人情報取り扱い（プライバシーポリシー確認）</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>眠っている15万リストから<br>紹介売上1,600万円超を掘り起こす。</h2>
+            <p>構築期間2週間。段階的にSMS配信→改善を繰り返し、<br>3ヶ月で232着座・紹介成約23名を目指すファネルを構築します。</p>
+        </div>
+    </section>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+        // Animate bars on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.sim-bar-fill').forEach(b => { const w = b.style.width; b.style.width = '0'; setTimeout(() => b.style.width = w, 100) }) } })
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.sim-batch').forEach(b => observer.observe(b));
+    </script>
+</body>
+
+</html>

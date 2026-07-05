@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Hacks — ファネル制作ロードマップ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a1a2e;
+            --navy-light: #222240;
+            --navy-lighter: #2a2a4a;
+            --gold: #d4a853;
+            --gold-light: #e8c878;
+            --gold-dim: rgba(212, 168, 83, .15);
+            --white: #f0f0f5;
+            --gray: #8888aa;
+            --bg: #0e0e1a;
+            --card: #16162a;
+            --border: #2a2a4a;
+            --green: #2ecc71;
+            --green-dim: rgba(46, 204, 113, .12);
+            --blue: #3b82f6;
+            --blue-dim: rgba(59, 130, 246, .12);
+            --orange: #f59e0b;
+            --orange-dim: rgba(245, 158, 11, .12);
+            --red: #e74c3c;
+            --red-dim: rgba(231, 76, 60, .12);
+            --purple: #a855f7;
+            --purple-dim: rgba(168, 85, 247, .12);
+            --teal: #14b8a6;
+            --teal-dim: rgba(20, 184, 166, .12);
+            --pink: #ec4899;
+            --pink-dim: rgba(236, 72, 153, .12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            line-height: 1.7;
+            min-height: 100vh
+        }
+
+        /* Header */
+        .header {
+            background: var(--navy);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px)
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px
+        }
+
+        .header p {
+            font-size: 12px;
+            color: var(--gray)
+        }
+
+        .header-badge {
+            font-size: 11px;
+            background: var(--green-dim);
+            color: var(--green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600
+        }
+
+        .back-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color .2s
+        }
+
+        .back-link:hover {
+            color: var(--gold)
+        }
+
+        /* Main */
+        .main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px 80px
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all .2s
+        }
+
+        .stat-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px)
+        }
+
+        .stat-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 32px;
+            font-weight: 900
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 4px
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .progress-header h3 {
+            font-size: 15px;
+            font-weight: 600
+        }
+
+        .progress-pct {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold)
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: var(--navy);
+            border-radius: 6px;
+            overflow: hidden
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width .8s ease
+        }
+
+        .progress-phases {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 11px;
+            color: var(--gray)
+        }
+
+        /* Flow */
+        .flow-section {
+            margin-bottom: 40px
+        }
+
+        .flow-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        /* Phase Cards */
+        .phase-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            position: relative
+        }
+
+        .phase-connector {
+            width: 2px;
+            height: 32px;
+            background: var(--border);
+            margin: 0 auto;
+            position: relative
+        }
+
+        .phase-connector::after {
+            content: '▼';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--border);
+            font-size: 10px
+        }
+
+        .phase {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all .3s
+        }
+
+        .phase:hover {
+            border-color: var(--gold);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .3)
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .phase-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0
+        }
+
+        .phase-info {
+            flex: 1
+        }
+
+        .phase-title {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .phase-subtitle {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px
+        }
+
+        .phase-status {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .phase-badge {
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600
+        }
+
+        .phase-badge.done {
+            background: var(--green-dim);
+            color: var(--green)
+        }
+
+        .phase-badge.active {
+            background: var(--orange-dim);
+            color: var(--orange)
+        }
+
+        .phase-badge.pending {
+            background: var(--navy-lighter);
+            color: var(--gray)
+        }
+
+        .phase-chevron {
+            color: var(--gray);
+            font-size: 16px;
+            transition: transform .3s
+        }
+
+        .phase.open .phase-chevron {
+            transform: rotate(180deg)
+        }
+
+        .phase-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease
+        }
+
+        .phase.open .phase-body {
+            max-height: 2000px
+        }
+
+        .phase-content {
+            padding: 0 24px 24px;
+            border-top: 1px solid var(--border)
+        }
+
+        /* Deliverables */
+        .deliverable {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .04)
+        }
+
+        .deliverable:last-child {
+            border-bottom: none
+        }
+
+        .deliverable-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0
+        }
+
+        .deliverable-check.done {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff
+        }
+
+        .deliverable-check.active {
+            border-color: var(--orange);
+            color: var(--orange)
+        }
+
+        .deliverable-name {
+            font-size: 14px;
+            flex: 1
+        }
+
+        .deliverable-desc {
+            font-size: 12px;
+            color: var(--gray)
+        }
+
+        .deliverable-link {
+            font-size: 12px;
+            color: var(--blue);
+            text-decoration: none
+        }
+
+        .deliverable-link:hover {
+            text-decoration: underline
+        }
+
+        /* Skills Used */
+        .skills-ref {
+            margin-top: 40px
+        }
+
+        .skills-ref h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px
+        }
+
+        .skill-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all .2s
+        }
+
+        .skill-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px)
+        }
+
+        .skill-card .skill-icon {
+            font-size: 24px
+        }
+
+        .skill-card .skill-name {
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        .skill-card .skill-use {
+            font-size: 12px;
+            color: var(--gray)
+        }
+
+        /* Links bar */
+        .links-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 32px
+        }
+
+        .link-chip {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 13px;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all .2s
+        }
+
+        .link-chip:hover {
+            border-color: var(--gold);
+            color: var(--gold)
+        }
+
+        .link-chip .live {
+            color: var(--green);
+            font-size: 8px
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+            color: var(--gray);
+            font-size: 11px;
+            border-top: 1px solid var(--border);
+            margin-top: 60px
+        }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .stats-row {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .header {
+                padding: 16px
+            }
+
+            .main {
+                padding: 16px 12px 60px
+            }
+
+            .skill-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:480px) {
+            .stats-row {
+                grid-template-columns: 1fr
+            }
+
+            .links-bar {
+                flex-direction: column
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <div>
+                <h1>✦ SKILL HACKS</h1>
+                <p>ファネル制作ロードマップ</p>
+            </div>
+            <span class="header-badge">✅ 全工程完了</span>
+        </div>
+        <a href="https://skillhacks-dashboard.surge.sh" class="back-link">← ダッシュボードに戻る</a>
+    </header>
+
+    <main class="main">
+
+        <!-- Live Links -->
+        <div class="links-bar">
+            <a href="https://skillhacks-sales.surge.sh" target="_blank" class="link-chip">🛒 セールスLP <span
+                    class="live">●</span></a>
+            <a href="https://skillhacks-presents.surge.sh" target="_blank" class="link-chip">🎁 プレゼント集 <span
+                    class="live">●</span></a>
+            <a href="https://skillhacks-dashboard.surge.sh" target="_blank" class="link-chip">📊 チームダッシュボード</a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number" style="color:var(--green)">7</div>
+                <div class="stat-label">フェーズ数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color:var(--gold)">24</div>
+                <div class="stat-label">制作物</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color:var(--blue)">24</div>
+                <div class="stat-label">完了</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color:var(--green)">100%</div>
+                <div class="stat-label">進捗率</div>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <h3>全体進捗</h3>
+                <span class="progress-pct">100%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width:100%"></div>
+            </div>
+            <div class="progress-phases">
+                <span>設計</span><span>台本</span><span>ページ</span><span>レター</span><span>LINE</span><span>特典</span><span>Deploy</span>
+            </div>
+        </div>
+
+        <!-- Phases -->
+        <div class="flow-section">
+            <h2>📋 制作フェーズ</h2>
+
+            <!-- Phase 1 -->
+            <div class="phase open" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--blue-dim)">📋</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 1: 設計 <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（1〜2日）</span></div>
+                        <div class="phase-subtitle">構成案・ヒアリング・プロット</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">ファネル構成案</div>
+                                <div class="deliverable-desc">全体の話数構成・各話の役割・CTAの設計</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">プロット（全4話）</div>
+                                <div class="deliverable-desc">各話のブロック構成と感情曲線の設計</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">タイトル案・プレゼント案</div>
+                                <div class="deliverable-desc">動画タイトルと特典の企画書</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 2 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--purple-dim)">📝</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 2: 台本制作 <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（2〜3日）</span></div>
+                        <div class="phase-subtitle">第零話〜第四話（VSL）の台本執筆</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第零話 台本</div>
+                                <div class="deliverable-desc">シリーズ導入・全体像・プレゼント紹介・視聴ルール</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第一話 台本</div>
+                                <div class="deliverable-desc">問題提起「なぜ勉強熱心な人ほど稼げないのか」</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第二話 台本</div>
+                                <div class="deliverable-desc">方法論「最短で結果を出す人が持っている3つの武器」</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第三話 台本</div>
+                                <div class="deliverable-desc">具体策「業界を敵に回す覚悟で作った仕組み」</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第四話（VSL）台本</div>
+                                <div class="deliverable-desc">セールス「スキルハックスの全てと特別オファー」</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 3 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--teal-dim)">🖥️</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 3: コンテンツページ <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（1日）</span></div>
+                        <div class="phase-subtitle">各話の動画配信ページ（HTML）</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第一話コンテンツページ</div>
+                                <div class="deliverable-desc">動画埋め込み + テキスト + 感想フォーム + 次話予告</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第二話コンテンツページ</div>
+                                <div class="deliverable-desc">同上</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第三話コンテンツページ</div>
+                                <div class="deliverable-desc">同上</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第四話（VSL）コンテンツページ</div>
+                                <div class="deliverable-desc">動画 + テキスト + 申込CTA + 特典リンク</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 4 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--orange-dim)">📄</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 4: セールスレター <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（1〜2日）</span></div>
+                        <div class="phase-subtitle">VSL台本ベースのテキスト訴求ページ</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">セールスレター（HTML）</div>
+                                <div class="deliverable-desc">Brainコミット型 — テキスト主体、黄色マーカー、>>リンクCTA</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">CTA分割版</div>
+                                <div class="deliverable-desc">プロラインに貼り付けやすいよう12パーツに分割</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 5 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--green-dim)">💬</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 5: LINEシナリオ <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（1〜2日）</span></div>
+                        <div class="phase-subtitle">全ステップ配信テキスト・リマインド</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第零話シナリオ</div>
+                                <div class="deliverable-desc">登録直後の自動返信・動画視聴への誘導</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">第一話〜第三話シナリオ</div>
+                                <div class="deliverable-desc">各話の配信テキスト・リマインド・感想催促（各2日締切）</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">VSL配信シナリオ</div>
+                                <div class="deliverable-desc">特別動画の案内・2日間締切リマインド</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">セールスシナリオ</div>
+                                <div class="deliverable-desc">7日間のセールスメッセージシーケンス</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">申込みシナリオ</div>
+                                <div class="deliverable-desc">購入後の自動応答・オンボーディング</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">LINE構築設計書</div>
+                                <div class="deliverable-desc">プロラインの全体設計 — シナリオ分岐・タグ・リッチメニュー</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 6 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--pink-dim)">🎁</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 6: 特典制作 <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（1日）</span></div>
+                        <div class="phase-subtitle">リードマグネット＋配布ページ</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">副業スキルマッチング診断シート</div>
+                                <div class="deliverable-desc">10問の質問で最適スキルを診断</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">副業ゼロイチ 90日ロードマップ</div>
+                                <div class="deliverable-desc">4フェーズのチェックリスト形式アクションプラン</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">スキルチェックリスト</div>
+                                <div class="deliverable-desc">各スキルの案件獲得レベル判定</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">初案件獲得テンプレート集</div>
+                                <div class="deliverable-desc">プロフィール文・営業文・提案文のテンプレ</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">案件獲得ロードマップ</div>
+                                <div class="deliverable-desc">初案件までのステップバイステップガイド</div>
+                            </div>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">特典配布ページ</div>
+                                <div class="deliverable-desc">一覧 + DLリンクを並べたHTML</div>
+                            </div>
+                            <a href="https://skillhacks-presents.surge.sh" target="_blank" class="deliverable-link">LIVE
+                                →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-connector"></div>
+
+            <!-- Phase 7 -->
+            <div class="phase" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-icon" style="background:var(--gold-dim)">🚀</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Phase 7: デプロイ・統合 <span
+                                style="font-size:12px;color:var(--gray);font-weight:400">（0.5日）</span></div>
+                        <div class="phase-subtitle">surge.sh公開 + プロライン設定</div>
+                    </div>
+                    <div class="phase-status">
+                        <span class="phase-badge done">✓ 完了</span>
+                        <span class="phase-chevron">▼</span>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-content">
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">セールスLP デプロイ</div>
+                                <div class="deliverable-desc">skillhacks-sales.surge.sh</div>
+                            </div>
+                            <a href="https://skillhacks-sales.surge.sh" target="_blank" class="deliverable-link">LIVE
+                                →</a>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">プレゼント集 デプロイ</div>
+                                <div class="deliverable-desc">skillhacks-presents.surge.sh</div>
+                            </div>
+                            <a href="https://skillhacks-presents.surge.sh" target="_blank" class="deliverable-link">LIVE
+                                →</a>
+                        </div>
+                        <div class="deliverable">
+                            <div class="deliverable-check done">✓</div>
+                            <div>
+                                <div class="deliverable-name">チームダッシュボード デプロイ</div>
+                                <div class="deliverable-desc">skillhacks-dashboard.surge.sh</div>
+                            </div>
+                            <a href="https://skillhacks-dashboard.surge.sh" target="_blank"
+                                class="deliverable-link">LIVE →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-ref">
+            <h2>🔧 使用スキル・ワークフロー</h2>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">📝</div>
+                    <div>
+                        <div class="skill-name">動画台本スキル</div>
+                        <div class="skill-use">Phase 2 で使用 — ファネル動画の台本設計・執筆</div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🛒</div>
+                    <div>
+                        <div class="skill-name">LP制作スキル</div>
+                        <div class="skill-use">Phase 4 で使用 — セールスLP/レターの制作</div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💬</div>
+                    <div>
+                        <div class="skill-name">LINEシナリオ設計</div>
+                        <div class="skill-use">Phase 5 で使用 — ステップ配信・シナリオ設計</div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🚀</div>
+                    <div>
+                        <div class="skill-name">デプロイワークフロー</div>
+                        <div class="skill-use">Phase 7 で使用 — surge.shへの公開・レジストリ登録</div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <div>
+                        <div class="skill-name">Figma双方向連携スキル</div>
+                        <div class="skill-use">デザインのFigma取り込み・編集</div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📦</div>
+                    <div>
+                        <div class="skill-name">セールスファネル一式制作</div>
+                        <div class="skill-use">全工程を統合したマスタースキル</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>Skill Hacks Funnel Production Roadmap — Built by Antigravity</p>
+        <p style="margin-top:4px">Last updated: 2026-03-21</p>
+    </footer>
+
+    <script>
+        function togglePhase(el) {
+            el.classList.toggle('open');
+        }
+        // Open first phase by default
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.phase').classList.add('open');
+        });
+    </script>
+</body>
+
+</html>

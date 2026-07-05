@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>黄土よもぎ蒸し専門店 ON｜FC加盟説明会</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gd:#1a3c2e;--gm:#2d6a4f;--gl:#52b788;--gp:#b7e4c7;
+  --cream:#f8f5ef;--gold:#c9a84c;--goldl:#e8d5a0;
+  --td:#1a1a1a;--tm:#444;--tl:#777;--white:#fff;
+  --W:1280px;--H:720px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:#111;color:var(--td);display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 8px 80px;}
+
+/* NAV */
+.nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);padding:10px 20px;border-radius:50px;z-index:999;}
+.nav button{background:var(--gm);color:#fff;border:none;padding:8px 18px;border-radius:30px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;transition:.2s;}
+.nav button:hover{background:var(--gl);}
+.nav span{color:#fff;font-size:13px;display:flex;align-items:center;min-width:70px;justify-content:center;}
+
+/* SLIDE */
+.slide{width:var(--W);height:var(--H);max-width:100%;position:relative;overflow:hidden;display:none;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.slide.active{display:flex;}
+
+/* COMMON HEADER */
+.sh{background:linear-gradient(90deg,var(--gd),var(--gm));padding:20px 56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sh h2{font-size:24px;color:#fff;font-family:'Noto Serif JP',serif;}
+.sh .pb{background:rgba(255,255,255,.15);color:var(--goldl);font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:2px;}
+.sb{flex:1;background:var(--cream);padding:28px 56px;display:flex;gap:28px;overflow:hidden;}
+.pn{position:absolute;bottom:14px;right:22px;font-size:11px;color:rgba(0,0,0,.22);}
+.pnl{position:absolute;bottom:14px;right:22px;font-size:11px;color:rgba(255,255,255,.28);}
+.cr{position:absolute;bottom:14px;left:22px;font-size:11px;color:rgba(255,255,255,.28);}
+
+/* ===== TITLE ===== */
+.s-title{background:linear-gradient(135deg,var(--gd) 0%,#0d2318 55%,#1a3c2e 100%);flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.s-title::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 68% 30%,rgba(82,183,136,.15) 0%,transparent 60%);}
+.s-title .btag{font-size:12px;letter-spacing:4px;color:var(--goldl);margin-bottom:18px;position:relative;}
+.s-title h1{font-family:'Noto Serif JP',serif;font-size:50px;color:#fff;font-weight:700;line-height:1.25;position:relative;margin-bottom:10px;}
+.s-title h1 span{color:var(--gl);}
+.s-title .sub{font-size:18px;color:var(--goldl);font-weight:300;position:relative;margin-bottom:36px;}
+.s-title .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:10px 24px;color:#fff;font-size:14px;position:relative;}
+.s-title .badge span{color:var(--gl);font-weight:700;}
+.deco{position:absolute;right:44px;bottom:40px;opacity:.06;font-size:160px;font-family:'Noto Serif JP',serif;color:#fff;line-height:1;}
+
+/* ===== CHAPTER ===== */
+.s-chap{flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.chap-num{font-size:80px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;position:relative;}
+.chap-title{font-family:'Noto Serif JP',serif;font-size:38px;color:#fff;position:relative;margin-bottom:12px;}
+.chap-sub{font-size:16px;color:rgba(255,255,255,.5);position:relative;}
+
+/* ===== TOC ===== */
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+.toc-item{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.toc-num{background:var(--gm);color:#fff;font-size:17px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.toc-main{font-size:14px;font-weight:700;color:var(--gd);}
+.toc-s{font-size:11px;color:var(--tl);margin-top:2px;}
+
+/* ===== WHY FC ===== */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+.why-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.why-card .wh-num{font-size:28px;font-weight:900;color:var(--gp);line-height:1;}
+.why-card .wh-t{font-size:14px;font-weight:700;color:var(--gd);margin:4px 0;}
+.why-card .wh-b{font-size:12px;color:var(--tm);line-height:1.5;}
+.why-banner{background:linear-gradient(90deg,var(--gd),var(--gm));border-radius:14px;padding:18px 26px;color:#fff;grid-column:span 2;display:flex;align-items:center;justify-content:space-between;}
+.why-banner .wb-text{font-size:18px;font-weight:700;color:var(--gl);}
+.why-banner .wb-s{font-size:13px;color:rgba(255,255,255,.65);margin-top:4px;}
+.why-kpis{display:flex;gap:16px;}
+.why-kpi{text-align:center;}
+.why-kpi .wkv{font-size:22px;font-weight:900;color:var(--goldl);}
+.why-kpi .wkl{font-size:10px;color:rgba(255,255,255,.5);}
+
+/* ===== STRENGTHS NUMBERS ===== */
+.str-num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;}
+.str-num-card{background:#fff;border-radius:14px;padding:20px 16px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center;border-top:4px solid var(--gl);}
+.str-num-card .snv{font-size:32px;font-weight:900;color:var(--gd);line-height:1;}
+.str-num-card .snl{font-size:12px;color:var(--tm);margin-top:6px;}
+.str-num-card .sns{font-size:11px;color:var(--tl);margin-top:3px;}
+
+/* ===== COMPANY ===== */
+.co-wrap{display:flex;gap:28px;width:100%;}
+.co-table{flex:1.4;}
+.co-table table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;border-radius:12px;overflow:hidden;}
+.co-table th{background:var(--gm);color:#fff;padding:10px 16px;text-align:left;font-size:13px;}
+.co-table td{padding:10px 16px;border-bottom:1px solid #eee;background:#fff;}
+.co-table td:first-child{font-weight:700;color:var(--gd);background:#f8f8f8;width:40%;}
+.co-table tr:last-child td{border-bottom:0;}
+.co-right{flex:1;display:flex;flex-direction:column;gap:12px;}
+.co-con{background:var(--gd);border-radius:14px;padding:20px;color:#fff;flex:1;}
+.co-con .cc-t{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.co-con .cc-v{font-size:14px;color:var(--goldl);line-height:1.6;font-style:italic;}
+
+/* ===== CONCEPT ===== */
+.con-wrap{display:flex;gap:24px;width:100%;align-items:stretch;}
+.con-left{flex:1;display:flex;flex-direction:column;gap:12px;}
+.con-quote{font-family:'Noto Serif JP',serif;font-size:20px;color:var(--gd);line-height:1.6;font-weight:700;background:#fff;border-left:5px solid var(--gl);border-radius:0 12px 12px 0;padding:18px 20px;}
+.con-points{display:flex;flex-direction:column;gap:8px;}
+.con-point{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.con-point .cp-icon{font-size:18px;flex-shrink:0;}
+.con-point .cp-text{font-size:13px;color:var(--tm);line-height:1.5;}
+.con-point .cp-text strong{color:var(--gd);}
+.con-right{flex:0.7;background:linear-gradient(150deg,var(--gd),var(--gm));border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;}
+.credo-list{display:flex;flex-direction:column;gap:8px;}
+.credo-item{display:flex;gap:10px;align-items:flex-start;}
+.credo-num{background:rgba(255,255,255,.12);color:var(--goldl);font-size:11px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.credo-text{font-size:12px;color:rgba(255,255,255,.8);line-height:1.5;}
+
+/* ===== MARKET ===== */
+.mkt-wrap{display:flex;gap:20px;width:100%;align-items:stretch;}
+.mkt-left{flex:1.3;display:flex;flex-direction:column;gap:12px;}
+.mkt-right{flex:0.9;display:flex;flex-direction:column;gap:12px;}
+.mkt-big{background:#fff;border-radius:14px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center;}
+.mkt-big .mb-num{font-size:42px;font-weight:900;color:var(--gm);}
+.mkt-big .mb-unit{font-size:16px;font-weight:400;color:var(--tl);}
+.mkt-big .mb-label{font-size:13px;color:var(--tm);margin-top:4px;}
+.mkt-bar{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.mkt-bar .bar-title{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:12px;}
+.bar-item{margin-bottom:10px;}
+.bar-label{display:flex;justify-content:space-between;font-size:12px;color:var(--tm);margin-bottom:4px;}
+.bar-track{background:#eee;border-radius:20px;height:10px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--gm),var(--gl));}
+.mkt-card{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;gap:12px;align-items:center;}
+.mkt-card .mc-icon{font-size:24px;flex-shrink:0;}
+.mkt-card .mc-t{font-size:13px;font-weight:700;color:var(--gd);}
+.mkt-card .mc-s{font-size:11px;color:var(--tl);margin-top:2px;}
+.mkt-hl{background:linear-gradient(90deg,var(--gd),var(--gm));border-radius:14px;padding:16px 22px;color:#fff;}
+.mkt-hl .mh-t{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:4px;}
+.mkt-hl .mh-b{font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;}
+.mkt-hl .mh-b strong{color:var(--goldl);}
+
+/* ===== WOMEN NEEDS ===== */
+.wn-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%;}
+.wn-card{background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.wn-q{font-size:11px;font-weight:700;color:var(--gm);letter-spacing:1px;margin-bottom:10px;}
+.wn-data{display:flex;flex-direction:column;gap:7px;}
+.wn-row{display:flex;align-items:center;gap:8px;}
+.wn-label{font-size:12px;color:var(--tm);min-width:90px;}
+.wn-bar-wrap{flex:1;background:#eee;border-radius:20px;height:9px;overflow:hidden;}
+.wn-bar{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--gm),var(--gl));}
+.wn-pct{font-size:12px;font-weight:700;color:var(--gm);min-width:36px;text-align:right;}
+.wn-sources{font-size:10px;color:var(--tl);margin-top:8px;}
+.wn-needs{background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.06);grid-column:span 1;}
+.wn-tag{display:inline-block;background:var(--gp);color:var(--gd);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin:3px 2px;}
+
+/* ===== BAD SALON ===== */
+.bad-wrap{display:flex;gap:20px;width:100%;}
+.bad-left{flex:1.2;display:flex;flex-direction:column;gap:12px;}
+.bad-right{flex:0.9;display:flex;flex-direction:column;gap:10px;}
+.trend-box{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.trend-box .tb-t{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:12px;}
+.trend-bar-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.trend-bar-item .yr{font-size:11px;color:var(--tl);min-width:28px;}
+.trend-track{flex:1;background:#eee;border-radius:20px;height:8px;overflow:hidden;}
+.trend-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#d64c4c,#e87070);}
+.trend-num{font-size:11px;font-weight:700;color:#d64c4c;min-width:32px;text-align:right;}
+.bad-reason{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.bad-reason .br-t{font-size:12px;font-weight:700;color:var(--gd);margin-bottom:8px;}
+.bad-items{display:flex;flex-wrap:wrap;gap:6px;}
+.bad-item{background:#fee;border:1px solid #fcc;border-radius:6px;padding:4px 10px;font-size:11px;color:#c0392b;}
+.bad-item::before{content:'✕ ';}
+
+/* ===== PAIN ===== */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;}
+.pain-card{background:#fff;border-radius:12px;padding:14px 15px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-left:4px solid var(--gl);}
+.pain-card .pc-t{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:4px;}
+.pain-card .pc-b{font-size:12px;color:var(--tm);line-height:1.5;}
+.pain-solve{background:linear-gradient(135deg,var(--gd),var(--gm));border-radius:14px;padding:18px 24px;color:#fff;grid-column:span 3;text-align:center;}
+.pain-solve .ps-t{font-size:20px;font-weight:700;color:var(--gl);margin-bottom:4px;}
+.pain-solve .ps-s{font-size:14px;color:rgba(255,255,255,.7);}
+
+/* ===== OPERATION ===== */
+.op-wrap{display:flex;flex-direction:column;gap:16px;width:100%;}
+.op-flow{display:flex;align-items:center;gap:6px;}
+.op-step{background:#fff;border-radius:12px;padding:12px 10px;text-align:center;flex:1;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.op-step.key{border:2px solid var(--gl);}
+.op-step .os-n{background:var(--gm);color:#fff;font-size:10px;font-weight:700;border-radius:20px;padding:2px 8px;display:inline-block;margin-bottom:5px;}
+.op-step.key .os-n{background:var(--gl);color:var(--gd);}
+.op-step .os-t{font-size:13px;font-weight:700;color:var(--gd);line-height:1.3;}
+.op-step .os-s{font-size:10px;color:var(--tl);margin-top:3px;}
+.op-arrow{color:var(--gl);font-size:18px;flex-shrink:0;}
+.op-tags{display:flex;gap:10px;}
+.op-tag{background:#fff;border-left:4px solid var(--gm);border-radius:0 10px 10px 0;padding:10px 14px;flex:1;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.op-tag .ot-t{font-size:12px;font-weight:700;color:var(--gd);}
+.op-tag .ot-v{font-size:18px;font-weight:900;color:var(--gm);margin:2px 0;}
+.op-tag .ot-s{font-size:10px;color:var(--tl);}
+
+/* ===== TROUBLE APPROACH ===== */
+.ta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;}
+.ta-card{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-top:4px solid var(--gm);}
+.ta-card .tc-t{font-size:14px;font-weight:700;color:var(--gd);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.ta-card .tc-t span{font-size:18px;}
+.ta-card .tc-flow{font-size:12px;color:var(--tm);line-height:1.7;}
+.ta-card .tc-flow .arr{color:var(--gl);font-weight:700;}
+.ta-card .tc-pace{font-size:11px;color:var(--gm);font-weight:700;margin-top:6px;}
+.ta-voice{background:linear-gradient(90deg,var(--gd),var(--gm));border-radius:12px;padding:14px 20px;color:#fff;grid-column:span 2;display:flex;align-items:center;gap:20px;}
+.ta-voice .tv-q{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:4px;}
+.ta-voice .tv-a{font-size:14px;color:var(--goldl);font-style:italic;}
+.ta-voice .rank{display:flex;gap:14px;}
+.ta-voice .rank-item{text-align:center;}
+.ta-voice .rank-item .rv{font-size:22px;font-weight:900;color:var(--gl);}
+.ta-voice .rank-item .rl{font-size:10px;color:rgba(255,255,255,.5);}
+
+/* ===== USER VOICE ===== */
+.uv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+.uv-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:relative;overflow:hidden;}
+.uv-card::before{content:'"';position:absolute;top:-12px;left:10px;font-size:80px;color:var(--gp);font-family:'Noto Serif JP',serif;line-height:1;}
+.uv-card .uv-t{font-size:13px;line-height:1.65;color:var(--td);position:relative;}
+.uv-card .uv-t strong{color:var(--gm);}
+.uv-summary{background:var(--gd);border-radius:14px;padding:18px 24px;color:#fff;grid-column:span 2;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.uv-summary .us-t{font-size:17px;color:var(--gl);font-weight:700;margin-bottom:6px;}
+.uv-summary .us-b{font-size:13px;color:rgba(255,255,255,.65);}
+.uv-ranks{display:flex;gap:16px;flex-shrink:0;}
+.uv-rank{background:rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;text-align:center;}
+.uv-rank .urp{font-size:11px;color:var(--goldl);margin-bottom:2px;}
+.uv-rank .urv{font-size:13px;font-weight:700;color:#fff;}
+.uv-rank .urpct{font-size:18px;font-weight:900;color:var(--gl);}
+
+/* ===== COMPARE ===== */
+.cmp-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;}
+.cmp-table th{padding:11px 14px;text-align:center;font-weight:700;font-size:14px;}
+.cmp-table th:first-child{text-align:left;}
+.cmp-table th.on-th{background:var(--gm);color:#fff;}
+.cmp-table th.ot-th{background:#e0e0e0;color:#555;}
+.cmp-table td{padding:9px 14px;border-bottom:1px solid #eee;background:#fff;}
+.cmp-table td:first-child{font-weight:700;color:var(--td);background:#f8f8f8;}
+.cmp-table td.on-td{text-align:center;background:rgba(82,183,136,.09);font-weight:700;color:var(--gd);}
+.cmp-table td.ot-td{text-align:center;color:#888;}
+.cmp-table tr:last-child td{border-bottom:0;}
+.good{color:var(--gm);}
+
+/* ===== DIFF STRENGTHS ===== */
+.ds-grid{display:grid;grid-template-columns:repeat(4,1fr) 0.01fr;gap:12px;width:100%;}
+.ds-card{background:#fff;border-radius:14px;padding:18px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow:hidden;position:relative;}
+.ds-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gm),var(--gl));}
+.ds-card .dc-n{font-size:28px;font-weight:900;color:var(--gp);line-height:1;margin-bottom:5px;}
+.ds-card .dc-t{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:6px;line-height:1.3;}
+.ds-card .dc-b{font-size:11px;color:var(--tm);line-height:1.5;}
+.ds-card .dc-b strong{color:var(--gm);}
+
+/* ===== SUBSCRIPTION ===== */
+.su-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;flex:1;}
+.su-card{background:#fff;border-radius:14px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06);position:relative;}
+.su-card.pop{border:2px solid var(--gl);}
+.pop-badge{position:absolute;top:-11px;background:var(--gm);color:#fff;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;}
+.su-card .sc-pl{font-size:12px;font-weight:700;color:var(--tl);margin-bottom:7px;}
+.su-card .sc-pr{font-size:24px;font-weight:900;color:var(--gd);}
+.su-card .sc-pr span{font-size:11px;font-weight:400;}
+.su-card .sc-pp{margin-top:5px;font-size:12px;color:var(--gm);font-weight:700;}
+.su-note{background:var(--gd);color:#fff;border-radius:12px;padding:14px 20px;display:flex;flex-direction:column;gap:5px;}
+.su-note .sn-t{font-size:15px;font-weight:700;color:var(--gl);margin-bottom:3px;}
+.su-note p{font-size:13px;}
+.su-note strong{color:var(--goldl);}
+
+/* ===== RECRUIT POWER ===== */
+.rp-wrap{display:flex;gap:20px;width:100%;}
+.rp-left{flex:1.3;display:flex;flex-direction:column;gap:12px;}
+.rp-right{flex:0.9;display:flex;flex-direction:column;gap:12px;}
+.hpb-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.hpb-card .hc-t{font-size:14px;font-weight:700;color:var(--gd);margin-bottom:12px;}
+.hpb-rows{display:flex;flex-direction:column;gap:8px;}
+.hpb-row{display:flex;align-items:center;gap:12px;}
+.hpb-row .hr-label{font-size:12px;color:var(--tm);min-width:100px;}
+.hpb-row .hr-val{font-size:20px;font-weight:900;color:var(--gm);}
+.hpb-row .hr-sub{font-size:11px;color:var(--tl);}
+.rp-msg{background:var(--gd);border-radius:14px;padding:18px 20px;color:#fff;}
+.rp-msg .rm-t{font-size:14px;font-weight:700;color:var(--gl);margin-bottom:8px;}
+.rp-msg .rm-b{font-size:12px;color:rgba(255,255,255,.7);line-height:1.6;}
+.rp-msg .rm-b strong{color:var(--goldl);}
+.rp-sub-power{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.rp-sub-power .rs-t{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;}
+.rs-items{display:flex;flex-direction:column;gap:7px;}
+.rs-item{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--tm);}
+.rs-item::before{content:'→';color:var(--gl);font-weight:700;flex-shrink:0;}
+
+/* ===== REVENUE ===== */
+.rv-wrap{display:flex;gap:20px;width:100%;}
+.rv-table-wrap{flex:1.5;overflow:hidden;}
+.rv-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;border-radius:12px;overflow:hidden;}
+.rv-table th{background:var(--gd);color:#fff;padding:9px 8px;text-align:center;font-size:12px;}
+.rv-table td{padding:7px 8px;text-align:center;border-bottom:1px solid #eee;background:#fff;font-size:12px;}
+.rv-table tr:nth-child(even) td{background:#f9f9f9;}
+.rv-table .tr-row td{background:var(--gm)!important;color:#fff;font-weight:700;}
+.rv-side{flex:1;display:flex;flex-direction:column;gap:10px;}
+.kpi{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:5px solid var(--gl);}
+.kpi .kl{font-size:11px;color:var(--tl);}
+.kpi .kv{font-size:26px;font-weight:900;color:var(--gd);}
+.kpi .ks{font-size:10px;color:var(--tl);margin-top:1px;}
+.kpi.acc{background:var(--gd);border-left-color:var(--gold);}
+.kpi.acc .kl,.kpi.acc .ks{color:rgba(255,255,255,.45);}
+.kpi.acc .kv{color:var(--goldl);}
+
+/* ===== 3YR ===== */
+.yr-cards{display:flex;gap:14px;width:100%;}
+.yr-card{flex:1;background:#fff;border-radius:14px;padding:20px 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.yr-card.y1{border-top:5px solid #7ec8a0;}
+.yr-card.y2{border-top:5px solid var(--gm);}
+.yr-card.y3{border-top:5px solid var(--gd);}
+.yr-badge{font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.y1 .yr-badge{background:#e8f5ee;color:#7ec8a0;}
+.y2 .yr-badge{background:#d4eddf;color:var(--gm);}
+.y3 .yr-badge{background:#c8e0d2;color:var(--gd);}
+.yr-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f0f0f0;}
+.yr-row:last-child{border-bottom:0;}
+.yl{font-size:11px;color:var(--tl);}
+.yv{font-size:15px;font-weight:700;color:var(--gd);}
+.yv.big{font-size:20px;color:var(--gm);}
+.cum-banner{background:linear-gradient(90deg,var(--gd),var(--gm));border-radius:14px;padding:18px 26px;color:#fff;display:flex;align-items:center;justify-content:space-between;width:100%;}
+.cum-item{text-align:center;}
+.cum-label{font-size:11px;color:rgba(255,255,255,.5);}
+.cum-val{font-size:24px;font-weight:900;color:var(--goldl);}
+.cum-div{width:1px;height:38px;background:rgba(255,255,255,.18);}
+
+/* ===== COST ===== */
+.cost-main{display:flex;gap:22px;width:100%;}
+.cost-list{flex:1.4;}
+.ci{display:flex;align-items:center;justify-content:space-between;padding:9px 16px;border-bottom:1px solid #eee;background:#fff;}
+.ci:first-child{border-radius:12px 12px 0 0;}
+.ci:last-child{border-bottom:0;border-radius:0 0 12px 12px;}
+.ci .cn{font-size:12px;color:var(--td);}
+.ci .ca{font-size:13px;font-weight:700;color:var(--gm);}
+.ci.subtot{background:#f0f7f4;}
+.ci.subtot .cn,.ci.subtot .ca{font-weight:700;color:var(--gd);}
+.ci.total{background:var(--gd);}
+.ci.total .cn{color:#fff;font-weight:700;font-size:13px;}
+.ci.total .ca{color:var(--goldl);font-size:17px;}
+.cost-right{flex:1;display:flex;flex-direction:column;gap:12px;}
+.recov-box{background:var(--gd);border-radius:14px;padding:18px;}
+.recov-box h3{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:12px;}
+.rt-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.rt-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.rt-dot.g{background:var(--gl);}
+.rt-dot.gold{background:var(--gold);}
+.rt-text{font-size:12px;color:rgba(255,255,255,.75);}
+.rt-text strong{color:var(--goldl);}
+.monthly-fixed{background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.monthly-fixed h4{font-size:12px;font-weight:700;color:var(--gd);margin-bottom:8px;}
+.mf-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid #f5f5f5;color:var(--tm);}
+.mf-row:last-child{border-bottom:0;}
+.mf-row span:last-child{font-weight:700;color:var(--gm);}
+
+/* ===== SUPPORT ===== */
+.sup-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+.sup-sec{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.sup-sec.dark{background:var(--gd);grid-column:span 2;}
+.sup-title{font-size:14px;font-weight:700;color:var(--gd);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.sup-title.light{color:#fff;}
+.sup-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--tm);margin-bottom:7px;}
+.sup-item::before{content:'✓';color:var(--gl);font-weight:700;flex-shrink:0;}
+.sup-item.light{color:rgba(255,255,255,.75);}
+.role-cards{display:flex;gap:12px;}
+.role-card{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;}
+.role-card .rc-icon{font-size:20px;margin-bottom:4px;}
+.role-card .rc-t{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px;}
+.role-card .rc-b{font-size:11px;color:rgba(255,255,255,.55);line-height:1.4;}
+.role-card.warn{border-color:rgba(201,168,76,.3);}
+.role-card.warn .rc-t{color:var(--goldl);}
+
+/* ===== FLOW ===== */
+.flow-wrap{display:flex;flex-direction:column;gap:10px;width:100%;}
+.flow-note{font-size:13px;color:var(--gm);font-weight:700;text-align:center;margin-bottom:4px;}
+.flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.flow-item{background:#fff;border-radius:12px;padding:12px 10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.flow-item .fi-n{background:var(--gm);color:#fff;font-size:11px;font-weight:700;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
+.flow-item .fi-t{font-size:12px;font-weight:700;color:var(--gd);line-height:1.3;}
+.flow-arrow{display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gl);}
+.flow-grid-2{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+.flow-final{background:linear-gradient(135deg,var(--gm),var(--gl));border-radius:12px;padding:14px;text-align:center;color:#fff;margin-top:4px;}
+.flow-final .ff-t{font-size:15px;font-weight:700;}
+.flow-final .ff-s{font-size:11px;opacity:.8;}
+
+/* ===== CONDITIONS ===== */
+.cond-wrap{display:flex;gap:20px;width:100%;}
+.cond-left{flex:1;}
+.cond-right{flex:1;display:flex;flex-direction:column;gap:12px;}
+.cond-items{display:flex;flex-direction:column;gap:8px;}
+.cond-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+.cond-item::before{content:'✓';color:var(--gl);font-weight:700;font-size:14px;flex-shrink:0;}
+.cond-item .ci-t{font-size:13px;font-weight:700;color:var(--gd);}
+.cond-item .ci-b{font-size:11px;color:var(--tl);margin-top:2px;}
+.cond-box{background:var(--gd);border-radius:14px;padding:18px 20px;color:#fff;}
+.cond-box h3{font-size:13px;color:var(--gl);margin-bottom:10px;}
+.cond-box p{font-size:12px;color:rgba(255,255,255,.7);line-height:1.6;}
+.cond-box strong{color:var(--goldl);}
+
+/* ===== FC VOICE ===== */
+.fv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;}
+.fv-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);position:relative;overflow:hidden;}
+.fv-card::before{content:'"';position:absolute;top:-12px;left:8px;font-size:78px;color:var(--gp);font-family:'Noto Serif JP',serif;line-height:1;}
+.fv-q{font-size:10px;font-weight:700;color:var(--gm);letter-spacing:1px;margin-bottom:6px;}
+.fv-a{font-size:13px;line-height:1.6;color:var(--td);position:relative;}
+.fv-a strong{color:var(--gm);}
+.fv-summary{background:var(--gd);border-radius:14px;padding:18px 24px;color:#fff;grid-column:span 2;display:flex;align-items:center;gap:20px;}
+.fv-quote{font-family:'Noto Serif JP',serif;font-size:17px;line-height:1.6;color:var(--goldl);flex:1;}
+.fv-meta{font-size:11px;color:rgba(255,255,255,.4);text-align:right;white-space:nowrap;}
+
+/* ===== FC MARKET STAT ===== */
+.fcs-wrap{display:flex;gap:20px;width:100%;align-items:stretch;}
+.fcs-left{flex:1.4;display:flex;flex-direction:column;gap:12px;}
+.fcs-right{flex:0.8;background:var(--gd);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;}
+.fc-stat-card{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.fc-stat-card .fsc-t{font-size:13px;font-weight:700;color:var(--gd);margin-bottom:12px;}
+.fc-stat-row{display:flex;justify-content:space-around;}
+.fc-stat-item{text-align:center;}
+.fc-stat-item .fsi-v{font-size:32px;font-weight:900;color:var(--gm);}
+.fc-stat-item .fsi-l{font-size:11px;color:var(--tl);}
+.fc-stat-item.red .fsi-v{color:#d64c4c;}
+.fc-rich{display:flex;flex-direction:column;gap:10px;}
+.fc-rich-item{background:rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;}
+.fc-rich-item .fri-v{font-size:26px;font-weight:900;color:var(--goldl);}
+.fc-rich-item .fri-l{font-size:11px;color:rgba(255,255,255,.5);margin-top:2px;}
+
+/* ===== REQUEST ===== */
+.req-wrap{display:flex;gap:20px;width:100%;align-items:stretch;}
+.req-left{flex:1.2;display:flex;flex-direction:column;gap:12px;}
+.req-right{flex:0.9;background:var(--gd);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;justify-content:center;}
+.req-box{background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.req-box .rb-t{font-size:14px;font-weight:700;color:var(--gd);margin-bottom:10px;}
+.req-items{display:flex;flex-direction:column;gap:8px;}
+.req-item{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--tm);}
+.req-item::before{content:'📌';flex-shrink:0;}
+.req-vision{background:rgba(255,255,255,.07);border-radius:12px;padding:16px;}
+.req-vision .rv-t{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:6px;}
+.req-vision .rv-v{font-size:14px;color:var(--goldl);line-height:1.6;}
+.req-goal{display:flex;flex-direction:column;gap:8px;}
+.req-goal-item{background:rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:center;}
+.req-goal-item .rgi-v{font-size:20px;font-weight:900;color:var(--gl);}
+.req-goal-item .rgi-l{font-size:11px;color:rgba(255,255,255,.5);}
+
+/* ===== CTA ===== */
+.s-cta{background:linear-gradient(135deg,var(--gd) 0%,#0d2318 60%,#1a3c2e 100%);flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.s-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 70%,rgba(82,183,136,.12) 0%,transparent 60%);}
+.cta-tag{font-size:11px;letter-spacing:4px;color:var(--goldl);margin-bottom:14px;position:relative;}
+.cta-h1{font-family:'Noto Serif JP',serif;font-size:40px;color:#fff;font-weight:700;line-height:1.3;margin-bottom:8px;position:relative;}
+.cta-h1 span{color:var(--gl);}
+.cta-sub{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:30px;position:relative;}
+.cta-bs{display:flex;gap:14px;margin-bottom:30px;position:relative;}
+.cta-b{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 20px;text-align:center;}
+.cta-b .cbv{font-size:22px;font-weight:900;color:var(--gl);}
+.cta-b .cbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:1px;}
+.cta-btn{display:inline-block;background:var(--gl);color:var(--gd);font-size:17px;font-weight:900;padding:16px 50px;border-radius:50px;letter-spacing:2px;position:relative;box-shadow:0 0 40px rgba(82,183,136,.3);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="nav">
+  <button onclick="prev()">◀ 前へ</button>
+  <span id="ind">1 / 35</span>
+  <button onclick="next()">次へ ▶</button>
+</div>
+
+<!-- ======================== -->
+<!-- S1: TITLE               -->
+<!-- ======================== -->
+<div class="slide s-title active" id="s1">
+  <div class="btag">FC FRANCHISE SEMINAR 2024</div>
+  <h1>黄土よもぎ蒸し専門店<br><span>ON</span>フランチャイズ<br>加盟説明会</h1>
+  <div class="sub">技術不要・未経験OK・1ヶ月目から黒字化できるサロンビジネス</div>
+  <div class="badge">株式会社rtma ／ 代表 <span>嶋岡 みのり</span></div>
+  <div class="deco">ON</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S2: TOC                  -->
+<!-- ======================== -->
+<div class="slide" id="s2" style="background:var(--cream);flex-direction:column;padding:52px 70px;">
+  <div style="font-family:'Noto Serif JP',serif;font-size:34px;color:var(--gd);margin-bottom:30px;padding-bottom:12px;border-bottom:3px solid var(--gl);">本日のアジェンダ</div>
+  <div class="toc-grid">
+    <div class="toc-item"><div class="toc-num">1</div><div><div class="toc-main">なぜFCを募集するのか・具体的な利益</div><div class="toc-s">FC展開の経緯と直営実績</div></div></div>
+    <div class="toc-item"><div class="toc-num">2</div><div><div class="toc-main">会社概要・加盟後の成長可能性</div><div class="toc-s">株式会社rtma・ブランドコンセプト・企業理念</div></div></div>
+    <div class="toc-item"><div class="toc-num">3</div><div><div class="toc-main">利益が伸び続ける仕組み</div><div class="toc-s">ビジネスモデル・差別化・集客・サブスク</div></div></div>
+    <div class="toc-item"><div class="toc-num">4</div><div><div class="toc-main">実際の売上・1年先の利益</div><div class="toc-s">直営データ・3年間収益計画</div></div></div>
+    <div class="toc-item"><div class="toc-num">5</div><div><div class="toc-main">オーナー様の実際の声</div><div class="toc-s">加盟後の成果・黒字化事例</div></div></div>
+    <div class="toc-item"><div class="toc-num">6</div><div><div class="toc-main">本部とFCの役割の分担</div><div class="toc-s">サポート体制・加盟条件・開業の流れ</div></div></div>
+  </div>
+  <div class="pn">2</div>
+</div>
+
+<!-- ======================== -->
+<!-- S3: WHY FC               -->
+<!-- ======================== -->
+<div class="slide" id="s3">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>なぜFCを募集するのか</h2><div class="pb">FC募集の経緯</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="wh-num">01</div>
+          <div class="wh-t">業界の仕組み化で先行者優位を確立</div>
+          <div class="wh-b">フランチャイズ化されたよもぎ蒸し専門店は現在ほぼ存在しない。今こそ業界を変える仕組みを全国に広げたいというビジョンのもとFC展開を開始。</div>
+        </div>
+        <div class="why-card">
+          <div class="wh-num">02</div>
+          <div class="wh-t">直営で実証済みの再現性あるモデル</div>
+          <div class="wh-b">蔵前本店・市川店で年間売上計約4,800万円・累計来店2万人超の実績。このモデルをコピー展開できるビジネスとしてFCで普及させたい。</div>
+        </div>
+        <div class="why-card">
+          <div class="wh-num">03</div>
+          <div class="wh-t">加盟オーナーに本当に成功してほしい</div>
+          <div class="wh-b">店舗数を増やすことが目的ではない。加盟してくださったオーナーが実際に成功し、さらに複数店舗を展開していくパートナーを求めている。</div>
+        </div>
+        <div class="why-card">
+          <div class="wh-num">04</div>
+          <div class="wh-t">最終目標：2〜3億円でのM&A売却</div>
+          <div class="wh-b">20〜30店舗展開後、大手企業への売却を視野に入れた事業設計。加盟オーナーに売却益を還元できるグループ成長を目指している。</div>
+        </div>
+        <div class="why-banner">
+          <div><div class="wb-text">⚡ 直営全店舗が黒字・事業継続率100%</div><div class="wb-s">これが私たちが自信を持ってFCを提供できる根拠です</div></div>
+          <div class="why-kpis">
+            <div class="why-kpi"><div class="wkv">2万人</div><div class="wkl">累計来店数</div></div>
+            <div class="why-kpi"><div class="wkv">100%</div><div class="wkl">事業継続率</div></div>
+            <div class="why-kpi"><div class="wkv">黒字</div><div class="wkl">全直営店舗</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">3</div>
+</div>
+
+<!-- ======================== -->
+<!-- S4: STRENGTHS NUMBERS   -->
+<!-- ======================== -->
+<div class="slide" id="s4">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>ONの強み</h2><div class="pb">直営実績の数値</div></div>
+    <div class="sb" style="flex-direction:column;gap:16px;align-items:center;justify-content:center;">
+      <div class="str-num-grid">
+        <div class="str-num-card"><div class="snv">2万人以上</div><div class="snl">業界No.1クラスの</div><div class="sns">累計来店数</div></div>
+        <div class="str-num-card"><div class="snv">年3,000万円</div><div class="snl">蔵前本店の</div><div class="sns">年間売上実績</div></div>
+        <div class="str-num-card"><div class="snv">35.6%</div><div class="snl">直営4台モデルの</div><div class="sns">平均利益率</div></div>
+        <div class="str-num-card"><div class="snv">8〜15%</div><div class="snl">自社ハーブ開発による</div><div class="sns">圧倒的低原価率</div></div>
+      </div>
+      <div class="str-num-grid">
+        <div class="str-num-card"><div class="snv">65%</div><div class="snl">習慣化による高い</div><div class="sns">リピート率</div></div>
+        <div class="str-num-card"><div class="snv">1ヶ月目〜</div><div class="snl">固定費が低いため</div><div class="sns">早期黒字化が可能</div></div>
+        <div class="str-num-card"><div class="snv">1名</div><div class="snl">4台を余裕で回せる</div><div class="sns">最小運用人員</div></div>
+        <div class="str-num-card"><div class="snv">HPBのみ</div><div class="snl">新規80〜100名/月を</div><div class="sns">集客（蔵前繁忙期）</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">4</div>
+</div>
+
+<!-- ======================== -->
+<!-- S5: CHAPTER              -->
+<!-- ======================== -->
+<div class="slide s-chap" id="s5" style="background:linear-gradient(135deg,var(--gd) 0%,#0d2318 100%);">
+  <div class="chap-num">02</div>
+  <div class="chap-title">会社概要・加盟後の成長可能性</div>
+  <div class="chap-sub">株式会社rtma ／ コンセプト ／ 企業理念</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S6: COMPANY OVERVIEW     -->
+<!-- ======================== -->
+<div class="slide" id="s6">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>会社概要</h2><div class="pb">COMPANY PROFILE</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="co-table">
+        <table>
+          <thead><tr><th colspan="2">株式会社rtma</th></tr></thead>
+          <tbody>
+            <tr><td>会社名</td><td>株式会社rtma</td></tr>
+            <tr><td>代表取締役</td><td>嶋岡 みのり</td></tr>
+            <tr><td>設立</td><td>2021年（蔵前本店オープン時）</td></tr>
+            <tr><td>所在地</td><td>東京都</td></tr>
+            <tr><td>事業内容</td><td>黄土よもぎ蒸し専門店の経営・FC展開</td></tr>
+            <tr><td>関連法人</td><td>一般社団法人（資格発行・ハーブ/化粧品の開発・卸元）</td></tr>
+            <tr><td>スタッフ総数</td><td>約10名（アルバイト含む）</td></tr>
+            <tr><td>累計来店数</td><td>延べ2万人以上（業界No.1クラス）</td></tr>
+            <tr><td>HP（蔵前）</td><td>on-kuramae.jp</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="co-right">
+        <div class="co-con" style="flex:0 0 auto;">
+          <div class="cc-t">代表からのご挨拶</div>
+          <div class="cc-v">「このご縁が私たちにとって素晴らしいものになりますように。私たちは一緒に走ってくださるパートナーとの出会いを心待ちにしています。」<br><br>— 代表 嶋岡 みのり</div>
+        </div>
+        <div style="background:var(--gm);border-radius:14px;padding:16px 18px;color:#fff;">
+          <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:8px;">店舗一覧</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.85);line-height:1.8;">
+            🏪 ON蔵前（フラッグシップ・8台）<br>
+            🏪 ON市川（7台・足湯付き）<br>
+            🧘 ヨガスタジオ（1店舗）<br>
+            💆 フェイシャル＋よもぎ複合（1店舗）
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">6</div>
+</div>
+
+<!-- ======================== -->
+<!-- S7: CONCEPT              -->
+<!-- ======================== -->
+<div class="slide" id="s7">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>ブランドコンセプト・企業理念</h2><div class="pb">OUR PHILOSOPHY</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="con-wrap">
+        <div class="con-left">
+          <div class="con-quote">「女性が輝き続けるために一番大切な<br>『土台作り』をサポートする」</div>
+          <div class="con-points">
+            <div class="con-point">
+              <div class="cp-icon">🌿</div>
+              <div class="cp-text"><strong>温活×習慣型セルフケア</strong>として訴求。ご褒美エステではなく、ヨガのように日常に溶け込む存在へ。</div>
+            </div>
+            <div class="con-point">
+              <div class="cp-icon">🏠</div>
+              <div class="cp-text">カフェスタイルの空間×完全個室×<strong>オリジナルボタニカルティー</strong>で極上のリラックス体験を提供。</div>
+            </div>
+            <div class="con-point">
+              <div class="cp-icon">💎</div>
+              <div class="cp-text">高級スキンケアブランド（<strong>トリロジー・AESOP</strong>）を設置。<strong>安売りしない価値型集客</strong>を徹底。</div>
+            </div>
+            <div class="con-point">
+              <div class="cp-icon">🌸</div>
+              <div class="cp-text">あらゆるトラブルを根本から改善。<strong>1人でも多くの方に本物の美と健康</strong>をお届けする。</div>
+            </div>
+          </div>
+        </div>
+        <div class="con-right">
+          <div style="font-size:13px;font-weight:700;color:var(--goldl);margin-bottom:4px;">企業理念 / クレド</div>
+          <div class="credo-list">
+            <div class="credo-item"><div class="credo-num">1</div><div class="credo-text">常に最高の笑顔を心がける</div></div>
+            <div class="credo-item"><div class="credo-num">2</div><div class="credo-text">素直な心を磨く</div></div>
+            <div class="credo-item"><div class="credo-num">3</div><div class="credo-text">どんなことも自分に指先を向け、反省し改善できるよう努力する</div></div>
+            <div class="credo-item"><div class="credo-num">4</div><div class="credo-text">時間管理を大切にする</div></div>
+            <div class="credo-item"><div class="credo-num">5</div><div class="credo-text">成長するために学び続ける</div></div>
+            <div class="credo-item"><div class="credo-num">6</div><div class="credo-text">お客様に喜びをお届けする伝道師である</div></div>
+            <div class="credo-item"><div class="credo-num">7</div><div class="credo-text">社会の一員として貢献することを誓う</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">7</div>
+</div>
+
+<!-- ======================== -->
+<!-- S8: CHAPTER              -->
+<!-- ======================== -->
+<div class="slide s-chap" id="s8" style="background:linear-gradient(135deg,var(--gd) 0%,#0d2318 100%);">
+  <div class="chap-num">03</div>
+  <div class="chap-title">利益が伸び続ける仕組み</div>
+  <div class="chap-sub">市場データ ／ ビジネスモデル ／ 差別化 ／ 集客</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S9: MARKET SIZE          -->
+<!-- ======================== -->
+<div class="slide" id="s9">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>よもぎ蒸し・温活市場の規模</h2><div class="pb">MARKET SIZE</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="mkt-wrap">
+        <div class="mkt-left">
+          <div class="mkt-big">
+            <div class="mkt-big" style="box-shadow:none;padding:0;">
+              <div style="display:flex;justify-content:space-around;">
+                <div style="text-align:center;"><div class="mkt-big"><div class="mb-num" style="font-size:36px;">3,384<span class="mb-unit">億円</span></div><div class="mb-label">エステサロン市場規模</div></div></div>
+                <div style="text-align:center;"><div class="mkt-big"><div class="mb-num" style="font-size:36px;">26<span class="mb-unit">兆円</span></div><div class="mb-label">FC市場規模（+26%成長中）</div></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="mkt-bar">
+            <div class="bar-title">美容に投資したいもの（2022年 業界調査）</div>
+            <div class="bar-item"><div class="bar-label"><span>フェイシャルケア</span><span>49.6%</span></div><div class="bar-track"><div class="bar-fill" style="width:49.6%"></div></div></div>
+            <div class="bar-item"><div class="bar-label"><span>ボディケア</span><span>30.3%</span></div><div class="bar-track"><div class="bar-fill" style="width:30.3%"></div></div></div>
+            <div class="bar-item"><div class="bar-label"><span>インナーケア</span><span>16.5%</span></div><div class="bar-track"><div class="bar-fill" style="width:16.5%"></div></div></div>
+            <div style="font-size:10px;color:var(--tl);margin-top:6px;">出典：株式会社美容経済新聞社【2022年度】エステ業界のトレンドに関する調査</div>
+          </div>
+        </div>
+        <div class="mkt-right">
+          <div class="mkt-card"><div class="mc-icon">🌡️</div><div><div class="mc-t">温活ブーム加速中</div><div class="mc-s">よもぎ蒸しの検索需要が年々増加。認知度が急上昇</div></div></div>
+          <div class="mkt-card"><div class="mc-icon">💆</div><div><div class="mc-t">セルフケア志向</div><div class="mc-s">日常型「メンテナンス」需要が拡大。習慣化ニーズ増</div></div></div>
+          <div class="mkt-card"><div class="mc-icon">💰</div><div><div class="mc-t">FC市場の穴</div><div class="mc-s">よもぎ蒸し専門FC店がほぼ存在しない先行者優位</div></div></div>
+          <div class="mkt-hl">
+            <div class="mh-t">約9割が「美容に投資したい意識が向上した」</div>
+            <div class="mh-b">キレイになるために投資する意識が高まったと感じている女性が<strong>非常に多い・少し思う合わせて86.3%</strong>に達する</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">9</div>
+</div>
+
+<!-- ======================== -->
+<!-- S10: WOMEN NEEDS         -->
+<!-- ======================== -->
+<div class="slide" id="s10">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>女性の健康ニーズ：よもぎ蒸しへの潜在需要</h2><div class="pb">CUSTOMER NEEDS</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="wn-grid">
+        <div class="wn-card">
+          <div class="wn-q">冷え性に悩む女性</div>
+          <div class="wn-data">
+            <div class="wn-row"><div class="wn-label">強く悩んでいる</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:55%"></div></div><div class="wn-pct">55%</div></div>
+            <div class="wn-row"><div class="wn-label">少し悩んでいる</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:30%"></div></div><div class="wn-pct">30%</div></div>
+          </div>
+          <div class="wn-sources">→ 女性の約85%が冷え性を実感</div>
+        </div>
+        <div class="wn-card">
+          <div class="wn-q">小顔・体型改善に関心のある女性</div>
+          <div class="wn-data">
+            <div class="wn-row"><div class="wn-label">なりたいと思う</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:61.7%"></div></div><div class="wn-pct">61.7%</div></div>
+            <div class="wn-row"><div class="wn-label">ややなりたい</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:23.1%"></div></div><div class="wn-pct">23.1%</div></div>
+          </div>
+          <div class="wn-sources">→ 8割以上が体型・顔型の改善を望む（資生堂調査）</div>
+        </div>
+        <div class="wn-card">
+          <div class="wn-q">生理トラブル・PMS に悩む女性</div>
+          <div class="wn-data">
+            <div class="wn-row"><div class="wn-label">生理痛で悩む</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:70%"></div></div><div class="wn-pct">70%</div></div>
+            <div class="wn-row"><div class="wn-label">PMSを感じる</div><div class="wn-bar-wrap"><div class="wn-bar" style="width:60%"></div></div><div class="wn-pct">60%</div></div>
+          </div>
+          <div class="wn-sources">→ 女性ホルモンと冷え改善が直結する巨大ニーズ</div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+        <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">ONが解決できる悩みタグ（顧客ニーズ一覧）</div>
+        <div>
+          <span class="wn-tag">冷え性</span><span class="wn-tag">むくみ</span><span class="wn-tag">生理不順</span><span class="wn-tag">PMS</span><span class="wn-tag">妊活</span><span class="wn-tag">肌荒れ</span><span class="wn-tag">デトックス</span><span class="wn-tag">ダイエット</span><span class="wn-tag">疲労回復</span><span class="wn-tag">自律神経</span><span class="wn-tag">睡眠の質</span><span class="wn-tag">肩こり</span><span class="wn-tag">アレルギー</span><span class="wn-tag">アンチエイジング</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">10</div>
+</div>
+
+<!-- ======================== -->
+<!-- S11: BAD SALON           -->
+<!-- ======================== -->
+<div class="slide" id="s11">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>上手くいかないサロンの実態</h2><div class="pb">INDUSTRY CHALLENGE</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="bad-wrap">
+        <div class="bad-left">
+          <div class="trend-box">
+            <div class="tb-t">エステティック業の廃業件数推移（東京商工リサーチ）</div>
+            <div class="trend-bar-item"><div class="yr">'18</div><div class="trend-track"><div class="trend-fill" style="width:55%"></div></div><div class="trend-num">163件</div></div>
+            <div class="trend-bar-item"><div class="yr">'19</div><div class="trend-track"><div class="trend-fill" style="width:57%"></div></div><div class="trend-num">168件</div></div>
+            <div class="trend-bar-item"><div class="yr">'20</div><div class="trend-track"><div class="trend-fill" style="width:49%"></div></div><div class="trend-num">144件</div></div>
+            <div class="trend-bar-item"><div class="yr">'21</div><div class="trend-track"><div class="trend-fill" style="width:40%"></div></div><div class="trend-num">119件</div></div>
+            <div class="trend-bar-item"><div class="yr">'22</div><div class="trend-track"><div class="trend-fill" style="width:57%"></div></div><div class="trend-num">168件</div></div>
+          </div>
+          <div class="trend-box" style="background:var(--gd);">
+            <div class="tb-t" style="color:var(--goldl);">個人サロンの生存率（中小企業白書）</div>
+            <div style="display:flex;gap:14px;margin-top:8px;">
+              <div style="text-align:center;flex:1;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;"><div style="font-size:28px;font-weight:900;color:#e87070;">25%</div><div style="font-size:11px;color:rgba(255,255,255,.5);">5年後成功率</div></div>
+              <div style="text-align:center;flex:1;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;"><div style="font-size:28px;font-weight:900;color:#e87070;">11.7%</div><div style="font-size:11px;color:rgba(255,255,255,.5);">1年後廃業率</div></div>
+              <div style="text-align:center;flex:1;background:rgba(255,255,255,.08);border-radius:10px;padding:12px;"><div style="font-size:28px;font-weight:900;color:var(--goldl);">70%</div><div style="font-size:11px;color:rgba(255,255,255,.5);">FC5年後成功率</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="bad-right">
+          <div class="bad-reason">
+            <div class="br-t">上手くいかないサロンの共通点</div>
+            <div class="bad-items">
+              <div class="bad-item">インスタを頑張っているのに集客できない</div>
+              <div class="bad-item">技術・接客には自信があるが利益が出ない</div>
+              <div class="bad-item">マニュアル化が徹底されていない</div>
+              <div class="bad-item">メニューや商品が多すぎて複雑</div>
+              <div class="bad-item">集計・分析ができていない</div>
+              <div class="bad-item">スタッフが定着・育たない</div>
+              <div class="bad-item">事業計画がなく、どんぶり勘定</div>
+              <div class="bad-item">契約率が悪く、新規が定着しない</div>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--gm),var(--gl));border-radius:12px;padding:14px 18px;color:#fff;text-align:center;">
+            <div style="font-size:15px;font-weight:700;margin-bottom:4px;">ONが解決する</div>
+            <div style="font-size:12px;opacity:.8;">集客・仕組み・マニュアルはすべて本部が構築済み</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">11</div>
+</div>
+
+<!-- ======================== -->
+<!-- S12: PAIN               -->
+<!-- ======================== -->
+<div class="slide" id="s12">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>起業・サロン経営者が抱える悩み</h2><div class="pb">YOUR PAIN POINTS</div></div>
+    <div class="sb" style="flex-direction:column;gap:12px;">
+      <div class="pain-grid">
+        <div class="pain-card"><div class="pc-t">利益が出ない</div><div class="pc-b">現場は得意でお客様もいるのに、なぜか利益が残らない。費用の使い方がわからない。</div></div>
+        <div class="pain-card"><div class="pc-t">集客ができない</div><div class="pc-b">SNSを頑張っているのに新規が来ない。どこに広告を出せばいいか分からない。</div></div>
+        <div class="pain-card"><div class="pc-t">スタッフが育たない</div><div class="pc-b">採用してもすぐ辞める。マニュアルがなく、教えることに時間がかかりすぎる。</div></div>
+        <div class="pain-card"><div class="pc-t">オーナーが現場を抜けられない</div><div class="pc-b">自分がいないと回らない。ひとり運営で体がボロボロ。将来への不安が消えない。</div></div>
+        <div class="pain-card"><div class="pc-t">5年後・10年後が見えない</div><div class="pc-b">事業計画がなく、このままで大丈夫か不安。仲間もいなくて孤独。</div></div>
+        <div class="pain-card"><div class="pc-t">未経験だが開業したい</div><div class="pc-b">健康・美容に関心があり自分のサロンを持ちたい。でも技術も経験もなく踏み出せない。</div></div>
+      </div>
+      <div class="pain-solve">
+        <div class="ps-t">💡 これらすべての悩みを、ONのFCが解決します</div>
+        <div class="ps-s">集客・仕組み・マニュアル・育成・事業計画……本部がすべてを設計済み。あなたはスタッフマネジメントだけに集中できます。</div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">12</div>
+</div>
+
+<!-- ======================== -->
+<!-- S13: OPERATION           -->
+<!-- ======================== -->
+<div class="slide" id="s13">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>エステサロンで成功するための秘訣：ONのオペレーション</h2><div class="pb">BUSINESS MODEL</div></div>
+    <div class="sb" style="flex-direction:column;gap:16px;">
+      <div class="op-wrap">
+        <div class="op-flow">
+          <div class="op-step"><div class="os-n">STEP1</div><div class="os-t">ハーブ選択</div><div class="os-s">7種からお客様が選ぶ</div></div>
+          <div class="op-arrow">▶</div>
+          <div class="op-step"><div class="os-n">STEP2</div><div class="os-t">ハーブセット</div><div class="os-s">壺に準備・セット</div></div>
+          <div class="op-arrow">▶</div>
+          <div class="op-step"><div class="os-n">STEP3</div><div class="os-t">着座・開始</div><div class="os-s">フットバス＋ティー</div></div>
+          <div class="op-arrow">▶</div>
+          <div class="op-step key"><div class="os-n" style="background:var(--gl);color:var(--gd);">40分</div><div class="os-t">スタッフの手が空く</div><div class="os-s">カルテ入力・次の準備</div></div>
+          <div class="op-arrow">▶</div>
+          <div class="op-step"><div class="os-n">STEP5</div><div class="os-t">スキンケア</div><div class="os-s">お見送り・お会計</div></div>
+        </div>
+        <div class="op-tags">
+          <div class="op-tag"><div class="ot-t">技術</div><div class="ot-v">不要</div><div class="ot-s">特別な資格・技術一切なし。未経験者が即日現場対応OK。</div></div>
+          <div class="op-tag"><div class="ot-t">クレーム</div><div class="ot-v">ほぼゼロ</div><div class="ot-s">施術ミスが構造的に起きにくい設計。精神的ストレスが最小。</div></div>
+          <div class="op-tag"><div class="ot-t">必要人員</div><div class="ot-v">1名</div><div class="ot-s">4台を余裕で回せる。シフト管理・人間関係の悩みが最小。</div></div>
+          <div class="op-tag"><div class="ot-t">再現性</div><div class="ot-v">高い</div><div class="ot-s">誰がやっても同じクオリティ。マニュアルで品質を担保。</div></div>
+          <div class="op-tag"><div class="ot-t">副業対応</div><div class="ot-v">可能</div><div class="ot-s">現場に立たなくてもOK。投資・副業目的でも運営できる。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">13</div>
+</div>
+
+<!-- ======================== -->
+<!-- S14: TROUBLE APPROACH   -->
+<!-- ======================== -->
+<div class="slide" id="s14">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>お悩み別アプローチ（エンドユーザー訴求）</h2><div class="pb">CUSTOMER APPROACH</div></div>
+    <div class="sb" style="flex-direction:column;gap:12px;">
+      <div class="ta-grid">
+        <div class="ta-card">
+          <div class="tc-t"><span>⚖️</span>ダイエット</div>
+          <div class="tc-flow">冷え→基礎代謝低下<span class="arr">→</span>よもぎ蒸しで大量発汗<span class="arr">→</span>むくみスッキリ・基礎代謝UP<span class="arr">→</span>痩せやすい体へ</div>
+          <div class="tc-pace">📅 推奨：週2〜3回×3ヶ月〜 ／ 実績：「2ヶ月でマイナス3kg」</div>
+        </div>
+        <div class="ta-card">
+          <div class="tc-t"><span>✨</span>肌質改善</div>
+          <div class="tc-flow">ターンオーバー促進（約40〜60日）<span class="arr">→</span>粒子の細かいミストで保湿<span class="arr">→</span>健康な肌へ再生</div>
+          <div class="tc-pace">📅 推奨：週1回×3ヶ月〜 ／ お客様1位の声：「お肌ツルツル」（60%）</div>
+        </div>
+        <div class="ta-card">
+          <div class="tc-t"><span>🌡️</span>体質改善（冷え・肩こり・自律神経）</div>
+          <div class="tc-flow">浄化<span class="arr">→</span>再生<span class="arr">→</span>変化<span class="arr">→</span>回復の4ステップ。3〜6ヶ月繰り返し解毒<span class="arr">→</span>自然治癒力UP</div>
+          <div class="tc-pace">📅 推奨：週1回×6ヶ月〜</div>
+        </div>
+        <div class="ta-card">
+          <div class="tc-t"><span>🤰</span>妊活</div>
+          <div class="tc-flow">冷えた子宮→卵子の育ちが悪い<span class="arr">→</span>体温UP・ホルモン活性化<span class="arr">→</span>妊娠しやすい体へ</div>
+          <div class="tc-pace">📅 推奨：週2回×3ヶ月〜 ／ 実績：「3ヶ月通って妊娠した」</div>
+        </div>
+        <div class="ta-voice">
+          <div style="flex:1;">
+            <div class="tv-q">お客様満足度ランキング</div>
+            <div class="rank">
+              <div class="rank-item"><div class="rv">60%</div><div class="rl">🥇 お肌ツルツル</div></div>
+              <div class="rank-item"><div class="rv">25%</div><div class="rl">🥈 代謝UP・汗かきやすい</div></div>
+              <div class="rank-item"><div class="rv">15%</div><div class="rl">🥉 よく眠れる</div></div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;flex:1;">
+            <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;">お客様の実際の声</div>
+            <div style="font-size:13px;color:var(--goldl);line-height:1.6;">「3ヶ月通って妊娠した」<br>「2ヵ月で無理なくマイナス3kg」<br>「生理不順が治った」「体調が良い」</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">14</div>
+</div>
+
+<!-- ======================== -->
+<!-- S15: USER VOICE          -->
+<!-- ======================== -->
+<div class="slide" id="s15">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>実際のお客様の声</h2><div class="pb">CUSTOMER REVIEWS</div></div>
+    <div class="sb" style="flex-direction:column;gap:12px;">
+      <div class="uv-grid">
+        <div class="uv-card">
+          <div class="uv-t">初めてよもぎ蒸しを体験しました。丁寧に説明していただき、たっぷり汗をかいてリフレッシュ。お店はとても清潔感がありオシャレな内装です！メイク落とし＆スキンケア用品が揃っているので、<strong>仕事帰りに手ぶらで来られるのも◎</strong></div>
+        </div>
+        <div class="uv-card">
+          <div class="uv-t">いつもお世話になってます。<strong>お店から出た後はマフラー無しで、外の風が涼しいと感じる程、身体全体がポカポカ</strong>しています。スタッフの方も皆さんとても感じが良く優しいです。よもぎ蒸しやお茶の種類も体調や気分で選べるので毎回楽しみです。</div>
+        </div>
+        <div class="uv-card">
+          <div class="uv-t">個室がゆったりしていて、よもぎの香りがとっても良くて癒されました。<strong>終わった後はいつもより体調が良い日が数日続いた</strong>気がします。チケットを購入したのでまた伺います！</div>
+        </div>
+        <div class="uv-card">
+          <div class="uv-t">初めての来店でしたが、雰囲気が良く入った途端に優しいよもぎの香りが漂い癒されました。<strong>帰り道、脚や肩凝りが楽になっていて今朝もいつもより身体が楽で驚きました。</strong></div>
+        </div>
+        <div class="uv-summary">
+          <div>
+            <div class="us-t">なぜリピート率65%を実現できるのか</div>
+            <div class="us-b">「効果が体で分かる」「来るのが習慣になった」「他のケアに戻れない」<br>よもぎ蒸しは体感が分かりやすく、通うたびに効果を実感できるため自然とリピートが生まれる。</div>
+          </div>
+          <div class="uv-ranks">
+            <div class="uv-rank"><div class="urp">リピート率</div><div class="urpct">65%</div></div>
+            <div class="uv-rank"><div class="urp">黒字化</div><div class="urpct">2ヶ月目</div></div>
+            <div class="uv-rank"><div class="urp">1位の声</div><div class="urv">肌ツルツル</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">15</div>
+</div>
+
+<!-- ======================== -->
+<!-- S16: COMPARE             -->
+<!-- ======================== -->
+<div class="slide" id="s16">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>他業態との徹底比較</h2><div class="pb">COMPARISON</div></div>
+    <div class="sb" style="align-items:center;">
+      <table class="cmp-table" style="border-radius:14px;overflow:hidden;width:100%;">
+        <thead>
+          <tr>
+            <th style="background:#f0f0f0;color:#666;">比較項目</th>
+            <th class="on-th">よもぎ蒸し ON</th>
+            <th class="ot-th">飲食FC</th>
+            <th class="ot-th">エステFC</th>
+            <th class="ot-th">美容サロン（個人）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>初期投資</td><td class="on-td">500万円〜</td><td class="ot-td">1,000万円〜</td><td class="ot-td">500万円〜</td><td class="ot-td">200〜500万円</td></tr>
+          <tr><td>技術・資格</td><td class="on-td good">不要</td><td class="ot-td">調理経験推奨</td><td class="ot-td">技術研修必須</td><td class="ot-td">資格あり推奨</td></tr>
+          <tr><td>必要人員</td><td class="on-td good">1名で完結</td><td class="ot-td">3名〜</td><td class="ot-td">2名〜</td><td class="ot-td">1〜2名</td></tr>
+          <tr><td>原価率</td><td class="on-td good">8〜15%</td><td class="ot-td">30〜35%</td><td class="ot-td">15〜25%</td><td class="ot-td">20〜30%</td></tr>
+          <tr><td>クレームリスク</td><td class="on-td good">極低</td><td class="ot-td">中</td><td class="ot-td">中〜高</td><td class="ot-td">中</td></tr>
+          <tr><td>投資回収</td><td class="on-td good">約14ヶ月</td><td class="ot-td">1.5〜3年</td><td class="ot-td">1〜2年</td><td class="ot-td">不安定</td></tr>
+          <tr><td>1ヶ月目黒字化</td><td class="on-td good">可能</td><td class="ot-td">6ヶ月〜</td><td class="ot-td">3〜6ヶ月</td><td class="ot-td">3〜12ヶ月</td></tr>
+          <tr><td>副業・投資目的</td><td class="on-td good">対応可</td><td class="ot-td">困難</td><td class="ot-td">困難</td><td class="ot-td">困難</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="pn">16</div>
+</div>
+
+<!-- ======================== -->
+<!-- S17: DIFF STRENGTHS      -->
+<!-- ======================== -->
+<div class="slide" id="s17">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>ONの圧倒的な差別化 4つの強み</h2><div class="pb">COMPETITIVE ADVANTAGE</div></div>
+    <div class="sb" style="align-items:center;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;">
+        <div class="ds-card">
+          <div class="dc-n">01</div>
+          <div class="dc-t">韓国ファンジン正規代理店<br>（日本わずか10社）</div>
+          <div class="dc-b">無形文化財の伝統技術×最高級五色黄土。椅子の品質で効果が<strong>数十倍</strong>変わる。偽物が多い中で本物を提供できる唯一の証明。代表直々に研修を受けた正規店。</div>
+        </div>
+        <div class="ds-card">
+          <div class="dc-n">02</div>
+          <div class="dc-t">希少ハーブ「モリンガ」<br>の取り扱い</div>
+          <div class="dc-b">90種の栄養素×300個の薬用効果。食用植物中最も栄養価が高い「奇跡のハーブ」。<strong>関東でほぼ取扱がない</strong>希少体験を提供できる。</div>
+        </div>
+        <div class="ds-card">
+          <div class="dc-n">03</div>
+          <div class="dc-t">全品無農薬×<br>自社開発オリジナルハーブ</div>
+          <div class="dc-b">一般社団法人にて自社開発。仕入れ原価を極限まで抑制し<strong>原価率8〜15%</strong>（1回あたり約500円）を実現。注文後にブレンドする鮮度へのこだわり。</div>
+        </div>
+        <div class="ds-card">
+          <div class="dc-n">04</div>
+          <div class="dc-t">日本一の広さ×<br>デザイナー監修空間</div>
+          <div class="dc-b">完全個室・日本一の部屋の広さを誇る。高級スキンケア（トリロジー・AESOP）設置。<strong>安売りしない価値型集客</strong>で単価と品質を守る。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">17</div>
+</div>
+
+<!-- ======================== -->
+<!-- S18: SUBSCRIPTION        -->
+<!-- ======================== -->
+<div class="slide" id="s18">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>サブスクが積み上がると経営が安定する</h2><div class="pb">SUBSCRIPTION MODEL</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="su-grid">
+        <div class="su-card"><div class="sc-pl">単発</div><div class="sc-pr">5,000<span>円</span></div><div class="sc-pp">都度利用</div></div>
+        <div class="su-card pop"><div class="pop-badge">★ 人気No.1</div><div class="sc-pl">月2回プラン</div><div class="sc-pr">7,600<span>円/月</span></div><div class="sc-pp">1回あたり 3,800円</div></div>
+        <div class="su-card pop"><div class="pop-badge">★ 人気No.2</div><div class="sc-pl">月4回プラン</div><div class="sc-pr">14,800<span>円/月</span></div><div class="sc-pp">1回あたり 3,700円</div></div>
+        <div class="su-card"><div class="sc-pl">月8回プラン</div><div class="sc-pr">28,400<span>円/月</span></div><div class="sc-pp">1回あたり 3,550円</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="su-note">
+          <div class="sn-t">💪 サブスク積み上がりの効果</div>
+          <p>サブスク会員 <strong>80〜100名</strong> で月100万円超が安定収入として確保</p>
+          <p>リピート率 <strong>約65%</strong>。会員が増えるほど新規集客のプレッシャーが激減</p>
+          <p>季節変動に強い→閑散期でも「読める売上」で精神的ゆとりが生まれる</p>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">全プランに含まれるサービス</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.9;">
+            ✓ フットバス（足湯）<br>
+            ✓ オリジナルボタニカルティー<br>
+            ✓ 40分＋無料延長<br>
+            ✓ メイク落とし・スキンケア用品完備<br>
+            ✓ 生理中は脚蒸しで対応可
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">18</div>
+</div>
+
+<!-- ======================== -->
+<!-- S19: RECRUIT POWER       -->
+<!-- ======================== -->
+<div class="slide" id="s19">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>絶対に失敗しない集客：HPBで完結するモデル</h2><div class="pb">RECRUITMENT POWER</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="rp-wrap">
+        <div class="rp-left">
+          <div class="hpb-card">
+            <div class="hc-t">直営店の集客実績（ホットペッパービューティー）</div>
+            <div class="hpb-rows">
+              <div class="hpb-row"><div class="hr-label">蔵前 新規（繁忙期）</div><div class="hr-val">80〜100名</div><div class="hr-sub">/月</div></div>
+              <div class="hpb-row"><div class="hr-label">蔵前 新規（閑散期）</div><div class="hr-val">30〜50名</div><div class="hr-sub">/月</div></div>
+              <div class="hpb-row"><div class="hr-label">蔵前 月間PV（繁忙期）</div><div class="hr-val">約10,000</div><div class="hr-sub">PV</div></div>
+              <div class="hpb-row"><div class="hr-label">市川 月間PV</div><div class="hr-val">5,000〜8,000</div><div class="hr-sub">PV</div></div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+            <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">補助集客施策</div>
+            <div style="font-size:12px;color:var(--tm);line-height:1.8;">
+              ✓ オープン時：ポスティング・チラシ<br>
+              ✓ オープン後：HPBのみで安定運用<br>
+              ✓ サブスク積み上げ後は新規依存が低減<br>
+              ✓ 出店前にHPBの検索数・PV・競合数をリサーチ
+            </div>
+          </div>
+        </div>
+        <div class="rp-right">
+          <div class="rp-msg">
+            <div class="rm-t">なぜHPBだけで成立するのか</div>
+            <div class="rm-b">よもぎ蒸し専門店として<strong>HPBの競合がほぼゼロのエリアが全国に多数</strong>存在する。競合の少ない今こそ、HPBを軸に出店し先行者優位を獲得できる唯一のタイミング。</div>
+          </div>
+          <div class="rp-sub-power">
+            <div class="rs-t">サブスクが「集客疲れ」を解消する</div>
+            <div class="rs-items">
+              <div class="rs-item">会員100名 = 月100万円の固定収入確保</div>
+              <div class="rs-item">新規が来なくても売上が下がりにくい</div>
+              <div class="rs-item">オーナーが精神的ゆとりを持って経営できる</div>
+              <div class="rs-item">集客予測が立つのでFCとして最も再現性が高い</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">19</div>
+</div>
+
+<!-- ======================== -->
+<!-- S20: CHAPTER             -->
+<!-- ======================== -->
+<div class="slide s-chap" id="s20" style="background:linear-gradient(135deg,var(--gd) 0%,#0d2318 100%);">
+  <div class="chap-num">04</div>
+  <div class="chap-title">実際の売上状況・1年先の利益</div>
+  <div class="chap-sub">直営4台モデルのリアルデータ ／ 3年間収益計画</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S21: REVENUE             -->
+<!-- ======================== -->
+<div class="slide" id="s21">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>直営店の実際の数字（4台モデル）</h2><div class="pb">ACTUAL PERFORMANCE</div></div>
+    <div class="sb">
+      <div class="rv-table-wrap">
+        <table class="rv-table">
+          <thead><tr><th>月</th><th>体験人数</th><th>サブスク会員</th><th>売上</th><th>経費</th><th>純利益</th><th>利益率</th></tr></thead>
+          <tbody>
+            <tr><td>1月</td><td>66名</td><td>95名</td><td>107万</td><td>80万</td><td>27万</td><td>25.5%</td></tr>
+            <tr><td>2月</td><td>52名</td><td>98名</td><td>102万</td><td>80万</td><td>22万</td><td>22.0%</td></tr>
+            <tr><td>3月</td><td>56名</td><td>99名</td><td>103万</td><td>80万</td><td>23万</td><td>22.5%</td></tr>
+            <tr><td>4月</td><td>34名</td><td>108名</td><td>165万</td><td>90万</td><td>75万</td><td style="color:var(--gl);font-weight:700;">45.4%</td></tr>
+            <tr><td>5月</td><td>35名</td><td>110名</td><td>124万</td><td>80万</td><td>44万</td><td>35.6%</td></tr>
+            <tr><td>6月</td><td>47名</td><td>115名</td><td>140万</td><td>80万</td><td>60万</td><td>42.8%</td></tr>
+            <tr><td>7月</td><td>51名</td><td>114名</td><td>152万</td><td>90万</td><td>62万</td><td>40.8%</td></tr>
+            <tr><td>8月</td><td>41名</td><td>118名</td><td>115万</td><td>80万</td><td>35万</td><td>30.4%</td></tr>
+            <tr><td>10月</td><td>24名</td><td>121名</td><td>135万</td><td>80万</td><td>55万</td><td>40.8%</td></tr>
+            <tr><td>12月</td><td>52名</td><td>123名</td><td>126万</td><td>80万</td><td>46万</td><td>36.3%</td></tr>
+            <tr class="tr-row"><td>年間</td><td>545名</td><td>—</td><td>1,522万</td><td>980万</td><td>542万</td><td>35.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rv-side">
+        <div class="kpi acc"><div class="kl">4台・1名運営の年間純利益</div><div class="kv">542万円</div><div class="ks">直営店のリアルな数字</div></div>
+        <div class="kpi"><div class="kl">平均利益率</div><div class="kv">35.6%</div><div class="ks">原価率8〜15%の恩恵</div></div>
+        <div class="kpi"><div class="kl">黒字化タイミング</div><div class="kv">1ヶ月目〜</div><div class="ks">固定費が低いため早期達成</div></div>
+        <div class="kpi"><div class="kl">リピート率</div><div class="kv">約65%</div><div class="ks">習慣化による高定着</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">21</div>
+</div>
+
+<!-- ======================== -->
+<!-- S22: 3YR PLAN            -->
+<!-- ======================== -->
+<div class="slide" id="s22">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>FC加盟後 3年間の収益計画（4台モデル）</h2><div class="pb">3-YEAR PROJECTION</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="yr-cards">
+        <div class="yr-card y1">
+          <div class="yr-badge">1年目</div>
+          <div class="yr-row"><div class="yl">サブスク会員</div><div class="yv">40名→110名</div></div>
+          <div class="yr-row"><div class="yl">年間売上</div><div class="yv big">1,244万円</div></div>
+          <div class="yr-row"><div class="yl">経費合計</div><div class="yv">827万円</div></div>
+          <div class="yr-row"><div class="yl">年間純利益</div><div class="yv big">417万円</div></div>
+          <div class="yr-row"><div class="yl">純利益率</div><div class="yv">33.5%</div></div>
+          <div class="yr-row"><div class="yl">月平均利益</div><div class="yv">約35万円</div></div>
+        </div>
+        <div class="yr-card y2">
+          <div class="yr-badge">2年目</div>
+          <div class="yr-row"><div class="yl">サブスク会員</div><div class="yv">110名→130名</div></div>
+          <div class="yr-row"><div class="yl">年間売上</div><div class="yv big">1,674万円</div></div>
+          <div class="yr-row"><div class="yl">経費合計</div><div class="yv">1,071万円</div></div>
+          <div class="yr-row"><div class="yl">年間純利益</div><div class="yv big">602万円</div></div>
+          <div class="yr-row"><div class="yl">純利益率</div><div class="yv">36.0%</div></div>
+          <div class="yr-row"><div class="yl">月平均利益</div><div class="yv">約50万円</div></div>
+        </div>
+        <div class="yr-card y3">
+          <div class="yr-badge">3年目</div>
+          <div class="yr-row"><div class="yl">サブスク会員</div><div class="yv">130名（安定）</div></div>
+          <div class="yr-row"><div class="yl">年間売上</div><div class="yv big">1,754万円</div></div>
+          <div class="yr-row"><div class="yl">経費合計</div><div class="yv">1,080万円</div></div>
+          <div class="yr-row"><div class="yl">年間純利益</div><div class="yv big">674万円</div></div>
+          <div class="yr-row"><div class="yl">純利益率</div><div class="yv">38.4%</div></div>
+          <div class="yr-row"><div class="yl">月平均利益</div><div class="yv">約56万円</div></div>
+        </div>
+      </div>
+      <div class="cum-banner">
+        <div class="cum-item"><div class="cum-label">3年間 売上合計</div><div class="cum-val">4,672万円</div></div>
+        <div class="cum-div"></div>
+        <div class="cum-item"><div class="cum-label">3年間 純利益合計</div><div class="cum-val">1,693万円</div></div>
+        <div class="cum-div"></div>
+        <div class="cum-item"><div class="cum-label">初期投資（4台）</div><div class="cum-val">約500万円</div></div>
+        <div class="cum-div"></div>
+        <div class="cum-item"><div class="cum-label">投資回収期間</div><div class="cum-val">約14ヶ月</div></div>
+        <div class="cum-div"></div>
+        <div class="cum-item"><div class="cum-label">黒字化</div><div class="cum-val">1ヶ月目〜</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">22</div>
+</div>
+
+<!-- ======================== -->
+<!-- S23: CHAPTER             -->
+<!-- ======================== -->
+<div class="slide s-chap" id="s23" style="background:linear-gradient(135deg,var(--gd) 0%,#0d2318 100%);">
+  <div class="chap-num">05</div>
+  <div class="chap-title">オーナー様の実際の声</div>
+  <div class="chap-sub">未経験から始めた加盟オーナーの生の体験談</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S24: FC VOICE            -->
+<!-- ======================== -->
+<div class="slide" id="s24">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>FCオーナーの声</h2><div class="pb">OWNER'S STORY</div></div>
+    <div class="sb" style="flex-direction:column;gap:12px;">
+      <div class="fv-grid">
+        <div class="fv-card">
+          <div class="fv-q">Q. 開業前に一番不安だったことは？</div>
+          <div class="fv-a">正直、一番不安だったのは「本当に利益が出るのか？」ということでした。ホットペッパービューティーとチラシだけでお客様が来るか半信半疑でしたが、オープン後は<strong>想像以上に反応があり</strong>、集客に追われすぎることなくスタートできました。</div>
+        </div>
+        <div class="fv-card">
+          <div class="fv-q">Q. ONをやろうと思った理由は？</div>
+          <div class="fv-a">30歳を過ぎてから自身の体調や将来の健康を意識するように。よもぎ蒸しは「内側から整える」ケアとして説得力があり、自分が本当に良いと思えるサービスでした。また、<strong>特別な技術や資格がなくても開業できる点</strong>が、未経験の私にとって大きな決め手でした。</div>
+        </div>
+        <div class="fv-card">
+          <div class="fv-q">Q. 思ったより楽だったこと・大変だったこと</div>
+          <div class="fv-a">【楽だった】施術に高度な技術が不要で<strong>新人スタッフでもすぐ現場に立てた</strong>。施術ミスが起きにくく<strong>クレーム対応がほとんどない</strong>。【大変だった】スタッフ全員の認識合わせ。ただし<strong>仕組み化後は運営が安定</strong>した。</div>
+        </div>
+        <div class="fv-card">
+          <div class="fv-q">Q. 黒字化まで何ヶ月？ リピート率は？</div>
+          <div class="fv-a"><strong>2ヶ月目に黒字化しました</strong>。固定費が抑えられるビジネスモデルなので、想定より早く結果が出た印象です。リピート率は<strong>約65%</strong>。「ここに来るのが習慣になった」「他のケアに戻れない」という声が増えています。</div>
+        </div>
+        <div class="fv-summary">
+          <div class="fv-quote">「技術がなくても始められて、数字が作りやすく、長く続けやすい。<br>未経験からでも、仕組みとサポートがあれば十分に戦えるビジネスだと思います。」</div>
+          <div class="fv-meta">FCオーナー（未経験から開業）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">24</div>
+</div>
+
+<!-- ======================== -->
+<!-- S25: FC MARKET STATS     -->
+<!-- ======================== -->
+<div class="slide" id="s25">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>FCビジネスとしての優位性</h2><div class="pb">FC MARKET DATA</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="fcs-wrap">
+        <div class="fcs-left">
+          <div class="fc-stat-card">
+            <div class="fsc-t">JFAフランチャイズチェーン統計調査（2022年度）</div>
+            <div class="fc-stat-row">
+              <div class="fc-stat-item"><div class="fsi-v">70%</div><div class="fsi-l">FC 5年後成功率</div></div>
+              <div style="width:1px;background:#eee;"></div>
+              <div class="fc-stat-item red"><div class="fsi-v">25%</div><div class="fsi-l">個人 5年後成功率</div></div>
+              <div style="width:1px;background:#eee;"></div>
+              <div class="fc-stat-item"><div class="fsi-v">7%</div><div class="fsi-l">FC 1年後廃業率</div></div>
+              <div style="width:1px;background:#eee;"></div>
+              <div class="fc-stat-item red"><div class="fsi-v">11.7%</div><div class="fsi-l">個人 1年後廃業率</div></div>
+            </div>
+          </div>
+          <div class="fc-stat-card">
+            <div class="fsc-t">FC市場は26兆円・成長率+26%</div>
+            <div style="font-size:13px;color:var(--tm);line-height:1.7;margin-top:6px;">
+              フランチャイズ市場は年々拡大しており、とくに美容・ヘルスケア領域のFC展開が急増中。よもぎ蒸しFCは<strong>まだ空席の多いブルーオーシャン市場</strong>。今参入することで先行者優位を確立できる。
+            </div>
+          </div>
+          <div style="background:linear-gradient(90deg,var(--gm),var(--gl));border-radius:12px;padding:14px 18px;color:#fff;text-align:center;">
+            <div style="font-size:15px;font-weight:700;">FCで起業した場合、個人事業の約3倍の成功率</div>
+            <div style="font-size:12px;opacity:.85;margin-top:4px;">仕組み・ブランド・サポートがあるから安心してスタートできる</div>
+          </div>
+        </div>
+        <div class="fcs-right">
+          <div style="font-size:13px;font-weight:700;color:var(--goldl);margin-bottom:10px;">ONのFC展開目標</div>
+          <div class="fc-rich">
+            <div class="fc-rich-item"><div class="fri-v">20〜30店舗</div><div class="fri-l">1次目標店舗数（2〜3年）</div></div>
+            <div class="fc-rich-item"><div class="fri-v">100店舗</div><div class="fri-l">最終目標店舗数</div></div>
+            <div class="fc-rich-item"><div class="fri-v">2〜3億円</div><div class="fri-l">M&A売却目標（20〜30店舗時）</div></div>
+          </div>
+          <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px;margin-top:8px;">
+            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-bottom:6px;">1オーナーに複数店舗を</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.8);line-height:1.6;">10〜15人のオーナーが2〜3店舗を持つことで30店舗は現実的な目標。加盟後に成功したオーナーが多店舗展開する前提で設計。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">25</div>
+</div>
+
+<!-- ======================== -->
+<!-- S26: CHAPTER             -->
+<!-- ======================== -->
+<div class="slide s-chap" id="s26" style="background:linear-gradient(135deg,var(--gd) 0%,#0d2318 100%);">
+  <div class="chap-num">06</div>
+  <div class="chap-title">本部とFCの役割の分担</div>
+  <div class="chap-sub">サポート体制 ／ 加盟条件 ／ 開業の流れ</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<!-- ======================== -->
+<!-- S27: SUPPORT             -->
+<!-- ======================== -->
+<div class="slide" id="s27">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>本部からの支援内容</h2><div class="pb">HQ SUPPORT</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="sup-grid">
+        <div class="sup-sec">
+          <div class="sup-title">🏗️ 開業前サポート</div>
+          <div class="sup-item">立地・物件選定のアドバイス</div>
+          <div class="sup-item">事業計画・収支設計サポート</div>
+          <div class="sup-item">開業スケジュールの明確化</div>
+          <div class="sup-item">ほぼ外さないエリア選定・集客予測</div>
+          <div class="sup-item">店舗デザイン・図面の設計サポート</div>
+        </div>
+        <div class="sup-sec">
+          <div class="sup-title">🎓 技術・研修サポート</div>
+          <div class="sup-item">未経験でも身につく施術研修</div>
+          <div class="sup-item">オペレーション・接客研修</div>
+          <div class="sup-item">マニュアル完備で即実践可能</div>
+          <div class="sup-item">協会認定資格の取得支援</div>
+          <div class="sup-item">毎月の理念研修・運営研修</div>
+        </div>
+        <div class="sup-sec">
+          <div class="sup-title">📈 集客・販促支援</div>
+          <div class="sup-item">ブランドコンセプトに沿った集客導線設計</div>
+          <div class="sup-item">オープン時の集客サポート</div>
+          <div class="sup-item">HPB掲載・運用指導</div>
+          <div class="sup-item">必ず成功させるための集客・マーケティング</div>
+          <div class="sup-item">トークスクリプト・接客テンプレート提供</div>
+        </div>
+        <div class="sup-sec">
+          <div class="sup-title">🔄 開業後フォロー</div>
+          <div class="sup-item">毎月の運営・売上ミーティング</div>
+          <div class="sup-item">月に1度の事業計画書・シミュレーション作成</div>
+          <div class="sup-item">課題に応じた改善アドバイス</div>
+          <div class="sup-item">技術・メニューのアップデート共有</div>
+          <div class="sup-item">スムーズな運営のための全般コンサルティング</div>
+        </div>
+        <div class="sup-sec dark">
+          <div class="sup-title light">👤 FCオーナーの役割（これだけでいい）</div>
+          <div class="role-cards">
+            <div class="role-card"><div class="rc-icon">🧑‍💼</div><div class="rc-t">スタッフマネジメント</div><div class="rc-b">採用・シフト管理・育成を本部マニュアルに沿って実施</div></div>
+            <div class="role-card"><div class="rc-icon">🏪</div><div class="rc-t">店舗全体の管理</div><div class="rc-b">清潔・空間維持・お客様との信頼関係づくり</div></div>
+            <div class="role-card"><div class="rc-icon">📊</div><div class="rc-t">数値・運営管理</div><div class="rc-b">売上・予約確認・在庫管理・本部との情報共有</div></div>
+            <div class="role-card warn"><div class="rc-icon">🚫</div><div class="rc-t">やらなくていいこと</div><div class="rc-b" style="color:rgba(255,255,255,.55);">集客設計・技術習得・マーケティング戦略</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">27</div>
+</div>
+
+<!-- ======================== -->
+<!-- S28: INITIAL COST        -->
+<!-- ======================== -->
+<div class="slide" id="s28">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>開業費用の内訳（4台モデル）</h2><div class="pb">INITIAL INVESTMENT</div></div>
+    <div class="sb">
+      <div class="cost-main">
+        <div class="cost-list">
+          <div class="ci"><span class="cn">加盟金</span><span class="ca">1,000,000円</span></div>
+          <div class="ci"><span class="cn">販売研修費・コンサルティング費</span><span class="ca">500,000円</span></div>
+          <div class="ci"><span class="cn">内装デザイン費用</span><span class="ca">300,000円</span></div>
+          <div class="ci"><span class="cn">ホームページ作成・SEO対策費用</span><span class="ca">300,000円</span></div>
+          <div class="ci"><span class="cn">協会認定資格取得費（1名）</span><span class="ca">100,000円</span></div>
+          <div class="ci"><span class="cn">よもぎ蒸しセット一式 × 4台</span><span class="ca">640,000円</span></div>
+          <div class="ci"><span class="cn">ガウン×30枚</span><span class="ca">96,000円</span></div>
+          <div class="ci"><span class="cn">クッション×4台・カバー×30枚</span><span class="ca">200,000円</span></div>
+          <div class="ci"><span class="cn">ハーブ・化粧品・お茶（初期在庫）</span><span class="ca">200,000円</span></div>
+          <div class="ci subtot"><span class="cn">小計（設備・加盟金等）</span><span class="ca">3,336,000円</span></div>
+          <div class="ci total"><span class="cn">総額（不動産取得・内装工事・備品含む）</span><span class="ca">約500万円〜</span></div>
+        </div>
+        <div class="cost-right">
+          <div class="recov-box">
+            <h3>📊 投資回収シミュレーション</h3>
+            <div class="rt-item"><div class="rt-dot g"></div><div class="rt-text">初期投資：<strong>約500万円</strong></div></div>
+            <div class="rt-item"><div class="rt-dot g"></div><div class="rt-text">1年目純利益：<strong>約417万円</strong></div></div>
+            <div class="rt-item"><div class="rt-dot gold"></div><div class="rt-text">黒字化：<strong>オープン1ヶ月目〜</strong></div></div>
+            <div class="rt-item"><div class="rt-dot gold"></div><div class="rt-text">投資回収：<strong>約14〜15ヶ月</strong></div></div>
+          </div>
+          <div class="monthly-fixed">
+            <h4>毎月の固定費（目安）</h4>
+            <div class="mf-row"><span>家賃・光熱費</span><span>115,000円</span></div>
+            <div class="mf-row"><span>人件費（1名 社保込）</span><span>310,000円</span></div>
+            <div class="mf-row"><span>ロイヤリティ</span><span>110,000円</span></div>
+            <div class="mf-row"><span>HPB広告費</span><span>55,000円</span></div>
+            <div class="mf-row"><span>仕入れ（売上の8%）</span><span>変動</span></div>
+          </div>
+          <div style="background:var(--gm);border-radius:12px;padding:14px 16px;color:#fff;text-align:center;">
+            <div style="font-size:13px;font-weight:700;">8台モデルも選択可能</div>
+            <div style="font-size:11px;opacity:.8;margin-top:3px;">初期費用：約800万円〜 ／ より高い収益を狙う場合</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">28</div>
+</div>
+
+<!-- ======================== -->
+<!-- S29: CONDITIONS          -->
+<!-- ======================== -->
+<div class="slide" id="s29">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>加盟条件</h2><div class="pb">CONDITIONS</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="cond-wrap">
+        <div class="cond-left">
+          <div style="font-size:14px;font-weight:700;color:var(--gd);margin-bottom:16px;">こんな方に加盟いただきたい</div>
+          <div class="cond-items">
+            <div class="cond-item"><div><div class="ci-t">よもぎ蒸し未経験OK</div><div class="ci-b">特別な技術・資格は一切不要。本部研修を受けていただきます。</div></div></div>
+            <div class="cond-item"><div><div class="ci-t">長期的に事業として取り組む意欲</div><div class="ci-b">店舗ビジネスは短期ではなく中長期での成長を前提としています。</div></div></div>
+            <div class="cond-item"><div><div class="ci-t">ブランド方針・世界観の遵守</div><div class="ci-b">安売り・独自判断での運営はお断りしています。ONのブランドを一緒に守る意識が必要です。</div></div></div>
+            <div class="cond-item"><div><div class="ci-t">お客様に誠実に向き合う姿勢</div><div class="ci-b">健康・美容にお悩みのお客様に真剣に向き合い信頼を積み上げられる方。</div></div></div>
+            <div class="cond-item"><div><div class="ci-t">本部との情報共有・連携</div><div class="ci-b">毎月のMTGや売上報告など本部との密なコミュニケーションをとれる方。</div></div></div>
+          </div>
+        </div>
+        <div class="cond-right">
+          <div class="cond-box">
+            <h3>加盟金が「今だけ」の理由</h3>
+            <p>現在の加盟金<strong>100万円</strong>は初期パートナー価格です。実績が積み上がるごとに段階的に引き上げていきます。先行して加盟いただくオーナー様には、一緒にブランドを作っていくパートナーとしてこの価格でご提供しています。</p>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">こんな方は特に大歓迎</div>
+            <div style="font-size:12px;color:var(--tm);line-height:1.8;">
+              🙋 副業・投資目的のサラリーマン<br>
+              🙋 美容業界未経験の個人事業主<br>
+              🙋 既に法人を持つ経営者（多角化）<br>
+              🙋 健康・美容に興味がある女性起業家
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--gm),var(--gl));border-radius:12px;padding:14px 18px;color:#fff;text-align:center;">
+            <div style="font-size:14px;font-weight:700;">💬 「技術不要×1名運営×500万円〜×1ヶ月目から黒字」</div>
+            <div style="font-size:11px;opacity:.85;margin-top:4px;">失敗の方が難しいビジネスモデル</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">29</div>
+</div>
+
+<!-- ======================== -->
+<!-- S30: FLOW                -->
+<!-- ======================== -->
+<div class="slide" id="s30">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>オープンまでの流れ</h2><div class="pb">OPENING FLOW</div></div>
+    <div class="sb" style="flex-direction:column;gap:14px;">
+      <div class="flow-note">※ 新規オープンの場合、最短2ヶ月〜</div>
+      <div class="flow-grid">
+        <div class="flow-item"><div class="fi-n">1</div><div class="fi-t">個別面談</div></div>
+        <div class="flow-item"><div class="fi-n">2</div><div class="fi-t">契約書読み合わせ・締結</div></div>
+        <div class="flow-item"><div class="fi-n">3</div><div class="fi-t">エリア決定・物件探し開始</div></div>
+        <div class="flow-item"><div class="fi-n">4</div><div class="fi-t">経営計画・資金調達計画作成</div></div>
+        <div class="flow-item"><div class="fi-n">5</div><div class="fi-t">求人開始・スタッフ採用</div></div>
+      </div>
+      <div style="display:flex;justify-content:center;color:var(--gl);font-size:22px;">▼</div>
+      <div class="flow-grid-2">
+        <div class="flow-item"><div class="fi-n">6</div><div class="fi-t">物件契約・内装工事</div></div>
+        <div class="flow-item"><div class="fi-n">7</div><div class="fi-t">HPB掲載開始</div></div>
+        <div class="flow-item"><div class="fi-n">8</div><div class="fi-t">スタッフ研修（施術・接客）</div></div>
+        <div class="flow-item"><div class="fi-n">9</div><div class="fi-t">オープン日決定・告知</div></div>
+        <div class="flow-item"><div class="fi-n">10</div><div class="fi-t">スタッフ研修<br>6日間</div></div>
+      </div>
+      <div class="flow-final">
+        <div class="ff-t">🎉 グランドオープン</div>
+        <div class="ff-s">多くの店舗で1ヶ月目から黒字化を達成</div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">30</div>
+</div>
+
+<!-- ======================== -->
+<!-- S31: REQUEST             -->
+<!-- ======================== -->
+<div class="slide" id="s31">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>加盟いただく際のお願い</h2><div class="pb">OUR REQUEST</div></div>
+    <div class="sb" style="align-items:stretch;">
+      <div class="req-wrap">
+        <div class="req-left">
+          <div class="req-box">
+            <div class="rb-t">ONが大切にしていること</div>
+            <div class="req-items">
+              <div class="req-item">たくさんのオーナーに加盟いただきたいというより、実際に加盟いただいたオーナーさんに<strong>成功していただく</strong>ことが最優先です。</div>
+              <div class="req-item">1店舗目で成功できた後は、<strong>5店舗・10店舗と展開していく前提</strong>でお考えください。</div>
+              <div class="req-item">FC加盟後、年間利益が<strong>1,000万円を超えてくる水準</strong>を一緒に目指しましょう。</div>
+              <div class="req-item">開業資金が<strong>350〜500万円</strong>とハードルが低い分、まず1店舗で実績を作ることに集中してください。</div>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">加盟を断るケースについて</div>
+            <div style="font-size:12px;color:var(--tm);line-height:1.8;">
+              ✕ 安売りや独自のメニュー設定をご希望の方<br>
+              ✕ 短期間だけの運営をお考えの方<br>
+              ✕ 本部との情報共有が難しい方<br>
+              ✕ ONのブランドコンセプトに共感できない方
+            </div>
+          </div>
+        </div>
+        <div class="req-right">
+          <div class="req-vision">
+            <div class="rv-t">代表 嶋岡みのりのビジョン</div>
+            <div class="rv-v">「加盟してくださったオーナーが本当に成功して、より多くの店舗を増やしていく——そのパートナーとの出会いを心待ちにしています。一緒に業界を変えましょう。」</div>
+          </div>
+          <div class="req-goal">
+            <div class="req-goal-item"><div class="rgi-v">1次目標</div><div class="rgi-l">20〜30店舗展開（2〜3年）</div></div>
+            <div class="req-goal-item"><div class="rgi-v">最終目標</div><div class="rgi-l">100店舗・M&A 2〜3億円</div></div>
+            <div class="req-goal-item"><div class="rgi-v">1人3店舗</div><div class="rgi-l">複数店舗展開で年間1,000万円超</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">31</div>
+</div>
+
+<!-- ======================== -->
+<!-- S32: CONTRACT FLOW       -->
+<!-- ======================== -->
+<div class="slide" id="s32">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>契約までの流れ</h2><div class="pb">CONTRACT PROCESS</div></div>
+    <div class="sb" style="flex-direction:column;gap:16px;justify-content:center;">
+      <div style="display:flex;flex-direction:column;gap:12px;width:100%;">
+        <div style="display:flex;gap:16px;align-items:stretch;">
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex:1;border-left:5px solid var(--gl);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><div style="background:var(--gm);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">①</div><div style="font-size:14px;font-weight:700;color:var(--gd);">個別相談</div></div>
+            <div style="font-size:12px;color:var(--tm);">ニーズ・目標・ご予算のすり合わせ。疑問点は何でもお気軽にご質問ください。</div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex:1;border-left:5px solid var(--gl);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><div style="background:var(--gm);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">②</div><div style="font-size:14px;font-weight:700;color:var(--gd);">2回目ミーティング</div></div>
+            <div style="font-size:12px;color:var(--tm);">サービス範囲・契約条件の確定。可能であればサロン内覧を実施。</div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex:1;border-left:5px solid var(--gl);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><div style="background:var(--gm);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">③</div><div style="font-size:14px;font-weight:700;color:var(--gd);">契約書の読み合わせ・締結</div></div>
+            <div style="font-size:12px;color:var(--tm);">重要事項説明書・フランチャイズ契約書を丁寧に読み合わせのうえ締結。</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:22px;color:var(--gl);">▼</div>
+        <div style="display:flex;gap:16px;align-items:stretch;">
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex:1;border-left:5px solid var(--gold);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><div style="background:var(--gold);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">④</div><div style="font-size:14px;font-weight:700;color:var(--gd);">ご入金→プロジェクト開始</div></div>
+            <div style="font-size:12px;color:var(--tm);">加盟金・研修費の入金をもってプロジェクトスタート。本部サポートが本格的に始まります。</div>
+          </div>
+          <div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex:1;border-left:5px solid var(--gold);">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><div style="background:var(--gold);color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">⑤</div><div style="font-size:14px;font-weight:700;color:var(--gd);">物件選定・内装・研修</div></div>
+            <div style="font-size:12px;color:var(--tm);">物件選定から内装工事・HPB開設・スタッフ研修まで本部が伴走します。</div>
+          </div>
+          <div style="background:linear-gradient(135deg,var(--gm),var(--gl));border-radius:14px;padding:18px 20px;flex:1;text-align:center;color:#fff;">
+            <div style="font-size:16px;font-weight:700;margin-bottom:4px;">🎉 グランドオープン</div>
+            <div style="font-size:11px;opacity:.8;">最短2ヶ月でオープン可能</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">32</div>
+</div>
+
+<!-- ======================== -->
+<!-- S33: FAQ                 -->
+<!-- ======================== -->
+<div class="slide" id="s33">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>よくあるご質問</h2><div class="pb">FAQ</div></div>
+    <div class="sb" style="flex-direction:column;gap:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;">
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. 副業として本業を続けながら経営できますか？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">可能です。4台・1名運営のモデルは、現場に立たなくてもスタッフに任せることができます。副業・投資目的の方の加盟も歓迎しています。</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. 資金調達はどうすればよいですか？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">日本政策金融公庫の創業融資を活用される方が多いです。本部が事業計画書の作成サポートを行いますので、まずはご相談ください。</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. どのエリアにでも出店できますか？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">基本的には全国可能ですが、出店前にHPBの検索数・PV・競合数をリサーチして数値に基づいた出店判断を行います。商圏人口が少ない場合はご相談になることがあります。</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. 集客は本当にホットペッパーだけでいいの？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">直営店の実績でHPBのみで繁忙期80〜100名の新規集客を達成しています。市場が空いているエリアであれば十分に成立します。サブスクが積み上がると新規依存も低減します。</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. 契約期間はどのくらいですか？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">フランチャイズ契約書に基づき定めております。詳細は個別面談でご確認ください。長期的なパートナーシップを前提にしています。</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:12px;font-weight:700;color:var(--gm);margin-bottom:5px;">Q. 複数店舗を持てますか？</div>
+          <div style="font-size:12px;color:var(--tm);line-height:1.5;">もちろんです。1店舗目で成功後は5店舗・10店舗と展開していく前提でお考えください。複数店舗展開で年間1,000万円を超える利益も十分に現実的です。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">33</div>
+</div>
+
+<!-- ======================== -->
+<!-- S34: SUPPLEMENT          -->
+<!-- ======================== -->
+<div class="slide" id="s34">
+  <div style="display:flex;flex-direction:column;width:100%;height:100%;">
+    <div class="sh"><h2>補足資料：ハーブメニュー・オプション一覧</h2><div class="pb">SUPPLEMENT</div></div>
+    <div class="sb" style="flex-direction:column;gap:12px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;">
+        <div style="background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">ハーブメニュー全7種</div>
+          <div style="font-size:11px;color:var(--tm);line-height:1.9;">
+            01 100%国産フレグランスよもぎ — 血行促進・デトックス・ホルモンバランス<br>
+            02 漢方ブレンドよもぎ — スーパーデトックス・美肌・免疫力<br>
+            03 <strong style="color:var(--gm);">モリンガ（スーパーフード）</strong> — 90種の栄養素・細胞活性<br>
+            04 インナービューティー（美容ブレンド） — 美肌・アレルギー緩和<br>
+            05 ヘルシーダイエット — 胃腸サポート・血流改善<br>
+            06 フェミナサポート — PMS緩和・ホルモンバランス<br>
+            07 むくみケア — 水分バランス・デトックス
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
+          <div style="font-size:13px;font-weight:700;color:var(--gd);margin-bottom:10px;">オプション・物販（LTV向上）</div>
+          <div style="font-size:11px;color:var(--tm);line-height:1.9;">
+            【オプションハーブ】各550円<br>
+            ローズ / レモングラス / ジンジャー / ラベンダー<br><br>
+            【ボタニカルティー BOTANITEA 全4種】<br>
+            シソ / シナモン / ジンジャー / クロマメ（全ノンカフェイン）<br><br>
+            【ドリンク・サプリ】<br>
+            ハーブエンザイム酵素 330円/杯<br>
+            ヒートエンザイム 400円/包
+          </div>
+        </div>
+        <div style="background:var(--gd);border-radius:14px;padding:16px 18px;color:#fff;grid-column:span 2;display:flex;align-items:center;justify-content:space-around;">
+          <div style="text-align:center;"><div style="font-size:28px;font-weight:900;color:var(--gl);">5,000円</div><div style="font-size:11px;color:rgba(255,255,255,.5);">単発料金</div></div>
+          <div style="width:1px;height:40px;background:rgba(255,255,255,.15);"></div>
+          <div style="text-align:center;"><div style="font-size:28px;font-weight:900;color:var(--goldl);">約500円</div><div style="font-size:11px;color:rgba(255,255,255,.5);">1回あたり原価</div></div>
+          <div style="width:1px;height:40px;background:rgba(255,255,255,.15);"></div>
+          <div style="text-align:center;"><div style="font-size:28px;font-weight:900;color:var(--gl);">8〜15%</div><div style="font-size:11px;color:rgba(255,255,255,.5);">原価率（自社ハーブの強み）</div></div>
+          <div style="width:1px;height:40px;background:rgba(255,255,255,.15);"></div>
+          <div style="text-align:center;"><div style="font-size:28px;font-weight:900;color:var(--goldl);">100,000円</div><div style="font-size:11px;color:rgba(255,255,255,.5);">協会認定資格（ブランド権威づけ）</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">34</div>
+</div>
+
+<!-- ======================== -->
+<!-- S35: CTA                 -->
+<!-- ======================== -->
+<div class="slide s-cta" id="s35">
+  <div class="cta-tag">NEXT STEP — FC FRANCHISE</div>
+  <div class="cta-h1">あなたの<span>次の一歩</span>を、<br>ONと一緒に踏み出してください。</div>
+  <div class="cta-sub">技術不要・未経験OK・初期投資500万円〜・1ヶ月目から黒字化</div>
+  <div class="cta-bs">
+    <div class="cta-b"><div class="cbv">500万円〜</div><div class="cbl">初期投資</div></div>
+    <div class="cta-b"><div class="cbv">14ヶ月</div><div class="cbl">投資回収期間</div></div>
+    <div class="cta-b"><div class="cbv">1ヶ月目〜</div><div class="cbl">黒字化</div></div>
+    <div class="cta-b"><div class="cbv">65%</div><div class="cbl">リピート率</div></div>
+    <div class="cta-b"><div class="cbv">2万人</div><div class="cbl">累計来店（直営実績）</div></div>
+  </div>
+  <div class="cta-btn">個別相談に申し込む</div>
+  <div class="cr">© 2024 株式会社rtma All Rights Reserved.</div>
+</div>
+
+<script>
+let cur=1;const tot=35;
+function show(n){document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));document.getElementById('s'+n).classList.add('active');document.getElementById('ind').textContent=n+' / '+tot;}
+function next(){if(cur<tot){cur++;show(cur);}}
+function prev(){if(cur>1){cur--;show(cur);}}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')next();if(e.key==='ArrowLeft'||e.key==='ArrowUp')prev();});
+show(1);
+</script>
+</body>
+</html>

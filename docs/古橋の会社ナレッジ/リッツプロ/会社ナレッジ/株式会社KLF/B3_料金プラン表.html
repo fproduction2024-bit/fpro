@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>料金プラン — KLF</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --amber-light: #F59E0B;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F7FAF8;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--mint), #1B8E7E);
+            padding: 44px 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 13.5px;
+            opacity: .9;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .sec-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--mint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--mint-mid);
+        }
+
+        /* Basic fee */
+        .basic-table {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--mint-mid);
+        }
+
+        .basic-table tr:first-child th {
+            background: var(--mint);
+            color: #fff;
+            padding: 12px 16px;
+            font-size: 13px;
+        }
+
+        .basic-table td {
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--mint-mid);
+            font-size: 14px;
+            color: var(--slate-mid);
+        }
+
+        .basic-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .basic-table tr:hover td {
+            background: var(--mint-pale);
+        }
+
+        .price-big {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--mint);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Plan cards */
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        @media(max-width:640px) {
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .plan-card {
+            background: var(--card);
+            border-radius: 18px;
+            border: 2px solid var(--mint-mid);
+            padding: 22px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.best {
+            border-color: var(--amber);
+            box-shadow: 0 6px 24px rgba(217, 119, 6, .15);
+        }
+
+        .best-ribbon {
+            position: absolute;
+            top: -1px;
+            right: 14px;
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .pc-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .tag-mint {
+            background: var(--mint-pale);
+            color: var(--mint);
+        }
+
+        .tag-amber {
+            background: var(--amber-pale);
+            color: var(--amber);
+        }
+
+        .plan-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--slate);
+            margin-bottom: 4px;
+        }
+
+        .plan-price {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--mint);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+
+        .plan-price sub {
+            font-size: 14px;
+            color: var(--slate-light);
+            font-weight: 400;
+        }
+
+        .plan-period {
+            font-size: 12px;
+            color: var(--slate-light);
+            margin-bottom: 14px;
+        }
+
+        .plan-features {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .plan-feature {
+            font-size: 13px;
+            color: var(--slate-mid);
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .plan-feature::before {
+            content: '✓';
+            color: var(--mint);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .plan-note {
+            margin-top: 14px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .note-green {
+            background: var(--green-pale);
+            color: var(--green);
+        }
+
+        .note-amber {
+            background: var(--amber-pale);
+            color: var(--amber);
+        }
+
+        /* Entry fee alert */
+        .alert-box {
+            background: linear-gradient(135deg, var(--amber-pale), #FFF8E5);
+            border: 2px solid var(--amber-light);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .alert-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .alert-content h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .alert-content p {
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            line-height: 1.65;
+        }
+
+        /* Option grid */
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .option-card {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            padding: 16px 18px;
+        }
+
+        .oc-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .oc-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 4px;
+        }
+
+        .oc-desc {
+            font-size: 12px;
+            color: var(--slate-light);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .oc-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--mint);
+        }
+
+        /* FAQ */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--mint-mid);
+            overflow: hidden;
+        }
+
+        .faq-q {
+            padding: 14px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--slate);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .faq-q::before {
+            content: 'Q';
+            background: var(--mint);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .faq-a {
+            padding: 0 18px 14px 50px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            line-height: 1.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 48px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <h1>💴 料金プラン</h1>
+        <p>あなたのペース・ご予算に合わせたプランをご用意しています。<br>まずはスタッフにお気軽にご相談ください。</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Basic fees -->
+        <div class="section">
+            <div class="sec-title">📋 基本料金（毎回かかる費用）</div>
+            <table class="basic-table">
+                <tr>
+                    <th>来院タイミング</th>
+                    <th>施術料</th>
+                    <th>検査料</th>
+                    <th>合計目安</th>
+                </tr>
+                <tr>
+                    <td>初回（初診）</td>
+                    <td><span class="price-big">4,500円</span></td>
+                    <td>1,100円</td>
+                    <td><span class="price-big">5,600円</span></td>
+                </tr>
+                <tr>
+                    <td>2回目<span style="font-size:11px;color:var(--slate-light);margin-left:6px;">（1ヶ月以内再来）</span></td>
+                    <td>2,500円</td>
+                    <td>1,100円</td>
+                    <td>3,600円</td>
+                </tr>
+                <tr>
+                    <td>3回目〜<span style="font-size:11px;color:var(--slate-light);margin-left:6px;">（継続来院）</span></td>
+                    <td>1,100円</td>
+                    <td>1,100円</td>
+                    <td>2,200円</td>
+                </tr>
+            </table>
+            <div style="margin-top:10px;font-size:12.5px;color:var(--slate-light);padding:0 4px;">
+                ※ 1ヶ月以上来院が空いた場合は、次回から初診料が適用されます。
+            </div>
+        </div>
+
+        <!-- Member plans -->
+        <div class="section">
+            <div class="sec-title">🏷️ 矯正会員プラン（受け放題）</div>
+            <p style="font-size:13.5px;color:var(--slate-mid);margin-bottom:20px;line-height:1.75;">
+                矯正（骨盤のボキボキ）は本来1回7,700円かかります。<br>
+                会員プランに入ると、毎月一定額で何度でも矯正を受けることができます。
+            </p>
+
+            <div class="alert-box">
+                <div class="alert-icon">⭐</div>
+                <div class="alert-content">
+                    <h4>初回入会特典</h4>
+                    <p>入会費 通常<strong>8,000円</strong> → <strong>当日ご入会で5,500円</strong>に！<br>
+                        （税別）今日決めると入会費がお得になります。</p>
+                </div>
+            </div>
+
+            <div class="plan-grid">
+                <div class="plan-card">
+                    <span class="pc-tag tag-mint">お試し</span>
+                    <div class="plan-name">1ヶ月プラン</div>
+                    <div class="plan-price">18,000<sub>円/月（税別）</sub></div>
+                    <div class="plan-period">縛りなし</div>
+                    <div class="plan-features">
+                        <div class="plan-feature">期間中の矯正が何度でも込み</div>
+                        <div class="plan-feature">縛りがないのでまず試しやすい</div>
+                    </div>
+                    <div class="plan-note note-green">→ まずお試ししてみたい方に</div>
+                </div>
+                <div class="plan-card best">
+                    <div class="best-ribbon">⭐ イチオシ</div>
+                    <span class="pc-tag tag-amber">大人気</span>
+                    <div class="plan-name">3ヶ月プラン</div>
+                    <div class="plan-price">13,000<sub>円/月（税別）</sub></div>
+                    <div class="plan-period">3ヶ月縛り</div>
+                    <div class="plan-features">
+                        <div class="plan-feature">3ヶ月でしっかり改善が見込める</div>
+                        <div class="plan-feature">1ヶ月プランより月5,000円お得</div>
+                        <div class="plan-feature">産後ケアに最適な期間をカバー</div>
+                    </div>
+                    <div class="plan-note note-amber">→ 根本的に変えたい方に</div>
+                </div>
+                <div class="plan-card">
+                    <span class="pc-tag tag-mint">長期最安</span>
+                    <div class="plan-name">1年プラン</div>
+                    <div class="plan-price">11,000<sub>円/月（税別）</sub></div>
+                    <div class="plan-period">12ヶ月縛り</div>
+                    <div class="plan-features">
+                        <div class="plan-feature">3プランで最も月額が安い</div>
+                        <div class="plan-feature">再発しないよう長期でケア</div>
+                        <div class="plan-feature">卒業後も月々更新で継続可</div>
+                    </div>
+                    <div class="plan-note note-green">→ 維持・メンテナンス重視の方に</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Options -->
+        <div class="section">
+            <div class="sec-title">🔧 オプションメニュー</div>
+            <div class="option-grid">
+                <div class="option-card">
+                    <div class="oc-icon">🦴</div>
+                    <div class="oc-name">肋骨矯正</div>
+                    <div class="oc-desc">肋骨・ウエストを締める矯正。1回でウエストの変化を実感できます。</div>
+                    <div class="oc-price">オプション価格</div>
+                </div>
+                <div class="option-card">
+                    <div class="oc-icon">🤱</div>
+                    <div class="oc-name">産後骨盤矯正</div>
+                    <div class="oc-desc">出産で開いた骨盤を専用矯正で締めます。産後12ヶ月が特に効果大。</div>
+                    <div class="oc-price">3,300円〜</div>
+                </div>
+                <div class="option-card">
+                    <div class="oc-icon">⚡</div>
+                    <div class="oc-name">EMS</div>
+                    <div class="oc-desc">電気刺激で筋肉を再生。寝たままで筋トレ相当の効果が期待できます。</div>
+                    <div class="oc-price">月4回 11,000円<br>月2回 6,600円</div>
+                </div>
+                <div class="option-card">
+                    <div class="oc-icon">🔮</div>
+                    <div class="oc-name">Pulse</div>
+                    <div class="oc-desc">EMS＋脂肪燃焼の最新機器。引き締めと脂肪分解を同時に行います。</div>
+                    <div class="oc-price">30回 132,000円〜</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <div class="sec-title">❓ よくあるご質問</div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">月に何回来ればいいですか？</div>
+                    <div class="faq-a">最初のうちは週1〜2回を目安にしています。状態が良くなるにつれて2週間に1回、月1回とペースを落としていきます。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">1ヶ月来られない月があっても大丈夫ですか？</div>
+                    <div class="faq-a">もちろんです。旅行や急用で来られない月があっても、翌月の調整をスタッフと一緒に決めましょう。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">保険は使えますか？</div>
+                    <div class="faq-a">当院は自費での施術となりますが、職業によっては労災として申請できる場合があります（保育士・介護職など）。詳しくはスタッフにご相談ください。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">子連れで来院できますか？</div>
+                    <div class="faq-a">はい、ベビーカーでのご来院も可能です。赤ちゃんをそばに置いたまま施術ができる環境を整えています。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">KLF 患者向け資料 B-3 / 料金プラン表 &nbsp;|&nbsp; 2026年4月 &nbsp;|&nbsp; ※料金は全て税別表示</div>
+    </div>
+</body>
+
+</html>

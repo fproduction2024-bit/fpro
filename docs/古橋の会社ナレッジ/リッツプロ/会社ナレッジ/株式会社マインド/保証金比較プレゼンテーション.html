@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC加盟店収支シミュレーション - 保証金モデル比較分析</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+    <style>
+        :root {
+            --navy: #1a2332;
+            --gold: #d4af37;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --light-bg: #2c3e50;
+        }
+
+        .reveal {
+            background: linear-gradient(135deg, var(--navy) 0%, #0f1419 100%);
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--gold);
+            text-transform: none;
+            font-weight: 700;
+        }
+
+        .reveal h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal h3 {
+            font-size: 1.3em;
+            color: #ecf0f1;
+        }
+
+        .reveal p,
+        .reveal li {
+            color: #ecf0f1;
+        }
+
+        .reveal table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 0.85em;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .reveal table th {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 15px;
+            font-weight: 700;
+            border: 2px solid var(--gold);
+        }
+
+        .reveal table td {
+            background: var(--light-bg);
+            color: #ecf0f1;
+            padding: 12px 15px;
+            border: 1px solid #34495e;
+        }
+
+        .reveal table tr:hover td {
+            background: #34495e;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--light-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-top: 0;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+        }
+
+        .highlight-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .success-number {
+            color: var(--success);
+            background: rgba(46, 204, 113, 0.2);
+            border: 2px solid var(--success);
+        }
+
+        .danger-number {
+            color: var(--danger);
+            background: rgba(231, 76, 60, 0.2);
+            border: 2px solid var(--danger);
+        }
+
+        .neutral-number {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--gold);
+        }
+
+        .bullet-list {
+            text-align: left;
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .bullet-list li {
+            margin: 12px 0;
+            padding-left: 10px;
+        }
+
+        .icon {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .subtitle {
+            color: #95a5a6;
+            font-size: 0.8em;
+            margin-top: -10px;
+        }
+
+        .quote {
+            background: var(--light-bg);
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #ecf0f1;
+        }
+
+        canvas {
+            max-height: 400px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pattern-box {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 3px solid;
+            text-align: center;
+        }
+
+        .pattern-a {
+            border-color: #95a5a6;
+        }
+
+        .pattern-b {
+            border-color: var(--gold);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 700;
+            margin: 5px;
+        }
+
+        .badge-current {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .badge-recommend {
+            background: var(--gold);
+            color: var(--navy);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- スライド1: 表紙 -->
+            <section>
+                <h1>FC加盟店収支シミュレーション</h1>
+                <h3>保証金モデル比較分析</h3>
+                <p class="subtitle">2026年2月4日</p>
+                <p style="margin-top: 80px; color: var(--gold);">リッツプロ株式会社</p>
+            </section>
+
+            <!-- スライド2: 前提条件 -->
+            <section>
+                <h2>シミュレーション前提条件</h2>
+                <ul class="bullet-list">
+                    <li>シャンプー台: <strong style="color: var(--gold);">2台</strong>（計測上限）</li>
+                    <li>年間売上予測: <strong style="color: var(--gold);">800万円</strong>（稼働率55-60%）</li>
+                    <li>稼働率目標: <strong style="color: var(--gold);">40%</strong>（引き継ぎ基準）</li>
+                    <li>使用期間: <strong style="color: var(--gold);">1年間</strong>（最大2年延長可）</li>
+                    <li>売上配分: オーナー<strong style="color: var(--gold);">10%</strong>（使用期間中）</li>
+                    <li>初期費用: <strong style="color: var(--gold);">10〜20万円</strong>（設備交換等）</li>
+                </ul>
+            </section>
+
+            <!-- スライド3: 比較モデル -->
+            <section>
+                <h2>2つの保証金モデル</h2>
+                <div class="comparison-grid">
+                    <div class="pattern-box pattern-a">
+                        <span class="badge badge-current">現行案</span>
+                        <h3 style="color: #95a5a6;">パターンA</h3>
+                        <div class="highlight-number neutral-number">300万円</div>
+                        <p>加盟金</p>
+                        <div style="margin-top: 20px;">
+                            <p style="font-size: 0.9em;">保証金</p>
+                            <div class="highlight-number" style="font-size: 2em; color: #95a5a6;">150万円</div>
+                            <p style="color: #95a5a6;">(50%保証)</p>
+                        </div>
+                    </div>
+                    <div class="pattern-box pattern-b">
+                        <span class="badge badge-recommend">🌟 提案</span>
+                        <h3>パターンB</h3>
+                        <div class="highlight-number neutral-number">300万円</div>
+                        <p>加盟金</p>
+                        <div style="margin-top: 20px;">
+                            <p style="font-size: 0.9em;">保証金</p>
+                            <div class="highlight-number success-number" style="font-size: 2em;">300万円</div>
+                            <p style="color: var(--success); font-weight: 700;">(100%全額保証)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- スライド4: 成功シナリオ -->
+            <section>
+                <h2>シナリオ1: 成功ケース</h2>
+                <h3 class="subtitle">稼働率40%以上達成（引き継ぎ）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>パターンA</th>
+                            <th>パターンB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>加盟金支払い</td>
+                            <td>-300万円</td>
+                            <td>-300万円</td>
+                        </tr>
+                        <tr>
+                            <td>初期費用</td>
+                            <td>-15万円</td>
+                            <td>-15万円</td>
+                        </tr>
+                        <tr>
+                            <td>売上配分（1年）</td>
+                            <td style="color: var(--success);">+80万円</td>
+                            <td style="color: var(--success);">+80万円</td>
+                        </tr>
+                        <tr>
+                            <td>保証金返金</td>
+                            <td>0円</td>
+                            <td>0円</td>
+                        </tr>
+                        <tr>
+                            <td>研修費</td>
+                            <td>-60万円</td>
+                            <td>-60万円</td>
+                        </tr>
+                        <tr style="background: var(--gold); color: var(--navy); font-weight: 700;">
+                            <td>実質支出</td>
+                            <td>-295万円</td>
+                            <td>-295万円</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 30px; font-size: 0.9em; color: #95a5a6;">
+                    ✅ 成功時は両パターンとも同じ（2年目で黒字転換）
+                </p>
+            </section>
+
+            <!-- スライド5: 失敗シナリオ① -->
+            <section>
+                <h2>シナリオ2-A: 失敗ケース</h2>
+                <h3 class="subtitle">稼働率10%未満・4ヶ月で撤退</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>パターンA</th>
+                            <th>パターンB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>加盟金支払い</td>
+                            <td>-300万円</td>
+                            <td>-300万円</td>
+                        </tr>
+                        <tr>
+                            <td>初期費用</td>
+                            <td>-15万円</td>
+                            <td>-15万円</td>
+                        </tr>
+                        <tr>
+                            <td>売上配分（4ヶ月）</td>
+                            <td style="color: var(--success);">+27万円</td>
+                            <td style="color: var(--success);">+27万円</td>
+                        </tr>
+                        <tr style="background: rgba(212, 175, 55, 0.2);">
+                            <td><strong>保証金返金</strong></td>
+                            <td style="color: #ecf0f1;">+150万円</td>
+                            <td style="color: var(--success); font-weight: 700;">+300万円</td>
+                        </tr>
+                        <tr>
+                            <td>研修費</td>
+                            <td>0円</td>
+                            <td>0円</td>
+                        </tr>
+                        <tr style="background: var(--gold); color: var(--navy); font-weight: 700;">
+                            <td>最終収支</td>
+                            <td style="color: var(--danger);">-138万円 ❌</td>
+                            <td style="color: var(--success);">+12万円 ✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div
+                    style="margin-top: 30px; background: rgba(46, 204, 113, 0.2); padding: 20px; border-radius: 10px; border: 2px solid var(--success);">
+                    <p style="font-size: 1.2em; font-weight: 700; color: var(--success);">
+                        🎯 パターンBは失敗しても黒字！
+                    </p>
+                </div>
+            </section>
+
+            <!-- スライド6: 失敗シナリオ② -->
+            <section>
+                <h2>シナリオ2-B: 失敗ケース</h2>
+                <h3 class="subtitle">稼働率40%未達・1年後撤退</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>パターンA</th>
+                            <th>パターンB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>加盟金支払い</td>
+                            <td>-300万円</td>
+                            <td>-300万円</td>
+                        </tr>
+                        <tr>
+                            <td>初期費用</td>
+                            <td>-15万円</td>
+                            <td>-15万円</td>
+                        </tr>
+                        <tr>
+                            <td>売上配分（12ヶ月）</td>
+                            <td style="color: var(--success);">+80万円</td>
+                            <td style="color: var(--success);">+80万円</td>
+                        </tr>
+                        <tr style="background: rgba(212, 175, 55, 0.2);">
+                            <td><strong>保証金返金</strong></td>
+                            <td style="color: #ecf0f1;">+150万円</td>
+                            <td style="color: var(--success); font-weight: 700;">+300万円</td>
+                        </tr>
+                        <tr>
+                            <td>研修費</td>
+                            <td>0円</td>
+                            <td>0円</td>
+                        </tr>
+                        <tr style="background: var(--gold); color: var(--navy); font-weight: 700;">
+                            <td>最終収支</td>
+                            <td style="color: var(--danger);">-85万円 ❌</td>
+                            <td style="color: var(--success);">+65万円 ✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div
+                    style="margin-top: 30px; background: rgba(46, 204, 113, 0.2); padding: 20px; border-radius: 10px; border: 2px solid var(--success);">
+                    <p style="font-size: 1.2em; font-weight: 700; color: var(--success);">
+                        💡 パターンBなら実質リスクゼロ！
+                    </p>
+                </div>
+            </section>
+
+            <!-- スライド7: 全シナリオ比較 -->
+            <section>
+                <h2>全シナリオ比較サマリー</h2>
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <table style="margin-top: 30px; font-size: 0.75em;">
+                    <thead>
+                        <tr>
+                            <th>シナリオ</th>
+                            <th>パターンA（150万）</th>
+                            <th>パターンB（300万）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>成功（引き継ぎ）</td>
+                            <td>-295万円</td>
+                            <td>-295万円</td>
+                        </tr>
+                        <tr>
+                            <td>失敗（4ヶ月撤退）</td>
+                            <td style="color: var(--danger); font-weight: 700;">-138万円 ❌</td>
+                            <td style="color: var(--success); font-weight: 700;">+12万円 ✅</td>
+                        </tr>
+                        <tr>
+                            <td>失敗（1年撤退）</td>
+                            <td style="color: var(--danger); font-weight: 700;">-85万円 ❌</td>
+                            <td style="color: var(--success); font-weight: 700;">+65万円 ✅</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- スライド8: 加盟店の心理比較 -->
+            <section>
+                <h2>加盟店の意思決定への影響</h2>
+                <div class="two-column">
+                    <div class="card">
+                        <h3 style="color: #95a5a6;">パターンA（150万）</h3>
+                        <ul class="bullet-list" style="font-size: 0.85em;">
+                            <li><span class="icon">⚠️</span>失敗すると<strong
+                                    style="color: var(--danger);">85〜138万円の損失</strong></li>
+                            <li><span class="icon">❓</span>「本当に40%達成できるか？」という不安</li>
+                            <li><span class="icon">🤔</span>リスクとリターンを天秤にかける判断</li>
+                        </ul>
+                        <div
+                            style="margin-top: 20px; padding: 15px; background: rgba(231, 76, 60, 0.2); border-radius: 8px;">
+                            <p style="font-size: 0.9em; color: var(--danger);">心理的ハードルあり</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>パターンB（300万）</h3>
+                        <ul class="bullet-list" style="font-size: 0.85em;">
+                            <li><span class="icon">✅</span>失敗しても<strong style="color: var(--success);">黒字で終われる</strong>
+                            </li>
+                            <li><span class="icon">✅</span>実質<strong style="color: var(--success);">リスクゼロ</strong>でテスト可能
+                            </li>
+                            <li><span class="icon">🎯</span>「やらない理由がない」提案に変わる</li>
+                        </ul>
+                        <div
+                            style="margin-top: 20px; padding: 15px; background: rgba(46, 204, 113, 0.2); border-radius: 8px;">
+                            <p style="font-size: 0.9em; color: var(--success); font-weight: 700;">心理的ハードル完全消滅</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- スライド9: 本部視点のリスク分析 -->
+            <section>
+                <h2>本部にとっての返金リスク</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto;">
+                    <ul class="bullet-list" style="font-size: 1em;">
+                        <li><span class="icon">✅</span>稼働率40%は<strong style="color: var(--gold);">広告費次第で達成可能</strong>
+                        </li>
+                        <li><span class="icon">✅</span>本部が運営を握っているため<strong
+                                style="color: var(--gold);">コントロール可能</strong></li>
+                        <li><span class="icon">✅</span>保証金返金リスクは<strong style="color: var(--success);">実質ゼロ</strong>
+                        </li>
+                    </ul>
+
+                    <div class="quote" style="margin-top: 40px;">
+                        <p style="font-size: 1em; margin-bottom: 10px;">
+                            「稼働率の条項に利益金額が含まれていないので、<strong
+                                style="color: var(--gold);">広告費をかければ必ず40%達成できる</strong>。返金リスクはゼロ」
+                        </p>
+                        <p style="text-align: right; font-size: 0.9em; color: #95a5a6;">
+                            — フルハシ氏の分析より
+                        </p>
+                    </div>
+
+                    <div
+                        style="margin-top: 40px; background: rgba(46, 204, 113, 0.2); padding: 25px; border-radius: 10px; border: 2px solid var(--success); text-align: center;">
+                        <p style="font-size: 1.3em; font-weight: 700; color: var(--success); margin: 0;">
+                            本部のリスクは実質変わらず、<br>加盟店の安心感だけが向上
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- スライド10: 提案・まとめ -->
+            <section>
+                <h2>提案: 保証金300万円全額モデル</h2>
+                <div style="text-align: left; max-width: 900px; margin: 0 auto;">
+                    <h3 style="color: var(--gold); margin-top: 30px;">推奨理由</h3>
+                    <ul class="bullet-list">
+                        <li><span class="icon">🎯</span><strong>制約率の大幅向上</strong><br>
+                            <span style="font-size: 0.85em; color: #95a5a6;">加盟店の心理的ハードルが完全に消える</span>
+                        </li>
+                        <li><span class="icon">💰</span><strong>本部のリスクは実質変わらず</strong><br>
+                            <span style="font-size: 0.85em; color: #95a5a6;">運営コントロールにより返金リスクはゼロ</span>
+                        </li>
+                        <li><span class="icon">🏆</span><strong>ブランディング効果</strong><br>
+                            <span style="font-size: 0.85em; color: #95a5a6;">「絶対的な自信」を示せる</span>
+                        </li>
+                        <li><span class="icon">⚡</span><strong>初期10社の早期獲得</strong><br>
+                            <span style="font-size: 0.85em; color: #95a5a6;">2社/月のペースで5ヶ月で達成可能</span>
+                        </li>
+                    </ul>
+
+                    <div
+                        style="margin-top: 40px; background: var(--gold); color: var(--navy); padding: 25px; border-radius: 10px;">
+                        <h3 style="color: var(--navy); margin-top: 0;">次のステップ</h3>
+                        <ul style="color: var(--navy); list-style: none; padding: 0;">
+                            <li>✅ 契約書の保証金条項修正</li>
+                            <li>✅ エリア・条件の明確化</li>
+                            <li>✅ 説明会資料への反映</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script>
+        // Reveal.js初期化
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            controls: true,
+            progress: true,
+            center: true,
+            slideNumber: true
+        });
+
+        // グラフの作成（スライド7用）
+        Reveal.on('slidechanged', event => {
+            if (event.indexh === 6) { // スライド7
+                const ctx = document.getElementById('comparisonChart');
+                if (ctx && !ctx.chartInstance) {
+                    ctx.chartInstance = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['成功（引き継ぎ）', '失敗（4ヶ月撤退）', '失敗（1年撤退）'],
+                            datasets: [
+                                {
+                                    label: 'パターンA（150万）',
+                                    data: [-295, -138, -85],
+                                    backgroundColor: 'rgba(149, 165, 166, 0.8)',
+                                    borderColor: 'rgba(149, 165, 166, 1)',
+                                    borderWidth: 2
+                                },
+                                {
+                                    label: 'パターンB（300万）',
+                                    data: [-295, 12, 65],
+                                    backgroundColor: 'rgba(212, 175, 55, 0.8)',
+                                    borderColor: 'rgba(212, 175, 55, 1)',
+                                    borderWidth: 2
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        color: '#ecf0f1',
+                                        font: {
+                                            size: 14,
+                                            weight: 'bold'
+                                        }
+                                    }
+                                },
+                                title: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        color: '#ecf0f1',
+                                        font: {
+                                            size: 12
+                                        },
+                                        callback: function (value) {
+                                            return value + '万円';
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.1)'
+                                    }
+                                },
+                                x: {
+                                    ticks: {
+                                        color: '#ecf0f1',
+                                        font: {
+                                            size: 12
+                                        }
+                                    },
+                                    grid: {
+                                        color: 'rgba(255, 255, 255, 0.1)'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

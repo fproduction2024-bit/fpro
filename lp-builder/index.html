@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP Builder - ランディングページ作成ツール</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚀 LP Builder</h1>
+            <p>シンプルで美しいランディングページを簡単に作成・管理</p>
+        </header>
+
+        <div class="toolbar">
+            <h2>マイLP一覧</h2>
+            <button class="btn btn-primary" id="createLpBtn">
+                ✨ 新規LP作成
+            </button>
+        </div>
+
+        <div id="lpGrid" class="lp-grid">
+            <!-- LP cards will be inserted here -->
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-state-icon">📄</div>
+            <h3>まだLPがありません</h3>
+            <p>「新規LP作成」ボタンから最初のランディングページを作成しましょう</p>
+            <button class="btn btn-primary" onclick="document.getElementById('createLpBtn').click()">
+                今すぐ作成する
+            </button>
+        </div>
+    </div>
+
+    <!-- Create LP Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新規LP作成</h3>
+            </div>
+            <div class="modal-body">
+                <form id="createLpForm">
+                    <div class="form-group">
+                        <label for="lpTitle">LPタイトル *</label>
+                        <input type="text" id="lpTitle" required placeholder="例: ゼンタングルプレゼント19">
+                    </div>
+                    <div class="form-group">
+                        <label for="lpDomain">ドメイン *</label>
+                        <input type="text" id="lpDomain" required placeholder="例: midori-zen-tangle.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="lpPath">パス *</label>
+                        <input type="text" id="lpPath" required placeholder="例: /clp/present19/">
+                    </div>
+                    <div class="form-group">
+                        <label for="lpTemplate">テンプレート</label>
+                        <select id="lpTemplate">
+                            <option value="zentangle">ゼンタングルLP</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">キャンセル</button>
+                <button class="btn btn-primary" id="submitBtn">作成</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

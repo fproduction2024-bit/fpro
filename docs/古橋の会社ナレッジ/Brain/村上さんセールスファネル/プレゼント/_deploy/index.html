@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Brainブースターパッケージ | 10大特典</title>
+<meta name="description" content="Brainブースターパッケージ受講者限定の10大特典ダッシュボードです。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F06543;
+  --orange-light:#FFF4F1;
+  --orange-hover:#D9573A;
+  --bg:#FAFAFA;
+  --white:#FFFFFF;
+  --text:#1C1817;
+  --text-sub:#666;
+  --text-muted:#999;
+  --border:#E8E8E8;
+  --border-light:#F0F0F0;
+  --shadow:0 1px 4px rgba(28,24,23,.06);
+  --shadow-hover:0 4px 16px rgba(28,24,23,.1);
+  --radius:10px;
+  --radius-sm:6px;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Noto Sans JP',Helvetica,Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;background:var(--bg);color:var(--text);line-height:1.9}
+
+/* Header */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:0;z-index:200}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.logo{font-size:1.4rem;font-weight:900;color:var(--orange);letter-spacing:-.02em}
+.logo span{color:var(--text)}
+.header-sub{font-size:.75rem;color:var(--text-muted)}
+
+/* Hero */
+.hero{background:var(--white);border-bottom:1px solid var(--border);padding:3rem 1.5rem;text-align:center}
+.hero-inner{max-width:680px;margin:0 auto}
+.hero-badge{display:inline-block;background:var(--orange-light);color:var(--orange);padding:.3rem 1rem;border-radius:20px;font-size:.8rem;font-weight:700;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:900;line-height:1.5;margin-bottom:.8rem;color:var(--text)}
+.hero p{color:var(--text-sub);font-size:.95rem;max-width:560px;margin:0 auto 1.5rem}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.hero-stat .num{font-size:1.8rem;font-weight:900;color:var(--orange)}
+.hero-stat .label{font-size:.75rem;color:var(--text-muted)}
+
+/* Cards */
+.cards-section{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.cards-section h2{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:flex-start}
+.card:hover{box-shadow:var(--shadow-hover);border-color:#ddd}
+.card-icon{font-size:1.5rem;margin-bottom:.6rem}
+.card h3{font-size:.95rem;font-weight:700;margin-bottom:.8rem;line-height:1.4}
+.card-tag{display:inline-block;font-size:.7rem;padding:.2rem .7rem;border-radius:12px;background:var(--orange-light);color:var(--orange);font-weight:600;margin-top:auto}
+
+/* Tabs */
+.content-area{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
+.tab-nav{display:flex;gap:6px;flex-wrap:wrap;padding:1rem 0;position:sticky;top:49px;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.tab-btn{padding:.45rem .8rem;border:1px solid var(--border);border-radius:20px;background:var(--white);color:var(--text-sub);font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
+.tab-btn.active,.tab-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeIn .3s ease}
+
+/* Content */
+.content-section{max-width:760px;margin:0 auto;padding-top:1.5rem}
+.content-section > h2{font-size:1.3rem;font-weight:900;padding-bottom:.6rem;border-bottom:2px solid var(--text);margin-bottom:1.5rem}
+.content-section h3{font-size:1.1rem;font-weight:800;margin:2.5rem 0 1rem;color:var(--text);border-left:4px solid var(--orange);padding-left:.6rem}
+.content-section h3.sec{font-size:1.1rem;margin-top:2.5rem;border-left:none;padding-left:0;border-bottom:1px solid var(--border);padding-bottom:.5rem}
+.content-section h4{font-size:1rem;font-weight:700;margin:1.5rem 0 .5rem}
+.content-section p,.content-section li{font-size:.9rem;color:var(--text-sub);line-height:1.9}
+.content-section p.sub{margin-left:1.5rem;font-size:.82rem;color:var(--text-muted);font-style:italic}
+.content-section ul,.content-section ol{padding-left:1.4rem;margin-bottom:1.2rem}
+.content-section li{margin-bottom:.4rem}
+.content-section strong{color:var(--text)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:1rem 0 1.5rem}
+.content-section table{width:100%;border-collapse:collapse;font-size:.82rem}
+.content-section thead th{background:#F7F7F7;color:var(--text);padding:.7rem .8rem;text-align:left;font-weight:700;border-bottom:2px solid var(--border)}
+.content-section tbody td{padding:.6rem .8rem;border-bottom:1px solid var(--border-light);color:var(--text-sub)}
+.content-section tbody tr:hover td{background:#FAFAFA}
+
+/* Code/pre */
+.content-section pre{background:#F7F7F7;border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.2rem;overflow-x:auto;margin:.8rem 0;font-size:.82rem;line-height:1.7;color:var(--text-sub);white-space:pre-wrap;font-family:'Noto Sans JP',monospace}
+
+/* Blockquote */
+.content-section blockquote{border-left:3px solid var(--orange);padding:.8rem 1.2rem;background:var(--orange-light);border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:1rem 0;font-size:.85rem;color:var(--text-sub);font-weight:500}
+
+/* Checklists */
+.ck{list-style:none;padding-left:0!important}
+.ck li{padding:.4rem 0 .4rem 1.8rem;position:relative;border-bottom:1px solid var(--border-light)}
+.ck li::before{content:'☐';position:absolute;left:0;color:var(--orange);font-size:1rem;top:.3rem}
+
+/* Footer */
+.footer{text-align:center;padding:2rem 1.5rem;color:var(--text-muted);font-size:.78rem;border-top:1px solid var(--border);background:var(--white);margin-top:2rem}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:640px){
+  .tab-btn{font-size:.7rem;padding:.35rem .6rem}
+  .cards{grid-template-columns:1fr}
+  .hero h1{font-size:1.3rem}
+  .tab-nav{top:49px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span>Brain</span>Booster</div>
+    <div class="header-sub">10大特典パッケージ</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">特別サポート受講者限定</span>
+    <h1>Brainビジネスを最速で<br>軌道に乗せる10大特典</h1>
+    <p>「知識をお金に変える」ために必要な、迫佑樹直伝の実践用フォーマット・テンプレート集です。コピーして今日からすぐに使えます。</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">10</div><div class="label">特典ファイル</div></div>
+      <div class="hero-stat"><div class="num">100%</div><div class="label">実践フォーマット</div></div>
+      <div class="hero-stat"><div class="num">∞</div><div class="label">永久保存版</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cards-section">
+  <h2>特典ラインナップ</h2>
+  <div class="cards">
+    
+    <div class="card" onclick="showTab('t01')">
+      <div class="card-icon">🗺️</div>
+      <h3>Brain販売で月50万円を達成するロードマップ</h3>
+      <span class="card-tag">Brain攻略</span>
+    </div>
+    <div class="card" onclick="showTab('t02')">
+      <div class="card-icon">💰</div>
+      <h3>コンテンツの値段設計テンプレート</h3>
+      <span class="card-tag">価格戦略</span>
+    </div>
+    <div class="card" onclick="showTab('t03')">
+      <div class="card-icon">🌱</div>
+      <h3>初心者が最短で月5万円を作る3ステップ</h3>
+      <span class="card-tag">0→1突破</span>
+    </div>
+    <div class="card" onclick="showTab('t04')">
+      <div class="card-icon">✅</div>
+      <h3>稼げるスキル選定チェックリスト</h3>
+      <span class="card-tag">スキル選定</span>
+    </div>
+    <div class="card" onclick="showTab('t05')">
+      <div class="card-icon">⚙️</div>
+      <h3>売上の壁を突破する仕組み化チェックシート</h3>
+      <span class="card-tag">仕組み化</span>
+    </div>
+    <div class="card" onclick="showTab('t06')">
+      <div class="card-icon">📈</div>
+      <h3>年商1億経営者が実践するKPI設計テンプ</h3>
+      <span class="card-tag">事業拡大</span>
+    </div>
+    <div class="card" onclick="showTab('t07')">
+      <div class="card-icon">🤝</div>
+      <h3>Brainアフィリエイトで月10万円稼ぐ戦略</h3>
+      <span class="card-tag">アフィリエイト</span>
+    </div>
+    <div class="card" onclick="showTab('t08')">
+      <div class="card-icon">📱</div>
+      <h3>SNSフォロワーを最速で伸ばすX運用テンプ</h3>
+      <span class="card-tag">SNS集客</span>
+    </div>
+    <div class="card" onclick="showTab('t09')">
+      <div class="card-icon">🏗️</div>
+      <h3>迫さん直伝ビジネスモデル構築の全体像</h3>
+      <span class="card-tag">ビジネスモデル</span>
+    </div>
+    <div class="card" onclick="showTab('t10')">
+      <div class="card-icon">🎤</div>
+      <h3>Brain成功者インタビュー集</h3>
+      <span class="card-tag">事例集</span>
+    </div>
+  </div>
+</section>
+
+<section class="content-area" id="content">
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" onclick="showTab('t01')">🗺️ Brain販売で月50万円を達成するロードマップ</button><button class="tab-btn " onclick="showTab('t02')">💰 コンテンツの値段設計テンプレート</button><button class="tab-btn " onclick="showTab('t03')">🌱 初心者が最短で月5万円を作る3ステップ</button><button class="tab-btn " onclick="showTab('t04')">✅ 稼げるスキル選定チェックリスト</button><button class="tab-btn " onclick="showTab('t05')">⚙️ 売上の壁を突破する仕組み化チェックシート</button><button class="tab-btn " onclick="showTab('t06')">📈 年商1億経営者が実践するKPI設計テンプ</button><button class="tab-btn " onclick="showTab('t07')">🤝 Brainアフィリエイトで月10万円稼ぐ戦略</button><button class="tab-btn " onclick="showTab('t08')">📱 SNSフォロワーを最速で伸ばすX運用テンプ</button><button class="tab-btn " onclick="showTab('t09')">🏗️ 迫さん直伝ビジネスモデル構築の全体像</button><button class="tab-btn " onclick="showTab('t10')">🎤 Brain成功者インタビュー集</button>
+  </div>
+
+  
+    <div class="tab-content active" id="tab-t01">
+      <div class="content-section">
+        <h2>🗺️ Brain販売で月50万円を達成するロードマップ</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「知識をお金に変える」——これは特別な才能じゃなく、正しい"順番"を知っているかどうかの話です。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>僕がBrainを立ち上げた理由は1つだけ。</p>
+<p><strong>「知識を持っている人が、正当に報われる世界を作りたい」</strong></p>
+<p>あなたがもし何かの分野で人より詳しいこと、経験から得た知見、仕事で積み上げたスキルがあるなら、それは間違いなく"売れる"。</p>
+<p>ただし、正しい手順を踏まなければ1円にもならない。</p>
+<p>このロードマップでは、僕が数千人のBrain出品者を見てきた中で分かった<strong>「月50万円を最短で達成する人の共通パターン」</strong>をお伝えします。</p>
+<h3 class="sec">Phase 0：自分の"売り物"を特定する（Day 1〜3）</h3>
+<h3>やるべきこと</h3>
+<ol>
+<li><strong>過去3年間で人に教えたこと</strong>を全部書き出す</li>
+<li><strong>「ありがとう」と言われた経験</strong>をリストアップする</li>
+<li><strong>自分が"当たり前"だと思っているが他人は知らないこと</strong>を洗い出す</li>
+</ol>
+<h3>売れるテーマの3条件</h3>
+<div class="tbl-wrap"><table><thead><tr><th>条件</th><th>チェック</th></tr></thead><tbody><tr><td>① その知識で<strong>誰かの悩みが解決する</strong></td><td>□</td></tr><tr><td>② ネットで<strong>検索している人がいる</strong>（需要がある）</td><td>□</td></tr><tr><td>③ あなたが<strong>実体験に基づいて語れる</strong></td><td>□</td></tr></tbody></table></div>
+<p><strong>❌ 初心者がやりがちなNGテーマ設定</strong></p>
+<ul>
+<li>「誰でもスマホポチポチで月100万（実績なし）」→ 信用ゼロ・規約違反リスク高</li>
+<li>「絶対に失敗しない人生の歩み方」→ テーマが広すぎて誰も買わない</li>
+<li>「私が〇〇大学に合格した日記」→ 悩みの解決策（ノウハウ）になっていない</li>
+</ul>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 「自分が稼いだ金額」よりも「自分が解決した問題」で商品を考えること。月収5万円でも「副業の始め方」は売れる。月収1億でも「なんとなく成功した話」は売れない。</blockquote>
+<h3 class="sec">Phase 1：最小単位でコンテンツを作る（Day 4〜10）</h3>
+<h3>❌ やりがちなミス</h3>
+<ul>
+<li>100ページのPDFを作ろうとする</li>
+<li>30本の動画講座を企画する</li>
+<li>完璧になるまで出品しない</li>
+</ul>
+<h3>✅ 正しいやり方</h3>
+<p><strong>「1つの問題を、1つの方法で解決するコンテンツ」を作る。</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>要素</th><th>具体例</th></tr></thead><tbody><tr><td><strong>タイトル</strong></td><td>【初心者向け】Instagramリール動画で月1万フォロワーを獲得した全手法</td></tr><tr><td><strong>構成</strong></td><td>5,000〜10,000字 or 動画3〜5本</td></tr><tr><td><strong>制作期間</strong></td><td>3〜7日</td></tr></tbody></table></div>
+<h3>コンテンツのフレームワーク</h3>
+<pre>1. 読者のビフォー（今こんな状態ですよね）
+2. アフター提示（こうなれます）
+3. なぜそうなれるのか（根拠・実績）
+4. 具体的な手順（ステップ1〜5）
+5. よくある失敗と対策
+6. まとめ＋次のアクション
+</pre>
+<p><strong>📊 【実データ】文字数ごとの平均販売価格と満足度の相関</strong></p>
+<ul>
+<li><strong>3,000字未満</strong>: 満足度低下のリスク大（薄いと感じられやすい）</li>
+<li><strong>5,000〜10,000字</strong>: 1,000円〜4,980円帯で最も読了率・満足度が高い黄金比</li>
+<li><strong>20,000字以上</strong>: 高単価（9,800円〜）で正当化されやすいが、動画解説がないと挫折率が上がる</li>
+</ul>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 最初のコンテンツに100点は要らない。70点で出して、レビューを見て改善する。これが最速。</blockquote>
+<h3 class="sec">Phase 2：価格と販売戦略を決める（Day 11〜14）</h3>
+<h3>価格設定の公式</h3>
+<pre>初回価格 ＝ 本来価格の30〜50%（アンカー効果を使う）
+</pre>
+<div class="tbl-wrap"><table><thead><tr><th>戦略</th><th>具体例</th></tr></thead><tbody><tr><td><strong>ローンチ価格</strong></td><td>4,980円（最初の50部限定）</td></tr><tr><td><strong>通常価格</strong></td><td>9,800円</td></tr><tr><td><strong>部数連動値上げ</strong></td><td>50部→100部→200部で段階的に値上げ</td></tr></tbody></table></div>
+<h3>販売前にやるべき3つの仕込み</h3>
+<ol>
+<li><strong>Xで「作ってます宣言」をする</strong>（制作過程を投稿）</li>
+<li><strong>無料部分で"価値の証明"をする</strong>（冒頭を無料公開）</li>
+<li><strong>レビュー依頼リストを作る</strong>（最初の5人に無料配布してレビューをもらう）</li>
+</ol>
+<h3 class="sec">Phase 3：初速を作る（Day 15〜21）</h3>
+<h3>Brainの売上が伸びる仕組み</h3>
+<pre>レビュー数 × レビュー質 × アフィリエイト報酬率 ＝ 拡散力
+</pre>
+<h3>初速のための施策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>施策</th><th>目的</th></tr></thead><tbody><tr><td><strong>アフィリエイト報酬率を50%に設定</strong></td><td>紹介者のインセンティブを最大化</td></tr><tr><td><strong>レビューキャンペーン</strong></td><td>購入者にレビュー依頼→追加特典プレゼント</td></tr><tr><td><strong>Xでのカウントダウン投稿</strong></td><td>「あと10部で値上げ」で緊急性を演出</td></tr><tr><td><strong>購入者限定の追加コンテンツ</strong></td><td>「買った人だけ見れる裏話」でレビュー促進</td></tr></tbody></table></div>
+<p><strong>🎯 レビュー獲得率を3倍にする「特典の渡し方」</strong></p>
+<p>単に「レビューしてね」はNG。</p>
+<ol>
+<li>コンテンツの最後に「<strong>実践用スプレッドシート（または秘匿プロンプト）</strong>」の存在を明かす</li>
+<li>「本気で実践したい方だけに渡したいので、レビューを書いてくれた方限定でお渡しします」と理由を添える</li>
+<li>LINE公式アカウント等に誘導し、レビューのスクショを送ってもらう</li>
+</ol>
+<blockquote>💡 <strong>迫のワンポイント</strong>: Brainのランキングは「直近の売上本数」で決まる。だから短期間に集中して売ることが重要。ダラダラ売るより、3日間で一気に売る方が結果的に総売上も伸びる。</blockquote>
+<h3 class="sec">Phase 4：月50万円の安定収益を作る（Day 22〜90）</h3>
+<h3>2つの収益エンジン</h3>
+<h4>エンジン①：商品ラインナップの拡充</h4>
+<pre>1商品 × 平均単価9,800円 × 月50本 ＝ 月49万円
+
+→ 達成のためにはコンテンツ数を3〜5本に増やす
+→ 1本あたり月10〜15本売れればOK
+</pre>
+<div class="tbl-wrap"><table><thead><tr><th>商品#</th><th>テーマ例</th><th>価格帯</th></tr></thead><tbody><tr><td>商品1</td><td>入門編（初心者向け）</td><td>4,980円</td></tr><tr><td>商品2</td><td>実践編（中級者向け）</td><td>9,800円</td></tr><tr><td>商品3</td><td>テンプレート集</td><td>14,800円</td></tr><tr><td>商品4</td><td>個別添削付きパッケージ</td><td>29,800円</td></tr><tr><td>商品5</td><td>コンサル付きプレミアム</td><td>49,800円</td></tr></tbody></table></div>
+<h4>エンジン②：アフィリエイト収益</h4>
+<ul>
+<li>自分の商品を買ってくれた人が次のアフィリエイターになる</li>
+<li>つまり「良い商品を出す→レビューが増える→紹介される→さらに売れる」の循環</li>
+</ul>
+<h3>月50万円達成者の時間配分</h3>
+<div class="tbl-wrap"><table><thead><tr><th>活動</th><th>週あたりの時間</th></tr></thead><tbody><tr><td>新コンテンツ制作</td><td>10時間</td></tr><tr><td>既存コンテンツ改善</td><td>3時間</td></tr><tr><td>X/SNS発信</td><td>5時間</td></tr><tr><td>レビュー対応・コミュニティ運営</td><td>2時間</td></tr></tbody></table></div>
+<h3>🛑 突破口コラム：売上が止まった時に見直す3つの数字</h3>
+<p>売上が月5万〜10万で停滞した時、才能を疑う前に以下の「数字」を見直してください。</p>
+<ol>
+<li><strong>PV（閲覧数）が足りない</strong> → SNSからの流入導線が弱い。無料プレゼント企画でインプを稼ぐ。</li>
+<li><strong>CTR（アフィリンクのクリック率）が低い</strong> → 訴求文が弱い。ベネフィット（読者がどう変わるか）を再定義する。</li>
+<li><strong>CVR（成約率）が低い（3%未満）</strong> → セールスレター（無料部分）の質が低い、または値段と価値が釣り合っていない。無料部分で「ノウハウの強力さ」を出し惜しみしない。</li>
+</ol>
+<h3 class="sec">月50万円達成チェックリスト</h3>
+<ul class="ck">
+<li>売れるテーマを特定した（Phase 0）</li>
+<li>最小単位のコンテンツを1つ作った（Phase 1）</li>
+<li>価格設定とローンチ戦略を決めた（Phase 2）</li>
+<li>初速施策を実行し、最初の10件のレビューを獲得した（Phase 3）</li>
+<li>2つ目以降のコンテンツを制作し始めた（Phase 4）</li>
+<li>アフィリエイト報酬率を最適化した</li>
+<li>月間売上50万円を達成した 🎉</li>
+</ul>
+<h3 class="sec">最後に</h3>
+<p>月50万円は「特別な人」だけが達成する数字じゃない。</p>
+<p>正しい順番で、正しい行動を、正しい量やれば、<strong>3ヶ月以内に到達可能な数字</strong>です。</p>
+<p>このロードマップの通りに進めて、もし壁にぶつかったら——その壁を壊すのが僕らBrainの仕事です。</p>
+<p><strong>面談で、あなただけのロードマップを一緒に作りましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t02">
+      <div class="content-section">
+        <h2>💰 コンテンツの値段設計テンプレート</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「値段を間違えるだけで、どんなに良いコンテンツでも売れなくなる。」<br>逆に言えば、値段設計を正しくやるだけで売上は2〜3倍変わる。</blockquote>
+<h3 class="sec">なぜ値段設計が重要なのか</h3>
+<p>Brain でコンテンツを出品している人の中で、<strong>売上トップ10%の人たち</strong>には共通点がある。</p>
+<p>それは「コンテンツの質」じゃない。<strong>「値段の付け方」</strong>だ。</p>
+<p>同じ内容でも、</p>
+<ul>
+<li>980円で売ったら「安いから大したことないだろう」と思われる</li>
+<li>49,800円で売ったら「高すぎて買えない」と離脱される</li>
+<li><strong>9,800円で売ったら「この内容でこの値段は安い」と感じてもらえる</strong></li>
+</ul>
+<p>この差は、<strong>値段が"伝えるメッセージ"</strong>だから生まれる。</p>
+<h3 class="sec">値段設計の5つの原則</h3>
+<h3>原則1：「いくらなら売れるか」ではなく「いくらの価値を届けるか」で考える</h3>
+<pre>❌ 「競合が5,000円だから4,980円にしよう」
+✅ 「この教材で月10万円稼げるなら、1万円は安いと感じるはず」
+</pre>
+<h3>原則2：価格帯ごとに"購入心理"が変わる</h3>
+<div class="tbl-wrap"><table><thead><tr><th>価格帯</th><th>購入者の心理</th><th>求められるもの・具体例</th></tr></thead><tbody><tr><td><strong>〜1,980円</strong></td><td>「とりあえず買ってみよう」</td><td>衝動買い。XのマネタイズTips、バズるプロンプト5選など</td></tr><tr><td><strong>2,980〜4,980円</strong></td><td>「ランチ数回分だし、ハズレでもいいか」</td><td>特定の悩みを1つ解決する明確なノウハウ（例：サムネ作成術）</td></tr><tr><td><strong>9,800〜14,800円</strong></td><td>「ちゃんと元が取れるか確認したい」</td><td>実績の証明・レビュー・ボリューム（例：動画編集0→1完全ガイド）</td></tr><tr><td><strong>19,800〜29,800円</strong></td><td>「これで本当に変われるなら買う」</td><td>体系的な講座・テンプレ配布・網羅性（例：YouTubeディレクター講座）</td></tr><tr><td><strong>49,800円〜</strong></td><td>「投資として回収できるか？」</td><td>サポート・個別添削・コミュニティ・圧倒的な時短価値</td></tr></tbody></table></div>
+<p><strong>🧠 【購入心理データ】決済ボタンが押される直前の5分間</strong></p>
+<p>高単価（9,800円以上）になるほど、人は決済直前に「買わない言い訳」を探します。</p>
+<p><em>「自分には難しそう」「時間がなくて挫折しそう」</em></p>
+<p>これを潰すのが、「コピペで使えるテンプレート」や「全額返金保証（成果保証）」などの強力なオファーです。</p>
+<h3>原則3：「ローンチ価格」で初速を作る</h3>
+<pre>通常価格の50〜60%をローンチ価格に設定
+
+例）通常9,800円 → ローンチ4,980円（最初の30部限定）
+</pre>
+<h3>原則4：段階的値上げで「今買う理由」を作る</h3>
+<div class="tbl-wrap"><table><thead><tr><th>段階</th><th>販売数</th><th>価格</th><th>目的</th></tr></thead><tbody><tr><td>第1段階</td><td>1〜30部</td><td>4,980円</td><td>レビューとランキング初速の確保</td></tr><tr><td>第2段階</td><td>31〜100部</td><td>6,980円</td><td>クチコミによる拡散期の刈り取り</td></tr><tr><td>第3段階</td><td>101〜300部</td><td>9,800円</td><td>適正価格での利益最大化</td></tr><tr><td>最終価格</td><td>301部〜</td><td>14,800円</td><td>ブランディングと高単価アフィリエイターの誘致</td></tr></tbody></table></div>
+<p><strong>📱 値上げ告知で使えるX（Twitter）ポスト用テンプレート</strong></p>
+<pre>【🚨あと〇部で値上げします】
+おかげさまでBrain「（商品名）」が〇日で〇〇部突破しました🎉
+
+現在〇〇円ですが、規定部数に達し次第【〇〇円】に値上げします。
+（おそらく今日中に枠が埋まります）
+
+最もお得に手に入る「今のうち」に、ぜひチェックしてみてください👇
+[Brainのリンク]
+</pre>
+<h3>原則5：アフィリエイト報酬率は「逆算」で決める</h3>
+<pre>報酬率 × 販売価格 ＝ 紹介者が得る金額
+
+9,800円 × 50% ＝ 4,900円（紹介者の報酬）
+→ 紹介者にとって「紹介する価値がある」金額か？
+</pre>
+<h3 class="sec">値段設計テンプレート</h3>
+<h3>STEP 1：価値の定量化</h3>
+<p>あなたのコンテンツで得られる成果を数値化する。</p>
+<div class="tbl-wrap"><table><thead><tr><th>質問</th><th>あなたの回答</th></tr></thead><tbody><tr><td>このコンテンツを実践したら、1ヶ月でいくら稼げる（節約できる）？</td><td>＿＿＿＿円</td></tr><tr><td>その効果は何ヶ月続く？</td><td>＿＿＿＿ヶ月</td></tr><tr><td>合計の経済的インパクト（上2つの掛け算）</td><td>＿＿＿＿円</td></tr></tbody></table></div>
+<h3>STEP 2：価格レンジの決定</h3>
+<pre>推奨販売価格 ＝ 経済的インパクト × 5〜10%
+
+例）月5万円 × 12ヶ月 ＝ 60万円
+→ 推奨価格：30,000〜60,000円
+→ 実際の設定：29,800円
+</pre>
+<h3>STEP 3：ローンチ戦略シート</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>設定値</th></tr></thead><tbody><tr><td>コンテンツ名</td><td></td></tr><tr><td>通常価格</td><td>＿＿＿＿円</td></tr><tr><td>ローンチ価格（通常の50〜60%）</td><td>＿＿＿＿円</td></tr><tr><td>ローンチ限定部数</td><td>＿＿＿＿部</td></tr><tr><td>第2段階価格</td><td>＿＿＿＿円</td></tr><tr><td>第2段階の部数上限</td><td>＿＿＿＿部</td></tr><tr><td>最終価格</td><td>＿＿＿＿円</td></tr><tr><td>アフィリエイト報酬率</td><td>＿＿＿＿%</td></tr><tr><td>紹介者1件あたりの報酬額</td><td>＿＿＿＿円</td></tr></tbody></table></div>
+<h3>STEP 4：売上シミュレーション</h3>
+<div class="tbl-wrap"><table><thead><tr><th>月</th><th>販売数</th><th>平均単価</th><th>売上</th><th>アフィリ報酬</th><th>純売上</th></tr></thead><tbody><tr><td>1ヶ月目</td><td>＿＿部</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td></tr><tr><td>2ヶ月目</td><td>＿＿部</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td></tr><tr><td>3ヶ月目</td><td>＿＿部</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td><td>＿＿円</td></tr><tr><td><strong>合計</strong></td><td></td><td></td><td><strong>＿＿円</strong></td><td><strong>＿＿円</strong></td><td><strong>＿＿円</strong></td></tr></tbody></table></div>
+<h3 class="sec">よくある価格設定のミスと対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>ミス</th><th>なぜダメか</th><th>対策</th></tr></thead><tbody><tr><td>安すぎる価格</td><td>「安い＝価値がない」と判断される</td><td>最低でも2,980円以上</td></tr><tr><td>値上げしない</td><td>「いつ買っても同じ」→ 購入の先延ばし</td><td>段階的値上げを必ず設定</td></tr><tr><td>アフィリ報酬が低い</td><td>紹介する旨味がない→拡散されない</td><td>最低30%、推奨50%</td></tr><tr><td>無料で出す</td><td>レビューがつかない・ランキングに乗らない</td><td>有料＋初回割引のほうが効果的</td></tr><tr><td>端数を使わない</td><td>心理的な壁を超えやすくなる</td><td>×10,000円 → ○9,800円</td></tr></tbody></table></div>
+<h3 class="sec">迫の実体験：値段を変えただけで売上3倍になった話</h3>
+<p>あるBrain出品者さんが、全く同じコンテンツを</p>
+<ul>
+<li><strong>最初</strong>: 1,980円で出品 → 月20部（月売上：39,600円）</li>
+<li><strong>改善後</strong>: 9,800円に値上げ＋段階値上げ導入 → 月12部（月売上：117,600円）</li>
+</ul>
+<p>部数は減ったのに<strong>売上は3倍</strong>。</p>
+<p>さらに、アフィリエイト報酬率を50%にしたことで紹介が増え、最終的に<strong>月30部</strong>まで伸びた。</p>
+<p><strong>値段設計だけで、月売上が3万円→30万円に変わった実例です。</strong></p>
+<h3 class="sec">最後に</h3>
+<p>「いい商品を作れば売れる」は幻想です。</p>
+<p>いい商品 × 正しい値段 × 正しい売り方 ＝ 売れる</p>
+<p>このテンプレートを埋めるだけで、あなたのコンテンツの「最適解」が見えてくるはず。</p>
+<p><strong>面談では、あなたのコンテンツに最適な価格戦略を一緒に設計しましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t03">
+      <div class="content-section">
+        <h2>🌱 初心者が最短で月5万円を作る3ステップ</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「月5万円」は人生を変える金額だ。<br>給料以外に毎月5万円が入ってくる状態を一度作れば、そこからの伸びは早い。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>僕は18歳でプログラミングを始めて、19歳で月100万円を超えた。</p>
+<p>でも最初の「月5万円」を達成するまでが一番しんどかった。</p>
+<p>なぜか？ <strong>「何をすればいいか分からない」から。</strong></p>
+<p>この資料では、これまで数千人の初心者を見てきた僕が、<strong>最も再現性の高い「月5万円の作り方」</strong>を3ステップに凝縮してお伝えします。</p>
+<h3 class="sec">STEP 1：90日で売れるスキルを1つ身につける</h3>
+<h3>「売れるスキル」の条件</h3>
+<div class="tbl-wrap"><table><thead><tr><th>条件</th><th>解説</th></tr></thead><tbody><tr><td>① <strong>企業や個人が"お金を払ってでも"外注している</strong></td><td>需要があるということ</td></tr><tr><td>② <strong>3ヶ月以内に基礎が身につく</strong></td><td>短期で成果が出せること</td></tr><tr><td>③ <strong>パソコン1台で完結する</strong></td><td>初期投資が要らないこと</td></tr><tr><td>④ <strong>案件の単価が1件1万円以上</strong></td><td>5件こなせば月5万円になること</td></tr></tbody></table></div>
+<h3>おすすめスキル TOP5（2026年最新版）</h3>
+<p>AIの台頭により「ただ作業するだけの人」は稼げなくなりましたが、「AIを使って高速化・高品質化できる人」は逆に単価が上がっています。</p>
+<div class="tbl-wrap"><table><thead><tr><th>スキル</th><th>学習期間</th><th>案件単価の目安</th><th>月5万円に必要な案件数</th><th>2026年の需要トレンド（AI活用）</th></tr></thead><tbody><tr><td><strong>① Web制作（コーディング）</strong></td><td>2〜3ヶ月</td><td>3〜10万円/件</td><td>1〜2件</td><td>AIでのコード生成＋修正スキルが重宝される</td></tr><tr><td><strong>② 動画編集</strong></td><td>1〜2ヶ月</td><td>5,000〜3万円/本</td><td>2〜10本</td><td>TikTok/ショート等の縦型動画が無双状態</td></tr><tr><td><strong>③ Webライティング</strong></td><td>1〜2ヶ月</td><td>3,000〜2万円/記事</td><td>3〜15記事</td><td>Claude等を使った「リサーチ＋構成作成」で執筆速度3倍</td></tr><tr><td><strong>④ SNS運用代行</strong></td><td>1ヶ月</td><td>3〜10万円/月</td><td>1〜2社</td><td>AIでの投稿文量産とコンセプト設計の需要大</td></tr><tr><td><strong>⑤ Lステップ/プロライン構築</strong></td><td>2〜3ヶ月</td><td>10〜50万円/件</td><td>1件</td><td>複雑なシナリオ分岐や自動化の需要が爆発中</td></tr></tbody></table></div>
+<h3>どれを選ぶべきか迷ったら</h3>
+<pre>質問1：文章を書くのが好き？ → YES → Webライティング
+質問2：細かい作業が得意？   → YES → Web制作
+質問3：動画をよく見る？     → YES → 動画編集
+質問4：SNSが好き？        → YES → SNS運用代行
+質問5：仕組みを作るのが好き？→ YES → Lステップ構築
+</pre>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 「好きかどうか」より「需要があるかどうか」で選ぶほうが確実。好きなことは、稼いでから追求しても遅くない。</blockquote>
+<h3 class="sec">STEP 2：最初の1件を「実績作り」として獲得する</h3>
+<h3>なぜ「最初の1件」が最難関なのか</h3>
+<ul>
+<li>スキルはあるのに実績がない → 信用されない → 案件が取れない → 実績が作れない</li>
+</ul>
+<p><strong>この"実績ゼロの壁"を壊す方法が3つある。</strong></p>
+<p><strong>🛑 0→1達成者のリアルな失敗例3選（これだけは絶対やめること）</strong></p>
+<ol>
+<li><strong>安すぎる価格（例: 100円）で受ける</strong>: モチベーションが続かず途中放棄し、逆に悪評価がつく。最低でも数千円〜半額程度にする。</li>
+<li><strong>レスポンスが遅い</strong>: 実績がない初心者の唯一の武器は「即レス」。24時間以上返信を空けたら負け。</li>
+<li><strong>テンプレをそのまま送る</strong>: 「初めまして。〇〇と申します。精一杯頑張ります。」←これでは100%選ばれない。相手の募集文に答える提案をする。</li>
+</ol>
+<h3>方法①：知人に無料〜格安で提供する</h3>
+<pre>ターゲット：個人事業主の友人、SNSで繋がっている人
+オファー ：「勉強中なので、実績作りのために無料でやらせてください」
+目的     ：ポートフォリオに載せられる実績を作る
+</pre>
+<h3>方法②：クラウドソーシングで小さい案件を取る</h3>
+<div class="tbl-wrap"><table><thead><tr><th>プラットフォーム</th><th>特徴</th></tr></thead><tbody><tr><td><strong>ランサーズ</strong></td><td>案件数が多い。初心者向けの低単価案件がある</td></tr><tr><td><strong>クラウドワークス</strong></td><td>同上。提案文のテンプレが豊富</td></tr><tr><td><strong>ココナラ</strong></td><td>自分で出品できる。値付けが自由</td></tr></tbody></table></div>
+<h3>方法③：Brainで実績付きの案件紹介を受ける</h3>
+<p>Brainのコミュニティで実際に案件を紹介し合う文化がある。ここに参加すると「仕事をくれる人」と直接つながれる。</p>
+<h3>提案文テンプレート</h3>
+<pre>【件名】〇〇の制作を承ります（実績あり・迅速対応）
+
+はじめまして、〇〇と申します。
+
+▼ 対応可能な範囲
+・〇〇
+・〇〇
+
+▼ 制作実績
+・〇〇（URL or スクリーンショット）
+
+▼ 納期
+ご依頼から〇日以内に初稿をお渡しします。
+
+▼ 料金
+今回は実績作りも兼ねて、通常の50%OFFでお受けいたします。
+
+ぜひご検討ください。よろしくお願いいたします。
+</pre>
+<p><strong>🤖 【AI時短術】提案文を秒で最適化するClaudeプロンプト</strong></p>
+<p>クライアントの募集文をコピーして、Claude（またはChatGPT）に以下のように指示してください。</p>
+<blockquote>以下のクラウドソーシングの案件募集文に対して、私が応募するための提案文を作成してください。<br>相手が「この人に頼みたい」と思うよう、募集文の悩みに寄り添い、私の強み（〇〇のスキルあり、即レス可能）をアピールする内容にしてください。<br>[ここに募集文をペースト]</blockquote>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 最初の1件は「お金」じゃなく「実績」を取りに行く。この1件があるかないかで、その後の案件獲得スピードが10倍変わる。</blockquote>
+<h3 class="sec">STEP 3：月5万円を安定させる「仕組み」を作る</h3>
+<h3>月5万円の安定に必要な3つの柱</h3>
+<h4>柱①：継続案件を1つ持つ</h4>
+<pre>単発案件だけ → 毎月ゼロからスタート（不安定）
+継続案件あり → 毎月のベース収入が確保される（安定）
+
+例）SNS運用代行：月3万円 × 1社 ＝ 月3万円のベース
+→ 残り2万円を単発案件で埋める
+</pre>
+<h4>柱②：ポートフォリオを磨き続ける</h4>
+<div class="tbl-wrap"><table><thead><tr><th>やること</th><th>頻度</th></tr></thead><tbody><tr><td>新しい制作実績を追加</td><td>月1回以上</td></tr><tr><td>クライアントの声を掲載</td><td>案件完了のたびに</td></tr><tr><td>スキルの幅を見せる</td><td>3ヶ月に1回更新</td></tr></tbody></table></div>
+<h4>柱③：「紹介」が生まれる仕事をする</h4>
+<pre>期待値を超える納品 → クライアントが満足 → 「知り合いにも紹介していい？」
+→ 紹介案件は「営業コスト0」で入ってくる最高の仕事
+</pre>
+<h3>月5万円達成までのタイムライン</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>やること</th><th>目標</th></tr></thead><tbody><tr><td><strong>Month 1</strong></td><td>スキル学習（毎日2時間）</td><td>基礎を固める</td></tr><tr><td><strong>Month 2</strong></td><td>ポートフォリオ制作＋最初の案件獲得</td><td>実績1件</td></tr><tr><td><strong>Month 3</strong></td><td>案件数を増やす＋継続案件を獲得</td><td>月5万円達成</td></tr></tbody></table></div>
+<h3 class="sec">月5万円達成チェックリスト</h3>
+<ul class="ck">
+<li>売れるスキルを1つ選んだ</li>
+<li>学習を開始した（毎日最低1時間）</li>
+<li>ポートフォリオ（実績集）を作り始めた</li>
+<li>最初の1件（無料or格安）を獲得した</li>
+<li>クラウドソーシングに登録した</li>
+<li>提案文を送り始めた（最低10件）</li>
+<li>継続案件を1つ獲得した</li>
+<li>月5万円を達成した 🎉</li>
+</ul>
+<h3 class="sec">最後に</h3>
+<p>月5万円は、あなたが思っているより近い。</p>
+<p>必要なのは「才能」じゃない。<strong>「正しい方向に、毎日2時間だけ使うこと」</strong>だ。</p>
+<p>90日後、給料とは別に毎月5万円が振り込まれる生活を想像してみてください。</p>
+<p><strong>面談では、あなたに最適なスキルとロードマップを一緒に見つけましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t04">
+      <div class="content-section">
+        <h2>✅ 稼げるスキル選定チェックリスト</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「何を学ぶか」で、1年後の月収が10倍変わる。<br>スキル選びを間違えると、どれだけ努力しても月5万円すら届かない。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>「稼ぎたい。でも何を勉強すればいいか分からない。」</p>
+<p>これ、僕のところに一番多く届く相談です。</p>
+<p>答えはシンプルで、<strong>「市場が求めているスキル」を選ぶこと</strong>。</p>
+<p>あなたが好きなことでも、市場が求めていなければお金にならない。</p>
+<p>逆に、市場が求めていることなら、未経験からでも3ヶ月で収益化できる。</p>
+<p>このチェックリストで、あなたに最適な「稼げるスキル」を見つけてください。</p>
+<h3 class="sec">PART 1：スキル選定の5大基準</h3>
+<p>あなたが検討しているスキルを、以下の5つの基準で採点してください。</p>
+<h3>採点方法</h3>
+<p>各基準を <strong>1〜5点</strong> で採点。合計 <strong>20点以上</strong> なら「稼げるスキル」と判定。</p>
+<h3>基準①：市場の需要があるか？（1〜5点）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>点数</th><th>状態</th></tr></thead><tbody><tr><td>5点</td><td>クラウドソーシングで常に案件が100件以上ある</td></tr><tr><td>4点</td><td>案件数が多く、単価も上昇傾向にある</td></tr><tr><td>3点</td><td>案件はあるが、競合も多い</td></tr><tr><td>2点</td><td>ニッチすぎて案件が少ない</td></tr><tr><td>1点</td><td>ほぼ案件がない or 完全に供給過多</td></tr></tbody></table></div>
+<p><strong>チェック方法</strong>: ランサーズ・クラウドワークスで「〇〇（スキル名）」と検索し、案件数を確認</p>
+<h3>基準②：3ヶ月以内に基礎が身につくか？（1〜5点）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>点数</th><th>状態</th></tr></thead><tbody><tr><td>5点</td><td>1ヶ月で基礎が固まり、2ヶ月目から案件を取れる</td></tr><tr><td>4点</td><td>2〜3ヶ月で実務レベルに達する</td></tr><tr><td>3点</td><td>3ヶ月で基礎はできるが、実務には追加学習が必要</td></tr><tr><td>2点</td><td>半年以上かかる</td></tr><tr><td>1点</td><td>1年以上かかる or 資格が必要</td></tr></tbody></table></div>
+<h3>基準③：案件単価は十分か？（1〜5点）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>点数</th><th>1件あたりの単価</th></tr></thead><tbody><tr><td>5点</td><td>10万円以上</td></tr><tr><td>4点</td><td>5〜10万円</td></tr><tr><td>3点</td><td>1〜5万円</td></tr><tr><td>2点</td><td>5,000〜1万円</td></tr><tr><td>1点</td><td>5,000円未満</td></tr></tbody></table></div>
+<h3>基準④：スケーラビリティがあるか？（1〜5点）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>点数</th><th>状態</th></tr></thead><tbody><tr><td>5点</td><td>スキルを教材化して販売できる＋コンサルにも展開可能</td></tr><tr><td>4点</td><td>単価を上げやすい or チームを組んで規模拡大できる</td></tr><tr><td>3点</td><td>継続案件が取りやすく、安定収入になる</td></tr><tr><td>2点</td><td>単発案件中心で、毎月の営業が必要</td></tr><tr><td>1点</td><td>時給労働で上限が見えている</td></tr></tbody></table></div>
+<h3>基準⑤：あなたとの相性（1〜5点）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>点数</th><th>状態</th></tr></thead><tbody><tr><td>5点</td><td>楽しい。時間を忘れて取り組める</td></tr><tr><td>4点</td><td>面白いとは思う。苦にならない</td></tr><tr><td>3点</td><td>特に好きでも嫌いでもないが、やれる</td></tr><tr><td>2点</td><td>少しつらいが、稼げるなら我慢できる</td></tr><tr><td>1点</td><td>苦痛。続けられる気がしない</td></tr></tbody></table></div>
+<h3 class="sec">PART 2：スキル採点シート</h3>
+<h3>あなたの検討スキルを採点してみよう</h3>
+<div class="tbl-wrap"><table><thead><tr><th>基準</th><th>スキルA：＿＿＿</th><th>スキルB：＿＿＿</th><th>スキルC：＿＿＿</th></tr></thead><tbody><tr><td>①市場の需要</td><td>/5</td><td>/5</td><td>/5</td></tr><tr><td>②学習期間</td><td>/5</td><td>/5</td><td>/5</td></tr><tr><td>③案件単価</td><td>/5</td><td>/5</td><td>/5</td></tr><tr><td>④スケーラビリティ</td><td>/5</td><td>/5</td><td>/5</td></tr><tr><td>⑤相性</td><td>/5</td><td>/5</td><td>/5</td></tr><tr><td><strong>合計</strong></td><td><strong>/25</strong></td><td><strong>/25</strong></td><td><strong>/25</strong></td></tr></tbody></table></div>
+<h3>判定</h3>
+<div class="tbl-wrap"><table><thead><tr><th>合計点</th><th>判定</th></tr></thead><tbody><tr><td><strong>20〜25点</strong></td><td>🟢 最優先で取り組むべきスキル</td></tr><tr><td><strong>15〜19点</strong></td><td>🟡 可能性あり。弱い基準を補強できるか検討</td></tr><tr><td><strong>10〜14点</strong></td><td>🟠 リスクあり。別のスキルも検討を</td></tr><tr><td><strong>〜9点</strong></td><td>🔴 このスキルは避けた方がいい</td></tr></tbody></table></div>
+<h3 class="sec">PART 3：2026年版 稼げるスキルランキング</h3>
+<p>僕がBrainの出品データと案件市場を分析して出した、今学ぶべきスキルのランキング。</p>
+<div class="tbl-wrap"><table><thead><tr><th>順位</th><th>スキル</th><th>需要</th><th>学習期間</th><th>単価</th><th>スケール</th><th>総合</th></tr></thead><tbody><tr><td>🥇 1位</td><td><strong>Lステップ/LINE構築</strong></td><td>5</td><td>4</td><td>5</td><td>5</td><td><strong>24</strong></td></tr><tr><td>🥈 2位</td><td><strong>Web制作（WordPress含む）</strong></td><td>5</td><td>4</td><td>4</td><td>4</td><td><strong>22</strong></td></tr><tr><td>🥉 3位</td><td><strong>SNS運用代行</strong></td><td>5</td><td>5</td><td>3</td><td>4</td><td><strong>22</strong></td></tr><tr><td>4位</td><td><strong>動画編集（ショート特化）</strong></td><td>5</td><td>5</td><td>3</td><td>3</td><td><strong>21</strong></td></tr><tr><td>5位</td><td><strong>Webライティング</strong></td><td>4</td><td>5</td><td>3</td><td>4</td><td><strong>21</strong></td></tr><tr><td>6位</td><td><strong>Webデザイン</strong></td><td>4</td><td>3</td><td>4</td><td>4</td><td><strong>20</strong></td></tr><tr><td>7位</td><td><strong>プログラミング（React/Next.js）</strong></td><td>4</td><td>2</td><td>5</td><td>5</td><td><strong>20</strong></td></tr><tr><td>8位</td><td><strong>広告運用</strong></td><td>4</td><td>3</td><td>5</td><td>4</td><td><strong>20</strong></td></tr></tbody></table></div>
+<h3>🌊 ブルーオーシャンを作る「スキル掛け合わせ戦略」</h3>
+<p>単一スキルでは競合が増えやすいですが、2つのスキルを掛け合わせると一気に「代えの効かない人材」になれます。</p>
+<ul>
+<li><strong>Web制作 × Lステップ</strong> → 「HP制作＋LINE集客機能」で単価3倍</li>
+<li><strong>動画編集 × SNS運用代行</strong> → 「リール制作から投稿代行まで全請け」で継続案件化</li>
+<li><strong>Webライティング × AI（Claude/ChatGPT）</strong> → 「爆速かつ高品質なSEOメディア構築」で時給5000円超え</li>
+</ul>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 1位のLステップ/LINE構築は「競合が少ない × 単価が高い × 需要が伸びている」という稼ぎやすさの三拍子が揃っている。Brain内でもLINE構築系のコンテンツは売上の伸びが顕著。さらに「AI」を掛け合わせれば、2026年の需要は無敵レベル。</blockquote>
+<h3 class="sec">PART 4：スキル選定後のアクションプラン</h3>
+<p>スキルが決まったら、以下の順番で進めてください。</p>
+<div class="tbl-wrap"><table><thead><tr><th>Week</th><th>やること</th></tr></thead><tbody><tr><td><strong>Week 1</strong></td><td>教材を1つ購入して学習開始。毎日2時間</td></tr><tr><td><strong>Week 2〜4</strong></td><td>基礎学習を完了。練習作品を3つ作る</td></tr><tr><td><strong>Week 5〜6</strong></td><td>ポートフォリオサイトを作成</td></tr><tr><td><strong>Week 7〜8</strong></td><td>クラウドソーシングで提案開始（1日3件）</td></tr><tr><td><strong>Week 9〜10</strong></td><td>最初の案件を獲得・納品</td></tr><tr><td><strong>Week 11〜12</strong></td><td>継続案件 or 2件目を獲得。月5万円達成</td></tr></tbody></table></div>
+<h3 class="sec">最後に</h3>
+<p>スキル選びで人生が変わる。これは大げさじゃなく、本当のこと。</p>
+<p>僕が最初にプログラミングを選んだのは「なんとなく」だったけど、結果的にそれが月収1000万円を超えるスキルになった。</p>
+<p>あなたに合ったスキルは、必ずある。</p>
+<p><strong>面談で、あなたの経験・適性・目標に合った最適なスキルを一緒に見つけましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t05">
+      <div class="content-section">
+        <h2>⚙️ 売上の壁を突破する仕組み化チェックシート</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>月商300万を超えたあたりで、ほぼ全員が同じ壁にぶつかる。<br>「自分が動かないと売上が止まる」——これを"仕組み"で解決する。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>売上がある経営者ほど、実は「忙しすぎて」成長が止まっている。</p>
+<ul>
+<li>月商100万円の人 → 「もっと働けば200万になる」と思っている</li>
+<li>月商300万円の人 → 「これ以上忙しくなれない」と気づく</li>
+<li>月商1000万円の人 → 「自分が動かなくても回る仕組み」を持っている</li>
+</ul>
+<p><strong>月商300万円〜1000万円の間にある「壁」は、仕組み化でしか壊せない。</strong></p>
+<p>このチェックシートで、あなたの事業のどこに「仕組み化の余地」があるかを特定してください。</p>
+<h3 class="sec">PART 1：仕組み化の全体像</h3>
+<h3>事業の4つのレイヤー</h3>
+<pre>┌───────────────────────────┐
+│    ④ 経営・戦略          │ ← あなたがやるべきこと（これだけ）
+├───────────────────────────┤
+│    ③ マーケティング       │ ← 仕組み化 or 外注
+├───────────────────────────┤
+│    ② セールス             │ ← 仕組み化 or 外注
+├───────────────────────────┤
+│    ① 価値提供（サービス）  │ ← 仕組み化 or 外注
+└───────────────────────────┘
+</pre>
+<p><strong>目指す状態</strong>: ④だけに集中し、①②③は仕組みが回している</p>
+<h3 class="sec">PART 2：仕組み化チェックシート</h3>
+<h3>セクション1：集客の仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr></thead><tbody><tr><td>□ 広告 or SEOで<strong>自動的にリストが増えている</strong></td><td>月＿＿件</td><td>月＿＿件</td></tr><tr><td>□ <strong>LP（ランディングページ）</strong>が存在し、CVR計測している</td><td>CVR＿＿%</td><td>CVR＿＿%</td></tr><tr><td>□ SNSを<strong>あなた以外の人が運用</strong>できる状態</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 紹介・口コミの<strong>仕組み</strong>がある（紹介特典等）</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ リスト獲得のコスト（CPA）を把握している</td><td>CPA＿＿円</td><td>CPA＿＿円</td></tr></tbody></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<h3>セクション2：教育の仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr></thead><tbody><tr><td>□ リスト登録後に<strong>自動でステップ配信</strong>が走る</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>動画・テキストで"価値観教育"</strong>が自動化されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 見込み客の<strong>温度感をスコアリング</strong>できている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 問い合わせ前に<strong>FAQ・事前情報</strong>を自動で届けている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>教育完了→商談誘導</strong>が自動で行われる</td><td>□Yes □No</td><td>□Yes</td></tr></tbody></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<h3>セクション3：セールスの仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr></thead><tbody><tr><td>□ 商談予約が<strong>カレンダーツールで自動化</strong></td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ セールストーク（台本）が<strong>マニュアル化</strong></td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ あなた以外の人が<strong>セールスできる</strong></td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 成約率を<strong>計測・改善するサイクル</strong>がある</td><td>成約率＿＿%</td><td>成約率＿＿%</td></tr><tr><td>□ 未成約者への<strong>フォローアップの仕組み</strong>がある</td><td>□Yes □No</td><td>□Yes</td></tr></tbody></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<h3>セクション4：価値提供の仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr></thead><tbody><tr><td>□ サービスの<strong>納品・提供手順がマニュアル化</strong></td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>あなた以外のスタッフ</strong>がサービス提供できる</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>会員サイト・オンライン教材</strong>でコンテンツ提供</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 顧客対応の<strong>テンプレート・FAQ</strong>が整備されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 顧客満足度を<strong>定期的に計測</strong>している</td><td>□Yes □No</td><td>□Yes</td></tr></tbody></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<h3>セクション5：組織・オペレーションの仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr></thead><tbody><tr><td>□ 業務フローが<strong>ドキュメント化</strong>されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>採用→教育→独り立ち</strong>の人材育成プロセスがある</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 週次 or 月次の<strong>KPI確認ミーティング</strong>を実施</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ <strong>タスク管理ツール</strong>で進捗が可視化されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ あなたが<strong>1週間不在でも</strong>事業が回る</td><td>□Yes □No</td><td>□Yes</td></tr></tbody></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<h3>⚠️ 仕組み化が崩壊する原因 TOP3</h3>
+<ol>
+<li><strong>マニュアルがない（口頭指示のみ）</strong>：スタッフが辞めるたびにイチからあなたが教えるハメになる。</li>
+<li><strong>権限委譲していない（最終確認を全部自分でやる）</strong>：あなたの確認待ちで業務スピードが半分以下に落ちる。</li>
+<li><strong>KPIを見ていない（丸投げ）</strong>：任せたけど数字が悪化し、結局自分で巻き取る。</li>
+</ol>
+<p><strong>📝 【コピペで使える】外注化・スタッフへの指示書テンプレート</strong></p>
+<pre>【業務内容】〇〇の更新作業
+【目的・ゴール】〇〇の数値を〇〇%に保つこと
+【具体的な手順（動画も添付）】
+1. …
+2. …
+【判断基準（ここまでは自分で決めてOK、これ以降は要相談）】
+・〇〇の場合は自己判断で進めてください。
+・〇〇のエラーが出た場合はすぐに〇〇へ報告してください。
+【FAQ（よくある質問）】
+・Q：… A：…
+</pre>
+<h3 class="sec">PART 3：診断結果</h3>
+<h3>合計スコア</h3>
+<div class="tbl-wrap"><table><thead><tr><th>セクション</th><th>スコア</th></tr></thead><tbody><tr><td>集客</td><td>/5</td></tr><tr><td>教育</td><td>/5</td></tr><tr><td>セールス</td><td>/5</td></tr><tr><td>価値提供</td><td>/5</td></tr><tr><td>組織</td><td>/5</td></tr><tr><td><strong>合計</strong></td><td><strong>/25</strong></td></tr></tbody></table></div>
+<h3>判定</h3>
+<div class="tbl-wrap"><table><thead><tr><th>合計</th><th>レベル</th><th>状態</th></tr></thead><tbody><tr><td><strong>20〜25</strong></td><td>🟢 仕組み化上級者</td><td>次は「レバレッジ」のフェーズ。広告投資やM&Aで一気に拡大</td></tr><tr><td><strong>15〜19</strong></td><td>🟡 もう少し</td><td>あと2〜3個の仕組みを入れれば、あなたの時間が大幅に空く</td></tr><tr><td><strong>10〜14</strong></td><td>🟠 属人的経営</td><td>売上は作れているが、あなたが倒れたら事業も止まる状態</td></tr><tr><td><strong>〜9</strong></td><td>🔴 要注意</td><td>自転車操業。今すぐ仕組み化に着手すべき</td></tr></tbody></table></div>
+<h3 class="sec">PART 4：仕組み化の優先順位</h3>
+<p><strong>スコアが低いセクションから着手する。</strong></p>
+<p>ただし、以下の順序で取り組むのが最も効率的：</p>
+<pre>1. セールスの仕組み化（成約率が上がれば全体の売上が上がる）
+2. 教育の仕組み化（セールスの負荷が減る）
+3. 集客の仕組み化（安定したリスト獲得）
+4. 価値提供の仕組み化（あなたの時間が空く）
+5. 組織の仕組み化（スケールの準備）
+</pre>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 多くの経営者は「集客が足りない」と思っているが、実際は「セールスと教育の仕組みがないから、集客しても取りこぼしている」だけのケースが8割。まずはセールスの仕組みから。</blockquote>
+<h3 class="sec">最後に</h3>
+<p>「仕組み化」は、あなたがサボるためのものじゃない。</p>
+<p><strong>あなたが「本当にやるべきこと」に集中するため</strong>のものだ。</p>
+<p>経営者の仕事は「仕組みを作ること」と「次の一手を考えること」。それ以外は全部仕組みに任せていい。</p>
+<p><strong>面談で、あなたの事業の「最初に仕組み化すべきポイント」を一緒に特定しましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t06">
+      <div class="content-section">
+        <h2>📈 年商1億経営者が実践するKPI設計テンプ</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「数字を見ていない経営者は、地図なしで航海しているのと同じだ。」<br>KPIを正しく設計するだけで、何をすべきかが一瞬で分かるようになる。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>年商1億円を超える経営者と、年商3000万円で止まる経営者。</p>
+<p>この2人の違いは、能力でも運でもなく、<strong>「見ている数字が違う」</strong>ということだ。</p>
+<p>年商3000万円の人は「売上」しか見ていない。</p>
+<p>年商1億円の人は「売上を構成する因数」を見ている。</p>
+<p>このテンプレートで、あなたの事業の<strong>「本当に追うべき数字」</strong>を特定してください。</p>
+<h3 class="sec">PART 1：KPI設計の基本フレームワーク</h3>
+<h3>売上の因数分解</h3>
+<pre>売上 ＝ リスト数 × 成約率 × 客単価 × リピート率
+</pre>
+<p>この4つの因数のうち、<strong>どこがボトルネックかを特定して、そこに集中する。</strong></p>
+<h3>例：月商500万円の事業</h3>
+<div class="tbl-wrap"><table><thead><tr><th>因数</th><th>現状</th><th>改善後</th><th>インパクト</th></tr></thead><tbody><tr><td>リスト数</td><td>月100人</td><td>月150人（+50%）</td><td>売上+50%</td></tr><tr><td>成約率</td><td>10%</td><td>15%（+5pt）</td><td>売上+50%</td></tr><tr><td>客単価</td><td>50万円</td><td>60万円（+20%）</td><td>売上+20%</td></tr><tr><td>リピート率</td><td>20%</td><td>35%（+15pt）</td><td>売上+75%</td></tr></tbody></table></div>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 多くの人は「リスト数を増やそう」とする。でも実は、成約率を5%上げるか、リピート率を15%上げる方が、広告費ゼロで売上が1.5倍になる。</blockquote>
+<h3 class="sec">PART 2：KPIツリーテンプレート</h3>
+<h3>あなたの事業のKPIツリーを埋めてください</h3>
+<pre>【最終目標】月商＿＿＿万円
+
+├── リスト獲得数：月＿＿＿人
+│    ├── 広告経由：＿＿＿人（CPA：＿＿＿円）
+│    ├── SNS経由：＿＿＿人
+│    ├── 紹介経由：＿＿＿人
+│    └── その他：＿＿＿人
+│
+├── 商談数：月＿＿＿件
+│    ├── リスト→商談 転換率：＿＿＿%
+│    └── 商談予約→着座率：＿＿＿%
+│
+├── 成約数：月＿＿＿件
+│    ├── 成約率：＿＿＿%
+│    └── 成約単価：＿＿＿万円
+│
+├── 客単価：＿＿＿万円
+│    ├── フロント商品：＿＿＿万円
+│    ├── バックエンド商品：＿＿＿万円
+│    └── アップセル率：＿＿＿%
+│
+└── LTV（顧客生涯価値）：＿＿＿万円
+     ├── 平均購入回数：＿＿回
+     ├── 継続期間：＿＿ヶ月
+     └── リピート率：＿＿＿%
+</pre>
+<h3 class="sec">PART 3：ボトルネック特定マトリクス</h3>
+<h3>各指標の「健全値」と比較してボトルネックを特定する</h3>
+<div class="tbl-wrap"><table><thead><tr><th>指標</th><th>業界平均</th><th>優秀ライン</th><th>あなたの数値</th><th>判定</th></tr></thead><tbody><tr><td><strong>リスト獲得CPA</strong></td><td>3,000〜5,000円</td><td>〜2,000円</td><td>＿＿＿円</td><td>□健全 □要改善</td></tr><tr><td><strong>リスト→商談 転換率</strong></td><td>3〜5%</td><td>10%以上</td><td>＿＿＿%</td><td>□健全 □要改善</td></tr><tr><td><strong>商談着座率</strong></td><td>60〜70%</td><td>80%以上</td><td>＿＿＿%</td><td>□健全 □要改善</td></tr><tr><td><strong>成約率</strong></td><td>20〜30%</td><td>40%以上</td><td>＿＿＿%</td><td>□健全 □要改善</td></tr><tr><td><strong>LTV</strong></td><td>初回購入の2倍</td><td>初回の3倍以上</td><td>＿＿＿万円</td><td>□健全 □要改善</td></tr><tr><td><strong>リピート率</strong></td><td>20〜30%</td><td>50%以上</td><td>＿＿＿%</td><td>□健全 □要改善</td></tr></tbody></table></div>
+<h3>ボトルネック別の処方箋</h3>
+<div class="tbl-wrap"><table><thead><tr><th>ボトルネック</th><th>処方箋</th></tr></thead><tbody><tr><td><strong>CPA が高い</strong></td><td>広告クリエイティブの改善 / LP の CVR 改善 / オーガニック流入の強化</td></tr><tr><td><strong>商談転換率が低い</strong></td><td>ステップ配信の教育コンテンツ強化 / 商談のベネフィット訴求</td></tr><tr><td><strong>着座率が低い</strong></td><td>リマインド配信の追加 / 事前動画で期待値を上げる</td></tr><tr><td><strong>成約率が低い</strong></td><td>セールストークの改善 / 顧客の質の向上（教育強化）</td></tr><tr><td><strong>LTV が低い</strong></td><td>バックエンド商品の追加 / 継続課金モデルの導入</td></tr></tbody></table></div>
+<h3>💡 迫からのアドバイス：KPI改善の「即効薬」</h3>
+<ul>
+<li><strong>CVR（成約率）を今すぐ上げる方法</strong>: レターの冒頭（ファーストビュー）に、「圧倒的な実績」または「驚きのビフォーアフター」の画像を1枚追加するだけで1〜2%上がることがある。</li>
+<li><strong>着座率を今すぐ上げる方法</strong>: 商談前日に「明日はこんな良い話をします」という期待値を高めるショート動画をLINEで自動送信する。</li>
+<li><strong>LTVを今すぐ上げる方法</strong>: 商品購入直後のサンクスページで、その商品と相性の良い「ワンタイムオファー（1度きりの特別割引）」を提示する。</li>
+</ul>
+<h3 class="sec">PART 4：週次KPIダッシュボード</h3>
+<h3>毎週月曜日にこのシートを更新する</h3>
+<div class="tbl-wrap"><table><thead><tr><th>指標</th><th>先週</th><th>今週</th><th>前週比</th><th>目標</th><th>達成率</th></tr></thead><tbody><tr><td>リスト獲得数</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>商談数</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>着座数</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>成約数</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>売上</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>広告費</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>ROAS</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div>
+<h3>月次レビューで見るべき数字</h3>
+<div class="tbl-wrap"><table><thead><tr><th>指標</th><th>今月</th><th>先月</th><th>3ヶ月平均</th><th>トレンド</th></tr></thead><tbody><tr><td>月間売上</td><td></td><td></td><td></td><td>📈📉➡️</td></tr><tr><td>新規リスト数</td><td></td><td></td><td></td><td>📈📉➡️</td></tr><tr><td>CPA</td><td></td><td></td><td></td><td>📈📉➡️</td></tr><tr><td>成約率</td><td></td><td></td><td></td><td>📈📉➡️</td></tr><tr><td>客単価</td><td></td><td></td><td></td><td>📈📉➡️</td></tr><tr><td>LTV</td><td></td><td></td><td></td><td>📈📉➡️</td></tr></tbody></table></div>
+<h3 class="sec">PART 5：KPI改善の優先順位の決め方</h3>
+<h3>インパクト × 実行難易度マトリクス</h3>
+<pre>          ┃ インパクト大
+          ┃
+    ②     ┃    ① ← 最優先
+ 難易度高  ┃  難易度低
+━━━━━━━━╋━━━━━━━━━
+    ④     ┃    ③
+ 難易度高  ┃  難易度低
+          ┃
+          ┃ インパクト小
+</pre>
+<div class="tbl-wrap"><table><thead><tr><th>優先度</th><th>施策例</th></tr></thead><tbody><tr><td><strong>①最優先</strong></td><td>セールストークの改善（成約率UP）、リマインド配信の追加（着座率UP）</td></tr><tr><td><strong>②次に</strong></td><td>新しい広告チャネルの開拓、バックエンド商品の開発</td></tr><tr><td><strong>③余裕があれば</strong></td><td>SNS発信の頻度UP、既存顧客へのアンケート</td></tr><tr><td><strong>④後回し</strong></td><td>全面リブランディング、システムの大規模改修</td></tr></tbody></table></div>
+<h3 class="sec">PART 6：年商1億円の逆算設計</h3>
+<h3>あなたの「年商1億円」の方程式を作る</h3>
+<pre>年商1億円 ＝ 月商＿＿＿万円
+
+月商＿＿＿万円 ＝ 月間成約＿＿件 × 客単価＿＿万円
+
+月間成約＿＿件 ＝ 月間商談＿＿件 × 成約率＿＿%
+
+月間商談＿＿件 ＝ 月間リスト＿＿人 × 商談転換率＿＿%
+</pre>
+<h3>具体例</h3>
+<pre>年商1億円 ＝ 月商833万円
+
+月商833万円 ＝ 月間成約17件 × 客単価50万円
+
+月間成約17件 ＝ 月間商談56件 × 成約率30%
+
+月間商談56件 ＝ 月間リスト560人 × 商談転換率10%
+
+→ 月に560人のリストを取り、10%を商談に持っていき、30%を成約すれば年商1億円
+→ CPA3,000円なら月間広告費168万円（年間約2,000万円）
+→ ROAS 5.0（広告費の5倍の売上）
+</pre>
+<h3 class="sec">最後に</h3>
+<p>「がむしゃらに頑張る」フェーズは、もう終わりにしていい。</p>
+<p>次のフェーズは「数字を見て、正しい場所に力を集中する」こと。</p>
+<p>このテンプレートを埋めれば、<strong>あなたの事業で"今"何をすべきかが数字で見える。</strong></p>
+<p><strong>面談で、あなたの事業のKPIツリーを一緒に設計して、年商1億までのロードマップを引きましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t07">
+      <div class="content-section">
+        <h2>🤝 Brainアフィリエイトで月10万円稼ぐ戦略</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「良いコンテンツを見つけて、正しく紹介する。」<br>これだけで月10万円は、実はそんなに難しくない。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>Brainのアフィリエイト機能は、他のアフィリエイトとは<strong>根本的に違う</strong>。</p>
+<div class="tbl-wrap"><table><thead><tr><th></th><th>従来のアフィリエイト</th><th>Brainアフィリエイト</th></tr></thead><tbody><tr><td>報酬率</td><td>1〜10%</td><td><strong>最大50%</strong></td></tr><tr><td>承認まで</td><td>30〜60日</td><td><strong>即時確定</strong></td></tr><tr><td>商品の質</td><td>当たりハズレが大きい</td><td>レビューで可視化</td></tr><tr><td>信頼性</td><td>怪しいと思われがち</td><td>「Brain」というプラットフォームの信頼</td></tr></tbody></table></div>
+<p>報酬率50%で即時確定——これだけで、<strong>月10万円のハードルが劇的に下がる</strong>。</p>
+<h3 class="sec">PART 1：月10万円の方程式</h3>
+<h3>シンプルな算数</h3>
+<pre>月10万円 ＝ 1件あたりの報酬 × 月間成約数
+
+例1）9,800円 × 50% × 月21件 ＝ 102,900円
+例2）29,800円 × 50% × 月7件 ＝ 104,300円
+例3）4,980円 × 50% × 月41件 ＝ 102,090円
+</pre>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 高単価商品（2万円以上）を選べば、<strong>月に7件</strong>紹介するだけで10万円。1日1件も要らない。</blockquote>
+<h3 class="sec">PART 2：売れる商品の選び方</h3>
+<h3>鉄板の5条件</h3>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>条件</th><th>チェック</th></tr></thead><tbody><tr><td>1</td><td><strong>アフィリエイト報酬率が40%以上</strong></td><td>□</td></tr><tr><td>2</td><td><strong>レビュー数が10件以上 & 平均4.5以上</strong></td><td>□</td></tr><tr><td>3</td><td><strong>販売ページの無料部分で「これは良い」と自分が感じる</strong></td><td>□</td></tr><tr><td>4</td><td><strong>ターゲットが明確</strong>（「誰のための商品か」が分かる）</td><td>□</td></tr><tr><td>5</td><td><strong>自分のフォロワー・読者層と合っている</strong></td><td>□</td></tr></tbody></table></div>
+<h3>商品リサーチの手順</h3>
+<pre>Step 1：Brainのランキングページをチェック（週1回）
+Step 2：新着で伸びている商品をウォッチリストに追加
+Step 3：気になる商品は「自分で買って中身を確認」する
+Step 4：本当に良いと思えたものだけを紹介する
+</pre>
+<blockquote>⚠️ <strong>重要</strong>: 買わずに紹介するのは絶対にNG。「自分が使って良かった」が最強のセールスコピー。</blockquote>
+<h3 class="sec">PART 3：紹介文の書き方テンプレート</h3>
+<h3>テンプレート①：体験レビュー型</h3>
+<pre>【タイトル例】
+「〇〇を買って実践したら、△△が□□になった話」
+
+【構成】
+1. ビフォー：この商品を買う前の自分の状態
+2. 購入の決め手：なぜこの商品を選んだか
+3. 実践したこと：具体的に何をやったか
+4. アフター：どんな変化があったか（数値で語る）
+5. こんな人におすすめ：ターゲットを明確にする
+6. リンク：「気になる方はこちら」
+</pre>
+<h3>テンプレート②：比較型</h3>
+<pre>【タイトル例】
+「〇〇系のBrain教材を5つ買って比較した結果、1番良かったのはコレでした」
+
+【構成】
+1. なぜ比較しようと思ったか
+2. 買った5つの教材の概要
+3. 比較表（価格・ボリューム・実践しやすさ・サポート）
+4. 1位の教材の詳細レビュー
+5. リンク
+</pre>
+<h3>テンプレート③：問題解決型</h3>
+<pre>【タイトル例】
+「〇〇で悩んでる人へ。この教材で解決できるかもしれません」
+
+【構成】
+1. 共感：「こんなことで悩んでませんか？」
+2. 原因：なぜその問題が起きるのか
+3. 解決策：この教材がなぜ解決策になるのか
+4. 実績：販売者の実績やレビュー
+5. リンク
+</pre>
+<h3>🤖 【AI時短術】成約率を高めるレビュー作成プロンプト</h3>
+<p>Brainの無料部分やレター内容をClaude/ChatGPTに読み込ませて、以下のプロンプトを使えば5分でレビューの叩き台ができます。</p>
+<blockquote>以下のBrain教材のセールスレターを元に、X（Twitter）でのアフィリエイトポストを作成してください。<br>条件：<br>1. 冒頭で「これを知らないと〇〇で損する」と注意喚起する<br>2. 教材のノウハウを1つだけチラ見せして期待値を上げる<br>3. ポストの最後に行動を促すリンクへの誘導を入れる<br>[レター本文をペースト]</blockquote>
+<p><strong>📊 【目安データ】XでのインプレッションとCTR（クリック率）</strong></p>
+<ul>
+<li><strong>インプレッション（表示回数）</strong>: フォロワー数の20〜30%が目安</li>
+<li><strong>リンククリック数</strong>: インプレッションの <strong>1〜3%</strong></li>
+<li><strong>成約率（クリックした人の購入率）</strong>: <strong>5〜10%</strong>（セールスレターの質に依存）</li>
+</ul>
+<p>つまり、<strong>1000回表示 → 20回クリック → 1件〜2件の成約</strong> が黄金レートです。クリック率が1%を切るなら「ポストの導入文」を見直してください。</p>
+<h3 class="sec">PART 4：集客チャネル別の戦略</h3>
+<h3>チャネル①：X（旧Twitter）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>施策</th><th>具体的なやり方</th></tr></thead><tbody><tr><td><strong>日常投稿</strong></td><td>学んだことの共有、実践結果の報告（1日3〜5投稿）</td></tr><tr><td><strong>スレッド投稿</strong></td><td>教材の学びをまとめた「価値提供スレッド」→最後にリンク</td></tr><tr><td><strong>引用RT</strong></td><td>教材販売者のポストを引用して感想を述べる</td></tr><tr><td><strong>プロフィール</strong></td><td>「〇〇を実践中」と明記。固定ポストにレビュー記事</td></tr></tbody></table></div>
+<h3>チャネル②：note</h3>
+<div class="tbl-wrap"><table><thead><tr><th>施策</th><th>具体的なやり方</th></tr></thead><tbody><tr><td><strong>レビュー記事</strong></td><td>2,000〜3,000字の詳細レビュー。SEOを意識したタイトル</td></tr><tr><td><strong>まとめ記事</strong></td><td>「〇〇ジャンルのBrain教材おすすめ5選」系の記事</td></tr><tr><td><strong>マガジン</strong></td><td>テーマごとにレビューをまとめる</td></tr></tbody></table></div>
+<h3>チャネル③：ブログ（WordPress）</h3>
+<div class="tbl-wrap"><table><thead><tr><th>施策</th><th>具体的なやり方</th></tr></thead><tbody><tr><td><strong>SEO記事</strong></td><td>「Brain 〇〇 レビュー」で上位表示を狙う</td></tr><tr><td><strong>比較記事</strong></td><td>「〇〇 vs △△ どっちがいい？」系の検索需要を狙う</td></tr><tr><td><strong>ランキング記事</strong></td><td>「Brain おすすめ教材ランキング」でまとめる</td></tr></tbody></table></div>
+<h3>チャネル別の難易度と期待リターン</h3>
+<div class="tbl-wrap"><table><thead><tr><th>チャネル</th><th>難易度</th><th>初収益までの期間</th><th>月10万円達成の難易度</th></tr></thead><tbody><tr><td><strong>X</strong></td><td>★★☆</td><td>2週間〜1ヶ月</td><td>★★★☆</td></tr><tr><td><strong>note</strong></td><td>★★☆</td><td>1〜2ヶ月</td><td>★★★☆</td></tr><tr><td><strong>ブログ</strong></td><td>★★★</td><td>3〜6ヶ月</td><td>★★☆☆（SEOが効けば安定）</td></tr><tr><td><strong>YouTube</strong></td><td>★★★</td><td>2〜3ヶ月</td><td>★★☆☆（動画の説得力は最強）</td></tr></tbody></table></div>
+<h3 class="sec">PART 5：月10万円までの30日ロードマップ</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Day</th><th>やること</th></tr></thead><tbody><tr><td><strong>Day 1〜3</strong></td><td>Brainのランキングを分析。紹介したい商品を3つ選ぶ</td></tr><tr><td><strong>Day 4〜5</strong></td><td>選んだ商品を購入し、中身を確認。実践開始</td></tr><tr><td><strong>Day 6〜7</strong></td><td>Xアカウントを最適化（プロフィール・固定ポスト・アイコン）</td></tr><tr><td><strong>Day 8〜14</strong></td><td>毎日3〜5投稿＋スレッド投稿を週2回</td></tr><tr><td><strong>Day 15〜17</strong></td><td>noteにレビュー記事を1本投稿</td></tr><tr><td><strong>Day 18〜21</strong></td><td>実践結果を報告する投稿シリーズ開始</td></tr><tr><td><strong>Day 22〜25</strong></td><td>2つ目のレビュー記事投稿。比較記事も1本</td></tr><tr><td><strong>Day 26〜28</strong></td><td>紹介リンクのクリック数・成約数を分析</td></tr><tr><td><strong>Day 29〜30</strong></td><td>最も成果が出たチャネル・商品に集中。月10万円を達成</td></tr></tbody></table></div>
+<h3 class="sec">月10万円達成チェックリスト</h3>
+<ul class="ck">
+<li>紹介する商品を3つ以上選定した</li>
+<li>選定した商品を全て自分で購入・確認した</li>
+<li>Xのプロフィールを最適化した</li>
+<li>レビュー記事を1本以上投稿した</li>
+<li>毎日3投稿以上を2週間継続した</li>
+<li>スレッド投稿を3回以上行った</li>
+<li>成約データを分析して改善した</li>
+<li>月10万円を達成した 🎉</li>
+</ul>
+<h3 class="sec">最後に</h3>
+<p>アフィリエイトの本質は「信頼の仲介」だ。</p>
+<p>あなたが本当に良いと思った商品を、それを必要としている人に届ける。</p>
+<p>その「仲介」に対して報酬が支払われる。これは正当なビジネスです。</p>
+<p><strong>面談で、あなたに最適なアフィリエイト戦略と商品選定を一緒にやりましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t08">
+      <div class="content-section">
+        <h2>📱 SNSフォロワーを最速で伸ばすX運用テンプ</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>フォロワー0から1万人まで、僕は3ヶ月だった。<br>才能じゃない。「型」があるかどうかの問題だ。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>X（旧Twitter）は、<strong>最も手軽に「影響力」を手に入れられるプラットフォーム</strong>だ。</p>
+<ul>
+<li>初期費用ゼロ</li>
+<li>顔出し不要</li>
+<li>文章だけで勝負できる</li>
+<li>フォロワーがそのまま「見込み客」になる</li>
+</ul>
+<p>ただし、闇雲に投稿しても一生伸びない。</p>
+<p>このテンプレートでは、<strong>再現性のある「X運用の型」</strong>をお渡しします。</p>
+<h3 class="sec">PART 1：アカウント設計</h3>
+<h3>プロフィール設計テンプレート</h3>
+<pre>【名前】
+〇〇｜肩書き or 実績
+
+例）迫佑樹｜Brain代表 / 20歳で年商10億
+
+【自己紹介文のフレームワーク】
+・何者か（1行で端的に）
+・実績（数字で語る）
+・何を発信しているか
+・フォローするメリット
+・CTA（LINE登録やnoteへの誘導）
+</pre>
+<h3>自己紹介文テンプレート</h3>
+<pre>〇〇を専門にしている△△です。
+□□の実績：(数字を入れる)
+このアカウントでは「〇〇で稼ぐ方法」を毎日発信しています。
+フォローすると〇〇が身につきます。
+▼ 無料プレゼントはこちら
+（リンク）
+</pre>
+<h3>プロフィール画像のポイント</h3>
+<div class="tbl-wrap"><table><thead><tr><th>要素</th><th>推奨</th><th>NG</th></tr></thead><tbody><tr><td><strong>アイコン</strong></td><td>プロ感のある顔写真 or 認識しやすいイラスト</td><td>風景写真・デフォルト画像</td></tr><tr><td><strong>ヘッダー</strong></td><td>実績や提供価値が一目で分かるデザイン</td><td>何も設定しない</td></tr><tr><td><strong>固定ツイート</strong></td><td>最も反応が良かった投稿 or 自己紹介スレッド</td><td>日常投稿を固定</td></tr></tbody></table></div>
+<p><strong>❌ 伸びないアカウントのNG特徴5選（プロフ編）</strong></p>
+<ol>
+<li><strong>名前が長すぎる</strong>：「山田＠〇〇で月収100万達成して自由な人生を満喫中」→ スパムっぽくて誰もフォローしない。</li>
+<li><strong>実績の羅列のみ</strong>：「〇〇賞受賞。〇〇大学卒。TOEIC900点」→ 読者にとって「だから私に何のメリットがあるの？」が抜けている。</li>
+<li><strong>ヘッダーが見切れている</strong>：スマホで見た時に文字が見切れていると、「細部にこだわらない人」と判定される。</li>
+<li><strong>URLのリンク先が謎</strong>：ただのURLだけ貼ってあり「これが何のリンクなのか」の説明がない。</li>
+<li><strong>自己紹介がネガティブ</strong>：「初心者ですが頑張ります」→ 初心者から教わりたい人はゼロです。背伸びしてでもプロとして振る舞うこと。</li>
+</ol>
+<h3 class="sec">PART 2：投稿の「型」7選</h3>
+<h3>型①：ノウハウ共有型（伸びやすさ：★★★★★）</h3>
+<pre>〇〇で月△△万円稼いだ方法を公開します。
+
+① ＿＿＿＿＿
+② ＿＿＿＿＿
+③ ＿＿＿＿＿
+④ ＿＿＿＿＿
+⑤ ＿＿＿＿＿
+
+特に③が重要。これだけで結果が変わりました。
+</pre>
+<h3>型②：ビフォーアフター型（伸びやすさ：★★★★★）</h3>
+<pre>【3ヶ月前】〇〇だった
+【今】△△になった
+
+やったことはたった3つ。
+
+① ＿＿＿＿＿
+② ＿＿＿＿＿
+③ ＿＿＿＿＿
+
+一番効果があったのは②です。
+</pre>
+<h3>型③：常識破壊型（伸びやすさ：★★★★☆）</h3>
+<pre>「〇〇すべき」は嘘です。
+
+実際に結果を出している人は△△をやっています。
+
+理由はシンプルで＿＿＿＿＿。
+
+僕も〇〇をやめてから、□□になりました。
+</pre>
+<h3>型④：失敗談共有型（伸びやすさ：★★★★☆）</h3>
+<pre>正直に告白します。
+
+〇〇で□□万円損しました。
+
+原因は△△だったんですが、
+同じミスをしている人をめちゃくちゃ見かけるので共有します。
+
+① やってしまったこと
+② なぜダメだったか
+③ 今ならこうする
+</pre>
+<h3>型⑤：数字インパクト型（伸びやすさ：★★★★☆）</h3>
+<pre>〇〇を始めて△△日。
+
+・フォロワー：□□人→□□人
+・売上：□□万円
+・問い合わせ：□□件
+
+やったことは毎日この3つだけ。
+</pre>
+<h3>型⑥：まとめ・リスト型（伸びやすさ：★★★☆☆）</h3>
+<pre>〇〇したい人が絶対に読むべきアカウント10選
+
+① @＿＿＿：理由
+② @＿＿＿：理由
+③ @＿＿＿：理由
+...
+
+全員フォローしておいて損はないです。
+</pre>
+<h3>型⑦：スレッド型（伸びやすさ：★★★★★）</h3>
+<pre>【1投目】インパクトのある結論
+「〇〇するだけで月△△万円増えた方法を全部公開します🧵」
+
+【2〜8投目】具体的なステップを1つずつ解説
+
+【最終投目】まとめ + CTA
+「参考になったらRT &amp; いいねお願いします。
+さらに詳しい内容はこちら →（リンク）」
+</pre>
+<h3 class="sec">PART 3：1週間の投稿スケジュール</h3>
+<h3>毎日の投稿ルーティン</h3>
+<div class="tbl-wrap"><table><thead><tr><th>時間帯</th><th>投稿内容</th><th>目的</th></tr></thead><tbody><tr><td><strong>7:00〜8:00</strong></td><td>おはようツイート + 今日の学び</td><td>エンゲージメント獲得</td></tr><tr><td><strong>12:00〜13:00</strong></td><td>ノウハウ系 or 数字インパクト型</td><td>インプレッション狙い</td></tr><tr><td><strong>19:00〜21:00</strong></td><td>スレッド or 失敗談</td><td>深い共感・拡散狙い</td></tr><tr><td><strong>随時</strong></td><td>リプライ・引用RT</td><td>コミュニティ形成</td></tr></tbody></table></div>
+<h3>1週間スケジュール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>曜日</th><th>投稿テーマ</th><th>投稿数</th></tr></thead><tbody><tr><td><strong>月</strong></td><td>週の目標共有 + ノウハウ</td><td>3〜4</td></tr><tr><td><strong>火</strong></td><td>失敗談 + 学び</td><td>3〜4</td></tr><tr><td><strong>水</strong></td><td>スレッド投稿（渾身の1本）</td><td>1（スレッド）+ 2</td></tr><tr><td><strong>木</strong></td><td>ビフォーアフター + 数字報告</td><td>3〜4</td></tr><tr><td><strong>金</strong></td><td>常識破壊型 + まとめ</td><td>3〜4</td></tr><tr><td><strong>土</strong></td><td>1週間の振り返り</td><td>2〜3</td></tr><tr><td><strong>日</strong></td><td>来週の予告 + 軽めの投稿</td><td>2〜3</td></tr></tbody></table></div>
+<h3 class="sec">PART 4：フォロワー伸長の5つの加速器</h3>
+<h3>加速器①：毎日30人にリプライする</h3>
+<pre>ターゲット：自分と同じジャンルで自分よりフォロワーが多い人
+リプライの型：「共感 + 自分の体験 + 質問」
+効果：相手のフォロワーに自分の存在を認知させる
+</pre>
+<h3>加速器②：企画を月1回やる</h3>
+<pre>企画例：
+「フォロー＆RTしてくれた方のアカウント、全員見に行って1人ずつ感想を返します」
+「〇〇に関する質問、何でも答えます（24時間限定）」
+</pre>
+<h3>加速器③：伸びたツイートを分析する</h3>
+<pre>チェック項目：
+・いいね数がフォロワー数の5%以上 → 「型」を分析して再利用
+・RT数がいいね数の20%以上 → 拡散される要素を特定
+・プロフィールクリック率が高い → フック（冒頭文）が強い
+</pre>
+<h3>加速器④：他プラットフォームとの連携</h3>
+<pre>X → note（詳しい解説記事へ誘導）
+X → LINE（リストとして獲得）
+X → YouTube（長尺コンテンツでファン化）
+</pre>
+<h3>加速器⑤：コラボ企画</h3>
+<pre>同じフォロワー規模の人とスペース（音声配信）をやる
+お互いのフォロワーに露出 → 相互にフォロワーが増える
+</pre>
+<h3 class="sec">PART 5：フォロワー別のマイルストーン</h3>
+<div class="tbl-wrap"><table><thead><tr><th>フォロワー数</th><th>目安期間</th><th>この段階でやるべきこと</th></tr></thead><tbody><tr><td><strong>0〜500</strong></td><td>1ヶ月</td><td>毎日投稿の習慣化。リプライ鬼特訓</td></tr><tr><td><strong>500〜1,000</strong></td><td>2ヶ月</td><td>スレッド投稿で一気に知名度UP</td></tr><tr><td><strong>1,000〜3,000</strong></td><td>3ヶ月</td><td>企画実施。noteやBrainでの情報発信開始</td></tr><tr><td><strong>3,000〜5,000</strong></td><td>4〜5ヶ月</td><td>ブランディング確立。アフィリエイト本格化</td></tr><tr><td><strong>5,000〜10,000</strong></td><td>6ヶ月</td><td>コラボ企画。自分の商品販売開始</td></tr></tbody></table></div>
+<h3 class="sec">最後に</h3>
+<p>フォロワー数は「影響力の通貨」だ。</p>
+<p>1万人のフォロワーがいれば、月10万円のアフィリエイト収入は現実的な数字になるし、自分のコンテンツを出品すれば初日に100万円売ることだって可能。</p>
+<p>でも最初の一歩は、<strong>今日1つ投稿すること</strong>。</p>
+<p><strong>面談で、あなたのジャンル・実績に合ったX運用戦略を一緒に設計しましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t09">
+      <div class="content-section">
+        <h2>🏗️ 迫さん直伝ビジネスモデル構築の全体像</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「スキルがあっても稼げない人」と「普通のスキルで年商1億の人」。<br>違いは1つ——ビジネスモデルを持っているかどうか。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>僕がBrainを作る前、プログラミングスクールを経営していた時に気づいたことがある。</p>
+<p><strong>「頑張っている量」と「稼いでいる金額」は比例しない。</strong></p>
+<p>月100時間働いて月収30万円の人がいれば、月20時間で月収300万円の人もいる。</p>
+<p>この差は、能力の差じゃない。<strong>ビジネスモデルの差</strong>だ。</p>
+<p>このコンテンツでは、僕が20歳で年商10億円を達成するまでに学んだ「ビジネスモデル構築の全体像」を、ステージ別にお伝えします。</p>
+<h3 class="sec">Chapter 1：ビジネスの4ステージ</h3>
+<pre>┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│  Stage 4：レバレッジ          年商3億〜                  │
+│  「仕組みが仕組みを生む」                                │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 3：仕組み化            年商3000万〜3億            │
+│  「自分がいなくても回る」                                │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 2：収益の安定          年商500万〜3000万          │
+│  「毎月の売上が読める」                                  │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 1：0→1               年商0〜500万               │
+│  「最初の1円を稼ぐ」                                    │
+│                                                         │
+└─────────────────────────────────────────────────────────┘
+</pre>
+<p><strong>多くの人はStage 1と2を行ったり来たりしている。</strong></p>
+<p>Stage 3に進むには「ビジネスモデル」の転換が必要。</p>
+<p>Stage 4に進むには「レバレッジ」の発想が必要。</p>
+<h3 class="sec">Chapter 2：各ステージで必要なこと</h3>
+<h3>Stage 1：0→1（年商0〜500万）</h3>
+<p><strong>このステージの目標</strong>: 最初の「売れる体験」を作る</p>
+<div class="tbl-wrap"><table><thead><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr></thead><tbody><tr><td>1つのスキルを極める</td><td>複数のことに手を出す</td></tr><tr><td>実績を1つ作る</td><td>ブランディング</td></tr><tr><td>直接営業する</td><td>広告を回す</td></tr><tr><td>安くてもいいから売る</td><td>値段にこだわる</td></tr></tbody></table></div>
+<p><strong>最速のビジネスモデル</strong>:</p>
+<pre>スキル × クライアントワーク ＝ 確実な収益
+
+例）Web制作 × 企業から受注 ＝ 月30〜50万円
+例）動画編集 × YouTuber案件 ＝ 月10〜30万円
+</pre>
+<h3>Stage 2：収益の安定（年商500万〜3000万）</h3>
+<p><strong>このステージの目標</strong>: 「お客さんが毎月来る仕組み」を作る</p>
+<div class="tbl-wrap"><table><thead><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr></thead><tbody><tr><td>継続収入モデルを作る</td><td>単発収入だけに依存する</td></tr><tr><td>自分の商品を持つ</td><td>他人のプラットフォームに依存する</td></tr><tr><td>リスト獲得の仕組みを作る</td><td>手動営業だけで回す</td></tr><tr><td>教育コンテンツを作る</td><td>毎回ゼロから説明する</td></tr></tbody></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre>コンテンツ販売 × 自動化 ＝ レバレッジのある収益
+
+例）Brain教材 × ステップ配信 ＝ 月100〜300万円
+例）オンライン講座 × サブスク ＝ 月50〜200万円
+</pre>
+<h3>Stage 3：仕組み化（年商3000万〜3億）</h3>
+<p><strong>このステージの目標</strong>: 「自分がいなくても売上が立つ」状態を作る</p>
+<div class="tbl-wrap"><table><thead><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr></thead><tbody><tr><td>チームを作る</td><td>1人で全部やる</td></tr><tr><td>マニュアルを整備する</td><td>口頭伝達だけで済ませる</td></tr><tr><td>KPIで経営する</td><td>感覚で判断する</td></tr><tr><td>バックエンド商品を作る</td><td>フロント商品だけで戦う</td></tr></tbody></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre>フロント × バックエンド × 組織 ＝ スケーラブルな事業
+
+例）
+フロント：無料動画 → ステップ配信 → 個別面談
+バックエンド：月額コミュニティ（月3万円 × 100人 ＝ 月300万円）
+組織：セールス2名 + CS1名 + マーケ1名
+</pre>
+<h3>Stage 4：レバレッジ（年商3億〜）</h3>
+<p><strong>このステージの目標</strong>: 「1つの事業の成功モデルを横展開する」</p>
+<div class="tbl-wrap"><table><thead><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr></thead><tbody><tr><td>成功したモデルを他業種に転用</td><td>ゼロから新しいことを始める</td></tr><tr><td>M&A or 事業提携</td><td>全部自前でやる</td></tr><tr><td>代理店モデル / FC展開</td><td>自社だけで拡大する</td></tr><tr><td>投資的な意思決定をする</td><td>現場作業を続ける</td></tr></tbody></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre>成功モデル × 横展開 × レバレッジ ＝ 年商10億円超
+
+例）
+BrainのFC代理店モデル：
+代理店4拠点（東京/名古屋/大阪/福岡） × 売上の80%バック
+→ 代理店が集客。本部は商品開発と価値提供に集中
+→ 商品原価20%で設計（メーカーの卸と同じ構造）
+</pre>
+<h3 class="sec">Chapter 3：ビジネスモデル設計の7つの原則</h3>
+<h3>原則1：フロントエンドとバックエンドを分ける</h3>
+<pre>フロントエンド（集客商品）：利益は出なくてもいい。リストを取ることが目的
+バックエンド（収益商品）：ここで利益を出す
+</pre>
+<p><strong>🧠 【マインドセット】フロント無料化の恐怖を乗り越える</strong></p>
+<p>多くの人が「渾身のノウハウを無料で出すなんてもったいない」と考え、フロントで利益を出そうとして失敗します。しかし、年商1億プレイヤーは「無料コンテンツで100%の価値を出し切り、バックエンドで120%の価値（手厚いサポートや環境）を売る」という設計をしています。</p>
+<h3>原則2：LTV（顧客生涯価値）で考える</h3>
+<pre>❌ 1回の取引で利益を最大化しよう
+✅ 1人の顧客から長期的にいくら得られるか？で設計しよう
+
+LTV &gt; CPA であれば、いくらでも広告を回せる
+</pre>
+<h3>原則3：商品原価は売値の20%以内に抑える</h3>
+<pre>これが「スケーラブルな事業」の鉄則
+
+売値10万円 → 原価2万円以内
+→ 残り80%を「集客」「セールス」「利益」に分配
+
+VERYの法則：
+ 20% 商品原価
+ 20% 集客コスト
+ 20% セールスコスト
+ 20% 運営コスト
+ 20% 利益
+</pre>
+<h3>原則4：「時間」を売らないモデルを作る</h3>
+<pre>❌ コンサル1時間5万円 → 1日5件が限界 → 月収上限あり
+✅ 動画コンテンツ → 一度作れば無限に売れる → 上限なし
+</pre>
+<h3>原則5：継続収入（リカーリング）を組み込む</h3>
+<pre>月額課金：月3万円 × 100人 ＝ 月300万円（毎月自動で入る）
+回数券：年間30万円のチケットをまとめ売り
+</pre>
+<h3>原則6：他人の力を借りる設計にする</h3>
+<pre>アフィリエイト報酬：50%を紹介者に還元 → 他人が営業してくれる
+代理店モデル：80%を代理店にバック → 代理店が集客してくれる
+</pre>
+<h3>原則7：データで判断する</h3>
+<pre>KPI を設計 → 数値を計測 → ボトルネックを特定 → 改善 → 再計測
+このサイクルを週次で回す
+</pre>
+<h3 class="sec">Chapter 4：あなたのビジネスモデル設計ワークシート</h3>
+<h3>ワーク①：今のステージを特定する</h3>
+<div class="tbl-wrap"><table><thead><tr><th>ステージ</th><th>あなたの現状</th></tr></thead><tbody><tr><td>Stage 1（0→1）</td><td>□ まだ月収50万円に達していない</td></tr><tr><td>Stage 2（安定）</td><td>□ 売上はあるが毎月不安定</td></tr><tr><td>Stage 3（仕組み化）</td><td>□ 売上は安定だが自分が止まると事業も止まる</td></tr><tr><td>Stage 4（レバレッジ）</td><td>□ 仕組みは回っている。次の拡大を模索中</td></tr></tbody></table></div>
+<h3>ワーク②：9マスビジネスモデルキャンバス</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>あなたの回答</th></tr></thead><tbody><tr><td><strong>① 顧客は誰か？</strong></td><td></td></tr><tr><td><strong>② 顧客の最大の悩みは？</strong></td><td></td></tr><tr><td><strong>③ あなたが提供する解決策は？</strong></td><td></td></tr><tr><td><strong>④ フロント商品は？</strong></td><td></td></tr><tr><td><strong>⑤ バックエンド商品は？</strong></td><td></td></tr><tr><td><strong>⑥ 集客チャネルは？</strong></td><td></td></tr><tr><td><strong>⑦ セールスの方法は？</strong></td><td></td></tr><tr><td><strong>⑧ 継続収入の仕組みは？</strong></td><td></td></tr><tr><td><strong>⑨ 1年後の目標売上は？</strong></td><td></td></tr></tbody></table></div>
+<h3 class="sec">最後に</h3>
+<p>ビジネスモデルは「地図」だ。</p>
+<p>地図なしで目的地に着く人もいるけど、それは運がいいだけ。</p>
+<p>地図があれば、誰でも、最短ルートで目的地に着ける。</p>
+<p>あなたの事業の「地図」、一緒に描きませんか？</p>
+<p><strong>面談で、あなたのステージに最適なビジネスモデルを一緒に設計しましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+    <div class="tab-content " id="tab-t10">
+      <div class="content-section">
+        <h2>🎤 Brain成功者インタビュー集</h2>
+        <p><strong>by 迫 佑樹（Brain代表）</strong></p>
+<blockquote>「成功者の話を聞く」。これが最もコスパの良い投資だと僕は思っている。<br>本を読むより、セミナーに行くより、"実際にやった人の生の声"が一番刺さる。</blockquote>
+<h3 class="sec">はじめに</h3>
+<p>Brainには月100万円以上を稼ぐプレイヤーが何百人もいる。</p>
+<p>でも彼らの大半は、最初から特別だったわけじゃない。</p>
+<ul>
+<li>元会社員</li>
+<li>子育て中の主婦</li>
+<li>借金まみれだったフリーター</li>
+<li>何のスキルもなかった大学生</li>
+</ul>
+<p>そんな「普通の人たち」が、Brainを使ってどうやって人生を変えたのか。</p>
+<p>4人の成功者のストーリーをお届けします。</p>
+<h3 class="sec">Case 1：コンテンツホルダーの成功例</h3>
+<h3>プロフィール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td><strong>名前</strong></td><td>Aさん（30代・男性）</td></tr><tr><td><strong>元の職業</strong></td><td>大手企業のマーケティング部門</td></tr><tr><td><strong>Brain歴</strong></td><td>1年6ヶ月</td></tr><tr><td><strong>現在の月収</strong></td><td>Brain売上 月150万円 + コンサル 月100万円</td></tr></tbody></table></div>
+<h3>Before</h3>
+<ul>
+<li>大手企業で10年間マーケティングを担当</li>
+<li>会社の看板がないと自分に価値がないと思っていた</li>
+<li>副業に興味はあったが「何を売ればいいか」分からなかった</li>
+<li>月収は手取り35万円。昇給の見込みもほぼなし</li>
+</ul>
+<h3>転機</h3>
+<blockquote>「Brainで"企業マーケティングの裏側"を書いたら、初日に50部売れた。<br>会社で当たり前にやっていたことが、個人事業主にとっては"お金を払ってでも知りたい"ことだったんです。」</blockquote>
+<h3>やったこと</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>アクション</th><th>結果</th></tr></thead><tbody><tr><td><strong>1ヶ月目</strong></td><td>企業マーケの知識をBrainに出品（4,980円）</td><td>初月売上：24万円</td></tr><tr><td><strong>3ヶ月目</strong></td><td>2作目を出品（実践テンプレ付き・14,800円）</td><td>月売上合計：60万円</td></tr><tr><td><strong>6ヶ月目</strong></td><td>購入者向けにコンサルを開始</td><td>コンサル収入：月50万円追加</td></tr><tr><td><strong>12ヶ月目</strong></td><td>月額コミュニティ運営を開始</td><td>月額会員80名 × 月1万円</td></tr></tbody></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"当たり前"を疑え。あなたが当然だと思っている知識は、誰かにとっては喉から手が出るほど欲しい情報。」</strong></blockquote>
+<h3 class="sec">Case 2：0→1からの成功例</h3>
+<h3>プロフィール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td><strong>名前</strong></td><td>Bさん（20代・女性）</td></tr><tr><td><strong>元の職業</strong></td><td>アパレル販売員</td></tr><tr><td><strong>Brain歴</strong></td><td>10ヶ月</td></tr><tr><td><strong>現在の月収</strong></td><td>Web制作 月40万円 + Brain教材 月20万円</td></tr></tbody></table></div>
+<h3>Before</h3>
+<ul>
+<li>アパレル店員として5年勤務。手取り18万円</li>
+<li>将来に不安を感じ、何かスキルを身につけたいと思っていた</li>
+<li>プログラミングは「自分には無理」と思い込んでいた</li>
+<li>貯金はほぼゼロ。月5万円の副収入が切実に必要だった</li>
+</ul>
+<h3>転機</h3>
+<blockquote>「Brainで見つけた"未経験からWeb制作で稼ぐ"という教材を購入。<br>最初は半信半疑だったけど、書いてある通りにやったら本当に2ヶ月で初案件が取れた。」</blockquote>
+<h3>やったこと</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>アクション</th><th>結果</th></tr></thead><tbody><tr><td><strong>1ヶ月目</strong></td><td>Brain教材でWeb制作の基礎を学習（毎日2時間）</td><td>基礎スキル習得</td></tr><tr><td><strong>2ヶ月目</strong></td><td>ポートフォリオ制作＋クラウドソーシングで提案開始</td><td>初案件獲得（3万円）</td></tr><tr><td><strong>4ヶ月目</strong></td><td>継続案件を2社から獲得</td><td>月収15万円</td></tr><tr><td><strong>6ヶ月目</strong></td><td>単価交渉＋新規開拓</td><td>月収30万円（アパレル退職）</td></tr><tr><td><strong>10ヶ月目</strong></td><td>自分の学習過程をBrain教材として出品</td><td>教材売上 月20万円追加</td></tr></tbody></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"月5万円"を目標にしたこと。いきなり月100万円とか言ってたら、何も始められなかった。小さいゴールを置いて、1つずつクリアしていった。」</strong></blockquote>
+<h3 class="sec">Case 3：経営者のスケール成功例</h3>
+<h3>プロフィール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td><strong>名前</strong></td><td>Cさん（40代・男性）</td></tr><tr><td><strong>元の状況</strong></td><td>個人コンサルタント</td></tr><tr><td><strong>Brain歴</strong></td><td>8ヶ月</td></tr><tr><td><strong>現在の年商</strong></td><td>1億2000万円（Brain以前は3000万円）</td></tr></tbody></table></div>
+<h3>Before</h3>
+<ul>
+<li>個人でコンサルティング事業を運営。年商3000万円</li>
+<li>1日12時間以上働いているのに、これ以上売上が伸びない</li>
+<li>自分が倒れたら終わりの「自転車操業」状態</li>
+<li>「仕組み化」の必要性は感じていたが、やり方が分からなかった</li>
+</ul>
+<h3>転機</h3>
+<blockquote>「Brainコミットに参加して、"自分が現場に出ること自体がボトルネック"だと気づいた。<br>経営者としての在り方を根本から変えてくれた。」</blockquote>
+<h3>やったこと</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>アクション</th><th>結果</th></tr></thead><tbody><tr><td><strong>1ヶ月目</strong></td><td>KPIの設計＋ボトルネックの特定</td><td>問題の可視化</td></tr><tr><td><strong>2ヶ月目</strong></td><td>セールストークのマニュアル化＋セールス担当を採用</td><td>面談の代行開始</td></tr><tr><td><strong>4ヶ月目</strong></td><td>ステップ配信で教育を自動化</td><td>リードの温度感が安定</td></tr><tr><td><strong>6ヶ月目</strong></td><td>バックエンド商品として月額コミュニティを設計</td><td>継続収入の柱ができた</td></tr><tr><td><strong>8ヶ月目</strong></td><td>自分は戦略とコンテンツ制作に集中</td><td>年商1億円ペースに</td></tr></tbody></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"仕組み化"とは、自分の仕事を奪われることじゃなく、自分の時間を取り戻すこと。それに気づいてから全部変わった。」</strong></blockquote>
+<h3 class="sec">Case 4：アフィリエイターの成功例</h3>
+<h3>プロフィール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td><strong>名前</strong></td><td>Dさん（20代・男性）</td></tr><tr><td><strong>元の職業</strong></td><td>飲食店アルバイト</td></tr><tr><td><strong>Brain歴</strong></td><td>6ヶ月</td></tr><tr><td><strong>現在の月収</strong></td><td>アフィリエイト報酬 月35万円</td></tr></tbody></table></div>
+<h3>Before</h3>
+<ul>
+<li>飲食店のアルバイトで生計を立てていた。月収14万円</li>
+<li>SNSは趣味でやっていたがフォロワー200人程度</li>
+<li>「自分には売れる知識もスキルもない」と思っていた</li>
+<li>アフィリエイトは「怪しい」というイメージがあった</li>
+</ul>
+<h3>転機</h3>
+<blockquote>「たまたまBrainで買った教材がめちゃくちゃ良くて、感想をXに書いたら、そのツイートからアフィリ報酬で5,000円入った。<br>"良いものを紹介するだけでお金が入るんだ"と衝撃を受けた。」</blockquote>
+<h3>やったこと</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>アクション</th><th>結果</th></tr></thead><tbody><tr><td><strong>1ヶ月目</strong></td><td>自分が買ったBrain教材のレビューをXで投稿</td><td>月5,000円</td></tr><tr><td><strong>2ヶ月目</strong></td><td>X運用を本格化。毎日5投稿＋週1スレッド</td><td>フォロワー800人</td></tr><tr><td><strong>3ヶ月目</strong></td><td>noteでレビュー記事を開始。比較記事がバズる</td><td>月8万円</td></tr><tr><td><strong>4ヶ月目</strong></td><td>フォロワー2,500人突破。紹介商品を厳選</td><td>月15万円</td></tr><tr><td><strong>6ヶ月目</strong></td><td>フォロワー5,000人。高単価商品の紹介に注力</td><td>月35万円</td></tr></tbody></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"自分で買って、本当に良いと思ったものしか紹介しない"。これを徹底したからフォロワーの信頼を得られた。信頼があるから売れる。」</strong></blockquote>
+<h3 class="sec">4人に共通する成功法則</h3>
+<div class="tbl-wrap"><table><thead><tr><th>#</th><th>法則</th></tr></thead><tbody><tr><td>1</td><td><strong>小さく始めた</strong>。最初から大きなことをしなかった</td></tr><tr><td>2</td><td><strong>1つに集中した</strong>。あれこれ手を出さなかった</td></tr><tr><td>3</td><td><strong>行動が早かった</strong>。考えすぎずにまず動いた</td></tr><tr><td>4</td><td><strong>環境を変えた</strong>。独学ではなく、先を行く人から学んだ</td></tr><tr><td>5</td><td><strong>データを見た</strong>。感覚ではなく、数字で改善した</td></tr></tbody></table></div>
+<h3>💡 実践アクション：このインタビューを「自分の武器」にする方法</h3>
+<p>成功者のストーリーを読むだけで終わらせてはいけません。今日から以下の方法で活用してください。</p>
+<ol>
+<li><strong>アフィリエイトの提案材料にする</strong>：「実は未経験から数ヶ月で月収40万になった事例があって…」と、あなたのフォロワーに希望を見せる。</li>
+<li><strong>自分の目標設定（ベンチマーク）に使う</strong>：自分と似た境遇のケースを見つけ、その人の「やったことリスト」をそのまま自分のタスクにする。</li>
+<li><strong>特典として活用する</strong>：自身のBrain記事のアフィリエイトリンクから購入してくれた人への「限定特典（事例集）」として配布し、成約率を上げる（※本特典の二次配布はBrainブースターパッケージのアフィリエイト目的に限り許可されています）。</li>
+</ol>
+<h3 class="sec">あなたは、どのタイプに近いですか？</h3>
+<div class="tbl-wrap"><table><thead><tr><th>Caseと似ている</th><th>あなたへのおすすめ</th></tr></thead><tbody><tr><td><strong>Case 1（Aさん）に近い</strong></td><td>今の知識を「コンテンツ」として商品化しましょう</td></tr><tr><td><strong>Case 2（Bさん）に近い</strong></td><td>まずは「売れるスキル」を1つ身につけましょう</td></tr><tr><td><strong>Case 3（Cさん）に近い</strong></td><td>KPIの設計と仕組み化で、次のステージへ</td></tr><tr><td><strong>Case 4（Dさん）に近い</strong></td><td>X運用を強化して、アフィリエイト収入を最大化しましょう</td></tr></tbody></table></div>
+<h3 class="sec">最後に</h3>
+<p>4人とも、特別な人じゃなかった。</p>
+<p>でも全員が「環境」を変え、「正しい情報」に出会い、「行動」した。</p>
+<p>あなたの人生を変えるきっかけは、意外と目の前にあるかもしれない。</p>
+<p><strong>面談で、あなただけの成功ストーリーの第一歩を踏み出しましょう。</strong></p>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+
+      </div>
+    </div>
+  
+</section>
+
+<footer class="footer">
+  <p>Brain Booster Package | &copy; 2026 Brain Inc. All Rights Reserved.</p>
+</footer>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const btns=document.querySelectorAll('.tab-btn');
+  const ids=['t01','t02','t03','t04','t05','t06','t07','t08','t09','t10'];
+  const idx=ids.indexOf(id);
+  if(idx>=0&&btns[idx])btns[idx].classList.add('active');
+  document.getElementById('content').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>副業スキルマッチング診断 | Skill Hacks 全話視聴者限定特典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #F06543;
+            --orange-light: #FFF4F1;
+            --bg: #f8f9fb;
+            --white: #fff;
+            --text: #1a1a2e;
+            --sub: #555;
+            --muted: #999;
+            --border: #e8e8e8;
+            --radius: 10px;
+            --blue: #2563eb;
+            --green: #16a34a
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px
+        }
+
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 32px 20px 28px;
+            text-align: center
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .accent {
+            color: #fbbf24
+        }
+
+        .sub-txt {
+            font-size: 13px;
+            opacity: .75
+        }
+
+        .main {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 24px 16px 60px
+        }
+
+        /* Quiz */
+        .quiz-wrap {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 24px
+        }
+
+        .quiz-header {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--orange-light) 0%, #fff 100%);
+            border-bottom: 1px solid #fde4d8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .quiz-header h2 {
+            font-size: .95rem;
+            font-weight: 900
+        }
+
+        .quiz-progress {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--orange)
+        }
+
+        .quiz-body {
+            padding: 24px 20px
+        }
+
+        .question-text {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.6
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .option {
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: .9rem;
+            color: var(--sub);
+            transition: all .15s;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start
+        }
+
+        .option:hover {
+            border-color: var(--orange);
+            background: var(--orange-light);
+            color: var(--text)
+        }
+
+        .option.selected {
+            border-color: var(--orange);
+            background: var(--orange-light);
+            color: var(--text);
+            font-weight: 700
+        }
+
+        .option-key {
+            font-weight: 900;
+            color: var(--orange);
+            flex-shrink: 0
+        }
+
+        .quiz-nav {
+            padding: 16px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: .88rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all .2s
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: #fff
+        }
+
+        .btn-primary:hover {
+            background: #d9573a
+        }
+
+        .btn-secondary {
+            background: var(--bg);
+            color: var(--sub);
+            border: 1px solid var(--border)
+        }
+
+        .btn:disabled {
+            opacity: .45;
+            cursor: not-allowed
+        }
+
+        /* Progress bar */
+        .progress-bar-bg {
+            background: #f0f0f0;
+            height: 4px;
+            border-radius: 99px;
+            overflow: hidden
+        }
+
+        .progress-bar-fill {
+            background: var(--orange);
+            height: 100%;
+            border-radius: 99px;
+            transition: width .4s ease
+        }
+
+        /* Result */
+        .result-wrap {
+            display: none;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            margin-bottom: 24px
+        }
+
+        .result-header {
+            padding: 20px 20px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .result-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 6px
+        }
+
+        .result-type {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 4px
+        }
+
+        .result-sub {
+            font-size: .88rem;
+            color: var(--sub)
+        }
+
+        .result-body {
+            padding: 20px
+        }
+
+        .tbl-wrap {
+            overflow-x: auto;
+            margin: 10px 0
+        }
+
+        .tbl-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .82rem
+        }
+
+        .tbl-wrap th {
+            background: #f7f7f7;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border)
+        }
+
+        .tbl-wrap td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--sub)
+        }
+
+        .sub-head {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin: 16px 0 8px;
+            border-bottom: 1px solid #fde4d8;
+            padding-bottom: 4px
+        }
+
+        .tip-box {
+            background: var(--orange-light);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--sub);
+            margin: 10px 0;
+            line-height: 1.7
+        }
+
+        .body-text {
+            font-size: .9rem;
+            color: var(--sub);
+            line-height: 1.8;
+            margin-bottom: 10px
+        }
+
+        ul.dot-list {
+            padding-left: 1.2rem;
+            font-size: .88rem;
+            color: var(--sub)
+        }
+
+        ul.dot-list li {
+            margin-bottom: 4px
+        }
+
+        /* Hybrid */
+        .hybrid-wrap {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 24px
+        }
+
+        .hybrid-wrap h3 {
+            font-size: .95rem;
+            font-weight: 900;
+            margin-bottom: 12px
+        }
+
+        /* Trend */
+        .trend-wrap {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 20px;
+            margin-bottom: 24px
+        }
+
+        .trend-wrap h3 {
+            font-size: .95rem;
+            font-weight: 900;
+            margin-bottom: 12px
+        }
+
+        .retry-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 32px;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: var(--muted);
+            background: var(--white);
+            border-top: 1px solid var(--border)
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="badge">🎁 全話視聴者限定特典④</div>
+        <h1>🔍 副業スキル<span class="accent">マッチング診断</span></h1>
+        <p class="sub-txt">10問に答えるだけであなたに最適な副業スキルが分かります。</p>
+    </header>
+
+    <main class="main">
+
+        <!-- Quiz -->
+        <div class="quiz-wrap" id="quizWrap">
+            <div class="quiz-header">
+                <h2 id="qTitle">質問 1 / 10</h2>
+                <span class="quiz-progress" id="qProgress">0%</span>
+            </div>
+            <div style="padding:0 20px">
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+                </div>
+            </div>
+            <div class="quiz-body">
+                <div class="question-text" id="qText"></div>
+                <div class="options" id="qOptions"></div>
+            </div>
+            <div class="quiz-nav">
+                <button class="btn btn-secondary" id="prevBtn" onclick="prevQ()" disabled>← 前へ</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextQ()" disabled>次へ →</button>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="result-wrap" id="resultWrap">
+            <div class="result-header">
+                <div class="result-label">診断結果</div>
+                <div class="result-type" id="resultType">─</div>
+                <div class="result-sub" id="resultSub">─</div>
+            </div>
+            <div class="result-body" id="resultBody"></div>
+            <div style="padding:0 20px 20px;text-align:center">
+                <button class="retry-btn" onclick="restart()">もう一度診断する</button>
+            </div>
+        </div>
+
+        <!-- Hybrid -->
+        <div class="hybrid-wrap">
+            <h3>🔀 同点の場合 ── ハイブリッド戦略</h3>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>同点パターン</th>
+                            <th>ハイブリッド戦略</th>
+                            <th>目指せる単価</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>プログラミング × デザイン</td>
+                            <td>コーディングまでワンストップ</td>
+                            <td>10〜50万円/件</td>
+                        </tr>
+                        <tr>
+                            <td>動画編集 × デザイン</td>
+                            <td>YouTube編集＋サムネセット提案</td>
+                            <td>1〜3万円/本</td>
+                        </tr>
+                        <tr>
+                            <td>プログラミング × ライティング</td>
+                            <td>SEOに強いWebサイト制作</td>
+                            <td>10〜30万円/件</td>
+                        </tr>
+                        <tr>
+                            <td>動画編集 × ライティング</td>
+                            <td>台本作成から編集まで一括対応</td>
+                            <td>1〜5万円/本</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tip-box">まず1つ目のスキルで案件を取れるレベルになってから、2つ目を追加する。2つ同時に学ぶのは効率が悪い。順番が大事！</div>
+        </div>
+
+        <!-- Trend -->
+        <div class="trend-wrap">
+            <h3>📊 2026年 スキル別トレンド比較</h3>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>スキル</th>
+                            <th>2026年トレンド</th>
+                            <th>AI活用度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>プログラミング</td>
+                            <td>AI×Web開発の掛け合わせ需要が急増</td>
+                            <td>高（コード生成）</td>
+                        </tr>
+                        <tr>
+                            <td>動画編集</td>
+                            <td>ショート動画の需要爆発中</td>
+                            <td>中（字幕自動化）</td>
+                        </tr>
+                        <tr>
+                            <td>デザイン</td>
+                            <td>「AIを使いこなせるデザイナー」に案件集中</td>
+                            <td>高（画像生成）</td>
+                        </tr>
+                        <tr>
+                            <td>ライティング</td>
+                            <td>「人が取材・執筆する記事」の単価が上昇中</td>
+                            <td>中（リサーチ補助）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tip-box">どのスキルもAIで「作業の一部」が自動化されつつあります。だからこそ「AIを使いこなす側」に回ることが重要です。</div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>© Skill Hacks by Brain Inc. ｜ スキルハックス 全話視聴者限定特典</p>
+        <p style="margin-top:6px">※ 本コンテンツの内容は個人の経験に基づくものであり、成果を保証するものではありません。</p>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                text: "Q1. 作業スタイルについて、最も近いのはどれですか？", opts: [
+                    { key: "A", label: "コツコツ細かい作業が好き（動画やデータを触るのが苦じゃない）", score: { movie: 3 } },
+                    { key: "B", label: "モノを「作る」より「書く・考える」方が得意", score: { writing: 3 } },
+                    { key: "C", label: "ビジュアルや色・デザインにこだわりたい", score: { design: 3 } },
+                    { key: "D", label: "ロジックや仕組みを作るのが好き（数学・論理思考型）", score: { prog: 3 } }
+                ]
+            },
+            {
+                text: "Q2. 副業に充てられる時間（1日の目安）はどのくらいですか？", opts: [
+                    { key: "A", label: "30分〜1時間（スキマ時間のみ）", score: { writing: 2 } },
+                    { key: "B", label: "1〜2時間（仕事終わり・休日中心）", score: { movie: 1, design: 1 } },
+                    { key: "C", label: "2〜3時間（しっかり時間を確保できる）", score: { movie: 2, design: 2 } },
+                    { key: "D", label: "3時間以上（本気で取り組める）", score: { prog: 3, movie: 1 } }
+                ]
+            },
+            {
+                text: "Q3. PCスキルについて、あなたに近いのはどれですか？", opts: [
+                    { key: "A", label: "OfficeとWebブラウザが使える程度", score: { writing: 2 } },
+                    { key: "B", label: "動画ソフトや画像編集ソフトを多少使ったことがある", score: { movie: 2, design: 1 } },
+                    { key: "C", label: "AdobeソフトやCanvaで画像を作ったことがある", score: { design: 3 } },
+                    { key: "D", label: "HTMLやプログラミングを少し触ったことがある", score: { prog: 3 } }
+                ]
+            },
+            {
+                text: "Q4. 「仕事をする上で大切にしていること」として最も近いのは？", opts: [
+                    { key: "A", label: "クライアントの期待を超えること（サービス精神）", score: { movie: 1, writing: 1 } },
+                    { key: "B", label: "美しいもの・見栄えの良いものを作ること", score: { design: 3 } },
+                    { key: "C", label: "効率よく速く仕上げること", score: { prog: 2, movie: 1 } },
+                    { key: "D", label: "相手に分かりやすく伝えること", score: { writing: 3 } }
+                ]
+            },
+            {
+                text: "Q5. 副業を始めたい主な理由は何ですか？（最も近いもの）", opts: [
+                    { key: "A", label: "とにかく早く稼ぎたい（最短で月3万〜）", score: { movie: 2, writing: 2 } },
+                    { key: "B", label: "将来的に独立・フリーランスを目指したい", score: { prog: 2, design: 1 } },
+                    { key: "C", label: "自分のスキルを活かして「作品」を作りたい", score: { design: 2, movie: 1 } },
+                    { key: "D", label: "生活費の補填や貯金を増やしたい（安定収入）", score: { writing: 2, movie: 1 } }
+                ]
+            },
+            {
+                text: "Q6. 動画コンテンツについて、あなたに近いのはどれですか？", opts: [
+                    { key: "A", label: "YouTubeを1日1時間以上見ている", score: { movie: 3 } },
+                    { key: "B", label: "動画は見るが、自分で作るイメージはない", score: { writing: 1 } },
+                    { key: "C", label: "動画を作るより写真・デザインに興味がある", score: { design: 2 } },
+                    { key: "D", label: "動画よりもアプリやWebサービスに興味がある", score: { prog: 3 } }
+                ]
+            },
+            {
+                text: "Q7. 文章を書くことについて、当てはまるのはどれですか？", opts: [
+                    { key: "A", label: "文章を書くのが好きで、日記やSNS投稿をよくする", score: { writing: 3 } },
+                    { key: "B", label: "報告書など論理的な文章は得意だが、感情表現は苦手", score: { prog: 1 } },
+                    { key: "C", label: "どちらかというと苦手だが、嫌いではない", score: { movie: 1 } },
+                    { key: "D", label: "文章よりビジュアルで表現したい", score: { design: 3 } }
+                ]
+            },
+            {
+                text: "Q8. あなたの「現職・バックグラウンド」に近いのはどれですか？", opts: [
+                    { key: "A", label: "営業・接客・コミュニケーション系", score: { writing: 2, movie: 1 } },
+                    { key: "B", label: "IT・エンジニア・理系専門職", score: { prog: 3 } },
+                    { key: "C", label: "デザイン・クリエイティブ・ものづくり系", score: { design: 3 } },
+                    { key: "D", label: "事務・管理・教育・医療・その他", score: { writing: 2 } }
+                ]
+            },
+            {
+                text: "Q9. スキル習得のスタイルとして近いのはどれですか？", opts: [
+                    { key: "A", label: "動画を見ながら手を動かして学ぶのが好き", score: { movie: 2, prog: 1 } },
+                    { key: "B", label: "テキストや本を読んで学ぶのが好き", score: { writing: 2 } },
+                    { key: "C", label: "実際に作品を作りながら学ぶのが好き", score: { design: 3, movie: 1 } },
+                    { key: "D", label: "エラーを調べて解決しながら学ぶのが好き", score: { prog: 3 } }
+                ]
+            },
+            {
+                text: "Q10. 副業で将来どうなりたいですか？", opts: [
+                    { key: "A", label: "まずは月5〜10万円、本業の傍らで安定して稼ぎたい", score: { movie: 2, writing: 2 } },
+                    { key: "B", label: "フリーランスとして独立し、自分の好きな仕事をしたい", score: { design: 2, prog: 2 } },
+                    { key: "C", label: "自分のビジネス・ブランドを作りたい", score: { writing: 2, design: 1 } },
+                    { key: "D", label: "副業で実績を作り、転職・キャリアチェンジを目指したい", score: { prog: 3 } }
+                ]
+            }
+        ];
+
+        const results = {
+            movie: {
+                type: "🎬 動画編集タイプ",
+                sub: "コツコツ積み上げ型。初案件まで最速の大器晩成スキル。",
+                data: [
+                    { label: "初期の案件単価", value: "3,000〜5,000円/本" },
+                    { label: "習得難易度", value: "★★☆☆☆（始めやすい）" },
+                    { label: "将来の発展性", value: "YouTube運営代行・ディレクター・映像クリエイター" },
+                    { label: "2026年トレンド", value: "ショート動画の需要爆発中" }
+                ],
+                actions: ["Premiere Pro or DaVinci Resolveの基礎を1週間学ぶ", "好きなYouTuberの動画を「勝手に編集」してサンプルを1本作る", "クラウドワークスで「動画編集」案件に応募開始（1日3件）"]
+            },
+            writing: {
+                type: "✍️ ライティングタイプ",
+                sub: "言語化が得意な戦略家。社会人経験がそのまま強みになる。",
+                data: [
+                    { label: "初期の案件単価", value: "文字単価1円〜（3,000円〜/記事）" },
+                    { label: "習得難易度", value: "★★☆☆☆（最も始めやすい）" },
+                    { label: "将来の発展性", value: "コピーライター・編集者・自分のメディア運営" },
+                    { label: "2026年トレンド", value: "体験ベース記事の単価が上昇中" }
+                ],
+                actions: ["SEOライティングの基礎（キーワード選定・見出し設計）を学ぶ", "PREP法を習得して、実際に3,000字の記事を2〜3本書く", "note等に公開してポートフォリオにし、営業を開始する"]
+            },
+            design: {
+                type: "🎨 デザインタイプ",
+                sub: "ビジュアル思考の表現者。「見た目」の力で高単価を狙える。",
+                data: [
+                    { label: "初期の案件単価", value: "3,000〜5,000円/枚" },
+                    { label: "習得難易度", value: "★★★☆☆（ツールの習得が必要）" },
+                    { label: "将来の発展性", value: "UIデザイナー・ブランディング・アートディレクター" },
+                    { label: "2026年トレンド", value: "「AIを使いこなせるデザイナー」に企業案件が集中" }
+                ],
+                actions: ["Photoshopの基礎（レイヤー・マスク・切り抜き）を3日で学ぶ", "実在する商品のバナーを模写で3枚制作する（5日）", "ポートフォリオを整理して案件応募開始"]
+            },
+            prog: {
+                type: "🖥️ プログラミングタイプ",
+                sub: "論理思考の問題解決者。習得に時間がかかるが、単価が高い。",
+                data: [
+                    { label: "初期の案件単価", value: "3〜5万円/ページ" },
+                    { label: "習得難易度", value: "★★★☆☆（論理的に学べる）" },
+                    { label: "将来の発展性", value: "Webサービス開発・SaaS構築・CTO" },
+                    { label: "2026年トレンド", value: "AI×Web開発の掛け合わせ需要が急増" }
+                ],
+                actions: ["HTML/CSSを1週間で学習してWebサイトを作れるようになる", "プログラミング言語の基礎概念を理解する", "シンプルなLPを1本コーディングしてポートフォリオに"]
+            }
+        };
+
+        let current = 0;
+        let answers = Array(questions.length).fill(null);
+        let scores = { movie: 0, writing: 0, design: 0, prog: 0 };
+
+        function renderQ() {
+            const q = questions[current];
+            document.getElementById('qTitle').textContent = `質問 ${current + 1} / ${questions.length}`;
+            const pct = Math.round(current / questions.length * 100);
+            document.getElementById('qProgress').textContent = pct + '%';
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('qText').textContent = q.text;
+            const optsEl = document.getElementById('qOptions');
+            optsEl.innerHTML = '';
+            q.opts.forEach((o, i) => {
+                const div = document.createElement('div');
+                div.className = 'option' + (answers[current] === i ? ' selected' : '');
+                div.innerHTML = `<span class="option-key">${o.key}</span><span>${o.label}</span>`;
+                div.onclick = () => selectOpt(i);
+                optsEl.appendChild(div);
+            });
+            document.getElementById('prevBtn').disabled = current === 0;
+            document.getElementById('nextBtn').textContent = current === questions.length - 1 ? '診断結果を見る ▶' : '次へ →';
+            document.getElementById('nextBtn').disabled = answers[current] === null;
+        }
+
+        function selectOpt(i) {
+            answers[current] = i;
+            document.getElementById('nextBtn').disabled = false;
+            renderQ();
+        }
+
+        function nextQ() {
+            if (current < questions.length - 1) { current++; renderQ(); }
+            else showResult();
+        }
+
+        function prevQ() {
+            if (current > 0) { current--; renderQ(); }
+        }
+
+        function showResult() {
+            scores = { movie: 0, writing: 0, design: 0, prog: 0 };
+            answers.forEach((a, qi) => {
+                if (a === null) return;
+                const sc = questions[qi].opts[a].score;
+                Object.keys(sc).forEach(k => scores[k] += sc[k]);
+            });
+            const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+            const r = results[winner];
+            document.getElementById('quizWrap').style.display = 'none';
+            const rw = document.getElementById('resultWrap');
+            rw.style.display = 'block';
+            document.getElementById('resultType').textContent = r.type;
+            document.getElementById('resultSub').textContent = r.sub;
+
+            const scoreOrder = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+            const scoreLabels = { movie: '動画編集', writing: 'ライティング', design: 'デザイン', prog: 'プログラミング' };
+            const maxScore = Math.max(...Object.values(scores));
+
+            let html = `<div class="sub-head">スコア（${Object.values(scores).reduce((a, b) => a + b, 0)}点満点）</div>`;
+            html += `<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">`;
+            scoreOrder.forEach(k => {
+                const pct = maxScore ? Math.round(scores[k] / maxScore * 100) : 0;
+                html += `<div><div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:3px"><span style="font-weight:${k === winner ? '900' : '400'};color:${k === winner ? 'var(--orange)' : 'var(--sub)'}">${scoreLabels[k]}</span><span style="color:var(--orange);font-weight:700">${scores[k]}点</span></div><div style="background:#f0f0f0;border-radius:99px;height:6px;overflow:hidden"><div style="background:${k === winner ? 'var(--orange)' : '#ccc'};height:100%;border-radius:99px;width:${pct}%"></div></div></div>`;
+            });
+            html += `</div>`;
+
+            html += `<div class="sub-head">スキル情報</div><div class="tbl-wrap"><table><tbody>`;
+            r.data.forEach(d => { html += `<tr><td style="font-weight:700;width:35%">${d.label}</td><td>${d.value}</td></tr>`; });
+            html += `</tbody></table></div>`;
+
+            html += `<div class="sub-head">1ヶ月目にやること TOP3</div><ul class="dot-list">`;
+            r.actions.forEach(a => { html += `<li>${a}</li>`; });
+            html += `</ul>`;
+            html += `<div class="tip-box" style="margin-top:16px">迷ったらまず1つ始めてみましょう。合わなかったら途中で変えても大丈夫です。</div>`;
+
+            document.getElementById('resultBody').innerHTML = html;
+            rw.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function restart() {
+            current = 0; answers = Array(questions.length).fill(null);
+            document.getElementById('quizWrap').style.display = 'block';
+            document.getElementById('resultWrap').style.display = 'none';
+            renderQ();
+            document.getElementById('quizWrap').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        renderQ();
+    </script>
+</body>
+
+</html>

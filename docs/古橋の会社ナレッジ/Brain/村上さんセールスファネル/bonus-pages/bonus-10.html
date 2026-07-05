@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特典10｜Brain成功者インタビュー集 - Brain ブースターパッケージ</title>
+<meta name="description" content="Brain ブースターパッケージ 特典10：Brain成功者インタビュー集。迫佑樹（Brain代表）からの限定特典コンテンツ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #f59e0b;
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --text: #f0f0f5;
+    --text-muted: #8888aa;
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-logo {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-logo span {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .topbar-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0f1f 50%, #0f1a1f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f59e0b22 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .hero-num .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .hero-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 20px #f59e0b66);
+  }
+  .hero-type {
+    display: inline-block;
+    background: #f59e0b22;
+    border: 1px solid #f59e0b44;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-author {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .hero-author strong {
+    color: var(--accent);
+  }
+
+  /* MAIN CONTENT */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Content styles */
+  .content h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 48px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f59e0b44;
+    color: var(--text);
+    position: relative;
+  }
+  .content h2::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .content h3::before {
+    content: '▶';
+    font-size: 10px;
+  }
+  .content p {
+    margin-bottom: 16px;
+    color: #d0d0e0;
+  }
+  .content strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .content em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .content code {
+    background: rgba(255,255,255,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #a8d8ff;
+  }
+  .content pre {
+    background: #0d0d18;
+    border: 1px solid #f59e0b33;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .content pre code {
+    background: none;
+    padding: 0;
+    color: #c8e6ff;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .content blockquote {
+    background: #f59e0b11;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: #c0c0d8;
+    font-style: italic;
+  }
+  .content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .content ul {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+  }
+  .content ul li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .content ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .content ol {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+    counter-reset: ol-counter;
+  }
+  .content ol li {
+    padding: 6px 0 6px 36px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    counter-increment: ol-counter;
+  }
+  .content ol li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    top: 8px;
+  }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: #f59e0b22;
+    color: var(--text);
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #f59e0b44;
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 16px;
+    color: #c0c0d8;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* NAVIGATION */
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    gap: 16px;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover {
+    color: var(--text);
+    border-color: #f59e0b44;
+    background: #f59e0b11;
+  }
+  .nav-index {
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .nav-index:hover {
+    color: var(--accent);
+    border-color: #f59e0b44;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060609;
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 36px; }
+    .container { padding: 32px 16px 60px; }
+    .cta-section { padding: 28px 20px; }
+    .page-nav { padding: 16px; flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    🧠 <span>Brain</span> ブースターパッケージ
+  </a>
+  <span class="topbar-badge">特典 10 / 10</span>
+</div>
+
+<section class="hero">
+  <div class="hero-num">
+    <span class="dot"></span>
+    SPECIAL BONUS 10
+  </div>
+  <span class="hero-icon">🌟</span>
+  <div class="hero-type">全タイプ共通 特別版</div>
+  <h1>Brain成功者インタビュー集</h1>
+  <p class="hero-author">by <strong>迫 佑樹</strong>（Brain代表）</p>
+</section>
+
+<div class="container">
+  <div class="content">
+    <hr>
+<blockquote>「成功者の話を聞く」。これが最もコスパの良い投資だと僕は思っている。 本を読むより、セミナーに行くより、"実際にやった人の生の声"が一番刺さる。</blockquote>
+<hr>
+<h2>はじめに</h2>
+<p>Brainには月100万円以上を稼ぐプレイヤーが何百人もいる。</p>
+<p>でも彼らの大半は、最初から特別だったわけじゃない。</p>
+<ul><li>元会社員</li><li>子育て中の主婦</li><li>借金まみれだったフリーター</li><li>何のスキルもなかった大学生</li></ul>
+<p>そんな「普通の人たち」が、Brainを使ってどうやって人生を変えたのか。</p>
+<p>4人の成功者のストーリーをお届けします。</p>
+<hr>
+<h2>Case 1：コンテンツホルダーの成功例</h2>
+<h3>プロフィール</h3>
+<div class="table-wrap"><table><tr><th>項目</th><th>内容</th></tr><tr><td>**名前**</td><td>Aさん（30代・男性）</td></tr><tr><td>**元の職業**</td><td>大手企業のマーケティング部門</td></tr><tr><td>**Brain歴**</td><td>1年6ヶ月</td></tr><tr><td>**現在の月収**</td><td>Brain売上 月150万円 + コンサル 月100万円</td></tr></table></div>
+<h3>Before</h3>
+<ul><li>大手企業で10年間マーケティングを担当</li><li>会社の看板がないと自分に価値がないと思っていた</li><li>副業に興味はあったが「何を売ればいいか」分からなかった</li><li>月収は手取り35万円。昇給の見込みもほぼなし</li></ul>
+<h3>転機</h3>
+<blockquote>「Brainで"企業マーケティングの裏側"を書いたら、初日に50部売れた。 会社で当たり前にやっていたことが、個人事業主にとっては"お金を払ってでも知りたい"ことだったんです。」</blockquote>
+<h3>やったこと</h3>
+<div class="table-wrap"><table><tr><th>期間</th><th>アクション</th><th>結果</th></tr><tr><td>**1ヶ月目**</td><td>企業マーケの知識をBrainに出品（4,980円）</td><td>初月売上：24万円</td></tr><tr><td>**3ヶ月目**</td><td>2作目を出品（実践テンプレ付き・14,800円）</td><td>月売上合計：60万円</td></tr><tr><td>**6ヶ月目**</td><td>購入者向けにコンサルを開始</td><td>コンサル収入：月50万円追加</td></tr><tr><td>**12ヶ月目**</td><td>月額コミュニティ運営を開始</td><td>月額会員80名 × 月1万円</td></tr></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"当たり前"を疑え。あなたが当然だと思っている知識は、誰かにとっては喉から手が出るほど欲しい情報。」</strong></blockquote>
+<hr>
+<h2>Case 2：0→1からの成功例</h2>
+<h3>プロフィール</h3>
+<div class="table-wrap"><table><tr><th>項目</th><th>内容</th></tr><tr><td>**名前**</td><td>Bさん（20代・女性）</td></tr><tr><td>**元の職業**</td><td>アパレル販売員</td></tr><tr><td>**Brain歴**</td><td>10ヶ月</td></tr><tr><td>**現在の月収**</td><td>Web制作 月40万円 + Brain教材 月20万円</td></tr></table></div>
+<h3>Before</h3>
+<ul><li>アパレル店員として5年勤務。手取り18万円</li><li>将来に不安を感じ、何かスキルを身につけたいと思っていた</li><li>プログラミングは「自分には無理」と思い込んでいた</li><li>貯金はほぼゼロ。月5万円の副収入が切実に必要だった</li></ul>
+<h3>転機</h3>
+<blockquote>「Brainで見つけた"未経験からWeb制作で稼ぐ"という教材を購入。 最初は半信半疑だったけど、書いてある通りにやったら本当に2ヶ月で初案件が取れた。」</blockquote>
+<h3>やったこと</h3>
+<div class="table-wrap"><table><tr><th>期間</th><th>アクション</th><th>結果</th></tr><tr><td>**1ヶ月目**</td><td>Brain教材でWeb制作の基礎を学習（毎日2時間）</td><td>基礎スキル習得</td></tr><tr><td>**2ヶ月目**</td><td>ポートフォリオ制作＋クラウドソーシングで提案開始</td><td>初案件獲得（3万円）</td></tr><tr><td>**4ヶ月目**</td><td>継続案件を2社から獲得</td><td>月収15万円</td></tr><tr><td>**6ヶ月目**</td><td>単価交渉＋新規開拓</td><td>月収30万円（アパレル退職）</td></tr><tr><td>**10ヶ月目**</td><td>自分の学習過程をBrain教材として出品</td><td>教材売上 月20万円追加</td></tr></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"月5万円"を目標にしたこと。いきなり月100万円とか言ってたら、何も始められなかった。小さいゴールを置いて、1つずつクリアしていった。」</strong></blockquote>
+<hr>
+<h2>Case 3：経営者のスケール成功例</h2>
+<h3>プロフィール</h3>
+<div class="table-wrap"><table><tr><th>項目</th><th>内容</th></tr><tr><td>**名前**</td><td>Cさん（40代・男性）</td></tr><tr><td>**元の状況**</td><td>個人コンサルタント</td></tr><tr><td>**Brain歴**</td><td>8ヶ月</td></tr><tr><td>**現在の年商**</td><td>1億2000万円（Brain以前は3000万円）</td></tr></table></div>
+<h3>Before</h3>
+<ul><li>個人でコンサルティング事業を運営。年商3000万円</li><li>1日12時間以上働いているのに、これ以上売上が伸びない</li><li>自分が倒れたら終わりの「自転車操業」状態</li><li>「仕組み化」の必要性は感じていたが、やり方が分からなかった</li></ul>
+<h3>転機</h3>
+<blockquote>「Brainコミットに参加して、"自分が現場に出ること自体がボトルネック"だと気づいた。 経営者としての在り方を根本から変えてくれた。」</blockquote>
+<h3>やったこと</h3>
+<div class="table-wrap"><table><tr><th>期間</th><th>アクション</th><th>結果</th></tr><tr><td>**1ヶ月目**</td><td>KPIの設計＋ボトルネックの特定</td><td>問題の可視化</td></tr><tr><td>**2ヶ月目**</td><td>セールストークのマニュアル化＋セールス担当を採用</td><td>面談の代行開始</td></tr><tr><td>**4ヶ月目**</td><td>ステップ配信で教育を自動化</td><td>リードの温度感が安定</td></tr><tr><td>**6ヶ月目**</td><td>バックエンド商品として月額コミュニティを設計</td><td>継続収入の柱ができた</td></tr><tr><td>**8ヶ月目**</td><td>自分は戦略とコンテンツ制作に集中</td><td>年商1億円ペースに</td></tr></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"仕組み化"とは、自分の仕事を奪われることじゃなく、自分の時間を取り戻すこと。それに気づいてから全部変わった。」</strong></blockquote>
+<hr>
+<h2>Case 4：アフィリエイターの成功例</h2>
+<h3>プロフィール</h3>
+<div class="table-wrap"><table><tr><th>項目</th><th>内容</th></tr><tr><td>**名前**</td><td>Dさん（20代・男性）</td></tr><tr><td>**元の職業**</td><td>飲食店アルバイト</td></tr><tr><td>**Brain歴**</td><td>6ヶ月</td></tr><tr><td>**現在の月収**</td><td>アフィリエイト報酬 月35万円</td></tr></table></div>
+<h3>Before</h3>
+<ul><li>飲食店のアルバイトで生計を立てていた。月収14万円</li><li>SNSは趣味でやっていたがフォロワー200人程度</li><li>「自分には売れる知識もスキルもない」と思っていた</li><li>アフィリエイトは「怪しい」というイメージがあった</li></ul>
+<h3>転機</h3>
+<blockquote>「たまたまBrainで買った教材がめちゃくちゃ良くて、感想をXに書いたら、そのツイートからアフィリ報酬で5,000円入った。 "良いものを紹介するだけでお金が入るんだ"と衝撃を受けた。」</blockquote>
+<h3>やったこと</h3>
+<div class="table-wrap"><table><tr><th>期間</th><th>アクション</th><th>結果</th></tr><tr><td>**1ヶ月目**</td><td>自分が買ったBrain教材のレビューをXで投稿</td><td>月5,000円</td></tr><tr><td>**2ヶ月目**</td><td>X運用を本格化。毎日5投稿＋週1スレッド</td><td>フォロワー800人</td></tr><tr><td>**3ヶ月目**</td><td>noteでレビュー記事を開始。比較記事がバズる</td><td>月8万円</td></tr><tr><td>**4ヶ月目**</td><td>フォロワー2,500人突破。紹介商品を厳選</td><td>月15万円</td></tr><tr><td>**6ヶ月目**</td><td>フォロワー5,000人。高単価商品の紹介に注力</td><td>月35万円</td></tr></table></div>
+<h3>成功のポイント</h3>
+<blockquote><strong>「"自分で買って、本当に良いと思ったものしか紹介しない"。これを徹底したからフォロワーの信頼を得られた。信頼があるから売れる。」</strong></blockquote>
+<hr>
+<h2>4人に共通する成功法則</h2>
+<div class="table-wrap"><table><tr><th>#</th><th>法則</th></tr><tr><td>1</td><td>**小さく始めた**。最初から大きなことをしなかった</td></tr><tr><td>2</td><td>**1つに集中した**。あれこれ手を出さなかった</td></tr><tr><td>3</td><td>**行動が早かった**。考えすぎずにまず動いた</td></tr><tr><td>4</td><td>**環境を変えた**。独学ではなく、先を行く人から学んだ</td></tr><tr><td>5</td><td>**データを見た**。感覚ではなく、数字で改善した</td></tr></table></div>
+<hr>
+<h2>あなたは、どのタイプに近いですか？</h2>
+<div class="table-wrap"><table><tr><th>Caseと似ている</th><th>あなたへのおすすめ</th></tr><tr><td>**Case 1（Aさん）に近い**</td><td>今の知識を「コンテンツ」として商品化しましょう</td></tr><tr><td>**Case 2（Bさん）に近い**</td><td>まずは「売れるスキル」を1つ身につけましょう</td></tr><tr><td>**Case 3（Cさん）に近い**</td><td>KPIの設計と仕組み化で、次のステージへ</td></tr><tr><td>**Case 4（Dさん）に近い**</td><td>X運用を強化して、アフィリエイト収入を最大化しましょう</td></tr></table></div>
+<hr>
+<h2>最後に</h2>
+<p>4人とも、特別な人じゃなかった。</p>
+<p>でも全員が「環境」を変え、「正しい情報」に出会い、「行動」した。</p>
+<p>あなたの人生を変えるきっかけは、意外と目の前にあるかもしれない。</p>
+<p><strong>面談で、あなただけの成功ストーリーの第一歩を踏み出しましょう。</strong></p>
+<hr>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+  </div>
+</div>
+
+<nav class="page-nav">
+  <a href="bonus-09.html" class="nav-btn nav-prev">← 特典09へ</a>
+  <a href="index.html" class="nav-index">📋 特典一覧へ</a>
+  <span></span>
+</nav>
+
+<footer>
+  <p>© Brain Inc. All Rights Reserved.</p>
+  <p>本コンテンツは Brain ブースターパッケージの限定特典です。無断転載・再配布を禁止します。</p>
+</footer>
+
+</body>
+</html>

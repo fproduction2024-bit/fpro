@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITK × YOLO's プロライン提案 ── よくあるご質問（Q&A）</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06)
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background: var(--bg-white);
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 101, 10, 0.15) 0%, transparent 70%);
+            border-radius: 50%
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.2);
+            border: 1px solid rgba(232, 101, 10, 0.5);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--orange-light);
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px
+        }
+
+        .hero h1 span {
+            color: var(--orange-light)
+        }
+
+        .hero p.sub {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 640px
+        }
+
+        /* Section */
+        section {
+            padding: 60px 0
+        }
+
+        section.alt {
+            background: var(--bg-gray)
+        }
+
+        .sec-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .sec-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4
+        }
+
+        .sec-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin-bottom: 40px
+        }
+
+        /* Q&A */
+        .qa-item {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            overflow: hidden
+        }
+
+        .qa-question {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 28px 32px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        .qa-question:hover {
+            background: var(--bg-gray)
+        }
+
+        .qa-badge {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 16px
+        }
+
+        .qa-badge.a {
+            background: var(--teal)
+        }
+
+        .qa-question h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 4px
+        }
+
+        .qa-answer {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px 32px;
+            background: var(--bg-gray)
+        }
+
+        .qa-answer-content {
+            font-size: 14px;
+            line-height: 1.9;
+            padding-top: 4px
+        }
+
+        .qa-answer-content strong {
+            color: var(--text-dark)
+        }
+
+        .qa-answer-content .point {
+            display: inline-block;
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            margin-top: 8px
+        }
+
+        .qa-category {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--teal);
+            display: inline-block
+        }
+
+        .qa-category-block {
+            margin-bottom: 48px
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--teal);
+            padding: 60px 0;
+            text-align: center;
+            color: #fff
+        }
+
+        .cta h2 {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px
+        }
+
+        .cta p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px
+        }
+
+        .cta a {
+            display: inline-block;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s
+        }
+
+        .cta a:hover {
+            background: var(--orange-dark)
+        }
+
+        .highlight-box {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin: 24px 0
+        }
+
+        .highlight-box h4 {
+            color: var(--orange);
+            font-size: 16px;
+            margin-bottom: 12px
+        }
+
+        /* TOC */
+        .toc {
+            background: var(--bg-gray);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin-bottom: 40px
+        }
+
+        .toc h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px
+        }
+
+        .toc ol {
+            padding-left: 20px
+        }
+
+        .toc li {
+            font-size: 14px;
+            line-height: 2;
+            color: var(--text-body)
+        }
+
+        .toc li a {
+            color: var(--teal);
+            text-decoration: none;
+            font-weight: 500
+        }
+
+        .toc li a:hover {
+            color: var(--orange);
+            text-decoration: underline
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 16px 0 12px;
+            font-size: 14px
+        }
+
+        thead {
+            background: var(--teal);
+            color: #fff
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px
+        }
+
+        td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-gray)
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">SUPPLEMENT</div>
+            <h1>プロライン導入に関する<br><span>よくあるご質問（Q&A）</span></h1>
+            <p class="sub">ITK × YOLO's プロライン提案書の補足資料です。<br>導入検討にあたって想定されるご質問にお答えします。</p>
+        </div>
+    </section>
+
+    <!-- 目次 -->
+    <section>
+        <div class="container">
+            <div class="toc">
+                <h4>📋 目次</h4>
+                <ol>
+                    <li><a href="#q1">プロラインの月額費用は別途かかるのか？</a></li>
+                    <li><a href="#q2">効果が出なかった場合、解約はできるのか？</a></li>
+                    <li><a href="#q3">ITK側のスタッフの作業負担はどのくらいか？</a></li>
+                    <li><a href="#q4">ブロックされてリストが減ってしまわないか？</a></li>
+                    <li><a href="#q5">LINE公式アカウントの月額メッセージ費用は？</a></li>
+                    <li><a href="#q6">競合の紹介会社もLINEをやっている？差別化は？</a></li>
+                    <li><a href="#q7">求職者から「なぜLINEが来るのか」とクレームが来たら？</a></li>
+                    <li><a href="#q8">既存のCRM（管理システム）との連携はできるのか？</a></li>
+                    <li><a href="#q9">配信コンテンツの確認フローは？勝手に送られない？</a></li>
+                    <li><a href="#q10">効果測定のレポートはどんな形で見られるのか？</a></li>
+                    <li><a href="#q11">今使っている求人媒体の広告費は減らせる？</a></li>
+                    <li><a href="#q12">古いリスト（2〜3年前）でも効果はある？</a></li>
+                    <li><a href="#q13">SMS配信の送信元はITKの名前で出せる？</a></li>
+                    <li><a href="#q14">面談予約が入ったけどドタキャンされたら？</a></li>
+                    <li><a href="#q15">プロラインではなくLステップやエルメではダメ？</a></li>
+                    <li><a href="#q16">LINE登録してくれた人に電話もしていい？</a></li>
+                    <li><a href="#q17">飲食以外の業種にも横展開できる？</a></li>
+                    <li><a href="#q18">LINEアカウントがBAN（凍結）されるリスクは？</a></li>
+                </ol>
+            </div>
+
+            <!-- ===== 費用・契約 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">💰 費用・契約について</div>
+
+                <!-- Q1 -->
+                <div class="qa-item" id="q1">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q1</div>
+                        <h3>プロラインの月額費用は別途かかるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            はい、プロライン自体のプラットフォーム利用料が別途かかります。ただし、<strong>フリープラン（月額0円）でも基本機能は使えます</strong>。<br><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>プラン</th>
+                                        <th>月額</th>
+                                        <th>ステップ配信数</th>
+                                        <th>向いているケース</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>フリープラン</strong></td>
+                                        <td>0円</td>
+                                        <td>10ステップまで</td>
+                                        <td>テスト運用・小規模リスト</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>プロプラン</strong></td>
+                                        <td>約9,680円</td>
+                                        <td>50ステップまで</td>
+                                        <td>本格運用（推奨）</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ゴールドプラン</strong></td>
+                                        <td>約29,700円</td>
+                                        <td>無制限</td>
+                                        <td>大規模配信・複数シナリオ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            ITKの場合、HOT/WARM/COOLの3シナリオを運用するので<strong>プロプラン（月額約9,680円）が最適</strong>です。<br>
+                            YOLO'sの構築費・運用費とは別の費用ですが、<strong>月1万円弱でLINE自動化の基盤が手に入る</strong>と考えれば非常にリーズナブルです。
+                            <div class="point">💡 プロラインの費用はITK様が直接契約・お支払いとなります</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="qa-item" id="q2">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q2</div>
+                        <h3>効果が出なかった場合、解約はできるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>最低契約期間は3ヶ月</strong>を推奨しています。<br><br>
+                            理由は、LINE登録の促進（第1〜3波のアプローチ）から、ステップ配信による温度上昇、面談予約の発生まで<strong>最低でも2〜3ヶ月のサイクルが必要</strong>だからです。<br><br>
+                            <strong>3ヶ月経過後は月単位で解約可能</strong>です。解約時もLINE公式アカウントとプロラインのアカウントはITK様の名義なので、<strong>構築済みのシナリオや登録者リストは全てITK様に残ります</strong>。<br><br>
+                            つまり、仮に運用代行を解約しても<strong>仕組みそのものは資産として残る</strong>設計です。
+                            <div class="point">💡 解約後もLINE登録者リスト・構築済みシナリオは全て残ります</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 運用・負担 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">⚙️ 運用・ITK側の負担について</div>
+
+                <!-- Q3 -->
+                <div class="qa-item" id="q3">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q3</div>
+                        <h3>ITK側のスタッフの作業は何をすればいい？現場の負担は？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>ITK様にお願いすること</strong>は基本的に3つだけです：<br><br>
+                            <strong>① 初期：既存リストデータの共有</strong><br>
+                            → CSVやExcelで求職者の電話番号・メールアドレスをご共有ください。<br><br>
+                            <strong>② 月次：配信コンテンツの確認（所要5〜10分）</strong><br>
+                            → YOLO'sが作成した配信文案を確認し、OKまたは修正指示をいただくだけ。<br><br>
+                            <strong>③ 随時：面談に来た求職者への対応</strong><br>
+                            → これはITK本来の業務ですので追加負担ではありません。<br><br>
+                            <strong>シナリオ構築・コンテンツ作成・配信設定・効果測定は全てYOLO'sが対応</strong>します。<br>
+                            斎藤社長が「うるさく」チェックしていただく分には大歓迎です！
+                            <div class="point">💡 現場スタッフの追加業務はゼロ。社長のチェックだけでOK</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="qa-item" id="q4">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q4</div>
+                        <h3>ブロックされてリストが減ってしまわないか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>セグメント配信を行うことで、ブロック率は5%以下に抑えられます</strong>。<br><br>
+                            ブロックが起きる主な原因は「自分に関係ない情報が頻繁に届く」ことです。ProLineでは：<br><br>
+                            ・<strong>HOT層</strong>：面談予約に直結する情報を短期間で集中配信<br>
+                            ・<strong>WARM層</strong>：2〜3日に1回、徐々に温度を上げるコンテンツ<br>
+                            ・<strong>COOL層</strong>：月1回のライトな情報のみ<br><br>
+                            と<strong>温度に応じて頻度と内容を変えている</strong>ため、「うざい」と感じにくい設計です。<br><br>
+                            仮にブロックされても、<strong>その人は「今はITKに興味がない」という判定</strong>。電話しても繋がらない人がLINEでもブロックしただけなので、<strong>実質的な損失はゼロ</strong>です。<br>
+                            むしろ「ブロックされなかった人 ＝ まだ可能性がある人」を<strong>可視化できる</strong>メリットがあります。
+                            <div class="point">💡 ブロック＝見込みなしの判定。リストの「見える化」が進むだけ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== LINE費用 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">📱 LINE公式アカウントについて</div>
+
+                <!-- Q5 -->
+                <div class="qa-item" id="q5">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q5</div>
+                        <h3>LINE公式アカウントの月額メッセージ費用はいくらかかる？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            LINE公式アカウントは<strong>友だち数ではなく「月間メッセージ配信数」で課金</strong>されます。<br><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>プラン</th>
+                                        <th>月額</th>
+                                        <th>無料メッセージ数</th>
+                                        <th>追加メッセージ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>コミュニケーション</strong></td>
+                                        <td>0円</td>
+                                        <td>200通/月</td>
+                                        <td>不可</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ライト</strong></td>
+                                        <td>5,000円</td>
+                                        <td>5,000通/月</td>
+                                        <td>不可</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>スタンダード</strong></td>
+                                        <td>15,000円</td>
+                                        <td>30,000通/月</td>
+                                        <td>〜3円/通</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            LINE登録者が500人の場合、月の配信通数は約2,000〜4,000通程度。<strong>ライトプラン（月5,000円）で十分カバー</strong>できます。<br>
+                            登録者が1,000人を超えてきたら<strong>スタンダードプラン（月15,000円）</strong>への切替を検討します。
+                            <div class="point">💡 LINE費用はITK様が直接契約。初期はライトプラン（月5,000円）で十分</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 競合・クレーム ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">🏢 競合・リスク対策について</div>
+
+                <!-- Q6 -->
+                <div class="qa-item" id="q6">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q6</div>
+                        <h3>競合の紹介会社もLINEをやっている？うちだけの差別化は？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            大手の人材紹介会社ではLINE公式アカウントを持っているところもありますが、<strong>ほとんどが「一斉配信」止まり</strong>です。<br><br>
+                            ITK × プロラインの差別化ポイントは：<br><br>
+                            ・<strong>セグメント別のステップ配信</strong> ── 温度に応じた自動シナリオは一斉配信と全く別物<br>
+                            ・<strong>飲食業界に完全特化</strong> ── 「寿司」「イタリアン」「カフェ」など職種別の配信コンテンツ<br>
+                            ・<strong>「業界最大のリスト」×「自動化」</strong> ── この組み合わせを持っているのはITKだけ<br>
+                            ・<strong>プロラインの高度な自動化機能</strong> ── L-stepやLステップよりもシナリオ分岐が柔軟<br><br>
+                            <strong>「LINE公式を持っている」と「LINEで売上を作れる仕組みがある」は全く別の話</strong>です。<br>
+                            後者をやっている飲食特化の紹介会社は、現時点ではほぼ見当たりません。
+                            <div class="point">💡 LINEを持っている≠LINEで成果を出せる。仕組み化が差別化の鍵</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="qa-item" id="q7">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q7</div>
+                        <h3>求職者から「なぜLINEが来るの？」とクレームが来たら？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            まず、<strong>LINEは求職者自身が「友だち追加」しない限り届きません</strong>。ITKからLINEを一方的に送ることはできない仕組みです。<br><br>
+                            「なぜSMS/メールが来たのか」という問い合わせが来た場合の対応フロー：<br><br>
+                            <strong>① 第一声</strong><br>
+                            「以前ITKにご登録いただいた際のご連絡先にご案内をお送りしております。」<br><br>
+                            <strong>② お詫び＋対応</strong><br>
+                            「ご不要でしたら今後のご案内を停止いたしますので、お申し付けください。」<br><br>
+                            <strong>③ 即時対応</strong><br>
+                            → リストから除外し、今後の配信対象から外す。<br><br>
+                            <strong>実際の運用では、クレームはほぼ発生しません</strong>。理由は：<br>
+                            ・SMSの内容が「求人情報のご案内」であり、悪意を感じるものではない<br>
+                            ・飲食スタッフは転職への関心が高い人が多く、情報提供を好意的に受け取る傾向がある<br>
+                            ・不要な人はSMSを無視するか、LINE登録せずに終わるだけ
+                            <div class="point">💡 YOLO'sがクレーム対応マニュアルとトークスクリプトを準備します</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 技術・連携 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">🔗 技術・システム連携について</div>
+
+                <!-- Q8 -->
+                <div class="qa-item" id="q8">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q8</div>
+                        <h3>既存のCRM（管理システム）との連携はできるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>直接のAPI連携は初期段階では不要</strong>です。<br><br>
+                            まず運用をスタートし、成果が出てきた段階でシステム連携を検討するのが効率的です。<br><br>
+                            <strong>初期の運用フロー（手動連携）：</strong><br>
+                            ① LINE上で面談予約が入る<br>
+                            ② プロラインの管理画面で確認（通知メールも届く）<br>
+                            ③ ITKスタッフがCRMに手動で入力<br><br>
+                            <strong>成果が出てからの連携オプション：</strong><br>
+                            ・プロラインのWebhookを利用して、予約データを自動でCRMに連携<br>
+                            ・Googleスプレッドシート経由での自動同期<br>
+                            ・Zapierなどのノーコードツールでの連携<br><br>
+                            月5〜10件の面談予約であれば手動で十分対応可能です。<strong>月30件を超えてきたら自動連携を構築</strong>する、という段階的なアプローチを推奨します。
+                            <div class="point">💡 まずは手動で小さくスタート。成果に応じて自動化を拡張</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== コンテンツ・レポート ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">📊 コンテンツ・効果測定について</div>
+
+                <!-- Q9 -->
+                <div class="qa-item" id="q9">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q9</div>
+                        <h3>配信コンテンツのチェックフローは？勝手に送られない？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>必ずITK様の承認を経てから配信されます</strong>。勝手に配信されることは絶対にありません。<br><br>
+                            <strong>配信までのフロー：</strong><br><br>
+                            <strong>① YOLO'sがドラフト作成</strong>（配信文・画像・タイミング）<br>
+                            ↓<br>
+                            <strong>② ITK様に確認依頼</strong>（チャットまたはメールでドラフト共有）<br>
+                            ↓<br>
+                            <strong>③ ITK様がOKまたは修正指示</strong>（所要5〜10分）<br>
+                            ↓<br>
+                            <strong>④ 修正反映 → 最終確認 → 配信設定</strong><br><br>
+                            初期構築時のステップ配信（自動で順番に送るもの）は、<strong>全てのメッセージを事前に一括で確認</strong>いただきます。<br>
+                            一度承認いただければ、あとは自動で配信されるので、毎回の確認は不要です。
+                            <div class="point">💡 初期に全メッセージを一括承認 → あとは自動。追加配信時のみ確認</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="qa-item" id="q10">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q10</div>
+                        <h3>効果測定のレポートはどんな形で見られるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>月次でレポートをお送りします</strong>。レポートに含まれる項目：<br><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>カテゴリ</th>
+                                        <th>指標</th>
+                                        <th>説明</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>LINE登録</strong></td>
+                                        <td>新規登録数 / 累計登録数 / ブロック率</td>
+                                        <td>リストの成長度合い</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>配信効果</strong></td>
+                                        <td>開封率 / クリック率 / 反応率</td>
+                                        <td>コンテンツの質の指標</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>面談予約</strong></td>
+                                        <td>予約数 / 予約率 / セグメント別内訳</td>
+                                        <td>最も重要なKPI</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>成約</strong></td>
+                                        <td>LINE経由成約数 / 成約率</td>
+                                        <td>最終的なROI</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>改善提案</strong></td>
+                                        <td>翌月のアクションプラン</td>
+                                        <td>PDCAサイクル</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            レポート形式は<strong>PDFまたはGoogleスプレッドシート</strong>で、毎月初にお届けします。<br>
+                            数字だけでなく<strong>「なぜその結果になったか」「来月何を改善するか」</strong>まで含めたレポートです。
+                            <div class="point">💡 数字の羅列ではなく「So What?（だから何をする？）」まで含むレポート</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 経営判断 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">💼 経営判断・費用対効果について</div>
+
+                <!-- Q11 -->
+                <div class="qa-item" id="q11">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q11</div>
+                        <h3>今使っている求人媒体（マイナビ等）の広告費は減らせるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>すぐには減らさないことを推奨します</strong>。ただし中長期的には十分可能です。<br><br>
+                            <strong>短期（〜3ヶ月）：既存広告はそのまま継続</strong><br>
+                            → LINE施策は「既存リストの掘り起こし」なので、新規リスト獲得チャネル（求人媒体）とは役割が違います。<br><br>
+                            <strong>中期（3〜6ヶ月）：広告予算の一部をLINE運用に振替</strong><br>
+                            → LINE経由の面談予約が安定してきたら、費用対効果の低い媒体から順に予算を削減。<br><br>
+                            <strong>長期（6ヶ月〜）：広告費の大幅削減が可能に</strong><br>
+                            → 既存リスト＋無限クーポンで<strong>自然流入のリストが増え続ける仕組み</strong>が完成すれば、広告依存度を下げられます。<br><br>
+                            最終的には<strong>「広告費で新規を取る」から「既存リストから自動で成約を生む」モデルへの転換</strong>が目標です。
+                            <div class="point">💡 LINEは広告の「代替」ではなく「補完＋資産化」の施策</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 実務・リスト ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">📋 リスト・配信の実務について</div>
+
+                <!-- Q12 -->
+                <div class="qa-item" id="q12">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q12</div>
+                        <h3>古いリスト（2〜3年前）でも効果はあるのか？電話番号が変わっていない？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>十分に効果があります</strong>。携帯電話番号の変更率は年間1〜2%程度と非常に低いです。<br><br>
+                            <strong>2〜3年前のリストでも90%以上の電話番号は有効</strong>です。メールアドレスはキャリアメールだと変わっている可能性がありますが、SMSなら到達率は高いままです。<br><br>
+                            むしろ古いリストほど<strong>「もう転職したい」「環境が変わった」という人が増えている可能性</strong>があり、掘り起こしの価値が高いです。<br><br>
+                            <strong>実際の運用では：</strong><br>
+                            ・SMS送信 → 到達しない番号は自動で検出（エラー返却）<br>
+                            ・到達しなかった番号はリストから除外 → <strong>リストの精度がむしろ上がる</strong><br>
+                            ・有効な番号にだけアプローチすることで、コストの無駄もなくなる
+                            <div class="point">💡 古いリストほど「掘り起こしの余地」が大きい。リスト精査にもなる</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="qa-item" id="q13">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q13</div>
+                        <h3>SMS配信の送信元はITKの名前で出せるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            SMS配信サービスによって対応が異なります：<br><br>
+                            <strong>① 国内直収接続型（推奨）</strong><br>
+                            → 送信元が「070」「080」「090」などの国内番号で表示されます。<strong>迷惑SMS扱いされにくく到達率が高い</strong>のがメリットです。<br><br>
+                            <strong>② 海外回線型（安価だが非推奨）</strong><br>
+                            → 送信元が海外番号や英数字になり、<strong>迷惑フィルターに引っかかる可能性</strong>があります。<br><br>
+                            <strong>③ 送信元名称表示</strong><br>
+                            → 一部サービスでは送信元に「ITK」などの<strong>会社名を表示する</strong>ことも可能です（Androidのみ対応）。<br><br>
+                            YOLO'sでは<strong>国内直収型のSMS配信サービスを利用</strong>し、到達率と信頼性を最大化する設計にしています。<br>
+                            また、メッセージ冒頭に<strong>必ず「【ITK】」を入れる</strong>ことで、誰からのメッセージか一目で分かるようにします。
+                            <div class="point">💡 国内直収型SMS + 冒頭に【ITK】表記で、信頼性を最大化</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="qa-item" id="q14">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q14</div>
+                        <h3>面談予約が入ったけどドタキャンされたらどうする？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>プロラインの自動リマインド機能で、ドタキャン率を大幅に下げます</strong>。<br><br>
+                            <strong>自動リマインドの設計：</strong><br>
+                            ・面談予約の<strong>前日 20:00</strong>にLINEリマインド（「明日の面談、お待ちしております！」）<br>
+                            ・面談予約の<strong>当日 朝9:00</strong>にLINEリマインド（「本日○時からの面談です。場所はこちら→」）<br><br>
+                            <strong>それでもドタキャンが発生した場合：</strong><br>
+                            ・自動で「ご都合が合わなかった場合は、こちらから再予約できます」とLINE送信<br>
+                            ・3日後に再度フォローメッセージを自動配信<br>
+                            ・<strong>「リスケ」をLINE上で完結できる</strong>ので、電話で追いかける必要なし<br><br>
+                            電話予約と違い、LINEでの予約は<strong>求職者自身が能動的に行った行動</strong>なので、そもそもドタキャン率が低い傾向があります。
+                            <div class="point">💡 前日・当日の自動リマインド + ドタキャン後の自動リスケ案内</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ツール選定 ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">🔧 ツール選定・運用ルールについて</div>
+
+                <!-- Q15 -->
+                <div class="qa-item" id="q15">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q15</div>
+                        <h3>プロラインではなく、Lステップやエルメではダメなのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            Lステップやエルメも優れたツールですが、<strong>ITKのような「既存リスト掘り起こし＋セグメント配信」にはプロラインが最適</strong>です。<br><br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>比較項目</th>
+                                        <th>プロライン</th>
+                                        <th>Lステップ</th>
+                                        <th>エルメ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>月額費用</strong></td>
+                                        <td>0〜29,700円</td>
+                                        <td>2,980〜59,800円</td>
+                                        <td>0〜33,000円</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>シナリオ分岐</strong></td>
+                                        <td>非常に柔軟</td>
+                                        <td>柔軟</td>
+                                        <td>やや制限あり</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>無料プラン</strong></td>
+                                        <td>あり（実用的）</td>
+                                        <td>なし</td>
+                                        <td>あり（制限多い）</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>カレンダー予約</strong></td>
+                                        <td>標準搭載</td>
+                                        <td>別途連携</td>
+                                        <td>標準搭載</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>アンケート機能</strong></td>
+                                        <td>高機能</td>
+                                        <td>高機能</td>
+                                        <td>基本的</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            プロラインの最大の強みは<strong>「無料プランでもテスト運用できる」「シナリオ分岐が直感的」「カレンダー予約が標準搭載」</strong>の3点。<br>
+                            ITKの運用に必要な機能が<strong>最もコスパよく揃っている</strong>のがプロラインです。
+                            <div class="point">💡 YOLO'sはプロラインの認定コンサルタント。構築・運用ノウハウが豊富</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="qa-item" id="q16">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q16</div>
+                        <h3>LINE登録してくれた人に、電話もしていいのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>もちろん可能です</strong>。LINEと電話は「二者択一」ではなく<strong>「併用」が最も効果的</strong>です。<br><br>
+                            <strong>推奨する併用ルール：</strong><br><br>
+                            <strong>① HOT層（すぐ転職したい人）</strong><br>
+                            → LINEで面談予約が入ったら、<strong>確認の電話を入れる</strong>のはアリ。求職者も歓迎する傾向。<br><br>
+                            <strong>② WARM層（検討中の人）</strong><br>
+                            → <strong>LINEのステップ配信で温度を上げてから電話</strong>するのが効果的。いきなり電話するより反応が良い。<br><br>
+                            <strong>③ COOL層（まだ動かない人）</strong><br>
+                            → <strong>電話は控え、LINEで繋がりを維持</strong>。まだ動く気がない人に電話するとブロックの原因に。<br><br>
+                            ポイントは<strong>「LINEで温度を見極めてから、適切なタイミングで電話する」</strong>こと。<br>
+                            プロラインのタグ情報を見れば<strong>「この人は今HOTだ」「この人はまだCOOLだ」と一目で分かる</strong>ので、架電の優先順位付けにも使えます。
+                            <div class="point">💡 LINEは電話の代替ではなく、電話の効率を上げる「温度計」</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 将来・リスク ===== -->
+            <div class="qa-category-block">
+                <div class="qa-category">🚀 将来の拡張・リスク管理について</div>
+
+                <!-- Q17 -->
+                <div class="qa-item" id="q17">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q17</div>
+                        <h3>飲食以外の業種にも横展開できるのか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>はい、仕組みそのものは業種を問わず横展開可能です</strong>。<br><br>
+                            「既存リスト × SMS/メール → LINE登録 → セグメント配信 →
+                            面談予約」というフローは、<strong>人材紹介・派遣・採用支援全般に適用</strong>できます。<br><br>
+                            <strong>横展開する場合に変わる部分：</strong><br>
+                            ・配信コンテンツの内容（求人情報、業界レポート等）<br>
+                            ・アンケートの質問項目（職種、希望条件等）<br>
+                            ・配信タイミング（業界ごとの勤務パターンに合わせる）<br><br>
+                            <strong>変わらない部分：</strong><br>
+                            ・プロラインの仕組み・設定<br>
+                            ・HOT/WARM/COOLのセグメント設計<br>
+                            ・自動配信・予約連携のフロー<br><br>
+                            まずは<strong>飲食特化で成果を出してから、他業種への展開を検討</strong>するのが効率的です。
+                            <div class="point">💡 仕組みは汎用的。まず飲食で成功モデルを作り、横展開へ</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q18 -->
+                <div class="qa-item" id="q18">
+                    <div class="qa-question">
+                        <div class="qa-badge">Q18</div>
+                        <h3>LINEアカウントがBAN（凍結）されるリスクはないか？</h3>
+                    </div>
+                    <div class="qa-answer">
+                        <div class="qa-badge a">A</div>
+                        <div class="qa-answer-content">
+                            <strong>正しい運用をしている限り、BAN（凍結）されるリスクは極めて低い</strong>です。<br><br>
+                            <strong>LINE公式アカウントがBANされる主な原因：</strong><br>
+                            ・アダルト・ギャンブル等の禁止コンテンツの配信<br>
+                            ・スパム的な大量配信<br>
+                            ・ユーザーからの通報が短期間に集中<br>
+                            ・LINE社の利用規約違反<br><br>
+                            <strong>ITKの場合、これらに該当する要素はありません：</strong><br>
+                            ・配信内容は「求人情報」「キャリア情報」＝<strong>完全にホワイトなコンテンツ</strong><br>
+                            ・セグメント配信で<strong>配信頻度を最適化</strong>しているのでスパム扱いされない<br>
+                            ・求職者自身がオプトイン（友だち追加）しているので<strong>通報リスクが低い</strong><br>
+                            ・ITKは認定された職業紹介事業者 ＝ <strong>事業の正当性が明確</strong><br><br>
+                            万が一のリスクヘッジとして、<strong>LINE公式アカウントの「認証済みアカウント」を取得</strong>することも推奨します。認証済みアカウントは<strong>信頼性が高く、BANリスクがさらに低減</strong>します。
+                            <div class="point">💡 正規の求人情報配信 + セグメント設計 = BAN リスクは実質ゼロ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- まとめ -->
+            <div class="highlight-box">
+                <h4>📌 その他のご質問について</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    上記以外にもご不明点がございましたら、お気軽にお問い合わせください。<br>
+                    YOLO'sは<strong>「丸投げでも、うるさくても、どちらでも対応します」</strong>。<br>
+                    ITK様のスタイルに合わせた運用体制を構築いたします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>ご不明点は解消されましたか？</h2>
+            <p>提案書本編と合わせてご検討ください。<br>詳細なお打ち合わせのご希望がございましたら、お気軽にご連絡ください。</p>
+            <p style="font-size:13px;opacity:0.5;margin-top:40px">YOLO's → ITK様　2026年2月（Q&A補足資料）</p>
+        </div>
+    </section>
+
+</body>
+
+</html>

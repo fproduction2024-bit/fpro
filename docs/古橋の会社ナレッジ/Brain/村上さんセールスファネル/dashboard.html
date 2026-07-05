@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>村上さんセールスファネル ダッシュボード</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+* { margin:0; padding:0; box-sizing:border-box }
+:root {
+    --purple: #7c3aed; --purple-light: #a855f7; --purple-dark: #6d28d9;
+    --gold: #b8965a; --gold-light: #d4b87a;
+    --teal: #0C4A4E; --teal-light: #1A6B70;
+    --green: #10b981; --red: #ef4444; --orange: #f97316; --blue: #3b82f6;
+    --bg: #f8f7f4; --bg-white: #ffffff; --text-dark: #1a1a2e; --text-body: #444;
+    --text-light: #888; --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --radius: 16px;
+}
+html { scroll-behavior: smooth }
+body { font-family:'Noto Sans JP',sans-serif; color:var(--text-dark); background:var(--bg); line-height:1.7 }
+.container { max-width:1100px; margin:0 auto; padding:0 24px }
+
+/* HERO */
+.hero { background:linear-gradient(135deg,#1a1033 0%,#2d1b69 40%,#4c1d95 100%); color:#fff; padding:80px 0 70px; position:relative; overflow:hidden }
+.hero::after { content:''; position:absolute; top:-40%; right:-15%; width:500px; height:500px; background:radial-gradient(circle,rgba(124,58,237,0.25),transparent 70%); border-radius:50% }
+.hero-badge { display:inline-block; background:rgba(255,255,255,0.1); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15); color:#e2d8f5; font-size:13px; font-weight:600; padding:6px 18px; border-radius:50px; margin-bottom:20px; letter-spacing:1px }
+.hero h1 { font-size:clamp(28px,4vw,42px); font-weight:900; line-height:1.3; margin-bottom:12px }
+.hero h1 span { background:linear-gradient(90deg,#c084fc,#f9a8d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.hero .sub { font-size:15px; color:rgba(255,255,255,0.65); max-width:600px; line-height:1.8 }
+
+/* SUMMARY CARDS */
+.summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:-40px; position:relative; z-index:2 }
+.summary-card { background:var(--bg-white); border:1px solid #eee; border-radius:var(--radius); padding:24px 16px; text-align:center; box-shadow:var(--shadow) }
+.summary-card .num { font-family:'Inter',sans-serif; font-size:36px; font-weight:800; color:var(--purple); line-height:1 }
+.summary-card .num span { font-size:14px; font-weight:600; color:var(--text-light) }
+.summary-card .label { font-size:12px; color:var(--text-light); margin-top:6px }
+.summary-card .change { font-size:11px; font-weight:700; color:var(--green); margin-top:4px }
+
+/* TABS */
+.tab-nav { display:flex; gap:4px; background:var(--bg-white); border-radius:var(--radius); padding:6px; box-shadow:var(--shadow); margin-bottom:32px; flex-wrap:wrap }
+.tab-nav button { flex:1; min-width:120px; padding:14px 8px; border:none; background:transparent; font-family:inherit; font-size:14px; font-weight:600; color:var(--text-light); border-radius:12px; cursor:pointer; transition:all .2s }
+.tab-nav button.active { background:var(--purple); color:#fff; box-shadow:0 4px 12px rgba(124,58,237,0.3) }
+.tab-content { display:none } .tab-content.active { display:block }
+
+/* SECTIONS */
+.sec-label { font-family:'Inter',sans-serif; font-size:12px; font-weight:700; color:var(--purple); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px }
+.sec-title { font-size:26px; font-weight:900; margin-bottom:10px; line-height:1.4 }
+.sec-desc { font-size:14px; color:var(--text-light); margin-bottom:32px; line-height:1.8 }
+
+/* CARDS */
+.card { background:var(--bg-white); border:1px solid #eee; border-radius:var(--radius); padding:28px 24px; box-shadow:var(--shadow) }
+.card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px }
+.card-icon { width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px }
+.card-icon.purple { background:rgba(124,58,237,0.1); color:var(--purple) }
+.card-icon.green { background:rgba(16,185,129,0.1); color:var(--green) }
+.card-icon.orange { background:rgba(249,115,22,0.1); color:var(--orange) }
+.card-icon.red { background:rgba(239,68,68,0.1); color:var(--red) }
+.card-icon.blue { background:rgba(59,130,246,0.1); color:var(--blue) }
+.card h3 { font-size:17px; font-weight:700 }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px }
+.grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px }
+
+/* FLOW */
+.flow-visual { background:var(--bg-white); border:1px solid #eee; border-radius:var(--radius); padding:32px; box-shadow:var(--shadow) }
+.flow-step { padding:16px 20px; border-left:4px solid var(--purple); border-radius:0 12px 12px 0; background:rgba(124,58,237,0.03); margin-bottom:4px }
+.flow-step.green-border { border-left-color:var(--green); background:rgba(16,185,129,0.03) }
+.flow-step.orange-border { border-left-color:var(--orange); background:rgba(249,115,22,0.03) }
+.flow-step .step-name { font-weight:700; font-size:15px }
+.flow-step .step-detail { font-size:13px; color:var(--text-light); margin-top:2px }
+.flow-arrow { text-align:center; color:var(--purple); font-size:18px; margin:2px 0 }
+
+/* CHECKLIST */
+.checklist { list-style:none }
+.checklist li { padding:14px 16px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:12px; font-size:14px }
+.checklist li:last-child { border-bottom:none }
+.status { display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:50px }
+.status.done { background:rgba(16,185,129,0.1); color:var(--green) }
+.status.wip { background:rgba(249,115,22,0.1); color:var(--orange) }
+.status.todo { background:rgba(239,68,68,0.1); color:var(--red) }
+
+/* TIMELINE */
+.timeline { position:relative; padding-left:36px; margin:24px 0 }
+.timeline::before { content:''; position:absolute; left:14px; top:0; bottom:0; width:3px; background:linear-gradient(to bottom,var(--purple),var(--green)); border-radius:2px }
+.timeline-item { position:relative; margin-bottom:24px; padding:16px 20px; background:var(--bg-white); border:1px solid #eee; border-radius:12px; box-shadow:var(--shadow) }
+.timeline-item::before { content:attr(data-day); position:absolute; left:-36px; top:16px; width:28px; height:28px; background:var(--purple); color:#fff; border-radius:50%; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:'Inter',sans-serif }
+.timeline-item h4 { font-size:15px; font-weight:700; margin-bottom:6px }
+.timeline-item p { font-size:13px; color:var(--text-body); line-height:1.7 }
+.timeline-item .tag { display:inline-block; background:rgba(124,58,237,0.1); color:var(--purple); font-size:11px; font-weight:700; padding:2px 10px; border-radius:50px; margin-bottom:8px }
+
+/* PRESENT GRID */
+.present-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px }
+.present-card-sm { background:var(--bg-white); border:1px solid #eee; border-radius:12px; padding:16px; box-shadow:var(--shadow) }
+.present-card-sm .p-num { font-family:'Inter',sans-serif; font-size:11px; font-weight:800; color:var(--purple); opacity:0.5 }
+.present-card-sm h4 { font-size:13px; font-weight:700; margin:4px 0 }
+.present-card-sm .p-tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:4px; display:inline-block }
+.p-tag.a { background:rgba(124,58,237,0.08); color:var(--purple) }
+.p-tag.b { background:rgba(16,185,129,0.08); color:var(--green) }
+.p-tag.c { background:rgba(249,115,22,0.08); color:var(--orange) }
+.p-tag.d { background:rgba(239,68,68,0.08); color:var(--red) }
+.p-tag.all { background:rgba(184,150,90,0.1); color:var(--gold) }
+
+/* HIGHLIGHT */
+.highlight-box { background:rgba(124,58,237,0.04); border-left:4px solid var(--purple); border-radius:0 12px 12px 0; padding:20px 24px; margin-top:24px }
+.highlight-box h4 { font-size:15px; font-weight:700; margin-bottom:8px }
+
+/* KPI TABLE */
+table { width:100%; border-collapse:collapse; background:var(--bg-white); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); margin-top:20px }
+th { background:#f7f5f2; padding:12px 16px; text-align:left; font-size:12px; font-weight:700; color:var(--text-light); text-transform:uppercase; letter-spacing:1px }
+td { padding:12px 16px; border-top:1px solid #f0f0f0; font-size:14px }
+td.highlight { font-weight:700; color:var(--purple) }
+
+/* FOOTER */
+footer { background:var(--text-dark); color:rgba(255,255,255,0.4); text-align:center; padding:32px 0; font-size:12px; margin-top:60px }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+    .summary-grid { grid-template-columns:1fr 1fr } .hero h1 { font-size:26px }
+    .grid-2,.grid-3 { grid-template-columns:1fr } .present-grid { grid-template-columns:1fr }
+    .tab-nav button { font-size:12px; padding:10px 6px; min-width:auto }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-badge">Brain × 村上セールスチーム</div>
+        <h1><span>セールスファネル</span><br>プロジェクト ダッシュボード</h1>
+        <p class="sub">Brain LINE登録者を村上さんセールスチームとの面談予約へ繋ぐ導線を構築。プレゼント10大特典 × 2段シナリオ × 面談着座で商材提案するファネル。</p>
+    </div>
+</section>
+
+<!-- SUMMARY -->
+<div class="container">
+    <div class="summary-grid">
+        <div class="summary-card">
+            <div class="num">10<span>本</span></div>
+            <div class="label">プレゼントコンテンツ</div>
+            <div class="change">✅ 全て制作済み</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">25<span>ステップ</span></div>
+            <div class="label">LINEシナリオ合計</div>
+            <div class="change">✅ テキスト完成</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">3<span>〜5万</span></div>
+            <div class="label">1面談あたり単価</div>
+            <div class="change">目標KPI</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">4<span>属性</span></div>
+            <div class="label">ターゲットセグメント</div>
+            <div class="change">A/B/C/D 分類</div>
+        </div>
+    </div>
+</div>
+
+<!-- TABS -->
+<section style="padding-top:80px">
+    <div class="container">
+        <div class="tab-nav">
+            <button class="active" onclick="showTab('overview')">📋 概要</button>
+            <button onclick="showTab('deliverables')">📦 制作物一覧</button>
+            <button onclick="showTab('scenario')">💬 LINEシナリオ</button>
+            <button onclick="showTab('presents')">🎁 プレゼント</button>
+            <button onclick="showTab('progress')">🚀 進捗管理</button>
+        </div>
+
+        <!-- TAB 1: 概要 -->
+        <div id="overview" class="tab-content active">
+            <div class="sec-label">funnel overview</div>
+            <div class="sec-title">ファネル全体フロー</div>
+            <div class="sec-desc">Brain LINE登録者をプレゼント訴求で反応させ、面談予約へ導く2段階シナリオ構成。</div>
+
+            <div class="flow-visual">
+                <div class="flow-step">
+                    <div class="step-name">① Brain LINE登録</div>
+                    <div class="step-detail">Brain経由でLINE友だち追加</div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">
+                    <div class="step-name">② シナリオ①：プレゼント紹介（2日締切・11ステップ）</div>
+                    <div class="step-detail">10大特典の"存在"を紹介。「受け取りたい」ボタンで興味表明。未反応者は先頭に戻す。</div>
+                </div>
+                <div class="flow-arrow">↓ 受け取りたいボタン押下</div>
+                <div class="flow-step orange-border">
+                    <div class="step-name">③ シナリオ②：面談予約誘導（7日締切・14ステップ）</div>
+                    <div class="step-detail">面談メリット訴求 → お客様の声 → 残枠演出 → 最終リマインド。未反応者は先頭に戻す。</div>
+                </div>
+                <div class="flow-arrow">↓ 面談予約</div>
+                <div class="flow-step green-border">
+                    <div class="step-name">④ Zoom面談（村上さんセールスチーム）</div>
+                    <div class="step-detail">60分マンツーマン面談。属性に応じてコミット/ハックス/その他商材を提案。</div>
+                </div>
+                <div class="flow-arrow">↓ 面談完了</div>
+                <div class="flow-step green-border">
+                    <div class="step-name">⑤ プレゼント送付（会員サイト）</div>
+                    <div class="step-detail">brain-booster-pkg.surge.sh の専用ページURLをLINEで送付。</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top:32px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon purple">🎯</div>
+                        <h3>ターゲット4属性</h3>
+                    </div>
+                    <table style="box-shadow:none;margin:0">
+                        <thead><tr><th>属性</th><th>ターゲット像</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>A</strong></td><td>コンテンツホルダー（専門知識でBrain販売したい人）</td></tr>
+                            <tr><td><strong>B</strong></td><td>0→1 初心者（まだ稼いだことがない人）</td></tr>
+                            <tr><td><strong>C</strong></td><td>売上あり経営者（スケールに壁がある人）</td></tr>
+                            <tr><td><strong>D</strong></td><td>アフィリエイター（紹介報酬で稼ぎたい人）</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">💰</div>
+                        <h3>KPI設計</h3>
+                    </div>
+                    <table style="box-shadow:none;margin:0">
+                        <thead><tr><th>指標</th><th>目標値</th></tr></thead>
+                        <tbody>
+                            <tr><td>1面談あたり単価</td><td class="highlight">3万〜5万円</td></tr>
+                            <tr><td>コミット提案率</td><td>10%</td></tr>
+                            <tr><td>ハックス提案率</td><td>10%</td></tr>
+                            <tr><td>価値提供のみ</td><td>40%</td></tr>
+                            <tr><td>その他提案</td><td>60%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 村上さんの強み</h4>
+                <p style="font-size:14px">マーケはなし。<strong>完全にセールス特化</strong>。「素の人でもある程度会話できればもう仕上げますよ」——Zoomに来てもらえれば、そこからは任せてというスタンス。だからこそ<strong>LINE→面談予約の接続導線</strong>が最も重要。</p>
+            </div>
+
+            <div class="grid-3" style="margin-top:32px">
+                <div class="card" style="text-align:center">
+                    <div class="card-icon purple" style="margin:0 auto 12px">👥</div>
+                    <h3 style="margin-bottom:6px">セールスチーム</h3>
+                    <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--purple)">5<span style="font-size:14px">名</span></div>
+                    <p style="color:var(--text-light);font-size:13px">村上さん＋4名体制</p>
+                </div>
+                <div class="card" style="text-align:center">
+                    <div class="card-icon green" style="margin:0 auto 12px">📅</div>
+                    <h3 style="margin-bottom:6px">面談形式</h3>
+                    <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--green)">60<span style="font-size:14px">分</span></div>
+                    <p style="color:var(--text-light);font-size:13px">Zoom個別面談</p>
+                </div>
+                <div class="card" style="text-align:center">
+                    <div class="card-icon orange" style="margin:0 auto 12px">🎁</div>
+                    <h3 style="margin-bottom:6px">プレゼント</h3>
+                    <div style="font-family:'Inter';font-size:32px;font-weight:800;color:var(--orange)">10<span style="font-size:14px">大特典</span></div>
+                    <p style="color:var(--text-light);font-size:13px">面談着座で全て提供</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: 制作物一覧 -->
+        <div id="deliverables" class="tab-content">
+            <div class="sec-label">deliverables</div>
+            <div class="sec-title">制作物一覧 ＆ ステータス</div>
+            <div class="sec-desc">Phase 1（テキストベース・最短構築パターン）の制作物と進捗状況。</div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon purple">📝</div>
+                        <h3>設計書・企画書</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status done">完了</span>LINE構築設計書（全体設計・KPI）</li>
+                        <li><span class="status done">完了</span>プロライン確認用 企画書</li>
+                        <li><span class="status done">完了</span>LINE画像 制作仕様書（15枚分）</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">💬</div>
+                        <h3>LINEシナリオ原稿</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status done">完了</span>シナリオ①：プレゼント受取（11ステップ）</li>
+                        <li><span class="status done">完了</span>シナリオ②：面談予約誘導（14ステップ）</li>
+                        <li><span class="status done">完了</span>面談予約ページ コピーライティング</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top:20px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">🌐</div>
+                        <h3>LP・Webページ</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status done">完了</span>LP パターンA（クリーム×ゴールド版）</li>
+                        <li><span class="status done">完了</span>LP パターンB（ダーク×パープル版）</li>
+                        <li><span class="status done">完了</span>プレゼント受取Webアプリ<br><small style="color:var(--text-light);margin-left:68px">brain-booster-pkg.surge.sh にデプロイ済</small></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon blue">🎁</div>
+                        <h3>プレゼントコンテンツ</h3>
+                    </div>
+                    <ul class="checklist">
+                        <li><span class="status done">完了</span>10大特典コンテンツ（Markdown形式）</li>
+                    </ul>
+                    <p style="font-size:13px;color:var(--text-light);margin-top:12px">属性A向け×2, B向け×2, C向け×2, D向け×2, 全属性共通×2 = 計10本</p>
+                </div>
+            </div>
+
+            <div style="margin-top:32px">
+                <h3 style="font-size:20px;font-weight:800;margin-bottom:16px">⚠️ 未制作・要対応アイテム</h3>
+                <div class="grid-2">
+                    <div class="card" style="border-left:4px solid var(--red)">
+                        <div class="card-header">
+                            <div class="card-icon red">🖼️</div>
+                            <h3>LINE配信用画像（15枚）</h3>
+                        </div>
+                        <p style="font-size:13px">仕様書は完成済。ヘッダー4枚、CTAボタン5種、コンテンツ3枚、緊急性バナー3種の実制作が必要。</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid var(--red)">
+                        <div class="card-header">
+                            <div class="card-icon red">📅</div>
+                            <h3>面談予約ページ構築</h3>
+                        </div>
+                        <p style="font-size:13px">コピーライティングは完成済。Calendly等との連携＆ページ本体の構築が必要。</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid var(--orange)">
+                        <div class="card-header">
+                            <div class="card-icon orange">⚙️</div>
+                            <h3>プロライン実装</h3>
+                        </div>
+                        <p style="font-size:13px">シナリオ原稿をプロラインに設定。シナリオ遷移、先頭に戻す、タグ管理の実装。</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid var(--text-light)">
+                        <div class="card-header">
+                            <div class="card-icon blue">🎬</div>
+                            <h3>Phase 2（将来対応）</h3>
+                        </div>
+                        <p style="font-size:13px">教育動画、15問アンケート分岐、属性別シナリオ。Phase 1稼働後に着手。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: LINEシナリオ -->
+        <div id="scenario" class="tab-content">
+            <div class="sec-label">line scenario</div>
+            <div class="sec-title">LINEシナリオ設計：2段階自動ファネル</div>
+            <div class="sec-desc">Skill Hacks式「2日締切＋先頭戻し」＋ Brain式「プレゼント段階解放」を統合した2シナリオ構成。</div>
+
+            <div class="grid-2" style="margin-bottom:24px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon purple">📩</div>
+                        <h3>シナリオ①の構造</h3>
+                    </div>
+                    <p style="font-size:14px"><strong style="color:var(--purple)">プレゼント受取 2日締切＋先頭に戻す</strong></p>
+                    <p style="font-size:13px;margin-top:8px">✅ 全11ステップ<br>✅ 2日間の締切でプレゼントの"存在"を紹介<br>✅ 「受け取りたい」ボタンでシナリオ②へ遷移<br>✅ 未反応者は「先頭に戻す」でリサイクル</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📅</div>
+                        <h3>シナリオ②の構造</h3>
+                    </div>
+                    <p style="font-size:14px"><strong style="color:var(--orange)">面談予約誘導 7日締切＋先頭に戻す</strong></p>
+                    <p style="font-size:13px;margin-top:8px">✅ 全14ステップ＋面談後送信<br>✅ 7日間で面談メリット・事例・緊急性を訴求<br>✅ 面談完了後にプレゼントURL送付<br>✅ 未反応者は「先頭に戻す」でリサイクル</p>
+                </div>
+            </div>
+
+            <h3 style="font-size:18px;font-weight:800;margin-bottom:16px">シナリオ① タイムライン</h3>
+            <div class="timeline">
+                <div class="timeline-item" data-day="1"><div class="tag">即時配信</div><h4>📦 プレゼント存在の紹介</h4><p>10大特典のリスト提示。受取条件は「面談参加」と明示。明後日24時の締切を設定。</p></div>
+                <div class="timeline-item" data-day="2"><div class="tag">再案内</div><h4>🔔 コンテンツ再送</h4><p>見逃し防止リマインド。期限内にボタンを押した人だけに面談案内を送ると予告。</p></div>
+                <div class="timeline-item" data-day="3"><div class="tag">流れ共有</div><h4>📋 受取までのSTEP説明</h4><p>STEP1→2→3の流れを図解。面談で得られる3つのメリットを具体化。</p></div>
+                <div class="timeline-item" data-day="4"><div class="tag">明日終了</div><h4>⚠️ 行動しないリスク訴求</h4><p>お客様の声を引用。「面談参加が条件」を再度強調。</p></div>
+                <div class="timeline-item" data-day="5"><div class="tag">最終日</div><h4>🔴 締切当日＋お客様の声</h4><p>受取方法の再説明。面談参加者の成功事例を紹介。</p></div>
+                <div class="timeline-item" data-day="6"><div class="tag">カウントダウン</div><h4>⏰ 残り4h → 2h → 1h</h4><p>3段階のリマインド配信。「ボタンを押すだけでOK」のハードル低下施策。</p></div>
+                <div class="timeline-item" data-day="↺"><div class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange)">先頭に戻す</div><h4>🔄 再チャンス（3ステップ）</h4><p>締切後に「お問い合わせがあった」体で再チャンスを提供。期限を延長して先頭に戻す。</p></div>
+            </div>
+
+            <h3 style="font-size:18px;font-weight:800;margin:32px 0 16px">シナリオ② タイムライン</h3>
+            <div class="timeline">
+                <div class="timeline-item" data-day="1"><div class="tag">お礼</div><h4>✨ 興味表明のお礼＋面談案内</h4><p>プレゼント準備完了を伝達。面談で得られるもの3点を提示。予約リンク設置。</p></div>
+                <div class="timeline-item" data-day="2"><div class="tag">メリット</div><h4>📅 面談メリットのまとめ</h4><p>面談内容の詳細。専用会員サイトのアクセス権プレゼントを告知。</p></div>
+                <div class="timeline-item" data-day="3"><div class="tag">チラ見せ</div><h4>👀 特典内容の一部公開</h4><p>反響の大きい特典2つを具体的に紹介。「残りは面談で」の誘導。</p></div>
+                <div class="timeline-item" data-day="4"><div class="tag">事例</div><h4>💬 参加者の声・事例紹介</h4><p>面談参加者3名のリアルな声。具体的な成果の数字を提示。</p></div>
+                <div class="timeline-item" data-day="5"><div class="tag">緊急性</div><h4>⚡ 残り枠わずか</h4><p>「残り3枠」の演出。92%の満足度データでクロージング。</p></div>
+                <div class="timeline-item" data-day="6"><div class="tag">具体化</div><h4>✅ 面談で得られるもの4点</h4><p>ポジション特定・ロードマップ・活用優先順位・最初の一手を具体化。</p></div>
+                <div class="timeline-item" data-day="7"><div class="tag" style="background:rgba(249,115,22,0.2);color:var(--orange)">🔥 クロージング</div><h4>📅 最終リマインド（4ステップ）</h4><p>明日終了→夜リマインド→本日終了16h→残4h→残2h の5段階クロージング。</p></div>
+                <div class="timeline-item" data-day="↺"><div class="tag" style="background:rgba(249,115,22,0.1);color:var(--orange)">先頭に戻す</div><h4>🔄 予約延長チャンス（3ステップ）</h4><p>7日間の延長を提示。先頭に戻して再シナリオ開始。</p></div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📋 面談完了後の自動メッセージ</h4>
+                <p style="font-size:14px">面談完了者にLINEでプレゼントページURL（<strong>brain-booster-pkg.surge.sh</strong>）を自動送付。「ブックマークしていつでもご活用ください」のメッセージ付き。</p>
+            </div>
+        </div>
+
+        <!-- TAB 4: プレゼント -->
+        <div id="presents" class="tab-content">
+            <div class="sec-label">booster package</div>
+            <div class="sec-title">ブースターパッケージ 10大特典</div>
+            <div class="sec-desc">4属性（コンテンツホルダー/初心者/経営者/アフィリエイター）すべてに対応する10本のコンテンツ。Markdown形式で制作済み。</div>
+
+            <div class="present-grid">
+                <div class="present-card-sm"><div class="p-num">01</div><h4>Brain販売で月50万円を達成するロードマップ</h4><span class="p-tag a">A: コンテンツホルダー</span></div>
+                <div class="present-card-sm"><div class="p-num">02</div><h4>コンテンツの値段設計テンプレート</h4><span class="p-tag a">A: コンテンツホルダー</span></div>
+                <div class="present-card-sm"><div class="p-num">03</div><h4>初心者が最短で月5万円を作る3ステップ</h4><span class="p-tag b">B: 初心者</span></div>
+                <div class="present-card-sm"><div class="p-num">04</div><h4>稼げるスキル選定チェックリスト</h4><span class="p-tag b">B: 初心者</span></div>
+                <div class="present-card-sm"><div class="p-num">05</div><h4>売上の壁を突破する仕組み化チェックシート</h4><span class="p-tag c">C: 経営者</span></div>
+                <div class="present-card-sm"><div class="p-num">06</div><h4>年商1億経営者が実践するKPI設計テンプレート</h4><span class="p-tag c">C: 経営者</span></div>
+                <div class="present-card-sm"><div class="p-num">07</div><h4>Brainアフィリエイトで月10万円稼ぐ戦略ガイド</h4><span class="p-tag d">D: アフィリエイター</span></div>
+                <div class="present-card-sm"><div class="p-num">08</div><h4>SNSフォロワーを最速で伸ばすX運用テンプレート</h4><span class="p-tag d">D: アフィリエイター</span></div>
+                <div class="present-card-sm"><div class="p-num">09</div><h4>迫さん直伝 ビジネスモデル構築の全体像</h4><span class="p-tag all">全属性共通</span></div>
+                <div class="present-card-sm"><div class="p-num">10</div><h4>Brain成功者インタビュー集</h4><span class="p-tag all">全属性共通</span></div>
+            </div>
+
+            <div class="highlight-box" style="margin-top:32px">
+                <h4>🌐 プレゼント受取ページ</h4>
+                <p style="font-size:14px"><strong>URL:</strong> <a href="https://brain-booster-pkg.surge.sh" target="_blank" style="color:var(--purple)">brain-booster-pkg.surge.sh</a><br>ダーク×パープルのWebアプリ。タイプ別タブフィルター＆モーダル詳細表示機能付き。デプロイ済み。</p>
+            </div>
+        </div>
+
+        <!-- TAB 5: 進捗管理 -->
+        <div id="progress" class="tab-content">
+            <div class="sec-label">progress tracker</div>
+            <div class="sec-title">Phase 1 進捗管理</div>
+            <div class="sec-desc">最短構築パターン（動画なし・テキストベース）の進捗状況。</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon green">✅</div>
+                    <h3>Phase 1 — 完了タスク</h3>
+                </div>
+                <ul class="checklist">
+                    <li><span class="status done">完了</span>ファネル全体設計書の作成</li>
+                    <li><span class="status done">完了</span>プレゼント10大特典コンテンツの作成（Markdown×10本）</li>
+                    <li><span class="status done">完了</span>LINEシナリオ①原稿（プレゼント受取・11ステップ）</li>
+                    <li><span class="status done">完了</span>LINEシナリオ②原稿（面談予約誘導・14ステップ）</li>
+                    <li><span class="status done">完了</span>面談予約ページ コピーライティング</li>
+                    <li><span class="status done">完了</span>LP制作（2パターン：クリーム版・ダーク版）</li>
+                    <li><span class="status done">完了</span>プレゼント受取Webアプリ（surge.shデプロイ済み）</li>
+                    <li><span class="status done">完了</span>プロライン確認用企画書</li>
+                    <li><span class="status done">完了</span>LINE画像制作仕様書</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <div class="card-icon red">🔴</div>
+                    <h3>Phase 1 — 未完了タスク</h3>
+                </div>
+                <ul class="checklist">
+                    <li><span class="status todo">未着手</span>LINE配信用画像の制作（15枚：ヘッダー4/ボタン5/コンテンツ3/バナー3）</li>
+                    <li><span class="status todo">未着手</span>面談予約ページの構築（Calendly等連携）</li>
+                    <li><span class="status todo">未着手</span>プロラインへのシナリオ実装（2シナリオ・先頭に戻し設定）</li>
+                    <li><span class="status todo">未着手</span>プレゼントコンテンツのPDF化（Markdown→PDF変換）</li>
+                    <li><span class="status todo">未着手</span>タグ設計・実装（興味あり/面談予約済/面談完了）</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <div class="card-icon blue">🔵</div>
+                    <h3>Phase 2 — 本格版（将来対応）</h3>
+                </div>
+                <ul class="checklist">
+                    <li><span class="status todo">未着手</span>迫さんの面玉動画の撮影・編集</li>
+                    <li><span class="status todo">未着手</span>属性分類アンケート（15問）の設計・実装</li>
+                    <li><span class="status todo">未着手</span>属性別教育シナリオ（A〜D 各タイプ別）</li>
+                    <li><span class="status todo">未着手</span>動画→感想→アンケート→プレゼント出し分けフロー</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="margin-top:32px">
+                <h4>📋 構築の優先順位</h4>
+                <table style="box-shadow:none;margin:0;margin-top:12px">
+                    <thead><tr><th>優先度</th><th>タスク</th><th>概要</th></tr></thead>
+                    <tbody>
+                        <tr><td>🔴 最優先</td><td class="highlight">LINE画像15枚の制作</td><td>シナリオに必要な画像の実制作</td></tr>
+                        <tr><td>🔴 最優先</td><td class="highlight">プロライン実装</td><td>シナリオ設定・先頭に戻す・タグ管理</td></tr>
+                        <tr><td>🟡 次に</td><td>面談予約ページ構築</td><td>Calendly連携・ページデザイン</td></tr>
+                        <tr><td>🟡 次に</td><td>プレゼントPDF化</td><td>Markdown→PDF変換・デザイン整形</td></tr>
+                        <tr><td>🟢 後で</td><td>Phase 2 動画・アンケート</td><td>Phase 1稼働後に着手</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Brain セールスファネル ダッシュボード — 村上さんセールスチーム × マンキーさんマーケ構築</p>
+    <p style="margin-top:4px">© F Production / YOLO's. Last updated: 2026-03-09</p>
+</footer>
+
+<script>
+function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 20, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

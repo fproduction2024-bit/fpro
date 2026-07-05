@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-to-Markdown Crawler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #38bdf8;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        .btn-run {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-run:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-run:disabled {
+            background: var(--text-dim);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-container {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .log-area {
+            margin-top: 20px;
+            background: #000;
+            border-radius: 12px;
+            padding: 16px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            color: #4ade80;
+        }
+
+        .completed-msg {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--success);
+            font-weight: 600;
+            display: none;
+        }
+
+        .btn-secondary {
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Web-to-Markdown Crawler</h1>
+
+        <div class="form-group">
+            <label>対象の開始URL</label>
+            <input type="text" id="url" placeholder="https://example.com/manual/">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label>最大保存ページ数</label>
+                <input type="number" id="max" value="10">
+            </div>
+            <div class="form-group">
+                <label>保存先フォルダ名</label>
+                <input type="text" id="folder" value="scraped_content">
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="strict_path">
+            <label for="strict_path">指定URLの階層以下のみをクロールする (--strict-path)</label>
+        </div>
+
+        <button class="btn-run" id="runBtn" onclick="startScrape()">クロールを開始する</button>
+
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="stats">
+                <span id="statusText">実行中...</span>
+                <span id="countText">0 / 0 ページ</span>
+            </div>
+            <div class="log-area" id="logArea"></div>
+            <div id="finishSection" style="display: none;">
+                <div class="completed-msg" style="display: block;">✨ クロールが完了しました！</div>
+                <button class="btn-secondary" onclick="openFolder()">📁 保存先フォルダを開く</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentJobId = null;
+        let pollInterval = null;
+
+        async function startScrape() {
+            const url = document.getElementById('url').value;
+            const max = document.getElementById('max').value;
+            const folder = document.getElementById('folder').value;
+            const strict = document.getElementById('strict_path').checked;
+
+            if (!url) {
+                alert("URLを入力してください");
+                return;
+            }
+
+            document.getElementById('runBtn').disabled = true;
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('logArea').innerHTML = '';
+            document.getElementById('finishSection').style.display = 'none';
+
+            try {
+                const response = await fetch('/api/scrape', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, max, folder, strict_path: strict })
+                });
+                const data = await response.json();
+                currentJobId = data.job_id;
+                startPolling();
+            } catch (err) {
+                alert("エラーが発生しました: " + err);
+                document.getElementById('runBtn').disabled = false;
+            }
+        }
+
+        function startPolling() {
+            pollInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/status/${currentJobId}`);
+                    const job = await response.json();
+
+                    // Update UI
+                    document.getElementById('progressBar').style.width = job.progress + '%';
+                    document.getElementById('countText').innerText = `${job.count} / ${document.getElementById('max').value} ページ`;
+
+                    const logArea = document.getElementById('logArea');
+                    logArea.innerHTML = job.logs.map(log => `<div class="log-entry">> ${log}</div>`).join('');
+                    logArea.scrollTop = logArea.scrollHeight;
+
+                    if (job.status === 'completed') {
+                        clearInterval(pollInterval);
+                        document.getElementById('finishSection').style.display = 'block';
+                        document.getElementById('statusText').innerText = '完了';
+                        document.getElementById('runBtn').disabled = false;
+                    }
+                } catch (err) {
+                    console.error("Polling error:", err);
+                }
+            }, 1000);
+        }
+
+        async function openFolder() {
+            if (!currentJobId) return;
+            try {
+                await fetch(`/api/open-folder/${currentJobId}`, { method: 'POST' });
+            } catch (err) {
+                alert("フォルダを開けませんでした: " + err);
+            }
+        }
+    </script>
+</body>
+
+</html>

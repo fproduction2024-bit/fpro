@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>なぜ痛みが出るのか — KLF</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F7FAF8;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            padding: 44px 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero-icon {
+            font-size: 52px;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            opacity: .85;
+            max-width: 420px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--mint);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--slate);
+        }
+
+        /* Step flow */
+        .flow-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .flow-card {
+            display: flex;
+            gap: 16px;
+            position: relative;
+            padding-bottom: 28px;
+        }
+
+        .flow-card:last-child {
+            padding-bottom: 0;
+        }
+
+        .flow-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 56px;
+            flex-shrink: 0;
+        }
+
+        .flow-icon-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+        }
+
+        .flow-line {
+            width: 2px;
+            background: var(--mint-mid);
+            flex: 1;
+            margin: 4px 0;
+        }
+
+        .flow-card:last-child .flow-line {
+            display: none;
+        }
+
+        .flow-body {
+            flex: 1;
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            padding: 18px 20px;
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+
+        .fb-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 8px;
+        }
+
+        .fb-desc {
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            line-height: 1.75;
+        }
+
+        .fb-desc strong {
+            color: var(--mint);
+        }
+
+        .fb-analogy {
+            background: var(--amber-pale);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--slate-mid);
+        }
+
+        .fb-analogy b {
+            color: var(--amber);
+        }
+
+        /* Analogy visual */
+        .analogy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        @media(max-width:600px) {
+            .analogy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .analogy-card {
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid;
+        }
+
+        .ac-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .ac-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .ac-desc {
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        /* Summary box */
+        .summary-box {
+            background: linear-gradient(135deg, var(--mint), #10896B);
+            border-radius: 16px;
+            padding: 24px;
+            color: #fff;
+            margin-top: 32px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .s-step {
+            background: rgba(255, 255, 255, .15);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 13.5px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .s-step .s-num {
+            background: rgba(255, 255, 255, .3);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 48px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="hero-icon">🦴</div>
+        <h1>なぜ痛みが出るのか</h1>
+        <p>体の痛みや不調は、ある日突然起きるのではなく、<br>長年の積み重ねから起きています。</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: 痛みの流れ -->
+        <div class="section">
+            <div class="section-label">
+                <div class="section-num">1</div>
+                <div class="section-title">痛みが生まれる5ステップ</div>
+            </div>
+
+            <div class="flow-cards">
+                <div class="flow-card">
+                    <div class="flow-left">
+                        <div class="flow-icon-circle" style="background:#DBEAFE;">🏃</div>
+                        <div class="flow-line"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="fb-title">STEP 1：20歳を過ぎると筋肉が落ち始める</div>
+                        <div class="fb-desc">20歳を超えると、毎日の疲れが「肉体的な疲れ」から「頭だけの疲れ」に変わっていきます。<br>
+                            子育て・仕事・家事で疲れていても、体を動かさない日が続くと<strong>筋肉は年に約1%ずつ落ちていきます</strong>。<br>
+                            さらに出産すると3〜5%一気に下がるとも言われています。</div>
+                    </div>
+                </div>
+                <div class="flow-card">
+                    <div class="flow-left">
+                        <div class="flow-icon-circle" style="background:#FEF3C7;">🥩</div>
+                        <div class="flow-line"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="fb-title">STEP 2：筋肉がビーフジャーキー化する</div>
+                        <div class="fb-desc">使わなくなった筋肉は、だんだん<strong>細くなって、硬くなって</strong>いきます。<br>
+                            これを「ビーフジャーキー化」と呼んでいます。</div>
+                        <div class="fb-analogy">
+                            <b>たとえ話：</b>新品の輪ゴムは柔らかく引っ張っても伸びますが、古くなった輪ゴムは硬くて引っ張ると切れてしまいます。それと同じことが筋肉で起きています。</div>
+                    </div>
+                </div>
+                <div class="flow-card">
+                    <div class="flow-left">
+                        <div class="flow-icon-circle" style="background:#FCE7F3;">🥩✨</div>
+                        <div class="flow-line"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="fb-title">STEP 3：サーロインステーキ現象が起きる</div>
+                        <div class="fb-desc">細くなった筋肉に<strong>脂肪が入り込み</strong>、見た目には太く見えても中身は脂肪だらけ、という状態になります。<br>
+                            霜降り肉のサシのように、筋肉の中に脂肪が入った状態です。</div>
+                        <div class="fb-analogy"><b>サーロインステーキ現象：</b>体重が増えているのに筋肉は減っている。それは「脂肪で体が太くなっているから」です。</div>
+                    </div>
+                </div>
+                <div class="flow-card">
+                    <div class="flow-left">
+                        <div class="flow-icon-circle" style="background:#FEE2E2;">😰</div>
+                        <div class="flow-line"></div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="fb-title">STEP 4：骨格が歪んで体に負担がかかる</div>
+                        <div class="fb-desc">筋肉で体重を支えられなくなると、<strong>骨に負担が移っていきます</strong>。<br>
+                            これが「歪み」の原因です。骨盤が傾くと、上半身でバランスを取ろうとして肩が上がり、首が傾き、全身のバランスが崩れていきます。</div>
+                    </div>
+                </div>
+                <div class="flow-card">
+                    <div class="flow-left">
+                        <div class="flow-icon-circle" style="background:var(--red-pale);">🔴</div>
+                    </div>
+                    <div class="flow-body">
+                        <div class="fb-title">STEP 5：痛みが出る</div>
+                        <div class="fb-desc">
+                            歪みが続いた状態で抱っこ・仕事・運動をすると、<strong>体の特定の部位に集中して負担がかかり</strong>、痛みや不調として現れます。<br>
+                            「急に痛くなった」のではなく、長い時間をかけて積み上がった結果です。</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: 比喩 -->
+        <div class="section">
+            <div class="section-label">
+                <div class="section-num">2</div>
+                <div class="section-title">分かりやすい「たとえ話」</div>
+            </div>
+            <div class="analogy-grid">
+                <div class="analogy-card" style="border-color:#FCD34D;background:#FFFBF0;">
+                    <div class="ac-icon">🦠</div>
+                    <div class="ac-name" style="color:#B45309;">ビーフジャーキー筋肉</div>
+                    <div class="ac-desc" style="color:var(--slate-mid);">新品の輪ゴム →
+                        古い輪ゴム。柔らかく弾力があったものが、硬くなってパツパツになってしまう状態。引っ張ると切れやすい（肉離れ）。</div>
+                </div>
+                <div class="analogy-card" style="border-color:#F9A8D4;background:#FFF0F9;">
+                    <div class="ac-icon">🥩</div>
+                    <div class="ac-name" style="color:#9D174D;">サーロインステーキ現象</div>
+                    <div class="ac-desc" style="color:var(--slate-mid);">霜降りのように筋肉に脂肪が入り込んだ状態。太く見えるが本物の筋肉は少ない。体を支える力が弱い。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: 回復の流れ -->
+        <div class="section">
+            <div class="section-label">
+                <div class="section-num">3</div>
+                <div class="section-title">痛みを治す4ステップ</div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-title">🌿 KLFでの改善の流れ</div>
+                <div class="summary-steps">
+                    <div class="s-step">
+                        <div class="s-num">1</div>歪みを取る（骨盤矯正・骨格調整）
+                    </div>
+                    <div class="s-step">
+                        <div class="s-num">2</div>硬くなった筋肉を柔らかくする（ほぐし・ストレッチ）
+                    </div>
+                    <div class="s-step">
+                        <div class="s-num">3</div>細くなった筋肉を太くする（EMS・運動・タンパク質補給）
+                    </div>
+                    <div class="s-step">
+                        <div class="s-num">4</div>その状態を維持する（メンテナンス来院・セルフケア）
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">KLF 患者向け資料 B-2 / 痛みの仕組み説明 &nbsp;|&nbsp; 2026年4月</div>
+    </div>
+</body>
+
+</html>

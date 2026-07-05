@@ -1,0 +1,52 @@
+{
+    "clients": [
+        {
+            "id": "ritzpro",
+            "name": "リッツプロ",
+            "contacts": [
+                {
+                    "name": "小樋さん",
+                    "role": "クライアント"
+                },
+                {
+                    "name": "遠山さん",
+                    "role": "クライアント"
+                },
+                {
+                    "name": "久保田さん",
+                    "role": "クライアント"
+                }
+            ]
+        },
+        {
+            "id": "yolos",
+            "name": "YOLO's",
+            "contacts": [
+                {
+                    "name": "齋藤さん",
+                    "role": "代表"
+                }
+            ]
+        },
+        {
+            "id": "tangleseed",
+            "name": "タングルシード",
+            "contacts": []
+        },
+        {
+            "id": "brain",
+            "name": "Brain",
+            "contacts": []
+        },
+        {
+            "id": "fproduction",
+            "name": "Fプロダクション",
+            "contacts": []
+        },
+        {
+            "id": "lisa",
+            "name": "LISA",
+            "contacts": []
+        }
+    ]
+}

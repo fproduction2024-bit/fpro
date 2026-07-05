@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-to-Markdown Tool Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #38bdf8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--primary);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        code {
+            background: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: var(--accent);
+            font-family: 'Courier New', Courier, monospace;
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .status-ready {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+        }
+
+        .status-info {
+            background: rgba(56, 189, 248, 0.2);
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Web-to-MD Dashboard</h1>
+        <p class="subtitle">マニュアルの閲覧と新ツールの使い方はこちらから</p>
+
+        <div class="grid">
+            <!-- Manuals Section -->
+            <div class="card">
+                <div class="status status-ready">完了済み</div>
+                <h2>📄 抽出済みマニュアル</h2>
+                <p>Proline Freeのマニュアル全194ページをMarkdown形式で保存しました。以下のフォルダから各ファイルを開けます。</p>
+                <p><strong>場所:</strong> <code>/Users/hiroshi/cursor/data/autosns_manuals/</code></p>
+                <a href="file:///Users/hiroshi/cursor/data/autosns_manuals/" class="btn">フォルダを開く</a>
+            </div>
+
+            <!-- Crawler Tool Section -->
+            <div class="card">
+                <div class="status status-info">ツール利用可能</div>
+                <h2>🕷️ 汎用クローラー</h2>
+                <p>他のサイトを丸ごとMarkdownに変換するためのツールです。ブラウザ専用の操作画面を作成しました。</p>
+                <a href="http://localhost:8080" class="btn" target="_blank">Chromeでツールを開く</a>
+                <p style="margin-top:15px; font-size: 0.8rem;">（ターミナルで <code>app.py</code> が動いている必要があります）</p>
+                <a href="file:///Users/hiroshi/cursor/projects/web_crawler/README.md" class="btn"
+                    style="background:transparent; border: 1px solid var(--primary); color: var(--primary);">詳細な使い方</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; color: var(--text-dim); font-size: 0.85rem;">
+            Created with Antigravity
+        </div>
+    </div>
+</body>
+
+</html>

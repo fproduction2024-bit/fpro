@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>リッツプロ｜クライアントジャーニー ルートマップ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --teal-light: #145B60;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            background: var(--bg-gray);
+            line-height: 1.7;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.15);
+            border: 1px solid rgba(232, 101, 10, 0.4);
+            color: var(--orange-light);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            color: var(--orange-light);
+        }
+
+        .hero p {
+            font-size: 15px;
+            opacity: 0.85;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── Summary Strip ── */
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            margin-top: -36px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .summary-strip .phase-tab {
+            background: var(--bg-white);
+            text-align: center;
+            padding: 20px 8px 16px;
+            border: 1px solid #e5e7eb;
+            cursor: default;
+            transition: .2s;
+        }
+
+        .summary-strip .phase-tab:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .summary-strip .phase-tab:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .summary-strip .phase-tab .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--orange);
+            margin-bottom: 4px;
+        }
+
+        .summary-strip .phase-tab .label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .summary-strip .phase-tab .period {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* ── Phase Section ── */
+        .phase {
+            margin-top: 56px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .phase-num {
+            background: var(--orange);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .phase-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .phase-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--orange), var(--teal));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 18px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--orange);
+            border: 3px solid var(--bg-gray);
+            z-index: 1;
+        }
+
+        .timeline-card {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-card h4 .icon {
+            font-size: 20px;
+        }
+
+        .timeline-card p {
+            font-size: 13px;
+            color: var(--text-body);
+            margin-bottom: 12px;
+        }
+
+        /* ── Role Tags ── */
+        .roles {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .role-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .role-client {
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange);
+            border: 1px solid rgba(232, 101, 10, 0.25);
+        }
+
+        .role-ritz {
+            background: rgba(12, 74, 78, 0.1);
+            color: var(--teal);
+            border: 1px solid rgba(12, 74, 78, 0.25);
+        }
+
+        /* ── Action List ── */
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 12px 0;
+        }
+
+        .action-list li {
+            font-size: 13px;
+            padding: 4px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .action-list li::before {
+            content: '▸';
+            color: var(--orange);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .action-list.ritz li::before {
+            color: var(--teal);
+        }
+
+        /* ── Deliverable Box ── */
+        .deliverables {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-top: 12px;
+        }
+
+        .deliverables .label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .deliverables ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .deliverables li {
+            font-size: 12px;
+            background: var(--bg-white);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            padding: 3px 10px;
+            border-radius: 6px;
+            color: var(--text-dark);
+        }
+
+        /* ── Connector Arrow ── */
+        .phase-connector {
+            text-align: center;
+            padding: 28px 0 0;
+            color: var(--teal);
+            font-size: 28px;
+            opacity: 0.5;
+        }
+
+        /* ── KPI Box ── */
+        .kpi-box {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .kpi-box .kpi-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--green);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .kpi-box .kpi-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .kpi-box .kpi-note {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--teal);
+            color: #fff;
+            text-align: center;
+            padding: 48px 24px;
+            margin-top: 64px;
+        }
+
+        .footer h3 {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .footer p {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        /* ── Dual Column ── */
+        .dual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .dual-col h5 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dual-col h5.client {
+            color: var(--orange);
+        }
+
+        .dual-col h5.ritz {
+            color: var(--teal);
+        }
+
+        /* ── Print / Responsive ── */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 26px;
+            }
+
+            .summary-strip {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .summary-strip .phase-tab:first-child,
+            .summary-strip .phase-tab:last-child {
+                border-radius: 8px;
+            }
+
+            .dual {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .hero {
+                padding: 40px 0 30px;
+            }
+
+            .phase {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ━━━━━━━━━━ HERO ━━━━━━━━━━ -->
+    <div class="hero">
+        <div class="container">
+            <div class="badge">CLIENT JOURNEY ROUTE MAP</div>
+            <h1>リッツプロ｜<span>仕事の流れ</span></h1>
+            <p>クライアントが最初の接点からM&A出口までに辿る行動を、一本のルートとして整理しました。各ステップで「クライアントがやること」と「リッツプロがやること」を明確にしています。</p>
+        </div>
+    </div>
+
+    <!-- ━━━━━━━━━━ SUMMARY STRIP ━━━━━━━━━━ -->
+    <div class="container">
+        <div class="summary-strip">
+            <div class="phase-tab">
+                <div class="num">PHASE 0</div>
+                <div class="label">商談・契約</div>
+                <div class="period">〜1ヶ月</div>
+            </div>
+            <div class="phase-tab">
+                <div class="num">PHASE 1</div>
+                <div class="label">本部構築</div>
+                <div class="period">1〜3ヶ月目</div>
+            </div>
+            <div class="phase-tab">
+                <div class="num">PHASE 2</div>
+                <div class="label">加盟店開発</div>
+                <div class="period">3〜6ヶ月目</div>
+            </div>
+            <div class="phase-tab">
+                <div class="num">PHASE 3</div>
+                <div class="label">スケールアップ</div>
+                <div class="period">6ヶ月〜2年目</div>
+            </div>
+            <div class="phase-tab">
+                <div class="num">PHASE 4</div>
+                <div class="label">M&A出口</div>
+                <div class="period">2〜3年目</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ━━━━━━━━━━ PHASE 0: 商談・契約 ━━━━━━━━━━ -->
+    <div class="container">
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">0</div>
+                <div>
+                    <div class="phase-title">商談・契約</div>
+                    <div class="phase-subtitle">初回接点〜プロジェクト開始まで</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 0-1 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📞</span> 初回ミーティング</h4>
+                        <p>ニーズ・目標・現状の把握。「いつまでに・いくらで・何店舗」のゴールイメージを共有する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>自社の事業概要・強みを説明する</li>
+                                    <li>現在の店舗数・直営実績を共有する</li>
+                                    <li>FC化の目的・3年後のゴールを伝える</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>現状ヒアリング・課題の特定</li>
+                                    <li>出口戦略（M&A）の提案</li>
+                                    <li>成功の定義の共有</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 0-2 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🔍</span> 2回目ミーティング（社内審査）</h4>
+                        <p>質問事項の確認、FC化の適性診断。社会性・専門性・拡大性の3軸で評価する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>追加資料の提出（PL/BS/メニュー等）</li>
+                                    <li>直営店の実績データ提供</li>
+                                    <li>質問への回答</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>FC化適性の社内審査</li>
+                                    <li>社会性・専門性・拡大性の評価</li>
+                                    <li>支援範囲・成果報酬の提示</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 0-3 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📝</span> 契約締結</h4>
+                        <p>契約書の読み合わせと電子契約書での締結。契約金の入金。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>契約内容の確認・承諾</li>
+                                    <li>電子契約書へのサイン</li>
+                                    <li>契約金200万円（税別）の入金</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>契約書の作成・読み合わせ</li>
+                                    <li>プロジェクトチームの編成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="deliverables">
+                            <div class="label">📦 この段階の成果物</div>
+                            <ul>
+                                <li>業務委託契約書</li>
+                                <li>プロジェクト計画書</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 0-4 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🚀</span> キックオフミーティング</h4>
+                        <p>プロジェクト開始。目的・スコープ・スケジュール・役割分担を全関係者で再確認。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>社内の関係者を集める</li>
+                                    <li>既存マニュアル・資料の共有</li>
+                                    <li>プロジェクトの優先事項を伝える</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>プロジェクト全体のロードマップ提示</li>
+                                    <li>スケジュール・マイルストーンの設定</li>
+                                    <li>市場調査の開始</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-connector">⬇</div>
+
+        <!-- ━━━━━━━━━━ PHASE 1: 本部構築 ━━━━━━━━━━ -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">1</div>
+                <div>
+                    <div class="phase-title">本部構築</div>
+                    <div class="phase-subtitle">FC本部としての仕組みを整える｜1〜3ヶ月目</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 1-1 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🎯</span> ゴール設計 ＆ 戦略設計</h4>
+                        <p>「いつまでに・何店舗・いくらで売却」を明確にし、逆算で戦略を組む。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>出口（M&A）の目標時期・金額を決める</li>
+                                    <li>自社のMVV（ミッション・ビジョン・バリュー）を策定</li>
+                                    <li>社会的意義の明確化（ESG/SDGs的な要素）</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>市場調査・ニーズ分析</li>
+                                    <li>競合調査・ポジショニング設計</li>
+                                    <li>M&A売却額シミュレーション（マルチプル法）</li>
+                                    <li>経営戦略の4層設計</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1-2 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📦</span> FCパッケージ化</h4>
+                        <p>接客・集客・商品提供・CS・経営会計を体系化し、加盟店に渡せるパッケージにする。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>直営店のオペレーションを洗い出す</li>
+                                    <li>施術・サービスの手順を共有</li>
+                                    <li>仕入先・原価・利益構造の開示</li>
+                                    <li>写真・動画素材の撮影協力</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>FCパッケージの設計・体系化</li>
+                                    <li>業務のシンプル化・効率化（⚠️最重要）</li>
+                                    <li>教育期間の圧縮設計</li>
+                                    <li>品質許容ラインの設定</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1-3 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📚</span> マニュアル構築</h4>
+                        <p>加盟店が再現できるマニュアル・研修プログラムを作成する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>マニュアル内容の監修・確認</li>
+                                    <li>研修プログラムの実演・撮影</li>
+                                    <li>トラブル事例の共有</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>オペレーションマニュアル作成</li>
+                                    <li>研修カリキュラム設計</li>
+                                    <li>チェックリスト・テンプレート整備</li>
+                                    <li>品質管理KPI策定</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="deliverables">
+                            <div class="label">📦 この段階の成果物</div>
+                            <ul>
+                                <li>FCオペレーションマニュアル</li>
+                                <li>研修プログラム</li>
+                                <li>チェックリスト</li>
+                                <li>品質管理基準書</li>
+                                <li>トラブル対応マニュアル</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1-4 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">⚖️</span> 法務・契約整備</h4>
+                        <p>FC加盟契約書・ロイヤリティ設計・コンプライアンス体制を整備する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>加盟金額・ロイヤリティ金額を決定</li>
+                                    <li>弁護士・法務との連携</li>
+                                    <li>商標登録の確認</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>FC契約書の雛形作成支援</li>
+                                    <li>ロイヤリティ設計（固定型推奨）</li>
+                                    <li>法務アドバイス・コンプライアンス支援</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-connector">⬇</div>
+
+        <!-- ━━━━━━━━━━ PHASE 2: 加盟店開発 ━━━━━━━━━━ -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">2</div>
+                <div>
+                    <div class="phase-title">加盟店開発</div>
+                    <div class="phase-subtitle">加盟店オーナーを集める仕組みを回す｜3〜6ヶ月目</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 2-1 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🎨</span> マーケティング準備</h4>
+                        <p>広告・LP・セミナー・導線をすべて整備する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>写真・動画撮影の協力（サロン/オフィス/代表者）</li>
+                                    <li>実績データの提供（月次売上等）</li>
+                                    <li>オーナーの声・インタビュー協力</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>LP制作（リッツプロ負担）</li>
+                                    <li>広告バナー・動画制作</li>
+                                    <li>セミナー台本・スライド作成</li>
+                                    <li>申込フォーム・LINE設定</li>
+                                    <li>Meta広告の設定</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="deliverables">
+                            <div class="label">📦 この段階の成果物</div>
+                            <ul>
+                                <li>FC募集LP</li>
+                                <li>広告バナー</li>
+                                <li>セミナー台本</li>
+                                <li>セミナースライド</li>
+                                <li>LINE公式設定</li>
+                                <li>申込フォーム</li>
+                                <li>提案書</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2-2 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🧪</span> 0次募集（テストマーケティング）</h4>
+                        <p>3〜10店舗を割安条件で募集。マニュアル改善パートナーとして加盟してもらう。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>セミナーに登壇する（オンライン90〜100分）</li>
+                                    <li>個別面談に参加して直接クロージング</li>
+                                    <li>加盟候補者の最終判断</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>Meta広告の運用（リッツプロ負担）</li>
+                                    <li>セミナー集客・運営サポート</li>
+                                    <li>個別面談の段取り</li>
+                                    <li>CPA・契約率の分析・改善</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="kpi-box">
+                            <div class="kpi-label">目標 CPA（加盟店開拓コスト）</div>
+                            <div class="kpi-value">申込 3.4万 → 契約 60万円</div>
+                            <div class="kpi-note">着席率50%、契約率10-20%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2-3 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🏗️</span> 加盟店オープン支援</h4>
+                        <p>加盟店のオープンまでを伴走。研修・プレオープン・初期集客を支援する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>加盟オーナーへの研修実施</li>
+                                    <li>プレオープンの立ち会い</li>
+                                    <li>加盟店への商材・機器納品</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>オープン支援体制の設計</li>
+                                    <li>マニュアルの改善・アップデート</li>
+                                    <li>SVサポート体制の構築支援</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-connector">⬇</div>
+
+        <!-- ━━━━━━━━━━ PHASE 3: スケールアップ ━━━━━━━━━━ -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">3</div>
+                <div>
+                    <div class="phase-title">スケールアップ</div>
+                    <div class="phase-subtitle">10店舗→50店舗→100店舗へ拡大する｜6ヶ月〜2年目</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 3-1 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📈</span> 1次募集（本格展開）</h4>
+                        <p>0次で検証したマーケティングを本格稼働。月5件ペースで加盟店を増やす。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>セミナー登壇を継続（月2〜4回）</li>
+                                    <li>個別面談・契約を実行</li>
+                                    <li>加盟オーナーとのエンゲージメント維持</li>
+                                    <li>既存加盟店への2ヶ月に1回のリアル訪問</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>広告の最適化・ROAS管理</li>
+                                    <li>新クリエイティブのテスト</li>
+                                    <li>YouTube広告の追加</li>
+                                    <li>ブランド構築支援（メディア・出版）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3-2 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🔄</span> 回収＆投資（ROAS管理）</h4>
+                        <p>売上と利益を出しつつ、資金を回収してさらに投資するサイクルを回す。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>月次のPL/BS/CFの管理</li>
+                                    <li>ロイヤリティ・仕入利益の管理</li>
+                                    <li>既存オーナーの複数店舗出店を促進</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>費用対効果の分析・レポーティング</li>
+                                    <li>マーケティング手法の追加・調整</li>
+                                    <li>経営支援・アドバイス</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3-3 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🌟</span> 2次募集 ＆ 持続的拡大</h4>
+                        <p>50店舗超からは既存オーナーの複数出店率が最重要KPI。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>カスタマーサクセス体制の強化</li>
+                                    <li>新商品・サービスの開発</li>
+                                    <li>エリア戦略の推進</li>
+                                    <li>ブランディング活動への参加</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>マーケティングチャネルの拡充</li>
+                                    <li>展示会・プラットフォーム出展</li>
+                                    <li>メディア戦略（テレビ・出版）</li>
+                                    <li>M&A準備のための企業価値向上支援</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="kpi-box">
+                            <div class="kpi-label">スケール目標</div>
+                            <div class="kpi-value">月5件 × 12ヶ月 = 年60件</div>
+                            <div class="kpi-note">ロイヤリティ10万/月 → 1年後 月600万の継続収益</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-connector">⬇</div>
+
+        <!-- ━━━━━━━━━━ PHASE 4: M&A出口 ━━━━━━━━━━ -->
+        <div class="phase">
+            <div class="phase-header">
+                <div class="phase-num">4</div>
+                <div>
+                    <div class="phase-title">M&A出口</div>
+                    <div class="phase-subtitle">企業売却とキャッシュアウト｜2〜3年目</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <!-- Step 4-1 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">📊</span> M&A準備</h4>
+                        <p>デューデリジェンス（DD）に耐える体制を整え、企業価値を最大化する。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>財務諸表の整備（PL/BS/CF）</li>
+                                    <li>法務・コンプライアンスの最終確認</li>
+                                    <li>加盟店との契約内容の再確認</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>DD対応支援</li>
+                                    <li>企業価値の算出（マルチプル法）</li>
+                                    <li>売却額が上がる構造の最終調整</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4-2 -->
+                <div class="timeline-item">
+                    <div class="timeline-card">
+                        <h4><span class="icon">🤝</span> 売却交渉・クロージング</h4>
+                        <p>営業利益 × 5〜7倍のマルチプル法で売却。税率20%で現金化。</p>
+                        <div class="dual">
+                            <div class="dual-col">
+                                <h5 class="client">🟠 クライアントがやること</h5>
+                                <ul class="action-list">
+                                    <li>買い手候補との面談</li>
+                                    <li>条件交渉への参加</li>
+                                    <li>最終合意・契約締結</li>
+                                </ul>
+                            </div>
+                            <div class="dual-col">
+                                <h5 class="ritz">🟢 リッツプロがやること</h5>
+                                <ul class="action-list ritz">
+                                    <li>M&Aアドバイザーとの連携</li>
+                                    <li>売却プロセスの伴走</li>
+                                    <li>ポストM&A移行支援</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="kpi-box">
+                            <div class="kpi-label">売却額の目安</div>
+                            <div class="kpi-value">営業利益 × 5〜7倍</div>
+                            <div class="kpi-note">月利200万 → 年間2,400万 → 売却額 1.2〜1.7億円（税率20%）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ━━━━━━━━━━ FOOTER ━━━━━━━━━━ -->
+    <div class="footer">
+        <h3>最短2〜3年で、出口のある経営を。</h3>
+        <p>リッツプロ株式会社 ｜ 伴走型FC支援事業</p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特典05｜売上の壁を突破する「仕組み化」チェックシート - Brain ブースターパッケージ</title>
+<meta name="description" content="Brain ブースターパッケージ 特典05：売上の壁を突破する「仕組み化」チェックシート。迫佑樹（Brain代表）からの限定特典コンテンツ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #0d9488;
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --text: #f0f0f5;
+    --text-muted: #8888aa;
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-logo {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-logo span {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .topbar-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0f1f 50%, #0f1a1f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #0d948822 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .hero-num .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .hero-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 20px #0d948866);
+  }
+  .hero-type {
+    display: inline-block;
+    background: #0d948822;
+    border: 1px solid #0d948844;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #0d9488 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-author {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .hero-author strong {
+    color: var(--accent);
+  }
+
+  /* MAIN CONTENT */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Content styles */
+  .content h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 48px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #0d948844;
+    color: var(--text);
+    position: relative;
+  }
+  .content h2::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .content h3::before {
+    content: '▶';
+    font-size: 10px;
+  }
+  .content p {
+    margin-bottom: 16px;
+    color: #d0d0e0;
+  }
+  .content strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .content em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .content code {
+    background: rgba(255,255,255,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #a8d8ff;
+  }
+  .content pre {
+    background: #0d0d18;
+    border: 1px solid #0d948833;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .content pre code {
+    background: none;
+    padding: 0;
+    color: #c8e6ff;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .content blockquote {
+    background: #0d948811;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: #c0c0d8;
+    font-style: italic;
+  }
+  .content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .content ul {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+  }
+  .content ul li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .content ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .content ol {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+    counter-reset: ol-counter;
+  }
+  .content ol li {
+    padding: 6px 0 6px 36px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    counter-increment: ol-counter;
+  }
+  .content ol li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    top: 8px;
+  }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: #0d948822;
+    color: var(--text);
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #0d948844;
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 16px;
+    color: #c0c0d8;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* NAVIGATION */
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    gap: 16px;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover {
+    color: var(--text);
+    border-color: #0d948844;
+    background: #0d948811;
+  }
+  .nav-index {
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .nav-index:hover {
+    color: var(--accent);
+    border-color: #0d948844;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060609;
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 36px; }
+    .container { padding: 32px 16px 60px; }
+    .cta-section { padding: 28px 20px; }
+    .page-nav { padding: 16px; flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    🧠 <span>Brain</span> ブースターパッケージ
+  </a>
+  <span class="topbar-badge">特典 05 / 10</span>
+</div>
+
+<section class="hero">
+  <div class="hero-num">
+    <span class="dot"></span>
+    SPECIAL BONUS 05
+  </div>
+  <span class="hero-icon">⚙️</span>
+  <div class="hero-type">経営者 Type C</div>
+  <h1>売上の壁を突破する「仕組み化」チェックシート</h1>
+  <p class="hero-author">by <strong>迫 佑樹</strong>（Brain代表）</p>
+</section>
+
+<div class="container">
+  <div class="content">
+    <hr>
+<blockquote>月商300万を超えたあたりで、ほぼ全員が同じ壁にぶつかる。 「自分が動かないと売上が止まる」——これを"仕組み"で解決する。</blockquote>
+<hr>
+<h2>はじめに</h2>
+<p>売上がある経営者ほど、実は「忙しすぎて」成長が止まっている。</p>
+<ul><li>月商100万円の人 → 「もっと働けば200万になる」と思っている</li><li>月商300万円の人 → 「これ以上忙しくなれない」と気づく</li><li>月商1000万円の人 → 「自分が動かなくても回る仕組み」を持っている</li></ul>
+<p><strong>月商300万円〜1000万円の間にある「壁」は、仕組み化でしか壊せない。</strong></p>
+<p>このチェックシートで、あなたの事業のどこに「仕組み化の余地」があるかを特定してください。</p>
+<hr>
+<h2>PART 1：仕組み化の全体像</h2>
+<h3>事業の4つのレイヤー</h3>
+<pre><code>┌───────────────────────────┐
+│    ④ 経営・戦略          │ ← あなたがやるべきこと（これだけ）
+├───────────────────────────┤
+│    ③ マーケティング       │ ← 仕組み化 or 外注
+├───────────────────────────┤
+│    ② セールス             │ ← 仕組み化 or 外注
+├───────────────────────────┤
+│    ① 価値提供（サービス）  │ ← 仕組み化 or 外注
+└───────────────────────────┘</code></pre>
+<p><strong>目指す状態</strong>: ④だけに集中し、①②③は仕組みが回している</p>
+<hr>
+<h2>PART 2：仕組み化チェックシート</h2>
+<h3>セクション1：集客の仕組み化</h3>
+<div class="table-wrap"><table><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr><tr><td>□ 広告 or SEOで**自動的にリストが増えている**</td><td>月＿＿件</td><td>月＿＿件</td></tr><tr><td>□ **LP（ランディングページ）**が存在し、CVR計測している</td><td>CVR＿＿%</td><td>CVR＿＿%</td></tr><tr><td>□ SNSを**あなた以外の人が運用**できる状態</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 紹介・口コミの**仕組み**がある（紹介特典等）</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ リスト獲得のコスト（CPA）を把握している</td><td>CPA＿＿円</td><td>CPA＿＿円</td></tr></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<hr>
+<h3>セクション2：教育の仕組み化</h3>
+<div class="table-wrap"><table><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr><tr><td>□ リスト登録後に**自動でステップ配信**が走る</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **動画・テキストで"価値観教育"**が自動化されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 見込み客の**温度感をスコアリング**できている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 問い合わせ前に**FAQ・事前情報**を自動で届けている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **教育完了→商談誘導**が自動で行われる</td><td>□Yes □No</td><td>□Yes</td></tr></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<hr>
+<h3>セクション3：セールスの仕組み化</h3>
+<div class="table-wrap"><table><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr><tr><td>□ 商談予約が**カレンダーツールで自動化**</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ セールストーク（台本）が**マニュアル化**</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ あなた以外の人が**セールスできる**</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 成約率を**計測・改善するサイクル**がある</td><td>成約率＿＿%</td><td>成約率＿＿%</td></tr><tr><td>□ 未成約者への**フォローアップの仕組み**がある</td><td>□Yes □No</td><td>□Yes</td></tr></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<hr>
+<h3>セクション4：価値提供の仕組み化</h3>
+<div class="table-wrap"><table><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr><tr><td>□ サービスの**納品・提供手順がマニュアル化**</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **あなた以外のスタッフ**がサービス提供できる</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **会員サイト・オンライン教材**でコンテンツ提供</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 顧客対応の**テンプレート・FAQ**が整備されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 顧客満足度を**定期的に計測**している</td><td>□Yes □No</td><td>□Yes</td></tr></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<hr>
+<h3>セクション5：組織・オペレーションの仕組み化</h3>
+<div class="table-wrap"><table><tr><th>チェック項目</th><th>現状</th><th>目標</th></tr><tr><td>□ 業務フローが**ドキュメント化**されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **採用→教育→独り立ち**の人材育成プロセスがある</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ 週次 or 月次の**KPI確認ミーティング**を実施</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ **タスク管理ツール**で進捗が可視化されている</td><td>□Yes □No</td><td>□Yes</td></tr><tr><td>□ あなたが**1週間不在でも**事業が回る</td><td>□Yes □No</td><td>□Yes</td></tr></table></div>
+<p><strong>スコア</strong>: チェック数＿＿/5</p>
+<hr>
+<h2>PART 3：診断結果</h2>
+<h3>合計スコア</h3>
+<div class="table-wrap"><table><tr><th>セクション</th><th>スコア</th></tr><tr><td>集客</td><td>/5</td></tr><tr><td>教育</td><td>/5</td></tr><tr><td>セールス</td><td>/5</td></tr><tr><td>価値提供</td><td>/5</td></tr><tr><td>組織</td><td>/5</td></tr><tr><td>**合計**</td><td>**/25**</td></tr></table></div>
+<h3>判定</h3>
+<div class="table-wrap"><table><tr><th>合計</th><th>レベル</th><th>状態</th></tr><tr><td>**20〜25**</td><td>🟢 仕組み化上級者</td><td>次は「レバレッジ」のフェーズ。広告投資やM&Aで一気に拡大</td></tr><tr><td>**15〜19**</td><td>🟡 もう少し</td><td>あと2〜3個の仕組みを入れれば、あなたの時間が大幅に空く</td></tr><tr><td>**10〜14**</td><td>🟠 属人的経営</td><td>売上は作れているが、あなたが倒れたら事業も止まる状態</td></tr><tr><td>**〜9**</td><td>🔴 要注意</td><td>自転車操業。今すぐ仕組み化に着手すべき</td></tr></table></div>
+<hr>
+<h2>PART 4：仕組み化の優先順位</h2>
+<p><strong>スコアが低いセクションから着手する。</strong></p>
+<p>ただし、以下の順序で取り組むのが最も効率的：</p>
+<pre><code>1. セールスの仕組み化（成約率が上がれば全体の売上が上がる）
+2. 教育の仕組み化（セールスの負荷が減る）
+3. 集客の仕組み化（安定したリスト獲得）
+4. 価値提供の仕組み化（あなたの時間が空く）
+5. 組織の仕組み化（スケールの準備）</code></pre>
+<blockquote>💡 <strong>迫のワンポイント</strong>: 多くの経営者は「集客が足りない」と思っているが、実際は「セールスと教育の仕組みがないから、集客しても取りこぼしている」だけのケースが8割。まずはセールスの仕組みから。</blockquote>
+<hr>
+<h2>最後に</h2>
+<p>「仕組み化」は、あなたがサボるためのものじゃない。</p>
+<p><strong>あなたが「本当にやるべきこと」に集中するため</strong>のものだ。</p>
+<p>経営者の仕事は「仕組みを作ること」と「次の一手を考えること」。それ以外は全部仕組みに任せていい。</p>
+<p><strong>面談で、あなたの事業の「最初に仕組み化すべきポイント」を一緒に特定しましょう。</strong></p>
+<hr>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+  </div>
+</div>
+
+<nav class="page-nav">
+  <a href="bonus-04.html" class="nav-btn nav-prev">← 特典04へ</a>
+  <a href="index.html" class="nav-index">📋 特典一覧へ</a>
+  <a href="bonus-06.html" class="nav-btn nav-next">特典06へ →</a>
+</nav>
+
+<footer>
+  <p>© Brain Inc. All Rights Reserved.</p>
+  <p>本コンテンツは Brain ブースターパッケージの限定特典です。無断転載・再配布を禁止します。</p>
+</footer>
+
+</body>
+</html>

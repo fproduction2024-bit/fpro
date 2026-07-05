@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITK × YOLO's 既存リスト引き上げ施策 ── プロラインで眠れるリストを採用成果に変える</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#0C4A4E', primaryTextColor: '#fff', primaryBorderColor: '#145B60', lineColor: '#E8650A', secondaryColor: '#FFF7F0', tertiaryColor: '#F8F9FB', fontFamily: 'Noto Sans JP, Inter, sans-serif', fontSize: '13px', edgeLabelBackground: '#FFF7F0' } });</script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06)
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background: var(--bg-white);
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 101, 10, 0.15) 0%, transparent 70%);
+            border-radius: 50%
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.2);
+            border: 1px solid rgba(232, 101, 10, 0.5);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--orange-light);
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px
+        }
+
+        .hero h1 span {
+            color: var(--orange-light)
+        }
+
+        .hero p.sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 640px
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2
+        }
+
+        .summary-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .summary-card .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1
+        }
+
+        .summary-card .num span {
+            font-size: 16px;
+            font-weight: 600
+        }
+
+        .summary-card .label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 8px
+        }
+
+        .summary-card .change {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px;
+            color: var(--orange)
+        }
+
+        section {
+            padding: 80px 0
+        }
+
+        section.alt {
+            background: var(--bg-gray)
+        }
+
+        .sec-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .sec-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4
+        }
+
+        .sec-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin-bottom: 40px
+        }
+
+        .card {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0
+        }
+
+        .card-icon.orange {
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange)
+        }
+
+        .card-icon.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green)
+        }
+
+        .card-icon.red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red)
+        }
+
+        .card-icon.teal {
+            background: rgba(12, 74, 78, 0.1);
+            color: var(--teal)
+        }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.7
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            font-size: 14px
+        }
+
+        thead {
+            background: var(--teal);
+            color: #fff
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-gray)
+        }
+
+        tbody tr:hover {
+            background: var(--orange-bg)
+        }
+
+        td.highlight {
+            font-weight: 700;
+            color: var(--orange)
+        }
+
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 40px 1fr;
+            gap: 0;
+            align-items: stretch;
+            margin-bottom: 32px
+        }
+
+        .compare-box {
+            padding: 28px;
+            border-radius: var(--radius)
+        }
+
+        .compare-box.before {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb
+        }
+
+        .compare-box.after {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.3)
+        }
+
+        .compare-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--orange)
+        }
+
+        .compare-box h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-dark)
+        }
+
+        .compare-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #e5e7eb
+        }
+
+        .compare-box.after .compare-item {
+            border-bottom-color: rgba(232, 101, 10, 0.15)
+        }
+
+        .roi-box {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius);
+            padding: 36px;
+            text-align: center;
+            margin: 32px 0
+        }
+
+        .roi-box .roi-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--green)
+        }
+
+        .roi-box .roi-label {
+            font-size: 16px;
+            margin-top: 8px;
+            color: var(--text-body)
+        }
+
+        .steps {
+            display: flex;
+            gap: 20px;
+            margin: 32px 0
+        }
+
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative
+        }
+
+        .step-num-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin: 0 auto 12px
+        }
+
+        .step-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px
+        }
+
+        .step-item p {
+            font-size: 13px;
+            color: var(--text-light)
+        }
+
+        .step-item::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 14px;
+            font-size: 20px;
+            color: var(--text-light)
+        }
+
+        .step-item:last-child::after {
+            display: none
+        }
+
+        .cta {
+            background: var(--teal);
+            padding: 60px 0;
+            text-align: center;
+            color: #fff
+        }
+
+        .cta h2 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px
+        }
+
+        .cta p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px
+        }
+
+        .highlight-box {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin: 24px 0
+        }
+
+        .highlight-box h4 {
+            color: var(--orange);
+            font-size: 16px;
+            margin-bottom: 12px
+        }
+
+        .flow-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 700px;
+            margin: 0 auto 32px
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--orange);
+            background: var(--bg-gray)
+        }
+
+        .flow-step.green-border {
+            border-left-color: var(--green)
+        }
+
+        .flow-step.teal-border {
+            border-left-color: var(--teal)
+        }
+
+        .flow-step .step-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-dark)
+        }
+
+        .flow-step .step-detail {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+            font-weight: 400
+        }
+
+        .flow-arrow-down {
+            text-align: center;
+            color: var(--orange);
+            font-size: 20px;
+            margin: 2px 0
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px
+        }
+
+        .funnel-box {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .funnel-box .phase-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 8px
+        }
+
+        .funnel-box h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px
+        }
+
+        .funnel-box p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.6
+        }
+
+        .funnel-box .days {
+            display: inline-block;
+            background: var(--orange-bg);
+            color: var(--orange);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px
+        }
+
+        /* Mermaid container */
+        .mermaid-wrapper {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            overflow-x: auto
+        }
+
+        .mermaid-wrapper .mermaid {
+            display: flex;
+            justify-content: center
+        }
+
+        .mermaid-caption {
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 16px;
+            font-style: italic
+        }
+
+        @media(max-width:768px) {
+            .summary-grid {
+                grid-template-columns: 1fr
+            }
+
+            .compare-grid {
+                grid-template-columns: 1fr;
+                gap: 12px
+            }
+
+            .compare-arrow {
+                transform: rotate(90deg)
+            }
+
+            .steps {
+                flex-direction: column
+            }
+
+            .step-item::after {
+                display: none
+            }
+
+            .hero h1 {
+                font-size: 26px
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+
+            .mermaid-wrapper {
+                padding: 16px 8px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">PROPOSAL 2026</div>
+            <h1>眠れる求職者リストを<br><span>プロラインで「稼働資産」に変える</span></h1>
+            <p class="sub">ITKが保有する既存の飲食人材リストに対し、LINE自動配信で再アプローチ。人手をかけずに面談設定→成約を自動化する仕組みのご提案。</p>
+        </div>
+    </section>
+
+    <!-- SUMMARY CARDS -->
+    <div class="container">
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="num">0<span>円</span></div>
+                <div class="label">新規リスト獲得コスト</div>
+                <div class="change">既存リストを活用するため追加広告費ゼロ</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">70<span>万〜</span></div>
+                <div class="label">成約1名あたりの紹介フィー</div>
+                <div class="change">リスト配信だけで売上が発生</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">30<span>%</span></div>
+                <div class="label">既存リストからの売上比率</div>
+                <div class="change">この30%を自動化で最大化する</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 課題認識 -->
+    <section style="padding-top:100px">
+        <div class="container">
+            <div class="sec-label">problem</div>
+            <div class="sec-title">ITKが抱える構造的な課題</div>
+            <div class="sec-desc">飲食人材紹介で業界最古参の知名度を持つITK。しかし、既存リストの活用に大きな機会損失が発生しています。</div>
+
+            <div class="grid-2" style="margin-bottom:32px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon red">🚨</div>
+                        <h3>求職者プールが活用できていない</h3>
+                    </div>
+                    <p>斎藤社長のネットワークで<strong>求人企業は無限に獲得可能</strong>。<br>
+                        ITKの売上の<strong style="color:var(--orange)">約30%は既存リストからの成約</strong>で生まれている。<br>
+                        しかし、過去に接触した求職者リスト（退職者・応募未決定者・過去面談者）への再アプローチは<strong>人力頼み</strong>。<br>
+                        「今すぐ転職」ではなかった人にも、タイミングが変われば動く人がいる。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon red">⏰</div>
+                        <h3>人力フォローの限界</h3>
+                    </div>
+                    <p>求職者への再アプローチは<strong>電話 or メール</strong>。<br>
+                        飲食業界の人は日中は現場に立っており<strong>電話に出ない</strong>。<br>
+                        メールは<strong>開封率5〜10%</strong>程度。<br>
+                        結果、フォローが追いつかず<strong>取りこぼし</strong>が大量発生。</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 この課題の本質</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    現時点で売上の30%が既存リストから生まれている ＝ <strong style="color:var(--orange)">人力でこれなら、自動化すれば倍以上になる</strong>。<br>
+                    過去にコストと労力をかけて獲得したリストが、人手不足でフォローしきれていない ＝ 機会損失。<br>
+                    → <strong>プロラインでこの30%を50%、60%へ引き上げる仕組み</strong>を構築します。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 提案の全体像 -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">solution</div>
+            <div class="sec-title">プロラインで実現すること</div>
+            <div class="sec-desc">既存リストに対してLINE自動配信を行い、「眠れるリスト」を「面談予約」に変えます。</div>
+
+            <div class="compare-grid">
+                <div class="compare-box before">
+                    <h4>❌ 現状のフォロー</h4>
+                    <div class="compare-item"><span>手段</span><span>電話・メール</span></div>
+                    <div class="compare-item"><span>頻度</span><span>思い出した時だけ</span></div>
+                    <div class="compare-item"><span>到達率</span><span style="color:var(--red)">電話不通 / メール開封5%</span></div>
+                    <div class="compare-item"><span>対応人数</span><span>1日20〜30件が限界</span></div>
+                    <div class="compare-item"><span>人件費</span><span>架電スタッフのコスト</span></div>
+                    <div class="compare-item"><span>夜間/休日</span><span style="color:var(--red)">対応不可</span></div>
+                </div>
+                <div class="compare-arrow">→</div>
+                <div class="compare-box after">
+                    <h4>✅ プロライン導入後</h4>
+                    <div class="compare-item"><span>手段</span><span>LINE自動配信</span></div>
+                    <div class="compare-item"><span>頻度</span><span style="color:var(--green)">シナリオで自動・定期</span></div>
+                    <div class="compare-item"><span>到達率</span><span style="color:var(--green)">LINE開封率60〜80%</span>
+                    </div>
+                    <div class="compare-item"><span>対応人数</span><span style="color:var(--green)">無制限（全リスト同時）</span></div>
+                    <div class="compare-item"><span>人件費</span><span style="color:var(--green)">追加人件費ゼロ</span></div>
+                    <div class="compare-item"><span>夜間/休日</span><span style="color:var(--green)">24時間自動対応</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 自動化シナリオ -->
+    <section>
+        <div class="container">
+            <div class="sec-label">scenario</div>
+            <div class="sec-title">プロライン自動配信シナリオ</div>
+            <div class="sec-desc">既存リストをLINEに誘導し、ステップ配信で温度を上げて面談予約まで自動で完結させます。</div>
+
+            <!-- LINE導線マーメイド図 -->
+            <div class="mermaid-wrapper">
+                <pre class="mermaid">
+flowchart TD
+    A["📋 既存リスト\n1,000人"] -->|SMS / メール / 電話| B["📱 LINE登録\n登録率 30%"]
+    B --> C["📝 自動アンケート\n就業状況・希望エリア・職種・転職意欲"]
+    C --> D{"🏷️ 自動セグメント"}
+    D -->|転職意欲 HIGH| E["🔥 HOT\n30人（10%）"]
+    D -->|いい話あれば| F["🌡️ WARM\n75人（25%）"]
+    D -->|今は考えてない| G["❄️ COOL\n195人（65%）"]
+    E -->|即日〜3日| H["カレンダー予約リンク\n+ マッチ求人3件提示"]
+    F -->|7〜14日間| I["給与相場レポート\n→ 成功事例 → 非公開求人\n→ 職務経歴書テンプレ"]
+    G -->|月1回 × 12ヶ月| J["人気求人ランキング\n→ 季節の転職情報\n→ 市場価値診断"]
+    H --> K["📅 面談予約\n自動確定"]
+    I -->|温度上昇| K
+    J -->|タイミング到来| K
+    K --> L["⏰ 自動リマインド\n前日・当日・1時間前"]
+    L --> M["🤝 面談実施"]
+    M --> N["✅ 成約\n紹介フィー 70万円〜"]
+
+    style A fill:#0C4A4E,stroke:#145B60,color:#fff
+    style B fill:#0C4A4E,stroke:#145B60,color:#fff
+    style C fill:#145B60,stroke:#1A6B70,color:#fff
+    style D fill:#E8650A,stroke:#C5520A,color:#fff
+    style E fill:#EF4444,stroke:#DC2626,color:#fff
+    style F fill:#F59E0B,stroke:#D97706,color:#fff
+    style G fill:#6B7280,stroke:#4B5563,color:#fff
+    style H fill:#FFF7F0,stroke:#E8650A,color:#1a1a2e
+    style I fill:#FFF7F0,stroke:#E8650A,color:#1a1a2e
+    style J fill:#F8F9FB,stroke:#6B7280,color:#1a1a2e
+    style K fill:#10B981,stroke:#059669,color:#fff
+    style L fill:#10B981,stroke:#059669,color:#fff
+    style M fill:#0C4A4E,stroke:#145B60,color:#fff
+    style N fill:#10B981,stroke:#059669,color:#fff
+                </pre>
+                <div class="mermaid-caption">LINE導線の全体フロー：既存リスト → LINE登録 → セグメント → 自動ナーチャリング → 面談予約 → 成約</div>
+            </div>
+
+            <div class="flow-visual">
+                <div class="flow-step">
+                    <div>
+                        <div class="step-name">Step 1：既存リストにLINE登録を促す</div>
+                        <div class="step-detail">SMS / メール / 電話で「LINE登録で最新の求人情報をお届け」と案内 → QRコードまたはリンクで登録</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step teal-border">
+                    <div>
+                        <div class="step-name">Step 2：登録直後にアンケート配信（自動セグメント）</div>
+                        <div class="step-detail">「現在の就業状況」「希望エリア」「希望職種」「転職意欲の度合い」を自動ヒアリング → タグで自動分類</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step">
+                    <div>
+                        <div class="step-name">Step 3：セグメント別ステップ配信（2〜4週間）</div>
+                        <div class="step-detail">転職意欲が高い人 → 即座に面談案内 / 様子見の人 → 求人情報＋業界コンテンツで温度を上げる</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step green-border">
+                    <div>
+                        <div class="step-name">Step 4：カレンダー予約で面談設定（全自動）</div>
+                        <div class="step-detail">LINE内でカレンダーから空き枠を選択 → 面談確定 → 前日・当日の自動リマインドで「ドタキャン激減」</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔑 ポイント：飲食業界はLINEと相性が最高</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    飲食業界の従業員は<strong>日中は電話に出られない</strong>（ランチ・ディナーの現場に立っている）。<br>
+                    でもLINEなら<strong>休憩中・閉店後にチェック</strong>できる。<br>
+                    → <strong style="color:var(--orange)">「電話に出ない」問題をLINEの非同期コミュニケーションで解決</strong>。<br>
+                    開封率は<strong>メールの10〜15倍</strong>（メール5% vs LINE 60〜80%）。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ITK だからこそ提案できる求職者メリット -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">value</div>
+            <div class="sec-title">ITKだからこそ求職者に提供できる6つの価値</div>
+            <div class="sec-desc">ITKのHPに掲載されている強みを、LINE配信コンテンツに変換します。<br>求職者が「このLINEは登録しておく価値がある」と感じるメリットの設計です。</div>
+
+            <div class="grid-2" style="margin-bottom:24px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon teal">🏢</div>
+                        <h3>大手企業との太いパイプ</h3>
+                    </div>
+                    <p>飲食専門転職支援の<strong>老舗＝業界最長の企業ネットワーク</strong>。<br>
+                        ITKからの紹介なら<strong style="color:var(--green)">書類選考・面接が通過しやすい</strong>。<br>
+                        選考難易度の高い企業でも内定を獲得できる。</p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「ITK経由だから通る！大手飲食チェーン非公開求人3選」</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📋</div>
+                        <h3>業界最大数の求人から選べる</h3>
+                    </div>
+                    <p><strong>上場大手企業から個人店まで全業態を網羅</strong>。<br>
+                        「土日休み」「夜勤なし」「月給35万円以上」など、<br>
+                        飲食では珍しい好条件もITKなら見つかる。</p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「今週の新着！完全週休3日も可能なラーメン店 店長候補」</p>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:24px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">👨‍🍳</div>
+                        <h3>飲食経験者のキャリアプランナー</h3>
+                    </div>
+                    <p>担当者は<strong>全員が飲食業界の経験者</strong>。<br>
+                        現場の大変さを知っているから、あなたの希望を本当に理解できる。<br>
+                        「給料上がらない」「月6休でブラック」<strong>→ 共感から始まる相談</strong>。</p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「元料理長のキャリアプランナーが教える 転職で年収100万UP する方法」</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon teal">📝</div>
+                        <h3>履歴書・職務経歴書の作成代行</h3>
+                    </div>
+                    <p>あなたの強み・経験を最大限アピールする書類を作成。<br>
+                        ITKの<strong style="color:var(--green)">書類選考通過率は業界最高水準</strong>。<br>
+                        「書き方がわからない」人こそ使うべきサービス。</p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「飲食スタッフの職務経歴書テンプレート 無料プレゼント」</p>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:32px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">🤝</div>
+                        <h3>面接への同行＆条件交渉</h3>
+                    </div>
+                    <p>基本的に<strong>面接に同行</strong>。企業ごとの癖・内定ポイントを熟知。<br>
+                        さらに内定後の<strong style="color:var(--green)">条件交渉を積極的に実施</strong>。<br>
+                        <strong>1円でも高い給料、好条件を勝ち取る</strong>ために企業と粘り強く交渉。
+                    </p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「面接が不安？ITKなら同行サポートあり！内定率UP の秘訣」</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">🛡️</div>
+                        <h3>入社後のアフターフォロー</h3>
+                    </div>
+                    <p>転職は入社後が本番。<strong>パワハラ・長時間労働・人間関係</strong>など<br>
+                        飲食業界特有のリスクに、入社後も<strong>いつでも相談OK</strong>。<br>
+                        入社して関係を終わりにすることは一切ない。</p>
+                    <p style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:700">▶
+                        LINE配信例：「転職したらおしまい？ITKは入社後もあなたの味方です」</p>
+                </div>
+            </div>
+
+            <!-- 成功事例 -->
+            <div class="sec-title" style="font-size:22px;margin-bottom:20px">📣 ITK利用者のリアルな声（HP掲載事例）</div>
+
+            <div class="grid-3" style="margin-bottom:24px">
+                <div class="card" style="border-top:3px solid var(--orange)">
+                    <p style="font-size:13px;margin-bottom:12px">25歳 / 大手イタリアン店長候補</p>
+                    <p style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">年収70万円UP</p>
+                    <p style="font-size:14px">330万円 → <strong>400万円</strong></p>
+                    <p style="font-size:14px">月休7日 → <strong>月休9日</strong></p>
+                    <p style="font-size:13px;color:var(--text-light);margin-top:10px">「5社面接して4社内定。比較して選べた」</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--green)">
+                    <p style="font-size:13px;margin-bottom:12px">45歳 / 大手高級鮨店 調理スタッフ</p>
+                    <p style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:8px">月給9万円UP</p>
+                    <p style="font-size:14px">38万円 → <strong>47万円</strong></p>
+                    <p style="font-size:14px">月4休 → <strong>月8休＋日曜定休</strong></p>
+                    <p style="font-size:13px;color:var(--text-light);margin-top:10px">「社長が担当。鮨にも詳しく、現場のことがわかる人だった」</p>
+                </div>
+                <div class="card" style="border-top:3px solid var(--teal)">
+                    <p style="font-size:13px;margin-bottom:12px">37歳 / 大手外食チェーン本部</p>
+                    <p style="font-size:20px;font-weight:900;color:var(--teal);margin-bottom:8px">社長の右腕に抜擢</p>
+                    <p style="font-size:14px">年収580万 → ベンチャー幹部</p>
+                    <p style="font-size:14px">1年後目標 <strong>年収630万円</strong></p>
+                    <p style="font-size:13px;color:var(--text-light);margin-top:10px">「4社合格。わがままを聞いてくれた」</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 これらの「ITKの強み」こそがLINE配信コンテンツになる</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    求職者がLINEを登録し続ける理由 ＝ <strong
+                        style="color:var(--orange)">「このLINEには自分にとって価値のある情報が来る」</strong>と感じること。<br>
+                    ITKの強みは、そのまま配信コンテンツのネタになります。<br>
+                    ・非公開求人の紹介 → 「LINE限定 非公開求人」として配信<br>
+                    ・面接同行 → 「面接が不安なあなたへ」として訴求<br>
+                    ・成功事例 → 「年収70万UPした25歳の話」としてストーリー配信<br>
+                    → <strong>求職者への売り込みではなく「価値提供」の形で面談予約に繋げます</strong>。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ステップ配信の中身 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">nurturing</div>
+            <div class="sec-title">セグメント別ステップ配信の中身</div>
+            <div class="sec-desc">アンケート結果に応じて、3つのグループに自動分岐。ITKの強みを活かしたコンテンツで温度を上げます。</div>
+
+            <div class="grid-3" style="margin-bottom:32px">
+                <div class="funnel-box">
+                    <div class="days">即日〜3日</div>
+                    <div class="phase-label">HOT（今すぐ転職したい）</div>
+                    <h4>🔥 即面談コース</h4>
+                    <p style="text-align:left;font-size:13px">
+                        ① 登録直後：カレンダー予約リンク配信<br>
+                        ② 希望条件マッチ求人を即座に3件提示<br>
+                        ③ <strong>「ITK経由なら書類選考が通りやすい！」</strong>を訴求<br>
+                        ④ <strong>面接同行サポート</strong>の案内<br>
+                    </p>
+                    <p style="margin-top:8px"><strong style="color:var(--green)">面談予約率：40〜60%</strong></p>
+                </div>
+                <div class="funnel-box">
+                    <div class="days">7〜14日間</div>
+                    <div class="phase-label">WARM（いい話あれば聞く）</div>
+                    <h4>🌡️ 温度上昇コース</h4>
+                    <p style="text-align:left;font-size:13px">
+                        ① Day1：<strong>給与相場レポート</strong>配信<br>
+                        ② Day3：<strong>転職成功事例</strong>（年収70万UPの話）<br>
+                        ③ Day7：<strong>非公開求人3選</strong>（LINE限定）<br>
+                        ④ Day10：<strong>職務経歴書テンプレート</strong>プレゼント<br>
+                        ⑤ Day14：面談予約への誘導
+                    </p>
+                    <p style="margin-top:8px"><strong style="color:var(--orange)">面談予約率：15〜25%</strong></p>
+                </div>
+                <div class="funnel-box">
+                    <div class="days">月1回 × 最大12ヶ月</div>
+                    <div class="phase-label">COOL（今は考えていない）</div>
+                    <h4>❄️ 長期追客コース</h4>
+                    <p style="text-align:left;font-size:13px">
+                        ① 月1回：<strong>人気求人ランキング</strong>配信<br>
+                        ② 季節の転職情報（<strong>繁忙期後の転職チャンス</strong>）<br>
+                        ③ <strong>「あなたの市場価値診断」</strong>クイズ<br>
+                        ④ 入社後アフターフォロー事例の紹介<br>
+                    </p>
+                    <p style="margin-top:8px"><strong style="color:var(--teal)">「辞めたい時」に最初に思い出す存在に</strong></p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>📊 なぜセグメント配信が重要なのか</h4>
+                <p style="font-size:14px">
+                    全員に同じ内容を送ると<strong>ブロック率が急上昇</strong>。<br>
+                    アンケートでセグメントすることで、<strong style="color:var(--orange)">必要な情報を必要な人に届ける → ブロック率5%以下を維持</strong>。<br>
+                    「まだ転職は考えてないけど情報は欲しい」という層＝<strong>半年後のHOTリード</strong>です。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 構築する機能一覧 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">features</div>
+            <div class="sec-title">プロラインで構築する機能一覧</div>
+            <div class="sec-desc">すべてプロラインで実装可能。追加のツール費用はかかりません。</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>機能</th>
+                        <th>内容</th>
+                        <th>効果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>自動アンケート</strong></td>
+                        <td>登録直後に転職意欲・希望条件を自動ヒアリング</td>
+                        <td class="highlight">セグメント自動分類</td>
+                    </tr>
+                    <tr>
+                        <td><strong>タグ管理</strong></td>
+                        <td>希望エリア・職種・転職時期でタグ付け</td>
+                        <td class="highlight">ピンポイント配信</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ステップ配信</strong></td>
+                        <td>HOT/WARM/COOLに分岐して自動配信</td>
+                        <td class="highlight">温度に応じた最適なアプローチ</td>
+                    </tr>
+                    <tr>
+                        <td><strong>カレンダー予約</strong></td>
+                        <td>LINE内で面談枠を選択 → 自動確定</td>
+                        <td class="highlight">面談設定の自動化</td>
+                    </tr>
+                    <tr>
+                        <td><strong>自動リマインド</strong></td>
+                        <td>面談の前日・当日・1時間前に自動配信</td>
+                        <td class="highlight">ドタキャン率▲50%以上</td>
+                    </tr>
+                    <tr>
+                        <td><strong>リッチメニュー</strong></td>
+                        <td>求人検索・面談予約・LINE相談の動線</td>
+                        <td class="highlight">常設の導線でいつでもアクション可能</td>
+                    </tr>
+                    <tr>
+                        <td><strong>一斉配信</strong></td>
+                        <td>新着求人・急募案件をセグメント別に配信</td>
+                        <td class="highlight">「今すぐ人が欲しい」案件に即対応</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- シミュレーション -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">simulation</div>
+            <div class="sec-title">引き上げ効果シミュレーション</div>
+            <div class="sec-desc">既存リストの規模に応じた、保守的な試算です。</div>
+
+            <div class="card" style="margin-bottom:24px">
+                <h3 style="margin-bottom:16px">前提条件</h3>
+                <div class="grid-2">
+                    <div>
+                        <p>• 既存リスト数：<strong>1,000人</strong>と仮定</p>
+                        <p>• LINE登録率：<strong>30%</strong>（SMS/メール誘導）</p>
+                        <p>• LINE登録者数：<strong>300人</strong></p>
+                    </div>
+                    <div>
+                        <p>• HOT層：<strong>10%</strong>（30人）</p>
+                        <p>• WARM層：<strong>25%</strong>（75人）</p>
+                        <p>• COOL層：<strong>65%</strong>（195人）</p>
+                    </div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>セグメント</th>
+                        <th>人数</th>
+                        <th>面談予約率</th>
+                        <th>面談数</th>
+                        <th>成約率</th>
+                        <th>成約数</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🔥 HOT</td>
+                        <td>30人</td>
+                        <td>50%</td>
+                        <td>15件</td>
+                        <td>30%</td>
+                        <td class="highlight" style="color:var(--green)">4〜5名</td>
+                    </tr>
+                    <tr>
+                        <td>🌡️ WARM</td>
+                        <td>75人</td>
+                        <td>20%</td>
+                        <td>15件</td>
+                        <td>20%</td>
+                        <td class="highlight" style="color:var(--green)">3名</td>
+                    </tr>
+                    <tr>
+                        <td>❄️ COOL（12ヶ月累計）</td>
+                        <td>195人</td>
+                        <td>8%</td>
+                        <td>15件</td>
+                        <td>15%</td>
+                        <td class="highlight" style="color:var(--green)">2名</td>
+                    </tr>
+                    <tr style="background:var(--orange-bg)">
+                        <td><strong>合計</strong></td>
+                        <td><strong>300人</strong></td>
+                        <td>—</td>
+                        <td><strong>45件</strong></td>
+                        <td>—</td>
+                        <td class="highlight" style="color:var(--green)"><strong>9〜10名</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="roi-box">
+                <div class="roi-num">630<span style="font-size:28px">万〜700万円</span></div>
+                <div class="roi-label">既存リスト1,000人から生まれる追加売上</div>
+                <p style="margin-top:12px;font-size:14px;color:var(--text-light)">成約9〜10名 × 紹介フィー70万円 ＝
+                    現在の「30%」をさらに押し上げる追加売上
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔄 さらに：無限クーポン施策との連動</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    先にご提案済みの「無限クーポン × 採用母集団形成」施策でリストが増え続ければ、<br>
+                    <strong style="color:var(--orange)">毎月新規リストがプロラインに流入 → 自動ナーチャリング → 面談予約</strong>というサイクルが完成。<br>
+                    → リスト規模が大きくなるほど、<strong>手を動かさなくても成約が生まれ続ける構造</strong>になります。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活用イメージ：ITKでの具体的な求職者体験 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">use case</div>
+            <div class="sec-title">ITKでの活用イメージ ── 求職者はこう動く</div>
+            <div class="sec-desc">プロライン導入後、ITKの既存リストにいる求職者がどのような体験をし、どう面談予約に至るのか。<br>3つの典型パターンで具体的に描写します。</div>
+
+            <!-- パターン1：HOT層 -->
+            <div class="card" style="border-left:4px solid var(--orange);margin-bottom:24px">
+                <div class="card-header">
+                    <div class="card-icon orange">�</div>
+                    <h3>パターン①：寿司職人タケシさん（32歳）── 夜23時に面談予約</h3>
+                </div>
+                <p style="font-size:13px;color:var(--orange);font-weight:700;margin-bottom:12px">HOT層 ──
+                    「今すぐ辞めたい」が電話には出られなかった人</p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:14px;line-height:2;margin:0">
+                        <strong>【背景】</strong>半年前にITKに登録。当時は「いい話があれば」程度だったが、最近オーナーとの関係が悪化し<strong>「もう限界、すぐ辞めたい」</strong>。<br>
+                        しかしITKからの電話は<strong>ランチ営業中（12時）やディナー仕込み中（15時）</strong>で毎回出られず。<br>
+                        メールも届いていたが、普段メールを見る習慣がなく<strong>全て未読のまま</strong>。
+                    </p>
+                </div>
+
+                <div style="margin-bottom:16px">
+                    <p style="font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:12px">📱 タケシさんのLINE体験
+                    </p>
+                    <div class="flow-visual" style="margin:0">
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">SMSが届く</div>
+                                <div class="step-detail">「ITKです。LINEで最新の飲食求人をお届けしています → https://〜」<br>→
+                                    閉店後の<strong>22:30</strong>にスマホを見て気づく。LINEならいいかと<strong>その場で友だち追加</strong></div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step teal-border">
+                            <div>
+                                <div class="step-name">即座にアンケートが届く（自動）</div>
+                                <div class="step-detail">「今の就業状況は？」→ <strong>在職中</strong><br>「転職の意欲は？」→
+                                    <strong>「すぐにでも転職したい」をタップ</strong><br>「希望エリアは？」→ <strong>東京都内</strong><br>「希望職種は？」→
+                                    <strong>寿司・和食</strong><br>→ タグ自動付与：<strong style="color:var(--red)">HOT / 東京 /
+                                        寿司和食</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">HOT専用メッセージが即配信（自動）</div>
+                                <div class="step-detail">
+                                    「タケシさん、ありがとうございます！🍣<br>東京の寿司・和食で、今すぐご案内できる求人が<strong>3件</strong>あります。<br>まずは15分のオンライン面談でお話ししませんか？」<br>＋
+                                    <strong>カレンダー予約リンク</strong>が表示される
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step green-border">
+                            <div>
+                                <div class="step-name">夜23:10 ── 面談予約完了</div>
+                                <div class="step-detail">まかない食べながらスマホでカレンダーを開き、<strong>翌々日の14時（休憩時間）</strong>を選択。<br>→
+                                    予約確定メッセージ＋前日リマインドが自動設定<br><strong style="color:var(--green)">→
+                                        電話では絶対に捕まらなかった人が、23時に自分から予約を入れた</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        💡 <strong>ポイント：</strong>飲食の現場に立つ人は<strong>営業時間中に電話に出ることは物理的に不可能</strong>。<br>
+                        でもLINEなら<strong>閉店後・休憩中・帰宅後</strong>にチェックできる。<br>
+                        ITKから何度電話しても繋がらなかった人が、<strong>LINEなら自分のタイミングで動ける</strong>。
+                    </p>
+                </div>
+            </div>
+
+            <!-- パターン2：WARM層 -->
+            <div class="card" style="border-left:4px solid var(--green);margin-bottom:24px">
+                <div class="card-header">
+                    <div class="card-icon green">🌡️</div>
+                    <h3>パターン②：カフェ店長ユウコさん（28歳）── コンテンツで温度が上がる</h3>
+                </div>
+                <p style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:12px">WARM層 ──
+                    「いい話があれば聞きたい」が、自分からは動かない人</p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:14px;line-height:2;margin:0">
+                        <strong>【背景】</strong>1年前にITKに相談。面談もしたが、当時は「もう少し今の店で頑張ろう」と見送り。<br>
+                        今も不満はあるが、<strong>「転職活動をする気力がない」「履歴書を書くのが面倒」</strong>。<br>
+                        ITKからのフォロー電話も「今は大丈夫です」で終わっていた。
+                    </p>
+                </div>
+
+                <div style="margin-bottom:16px">
+                    <p style="font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:12px">📱 ユウコさんの14日間
+                    </p>
+                    <div class="flow-visual" style="margin:0">
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">Day 0：LINE登録 → アンケート</div>
+                                <div class="step-detail">「転職の意欲は？」→ <strong>「いい話があれば聞きたい」</strong>を選択<br>→
+                                    タグ自動付与：<strong style="color:var(--orange)">WARM / 東京 / カフェ</strong></div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">Day 1：給与相場レポート配信（自動）</div>
+                                <div class="step-detail">「カフェ店長の平均年収は〇〇万円。あなたの給料は相場と比べてどう？」<br>→
+                                    通勤電車の中で読む。<strong>「え、私の給料って相場より50万も低いの…？」</strong></div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">Day 3：転職成功事例の配信（自動）</div>
+                                <div class="step-detail">「26歳カフェスタッフ → 大手飲食チェーンのSV職へ。年収70万円UP、月休9日に」<br>→
+                                    <strong>「同い年くらいの人がこんなに条件良くなるんだ…」</strong>と気になり始める
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">Day 7：非公開求人3選の配信（自動）</div>
+                                <div class="step-detail">「LINE限定🔒 今週の非公開求人TOP3」<br>→
+                                    「完全週休2日のカフェSV」を見て<strong>「こんな条件の求人あるんだ…」</strong>とスクショ保存</div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">Day 10：職務経歴書テンプレート配信（自動）</div>
+                                <div class="step-detail">「飲食スタッフ専用！職務経歴書テンプレート 無料ダウンロード」<br>→
+                                    <strong>「ITKが書類も作ってくれるんだ。それなら面倒じゃないかも」</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step green-border">
+                            <div>
+                                <div class="step-name">Day 14：面談案内＋予約リンク（自動）</div>
+                                <div class="step-detail">「ユウコさん、気になる求人はありましたか？<br>まずは15分のオンライン相談で、あなたに合う求人をご提案します」<br>＋
+                                    カレンダー予約リンク<br><strong style="color:var(--green)">→ 「話だけ聞いてみようかな」と予約ボタンをタップ</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        💡
+                        <strong>ポイント：</strong>電話で「今は大丈夫です」と言っていた人でも、<strong>情報を少しずつ受け取ることで「転職してもいいかも」という気持ちが育つ</strong>。<br>
+                        人力では1人に14日間かけてフォローするのは不可能。<strong>ステップ配信なら全自動で温度を上げ続けられる</strong>。
+                    </p>
+                </div>
+            </div>
+
+            <!-- パターン3：COOL層 -->
+            <div class="card" style="border-left:4px solid var(--teal);margin-bottom:24px">
+                <div class="card-header">
+                    <div class="card-icon teal">❄️</div>
+                    <h3>パターン③：ホテル調理師ケンジさん（41歳）── 8ヶ月後に突然動く</h3>
+                </div>
+                <p style="font-size:13px;color:var(--teal);font-weight:700;margin-bottom:12px">COOL層 ──
+                    「今は転職を考えていない」が、タイミングが来れば動く人</p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:14px;line-height:2;margin:0">
+                        <strong>【背景】</strong>2年前にITKに登録したが、当時は情報収集目的。今の職場に不満はなく、<strong>「辞める理由がない」</strong>。<br>
+                        ITKの電話にも「また何かあったら連絡します」で終了。<strong>事実上「放置リスト」</strong>だった。
+                    </p>
+                </div>
+
+                <div style="margin-bottom:16px">
+                    <p style="font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:12px">📱 ケンジさんの8ヶ月</p>
+                    <div class="flow-visual" style="margin:0">
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">LINE登録 → COOL層に分類</div>
+                                <div class="step-detail">アンケートで「今は転職を考えていない」を選択<br>→
+                                    <strong>月1回の軽いコンテンツ配信</strong>が始まる（負担にならない頻度）
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">月1回：人気求人ランキング＋業界ニュース</div>
+                                <div class="step-detail">「今月の人気求人TOP5」「ホテル業界の平均年収が〇〇万円に上昇」<br>→
+                                    たまに開いて<strong>「ふーん」と軽く読む程度</strong>。ブロックはしない</div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">8ヶ月後：職場で大きな変化が起きる</div>
+                                <div class="step-detail">信頼していた料理長が退職。新しい料理長と方針が合わず、<strong>「ここにいる意味あるのか」</strong>と感じ始める
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">ちょうどそのタイミングでLINEが届く</div>
+                                <div class="step-detail">「あなたの市場価値診断 🎯 3つの質問に答えるだけ」<br>→
+                                    <strong>「ちょっとやってみるか」</strong>と診断を開始
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step">
+                            <div>
+                                <div class="step-name">診断結果 → 具体的な求人提示（自動）</div>
+                                <div class="step-detail">「ケンジさんの経験なら、年収500万円以上が狙えます。該当する非公開求人が2件あります」<br>→ <strong
+                                        style="color:var(--orange)">「自分にこんな条件の求人があるのか」と初めて本気で転職を考える</strong></div>
+                            </div>
+                        </div>
+                        <div class="flow-arrow-down">↓</div>
+                        <div class="flow-step green-border">
+                            <div>
+                                <div class="step-name">リッチメニューから面談予約</div>
+                                <div class="step-detail">LINE画面下部の「面談を予約する」ボタンをタップ → カレンダーで日時を選択<br><strong
+                                        style="color:var(--green)">→ 2年間「放置リスト」だった人が、自分から面談を申し込んだ</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        � <strong>ポイント：</strong>人力では2年間放置するしかなかった人に、<strong>月1回のLINEで「存在を思い出してもらう」</strong>ことができる。<br>
+                        転職は<strong>「タイミング」が全て</strong>。そのタイミングが来た瞬間に<strong>ITKが第一想起される仕組み</strong>がプロラインで作れる。<br>
+                        人材紹介の紹介フィーは<strong>1名70万円〜</strong>。COOL層から1名でも成約すれば、<strong>LINE配信コストは一瞬で回収</strong>。
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🎯 3パターンに共通すること</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    <strong>①「電話に出ない人」にもLINEなら届く</strong> ── 飲食の現場にいる人は日中電話に出られない。LINEなら閉店後・休憩中に自分のペースで見れる。<br>
+                    <strong>②「自分からは動かない人」もコンテンツで動く</strong> ── 給与相場、成功事例、非公開求人を段階的に届けることで「転職してもいいかも」を育てる。<br>
+                    <strong>③「いつか動く人」を逃さない</strong> ── 月1回のLINEだけで、タイミングが来た瞬間に「まずITKに相談しよう」と思い出してもらえる。<br><br>
+                    → これらは全て<strong style="color:var(--orange)">プロラインが自動で行います</strong>。ITKのスタッフの手を一切煩わせません。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 期待される成果 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">outcome</div>
+            <div class="sec-title">プロライン導入で期待される成果</div>
+            <div class="sec-desc">既存リストからの売上比率30%を、自動化によってさらに押し上げます。</div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">📈</div>
+                        <h3>短期（3ヶ月以内）</h3>
+                    </div>
+                    <p>• HOT層への即配信で<strong style="color:var(--green)">面談数が即増加</strong><br>
+                        • 電話不通・メール未開封の求職者に<strong>LINEで確実にリーチ</strong><br>
+                        • セグメント配信により<strong>ブロック率5%以下を維持</strong><br>
+                        • スタッフの架電時間を<strong>他の業務に振り替え可能</strong></p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">�</div>
+                        <h3>中長期（6〜12ヶ月）</h3>
+                    </div>
+                    <p>• WARM→HOTへの温度上昇で<strong style="color:var(--orange)">成約率が継続的に向上</strong><br>
+                        • COOL層の長期追客で<strong>「辞めたい時」の第一想起</strong>を獲得<br>
+                        • 無限クーポン施策との連動で<strong>リスト自体が毎月増加</strong><br>
+                        • リスト規模拡大に比例して<strong>成約数も自動的にスケール</strong></p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 既存リスト売上30% → 自動化でどこまで伸ばせるか</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    現在、人力で30%を達成している ＝ <strong style="color:var(--orange)">ポテンシャルは遥かに大きい</strong>。<br>
+                    プロラインで24時間自動フォロー × セグメント配信を実装すれば、<br>
+                    フォローの「抜け漏れ」がなくなり、<strong>売上比率を40%→50%と段階的に引き上げることが可能</strong>です。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 個人情報保護・コンプライアンス -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">privacy & compliance</div>
+            <div class="sec-title">個人情報保護への対応</div>
+            <div class="sec-desc">既存リストの活用において最も重要な「個人情報の取扱い」について、法的根拠と具体的な対策をご説明します。</div>
+
+            <div class="card" style="border-left:4px solid var(--teal);margin-bottom:20px">
+                <div class="card-header">
+                    <div class="card-icon teal">⚖️</div>
+                    <h3>法的根拠：なぜ既存リストへのLINE案内が可能なのか</h3>
+                </div>
+                <p style="font-size:14px;line-height:1.8">
+                    ITKが保有する求職者リストは、<strong>職業紹介事業の一環として正当に取得</strong>された個人情報です。<br>
+                    個人情報保護法では、<strong style="color:var(--teal)">取得時に通知した利用目的の範囲内</strong>であれば、再度のアプローチが可能です。<br>
+                    人材紹介会社の利用目的には通常「求人情報の提供」「転職支援に関する連絡」が含まれており、<br>
+                    → <strong>LINE登録の案内は「求人情報の新しい受取方法のご案内」として利用目的の範囲内</strong>です。
+                </p>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">✅</div>
+                        <h3>LINEのオプトイン構造</h3>
+                    </div>
+                    <p style="font-size:14px;line-height:1.8">
+                        LINEは<strong>求職者が自分の意思で「友だち追加」する仕組み</strong>です。<br>
+                        ITKがやることは「LINE登録のご案内」まで。<br>
+                        <strong style="color:var(--green)">登録するかどうかは求職者自身の判断</strong> → 完全なオプトイン。<br>
+                        さらに、いつでもブロック（＝配信停止）できるため、<br>
+                        <strong>メルマガの「配信停止リンク」以上に求職者の意思が尊重</strong>されます。
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">🔒</div>
+                        <h3>データの分離管理</h3>
+                    </div>
+                    <p style="font-size:14px;line-height:1.8">
+                        プロラインに<strong>求職者の個人情報（氏名・電話番号等）を直接保存する必要はありません</strong>。<br>
+                        LINE上では「LINE名」のみで管理し、<br>
+                        <strong style="color:var(--green)">既存の求職者DBとの紐付けはITK社内のシステムで行う</strong>運用設計が可能です。<br>
+                        → プロライン側に個人情報が流出するリスクを最小化します。
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📋</div>
+                        <h3>職業安定法への準拠</h3>
+                    </div>
+                    <p style="font-size:14px;line-height:1.8">
+                        職業安定法第5条の5では、求職者の個人情報は<strong>「業務の目的の達成に必要な範囲内で収集・保管・使用」</strong>することが求められています。<br>
+                        LINE配信による求人情報の提供・転職支援は<strong
+                            style="color:var(--orange)">職業紹介の業務目的そのもの</strong>であり、法的に問題ありません。<br>
+                        むしろ、<strong>情報到達率が高いLINEの方が求職者への情報提供義務を果たしやすい</strong>とも言えます。
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📝</div>
+                        <h3>プライバシーポリシーの整備</h3>
+                    </div>
+                    <p style="font-size:14px;line-height:1.8">
+                        LINE公式アカウントの運用にあたり、<strong>プライバシーポリシーの更新</strong>をYOLO'sがサポートします。<br>
+                        具体的には以下を明記：<br>
+                        ・LINEを通じた求人情報の配信について<br>
+                        ・アンケートで取得する情報の利用目的<br>
+                        ・配信停止（ブロック）の方法<br>
+                        → <strong style="color:var(--green)">テンプレートをYOLO'sが準備し、ITK様の法務確認を経て運用開始</strong>します。
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🛡️ まとめ：ITKの「既存リスト × LINE」は法的にクリーン</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    ① 既存リストへのLINE案内 ＝ <strong>利用目的の範囲内</strong>（求人情報の提供手段の追加）<br>
+                    ② LINE登録 ＝ <strong>求職者自身の意思によるオプトイン</strong>（強制性ゼロ）<br>
+                    ③ いつでもブロック可能 ＝ <strong>求職者の自己決定権を最大限尊重</strong><br>
+                    ④ プロラインに個人情報を保存しない ＝ <strong>データ漏洩リスクを最小化</strong><br>
+                    ⑤ プライバシーポリシー更新 ＝ <strong>YOLO'sがテンプレートを準備</strong><br><br>
+                    → <strong style="color:var(--orange)">「既存リストの掘り起こし」は、正しく運用すれば法的リスクは極めて低い</strong>施策です。<br>
+                    ご不安な点があれば、ITK様の顧問弁護士とも連携して対応いたします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入ステップ -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">next steps</div>
+            <div class="sec-title">導入ステップ</div>
+            <div class="sec-desc">最短2週間で配信開始。斎藤社長の手を煩わせることなく、YOLO'sが全て構築します。</div>
+
+            <div class="steps">
+                <div class="step-item">
+                    <div class="step-num-circle">1</div>
+                    <h4>リスト整理・LINE開設</h4>
+                    <p>既存リストの精査<br>LINE公式アカウント開設<br>（3日）</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">2</div>
+                    <h4>プロライン構築</h4>
+                    <p>シナリオ・アンケート<br>カレンダー予約設定<br>（1〜2週間）</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">3</div>
+                    <h4>LINE登録促進</h4>
+                    <p>既存リストにSMS/メールで<br>LINE登録を案内<br>（1週間）</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">4</div>
+                    <h4>自動配信スタート</h4>
+                    <p>ステップ配信開始<br>面談予約が自動で入る<br>（継続運用）</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🤝 YOLO'sが丸ごと構築・運用します</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    斎藤社長は「丸投げしたい。でもうるさい」タイプとのこと。<br>
+                    YOLO'sが<strong style="color:var(--orange)">設計・構築・配信文の作成・効果測定まで全て対応</strong>します。<br>
+                    クオリティチェックだけ社長にお願いし、あとは全自動で回る仕組みにします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINE登録促進施策 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">list migration</div>
+            <div class="sec-title">既存リストからLINE登録へ導く3つのアプローチ</div>
+            <div class="sec-desc">ITKが保有するメールアドレス・電話番号を活用して、求職者をLINEに誘導する具体的な施策です。<br>保有情報に応じて最適なチャネルを使い分けます。</div>
+
+            <!-- SMS -->
+            <div class="card" style="border-left:4px solid var(--orange);margin-bottom:20px">
+                <div class="card-header">
+                    <div class="card-icon orange">📱</div>
+                    <h3>アプローチ①：SMS配信（電話番号保有者向け）</h3>
+                </div>
+                <p style="font-size:13px;color:var(--orange);font-weight:700;margin-bottom:12px">最も効果的 ──
+                    到達率95%以上・開封率ほぼ100%</p>
+                <p style="font-size:14px;line-height:1.8;margin-bottom:16px">
+                    飲食スタッフは<strong>メールを見ない人が多い</strong>が、<strong>SMSはほぼ確実に見る</strong>。<br>
+                    短いメッセージ＋LINE登録リンクをSMSで送るのが最も効率的です。
+                </p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px">💬
+                        SMS送信文テンプレート（70文字以内）</p>
+                    <div
+                        style="background:var(--bg-white);border:1px solid #e5e7eb;border-radius:8px;padding:16px;font-size:14px;line-height:1.8">
+                        <p style="margin:0">【ITK】飲食専門の非公開求人をLINEでお届け中🍽️<br>最新の好条件求人をチェック👇<br>https://lin.ee/xxxxx</p>
+                    </div>
+                    <p style="font-size:12px;color:var(--text-light);margin-top:8px">※SMS配信コスト：1通あたり約8〜15円</p>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        📊 <strong>想定効果：</strong>SMS開封率 <strong style="color:var(--green)">90%以上</strong> → LINE登録率
+                        <strong style="color:var(--green)">25〜35%</strong><br>
+                        💡 <strong>送信タイミング：</strong>飲食スタッフが見やすい<strong>15:00〜16:00（アイドルタイム）</strong>or
+                        <strong>22:00〜23:00（閉店後）</strong>が最適
+                    </p>
+                </div>
+            </div>
+
+            <!-- メール -->
+            <div class="card" style="border-left:4px solid var(--teal);margin-bottom:20px">
+                <div class="card-header">
+                    <div class="card-icon teal">✉️</div>
+                    <h3>アプローチ②：メール配信（メールアドレス保有者向け）</h3>
+                </div>
+                <p style="font-size:13px;color:var(--teal);font-weight:700;margin-bottom:12px">補助チャネル ── SMSが届かない層をカバー
+                </p>
+                <p style="font-size:14px;line-height:1.8;margin-bottom:16px">
+                    メールの開封率は5〜10%と低いですが、<strong>電話番号がなくメールのみの求職者</strong>にはこちらでアプローチ。<br>
+                    件名と冒頭で<strong>「ITK」の名前を明確にし、LINEに移行するメリット</strong>を伝えます。
+                </p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px">✉️ メール テンプレート</p>
+                    <div
+                        style="background:var(--bg-white);border:1px solid #e5e7eb;border-radius:8px;padding:16px;font-size:14px;line-height:1.8">
+                        <p style="margin:0;font-weight:700;color:var(--text-dark)">件名：【ITK】LINEで非公開求人をお届けします🍽</p>
+                        <hr style="border:none;border-top:1px solid #eee;margin:12px 0">
+                        <p style="margin:0">
+                            〇〇 様<br><br>
+                            飲食業界専門の転職支援ITKです。<br>
+                            以前ご登録いただきありがとうございました。<br><br>
+                            この度、<strong>LINEで最新の非公開求人や給与相場情報をお届けするサービス</strong>を開始しました。<br><br>
+                            ✅ 週1回、あなたの希望に合った求人をお届け<br>
+                            ✅ LINE限定の非公開求人あり<br>
+                            ✅ 面談予約もLINEからワンタップ<br><br>
+                            ▼ LINE友だち追加はこちら（無料）<br>
+                            https://lin.ee/xxxxx<br><br>
+                            ※配信が不要な場合はいつでもブロックできます。
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        📊 <strong>想定効果：</strong>メール開封率 <strong>5〜10%</strong> → LINE登録率 <strong
+                            style="color:var(--green)">開封者の30〜40%</strong><br>
+                        💡 <strong>ポイント：</strong>件名に「ITK」を入れることで<strong>迷惑メールと区別</strong>。ベネフィットを箇条書きで明確に
+                    </p>
+                </div>
+            </div>
+
+            <!-- 電話 -->
+            <div class="card" style="border-left:4px solid var(--green);margin-bottom:20px">
+                <div class="card-header">
+                    <div class="card-icon green">📞</div>
+                    <h3>アプローチ③：電話フォロー時にLINE案内（架電スタッフ向け）</h3>
+                </div>
+                <p style="font-size:13px;color:var(--green);font-weight:700;margin-bottom:12px">既存の架電業務に「一言追加」するだけ</p>
+                <p style="font-size:14px;line-height:1.8;margin-bottom:16px">
+                    現在も電話フォローを行っているなら、<strong>通話の最後にLINE登録を案内するだけ</strong>。<br>
+                    電話に出た人 ＝ まだITKとの関係が切れていない人なので、<strong>LINE登録率が最も高い</strong>チャネルです。
+                </p>
+
+                <div style="background:var(--bg-gray);border-radius:8px;padding:20px;margin-bottom:16px">
+                    <p style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px">📞 トークスクリプト例</p>
+                    <div
+                        style="background:var(--bg-white);border:1px solid #e5e7eb;border-radius:8px;padding:16px;font-size:14px;line-height:1.8">
+                        <p style="margin:0">
+                            「ありがとうございます。ちなみに最近、<strong>LINEで非公開求人をお届けするサービス</strong>を始めまして。<br>
+                            お電話だとなかなかタイミングが合わないと思うので、<strong>LINEなら空いた時間にチェック</strong>していただけます。<br>
+                            後ほどSMSでLINE登録のリンクをお送りしてもいいですか？」
+                        </p>
+                    </div>
+                    <p style="font-size:12px;color:var(--text-light);margin-top:8px">→ 許可を取った上でSMSを送信 = 登録率がさらに上がる</p>
+                </div>
+
+                <div style="background:var(--orange-bg);border-radius:8px;padding:16px 20px">
+                    <p style="font-size:14px;margin:0;line-height:1.8">
+                        📊 <strong>想定効果：</strong>電話で了承を得た人のLINE登録率 <strong
+                            style="color:var(--green)">60〜80%</strong><br>
+                        💡 <strong>ポイント：</strong>「電話に出られない問題」をLINEで解決する、という<strong>求職者側のメリット</strong>で訴求
+                    </p>
+                </div>
+            </div>
+
+            <!-- 配信戦略 -->
+            <div class="card" style="margin-bottom:20px">
+                <div class="card-header">
+                    <div class="card-icon orange">📋</div>
+                    <h3>推奨：3段階のアプローチ戦略</h3>
+                </div>
+                <p style="font-size:14px;line-height:1.8;margin-bottom:16px">
+                    一度の配信で全員が登録するわけではありません。<strong>3回に分けて段階的にアプローチ</strong>することで登録率を最大化します。
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>段階</th>
+                            <th>タイミング</th>
+                            <th>対象</th>
+                            <th>チャネル</th>
+                            <th>内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>第1波</strong></td>
+                            <td>初日</td>
+                            <td>電話番号保有者 全員</td>
+                            <td class="highlight">SMS</td>
+                            <td>LINE登録案内＋非公開求人訴求</td>
+                        </tr>
+                        <tr>
+                            <td><strong>第2波</strong></td>
+                            <td>1週間後</td>
+                            <td>第1波で未登録の人</td>
+                            <td class="highlight">SMS（リマインド）</td>
+                            <td>切り口を変えて再送「給与相場レポートをLINEで配布中」</td>
+                        </tr>
+                        <tr>
+                            <td><strong>第3波</strong></td>
+                            <td>2週間後</td>
+                            <td>メールのみ保有者<br>+ まだ未登録の人</td>
+                            <td class="highlight">メール</td>
+                            <td>HTML形式で視覚的に訴求＋QRコード画像添付</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 リスト状況別の最適アプローチまとめ</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    📱 <strong>電話番号あり</strong> → <strong
+                        style="color:var(--orange)">SMS配信が最優先</strong>（到達率・登録率ともに最高）<br>
+                    ✉️ <strong>メールのみ</strong> → <strong
+                        style="color:var(--teal)">メールで案内</strong>（SMSより効果は劣るが、やらないよりは遥かに効果的）<br>
+                    📱+✉️ <strong>両方あり</strong> → <strong
+                        style="color:var(--green)">SMSを先に送り、未登録者にメールでリマインド</strong><br>
+                    📞 <strong>架電業務あり</strong> → <strong>通話時にLINEを案内し、直後にSMS送信</strong>（登録率60〜80%）<br><br>
+                    → YOLO'sが<strong>配信リストの整理・文面作成・配信設定まで全て代行</strong>します。ITK様はリストデータをご共有いただくだけでOKです。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 費用 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">pricing</div>
+            <div class="sec-title">費用</div>
+            <div class="sec-desc">設計・構築・コンテンツ制作・運用まで、YOLO'sがワンストップで対応します。</div>
+
+            <div class="grid-2" style="margin-bottom:32px">
+                <div class="card" style="border-top:4px solid var(--orange);text-align:center">
+                    <p style="font-size:13px;font-weight:700;color:var(--orange);letter-spacing:1px;margin-bottom:8px">
+                        INITIAL</p>
+                    <h3 style="font-size:18px;margin-bottom:16px">初期構築費</h3>
+                    <div
+                        style="font-family:'Inter',sans-serif;font-size:48px;font-weight:900;color:var(--orange);line-height:1">
+                        70<span style="font-size:20px;font-weight:700">万円</span></div>
+                    <p style="font-size:12px;color:var(--text-light);margin-top:8px;margin-bottom:20px">（税別）</p>
+                    <div style="text-align:left;font-size:14px;line-height:2">
+                        <p>✅ LINE公式アカウント開設・初期設定</p>
+                        <p>✅ プロライン接続・基本構築</p>
+                        <p>✅ 自動アンケート設計・構築</p>
+                        <p>✅ セグメント・タグ設計</p>
+                        <p>✅ ステップ配信シナリオ構築（3本）</p>
+                        <p>✅ 配信コンテンツ ライティング（10〜15通）</p>
+                        <p>✅ カレンダー予約連携</p>
+                        <p>✅ 自動リマインド設定</p>
+                        <p>✅ リッチメニュー デザイン・設定</p>
+                        <p>✅ SMS/メール誘導文テンプレート作成</p>
+                        <p>✅ プライバシーポリシー テンプレート</p>
+                        <p>✅ テスト・動作確認</p>
+                    </div>
+                </div>
+                <div class="card" style="border-top:4px solid var(--teal);text-align:center">
+                    <p style="font-size:13px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:8px">
+                        MONTHLY</p>
+                    <h3 style="font-size:18px;margin-bottom:16px">月額運用費</h3>
+                    <div
+                        style="font-family:'Inter',sans-serif;font-size:48px;font-weight:900;color:var(--teal);line-height:1">
+                        10<span style="font-size:20px;font-weight:700">万円<span
+                                style="font-size:14px;font-weight:400">/月</span></span></div>
+                    <p style="font-size:12px;color:var(--text-light);margin-top:8px;margin-bottom:20px">（税別）</p>
+                    <div style="text-align:left;font-size:14px;line-height:2">
+                        <p>✅ 配信コンテンツの定期更新・改善</p>
+                        <p>✅ 新着求人の配信テンプレート作成</p>
+                        <p>✅ 効果測定・月次レポート</p>
+                        <p>✅ シナリオの改善・チューニング</p>
+                        <p>✅ 新規シナリオの追加</p>
+                        <p>✅ プロライン管理画面の操作サポート</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roi-box">
+                <div class="roi-num" style="color:var(--orange)">1<span style="font-size:28px">名の成約で回収</span></div>
+                <div class="roi-label">紹介フィー70万円〜 ＝ 初期構築費と同額</div>
+                <p style="margin-top:12px;font-size:14px;color:var(--text-light)">
+                    シミュレーションでは既存リスト1,000人から<strong>9〜10名の成約</strong>を見込んでいます。<br>
+                    初期費用は<strong style="color:var(--orange)">最初の1名の成約で完全回収</strong>。2名目以降は全て純利益です。
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 コスト比較：人力フォロー vs プロライン</h4>
+                <p style="font-size:14px;line-height:1.8">
+                    架電スタッフ1名の人件費 ＝ <strong>月25〜30万円</strong>（到達率15%）<br>
+                    プロライン運用費 ＝ <strong style="color:var(--orange)">月10万円</strong>（到達率60〜80%・24時間稼働・全リスト同時対応）<br><br>
+                    → <strong>人件費の1/3以下のコストで、到達率は4倍以上</strong>。しかも人を増やさなくてもリスト規模に応じて自動スケールします。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>既存リストは「埋蔵金」。<br>プロラインで掘り起こせば、広告費ゼロで成約が生まれる。</h2>
+            <p>無限クーポンで新規リストを増やしながら、既存リストもプロラインで活性化。<br>ITKの人材紹介事業に「自動で回る求職者パイプライン」を構築します。</p>
+            <p style="font-size:13px;opacity:0.5;margin-top:40px">YOLO's → ITK様　2026年2月</p>
+        </div>
+    </section>
+
+</body>
+
+</html>

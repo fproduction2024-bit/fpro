@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全メニュー紹介 — KLF</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F7FAF8;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --blue: #1D4ED8;
+            --blue-pale: #DBEAFE;
+            --purple: #7C3AED;
+            --purple-pale: #EDE9FE;
+            --pink: #DB2777;
+            --pink-pale: #FCE7F3;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--mint), #0D7A6A);
+            padding: 44px 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            opacity: .9;
+            max-width: 440px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Category tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 2px solid var(--mint-mid);
+            background: transparent;
+            color: var(--slate-light);
+            cursor: pointer;
+            transition: all .2s;
+            font-family: inherit;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--mint);
+            border-color: var(--mint);
+            color: #fff;
+        }
+
+        /* Category section */
+        .cat-section {
+            display: none;
+        }
+
+        .cat-section.active {
+            display: block;
+        }
+
+        .cat-header {
+            border-radius: 16px;
+            padding: 22px 26px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .cat-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .cat-header p {
+            font-size: 13.5px;
+            opacity: .9;
+            line-height: 1.7;
+        }
+
+        /* Menu grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .menu-card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid var(--mint-mid);
+            overflow: hidden;
+            transition: all .2s;
+        }
+
+        .menu-card:hover {
+            box-shadow: 0 6px 20px rgba(11, 110, 79, .1);
+            transform: translateY(-2px);
+        }
+
+        .mc-top {
+            padding: 20px 20px 14px;
+            border-bottom: 1px solid var(--mint-mid);
+        }
+
+        .mc-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .mc-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 6px;
+        }
+
+        .mc-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .mc-desc {
+            font-size: 13px;
+            color: var(--slate-light);
+            line-height: 1.65;
+        }
+
+        .mc-bottom {
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mc-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--mint);
+        }
+
+        .mc-target {
+            font-size: 11px;
+            color: var(--slate-light);
+        }
+
+        /* Effect-before-after */
+        .effect-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 14px 0;
+        }
+
+        .effect-item {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .effect-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .effect-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--slate-mid);
+        }
+
+        /* Flow visual */
+        .flow-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 14px 0;
+        }
+
+        .flow-item {
+            background: var(--mint-pale);
+            border: 1px solid var(--mint-mid);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--mint);
+        }
+
+        .flow-arrow {
+            font-size: 16px;
+            color: var(--mint-mid);
+        }
+
+        /* Recommended box */
+        .recommend-box {
+            background: linear-gradient(135deg, var(--amber-pale), #FFFBF0);
+            border: 2px solid #FCD34D;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 14px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .recommend-box .rl {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0 16px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 48px;
+        }
+
+        @media(max-width:640px) {
+            .hero {
+                padding: 32px 20px;
+            }
+
+            .container {
+                padding: 24px 16px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .effect-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <h1>🌿 全メニュー紹介</h1>
+        <p>KLFでは整骨院施術とエステを組み合わせ、<br>あなたの体の悩みに総合的にアプローチします。</p>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showCat('ortho',this)">🦴 整骨・矯正</button>
+            <button class="tab-btn" onclick="showCat('esthetic',this)">✨ エステ・ボディ</button>
+            <button class="tab-btn" onclick="showCat('postnatal',this)">🤱 産後ケア</button>
+            <button class="tab-btn" onclick="showCat('other',this)">🔬 検査・その他</button>
+        </div>
+
+        <!-- 整骨・矯正 -->
+        <div class="cat-section active" id="cat-ortho">
+            <div class="cat-header" style="background:linear-gradient(135deg,#1E293B,#334155);">
+                <h2>🦴 整骨・矯正メニュー</h2>
+                <p>歪みを取り、筋肉をほぐし、正しい体のバランスを取り戻します。<br>整骨院としての保険適用外の自費メニューです。</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🔧</div>
+                        <div class="mc-badge" style="background:var(--mint-pale);color:var(--mint);">基本</div>
+                        <div class="mc-name">筋肉治療 ＋ 検査</div>
+                        <div class="mc-desc">インボディ計測を含む体の状態チェックと、筋肉へのアプローチ治療。毎回の来院で実施します。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">初回 5,600円 / 継続 2,200円〜</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">💥</div>
+                        <div class="mc-badge" style="background:var(--blue-pale);color:var(--blue);">矯正（会員）</div>
+                        <div class="mc-name">骨盤矯正</div>
+                        <div class="mc-desc">骨盤・背骨の歪みをボキボキと調整します。会員プランで月額定額とすることができます（通常7,700円/回）。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">会員プランで受け放題</div>
+                        <div class="mc-target">歪み・腰痛・肩こり</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🌿</div>
+                        <div class="mc-badge" style="background:var(--green-pale);color:var(--green);">やさしい矯正</div>
+                        <div class="mc-name">SOT（無通矯正）</div>
+                        <div class="mc-desc">ボキボキが苦手な方向けの、骨格ブロックを使った無痛矯正。産後すぐの方にも対応可能です。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">会員料金の約半額</div>
+                        <div class="mc-target">ボキボキ苦手な方</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- エステ・ボディ -->
+        <div class="cat-section" id="cat-esthetic">
+            <div class="cat-header" style="background:linear-gradient(135deg,var(--purple),#5B21B6);">
+                <h2>✨ エステ・ボディメニュー</h2>
+                <p>脂肪燃焼・バストアップ・フェイシャルなど、見た目の変化を目指すエステメニュー。<br>整骨との組み合わせで効率的な体型改善を実現します。</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🔥</div>
+                        <div class="mc-badge" style="background:var(--red-pale);color:var(--red);">脂肪燃焼</div>
+                        <div class="mc-name">フォースカッター</div>
+                        <div class="mc-desc">脂肪細胞を温めて小さくする機器。温めることで固まった脂肪を溶かし、EMSで引き剥がします。</div>
+                        <div class="flow-row">
+                            <div class="flow-item">温める</div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item">溶かす</div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-item">引き剥がす</div>
+                        </div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">ダイエット・お腹まわり</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">❄️</div>
+                        <div class="mc-badge" style="background:var(--blue-pale);color:var(--blue);">脂肪冷却</div>
+                        <div class="mc-name">脂肪冷却</div>
+                        <div class="mc-desc">脂肪を冷却して細胞を壊す最新の痩身施術。ピンポイントで減らしたい部位に対応。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">部分痩せ希望の方</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">⚡</div>
+                        <div class="mc-badge" style="background:var(--amber-pale);color:var(--amber);">最新機器</div>
+                        <div class="mc-name">Pulse（パルス）</div>
+                        <div class="mc-desc">EMS（電気刺激）と脂肪燃焼を同時に行う最新機器。引き締めと脂肪分解を一度に実現します。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">30回 132,000円〜</div>
+                        <div class="mc-target">引き締め・脂肪分解</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🌸</div>
+                        <div class="mc-badge" style="background:var(--pink-pale);color:var(--pink);">バストケア</div>
+                        <div class="mc-name">バストアップ</div>
+                        <div class="mc-desc">育児・授乳後のバストケアに特化した施術。専門機器でハリ・ツヤの改善を目指します。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">産後のバストケア</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">💆</div>
+                        <div class="mc-badge" style="background:var(--purple-pale);color:var(--purple);">フェイシャル</div>
+                        <div class="mc-name">フェイシャル・リフトアップ</div>
+                        <div class="mc-desc">たるみ・シワへのアプローチ。ペイシャルリストアップ・BBL光などを用いたフェイシャルケア。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">エイジングケア</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🦵</div>
+                        <div class="mc-badge" style="background:var(--slate-light);color:#fff;">脱毛</div>
+                        <div class="mc-name">脱毛</div>
+                        <div class="mc-desc">全身・部分脱毛に対応。整骨と同じ院内で完結できる便利なメニューです。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">全身・部分脱毛</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 産後ケア -->
+        <div class="cat-section" id="cat-postnatal">
+            <div class="cat-header" style="background:linear-gradient(135deg,#DB2777,#9D174D);">
+                <h2>🤱 産後ケアメニュー</h2>
+                <p>産後の体は大きく変化しています。<br>骨盤・筋肉・ボディラインを専門的にサポートします。</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🤱</div>
+                        <div class="mc-badge" style="background:var(--pink-pale);color:var(--pink);">産後専用</div>
+                        <div class="mc-name">産後骨盤矯正</div>
+                        <div class="mc-desc">出産で開いた骨盤を専用矯正で正しい位置に戻します。<br>
+                            <strong style="color:var(--pink);">産後12ヶ月以内が特に効果的です。</strong>
+                        </div>
+                        <div class="recommend-box">
+                            <div class="rl">⭐ おすすめポイント</div>
+                            産後3ヶ月は骨盤が最も動きやすい「ゴールデン期間」。この時期に集中して施術を受けることで変化を早く感じられます。
+                        </div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">3,300円〜（会員セット割あり）</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">💪</div>
+                        <div class="mc-badge" style="background:var(--amber-pale);color:var(--amber);">産後専用</div>
+                        <div class="mc-name">EMS（産後筋肉再生）</div>
+                        <div class="mc-desc">産後に落ちた筋肉を電気刺激で再生するメニュー。産後の運動が難しい方にも対応。<br>寝たままで体幹筋肉にアプローチできます。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">月4回 11,000円 / 月2回 6,600円</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🦴</div>
+                        <div class="mc-badge" style="background:var(--purple-pale);color:var(--purple);">セット施術</div>
+                        <div class="mc-name">肋骨矯正（ロスマン矯正）</div>
+                        <div class="mc-desc">肋骨と骨盤を同時にケアする上半身の矯正。ウエストの引き締め効果が出やすく、産後ボディケアに人気です。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">オプション追加</div>
+                        <div class="mc-target">ウエスト・体型戻し</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 検査・その他 -->
+        <div class="cat-section" id="cat-other">
+            <div class="cat-header" style="background:linear-gradient(135deg,var(--blue),#1E40AF);">
+                <h2>🔬 検査・その他</h2>
+                <p>体の状態を正確に把握するための検査メニューです。</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">📊</div>
+                        <div class="mc-badge" style="background:var(--blue-pale);color:var(--blue);">全患者に実施</div>
+                        <div class="mc-name">インボディ計測</div>
+                        <div class="mc-desc">体重・筋肉量・体脂肪・細胞外水分比などを計測。体の「今の状態」を数値で可視化します。毎回の来院で実施し、変化を記録します。</div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">検査料 1,100円（毎回）</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="mc-top">
+                        <div class="mc-icon">🧬</div>
+                        <div class="mc-badge" style="background:var(--green-pale);color:var(--green);">一生に1回</div>
+                        <div class="mc-name">DNA検査</div>
+                        <div class="mc-desc">自分のDNAから、筋肉のつきやすさ・脂肪の燃えやすさ・必要な栄養素などを調べる検査。一生に1回の検査で、自分に合った体づくりの指針になります。
+                        </div>
+                    </div>
+                    <div class="mc-bottom">
+                        <div class="mc-price">要相談</div>
+                        <div class="mc-target">栄養・体質把握</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">KLF 患者向け資料 B-4 / 全メニュー紹介 &nbsp;|&nbsp; 2026年4月</div>
+    </div>
+
+    <script>
+        function showCat(cat, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('cat-' + cat).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

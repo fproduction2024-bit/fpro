@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【第三話】なぜ僕は業界を全部敵に回す覚悟で「この仕組み」を作ったのか</title>
+    <meta name="description" content="スキルハックス動画講座 第三話。「安くて手厚い」という空白ポジション、2倍返金保証の覚悟を語る。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #f8f9fb;
+            color: #333;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .ep-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px 32px;
+        }
+
+        .ep-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .ep-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 900;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .ep-title .accent {
+            color: #60a5fa;
+        }
+
+        .ep-meta {
+            font-size: 13px;
+            opacity: .7;
+        }
+
+        .timer-bar {
+            background: #fff3cd;
+            color: #856404;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .video-section {
+            background: #000;
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #111;
+        }
+
+        .video-placeholder .insert-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .video-placeholder .insert-note strong {
+            color: #60a5fa;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .content {
+            background: #fff;
+            padding: 32px 24px;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid #2563eb;
+            line-height: 1.5;
+        }
+
+        .content p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .recap-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .recap-box .label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #16a34a;
+            margin-bottom: 4px;
+        }
+
+        .recap-box p {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .matrix-box {
+            background: #f8f9fb;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .matrix-box .title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .matrix-cell {
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .matrix-cell.gray {
+            background: #f0f0f0;
+            color: #888;
+        }
+
+        .matrix-cell.red {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .matrix-cell.yellow {
+            background: #fefce8;
+            color: #a16207;
+            border: 1px solid #fde68a;
+        }
+
+        .matrix-cell.blue {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 2px solid #2563eb;
+            font-weight: 700;
+        }
+
+        .matrix-cell strong {
+            display: block;
+            font-size: 11px;
+            opacity: .7;
+            margin-bottom: 2px;
+        }
+
+        .guarantee-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+        }
+
+        .guarantee-box .icon {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .guarantee-box h3 {
+            font-size: 16px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #15803d;
+        }
+
+        .guarantee-box p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .pillar-list {
+            list-style: none;
+            margin: 0 0 24px;
+        }
+
+        .pillar-list li {
+            padding: 12px 0 12px 32px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+            position: relative;
+        }
+
+        .pillar-list li::before {
+            content: '🏛️';
+            position: absolute;
+            left: 0;
+            top: 12px;
+        }
+
+        .pillar-list li strong {
+            color: #1a1a2e;
+        }
+
+        .next-section {
+            background: linear-gradient(180deg, #fff 0%, #fef3c7 100%);
+            padding: 32px 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .next-badge {
+            display: inline-block;
+            background: #dc2626;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            letter-spacing: .5px;
+        }
+
+        .next-section h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .next-section p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .next-section ul {
+            list-style: none;
+            margin: 12px 0;
+        }
+
+        .next-section ul li {
+            font-size: 14px;
+            color: #555;
+            padding: 4px 0 4px 20px;
+            position: relative;
+        }
+
+        .next-section ul li::before {
+            content: '▸';
+            color: #dc2626;
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .form-section {
+            background: #fff;
+            padding: 32px 24px 40px;
+            border-top: 3px solid #2563eb;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color .2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #06C755 0%, #05a848 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 8px;
+            transition: opacity .2s;
+            box-shadow: 0 4px 14px rgba(6, 199, 85, .3);
+        }
+
+        .submit-btn:hover {
+            opacity: .9;
+        }
+
+        .submit-btn .sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .micro-copy {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: #bbb;
+            background: #f8f9fb;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <header class="ep-header">
+            <div class="ep-badge">🎬 第三話（全4話）</div>
+            <h1 class="ep-title">
+                なぜ僕は<span class="accent">業界を全部敵に回す覚悟</span>で<br>
+                「この仕組み」を作ったのか
+            </h1>
+            <p class="ep-meta">講師：迫 佑樹（株式会社ブレイン 代表取締役）</p>
+        </header>
+
+        <div class="timer-bar">
+            <span>⏰</span> この動画の視聴期限：あと <strong>3日間</strong>
+        </div>
+
+        <section class="video-section">
+            <div class="video-placeholder">
+                <div class="insert-note">
+                    <strong>▶ ここに第三話の動画を挿入</strong>
+                    Vimeo or YouTube（限定公開）を埋め込み
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="recap-box">
+                <div class="label">📝 ここまでの振り返り</div>
+                <p>
+                    第一話：「ノウハウを知ること自体に価値はない」<br>
+                    第二話：最短で結果を出す人が持つ「3つの武器」<br>
+                    <strong>→ でも、この3つを全部自力で揃えるのは至難の業。</strong>
+                </p>
+            </div>
+
+            <h2>この動画で分かること</h2>
+            <p>
+                今回は、第一話・第二話で語った<br>
+                <strong>「3つの武器」を全て実現する仕組みの全貌</strong>を<br>
+                初公開します。
+            </p>
+
+            <div class="matrix-box">
+                <div class="title">📐 スキル教育市場の2軸マトリクス</div>
+                <div class="matrix-grid">
+                    <div class="matrix-cell yellow">
+                        <strong>高い × 手厚い</strong>
+                        高額スクール<br>（88万円〜）
+                    </div>
+                    <div class="matrix-cell red">
+                        <strong>高い × 放置</strong>
+                        いわゆる<br>情報商材
+                    </div>
+                    <div class="matrix-cell blue">
+                        <strong>安い × 手厚い</strong>
+                        ここが<br>【空白】だった
+                    </div>
+                    <div class="matrix-cell gray">
+                        <strong>安い × 放置</strong>
+                        低品質教材<br>／無料情報
+                    </div>
+                </div>
+            </div>
+
+            <h2>スキルハックスの3つの柱</h2>
+            <ul class="pillar-list">
+                <li><strong>全講座学び放題</strong><br>単体合計788,000円分の講座が全て受講可能。動画編集、プログラミング、デザイン、ライティング──あなたに合うスキルが必ず見つかる。</li>
+                <li><strong>伴走支援</strong><br>初回面談でロードマップを作成。個別Zoom、黙々会、日報モニタリング──一人で挫折させない仕組み。</li>
+                <li><strong>コミュニティ</strong><br>同じ目標を持つ仲間と切磋琢磨。成果報告が飛び交う環境に身を置くことで「当たり前の基準」が上がる。</li>
+            </ul>
+
+            <div class="guarantee-box">
+                <div class="icon">🛡️</div>
+                <h3>2倍返金保証</h3>
+                <p>
+                    やるべき課題をこなして、それでも受講料分すら稼げなかった場合──<br>
+                    <strong>未回収額の2倍を返金します。</strong><br><br>
+                    「やったけど稼げなかった」→ お金が返ってくる<br>
+                    「やったら稼げた」→ 投資回収できた<br><br>
+                    <strong>どっちに転んでも、あなたは損をしない。</strong><br>
+                    この保証ができるのは、カリキュラムとサポート体制への絶対的な自信の裏返しです。
+                </p>
+            </div>
+        </section>
+
+        <section class="next-section">
+            <div class="next-badge">🔥 次のプレゼント【最終回】</div>
+            <h3>【特別動画】スキルハックスの全貌<br>──迫佑樹が全てを語るご案内動画</h3>
+            <ul>
+                <li>全講座の詳細内容</li>
+                <li>伴走支援の具体的な流れ</li>
+                <li>受講生データ（満足度88%）</li>
+                <li>なぜ39万8千円なのか──価格の裏側</li>
+                <li>具体的な申し込み手順</li>
+            </ul>
+            <p style="margin-top:12px;">
+                <strong>感想を送信いただいた方に、最終回の特別動画と<br>
+                    【5大特典】を全てプレゼントします。</strong>
+            </p>
+        </section>
+
+        <section class="form-section" id="form">
+            <h2>感想を送信して<br>特別動画を受け取る</h2>
+            <p class="form-note">
+                いよいよ次が最終回です。<br>
+                ここまで3本の動画を見てくださったあなたは、<br>
+                数千人の中でもほんの一握りの「本気の方」です。
+            </p>
+
+            <form>
+                <div class="form-group">
+                    <label>お名前</label>
+                    <input type="text" placeholder="例：田中 太郎">
+                </div>
+                <div class="form-group">
+                    <label>動画のご感想</label>
+                    <textarea placeholder="「安くて手厚い」という考え方について、どう思われましたか？ 率直な感想をお聞かせください。"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    感想を送信して特別動画を受け取る ▶
+                    <span>💬 送信後、1分以内にLINEで最終回をお届けします</span>
+                </button>
+            </form>
+
+            <p class="micro-copy">
+                ※ いただいた感想は迫佑樹が全て目を通しています。<br>
+                ※ 視聴期限を過ぎると、このページは閲覧できなくなります。
+            </p>
+        </section>
+
+        <footer class="footer">
+            <p>© Skill Hacks by Brain Inc.</p>
+            <p>※ 本ページの内容は個人の経験に基づくものであり、結果を保証するものではありません。</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

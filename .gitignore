@@ -41,3 +41,22 @@ Thumbs.db
 !tests/fixtures/*.webp
 !tests/fixtures/*.png
 
+
+# Node
+node_modules/
+
+# Secrets / credentials（コミット禁止）
+.cursor/mcp.json
+projects/proline_extractor/credentials.json
+projects/proline_extractor/session.json
+ftp-uploader/config.json
+**/.studio-token
+.env
+
+# 50MB超の巨大バイナリ（GitHub上限対策。ファイル自体はローカルに残る）
+docs/tangleseed_hp.zip
+docs/古橋の会社ナレッジ/リッツプロ/リッツプロナレッジ/ブプラ紹介.pdf
+docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社rtma.zip
+docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社rtma/画像/gigafile-0402-d3ff202646b195144dc43d36a3890617.zip
+docs/古橋の会社ナレッジ/リッツプロ/会社ナレッジ/株式会社マインド/FC加盟店事業説明資料.pdf
+projects/tangleseed_hp_production.zip

@@ -22,6 +22,17 @@ def escape(text):
     return html.escape(text)
 
 # ── Collect all content ──
+
+# 完成版台本（優先表示）
+scripts_final = [
+    ("第零話 完成版", read_file(f"{BASE}/台本/第零話_台本_完成版.md")),
+    ("第一話 完成版", read_file(f"{BASE}/台本/第一話_台本_完成版.md")),
+    ("第二話 完成版", read_file(f"{BASE}/台本/第二話_台本_完成版.md")),
+    ("第三話 完成版", read_file(f"{BASE}/台本/第三話_台本_完成版.md")),
+    ("第四話 VSL 完成版", read_file(f"{BASE}/台本/第四話_VSL_台本_完成版.md")),
+]
+
+# ドラフト台本
 scripts = [
     ("第一話", read_file(f"{BASE}/台本/第一話_台本.md")),
     ("第一話 v2", read_file(f"{BASE}/台本/第一話_台本_v2.md")),
@@ -54,6 +65,21 @@ presents = [
     ("副業ゼロイチ90日ロードマップ", read_file(f"{BASE}/プレゼント/副業ゼロイチ90日ロードマップ.md")),
 ]
 
+# LINEシナリオ
+line_scenarios = [
+    ("第零話（2日締切）", read_file(f"{BASE}/LINEシナリオ/【第零話】LINEシナリオ_2日締切.txt")),
+    ("第一話（2日締切）", read_file(f"{BASE}/LINEシナリオ/【第一話】LINEシナリオ_2日締切.txt")),
+    ("第二話（2日締切）", read_file(f"{BASE}/LINEシナリオ/【第二話】LINEシナリオ_2日締切.txt")),
+    ("第三話（2日締切）", read_file(f"{BASE}/LINEシナリオ/【第三話】LINEシナリオ_2日締切.txt")),
+    ("VSL・特別動画（2日締切）", read_file(f"{BASE}/LINEシナリオ/【VSL・特別動画】LINEシナリオ_2日締切.txt")),
+    ("VSL・特別動画（7日間）", read_file(f"{BASE}/LINEシナリオ/【VSL・特別動画】LINEシナリオ_7日間.txt")),
+    ("セールス（7日間）", read_file(f"{BASE}/LINEシナリオ/【セールス】LINEシナリオ_7日間.txt")),
+    ("申込み（1日締切）", read_file(f"{BASE}/LINEシナリオ/【申込み】LINEシナリオ_1日締切.txt")),
+]
+
+# LINE構築設計書
+line_design = read_file(f"{BASE}/LINE構築設計書.md")
+
 meetings = []
 meeting_dir = f"{BASE}/ミーティング素材"
 for f in sorted(os.listdir(meeting_dir)):
@@ -65,7 +91,11 @@ planning = [
     ("タイトル案・プレゼント案", read_file(f"{BASE}/タイトル案_プレゼント案.md")),
 ]
 
+# セールスレター
+sales_letter_content = read_file(f"{BASE}/sales-letter/index.html")
+
 changelog_content = read_file(f"{BASE}/deploy_log.md")
+dev_memo = read_file(f"{BASE}/開発メモ.md")
 
 def make_tabs(items, section_id):
     """Generate tab buttons and content panels for a list of (title, content) tuples."""
@@ -517,9 +547,13 @@ body {{
 
     <div class="nav-section">
       <div class="nav-section-title">制作物</div>
+      <a class="nav-link" data-section="scripts-final">
+        <span class="icon">✅</span> 完成版台本
+        <span class="nav-badge">5</span>
+      </a>
       <a class="nav-link" data-section="scripts">
-        <span class="icon">📝</span> 台本
-        <span class="nav-badge">4</span>
+        <span class="icon">📝</span> ドラフト台本
+        <span class="nav-badge">9</span>
       </a>
       <a class="nav-link" data-section="plots">
         <span class="icon">🗂️</span> プロット
@@ -532,6 +566,36 @@ body {{
       <a class="nav-link" data-section="presents">
         <span class="icon">🎁</span> プレゼント
         <span class="nav-badge">5</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">LINE構築</div>
+      <a class="nav-link" data-section="line-design">
+        <span class="icon">📐</span> LINE構築設計書
+      </a>
+      <a class="nav-link" data-section="line-scenarios">
+        <span class="icon">💬</span> LINEシナリオ
+        <span class="nav-badge">8</span>
+      </a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-title">Webページ</div>
+      <a class="nav-link" onclick="window.open('https://skillhacks-sales.surge.sh','_blank')">
+        <span class="icon">🛒</span> セールスLP
+        <span class="nav-badge" style="background:var(--green);color:#fff">LIVE</span>
+      </a>
+      <a class="nav-link" onclick="window.open('https://skillhacks-presents.surge.sh','_blank')">
+        <span class="icon">🎁</span> プレゼント集
+        <span class="nav-badge" style="background:var(--green);color:#fff">LIVE</span>
+      </a>
+      <a class="nav-link" data-section="sales-letter">
+        <span class="icon">📄</span> セールスレター
+      </a>
+      <a class="nav-link" data-section="content-pages">
+        <span class="icon">📺</span> コンテンツページ
+        <span class="nav-badge">4</span>
       </a>
     </div>
 
@@ -549,6 +613,9 @@ body {{
 
     <div class="nav-section">
       <div class="nav-section-title">システム</div>
+      <a class="nav-link" data-section="dev-memo">
+        <span class="icon">🛠️</span> 開発メモ
+      </a>
       <a class="nav-link" data-section="changelog">
         <span class="icon">🔄</span> デプロイ履歴
       </a>
@@ -566,17 +633,62 @@ body {{
       </div>
 
       <div class="status-bar">
-        <div class="status-item"><span class="status-dot green"></span> 台本 第1〜4話 完成</div>
-        <div class="status-item"><span class="status-dot green"></span> プレゼント 5種 完成</div>
-        <div class="status-item"><span class="status-dot yellow"></span> スライド テスト生成済み</div>
-        <div class="status-item"><span class="status-dot blue"></span> フィードバック 反映済み</div>
+        <div class="status-item"><span class="status-dot green"></span> 完成版台本 5本</div>
+        <div class="status-item"><span class="status-dot green"></span> LINEシナリオ 8本</div>
+        <div class="status-item"><span class="status-dot green"></span> プレゼント 5種</div>
+        <div class="status-item"><span class="status-dot green"></span> セールスLP デプロイ済み</div>
+        <div class="status-item"><span class="status-dot green"></span> プレゼント集 デプロイ済み</div>
+        <div class="status-item"><span class="status-dot green"></span> セールスレター 完成</div>
+        <div class="status-item"><span class="status-dot green"></span> コンテンツページ 4本</div>
       </div>
 
       <div class="overview-grid">
-        <div class="overview-card" onclick="navigate('scripts')">
-          <div class="card-icon">📝</div>
-          <div class="card-title">台本</div>
-          <div class="card-desc">全4話の本番用台本</div>
+        <div class="overview-card" onclick="navigate('scripts-final')">
+          <div class="card-icon">✅</div>
+          <div class="card-title">完成版台本</div>
+          <div class="card-desc">第零話〜第四話（VSL）</div>
+          <div class="card-count">5本</div>
+        </div>
+        <div class="overview-card" onclick="navigate('line-scenarios')">
+          <div class="card-icon">💬</div>
+          <div class="card-title">LINEシナリオ</div>
+          <div class="card-desc">全ステップ配信文章</div>
+          <div class="card-count">8本</div>
+        </div>
+        <div class="overview-card" onclick="navigate('line-design')">
+          <div class="card-icon">📐</div>
+          <div class="card-title">LINE構築設計書</div>
+          <div class="card-desc">ファネル全体設計</div>
+          <div class="card-count">1本</div>
+        </div>
+        <div class="overview-card" onclick="navigate('presents')">
+          <div class="card-icon">🎁</div>
+          <div class="card-title">プレゼント</div>
+          <div class="card-desc">視聴者向け特典</div>
+          <div class="card-count">5種</div>
+        </div>
+        <div class="overview-card" onclick="window.open('https://skillhacks-sales.surge.sh','_blank')">
+          <div class="card-icon">🛒</div>
+          <div class="card-title">セールスLP</div>
+          <div class="card-desc">申込みページ</div>
+          <div class="card-count" style="color:var(--green)">LIVE</div>
+        </div>
+        <div class="overview-card" onclick="window.open('https://skillhacks-presents.surge.sh','_blank')">
+          <div class="card-icon">🎁</div>
+          <div class="card-title">プレゼント集サイト</div>
+          <div class="card-desc">五大特典Webページ</div>
+          <div class="card-count" style="color:var(--green)">LIVE</div>
+        </div>
+        <div class="overview-card" onclick="navigate('sales-letter')">
+          <div class="card-icon">📄</div>
+          <div class="card-title">セールスレター</div>
+          <div class="card-desc">VSLページ用レター</div>
+          <div class="card-count">1本</div>
+        </div>
+        <div class="overview-card" onclick="navigate('content-pages')">
+          <div class="card-icon">📺</div>
+          <div class="card-title">コンテンツページ</div>
+          <div class="card-desc">各話の視聴ページ</div>
           <div class="card-count">4本</div>
         </div>
         <div class="overview-card" onclick="navigate('plots')">
@@ -591,18 +703,6 @@ body {{
           <div class="card-desc">全93枚のスライド仕様</div>
           <div class="card-count">93枚</div>
         </div>
-        <div class="overview-card" onclick="navigate('presents')">
-          <div class="card-icon">🎁</div>
-          <div class="card-title">プレゼント</div>
-          <div class="card-desc">視聴者向け特典</div>
-          <div class="card-count">5種</div>
-        </div>
-        <div class="overview-card" onclick="navigate('planning')">
-          <div class="card-icon">💡</div>
-          <div class="card-title">企画書</div>
-          <div class="card-desc">ファネル構成・タイトル案</div>
-          <div class="card-count">2本</div>
-        </div>
         <div class="overview-card" onclick="navigate('meetings')">
           <div class="card-icon">📋</div>
           <div class="card-title">ミーティング素材</div>
@@ -612,11 +712,20 @@ body {{
       </div>
     </div>
 
-    <!-- Scripts Section -->
+    <!-- Scripts Final Section -->
+    <div class="section" id="scripts-final">
+      <div class="section-header">
+        <h2><span class="icon">✅</span> 完成版台本</h2>
+        <p>第零話〜第四話（VSL）の完成版台本</p>
+      </div>
+      {make_tabs(scripts_final, "script-final")}
+    </div>
+
+    <!-- Scripts Draft Section -->
     <div class="section" id="scripts">
       <div class="section-header">
-        <h2><span class="icon">📝</span> 台本</h2>
-        <p>全4話の本番用台本（演出指示・スライド指示付き）</p>
+        <h2><span class="icon">📝</span> ドラフト台本</h2>
+        <p>各話のドラフト版台本（v1・v2等）</p>
       </div>
       {make_tabs(scripts, "script")}
     </div>
@@ -666,6 +775,51 @@ body {{
       {make_tabs(meetings, "meeting")}
     </div>
 
+    <!-- LINE Design Section -->
+    <div class="section" id="line-design">
+      <div class="section-header">
+        <h2><span class="icon">📐</span> LINE構築設計書</h2>
+        <p>ファネル全体のシナリオ構成・KPI設計・構築チェックリスト</p>
+      </div>
+      <div class="md-content">{escape(line_design)}</div>
+    </div>
+
+    <!-- LINE Scenarios Section -->
+    <div class="section" id="line-scenarios">
+      <div class="section-header">
+        <h2><span class="icon">💬</span> LINEシナリオ</h2>
+        <p>全8本のLINE配信シナリオ（第零話〜申込み）</p>
+      </div>
+      {make_tabs(line_scenarios, "line")}
+    </div>
+
+    <!-- Sales Letter Section -->
+    <div class="section" id="sales-letter">
+      <div class="section-header">
+        <h2><span class="icon">📄</span> セールスレター</h2>
+        <p>VSL動画ページ用のセールスレターHTML</p>
+      </div>
+      <div class="md-content"><pre><code>{escape(sales_letter_content)}</code></pre></div>
+    </div>
+
+    <!-- Content Pages Section -->
+    <div class="section" id="content-pages">
+      <div class="section-header">
+        <h2><span class="icon">📺</span> コンテンツページ</h2>
+        <p>第一話〜第四話(VSL)の視聴ページHTML — 4ページ</p>
+      </div>
+      <div class="md-content">
+        <h3>📁 コンテンツページ一覧</h3>
+        <ul>
+          <li>第一話_コンテンツページ.html</li>
+          <li>第二話_コンテンツページ.html</li>
+          <li>第三話_コンテンツページ.html</li>
+          <li>第四話VSL_コンテンツページ.html</li>
+        </ul>
+        <p>※ HTMLソースは各ファイルに格納されています。ローカルのcontent-pagesディレクトリをご参照ください。</p>
+      </div>
+    </div>
+
     <!-- Changelog Section -->
     <div class="section" id="changelog">
       <div class="section-header">
@@ -673,6 +827,15 @@ body {{
         <p>ダッシュボードの更新・変更ログ</p>
       </div>
       <div class="md-content">{escape(changelog_content)}</div>
+    </div>
+
+    <!-- Dev Memo Section -->
+    <div class="section" id="dev-memo">
+      <div class="section-header">
+        <h2><span class="icon">🛠️</span> 開発メモ</h2>
+        <p>開発・仕様変更に関する備忘録</p>
+      </div>
+      <div class="md-content">{escape(dev_memo)}</div>
     </div>
 
     <div class="footer">

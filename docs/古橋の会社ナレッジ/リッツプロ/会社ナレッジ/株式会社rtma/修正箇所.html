@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【修正後LP原稿】よもぎ蒸し専門店「ON」FC加盟募集 — Meta審査対応版</title>
+<style>
+:root{
+  --del-color:#c0392b; --del-bg:#fdecea;
+  --add-color:#1a7742; --add-bg:#d4edda;
+  --ref-color:#6c757d;
+  --note-bg:#fff3cd; --note-border:#ffc107;
+  --img-note-bg:#f0e6ff; --img-note-border:#7c3aed;
+  --struct-bg:#e3f2fd; --struct-border:#2196f3;
+  --section-bg:#f8f9fa;
+}
+*{box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;line-height:1.8;color:#212529;max-width:960px;margin:0 auto;padding:24px;background:#fff;}
+.doc-header{background:#212529;color:#fff;padding:28px 32px;border-radius:8px;margin-bottom:24px;}
+.doc-header h1{margin:0 0 8px;font-size:1.5em;}
+.doc-header .sub{font-size:0.9em;opacity:0.85;}
+.legend{background:var(--section-bg);border:1px solid #dee2e6;border-radius:8px;padding:18px 22px;margin-bottom:24px;font-size:0.92em;}
+.legend h2{margin:0 0 10px;font-size:1.05em;}
+.legend ul{margin:6px 0 0;padding-left:20px;}
+.legend li{margin:4px 0;}
+.toc{background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:18px 22px;margin-bottom:32px;}
+.toc h2{margin:0 0 10px;font-size:1.05em;}
+.toc ol{margin:6px 0 0;padding-left:22px;}
+.toc a{color:#0d6efd;text-decoration:none;}
+.toc a:hover{text-decoration:underline;}
+.lp-section{border:1px solid #dee2e6;border-radius:8px;margin-bottom:24px;overflow:hidden;}
+.section-label{background:#343a40;color:#fff;padding:10px 18px;font-weight:bold;font-size:0.95em;}
+.section-content{padding:20px 24px;background:#fff;}
+.del{color:var(--del-color);text-decoration:line-through;background:var(--del-bg);padding:1px 4px;border-radius:3px;}
+.add{color:var(--add-color);background:var(--add-bg);font-weight:bold;padding:1px 4px;border-radius:3px;}
+.ref{display:inline-block;color:#fff;background:#c0392b;border-radius:10px;font-size:0.7em;padding:2px 8px;margin:0 4px;font-weight:bold;vertical-align:middle;}
+.arrow{color:#6c757d;font-weight:bold;margin:0 4px;}
+.arrow-block{display:block;text-align:center;color:#6c757d;font-weight:bold;font-size:1.2em;margin:6px 0;}
+.note{background:var(--note-bg);border-left:4px solid var(--note-border);padding:12px 16px;margin:12px 0;border-radius:4px;font-size:0.9em;}
+.img-note{background:var(--img-note-bg);border-left:4px solid var(--img-note-border);padding:12px 16px;margin:12px 0;border-radius:4px;font-size:0.9em;}
+.struct-note{background:var(--struct-bg);border-left:4px solid var(--struct-border);padding:12px 16px;margin:12px 0;border-radius:4px;font-size:0.9em;}
+.note-title{font-weight:bold;margin-bottom:4px;}
+.lp-headline{font-size:1.4em;font-weight:bold;text-align:center;margin:12px 0;}
+.lp-subhead{font-size:1.1em;font-weight:bold;margin:10px 0;}
+.lp-body{margin:8px 0;}
+.lp-small{font-size:0.85em;color:#6c757d;}
+.lp-center{text-align:center;}
+.lp-bold{font-weight:bold;}
+.lp-cta{background:#e8f5e9;border:2px solid #4caf50;border-radius:6px;padding:14px 18px;text-align:center;margin:14px 0;}
+.lp-cta .btn{display:inline-block;background:#4caf50;color:#fff;padding:8px 24px;border-radius:4px;font-weight:bold;}
+.lp-disclaimer{font-size:0.8em;color:#888;margin:6px 0;}
+.lp-voice-name{font-weight:bold;color:#c2185b;}
+.lp-divider{border:none;border-top:1px dashed #ced4da;margin:18px 0;}
+.lp-list{padding-left:22px;margin:8px 0;}
+.lp-list li{margin:4px 0;}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.92em;}
+th,td{border:1px solid #dee2e6;padding:8px 10px;text-align:left;vertical-align:top;}
+th{background:#f1f3f5;font-weight:bold;}
+.summary{margin-top:40px;}
+.summary h2{border-bottom:3px solid #343a40;padding-bottom:6px;}
+.score-after{background:#d4edda;font-weight:bold;}
+
+/* アースカラーのバッジ（修正重要度マーカー） */
+.risk-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-align: center;
+  min-width: 48px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+.risk-badge.high {
+  background-color: #B85A52; /* アースカラー 赤（テラコッタ） */
+}
+.risk-badge.medium {
+  background-color: #C3994B; /* アースカラー 黄（マスタード） */
+}
+.risk-badge.low {
+  background-color: #6C8D66; /* アースカラー 緑（オリーブ） */
+}
+
+@media print{
+  body{max-width:100%;}
+  .lp-section{page-break-inside:avoid;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>【修正後LP原稿】よもぎ蒸し専門店「ON」FC加盟募集 — Meta審査対応版</h1>
+  <div class="sub">広告主：株式会社rtma ／ 反映指摘件数：12件 ／ 修正案B（訴求力維持）反映済み</div>
+</div>
+
+<div class="legend">
+  <h2>📖 凡例（読み方）</h2>
+  <ul>
+    <li><span class="del">赤字＋取り消し線</span>：削除すべき元の表現</li>
+    <li><span class="add">緑字＋ハイライト＋太字</span>：差し替え後の修正案</li>
+    <li><span class="ref">No.X</span>：審査レビューの指摘番号（詳細はサマリーテーブル参照）</li>
+    <li><span class="arrow">↓ / →</span>：削除→追加の対比矢印</li>
+    <li>装飾なしテキスト：変更不要（そのまま使用OK）</li>
+    <li>注記ボックス：⚠️修正理由 ／ 🖼️画像差し替え ／ 🔧構造修正</li>
+  </ul>
+</div>
+
+<div class="toc">
+  <h2>📑 セクション一覧</h2>
+  <ol>
+    <li><a href="#s1">セクション1：ヒーローセクション（ファーストビュー）</a></li>
+    <li><a href="#s2">セクション2：お悩み訴求セクション</a></li>
+    <li><a href="#s3">セクション3：SOLUTION（解決策の3つの仕組み）</a></li>
+    <li><a href="#s4">セクション4：WHY ON（選ばれる理由）</a></li>
+    <li><a href="#s5">セクション5：COMPARISON（他業態FCとの比較）</a></li>
+    <li><a href="#s6">セクション6：PROVEN RESULTS（直営店実績）</a></li>
+    <li><a href="#s7">セクション7：REVENUE SIMULATION（収益シミュレーション）</a></li>
+    <li><a href="#s8">セクション8：HANDS OFF（運営設計）</a></li>
+    <li><a href="#s9">セクション9：INVESTMENT（FC条件・開業費用）</a></li>
+    <li><a href="#s10">セクション10：SUPPORT（本部サポート体制）</a></li>
+    <li><a href="#s11">セクション11：VOICE（加盟オーナーの声）</a></li>
+    <li><a href="#s12">セクション12：REVIEWS（お客様の口コミ）</a></li>
+    <li><a href="#s13">セクション13：FAQ</a></li>
+    <li><a href="#s14">セクション14：末尾CTA</a></li>
+    <li><a href="#s15">セクション15：フッター・法的表記</a></li>
+  </ol>
+</div>
+
+<!-- ============ セクション1：ヒーロー ============ -->
+<div class="lp-section" id="s1">
+  <div class="section-label">セクション1：ヒーローセクション（ファーストビュー）</div>
+  <div class="section-content">
+    <p class="lp-body">0次募集・残りわずか<br>FC加盟オーナー募集中</p>
+    <p class="lp-body">副業・独立・第2の事業をお探しの方へ</p>
+
+    <p class="lp-headline">
+      <span class="del">累計来店2万人超の<br>直営店が生み出した<br>よもぎ蒸しフランチャイズ</span>
+      <span class="ref">No.1</span>
+    </p>
+    <p class="lp-body lp-center">
+      <span class="del">年間純利益（直営店実績 / 12ヶ月）</span><br>
+      <span class="del">542万円</span><br>
+      <span class="del">技術不要 / 1名運営 / 500万円〜</span><br>
+      <span class="del">1ヶ月目から黒字のサロンビジネス</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-headline">
+      <span class="add">累計来店2万人を支えた直営店オペレーションを、<br>そのまま使えるFCモデル</span>
+    </p>
+    <p class="lp-body lp-center">
+      <span class="add">技術不要・1名運営・原価率8〜15%という<br>小さな構造から始められます</span><br>
+      <span class="add">※直営店12ヶ月の運営データはLINE登録後に全公開</span>
+    </p>
+
+    <div class="note">
+      <div class="note-title">⚠️ No.1 修正理由</div>
+      ファーストビューに「年間純利益542万円」「1ヶ月目から黒字」を掲げる構造は、Metaが最も厳格に執行するget-rich-quick条項（Fraud, Scams, and Deceptive Practices）に直接該当。「結果（純利益・黒字化時期）→構造（オペレーション・原価率）」へ転換し、収益データを「LINE登録後に開示」というオファーに変換。CPL（リスト獲得）KPIにも貢献します。
+    </div>
+
+    <p class="lp-body">
+      <span class="del">・35.6% 利益率</span><br>
+      <span class="del">・14ヶ月 投資回収</span><br>
+      ・<span class="lp-bold">65%</span> リピート率<br>
+      ・<span class="lp-bold">1名</span> 運営人員
+      <span class="ref">No.1</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.1 補足</div>
+      「35.6%利益率」「14ヶ月投資回収」もNo.1の収益保証ニュアンスに連動するため削除。「リピート率65%」「1名運営」は事業構造の事実訴求として残置可（入稿時のクリエイティブ全体トーンと組み合わせて再評価推奨）。
+    </div>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了 ／ ※ 勧誘・押し売りは一切ありません</span>
+    </div>
+
+    <p class="lp-body">
+      <span class="del">● 現在 19 名がこのページを閲覧中</span>
+      <span class="ref">No.2</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.2 修正理由（要素ごと削除）</div>
+      リアルタイム閲覧者数表示は、実際のトラッキング集計でない限り Deceptive Practices に該当し、Fraudカテゴリ（最も厳格な執行ゾーン）の対象。Cookieベースの擬似表示やJSタイマーの場合、検出時のアカウント停止リスクが極めて高いため要素ごと削除。社会的証明が必要なら「累計来店2万人」など検証可能な実績を活用。
+    </div>
+
+    <p class="lp-body">
+      <span class="del">0次募集・残りわずか</span>
+      <span class="ref">No.3</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body">
+      <span class="add">0次募集：先着5店舗まで加盟金100万円</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.3 修正理由</div>
+      「残りわずか」は具体的残席数が確認できない場合、虚偽の希少性に該当。Metaは「先着5店舗」「○月○日締切」など検証可能な希少性は許容するため、抽象的な煽り表現のみを削除し、希少性の事実構造（先着5店舗）はそのまま残置。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション2：お悩み訴求 ============ -->
+<div class="lp-section" id="s2">
+  <div class="section-label">セクション2：お悩み訴求セクション</div>
+  <div class="section-content">
+    <p class="lp-headline">
+      <span class="del">こんなお悩みありませんか？</span>
+      <span class="ref">No.4</span>
+    </p>
+    <ol class="lp-list">
+      <li><span class="del">副業を始めたいけど、何から手をつければいいか分からない</span></li>
+      <li><span class="del">独立したいけど、特別な技術や資格を持っていない</span></li>
+      <li><span class="del">投資に興味はあるけど、リスクが怖くて踏み出せない</span></li>
+      <li><span class="del">好きなことを仕事にしたいけど、収益化できるか不安</span></li>
+      <li><span class="del">手離れよく、利益率のいい事業を持ちたい</span></li>
+    </ol>
+    <p class="arrow-block">↓</p>
+    <p class="lp-headline"><span class="add">ONサロンFCが解決する5つの課題</span></p>
+    <ol class="lp-list">
+      <li><span class="add">何から始めればいいか分からない副業のスタートアップ問題</span></li>
+      <li><span class="add">特別な技術や資格がなくても始められる事業設計</span></li>
+      <li><span class="add">投資リスクを構造的に下げるビジネスモデル</span></li>
+      <li><span class="add">趣味ではなく事業として収益化する仕組み</span></li>
+      <li><span class="add">手離れよく利益率の高い事業構造</span></li>
+    </ol>
+    <div class="note">
+      <div class="note-title">⚠️ No.4 修正理由（PA違反の解消）</div>
+      原稿の悩み列挙は、PA（パーソナルアトリビュート）違反の典型構造。「ありませんか？」が読み手の財政状態（副業必要・経済的状況）と精神状態（投資が怖い・収益化が不安）を断定的に暗示。フレーミング転換テクニック（サービス主語型）を適用し、「あなたの悩み」→「ONサロンが解決する課題」へ主語転換。描写内容はほぼ100%維持しているため訴求力は完全に保持され、次のSOLUTIONへの接続がより論理的になります。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション3：SOLUTION ============ -->
+<div class="lp-section" id="s3">
+  <div class="section-label">セクション3：SOLUTION（解決策の3つの仕組み）</div>
+  <div class="section-content">
+    <p class="lp-small">SOLUTION</p>
+    <p class="lp-headline">そのお悩み、ONサロンなら全て解消できます</p>
+    <p class="lp-body lp-center">
+      <span class="del">構造的に「失敗しにくい」ビジネスモデル</span>
+      <span class="ref">No.5</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body lp-center">
+      <span class="add">投資負担・運営負担・集客負担を抑える3つの仕組み</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.5 修正理由</div>
+      「失敗しにくい」は審査AIが成功保証ニュアンスとして検出する可能性が高い表現。「投資負担・運営負担・集客負担」という3つの具体的負担軽減に変換することで、抽象表現より説得力が上がり、修正後のSOLUTION 01〜03の構造とも整合します。
+    </div>
+
+    <p class="lp-subhead">01 技術・資格は一切不要</p>
+    <p class="lp-body">ハーブを選んでもらい、お茶を出すだけ。施術ミスが構造的に起きない仕組みなので、未経験でも翌日から現場に立てます。</p>
+
+    <p class="lp-subhead">02 リスクが圧倒的に低い</p>
+    <p class="lp-body">原価率8〜15%・1名運営・マンション1室で完結。初期投資500万円〜、14ヶ月で回収できる低リスクモデルです。</p>
+
+    <p class="lp-subhead">03 サブスク×高リピートで安定</p>
+    <p class="lp-body">リピート率65%のサブスク型収益。新規集客に依存しないストックビジネスで、月ごとに売上が積み上がります。</p>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了 / 勧誘なし</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション4：WHY ON ============ -->
+<div class="lp-section" id="s4">
+  <div class="section-label">セクション4：WHY ON（選ばれる理由）</div>
+  <div class="section-content">
+    <p class="lp-small">WHY ON</p>
+    <p class="lp-headline">なぜONサロンのFCは選ばれるのか</p>
+    <p class="lp-body lp-center">累計2万人が通い続ける理由 ── 3つの仕組み</p>
+
+    <p class="lp-subhead">仕組み 01｜集客・オペレーションを本部に完全丸投げOK</p>
+    <p class="lp-body">ハーブを選んでいただき、お茶を出すだけ。施術技術は一切不要なので、スタッフ研修も本部が完全サポート。開業前〜開業後まで、手間のかかる作業は<span class="lp-bold">全て本部が担います</span>。</p>
+
+    <p class="lp-subhead">仕組み 02｜マンション1室・1名で黒字化できる最小設計</p>
+    <p class="lp-body">初期投資500万円〜・原価率8〜15%。飲食FCの半分以下の人件費で損益分岐点が格段に低く、<span class="lp-bold">1ヶ月目から黒字になれる設計</span>です。</p>
+
+    <p class="lp-subhead">仕組み 03｜属人性ゼロ！未経験でも現場に出なくてもOK</p>
+    <p class="lp-body">技術ミスが構造的に起きにくいから、誰がやっても同じ品質。<span class="lp-bold">副業・兼業オーナーがすぐに現場を任せられる</span>仕組みです。</p>
+    <div class="note">
+      <div class="note-title">⚠️ 補足（No.1・No.7関連）</div>
+      このセクション本文の「1ヶ月目から黒字」「副業・兼業オーナーが現場を任せられる」表現は、No.1・No.7の指摘と同質のリスクを含むため、本来は同様の言い換えが望ましい範囲。クライアント側で本文修正の余地があれば、「黒字化を目指せる設計」「オーナーの稼働量を選べる運営設計」等への調整を推奨します（本指摘は審査チェック結果のNo.1・No.7に準じた追加配慮）。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション5：COMPARISON ============ -->
+<div class="lp-section" id="s5">
+  <div class="section-label">セクション5：COMPARISON（他業態FCとの比較）</div>
+  <div class="section-content">
+    <p class="lp-small">COMPARISON</p>
+    <p class="lp-headline">
+      他業態FCとの比較 <span class="ref">No.9</span>
+    </p>
+
+    <p class="lp-small">▼ 修正前テーブル</p>
+    <table>
+      <thead>
+        <tr><th>比較項目</th><th>ONサロン</th><th>飲食FC</th><th>エステFC</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>初期投資</td><td>500万円〜</td><td>1,000万円〜</td><td>500万円〜</td></tr>
+        <tr><td>技術・資格</td><td>不要</td><td>調理経験推奨</td><td>技術研修必須</td></tr>
+        <tr><td>必要人員</td><td>1名</td><td>3名〜</td><td>2名〜</td></tr>
+        <tr><td>原価率</td><td>8〜15%</td><td>30〜35%</td><td>15〜25%</td></tr>
+        <tr><td><span class="del">投資回収</span></td><td><span class="del">約14ヶ月</span></td><td><span class="del">1.5〜3年</span></td><td><span class="del">1〜2年</span></td></tr>
+        <tr><td><span class="del">副業対応</span></td><td><span class="del">可能</span></td><td><span class="del">困難</span></td><td><span class="del">困難</span></td></tr>
+      </tbody>
+    </table>
+
+    <p class="arrow-block">↓</p>
+
+    <p class="lp-small"><span class="add">▼ 修正後テーブル（比較構造維持・問題箇所のみ修正）</span></p>
+    <table>
+      <thead>
+        <tr><th>比較項目</th><th>ONサロン</th><th>飲食FC</th><th>エステFC</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="add">初期投資</span></td><td><span class="add">500万円〜</span></td><td><span class="add">1,000万円〜</span></td><td><span class="add">500万円〜</span></td></tr>
+        <tr><td><span class="add">技術・資格</span></td><td><span class="add">不要</span></td><td><span class="add">調理経験推奨</span></td><td><span class="add">技術研修必須</span></td></tr>
+        <tr><td><span class="add">必要人員</span></td><td><span class="add">1名</span></td><td><span class="add">3名〜</span></td><td><span class="add">2名〜</span></td></tr>
+        <tr><td><span class="add">原価率</span></td><td><span class="add">8〜15%</span></td><td><span class="add">30〜35%</span></td><td><span class="add">15〜25%</span></td></tr>
+        <tr><td><span class="add">副業対応</span></td><td><span class="add">並行運営可能</span></td><td><span class="add">困難</span></td><td><span class="add">困難</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <div class="note-title">⚠️ No.9 修正理由</div>
+      他業態との比較表構造は残しつつ（修正案B：訴求力維持）、Metaポリシーでリスクの高い2箇所のみを修正しました。<br>
+      ①「投資回収（約14ヶ月）」は、他の業態と比較することで「確実な収益（get-rich-quick）」の保証と誤認されるリスクが高いため行ごと削除。<br>
+      ②「副業対応：可能」は、Metaの雇用ポリシー（現場に出ないで稼げるという一攫千金の暗示）に触れるため「並行運営可能」に言い換えて事実構造として表記しています。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション6：PROVEN RESULTS ============ -->
+<div class="lp-section" id="s6">
+  <div class="section-label">セクション6：PROVEN RESULTS（直営店実績）</div>
+  <div class="section-content">
+    <p class="lp-small">PROVEN RESULTS</p>
+    <p class="lp-headline">直営店の実績データ</p>
+    <p class="lp-body lp-center">直営4台モデル / 12ヶ月分</p>
+    <p class="lp-body">
+      ・<span class="lp-bold">1,521万円</span> (年間売上)<br>
+      ・<span class="lp-bold">542万円</span> (年間純利益)<br>
+      ・<span class="lp-bold">35.6%</span> (平均利益率)<br>
+      ・<span class="lp-bold">65%</span> (リピート率)
+    </p>
+    <p class="lp-body">月次データ（売上・経費・純利益 12ヶ月分）はLINEで全公開</p>
+    <div class="note">
+      <div class="note-title">⚠️ 補足（No.1・No.6関連）</div>
+      審査チェック結果の指摘リスト（No.1〜No.12）にこのセクションの個別指摘は含まれていませんが、本セクションの直営店収益数値（年間売上1,521万円・年間純利益542万円・平均利益率35.6%）はNo.1・No.6で指摘されたget-rich-quick関連の数値訴求と同質です。本来はNo.6と同様に「LINE登録後の事業説明資料に統合」する設計が安全。クライアント側での追加判断を推奨します。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション7：REVENUE SIMULATION ============ -->
+<div class="lp-section" id="s7">
+  <div class="section-label">セクション7：REVENUE SIMULATION（収益シミュレーション）</div>
+  <div class="section-content">
+    <p class="lp-small">REVENUE SIMULATION</p>
+    <p class="lp-headline">
+      <span class="del">収益シミュレーション</span>
+      <span class="ref">No.6</span>
+    </p>
+    <p class="lp-body lp-center"><span class="del">直営店実績ベースの手堅い数字</span></p>
+    <p class="lp-body lp-center">
+      <span class="del">1店舗の年間純利益</span><br>
+      <span class="del">542万円 × 3店舗</span>
+    </p>
+    <p class="lp-body lp-center">
+      <span class="del">年収</span><br>
+      <span class="del">1,626万円</span>
+    </p>
+    <p class="lp-body">
+      <span class="del">・500万円〜 初期投資</span><br>
+      <span class="del">・14ヶ月 投資回収</span><br>
+      <span class="del">・35.6% 利益率</span>
+    </p>
+    <p class="lp-body lp-center"><span class="del">低リスク / 低リソース / 高回収型</span></p>
+
+    <p class="arrow-block">↓</p>
+
+    <p class="lp-headline"><span class="add">複数店舗展開を前提とした事業設計</span></p>
+    <p class="lp-body">
+      <span class="add">直営店モデルでは1店舗あたりの運営工数を月◯時間に抑えており、複数店舗の同時運営が現実的です。3店舗・5店舗展開時の収支モデル・必要リソース・運営体制の詳細は、LINE登録後の事業説明資料でお渡しします。</span>
+    </p>
+
+    <div class="note">
+      <div class="note-title">⚠️ No.6 修正理由</div>
+      「年収1,626万円」の明示は、Metaが最も厳格に執行するget-rich-quick条項とEmployment fraud条項の両方に直接該当（FC加盟広告での具体的年収提示は「給与の事前約束」と判定される可能性が高く、アカウント停止リスクの最大要因）。収益数値を完全排除しつつ、訴求の核心（複数店舗展開の現実性）を残し、それを「LINE登録後の事業説明資料」というオファーに転換することでCPL貢献も維持。
+    </div>
+
+    <div class="struct-note">
+      <div class="note-title">🔧 No.6 構造修正</div>
+      修正後の本文中「月◯時間」の◯部分は、クライアント側で実数値（直営店で実測されている運営工数）に差し替えてください。実数値が確認できない場合は「月数十時間程度」など範囲表現に変更可。
+    </div>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了 / 勧誘なし</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション8：HANDS OFF ============ -->
+<div class="lp-section" id="s8">
+  <div class="section-label">セクション8：HANDS OFF（運営設計）</div>
+  <div class="section-content">
+    <p class="lp-small">HANDS OFF</p>
+    <p class="lp-headline">
+      <span class="del">副業・兼業OK</span><br>
+      <span class="del">あなたが現場に出ることなく経営できます</span>
+      <span class="ref">No.7</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-headline"><span class="add">オーナーの稼働量を選べる運営設計</span></p>
+
+    <p class="lp-body">
+      <span class="del">ONサロンは「手離れの良さ」が最大の強みのひとつです。高度な施術技術が不要なため、スタッフを1名採用するだけでオーナーは現場に出る必要がありません。集客・マニュアル・システムは本部が整備済みです。</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body">
+      <span class="add">ONサロンは施術が標準化されており、スタッフ1名の採用でオペレーションが完結する設計です。集客導線・接客マニュアル・スタッフ研修プログラムは本部が提供します。</span>
+    </p>
+
+    <p class="lp-body">
+      <span class="del">・副業・兼業でスタート可能</span><br>
+      ・集客は本部がサポート<br>
+      ・スタッフ研修マニュアル完備<br>
+      ・技術指導は一切不要
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body">
+      <span class="add">・本業を持ちながらの並行運営も可能な運営設計</span><br>
+      <span class="add">・集客導線の構築・運用は本部がサポート</span><br>
+      <span class="add">・スタッフ研修マニュアルを完備</span><br>
+      <span class="add">・施術の標準化により属人性を低減</span>
+    </p>
+
+    <div class="note">
+      <div class="note-title">⚠️ No.7 修正理由</div>
+      「副業」「現場に出ない」「手離れ」の組み合わせは、Metaの最新公式ポリシーで明示禁止されている「わずかな時間と労力で金銭を約束する一攫千金的な機会」条項に直接該当（FC募集広告で最も停止リスクが高い訴求パターン）。核心訴求（オーナー稼働量を抑えられる）はそのまま残しつつ、フレーミングを「労力ゼロで稼げる」から「運営設計の柔軟性」へ転換。「副業」を「本業を持ちながらの並行運営」、「現場に出ない」を「オペレーションが標準化されている」へ言い換え。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション9：INVESTMENT ============ -->
+<div class="lp-section" id="s9">
+  <div class="section-label">セクション9：INVESTMENT（FC条件・開業費用）</div>
+  <div class="section-content">
+    <p class="lp-small">INVESTMENT</p>
+    <p class="lp-headline">FC条件・開業費用</p>
+
+    <p class="lp-subhead">0次募集 特別価格（5店舗目まで）</p>
+    <p class="lp-body">
+      通常加盟金 300万円 → <span class="lp-bold">100万円</span><br>
+      <span class="del">※ 段階的に引き上げ予定。お早めにご検討ください。</span>
+      <span class="ref">No.3</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body">
+      <span class="add">※ 6店舗目以降は加盟条件を見直します。</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.3 修正理由（末尾CTAと整合）</div>
+      「次回引き上げ予定」「お早めに」も虚偽の希少性／人為的緊急性に該当するため、「条件を見直します」へ変更（事実上の引き上げ示唆を残しつつ、断定保証を回避）。
+    </div>
+
+    <p class="lp-subhead">加盟金</p>
+    <p class="lp-body"><span class="lp-bold">100万円</span>（0次募集限定価格）</p>
+
+    <p class="lp-subhead">ロイヤリティ</p>
+    <p class="lp-body"><span class="lp-bold">月額11万円</span>（固定制・売上歩合なし）</p>
+
+    <p class="lp-subhead">
+      <span class="del">投資回収</span>
+      <span class="ref">No.10</span>
+    </p>
+    <p class="lp-body">
+      <span class="del">約14ヶ月</span><br>
+      <span class="del">1ヶ月目から黒字</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.10 修正理由（項目ごと削除）</div>
+      「加盟金」「ロイヤリティ」と並列で「投資回収14ヶ月」「1ヶ月目から黒字」を表示する構造は、これらを「FC条件と同じく確定された数値」と読み手に誤認させ、Misleading Claimsで最も検出されやすい表現の一つ。投資回収・黒字化タイミングの項目を完全削除し、FC条件（加盟金・ロイヤリティ）のみに絞ることで事実情報のみの安全なセクションに変換。投資回収の話はNo.6と統合し「LINE登録後の事業説明資料」で開示する設計。
+    </div>
+
+    <p class="lp-body">開業費用内訳（4台モデル） ∨</p>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション10：SUPPORT ============ -->
+<div class="lp-section" id="s10">
+  <div class="section-label">セクション10：SUPPORT（本部サポート体制）</div>
+  <div class="section-content">
+    <p class="lp-small">SUPPORT</p>
+    <p class="lp-headline">本部サポート体制</p>
+    <p class="lp-body lp-center">開業前から開業後まで、ONブランドの全てをサポート</p>
+
+    <p class="lp-subhead">1 開業前サポート</p>
+    <p class="lp-body">・立地・物件選定<br>・事業計画・収支設計<br>・開業スケジュール</p>
+
+    <p class="lp-subhead">2 技術・運営研修</p>
+    <p class="lp-body">・施術研修<br>・オペレーション・接客<br>・マニュアル完備</p>
+
+    <p class="lp-subhead">3 集客・販促支援</p>
+    <p class="lp-body">・集客導線の構築<br>・HPB掲載・運用指導<br>・オープン時集客</p>
+
+    <p class="lp-subhead">4 開業後フォロー</p>
+    <p class="lp-body">・毎月のミーティング<br>・改善アドバイス<br>・メニュー更新共有</p>
+  </div>
+</div>
+
+<!-- ============ セクション11：VOICE ============ -->
+<div class="lp-section" id="s11">
+  <div class="section-label">セクション11：VOICE（加盟オーナーの声）</div>
+  <div class="section-content">
+    <p class="lp-small">VOICE</p>
+    <p class="lp-headline">加盟オーナーの声</p>
+
+    <p class="lp-subhead">
+      <span class="del">開業2ヶ月目で黒字化</span>
+      <span class="ref">No.8</span>
+    </p>
+    <p class="lp-voice-name">FCオーナー</p>
+    <p class="lp-body">
+      <span class="del">「固定費が抑えられるビジネスモデルなので、想定より早く結果が出ました。技術がなくても始められて、数字が作りやすく、長く続けやすい。未経験でも仕組みとサポートがあれば十分に戦えます。」</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-subhead"><span class="add">FCオーナーの声</span></p>
+    <p class="lp-body">
+      <span class="add">「固定費が抑えられる設計なので、立ち上げ時の運営に集中できました。技術がなくても始められて、長く続けやすい仕組みです。未経験でも本部のサポートで十分に戦えます。」</span>
+    </p>
+    <p class="lp-disclaimer"><span class="add">※掲載内容は加盟オーナー個人の体験であり、結果には個人差があります。</span></p>
+
+    <div class="note">
+      <div class="note-title">⚠️ No.8 修正理由</div>
+      特定の成果（2ヶ月目で黒字化）を含む声はMisleading Claimsの典型的検出対象。本LPのように本文中に直営店の収益数値が大量に提示されている文脈では、お客様の声の数値訴求は「典型的な結果である」という暗示と解釈されるリスクが極めて高い。数値を削除し、定性的な体験記述（立ち上げ時の運営に集中できた・長く続けやすい・サポートで戦える）を残すことで、社会的証明としての機能は維持。免責条項は視認可能なサイズで併記必須。
+    </div>
+
+    <hr class="lp-divider">
+
+    <p class="lp-subhead">リピート率65% クレーム対応ほぼゼロ</p>
+    <p class="lp-voice-name">FCオーナー</p>
+    <p class="lp-body">「ここに来るのが習慣になった、他のケアに戻れないと言っていただけることが増えています。施術に高度な技術が不要で、施術ミスが起きにくい。新人でもすぐ現場に立てます。」</p>
+    <div class="note">
+      <div class="note-title">⚠️ No.8 補足</div>
+      2件目の声の「リピート率65%」「クレーム対応ほぼゼロ」は、直営店データなのか個別オーナー実績なのかが不明瞭。LP内の事業説明と分離した文脈で配置することを推奨（同一の免責条項を併記、もしくは数値部分を定性表現に置き換え）。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション12：REVIEWS ============ -->
+<div class="lp-section" id="s12">
+  <div class="section-label">セクション12：REVIEWS（お客様の口コミ）</div>
+  <div class="section-content">
+    <p class="lp-small">REVIEWS</p>
+    <p class="lp-headline">お客様の口コミ</p>
+
+    <p class="lp-body">★★★★★<br>初めてよもぎ蒸しを体験しました。たっぷり汗をかいてリフレッシュできました。お店はとても清潔感がありオシャレな内装です！仕事帰りに手ぶらで来られるのも◎</p>
+    <p class="lp-body">★★★★★<br>身体の中から温まりたい時に利用しています。お店から出た後はマフラー無しで、外の風が涼しいと感じる程、身体全体がポカポカしてます。</p>
+    <p class="lp-body">★★★★★<br>個室がゆったりしていて、よもぎの香りがとっても良くて癒されました。終わった後はいつもより体調が良い日が数日続いた気がします。</p>
+    <p class="lp-body">★★★★★<br>雰囲気が良く入った途端に優しいよもぎの香りが漂い癒されました。帰り道、脚や肩凝りが楽になっていて今朝も身体が楽で驚きました。</p>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション13：FAQ ============ -->
+<div class="lp-section" id="s13">
+  <div class="section-label">セクション13：FAQ</div>
+  <div class="section-content">
+    <p class="lp-small">FAQ</p>
+    <p class="lp-headline">よくある質問</p>
+    <p class="lp-body">
+      ・未経験でも本当に大丈夫ですか？ ∨<br>
+      ・<span class="del">副業・兼業としても始められますか？</span> <span class="add">本業と並行して運営することは可能ですか？</span> ∨<br>
+      ・初期費用はどのくらいかかりますか？ ∨<br>
+      ・開業までどのくらいかかりますか？ ∨<br>
+      ・ロイヤリティはいくらですか？ ∨
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.7 関連修正</div>
+      FAQ内の「副業・兼業」表現もNo.7と同質のリスクを含むため、「本業と並行して運営」へ言い換え。回答内容（アコーディオン展開部）が原稿に含まれていないため、回答側も同様に「副業／現場に出ない」表現を避けた構成にすることをクライアントに依頼してください。
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション14：末尾CTA ============ -->
+<div class="lp-section" id="s14">
+  <div class="section-label">セクション14：末尾CTA</div>
+  <div class="section-content">
+    <p class="lp-headline">
+      <span class="del">0次募集は残りわずか</span><br>
+      <span class="del">この条件で始められるのは今だけです</span>
+      <span class="ref">No.3</span>
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-headline">
+      <span class="add">0次募集：先着5店舗まで加盟金100万円</span>
+    </p>
+
+    <p class="lp-body">
+      <span class="del">加盟金100万円は0次募集（5店舗目まで）の特別価格です。</span><br>
+      <span class="del">次回募集では300万円に引き上げ予定。</span><br>
+      代表・嶋岡みのりが直営12ヶ月分の実績データを全て公開。<br>
+      勧誘なし・90分でわかるFCの全貌。
+    </p>
+    <p class="arrow-block">↓</p>
+    <p class="lp-body">
+      <span class="add">加盟金100万円は0次募集（先着5店舗まで）の特別価格です。</span><br>
+      <span class="add">6店舗目以降は加盟条件を見直します。</span><br>
+      <span class="add">代表・嶋岡みのりが直営12ヶ月分の実績データを全て公開。</span><br>
+      <span class="add">勧誘なし・90分でわかるFCの全貌。</span>
+    </p>
+    <div class="note">
+      <div class="note-title">⚠️ No.3 修正理由</div>
+      ヒーローセクション・INVESTMENTセクションと整合させ、「残りわずか」「今だけ」「次回引き上げ予定」を削除。「先着5店舗」という具体的・検証可能な希少性の事実構造はそのまま残置し、訴求力を維持。
+    </div>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">無料・30秒で完了 ／ ※ 強引な勧誘・押し売りは一切ありません</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ セクション15：フッター ============ -->
+<div class="lp-section" id="s15">
+  <div class="section-label">セクション15：フッター・法的表記</div>
+  <div class="section-content">
+    <p class="lp-body">
+      黄土よもぎ蒸し専門店「ON」FC事業部<br>
+      株式会社rtma
+    </p>
+    <p class="lp-disclaimer">© 2024 株式会社rtma</p>
+
+    <div class="lp-cta">
+      <span class="btn">[ LINEで詳細を受け取る ]</span><br>
+      <span class="lp-small">0次募集 残りわずか / 無料・30秒で完了</span>
+    </div>
+    <div class="note">
+      <div class="note-title">⚠️ No.3 補足（CTAボタン下キャプション）</div>
+      フッターCTA下の「0次募集 残りわずか」も同質の表現のため、ヒーロー・末尾CTAと同様に「先着5店舗まで」等の具体表現への置き換えを推奨。
+    </div>
+
+    <div class="struct-note">
+      <div class="note-title">🔧 No.11 構造修正（特商法表記の追加が必要）</div>
+      原稿内には会社名（株式会社rtma）と著作権表記のみで、以下が確認できません。Meta審査で「Business Information不足」として不承認になるリスクが高いため、フッター（または別ページへのリンク）に下記の追加が必要です：
+      <ul>
+        <li>事業者所在地（番地まで）</li>
+        <li>連絡先（電話番号またはメールアドレス）</li>
+        <li>加盟金100万円・ロイヤリティ月額11万円の支払条件・支払時期</li>
+        <li>解約条件・契約期間・中途解約時の返金条件</li>
+        <li>特定商取引法に基づく表記ページへのリンク</li>
+        <li>プライバシーポリシーへのリンク</li>
+      </ul>
+      特に高額契約（加盟金100万円＋月額11万円のロイヤリティ＝5年で760万円規模）を含むFC募集では、LP内での契約条件の透明性は通常の通販より厳格に求められます。クライアントに上記の所在・記載状況を確認してください。
+    </div>
+
+    <div class="struct-note">
+      <div class="note-title">🔧 No.12 構造修正（Special Ad Category対応・入稿時運用指示）</div>
+      日本市場ではSpecial Ad Categoriesの自己申告は強制適用ではないものの、MetaのAI分類が広告コンテンツとLPコンテンツから「雇用機会の提供」と自動分類する可能性があります。分類された場合：年齢・性別・郵便番号によるターゲティング制限／類似オーディエンス使用不可／配信効率の大幅低下が発生します。
+      <ul>
+        <li>入稿時にMetaがSpecial Ad Categoryの選択を提案してきた場合は、それに従ってください（意図的に「該当しない」を選択することはシステム回避と見なされるリスクあり）</li>
+        <li>ターゲティング設計時はSpecial Ad Category適用を前提とした設計（広範な年齢・地域設定）も準備しておくことを推奨</li>
+      </ul>
+      ※本項目はLP本文の修正ではなく、入稿時の運用指示としてアカウント担当者へ共有してください。
+    </div>
+  </div>
+</div>
+
+<!-- ============ サマリーテーブル ============ -->
+<div class="summary">
+  <h2>📊 修正箇所サマリー（全12件）</h2>
+  <table>
+    <thead>
+      <tr><th>No.</th><th>リスク</th><th>抵触箇所の概要</th><th>修正内容</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><span class="risk-badge high">高</span></td><td>ヒーロー：年間純利益542万円／1ヶ月目から黒字</td><td>収益数値・黒字化タイミングを削除し、「累計2万人を支えた直営店オペレーション／技術不要・1名運営・原価率8〜15%」に転換。データはLINE登録後開示</td></tr>
+      <tr><td>2</td><td><span class="risk-badge high">高</span></td><td>ヒーロー：「現在19名がこのページを閲覧中」</td><td>要素ごと削除（Deceptive Practices該当）</td></tr>
+      <tr><td>3</td><td><span class="risk-badge high">高</span></td><td>ヒーロー／INVESTMENT／末尾CTA：「残りわずか」「次回300万円に引き上げ予定」「今だけ」</td><td>抽象的な煽り表現を削除し「先着5店舗まで／6店舗目以降は加盟条件を見直します」に変更</td></tr>
+      <tr><td>4</td><td><span class="risk-badge high">高</span></td><td>「こんなお悩みありませんか？」セクション全体（PA違反）</td><td>主語転換：「ONサロンFCが解決する5つの課題」へフレーミング変更。描写内容は維持</td></tr>
+      <tr><td>5</td><td><span class="risk-badge high">高</span></td><td>SOLUTION：「構造的に失敗しにくいビジネスモデル」</td><td>「投資負担・運営負担・集客負担を抑える3つの仕組み」に変換</td></tr>
+      <tr><td>6</td><td><span class="risk-badge high">高</span></td><td>REVENUE SIMULATION：「年収1,626万円」「542万円×3店舗」</td><td>収益数値を完全削除し、「複数店舗展開を前提とした事業設計／詳細はLINE登録後の事業説明資料」に転換</td></tr>
+      <tr><td>7</td><td><span class="risk-badge high">高</span></td><td>HANDS OFF：「副業・兼業OK」「現場に出ることなく経営」</td><td>「オーナーの稼働量を選べる運営設計／本業と並行運営も可能／オペレーション標準化」に転換</td></tr>
+      <tr><td>8</td><td><span class="risk-badge medium">中</span></td><td>VOICE：「開業2ヶ月目で黒字化」（免責なし）</td><td>具体成果数値を削除、定性体験のみ残置。免責条項を視認可能サイズで併記</td></tr>
+      <tr><td>9</td><td><span class="risk-badge medium">中</span></td><td>COMPARISON：飲食FC／エステFCとの比較表</td><td>比較構造は維持しつつ、「投資回収」の行を削除。「副業対応：可能」を「並行運営可能」へ言い換え</td></tr>
+      <tr><td>10</td><td><span class="risk-badge medium">中</span></td><td>INVESTMENT：「投資回収約14ヶ月」「1ヶ月目から黒字」</td><td>項目ごと削除し、加盟金・ロイヤリティのFC条件のみに絞る</td></tr>
+      <tr><td>11</td><td><span class="risk-badge medium">中</span></td><td>LP全体：特商法表記の不在</td><td>🔧 構造修正：事業者所在地・連絡先・支払条件・解約条件・プライバシーポリシー等の追加が必要（クライアント確認）</td></tr>
+      <tr><td>12</td><td><span class="risk-badge medium">中</span></td><td>LP全体：Special Ad Category（雇用）への自動分類リスク</td><td>🔧 構造修正：入稿時の運用指示。Metaが分類提案した場合は従う／ターゲティング制限を前提とした設計も準備</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ 総合評価テーブル ============ -->
+<div class="summary">
+  <h2>🎯 総合評価</h2>
+  <table>
+    <thead>
+      <tr><th></th><th>審査通過の確実性</th><th>アカウント停止リスク</th><th>評価理由・総評</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>修正前</strong></td>
+        <td><span class="risk-badge high">2/10</span></td>
+        <td><span class="risk-badge high">高</span></td>
+        <td>get-rich-quick条項該当（年収1,626万円・年間純利益542万円・1ヶ月目から黒字）、雇用機会のFraud条項該当（副業可・現場に出ない経営）、虚偽のリアルタイム閲覧者表示（19名閲覧中）の3点が、Metaが最も厳格に執行するFraud関連カテゴリに同時抵触。さらにPA違反・虚偽の希少性・特商法不備の懸念も重畳。<strong>1回の不承認に留まらず、繰り返しの修正再入稿でアカウント信頼度低下→広告アカウント制限→BM停止の連鎖リスクが現実的なレベル。</strong></td>
+      </tr>
+      <tr>
+        <td><strong>修正後</strong></td>
+        <td class="score-after"><span class="risk-badge low">7/10</span></td>
+        <td class="score-after"><span class="risk-badge low">低〜中</span></td>
+        <td>get-rich-quick該当箇所をすべてプロセス・事業構造の訴求に転換し、収益数値をLINE登録後の開示オファーに統合。PA違反をフレーミング転換で解消。虚偽の希少性・閲覧者表示を削除。<br><strong>残存リスク：</strong>①特商法表記の有無確認（No.11）、②Special Ad Category自動分類への対応準備（No.12）、③LP内の数値訴求（原価率8〜15%、リピート率65%、累計2万人）も入稿時のクリエイティブ全体トーンと組み合わせて再評価が必要。</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

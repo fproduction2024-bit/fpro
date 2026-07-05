@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古橋 統合マスタープラン 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0e1a;--surface:#111827;--surface2:#1a2234;
+  --teal:#14b8a6;--teal2:#0d9488;--orange:#f97316;--orange2:#ea6c0a;
+  --purple:#8b5cf6;--pink:#ec4899;--gold:#f59e0b;
+  --text:#e2e8f0;--muted:#64748b;--border:#1e293b;
+}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh;overflow-x:hidden}
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 50%,#0f172a 100%);padding:60px 40px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(20,184,166,.2) 0%,transparent 70%)}
+.hero-badge{display:inline-block;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.4);color:var(--teal);padding:6px 18px;border-radius:20px;font-size:13px;letter-spacing:2px;margin-bottom:20px}
+.hero h1{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff 0%,var(--teal) 50%,var(--orange) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto 30px}
+.vision-box{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.4);border-radius:12px;padding:16px 32px;font-size:15px;color:var(--orange)}
+.vision-box strong{display:block;font-size:22px;font-weight:700;color:#fff;margin-top:4px}
+.container{max-width:1400px;margin:0 auto;padding:0 24px}
+section{padding:40px 0}
+.section-title{font-size:22px;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.section-title .dot{width:10px;height:10px;border-radius:50%;background:var(--teal)}
+
+/* GRID */
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.biz-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.biz-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.biz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.card-teal::before{background:linear-gradient(90deg,var(--teal),var(--teal2))}
+.card-orange::before{background:linear-gradient(90deg,var(--orange),var(--orange2))}
+.card-purple::before{background:linear-gradient(90deg,var(--purple),#6d28d9)}
+.card-pink::before{background:linear-gradient(90deg,var(--pink),#be185d)}
+.card-gold::before{background:linear-gradient(90deg,var(--gold),#d97706)}
+.biz-card .emoji{font-size:32px;margin-bottom:12px}
+.biz-card h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.biz-card .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.kpi-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.kpi{background:var(--surface2);border-radius:8px;padding:8px 12px;text-align:center;flex:1;min-width:80px}
+.kpi .val{font-size:16px;font-weight:700;color:var(--teal)}
+.kpi .lbl{font-size:10px;color:var(--muted);margin-top:2px}
+.card-orange .kpi .val{color:var(--orange)}
+.card-purple .kpi .val{color:var(--purple)}
+.card-pink .kpi .val{color:var(--pink)}
+.card-gold .kpi .val{color:var(--gold)}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px}
+.tag{background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.25);color:var(--teal);font-size:11px;padding:3px 10px;border-radius:20px}
+.card-orange .tag{background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.25);color:var(--orange)}
+.card-purple .tag{background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.25);color:var(--purple)}
+.card-pink .tag{background:rgba(236,72,153,.1);border-color:rgba(236,72,153,.25);color:var(--pink)}
+.card-gold .tag{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.25);color:var(--gold)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--teal),var(--orange))}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--teal)}
+.tl-q{font-size:12px;color:var(--teal);font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.tl-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.tl-items{display:flex;flex-wrap:wrap;gap:6px}
+.tl-tag{background:var(--surface2);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--muted)}
+
+/* ROI TABLE */
+.roi-table{width:100%;border-collapse:collapse;font-size:14px}
+.roi-table th{background:var(--surface2);padding:12px 16px;text-align:left;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.roi-table td{padding:14px 16px;border-bottom:1px solid var(--border)}
+.roi-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--teal)}
+.roi-val{color:var(--orange);font-weight:700}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.pillar{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.pillar .num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 12px}
+.pillar h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.pillar p{font-size:12px;color:var(--muted)}
+
+/* FINAL VISION */
+.vision-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.vision-card{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center}
+.vision-card .icon{font-size:40px;margin-bottom:12px}
+.vision-card h3{font-size:28px;font-weight:900;margin-bottom:6px}
+.vision-card p{color:var(--muted);font-size:14px}
+
+footer{text-align:center;padding:40px;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">MASTER PLAN 2026</div>
+  <h1>古橋 統合マスタープラン</h1>
+  <p>タングルシード・リッツプロ・プロライン・Brain — すべての事業を一枚に</p>
+  <div class="vision-box">
+    古橋さんの最上位ビジョン
+    <strong>「自分の半径50mの人が幸せで前に向かっている状態」年利1億円・週5日休日</strong>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 事業別概要 -->
+  <section>
+    <div class="section-title"><div class="dot"></div>事業ポートフォリオ</div>
+    <div class="biz-grid">
+
+      <!-- タングルシード -->
+      <div class="biz-card card-teal">
+        <div class="emoji">🌿</div>
+        <h3>タングルシード</h3>
+        <div class="sub">ゼンタングル × メンタルウェルネス</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">7,000万</div><div class="lbl">現年商</div></div>
+          <div class="kpi"><div class="val">1億+</div><div class="lbl">2026目標</div></div>
+          <div class="kpi"><div class="val">5億</div><div class="lbl">3年資産</div></div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">JV集客60%化</span>
+          <span class="tag">YouTube×AI</span>
+          <span class="tag">サブスク月3,000円</span>
+          <span class="tag">6月大型イベント</span>
+        </div>
+      </div>
+
+      <!-- リッツプロ -->
+      <div class="biz-card card-orange">
+        <div class="emoji">🏢</div>
+        <h3>リッツプロ</h3>
+        <div class="sub">FC本部構築支援・M&A出口設計</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">250万</div><div class="lbl">月額顧問料</div></div>
+          <div class="kpi"><div class="val">7社+</div><div class="lbl">支援中</div></div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">ON Salon FC</span>
+          <span class="tag">KLF</span>
+          <span class="tag">Birth小林さん</span>
+          <span class="tag">山本さん</span>
+          <span class="tag">M&A出口</span>
+        </div>
+      </div>
+
+      <!-- プロライン -->
+      <div class="biz-card card-purple">
+        <div class="emoji">📊</div>
+        <h3>プロライン事業</h3>
+        <div class="sub">データマーケティング × 自動化</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">2,300万</div><div class="lbl">現月商</div></div>
+          <div class="kpi"><div class="val">3,000万</div><div class="lbl">H2目標</div></div>
+          <div class="kpi"><div class="val">1,000万</div><div class="lbl">月利益目標</div></div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Brainファネル</span>
+          <span class="tag">YOLO's連携</span>
+          <span class="tag">構築代行</span>
+          <span class="tag">講師研修</span>
+        </div>
+      </div>
+
+      <!-- Brain/ファネル事業 -->
+      <div class="biz-card card-pink">
+        <div class="emoji">🧠</div>
+        <h3>Brain コミット</h3>
+        <div class="sub">セールスファネル × コンテンツ制作</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">4話+VSL</div><div class="lbl">動画構成</div></div>
+          <div class="kpi"><div class="val">制作中</div><div class="lbl">ステータス</div></div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">動画台本完成</span>
+          <span class="tag">セールスレター</span>
+          <span class="tag">LINEシナリオ</span>
+          <span class="tag">村上さん</span>
+        </div>
+      </div>
+
+      <!-- YOLO's/ITK -->
+      <div class="biz-card card-gold">
+        <div class="emoji">⚡</div>
+        <h3>YOLO's & ITK</h3>
+        <div class="sub">B2B採用マーケ × BPO</div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">150,000</div><div class="lbl">休眠リスト</div></div>
+          <div class="kpi"><div class="val">16M</div><div class="lbl">売上期待値</div></div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">YOLO REC</span>
+          <span class="tag">YOLO Guard</span>
+          <span class="tag">ITK再活性化</span>
+          <span class="tag">SMS施策</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2026年ロードマップ -->
+  <section>
+    <div class="section-title"><div class="dot"></div>2026年 統合ロードマップ</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+      <div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-q">Q1 (1〜3月) — 基盤構築</div>
+            <div class="tl-title">YouTube×AI立ち上げ・ステップ配信改善</div>
+            <div class="tl-items">
+              <span class="tl-tag">YouTube週3本投稿開始</span>
+              <span class="tl-tag">LINE購入率8%→10%</span>
+              <span class="tl-tag">Brainコミット台本制作</span>
+              <span class="tl-tag">リッツプロ新規契約</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-q">Q2 (4〜6月) — 拡大準備</div>
+            <div class="tl-title">JV交渉・サブスク準備・6月イベント開催</div>
+            <div class="tl-items">
+              <span class="tl-tag">月500リスト獲得</span>
+              <span class="tl-tag">JV5社以上交渉</span>
+              <span class="tl-tag">サブスクLP作成</span>
+              <span class="tl-tag">6月大型イベント🎉</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-q">Q3 (7〜9月) — 本格展開</div>
+            <div class="tl-title">サブスク500人達成・FC加盟店拡大</div>
+            <div class="tl-items">
+              <span class="tl-tag">サブスク7月ローンチ</span>
+              <span class="tl-tag">月700リスト</span>
+              <span class="tl-tag">ITK休眠リスト活性化</span>
+              <span class="tl-tag">プロライン月商3000万</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-q">Q4 (10〜12月) — 年末追い込み</div>
+            <div class="tl-title">サブスク1,000人・JV10社・利益1億</div>
+            <div class="tl-items">
+              <span class="tl-tag">年間1,500リスト達成</span>
+              <span class="tl-tag">JV10社稼働</span>
+              <span class="tl-tag">M&A検討開始</span>
+              <span class="tl-tag">年利1億達成🔥</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 投資×リターン表 -->
+      <div>
+        <div class="table-wrap">
+          <table class="roi-table">
+            <thead>
+              <tr>
+                <th>施策</th><th>投資額</th><th>期待売上増</th><th>ROI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>YouTube×AI</td><td>114万</td><td class="roi-val">750万</td><td>557%</td></tr>
+              <tr><td>既存事業最適化</td><td>0円</td><td class="roi-val">3,540万</td><td>∞</td></tr>
+              <tr><td>サブスク教室</td><td>50万</td><td class="roi-val">900万</td><td>1,710%</td></tr>
+              <tr><td>JV集客拡大</td><td>1,000万</td><td class="roi-val">1億+</td><td>1,000%+</td></tr>
+              <tr><td>Brainコミット</td><td>制作費</td><td class="roi-val">高単価</td><td>高</td></tr>
+              <tr><td><strong>合計</strong></td><td><strong>〜1,164万</strong></td><td><strong>1億5,000万+</strong></td><td><strong>—</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:12px;font-weight:700;letter-spacing:1px">タングルシード 集客比率 目標</div>
+          <div style="margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>JV (ジョイントベンチャー)</span><span style="color:var(--teal);font-weight:700">60%</span></div>
+            <div style="height:8px;background:var(--surface2);border-radius:4px"><div style="height:100%;width:60%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:4px"></div></div>
+          </div>
+          <div style="margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>リピート・紹介</span><span style="color:var(--orange);font-weight:700">25%</span></div>
+            <div style="height:8px;background:var(--surface2);border-radius:4px"><div style="height:100%;width:25%;background:linear-gradient(90deg,var(--orange),var(--orange2));border-radius:4px"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>広告 (現在は依存中)</span><span style="color:var(--muted);font-weight:700">15%</span></div>
+            <div style="height:8px;background:var(--surface2);border-radius:4px"><div style="height:100%;width:15%;background:var(--muted);border-radius:4px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- プロラインの5大施策 -->
+  <section>
+    <div class="section-title"><div class="dot"></div>プロライン 5大成長施策</div>
+    <div class="pillars">
+      <div class="pillar"><div class="num">1</div><h4>Brain Boosterファネル</h4><p>インフルエンサー向け高単価ファネル<br>30〜50万/成約</p></div>
+      <div class="pillar"><div class="num">2</div><h4>YOLO's B2B連携</h4><p>YOLO REC採用自動化<br>YOLO Guard BPO展開</p></div>
+      <div class="pillar"><div class="num">3</div><h4>講師研修・教育</h4><p>実装専門家を育成<br>新収益流を創出</p></div>
+      <div class="pillar"><div class="num">4</div><h4>勉強会ゲスト登壇</h4><p>高品質B2Bリード獲得<br>信頼ベースの販売</p></div>
+      <div class="pillar"><div class="num">5</div><h4>ハウスリストローンチ</h4><p>既存顧客へ構築代行<br>CAC=0で即売上</p></div>
+    </div>
+  </section>
+
+  <!-- 最終ビジョン -->
+  <section>
+    <div class="section-title"><div class="dot"></div>3年後ビジョン (2028)</div>
+    <div class="vision-row">
+      <div class="vision-card">
+        <div class="icon">💰</div>
+        <h3 style="color:var(--gold)">年利 1億円</h3>
+        <p>タングルシード × リッツプロ × プロライン<br>統合収益モデル</p>
+      </div>
+      <div class="vision-card">
+        <div class="icon">🏛️</div>
+        <h3 style="color:var(--teal)">資産 5億円</h3>
+        <p>M&A出口設計 × 株式価値<br>FC事業の戦略的売却</p>
+      </div>
+      <div class="vision-card">
+        <div class="icon">🌍</div>
+        <h3 style="color:var(--purple)">世界 10万人</h3>
+        <p>ゼンタングル × メンタルウェルネス<br>グローバルコミュニティ</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div style="font-size:24px;margin-bottom:8px">🌿</div>
+  古橋 統合マスタープラン 2026 — 作成: 2026年5月 by Antigravity<br>
+  <span style="color:var(--teal)">「自分の半径50mの人が幸せで前に向かっている状態」</span>
+</footer>
+
+</body>
+</html>

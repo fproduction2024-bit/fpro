@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>接客図解マップ — KLF スタッフマニュアル</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --mint: #0B6E4F;
+      --mint-light: #10896B;
+      --mint-pale: #E8F5F0;
+      --mint-mid: #C5E8DA;
+      --amber: #D97706;
+      --amber-pale: #FEF3C7;
+      --amber-light: #F59E0B;
+      --red: #DC2626;
+      --red-pale: #FEE2E2;
+      --red-light: #EF4444;
+      --slate: #1E293B;
+      --slate-mid: #334155;
+      --slate-light: #64748B;
+      --bg: #F1F5F2;
+      --card: #FFFFFF;
+      --blue: #1D4ED8;
+      --blue-pale: #DBEAFE;
+      --purple: #7C3AED;
+      --purple-pale: #EDE9FE;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--slate);
+      line-height: 1.6;
+    }
+
+    .top-bar {
+      background: linear-gradient(135deg, var(--mint) 0%, #0D8560 100%);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(11,110,79,.25);
+    }
+
+    .top-bar h1 { color: #fff; font-size: 22px; font-weight: 700; }
+    .top-bar .sub { color: rgba(255,255,255,.8); font-size: 13px; margin-top: 2px; }
+    .badge { background: var(--amber); color: #fff; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 36px 24px; }
+
+    /* Step nav */
+    .step-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 36px;
+    }
+
+    .step-btn {
+      flex-shrink: 0;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 2px solid var(--mint-mid);
+      background: var(--card);
+      color: var(--slate-mid);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: inherit;
+    }
+
+    .step-btn:hover { background: var(--mint-pale); border-color: var(--mint); color: var(--mint); }
+    .step-btn.active { background: var(--mint); border-color: var(--mint); color: #fff; }
+
+    /* Section title */
+    .sec-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--slate);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--mint-mid);
+    }
+
+    .sec-num {
+      width: 36px; height: 36px;
+      background: var(--mint);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      border: 1px solid var(--mint-mid);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 16px rgba(11,110,79,.07);
+    }
+
+    .card-title {
+      font-size: 16px; font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--slate);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* Balance diagram */
+    .balance-diagram {
+      display: grid;
+      grid-template-columns: 1fr 80px 1fr;
+      gap: 20px;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .balance-side {
+      background: var(--mint-pale);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .balance-side.bad { background: var(--red-pale); }
+
+    .balance-label {
+      font-size: 28px;
+      font-weight: 900;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .balance-label.ok { color: var(--mint); }
+    .balance-label.bad { color: var(--red); }
+
+    .balance-desc { font-size: 12px; color: var(--slate-light); margin-top: 4px; }
+
+    .balance-arrow {
+      text-align: center;
+      font-size: 32px;
+      color: var(--slate-light);
+    }
+
+    /* Bar visualization */
+    .bar-group { margin-bottom: 24px; }
+    .bar-group-title {
+      font-size: 13px; font-weight: 700; color: var(--slate-light);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .bar-row {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+    }
+
+    .bar-label { width: 60px; font-size: 13px; font-weight: 600; text-align: right; color: var(--slate-mid); }
+
+    .bar-track {
+      flex: 1; height: 32px; background: #F1F5F9;
+      border-radius: 8px; overflow: hidden; position: relative;
+    }
+
+    .bar-fill {
+      height: 100%; border-radius: 8px;
+      display: flex; align-items: center;
+      padding: 0 12px;
+      font-size: 13px; font-weight: 700; color: #fff;
+      transition: width 1s ease;
+    }
+
+    .bar-ok { background: linear-gradient(90deg, #10896B, #20B89A); }
+    .bar-warn { background: linear-gradient(90deg, #D97706, #FBBF24); }
+    .bar-bad { background: linear-gradient(90deg, #DC2626, #F87171); }
+
+    .bar-val { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 600; color: var(--slate-mid); }
+
+    /* Muscle theory cards */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .theory-card {
+      border-radius: 14px;
+      padding: 20px;
+      border: 2px solid transparent;
+    }
+
+    .theory-card.healthy { background: var(--mint-pale); border-color: var(--mint-mid); }
+    .theory-card.beef { background: var(--amber-pale); border-color: #FCD34D; }
+    .theory-card.sirloin { background: var(--red-pale); border-color: #FCA5A5; }
+
+    .theory-card .tc-emoji { font-size: 32px; margin-bottom: 8px; }
+    .theory-card .tc-name { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .theory-card .tc-desc { font-size: 13px; color: var(--slate-mid); line-height: 1.65; }
+    .theory-card .tc-state { font-size: 12px; font-weight: 700; margin-top: 8px; padding: 3px 10px; border-radius: 10px; display: inline-block; }
+    .badge-ok { background: var(--mint); color: #fff; }
+    .badge-warn { background: var(--amber); color: #fff; }
+    .badge-danger { background: var(--red); color: #fff; }
+
+    /* Age timeline */
+    .age-timeline {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .age-node {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .age-node::before {
+      content: '';
+      position: absolute;
+      top: 22px; left: 50%; right: -50%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--mint), var(--amber));
+      z-index: 0;
+    }
+
+    .age-node:last-child::before { display: none; }
+
+    .age-circle {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      margin: 0 auto 10px;
+      position: relative; z-index: 1;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    }
+
+    .age-circle.ok { background: var(--mint); color: #fff; }
+    .age-circle.warn { background: var(--amber); color: #fff; }
+    .age-circle.danger { background: var(--red); color: #fff; }
+
+    .age-label { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .age-desc { font-size: 11.5px; color: var(--slate-light); line-height: 1.5; }
+    .age-muscle { font-size: 18px; font-weight: 800; font-family: 'Inter', sans-serif; }
+    .age-muscle.ok { color: var(--mint); }
+    .age-muscle.warn { color: var(--amber); }
+    .age-muscle.danger { color: var(--red); }
+
+    /* Recovery steps */
+    .recovery-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .recovery-step {
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .recovery-step::after {
+      content: '→';
+      position: absolute;
+      right: -10px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: var(--slate-light);
+      z-index: 1;
+    }
+
+    .recovery-step:last-child::after { display: none; }
+
+    .rs-1 { background: #EFF6FF; border-color: #93C5FD; }
+    .rs-2 { background: var(--mint-pale); border-color: var(--mint-mid); }
+    .rs-3 { background: var(--amber-pale); border-color: #FCD34D; }
+    .rs-4 { background: var(--purple-pale); border-color: #C4B5FD; }
+
+    .rs-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .rs-1 .rs-num { background: var(--blue); }
+    .rs-2 .rs-num { background: var(--mint); }
+    .rs-3 .rs-num { background: var(--amber); }
+    .rs-4 .rs-num { background: var(--purple); }
+
+    .rs-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .rs-desc { font-size: 12px; color: var(--slate-light); line-height: 1.55; }
+
+    /* Can-do / Clinic table */
+    .cando-table {
+      width: 100%; border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .cando-table th {
+      padding: 12px 16px;
+      font-size: 13px; font-weight: 700;
+      text-align: center;
+      background: var(--mint);
+      color: #fff;
+    }
+
+    .cando-table th:first-child { background: var(--slate); text-align: left; border-radius: 10px 0 0 0; }
+    .cando-table th:last-child { border-radius: 0 10px 0 0; }
+
+    .cando-table td {
+      padding: 12px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--mint-mid);
+      vertical-align: middle;
+    }
+
+    .cando-table tr:last-child td { border-bottom: none; }
+    .cando-table tr:nth-child(even) td { background: #FAFFFE; }
+
+    .check-yes { color: var(--mint); font-weight: 700; font-size: 16px; }
+    .check-no { color: #CBD5E1; font-size: 16px; }
+    .check-clinic { color: var(--amber); font-weight: 700; font-size: 16px; }
+
+    .clinic-tag {
+      background: var(--mint-pale);
+      color: var(--mint);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 8px;
+      margin-left: 6px;
+    }
+
+    /* Goal direction */
+    .goal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .goal-card {
+      border-radius: 14px;
+      padding: 22px;
+      border: 2px solid transparent;
+    }
+
+    .goal-a { background: var(--blue-pale); border-color: #93C5FD; }
+    .goal-b { background: var(--red-pale); border-color: #FCA5A5; }
+    .goal-c { background: var(--purple-pale); border-color: #C4B5FD; }
+
+    .goal-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .goal-a .goal-label { color: var(--blue); }
+    .goal-b .goal-label { color: var(--red); }
+    .goal-c .goal-label { color: var(--purple); }
+
+    .goal-title { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .goal-flow { font-size: 13px; color: var(--slate-mid); }
+    .goal-flow span { font-weight: 700; }
+
+    /* Price add */
+    .price-add {
+      background: linear-gradient(135deg, var(--amber-pale), #FFF9ED);
+      border: 2px solid var(--amber-light);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .price-add .pa-icon { font-size: 36px; }
+    .price-add .pa-label { font-size: 13px; color: var(--amber); font-weight: 700; margin-bottom: 4px; }
+    .price-add .pa-value { font-size: 26px; font-weight: 800; font-family: 'Inter', sans-serif; color: var(--amber); }
+    .price-add .pa-desc { font-size: 13px; color: var(--slate-mid); }
+
+    /* Injury note */
+    .injury-box {
+      background: var(--red-pale);
+      border: 2px solid var(--red-light);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-top: 20px;
+    }
+
+    .injury-box .ib-title { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 12px; }
+
+    .injury-steps { list-style: none; }
+    .injury-steps li {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-bottom: 8px; font-size: 13.5px;
+    }
+
+    .injury-steps .is-num {
+      width: 22px; height: 22px;
+      background: var(--red); color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* Section visibility */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Diagram overview */
+    .diagram-overview {
+      background: var(--mint-pale);
+      border: 2px solid var(--mint-mid);
+      border-radius: 18px;
+      padding: 22px 28px;
+      margin-bottom: 28px;
+    }
+
+    .diagram-overview p {
+      font-size: 14px; color: var(--slate-mid); line-height: 1.75;
+    }
+
+    /* Handwritten note style */
+    .hw-note {
+      background: #FFFBEB;
+      border-left: 4px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      margin: 14px 0;
+      font-size: 13.5px;
+      color: var(--slate-mid);
+    }
+
+    .hw-note strong { color: var(--amber); }
+
+    /* Conversation trigger */
+    .conv-trigger {
+      background: var(--slate);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 12px 0;
+    }
+
+    .conv-trigger .ct-label { font-size: 11px; font-weight: 700; color: var(--mint-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .conv-trigger .ct-text { font-size: 14px; color: #fff; line-height: 1.65; }
+    .conv-trigger .ct-expected { font-size: 12.5px; color: #94A3B8; margin-top: 8px; }
+
+    /* Footer */
+    .footer {
+      margin-top: 60px;
+      padding: 30px 0 20px;
+      border-top: 1px solid var(--mint-mid);
+      text-align: center;
+      color: var(--slate-light);
+      font-size: 12px;
+    }
+
+    @media(max-width: 700px) {
+      .top-bar { padding: 16px 20px; }
+      .container { padding: 20px 16px; }
+      .recovery-steps { grid-template-columns: 1fr 1fr; }
+      .goal-grid { grid-template-columns: 1fr; }
+      .balance-diagram { grid-template-columns: 1fr; }
+      .balance-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <div>
+    <h1>🗺️ 接客図解マップ</h1>
+    <div class="sub">KLF スタッフ用 — 小林先生の手書き図を完全デジタル化</div>
+  </div>
+  <span class="badge">STAFF ONLY</span>
+</div>
+
+<div class="container">
+
+  <div class="diagram-overview">
+    <p>
+      このページは小林先生が接客中に手書きで描く説明図を、スタッフが再現できるようにデジタル化したものです。<br>
+      <strong>「絵に描きながら話す」ことが成約率90%の核心</strong> です。各ステップで図を描く動作を身につけましょう。
+    </p>
+  </div>
+
+  <!-- Step Navigation -->
+  <div class="step-nav">
+    <button class="step-btn active" onclick="showSection('s1', this)">① バランス崩壊の仕組み</button>
+    <button class="step-btn" onclick="showSection('s2', this)">② 筋肉劣化の3段階</button>
+    <button class="step-btn" onclick="showSection('s3', this)">③ 年齢と筋肉の低下</button>
+    <button class="step-btn" onclick="showSection('s4', this)">④ 回復の4ステップ</button>
+    <button class="step-btn" onclick="showSection('s5', this)">⑤ できること・できないこと</button>
+    <button class="step-btn" onclick="showSection('s6', this)">⑥ 怪我の豆知識</button>
+  </div>
+
+  <!-- S1: バランス崩壊の仕組み -->
+  <div id="s1" class="section active">
+    <div class="sec-title">
+      <div class="sec-num">①</div>
+      骨と筋肉のバランス崩壊の仕組み
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚖️ 10:10 → 10:4 のバランス変化</div>
+
+      <div class="balance-diagram">
+        <div class="balance-side">
+          <div class="balance-label ok">10 : 10</div>
+          <div style="margin-top: 8px; font-size: 14px; font-weight: 700; color: var(--mint);">理想の状態</div>
+          <div class="balance-desc" style="margin-top: 8px;">骨も筋肉も同等に体重を分担<br>歪みなし・痛みなし</div>
+          <div style="margin-top: 14px; text-align: left; font-size: 13px; color: var(--slate-mid);">
+            <div style="margin-bottom: 4px;">🦴 骨 ████████████ 10</div>
+            <div>💪 筋肉 ████████████ 10</div>
+          </div>
+        </div>
+        <div class="balance-arrow">➡️</div>
+        <div class="balance-side bad">
+          <div class="balance-label bad">10 : 4</div>
+          <div style="margin-top: 8px; font-size: 14px; font-weight: 700; color: var(--red);">劣化した状態</div>
+          <div class="balance-desc" style="margin-top: 8px;">筋肉が細く・硬くなり骨に過負荷<br>歪み・痛みが発生</div>
+          <div style="margin-top: 14px; text-align: left; font-size: 13px; color: var(--slate-mid);">
+            <div style="margin-bottom: 4px;">🦴 骨 ████████████ 10〜16（過負荷）</div>
+            <div>💪 筋肉 ████ 4〜8（低下）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hw-note">
+        <strong>【手書きのポイント】</strong> 丸を2つ描いて「骨」「筋」と書き、数字の変化を矢印で示す。患者に「どっちが長い？」と確認させながら描く。
+      </div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 接客トリガー</div>
+        <div class="ct-text">「この棒グラフで見ると、筋肉の数字が一番短い。ということはこの筋肉で体重と体脂肪を全部支えてるってことなんですよ。」</div>
+        <div class="ct-expected">⟶ 予想反応：「えっ、そうなんですか」「大変ですね」</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📉 インボディのバランスパターン</div>
+
+      <div class="bar-group">
+        <div class="bar-group-title">❌ C型（逆矢印）— 最も多いパターン</div>
+        <div class="bar-row">
+          <div class="bar-label">体重</div>
+          <div class="bar-track">
+            <div class="bar-fill bar-ok" style="width: 72%">72kg相当</div>
+            <div class="bar-val">標準</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">筋肉量</div>
+          <div class="bar-track">
+            <div class="bar-fill bar-bad" style="width: 48%">48%</div>
+            <div class="bar-val">⚠ 低い</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">体脂肪</div>
+          <div class="bar-track">
+            <div class="bar-fill bar-warn" style="width: 88%">88%</div>
+            <div class="bar-val">⚠ 高い</div>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--red); font-weight: 600; margin-top: 10px; padding: 10px 14px; background: var(--red-pale); border-radius: 8px;">
+          → 筋肉が最も短い = 少ない筋肉で全体を支えている = 常に100%以上の負担
+        </div>
+      </div>
+
+      <div class="bar-group">
+        <div class="bar-group-title">✅ 理想型 — 治療のゴールイメージ</div>
+        <div class="bar-row">
+          <div class="bar-label">体重</div>
+          <div class="bar-track"><div class="bar-fill bar-ok" style="width: 66%">標準</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">筋肉量</div>
+          <div class="bar-track"><div class="bar-fill bar-ok" style="width: 68%">標準</div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">体脂肪</div>
+          <div class="bar-track"><div class="bar-fill bar-ok" style="width: 64%">標準</div></div>
+        </div>
+        <div style="font-size: 13px; color: var(--mint); font-weight: 600; margin-top: 10px; padding: 10px 14px; background: var(--mint-pale); border-radius: 8px;">
+          → 3本の棒がほぼ揃っている状態。負担が均等で痛みが出にくい。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: 筋肉劣化の3段階 -->
+  <div id="s2" class="section">
+    <div class="sec-title">
+      <div class="sec-num">②</div>
+      筋肉劣化の3段階（ビーフジャーキー→サーロイン）
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-card healthy">
+        <div class="tc-emoji">💪</div>
+        <span class="tc-state badge-ok">① 健康な状態</span>
+        <div class="tc-name" style="margin-top: 8px;">太く・柔らかい筋肉</div>
+        <div class="tc-desc">
+          新品の輪ゴムのように、<strong>引っ張ると伸びる</strong>。<br>
+          骨と筋肉が10:10でバランスしていて怪我しにくい。
+        </div>
+      </div>
+
+      <div class="theory-card beef">
+        <div class="tc-emoji">🥩</div>
+        <span class="tc-state badge-warn">② ビーフジャーキー化</span>
+        <div class="tc-name" style="margin-top: 8px;">細く・硬くなった筋肉</div>
+        <div class="tc-desc">
+          古い輪ゴムのように、<strong>引っ張るとちぎれる</strong>。<br>
+          運動会で走ったおじさんが肉離れするのはこの状態。<br>
+          <strong>20歳以降に年1%ずつ低下</strong>していく。
+        </div>
+      </div>
+
+      <div class="theory-card sirloin">
+        <div class="tc-emoji">🥩✨</div>
+        <span class="tc-state badge-danger">③ サーロインステーキ現象</span>
+        <div class="tc-name" style="margin-top: 8px;">筋肉の中に脂肪が入り込む</div>
+        <div class="tc-desc">
+          細く硬くなった筋肉に脂肪がまとわりつく。<br>
+          霜降り肉のように<strong>筋肉の質が最も悪い状態</strong>。<br>
+          体重が増えているのに体が支えられなくなる。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔗 劣化の連鎖を患者に説明する流れ</div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 ステップ1：筋肉が落ちた実感を引き出す</div>
+        <div class="ct-text">「○○さん、昔と比べて筋肉落ちたなって自覚ありますか？」</div>
+        <div class="ct-expected">⟶ 予想反応：だいたい「あります」と答える</div>
+      </div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 ステップ2：輪ゴムの比喩</div>
+        <div class="ct-text">「新品の輪ゴムって引っ張ると伸びるでしょ？古くなった輪ゴムって引っ張るとどうなりますか？」</div>
+        <div class="ct-expected">⟶ 予想反応：「切れる」「ちぎれる」</div>
+      </div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 ステップ3：体重の変化と脂肪の増加</div>
+        <div class="ct-text">「20歳と比べて体重はどうですか？増えてる方多いんですけど…<br>筋肉が落ちて体重が増えているってことは、何が増えてるかわかりますか？」</div>
+        <div class="ct-expected">⟶ 予想反応：「脂肪」→「そうです！それでサーロイン現象が起きて…」と続ける</div>
+      </div>
+
+      <div class="hw-note">
+        <strong>【手書きのポイント】</strong> 丸を描いて「太くて柔らかい」→ 小さい丸に「細く硬い（ビーフ）」→ 丸に点々で「サーロイン（霜降り）」という3段階の絵を描く
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: 年齢と筋肉の低下 -->
+  <div id="s3" class="section">
+    <div class="sec-title">
+      <div class="sec-num">③</div>
+      年齢・出産による筋肉低下メカニズム（20歳の壁）
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 20歳前後で起きる「疲れの質の変化」</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+        <div style="background: var(--blue-pale); border-radius: 12px; padding: 18px; border: 2px solid #93C5FD; text-align: center;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 8px;">〜20歳</div>
+          <div style="font-size: 28px; margin-bottom: 8px;">🏃</div>
+          <div style="font-size: 15px; font-weight: 700;">肉体疲労</div>
+          <div style="font-size: 12.5px; color: var(--slate-mid); margin-top: 6px; line-height: 1.5;">
+            体育・部活・スポーツで<br>嫌でも体を動かしていた。<br>筋肉を常に使っていた。
+          </div>
+        </div>
+        <div style="background: var(--amber-pale); border-radius: 12px; padding: 18px; border: 2px solid #FCD34D; text-align: center;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--amber); margin-bottom: 8px;">20歳〜</div>
+          <div style="font-size: 28px; margin-bottom: 8px;">💻</div>
+          <div style="font-size: 15px; font-weight: 700;">脳疲労</div>
+          <div style="font-size: 12.5px; color: var(--slate-mid); margin-top: 6px; line-height: 1.5;">
+            デスクワーク・子育てで<br>頭は疲れても体は動かない。<br>筋肉が使われなくなっていく。
+          </div>
+        </div>
+      </div>
+
+      <div style="background: var(--red-pale); border-radius: 12px; padding: 18px; border: 2px solid #FCA5A5; margin-top: 8px;">
+        <div style="font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: 12px;">📉 筋肉低下の速度</div>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+          <div style="text-align: center; flex: 1; min-width: 120px;">
+            <div style="font-size: 32px; font-weight: 900; font-family: 'Inter', sans-serif; color: var(--slate);">1%<span style="font-size: 16px;">/年</span></div>
+            <div style="font-size: 13px; color: var(--slate-light);">20歳以降の一般的な低下</div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 120px;">
+            <div style="font-size: 32px; font-weight: 900; font-family: 'Inter', sans-serif; color: var(--red);">3〜5%</div>
+            <div style="font-size: 13px; color: var(--slate-light);">出産1回あたりの追加低下</div>
+          </div>
+          <div style="text-align: center; flex: 1; min-width: 120px;">
+            <div style="font-size: 32px; font-weight: 900; font-family: 'Inter', sans-serif; color: var(--amber);">30代</div>
+            <div style="font-size: 13px; color: var(--slate-light);">出産2回なら−10〜13%<br>に達していることも</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🗣️ 患者に共感を引き出す確認トーク</div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 確認する</div>
+        <div class="ct-text">「○○さんって昔より筋肉落ちたって自覚ありますか？<br>20代の頃と比べて体型とか体の感じって変わりましたか？」</div>
+        <div class="ct-expected">⟶ 予想反応：「あります」「胃下垂みたいになった」「体重は同じでも締まりがない」</div>
+      </div>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 出産患者への応用</div>
+        <div class="ct-text">「出産すると一般的に3〜5%筋肉が落ちると言われてるんですよ。<br>○○さん、○人産んでらっしゃるとすると…合計で〇〇%落ちてる可能性があります。<br>それに加えて年1%ずつ落ちてるんで、今の数字が出て当然なんですね。」</div>
+        <div class="ct-expected">⟶ 予想反応：「そんなに落ちるんですね」「それで痛みが出るんですか」</div>
+      </div>
+
+      <div class="hw-note">
+        <strong>【手書きのポイント】</strong> 「肉体｜脳」と縦線で分けた表を書いて、20歳で矢印を示す。左右で疲れの質が変わる絵を描く。
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: 回復の4ステップ -->
+  <div id="s4" class="section">
+    <div class="sec-title">
+      <div class="sec-num">④</div>
+      回復の4ステップ（治療の全体像）
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔄 治療は4段階で進める</div>
+
+      <div class="recovery-steps">
+        <div class="recovery-step rs-1">
+          <div class="rs-num">①</div>
+          <div class="rs-title">歪みを取る</div>
+          <div class="rs-desc">骨盤矯正で左右差をゼロにする。これが最初の土台。</div>
+        </div>
+        <div class="recovery-step rs-2">
+          <div class="rs-num">②</div>
+          <div class="rs-title">柔らかくする</div>
+          <div class="rs-desc">固まったビーフジャーキー筋肉を柔らかく戻す施術。</div>
+        </div>
+        <div class="recovery-step rs-3">
+          <div class="rs-num">③</div>
+          <div class="rs-title">太くする</div>
+          <div class="rs-desc">EMS・筋トレ・タンパク質で筋肉量を増やす段階。</div>
+        </div>
+        <div class="recovery-step rs-4">
+          <div class="rs-num">④</div>
+          <div class="rs-title">維持する</div>
+          <div class="rs-desc">メンテナンスで崩れないよう定期的にケアする。</div>
+        </div>
+      </div>
+
+      <div class="hw-note">
+        <strong>【手書きのポイント】</strong> 体の輪郭（楕円）を描いて左右の足長さが違う絵 → 歪みを表現。その後の変化を矢印で示す。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🎯 ゴールは「患者自身が選ぶ」設計</div>
+
+      <div class="goal-grid">
+        <div class="goal-card goal-a">
+          <div class="goal-label">方向性 A</div>
+          <div class="goal-title">💪 筋肉をつける方向</div>
+          <div class="goal-flow">
+            <span>歪みを取る</span> → <span>柔らかく</span> → <span>太くする</span> → <span>維持</span>
+          </div>
+          <div style="font-size: 12.5px; color: var(--slate-light); margin-top: 10px;">主に整体・骨盤矯正コース。抱っこ等の負担に耐えられる体を作る。</div>
+        </div>
+        <div class="goal-card goal-b">
+          <div class="goal-label">方向性 B</div>
+          <div class="goal-title">🔥 脂肪を減らす方向</div>
+          <div class="goal-flow">
+            <span>歪みを取る</span> → <span>体幹の脂肪を燃やす</span> → <span>維持</span>
+          </div>
+          <div style="font-size: 12.5px; color: var(--slate-light); margin-top: 10px;">EMS・ダイエット施術コース。隠れ肥満・体幹脂肪を重点的に落とす。</div>
+        </div>
+      </div>
+
+      <div style="background: var(--purple-pale); border: 2px solid #C4B5FD; border-radius: 12px; padding: 18px; margin-top: 4px;">
+        <div style="font-size: 13px; font-weight: 700; color: var(--purple); margin-bottom: 8px;">C：両方同時</div>
+        <div style="font-size: 13px; color: var(--slate-mid);">歪みを取りながら筋肉をつけ、脂肪も減らしていく。中長期のフルコース。</div>
+      </div>
+
+      <div class="conv-trigger" style="margin-top: 16px;">
+        <div class="ct-label">💬 ゴール選択を渡すトーク</div>
+        <div class="ct-text">「早く終わりたい人は短期で卒業できます。ただ再発しやすい。<br>再発したくないなら中長期でしっかりやっていく。<br>どちらにするかは○○さん自身で決めてください。<br>僕らがゴールを決めると『来させられてる感』になっちゃうので。」</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💴 産後骨盤矯正の追加オプション</div>
+
+      <div class="price-add">
+        <div class="pa-icon">🦴</div>
+        <div>
+          <div class="pa-label">初回体験追加オプション</div>
+          <div class="pa-value">+ ¥3,300</div>
+          <div class="pa-desc">本日のホットペッパー予約メニューに産後骨盤矯正を追加。<br>広がった骨盤を閉める「締め」の施術を同日に体験できる。</div>
+        </div>
+      </div>
+
+      <div class="hw-note">
+        <strong>【提案タイミング】</strong> ゴール説明の後、施術前に提案する。「今日ちょうどこちらも体験できるのでお勧めです」と自然に繋げる。
+      </div>
+    </div>
+  </div>
+
+  <!-- S5: できること・できないこと -->
+  <div id="s5" class="section">
+    <div class="sec-title">
+      <div class="sec-num">⑤</div>
+      自分でできること vs 院でしかできないこと
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 「任せてもらう理由」を論理的に説明する</div>
+
+      <table class="cando-table">
+        <thead>
+          <tr>
+            <th>やること</th>
+            <th>自分でできる</th>
+            <th>院でできる（任せて）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>①歪みを取る</strong><br><span style="font-size: 12px; color: var(--slate-light);">骨盤矯正・左右差を揃える</span></td>
+            <td style="text-align: center;"><span class="check-no">✕ できない</span></td>
+            <td style="text-align: center;"><span class="check-clinic">✅ 骨盤矯正</span></td>
+          </tr>
+          <tr>
+            <td><strong>②柔らかくする</strong><br><span style="font-size: 12px; color: var(--slate-light);">固まった筋肉をほぐす</span></td>
+            <td>✅ ストレッチ・お風呂・水分</td>
+            <td style="text-align: center;"><span class="check-clinic">✅ マッサージ・電気治療</span></td>
+          </tr>
+          <tr>
+            <td><strong>③太くする</strong><br><span style="font-size: 12px; color: var(--slate-light);">筋肉量を増やす</span></td>
+            <td>✅ 筋トレ（ガソリン＝タンパク質も必要）</td>
+            <td style="text-align: center;"><span class="check-clinic">✅ EMS機器</span></td>
+          </tr>
+          <tr>
+            <td><strong>④栄養を入れる</strong><br><span style="font-size: 12px; color: var(--slate-light);">筋肉の材料を供給</span></td>
+            <td>✅ タンパク質食・プロテイン</td>
+            <td style="text-align: center;"><span class="check-clinic">✅ DNA検査・サプリ指導</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="conv-trigger">
+        <div class="ct-label">💬 「歪みは自分では無理」のセリフ</div>
+        <div class="ct-text">「歪みを取るのは正直自分じゃできないんですよ。<br>僕自身も自分ではできないんで、ここは任せてもらう部分です。」</div>
+      </div>
+
+      <div class="conv-trigger" style="margin-top: 8px;">
+        <div class="ct-label">💬 「ガソリンのない車」の比喩</div>
+        <div class="ct-text">「筋トレしながらマクドでポテチ食べてたら筋肉つきますか？<br>（つかない）→ じゃあ筋肉をつけるにはガソリンが必要で、そのガソリンがタンパク質です。」</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔄 ゴールのすり替え戦略（継続率の秘密）</div>
+
+      <div style="display: grid; grid-template-columns: 1fr 60px 1fr; gap: 12px; align-items: center; margin: 16px 0;">
+        <div style="background: var(--mint-pale); border: 2px solid var(--mint-mid); border-radius: 12px; padding: 16px; text-align: center;">
+          <div style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">「締める」ゴール</div>
+          <div style="font-size: 12px; color: var(--slate-light);">産後骨盤矯正<br>3ヶ月で達成可能</div>
+          <div style="margin-top: 10px; background: #FEF3C7; border-radius: 8px; padding: 8px; font-size: 12px; color: var(--amber);">完成したら「終わり」と思われる</div>
+        </div>
+        <div style="text-align: center; font-size: 24px; color: var(--mint);">→</div>
+        <div style="background: var(--amber-pale); border: 2px solid var(--amber-light); border-radius: 12px; padding: 16px; text-align: center;">
+          <div style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">「整える」ゴール</div>
+          <div style="font-size: 12px; color: var(--slate-light);">骨盤矯正・メンテ<br>ゴールなし → ずっと通える</div>
+          <div style="margin-top: 10px; background: var(--mint-pale); border-radius: 8px; padding: 8px; font-size: 12px; color: var(--mint);">「次の目標」を一緒に作る</div>
+        </div>
+      </div>
+
+      <div style="background: var(--slate); border-radius: 12px; padding: 18px; margin-top: 12px;">
+        <div style="color: #94A3B8; font-size: 12px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">継続率を高める頻度設計</div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <div style="background: var(--red); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;">週2〜3回</div>
+          <div style="color: #94A3B8;">→</div>
+          <div style="background: #475569; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;">週1回</div>
+          <div style="color: #94A3B8;">→</div>
+          <div style="background: #334155; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;">隔週</div>
+          <div style="color: #94A3B8;">→</div>
+          <div style="background: var(--mint); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;">月2回（安定）</div>
+        </div>
+        <div style="color: #64748B; font-size: 12px; margin-top: 10px;">頻度が下がるほど料金も下がる → 患者にとってお得感 → 解約しにくくなる</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6: 怪我の豆知識 -->
+  <div id="s6" class="section">
+    <div class="sec-title">
+      <div class="sec-num">⑥</div>
+      怪我の豆知識トーク（急性期の患者向け）
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚡ 急性期（最初の3日間）のNG行動</div>
+
+      <div class="injury-box">
+        <div class="ib-title">🚫 怪我後3日間は絶対NG</div>
+        <ul class="injury-steps">
+          <li>
+            <div class="is-num">1</div>
+            <div>
+              <strong>温める</strong>こと<br>
+              <span style="font-size: 12.5px; color: #7F7F7F;">炎症の初期は冷やすのが正解。温めると腫れが悪化する。</span>
+            </div>
+          </li>
+          <li>
+            <div class="is-num">2</div>
+            <div>
+              <strong>お酒</strong>を飲むこと<br>
+              <span style="font-size: 12.5px; color: #7F7F7F;">血行が促進されて内出血が広がってしまう。</span>
+            </div>
+          </li>
+          <li>
+            <div class="is-num">3</div>
+            <div>
+              <strong>痛い動作をわざとする</strong>（確認行動）<br>
+              <span style="font-size: 12.5px; color: #7F7F7F;">「どこが痛いかな」と動かすのもNG。安静が最優先。</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="conv-trigger" style="margin-top: 16px;">
+        <div class="ct-label">💬 接客トーク</div>
+        <div class="ct-text">「ピキッとなって痛くなったとき、中で筋肉が少し切れてる状態なんですよ。<br>最初の3日間だけはNGなことがあって、温めること・お酒・痛い動作の確認、この3つです。<br>3日間は冷やして安静。アドレナリンが出てるから最初は痛みが出にくいので、3日後から本格的に痛みが来ます。」</div>
+      </div>
+
+      <div style="background: var(--mint-pale); border: 2px solid var(--mint-mid); border-radius: 12px; padding: 18px; margin-top: 16px;">
+        <div style="font-size: 14px; font-weight: 700; color: var(--mint); margin-bottom: 10px;">✅ 院に来てからの流れ</div>
+        <div style="font-size: 13.5px; color: var(--slate-mid); line-height: 1.75;">
+          <strong>1. サポート再開</strong>（3日経過後、来院OK）<br>
+          <strong>2. 電気治療・マッサージ</strong>（血流を促して回復促進）<br>
+          <strong>3. EMS</strong>（筋肉の萎縮を防止・再生を促す）
+        </div>
+      </div>
+
+      <div class="hw-note" style="margin-top: 16px;">
+        <strong>【活用シーン】</strong> 急な怪我で来院した患者、「整骨院に来ていいタイミング」を聞かれた時、次回来院を促すクロージング説明で使う。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🩺 インボディ270 — FC必須機器</div>
+
+      <div style="background: var(--slate); border-radius: 14px; padding: 22px; color: #fff;">
+        <div style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--mint-light);">成約率を高める最重要ツール</div>
+        <div style="font-size: 13.5px; line-height: 1.85; color: #CBD5E1;">
+          インボディがあると…<br>
+          ✅ 一般論ではなく「あなたの数字」で話せる<br>
+          ✅ 体のアンバランスを視覚で証明できる<br>
+          ✅ 患者が「なるほど」と納得する瞬間を作れる<br>
+          ✅ 治療前後の変化を数値で見せられる
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;">
+          <div style="background: rgba(255,255,255,.1); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 12px; color: #94A3B8; margin-bottom: 4px;">FC推奨（中古）</div>
+            <div style="font-size: 22px; font-weight: 800; font-family: 'Inter', sans-serif; color: #FBBF24;">¥40万〜</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">InBody 270</div>
+          </div>
+          <div style="background: rgba(255,255,255,.1); border-radius: 10px; padding: 14px;">
+            <div style="font-size: 12px; color: #94A3B8; margin-bottom: 4px;">本店使用機種</div>
+            <div style="font-size: 22px; font-weight: 800; font-family: 'Inter', sans-serif; color: #94A3B8;">¥165万〜</div>
+            <div style="font-size: 12px; color: #94A3B8; margin-top: 4px;">InBody 570（中古）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    KLF スタッフ向けマニュアル — 接客図解マップ｜リッツプロ制作<br>
+    2026年4月22日 小林先生の手書き図をデジタル化｜無断転載禁止
+  </div>
+
+</div>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 120, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

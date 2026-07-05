@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>月額制 店舗採用パッケージ｜来店客がスタッフ候補になる</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #E8650A;
+            --orange-light: #FF8C33;
+            --orange-dark: #C5520A;
+            --orange-bg: #FFF7F0;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F8F9FB;
+            --text-dark: #1a1a2e;
+            --text-body: #444;
+            --text-light: #6b7280;
+            --green: #10B981;
+            --red: #EF4444;
+            --teal: #0C4A4E;
+            --radius: 12px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.06)
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            color: var(--text-body);
+            line-height: 1.8;
+            background: var(--bg-white);
+            -webkit-font-smoothing: antialiased
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #0C4A4E 0%, #145B60 50%, #1A6B70 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(232, 101, 10, 0.15) 0%, transparent 70%);
+            border-radius: 50%
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 101, 10, 0.2);
+            border: 1px solid rgba(232, 101, 10, 0.5);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--orange-light);
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px
+        }
+
+        .hero h1 span {
+            color: var(--orange-light)
+        }
+
+        .hero p.sub {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 300;
+            max-width: 640px
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 2
+        }
+
+        .summary-card {
+            background: var(--bg-white);
+            border: 1px solid #eee;
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .summary-card .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1
+        }
+
+        .summary-card .num span {
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        .summary-card .label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 8px
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0
+        }
+
+        section.alt {
+            background: var(--bg-gray)
+        }
+
+        .sec-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .sec-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.4
+        }
+
+        .sec-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            max-width: 640px;
+            margin-bottom: 40px
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0
+        }
+
+        .card-icon.orange {
+            background: rgba(232, 101, 10, 0.1);
+            color: var(--orange)
+        }
+
+        .card-icon.green {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green)
+        }
+
+        .card-icon.red {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--red)
+        }
+
+        .card-icon.teal {
+            background: rgba(12, 74, 78, 0.1);
+            color: var(--teal)
+        }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark)
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.7
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            font-size: 14px
+        }
+
+        thead {
+            background: var(--teal);
+            color: #fff
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-gray)
+        }
+
+        tbody tr:hover {
+            background: var(--orange-bg)
+        }
+
+        td.highlight {
+            font-weight: 700;
+            color: var(--orange)
+        }
+
+        td.green {
+            font-weight: 700;
+            color: var(--green)
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.2);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            margin: 24px 0
+        }
+
+        .highlight-box h4 {
+            color: var(--orange);
+            font-size: 16px;
+            margin-bottom: 12px
+        }
+
+        .highlight-box p {
+            font-size: 14px;
+            line-height: 1.8
+        }
+
+        /* Flow */
+        .flow-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-width: 700px;
+            margin: 0 auto 32px
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--orange);
+            background: var(--bg-gray)
+        }
+
+        .flow-step.green-border {
+            border-left-color: var(--green)
+        }
+
+        .flow-step.teal-border {
+            border-left-color: var(--teal)
+        }
+
+        .flow-step .step-icon {
+            font-size: 24px;
+            flex-shrink: 0
+        }
+
+        .flow-step .step-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-dark)
+        }
+
+        .flow-step .step-detail {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+            font-weight: 400
+        }
+
+        .flow-arrow-down {
+            text-align: center;
+            color: var(--orange);
+            font-size: 20px;
+            margin: 2px 0
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            gap: 20px;
+            margin: 32px 0
+        }
+
+        .step-item {
+            flex: 1;
+            text-align: center;
+            position: relative
+        }
+
+        .step-num-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin: 0 auto 12px
+        }
+
+        .step-item h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px
+        }
+
+        .step-item p {
+            font-size: 13px;
+            color: var(--text-light)
+        }
+
+        .step-item::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 14px;
+            font-size: 20px;
+            color: var(--text-light)
+        }
+
+        .step-item:last-child::after {
+            display: none
+        }
+
+        /* Compare */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 40px 1fr;
+            gap: 0;
+            align-items: stretch;
+            margin-bottom: 32px
+        }
+
+        .compare-box {
+            padding: 28px;
+            border-radius: var(--radius)
+        }
+
+        .compare-box.before {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb
+        }
+
+        .compare-box.after {
+            background: var(--orange-bg);
+            border: 1px solid rgba(232, 101, 10, 0.3)
+        }
+
+        .compare-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--orange)
+        }
+
+        .compare-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #e5e7eb
+        }
+
+        .compare-box.after .compare-item {
+            border-bottom-color: rgba(232, 101, 10, 0.15)
+        }
+
+        /* ROI */
+        .roi-box {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--radius);
+            padding: 36px;
+            text-align: center;
+            margin: 32px 0
+        }
+
+        .roi-box .roi-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--green)
+        }
+
+        .roi-box .roi-label {
+            font-size: 16px;
+            margin-top: 8px;
+            color: var(--text-body)
+        }
+
+        /* Pricing tiers */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 32px 0
+        }
+
+        .tier-card {
+            background: var(--bg-white);
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform .2s, box-shadow .2s
+        }
+
+        .tier-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1)
+        }
+
+        .tier-card.recommended {
+            border: 2px solid var(--orange);
+            position: relative
+        }
+
+        .tier-card.recommended::before {
+            content: 'おすすめ';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--orange);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 14px;
+            border-radius: 20px
+        }
+
+        .tier-name {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 4px
+        }
+
+        .tier-price {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--orange);
+            margin: 12px 0
+        }
+
+        .tier-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-light)
+        }
+
+        .tier-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            line-height: 1.6
+        }
+
+        .tier-features {
+            list-style: none;
+            text-align: left;
+            font-size: 13px
+        }
+
+        .tier-features li {
+            padding: 6px 0;
+            border-bottom: 1px solid #f0f0f0
+        }
+
+        .tier-features li::before {
+            content: '✓ ';
+            color: var(--green);
+            font-weight: 700
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--teal);
+            padding: 60px 0;
+            text-align: center;
+            color: #fff
+        }
+
+        .cta h2 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px
+        }
+
+        .cta p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 32px
+        }
+
+        /* Responsive */
+        @media(max-width:768px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .compare-grid {
+                grid-template-columns: 1fr;
+                gap: 12px
+            }
+
+            .compare-arrow {
+                transform: rotate(90deg)
+            }
+
+            .steps {
+                flex-direction: column
+            }
+
+            .step-item::after {
+                display: none
+            }
+
+            .hero h1 {
+                font-size: 26px
+            }
+
+            .grid-2,
+            .grid-3,
+            .tier-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="container">
+            <div class="hero-badge">RECRUITMENT PACKAGE</div>
+            <h1>来店客の中から<br><span>次のスタッフ候補</span>を見つける</h1>
+            <p class="sub">月額制の店舗採用パッケージ。LINE×クーポンで来店頻度を上げながら、広告費ゼロで採用母集団を自動形成する仕組みをご提供します。</p>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="container">
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="num">0<span>円</span></div>
+                <div class="label">採用母集団の<br>獲得コスト</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">1.5<span>万〜</span></div>
+                <div class="label">月額料金<br>（税別）</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">100<span>〜300人</span></div>
+                <div class="label">月間LINE登録<br>見込み数</div>
+            </div>
+            <div class="summary-card">
+                <div class="num">1.3<span>倍</span></div>
+                <div class="label">導入後の<br>来店頻度向上</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 課題 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">problem</div>
+            <div class="sec-title">飲食店の採用、こんな課題ありませんか？</div>
+            <div class="sec-desc">求人広告を出しても応募が来ない。来ても続かない。採用コストばかりかさんでいく——。</div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon red">💸</div>
+                        <h3>採用コストが高すぎる</h3>
+                    </div>
+                    <p>バイトル・タウンワーク等の求人広告に<strong>年間60〜90万円</strong>。<br>
+                        採用単価は1人あたり<strong>5〜10万円</strong>以上。<br>
+                        しかも、広告をやめたら応募もゼロに戻る。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon red">👤</div>
+                        <h3>応募が来ても定着しない</h3>
+                    </div>
+                    <p>求人サイト経由の応募者は<strong>「なんとなく応募」</strong>が多い。<br>
+                        お店の雰囲気や人間関係を知らないまま入るから<strong>ミスマッチ</strong>が起きる。<br>
+                        結果、<strong>3ヶ月以内に辞める</strong>ケースが頻発。</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 でも、こんな経験はありませんか？</h4>
+                <p>「常連さんが友達を紹介してくれた」「お客さんが『ここで働きたい』と言ってくれた」——<br>
+                    実は<strong style="color:var(--orange)">最高の採用候補は、すでにお店に来ているお客さん</strong>の中にいます。<br>
+                    お店の雰囲気を知っている人が働くから定着率が高い。紹介だから採用コストもゼロ。<br>
+                    この「来店客からの採用」を<strong>仕組み化</strong>したのが、私たちのパッケージです。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ソリューション概要 -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">solution</div>
+            <div class="sec-title">解決策：LINE × 無限クーポン × 採用の3in1</div>
+            <div class="sec-desc">来店客にLINE登録してもらい、クーポンで来店頻度を上げる。そのLINEリストが、そのまま採用母集団になります。</div>
+
+            <div class="compare-grid">
+                <div class="compare-box before">
+                    <h4>❌ 従来の採用</h4>
+                    <div class="compare-item"><span>手段</span><span>求人広告（バイトル等）</span></div>
+                    <div class="compare-item"><span>費用</span><span style="color:var(--red)">年間60〜90万円</span></div>
+                    <div class="compare-item"><span>応募者の質</span><span>お店を知らない人</span></div>
+                    <div class="compare-item"><span>定着率</span><span style="color:var(--red)">低い（ミスマッチ多発）</span></div>
+                    <div class="compare-item"><span>広告停止後</span><span style="color:var(--red)">応募ゼロ</span></div>
+                </div>
+                <div class="compare-arrow">→</div>
+                <div class="compare-box after">
+                    <h4>✅ 本パッケージ</h4>
+                    <div class="compare-item"><span>手段</span><span>来店客のLINEリスト</span></div>
+                    <div class="compare-item"><span>費用</span><span
+                            style="color:var(--green);font-weight:700">月額1.5〜5万円</span></div>
+                    <div class="compare-item"><span>応募者の質</span><span style="color:var(--green)">お店のファン</span></div>
+                    <div class="compare-item"><span>定着率</span><span style="color:var(--green)">高い（雰囲気を知っている）</span>
+                    </div>
+                    <div class="compare-item"><span>退会後</span><span style="color:var(--green)">リストは資産として残る</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 仕組み：無限クーポン -->
+    <section>
+        <div class="container">
+            <div class="sec-label">how it works</div>
+            <div class="sec-title">「無限クーポン」施策の仕組み</div>
+            <div class="sec-desc">レジ横POPとスタッフの一声でLINE登録を促進。クーポンで来店頻度が上がり、LINEリストが自動で蓄積されます。</div>
+
+            <div class="flow-visual">
+                <div class="flow-step">
+                    <div class="step-icon">🏪</div>
+                    <div>
+                        <div class="step-name">レジ横にPOPを設置</div>
+                        <div class="step-detail">「今すぐLINE登録で今回のお会計から300円引き」</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step">
+                    <div class="step-icon">💬</div>
+                    <div>
+                        <div class="step-name">会計時にスタッフが一声かける</div>
+                        <div class="step-detail">「300円オフクーポン要りますか？」→ QRコード読み取り</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step green-border">
+                    <div class="step-icon">📱</div>
+                    <div>
+                        <div class="step-name">LINE登録 → クーポン自動配布</div>
+                        <div class="step-detail">プロラインで自動配信。次回来店時にもクーポンが届き、リピート促進</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step teal-border">
+                    <div class="step-icon">📊</div>
+                    <div>
+                        <div class="step-name">リスト蓄積 → 採用母集団が自動形成</div>
+                        <div class="step-detail">1店舗あたり月100〜300人のLINE登録。採用が必要になった時にリストへ配信するだけ</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡「300円引いたら利益なくならない？」にお答えします</h4>
+                <p>顧客単価1,300円 × 利益率20% = 260円 → 確かに1杯あたりは赤字に見えます。<br><br>
+                    <strong
+                        style="color:var(--orange)">しかし</strong>、家賃・人件費は固定費。月売上500万→550万に増えた場合、増分50万の原価は変動費（原材料費30%）のみ。<br>
+                    50万 × 70% = <strong style="color:var(--green)">35万円の追加純利益</strong>。<br>
+                    来店頻度が1.3倍になれば、クーポン値引き分を大きく上回る利益が生まれます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 採用時のLINE活用 -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">recruitment</div>
+            <div class="sec-title">採用が必要になったら：LINEで即リーチ</div>
+            <div class="sec-desc">蓄積されたLINEリストに求人メッセージを配信。お店のファンだから応募の質が全然違います。</div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon orange">📢</div>
+                        <h3>LINE一斉配信で求人告知</h3>
+                    </div>
+                    <p>LINEリスト500人に「スタッフ募集」を配信 →<br>
+                        <strong>開封率60〜80%</strong>（メールの10倍以上）。<br>
+                        求人広告費ゼロで300人以上に情報が届きます。
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon green">👫</div>
+                        <h3>「知り合い紹介」の連鎖</h3>
+                    </div>
+                    <p>LINEを受け取った常連さんが<strong>友人・知人に共有</strong>。<br>
+                        「あのお店で働きない？」の口コミが自然発生。<br>
+                        お店を知っている人だから<strong>定着率が圧倒的に高い</strong>。</p>
+                </div>
+            </div>
+
+            <div class="roi-box">
+                <div style="font-size:14px;color:var(--text-light);margin-bottom:8px">求人広告 vs 本パッケージ</div>
+                <div class="roi-num">0<span style="font-size:28px">円</span></div>
+                <div class="roi-label">リストからの採用にかかる追加費用</div>
+                <p style="margin-top:12px;font-size:14px;color:var(--text-light)">
+                    バイトル等に年間60〜90万円かけていたコストが不要に。<br>さらに2店舗目出店時も、既存リストから採用できる。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金プラン -->
+    <section>
+        <div class="container">
+            <div class="sec-label">pricing</div>
+            <div class="sec-title">料金プラン</div>
+            <div class="sec-desc">お店の規模やニーズに合わせて3つのプランをご用意しています。</div>
+
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <div class="tier-name">梅プラン</div>
+                    <div class="tier-price">1.5<span>万円/月</span></div>
+                    <div class="tier-desc">来店頻度UPに特化<br>まずはここから始めたい方へ</div>
+                    <ul class="tier-features">
+                        <li>LINE公式アカウント構築</li>
+                        <li>無限クーポン設計・設定</li>
+                        <li>レジ横POP作成</li>
+                        <li>スタッフ向け声かけマニュアル</li>
+                        <li>月次レポート</li>
+                    </ul>
+                </div>
+                <div class="tier-card recommended">
+                    <div class="tier-name">竹プラン</div>
+                    <div class="tier-price">3<span>万円/月</span></div>
+                    <div class="tier-desc">来店頻度UP + Googleマップ対策<br>新規集客も強化したい方へ</div>
+                    <ul class="tier-features">
+                        <li>梅プランの全機能</li>
+                        <li>MEO対策（Googleマップ最適化）</li>
+                        <li>Googleマップ → LP → LINE導線構築</li>
+                        <li>口コミ返信代行</li>
+                        <li>月次レポート + 改善提案</li>
+                    </ul>
+                </div>
+                <div class="tier-card">
+                    <div class="tier-name">松プラン</div>
+                    <div class="tier-price">4.5<span>〜5万円/月</span></div>
+                    <div class="tier-desc">全方位型集客＋採用<br>本気でリスト構築したい方へ</div>
+                    <ul class="tier-features">
+                        <li>竹プランの全機能</li>
+                        <li>SNS運用代行（Instagram/TikTok）</li>
+                        <li>写真・動画制作</li>
+                        <li>広告運用</li>
+                        <li>初期構築費込み</li>
+                    </ul>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>施策</th>
+                        <th>何ができるか</th>
+                        <th>対応プラン</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="highlight">無限クーポン（LINE）</td>
+                        <td>来店頻度UP + LINEリスト蓄積 + 採用母集団形成</td>
+                        <td>全プラン</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">MEO（Googleマップ）</td>
+                        <td>「近くのラーメン」等の検索で上位表示 → 新規来店</td>
+                        <td>竹・松</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">SNS運用</td>
+                        <td>Instagram/TikTokでの認知拡大 → 新規来店</td>
+                        <td>松のみ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- MEOとの連携 -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">google maps</div>
+            <div class="sec-title">MEO（Googleマップ対策）との連携</div>
+            <div class="sec-desc">「ラーメン屋なのに自社LPを持つ」という逆転発想。Googleマップからの新規客もLINEリストに取り込みます。</div>
+
+            <div class="flow-visual">
+                <div class="flow-step teal-border">
+                    <div class="step-icon">🔍</div>
+                    <div>
+                        <div class="step-name">Googleマップで「近くのラーメン屋」と検索</div>
+                        <div class="step-detail">MEO最適化で上位3位以内に表示</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step">
+                    <div class="step-icon">🌐</div>
+                    <div>
+                        <div class="step-name">「ウェブサイト」→ 自社LPに遷移</div>
+                        <div class="step-detail">通常は食べログに飛ぶところを、自社のランディングページに設定</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step">
+                    <div class="step-icon">🎫</div>
+                    <div>
+                        <div class="step-name">LP上で「300円オフクーポンを受け取る」</div>
+                        <div class="step-detail">ボタンひとつでLINE登録＆クーポン獲得</div>
+                    </div>
+                </div>
+                <div class="flow-arrow-down">↓</div>
+                <div class="flow-step green-border">
+                    <div class="step-icon">✅</div>
+                    <div>
+                        <div class="step-name">新規来店 → リピート → リストに蓄積</div>
+                        <div class="step-detail">Googleマップ経由の来店客も無限クーポン施策に合流</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 利益シミュレーション -->
+    <section>
+        <div class="container">
+            <div class="sec-label">simulation</div>
+            <div class="sec-title">導入効果シミュレーション</div>
+            <div class="sec-desc">月商500万円のラーメン店が竹プラン（月額3万円）を導入した場合の試算です。</div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>導入前</th>
+                        <th>導入後</th>
+                        <th>変化</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>月間来店客数</td>
+                        <td>3,000人</td>
+                        <td>3,900人</td>
+                        <td class="green">+900人（1.3倍）</td>
+                    </tr>
+                    <tr>
+                        <td>月間LINEリスト増加</td>
+                        <td>0人</td>
+                        <td>200人</td>
+                        <td class="green">+200人/月</td>
+                    </tr>
+                    <tr>
+                        <td>月間売上</td>
+                        <td>500万円</td>
+                        <td>650万円</td>
+                        <td class="green">+150万円</td>
+                    </tr>
+                    <tr>
+                        <td>追加売上の純利益（原価率30%）</td>
+                        <td>—</td>
+                        <td>105万円</td>
+                        <td class="green">+105万円</td>
+                    </tr>
+                    <tr>
+                        <td>パッケージ費用</td>
+                        <td>—</td>
+                        <td>3万円</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>年間採用広告費の削減</td>
+                        <td>60〜90万円</td>
+                        <td>0円</td>
+                        <td class="green">▲60〜90万円</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="roi-box">
+                <div class="roi-num">35<span style="font-size:28px">倍</span></div>
+                <div class="roi-label">投資対効果（ROI）</div>
+                <p style="margin-top:12px;font-size:14px;color:var(--text-light)">
+                    月額3万円の投資に対し、月間純利益+105万円の増分。<br>さらにLINEリストは解約後も資産として残り続けます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入ステップ -->
+    <section class="alt">
+        <div class="container">
+            <div class="sec-label">getting started</div>
+            <div class="sec-title">導入はカンタン4ステップ</div>
+            <div class="sec-desc">最短1週間で運用開始。すべて私たちが構築し、お渡しします。</div>
+
+            <div class="steps">
+                <div class="step-item">
+                    <div class="step-num-circle">1</div>
+                    <h4>ヒアリング</h4>
+                    <p>お店の状況・目標を<br>30分でお伺い</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">2</div>
+                    <h4>LINE構築</h4>
+                    <p>LINE公式アカウント<br>クーポン・POP作成<br>（約1週間）</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">3</div>
+                    <h4>設置・研修</h4>
+                    <p>POP設置・スタッフへの<br>声かけ研修<br>（30分で完了）</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num-circle">4</div>
+                    <h4>運用開始</h4>
+                    <p>あとは自動でリスト蓄積<br>月次レポートでフォロー</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🤝 全部おまかせで大丈夫です</h4>
+                <p>LINE構築・クーポン設計・POP作成・スタッフ研修まで、<strong style="color:var(--orange)">すべて私たちが対応</strong>します。<br>
+                    オーナー様にお願いするのは「レジ横にPOPを置くこと」と「スタッフに一声かけてもらうこと」だけ。<br>
+                    <strong>ITリテラシー不要。丸投げOK。</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- よくある質問 -->
+    <section>
+        <div class="container">
+            <div class="sec-label">faq</div>
+            <div class="sec-title">よくあるご質問</div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon orange">❓</div>
+                    <h3>最低契約期間はありますか？</h3>
+                </div>
+                <p>最低3ヶ月からのご契約となります。LINEリストが蓄積されるまでに2〜3ヶ月程度が目安のため、効果実感前の解約を防ぐためです。それ以降はいつでも解約可能です。</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon orange">❓</div>
+                    <h3>解約したらLINEリストはどうなりますか？</h3>
+                </div>
+                <p><strong
+                        style="color:var(--green)">LINEリストはお店の資産です。</strong>解約後もLINE公式アカウントとリストはそのままお使いいただけます。蓄積したリストに求人配信を自社で行うことも可能です。
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon orange">❓</div>
+                    <h3>クーポンの割引額はどう決めますか？</h3>
+                </div>
+                <p>お店の客単価・原価率・来店頻度に応じて最適な金額をご提案します。100円・200円・300円の3パターン ×
+                    有効期限7日・14日・30日で、<strong>計12パターン</strong>のシミュレーションをお出しします。</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon orange">❓</div>
+                    <h3>飲食以外の業種でも使えますか？</h3>
+                </div>
+                <p>はい。<strong>美容室・接骨院・パーソナルジム</strong>など、リピート来店がある店舗型ビジネスであれば同じ仕組みが有効です。お気軽にご相談ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <h2>お客さんが「ここで働きたい」と<br>思ってくれる仕組みを、つくりませんか？</h2>
+            <p>来店客のLINEリストを蓄積するだけで、<br>売上アップと採用コスト削減を同時に実現できます。</p>
+            <p style="font-size:13px;opacity:0.5;margin-top:40px">月額制 店舗採用パッケージ 2026</p>
+        </div>
+    </section>
+
+</body>
+
+</html>

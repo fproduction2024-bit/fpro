@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スキルハックス 受講生インタビューガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #e8effc;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.7;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .header .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 0.82rem;
+            opacity: 0.9;
+        }
+
+        .header .meta-row span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px 64px;
+        }
+
+        /* ── Info Card ── */
+        .info-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .info-card h2 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .info-grid label {
+            font-size: 0.78rem;
+            color: var(--gray-500);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .info-grid input {
+            width: 100%;
+            border: none;
+            border-bottom: 1.5px solid var(--gray-300);
+            padding: 6px 0;
+            font-size: 0.9rem;
+            font-family: inherit;
+            background: transparent;
+            outline: none;
+            color: var(--gray-800);
+        }
+
+        .info-grid input:focus {
+            border-bottom-color: var(--primary);
+        }
+
+        .info-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        /* ── Flow Overview ── */
+        .flow-overview {
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #c7d8f5;
+        }
+
+        .flow-overview h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .flow-steps {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 90px;
+            text-align: center;
+            padding: 10px 6px;
+            position: relative;
+            font-size: 0.78rem;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-step .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .flow-step .step-label {
+            display: block;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .flow-step .step-time {
+            display: block;
+            color: var(--gray-400);
+            font-size: 0.7rem;
+        }
+
+        /* ── Section ── */
+        .section {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .section-num.ice {
+            background: #6366f1;
+        }
+
+        .section-num.before {
+            background: #f59e0b;
+        }
+
+        .section-num.trigger {
+            background: #10b981;
+        }
+
+        .section-num.during {
+            background: #3b82f6;
+        }
+
+        .section-num.result {
+            background: #8b5cf6;
+        }
+
+        .section-num.change {
+            background: #ec4899;
+        }
+
+        .section-num.quote {
+            background: #ef4444;
+        }
+
+        .section-title-area {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .section-purpose {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .section-time {
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+            flex-shrink: 0;
+        }
+
+        .section-body {
+            padding: 16px 20px 20px;
+        }
+
+        /* ── Question Item ── */
+        .question-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .question-text::before {
+            content: 'Q';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .question-hint {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-left: 30px;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .question-follow {
+            font-size: 0.82rem;
+            color: var(--primary);
+            margin-left: 30px;
+            padding: 4px 0;
+        }
+
+        .question-follow::before {
+            content: '↳';
+            margin-right: 6px;
+            font-weight: 700;
+        }
+
+        .memo-area {
+            margin-left: 30px;
+            margin-top: 6px;
+            width: calc(100% - 30px);
+            min-height: 36px;
+            border: 1.5px dashed var(--gray-300);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            background: var(--gray-50);
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .memo-area:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: white;
+        }
+
+        /* ── Voice Tip ── */
+        .voice-tip {
+            background: var(--accent-light);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 6px 30px;
+            font-size: 0.82rem;
+            color: var(--gray-700);
+            border-left: 3px solid var(--accent);
+        }
+
+        .voice-tip::before {
+            content: '💬 声かけ例：';
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ── Important Badge ── */
+        .important-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: white;
+            background: var(--danger);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* ── Closing Card ── */
+        .closing-card {
+            background: var(--success-light);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 24px;
+            border: 1px solid #a7f3d0;
+        }
+
+        .closing-card h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .closing-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .closing-card li {
+            padding: 4px 0;
+            font-size: 0.88rem;
+            color: var(--gray-700);
+        }
+
+        .closing-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* ── Priority Table ── */
+        .priority-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .priority-section h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            margin-bottom: 12px;
+        }
+
+        .priority-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .priority-table th {
+            text-align: left;
+            padding: 8px 10px;
+            background: var(--gray-100);
+            font-weight: 500;
+            color: var(--gray-500);
+            font-size: 0.78rem;
+        }
+
+        .priority-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .stars {
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        /* ══════════════════════════════════════
+       SAVE BUTTON
+       ══════════════════════════════════════ */
+        .save-section {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .save-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 48px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: inherit;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(26, 86, 219, 0.3);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(26, 86, 219, 0.4);
+        }
+
+        .save-btn:active {
+            transform: translateY(0);
+        }
+
+        .save-btn.saving {
+            background: var(--gray-400);
+            pointer-events: none;
+        }
+
+        .save-btn.saved {
+            background: linear-gradient(135deg, #059669, #10b981);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        /* ══════════════════════════════════════
+       SAVED DATA LIST
+       ══════════════════════════════════════ */
+        .data-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 2px solid var(--gray-200);
+        }
+
+        .data-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .data-section-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .data-count {
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .data-empty {
+            text-align: center;
+            color: var(--gray-400);
+            padding: 40px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* ── Data Card ── */
+        .data-card {
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .data-card:hover {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .data-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .data-card-header:hover {
+            background: var(--gray-50);
+        }
+
+        .data-card-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .data-card-info {
+            flex: 1;
+        }
+
+        .data-card-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+        }
+
+        .data-card-meta {
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .data-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .data-card-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            cursor: pointer;
+            font-size: 0.7rem;
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .data-card-toggle:hover {
+            background: var(--gray-100);
+        }
+
+        .data-card-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .data-card-delete {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            border: 1px solid var(--danger-light);
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--danger);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .data-card-delete:hover {
+            background: var(--danger-light);
+        }
+
+        .data-card-body {
+            display: none;
+            padding: 0 20px 20px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .data-card-body.open {
+            display: block;
+        }
+
+        .data-detail-section {
+            margin-top: 16px;
+        }
+
+        .data-detail-section h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .data-detail-item {
+            padding: 6px 0;
+        }
+
+        .data-detail-q {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            margin-bottom: 2px;
+        }
+
+        .data-detail-a {
+            font-size: 0.88rem;
+            color: var(--gray-800);
+            padding: 4px 8px;
+            background: var(--gray-50);
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+
+        .data-detail-empty {
+            font-size: 0.82rem;
+            color: var(--gray-300);
+            font-style: italic;
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--gray-800);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: #059669;
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 32px 16px;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .flow-step::after {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+            }
+
+            .save-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── Header ── -->
+    <div class="header">
+        <h1>📋 受講生インタビューガイド</h1>
+        <p class="subtitle">Skill Hacks — 受講生事例ヒアリング用</p>
+        <div class="meta-row">
+            <span>⏱ 所要時間 15〜20分</span>
+            <span>🎥 Zoom / 対面</span>
+            <span>📝 台本挿入用の素材収集</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ── 記入欄 ── -->
+        <div class="info-card">
+            <h2>📌 インタビュー情報</h2>
+            <div class="info-grid">
+                <div>
+                    <label>インタビュー日時</label>
+                    <input type="text" id="info-date" placeholder="例: 2026/2/13 14:00">
+                </div>
+                <div>
+                    <label>インタビュアー名</label>
+                    <input type="text" id="info-interviewer" placeholder="名前を入力">
+                </div>
+                <div>
+                    <label>対象者名（ニックネーム可）</label>
+                    <input type="text" id="info-name" placeholder="名前を入力">
+                </div>
+                <div>
+                    <label>年齢層</label>
+                    <input type="text" id="info-age" placeholder="20代 / 30代 / 40代〜">
+                </div>
+                <div class="full">
+                    <label>受講前の職業・状況</label>
+                    <input type="text" id="info-job" placeholder="例: 会社員、主婦、フリーランス等">
+                </div>
+                <div class="full">
+                    <label>家庭環境</label>
+                    <input type="text" id="info-family" placeholder="例: 子育て中、共働き、単身 等">
+                </div>
+            </div>
+        </div>
+
+        <!-- ── 進行フロー ── -->
+        <div class="flow-overview">
+            <h2>🗺 インタビューの流れ</h2>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span><span class="step-label">アイスブレイク</span><span
+                        class="step-time">〜2分</span></div>
+                <div class="flow-step"><span class="step-num">2</span><span class="step-label">受講前の状態</span><span
+                        class="step-time">〜3分</span></div>
+                <div class="flow-step"><span class="step-num">3</span><span class="step-label">受講の決め手</span><span
+                        class="step-time">〜2分</span></div>
+                <div class="flow-step"><span class="step-num">4</span><span class="step-label">受講中の体験</span><span
+                        class="step-time">〜5分</span></div>
+                <div class="flow-step"><span class="step-num">5</span><span class="step-label">案件獲得</span><span
+                        class="step-time">〜3分</span></div>
+                <div class="flow-step"><span class="step-num">6</span><span class="step-label">変化と実感</span><span
+                        class="step-time">〜3分</span></div>
+                <div class="flow-step"><span class="step-num">7</span><span class="step-label">一言コメント</span><span
+                        class="step-time">〜2分</span></div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 1: アイスブレイク ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num ice">1</span>
+                <div class="section-title-area">
+                    <div class="section-title">アイスブレイク</div>
+                    <div class="section-purpose">リラックスした雰囲気をつくる</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="voice-tip">「今日はお時間いただきありがとうございます！堅くならなくて大丈夫なので、普段話すような感じでお話しいただければ嬉しいです。」</div>
+                <div class="voice-tip">「動画で使う場合もこちらで編集しますので、言い直しとか全然OKです！」</div>
+                <div class="question-item">
+                    <div class="question-text">最近のお仕事の調子はいかがですか？</div>
+                    <div class="question-hint">※ 場を温める程度でOK。深堀り不要。</div>
+                    <textarea class="memo-area" data-section="1_アイスブレイク" data-q="最近のお仕事の調子" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 2: 受講前の状態 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num before">2</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講前の状態</div>
+                    <div class="section-purpose">Before像を引き出す → 視聴者の共感ポイント</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">副業を始めようと思ったきっかけを教えてください</div>
+                    <div class="question-hint">※ 感情面（不安・焦り・希望）を深堀りする</div>
+                    <textarea class="memo-area" data-section="2_受講前の状態" data-q="副業のきっかけ" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">当時、どんな不安や悩みがありましたか？</div>
+                    <div class="question-follow">具体的にどんな場面で不安を感じましたか？</div>
+                    <textarea class="memo-area" data-section="2_受講前の状態" data-q="不安や悩み" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">以前に他の教材やスクールを試したことはありますか？</div>
+                    <div class="question-follow">その時のどんな点が合わなかったですか？</div>
+                    <textarea class="memo-area" data-section="2_受講前の状態" data-q="他の教材の経験" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">「自分にもできるのか」という不安はありましたか？</div>
+                    <textarea class="memo-area" data-section="2_受講前の状態" data-q="自分にもできるか不安" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 3: 受講の決め手 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num trigger">3</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講の決め手</div>
+                    <div class="section-purpose">なぜスキルハックスを選んだか → 検討中の視聴者の後押しに</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">スキルハックスをどこで知りましたか？</div>
+                    <textarea class="memo-area" data-section="3_受講の決め手" data-q="知ったきっかけ" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">参加を決めた一番の理由は何でしたか？</div>
+                    <div class="question-hint">※ 最後の一歩を踏み出せた理由を聞く</div>
+                    <textarea class="memo-area" data-section="3_受講の決め手" data-q="参加の一番の理由" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">価格や返金保証は判断にどう影響しましたか？</div>
+                    <textarea class="memo-area" data-section="3_受講の決め手" data-q="価格・返金保証の影響" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 4: 受講中の体験 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num during">4</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講中の体験</div>
+                    <div class="section-purpose">学習プロセスのリアルさ → 「自分でもできそう」を引き出す</div>
+                </div>
+                <span class="section-time">〜5分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">最初に学んだスキルは何ですか？</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="最初に学んだスキル" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">学習ペースはどのくらいでしたか？</div>
+                    <div class="question-hint">※「1日何時間？」「何ヶ月で完了？」など具体的に</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="学習ペース" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">本業や家事との両立で工夫したことは？</div>
+                    <div class="question-hint">※ ターゲット層（忙しい人）へのリアルな共感ポイント</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="両立の工夫" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">つまずいたポイントはありましたか？<span class="important-badge">重要</span></div>
+                    <div class="question-follow">その時、どうやって乗り越えましたか？</div>
+                    <div class="voice-tip">「完璧にうまくいった話よりも、苦労した話のほうが参考になるので、ぜひ教えてください」</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="つまずき・乗り越え方" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">伴走支援（個別面談・もくもく会等）は使いましたか？</div>
+                    <div class="question-follow">具体的にどう役立ちましたか？</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="伴走支援の活用" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">コミュニティの雰囲気はどうでしたか？</div>
+                    <textarea class="memo-area" data-section="4_受講中の体験" data-q="コミュニティの雰囲気" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 5: 案件獲得 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num result">5</span>
+                <div class="section-title-area">
+                    <div class="section-title">案件獲得の経験</div>
+                    <div class="section-purpose">成果の具体性 → 「本当に稼げるんだ」を証明</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">初案件を取るまでに何件くらい応募しましたか？</div>
+                    <textarea class="memo-area" data-section="5_案件獲得" data-q="応募件数" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">初案件の内容と単価を教えてください</div>
+                    <textarea class="memo-area" data-section="5_案件獲得" data-q="初案件の内容と単価" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">初めてお金をもらった時の気持ちは？<span class="important-badge">重要</span></div>
+                    <div class="question-hint">※ 感情を引き出す。ここが台本のハイライトになる</div>
+                    <div class="voice-tip">「その時の気持ち、覚えていますか？率直に教えてください」</div>
+                    <textarea class="memo-area" data-section="5_案件獲得" data-q="初めて報酬を得た感想" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">その後、リピートや紹介はありましたか？</div>
+                    <textarea class="memo-area" data-section="5_案件獲得" data-q="リピート・紹介" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">現在の月収（副業収入）はどのくらいですか？</div>
+                    <div class="question-hint">※ 答えにくい場合は「ざっくりでOKです」と伝える</div>
+                    <textarea class="memo-area" data-section="5_案件獲得" data-q="現在の月収" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 6: 変化と実感 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num change">6</span>
+                <div class="section-title-area">
+                    <div class="section-title">変化と実感</div>
+                    <div class="section-purpose">After像を明確に → 視聴者が未来を描けるように</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">受講前と今で、一番変わったことは？<span class="important-badge">重要</span></div>
+                    <div class="voice-tip">「一つだけ挙げるとしたら？」と絞ると答えやすいです</div>
+                    <textarea class="memo-area" data-section="6_変化と実感" data-q="一番の変化" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">「自信がついた」と感じた瞬間はありますか？</div>
+                    <textarea class="memo-area" data-section="6_変化と実感" data-q="自信がついた瞬間" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">家族や周囲の反応はいかがでしたか？</div>
+                    <textarea class="memo-area" data-section="6_変化と実感" data-q="家族・周囲の反応" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">働き方や生活はどう変わりましたか？</div>
+                    <div class="question-hint">※ 時間・お金・気持ちの変化を聞く</div>
+                    <textarea class="memo-area" data-section="6_変化と実感" data-q="働き方・生活の変化" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 7: 台本用の一言 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num quote">7</span>
+                <div class="section-title-area">
+                    <div class="section-title">台本用の一言コメント<span class="important-badge">★最重要</span></div>
+                    <div class="section-purpose">台本・LPで引用するキラーフレーズを引き出す</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="voice-tip">「最後に1つだけ。もし今、過去の自分にメッセージを送るとしたら、なんて言ってあげますか？」</div>
+                <div class="question-item">
+                    <div class="question-text">過去の自分に対して、どんな言葉をかけますか？</div>
+                    <div class="question-hint">※ ここで出た言葉をそのまま台本で使う</div>
+                    <textarea class="memo-area" data-section="7_台本用コメント" data-q="過去の自分へのメッセージ"
+                        placeholder="一言コメントをそのまま記録" style="min-height: 60px;"></textarea>
+                </div>
+                <div class="question-item" style="margin-top: 12px;">
+                    <div class="question-text" style="font-size: 0.82rem; color: var(--gray-500);">
+                        参考フレーズ（本人が言葉に詰まった場合のヒント）</div>
+                    <ul
+                        style="margin-left: 30px; margin-top: 8px; color: var(--gray-500); font-size: 0.85rem; list-style: disc;">
+                        <li>「○○だった私が、△△できるようになった」</li>
+                        <li>「あの時一歩踏み出して本当によかった」</li>
+                        <li>「スキルハックスの○○があったから続けられた」</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── クロージング ── -->
+        <div class="closing-card">
+            <h2>🎬 インタビュー終了後のチェックリスト</h2>
+            <ul>
+                <li>感謝を伝える（「貴重なお話ありがとうございました！」）</li>
+                <li>掲載許可の最終確認（動画・テキスト・匿名 etc.）</li>
+                <li>回答を整理して台本チームに共有</li>
+                <li>台本の該当箇所に事例を挿入（第二話 §5、第四話 §4・§6）</li>
+                <li>本人に掲載箇所の最終確認を取る</li>
+            </ul>
+        </div>
+
+        <!-- ── 優先タイプ ── -->
+        <div class="priority-section">
+            <h2>🎯 欲しい受講生タイプ（優先度順）</h2>
+            <table class="priority-table">
+                <thead>
+                    <tr>
+                        <th>優先度</th>
+                        <th>タイプ</th>
+                        <th>理由</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="stars">★★★</span></td>
+                        <td>子育て中の主婦</td>
+                        <td>ターゲット層と重なる、共感度が高い</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★★</span></td>
+                        <td>完全未経験からゼロイチ突破</td>
+                        <td>「自分にもできる」感を伝えやすい</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★☆</span></td>
+                        <td>本業ありの会社員</td>
+                        <td>時間がない中での成功事例</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★☆</span></td>
+                        <td>40代以上の方</td>
+                        <td>年齢の壁を超えた事例</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★☆☆</span></td>
+                        <td>他スクール経験後にスキルハックスで成功</td>
+                        <td>差別化の証明</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ══════════════════════════════════════
+         SAVE BUTTON
+         ══════════════════════════════════════ -->
+        <div class="save-section">
+            <button class="save-btn" id="saveBtn" onclick="saveInterview()">
+                💾 インタビュー結果を保存
+            </button>
+        </div>
+
+        <!-- ══════════════════════════════════════
+         SAVED DATA LIST
+         ══════════════════════════════════════ -->
+        <div class="data-section" id="dataSection">
+            <div class="data-section-header">
+                <h2>📂 保存済みインタビュー</h2>
+                <span class="data-count" id="dataCount">0 件</span>
+            </div>
+            <div id="dataList"></div>
+        </div>
+
+        <div class="footer">Skill Hacks Interview Guide — for internal use only</div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const STORAGE_KEY = 'skillhacks_interviews';
+
+        // ── Storage helpers ──
+        function readData() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+            catch { return []; }
+        }
+        function writeData(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        // ── Toast ──
+        function showToast(msg, type = 'success') {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'toast ' + type + ' show';
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // ── Collect form data ──
+        function collectData() {
+            const info = {
+                date: document.getElementById('info-date').value,
+                interviewer: document.getElementById('info-interviewer').value,
+                name: document.getElementById('info-name').value,
+                age: document.getElementById('info-age').value,
+                job: document.getElementById('info-job').value,
+                family: document.getElementById('info-family').value,
+            };
+            const memos = [];
+            document.querySelectorAll('.memo-area').forEach(el => {
+                memos.push({ section: el.dataset.section, question: el.dataset.q, answer: el.value.trim() });
+            });
+            return { info, memos };
+        }
+
+        // ── Save ──
+        function saveInterview() {
+            const btn = document.getElementById('saveBtn');
+            const data = collectData();
+
+            if (!data.info.name) {
+                showToast('⚠️ 対象者名を入力してください', 'error');
+                document.getElementById('info-name').focus();
+                return;
+            }
+            const filledMemos = data.memos.filter(m => m.answer);
+            if (filledMemos.length === 0) {
+                showToast('⚠️ 最低1つの質問にメモを記入してください', 'error');
+                return;
+            }
+
+            btn.classList.add('saving');
+            btn.textContent = '⏳ 保存中...';
+
+            const all = readData();
+            const entry = {
+                id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                savedAt: new Date().toISOString(),
+                ...data,
+            };
+            all.push(entry);
+            writeData(all);
+
+            btn.classList.remove('saving');
+            btn.classList.add('saved');
+            btn.textContent = '✅ 保存しました！';
+            showToast('✅ インタビューデータを保存しました');
+
+            setTimeout(() => {
+                document.querySelectorAll('.memo-area').forEach(el => el.value = '');
+                document.querySelectorAll('.info-grid input').forEach(el => el.value = '');
+                btn.classList.remove('saved');
+                btn.textContent = '💾 インタビュー結果を保存';
+            }, 2000);
+
+            loadInterviews();
+        }
+
+        // ── Load list ──
+        function loadInterviews() {
+            const data = readData().sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt));
+            renderList(data);
+        }
+
+        // ── Render list ──
+        function renderList(interviews) {
+            const container = document.getElementById('dataList');
+            const countEl = document.getElementById('dataCount');
+            countEl.textContent = interviews.length + ' 件';
+
+            if (interviews.length === 0) {
+                container.innerHTML = '<div class="data-empty">まだ保存されたインタビューデータはありません</div>';
+                return;
+            }
+
+            container.innerHTML = interviews.map(iv => {
+                const date = iv.info?.date || '';
+                const name = iv.info?.name || '名前なし';
+                const interviewer = iv.info?.interviewer || '';
+                const age = iv.info?.age || '';
+                const job = iv.info?.job || '';
+                const savedAt = new Date(iv.savedAt).toLocaleString('ja-JP');
+                const initial = name.charAt(0);
+                const filledMemos = (iv.memos || []).filter(m => m.answer);
+
+                const sections = {};
+                filledMemos.forEach(m => {
+                    if (!sections[m.section]) sections[m.section] = [];
+                    sections[m.section].push(m);
+                });
+
+                const detailHtml = Object.entries(sections).map(([sec, items]) => `
+          <div class="data-detail-section">
+            <h4>${sec.replace(/^\d+_/, '')}</h4>
+            ${items.map(item => `
+              <div class="data-detail-item">
+                <div class="data-detail-q">${item.question}</div>
+                <div class="data-detail-a">${escapeHtml(item.answer)}</div>
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+
+                return `
+          <div class="data-card" data-id="${iv.id}">
+            <div class="data-card-header" onclick="toggleCard(this)">
+              <div class="data-card-avatar">${escapeHtml(initial)}</div>
+              <div class="data-card-info">
+                <div class="data-card-name">${escapeHtml(name)}${age ? ' (' + escapeHtml(age) + ')' : ''}${job ? ' — ' + escapeHtml(job) : ''}</div>
+                <div class="data-card-meta">
+                  ${date ? '📅 ' + escapeHtml(date) : ''}
+                  ${interviewer ? '　👤 ' + escapeHtml(interviewer) : ''}
+                  　💬 回答 ${filledMemos.length} 件　|　保存: ${savedAt}
+                </div>
+              </div>
+              <div class="data-card-actions">
+                <button class="data-card-toggle" title="詳細を展開">▼</button>
+                <button class="data-card-delete" title="削除" onclick="deleteInterview(event, '${iv.id}')">✕</button>
+              </div>
+            </div>
+            <div class="data-card-body">
+              ${filledMemos.length > 0 ? detailHtml : '<div class="data-detail-empty">メモなし</div>'}
+            </div>
+          </div>
+        `;
+            }).join('');
+        }
+
+        // ── Toggle card ──
+        function toggleCard(headerEl) {
+            const body = headerEl.nextElementSibling;
+            const toggle = headerEl.querySelector('.data-card-toggle');
+            body.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+
+        // ── Delete ──
+        function deleteInterview(event, id) {
+            event.stopPropagation();
+            if (!confirm('このインタビューデータを削除しますか？')) return;
+            let data = readData();
+            data = data.filter(d => d.id !== id);
+            writeData(data);
+            showToast('🗑 削除しました');
+            loadInterviews();
+        }
+
+        // ── Escape HTML ──
+        function escapeHtml(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        // ── Init ──
+        loadInterviews();
+    </script>
+
+</body>
+
+</html>

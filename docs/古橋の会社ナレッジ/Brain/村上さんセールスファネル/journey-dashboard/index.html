@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブースターパッケージ カスタマージャーニー</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #F97316;
+            --orange-dark: #EA580C;
+            --orange-deep: #C2410C;
+            --orange-light: #FB923C;
+            --amber: #F59E0B;
+            --green: #10B981;
+            --green-dark: #059669;
+            --bg: #FFFBF5;
+            --bg-card: #fff;
+            --bg-phase: #FFF7ED;
+            --text: #1a1a2e;
+            --text-body: #444;
+            --text-light: #888;
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --radius: 16px;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7
+        }
+
+        .header {
+            background: linear-gradient(135deg, #7C2D12, #B8510D, #EA580C);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center
+        }
+
+        .header h1 {
+            font-size: clamp(22px, 4vw, 32px);
+            font-weight: 900;
+            margin-bottom: 8px
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: .7
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* JOURNEY FLOW */
+        .journey-flow {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin: 40px 0 32px;
+            overflow-x: auto;
+            padding: 0 0 12px
+        }
+
+        .phase-col {
+            flex: 1;
+            min-width: 160px;
+            position: relative
+        }
+
+        .phase-head {
+            padding: 14px 16px;
+            text-align: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 14px;
+            position: relative
+        }
+
+        .phase-head .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            display: block;
+            line-height: 1
+        }
+
+        .phase-head .label {
+            font-size: 12px;
+            margin-top: 2px;
+            opacity: .85
+        }
+
+        .ph1 .phase-head {
+            background: #F97316
+        }
+
+        .ph2 .phase-head {
+            background: #EA580C
+        }
+
+        .ph3 .phase-head {
+            background: #C2410C
+        }
+
+        .ph4 .phase-head {
+            background: #10B981
+        }
+
+        .ph5 .phase-head {
+            background: #059669
+        }
+
+        .phase-body {
+            background: var(--bg-card);
+            border: 1px solid #f0e8df;
+            border-top: none;
+            padding: 16px 12px;
+            min-height: 180px
+        }
+
+        .phase-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background .2s
+        }
+
+        .phase-item:hover {
+            background: #FFF7ED
+        }
+
+        .phase-item .emoji {
+            font-size: 18px;
+            flex-shrink: 0
+        }
+
+        .phase-item .status {
+            margin-left: auto;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-weight: 800;
+            flex-shrink: 0
+        }
+
+        .done {
+            background: #ECFDF5;
+            color: #059669
+        }
+
+        .pending {
+            background: #FFF7ED;
+            color: #EA580C
+        }
+
+        .arrow-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--orange);
+            font-weight: 900;
+            padding: 0 4px;
+            min-width: 24px
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            min-width: 140px
+        }
+
+        .stat-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            line-height: 1
+        }
+
+        .stat-num.orange {
+            color: var(--orange)
+        }
+
+        .stat-num.green {
+            color: var(--green)
+        }
+
+        .stat-num.amber {
+            color: var(--amber)
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px;
+            font-weight: 600
+        }
+
+        /* DETAIL TABLE */
+        .detail-section {
+            margin: 40px 0
+        }
+
+        .detail-section h2 {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .detail-section h2 .phase-badge {
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 50px;
+            color: #fff
+        }
+
+        .pb1 {
+            background: #F97316
+        }
+
+        .pb2 {
+            background: #EA580C
+        }
+
+        .pb3 {
+            background: #C2410C
+        }
+
+        .pb4 {
+            background: #10B981
+        }
+
+        .pb5 {
+            background: #059669
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 24px
+        }
+
+        thead th {
+            background: #F8F4EE;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-light);
+            border-bottom: 1px solid #eee
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            font-size: 13px;
+            border-bottom: 1px solid #f5f5f5;
+            vertical-align: middle
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none
+        }
+
+        tbody tr:hover {
+            background: #FFFBF5
+        }
+
+        .status-badge {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 50px;
+            white-space: nowrap
+        }
+
+        /* PROGRESS BAR */
+        .progress-wrap {
+            margin: 32px 0;
+            text-align: center
+        }
+
+        .progress-bar {
+            background: #f0e8df;
+            border-radius: 50px;
+            height: 24px;
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--green), var(--green-dark));
+            height: 100%;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            transition: width .6s
+        }
+
+        .progress-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-body);
+            margin-top: 8px
+        }
+
+        /* PRIORITY */
+        .priority-box {
+            background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+            border: 2px solid var(--orange);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin: 32px 0
+        }
+
+        .priority-box h3 {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--orange-deep);
+            margin-bottom: 12px
+        }
+
+        .priority-steps {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .p-step {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            box-shadow: var(--shadow)
+        }
+
+        .p-step .p-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--orange)
+        }
+
+        .p-step .p-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 4px
+        }
+
+        .p-step .p-desc {
+            font-size: 11px;
+            color: var(--text-light);
+            margin-top: 4px
+        }
+
+        footer {
+            background: var(--text);
+            color: rgba(255, 255, 255, .4);
+            text-align: center;
+            padding: 24px;
+            font-size: 11px;
+            margin-top: 48px
+        }
+
+        @media(max-width:768px) {
+            .journey-flow {
+                flex-direction: column
+            }
+
+            .arrow-col {
+                transform: rotate(90deg);
+                padding: 4px 0
+            }
+
+            .priority-steps {
+                flex-direction: column
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                align-items: center
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <h1>🗺️ ブースターパッケージ カスタマージャーニー</h1>
+            <p>認知 → 興味 → 検討 → 行動 → 定着 ── 5フェーズ × 制作物マップ</p>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stat-box">
+                <div class="stat-num orange">22</div>
+                <div class="stat-label">制作物 合計</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num green">15</div>
+                <div class="stat-label">完了 ✅</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num amber">7</div>
+                <div class="stat-label">未制作 ⚠️</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num green">68<span style="font-size:16px">%</span></div>
+                <div class="stat-label">進捗率</div>
+            </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress-wrap">
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:68%">68%</div>
+            </div>
+            <div class="progress-label">ファネル稼働まであと <strong>3つ</strong>（予約ページ・LINE画像・プロライン実装）</div>
+        </div>
+    </div>
+
+    <!-- JOURNEY FLOW -->
+    <div class="container">
+        <div class="journey-flow">
+            <div class="phase-col ph1">
+                <div class="phase-head"><span class="num">①</span><span class="label">認知</span></div>
+                <div class="phase-body">
+                    <div class="phase-item"><span class="emoji">🖼️</span>OGPバナー×10<span class="status done">✅</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">📝</span>Brain記事<span class="status pending">⚠️</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">🐦</span>X投稿テンプレ<span class="status pending">⚠️</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">🤝</span>アフィリ素材<span class="status pending">⚠️</span>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow-col">→</div>
+            <div class="phase-col ph2">
+                <div class="phase-head"><span class="num">②</span><span class="label">興味</span></div>
+                <div class="phase-body">
+                    <div class="phase-item"><span class="emoji">🌐</span>LP v2（オレンジ）<span class="status done">✅</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">💚</span>LINE追加導線<span class="status pending">⚠️</span>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow-col">→</div>
+            <div class="phase-col ph3">
+                <div class="phase-head"><span class="num">③</span><span class="label">検討</span></div>
+                <div class="phase-body">
+                    <div class="phase-item"><span class="emoji">💬</span>シナリオ① 2日<span class="status done">✅</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">💬</span>シナリオ② 7日<span class="status done">✅</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">🎨</span>LINE画像15枚<span class="status pending">⚠️</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">⚙️</span>プロライン実装<span class="status pending">⚠️</span>
+                    </div>
+                </div>
+            </div>
+            <div class="arrow-col">→</div>
+            <div class="phase-col ph4">
+                <div class="phase-head"><span class="num">④</span><span class="label">行動</span></div>
+                <div class="phase-body">
+                    <div class="phase-item"><span class="emoji">📋</span>予約ページコピー<span class="status done">✅</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">📅</span>予約ページ本体<span class="status pending">⚠️</span>
+                    </div>
+                    <div class="phase-item"><span class="emoji">🎥</span>Zoom面談<span class="status done">✅</span></div>
+                </div>
+            </div>
+            <div class="arrow-col">→</div>
+            <div class="phase-col ph5">
+                <div class="phase-head"><span class="num">⑤</span><span class="label">定着</span></div>
+                <div class="phase-body">
+                    <div class="phase-item"><span class="emoji">🎁</span>10大特典<span class="status done">✅</span></div>
+                    <div class="phase-item"><span class="emoji">🌐</span>会員サイト<span class="status done">✅</span></div>
+                    <div class="phase-item"><span class="emoji">📩</span>自動メッセージ<span class="status done">✅</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAIL TABLES -->
+    <div class="container">
+        <div class="detail-section">
+            <h2><span class="phase-badge pb1">①</span> 認知 — 「知ってもらう」</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>制作物</th>
+                        <th>用途</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>OGPバナー 10パターン</td>
+                        <td>Brain記事・SNSシェア時の画像表示</td>
+                        <td><span class="status-badge done">✅ 完了</span></td>
+                    </tr>
+                    <tr>
+                        <td>Brain記事ページ</td>
+                        <td>10大特典の紹介記事（Brain上に公開）</td>
+                        <td><span class="status-badge pending">⚠️ 未制作</span></td>
+                    </tr>
+                    <tr>
+                        <td>X投稿テンプレート</td>
+                        <td>SNS告知投稿文（5パターン程度）</td>
+                        <td><span class="status-badge pending">⚠️ 未制作</span></td>
+                    </tr>
+                    <tr>
+                        <td>アフィリエイト用素材</td>
+                        <td>紹介者向けバナー・紹介文テンプレ</td>
+                        <td><span class="status-badge pending">⚠️ 未制作</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="detail-section">
+            <h2><span class="phase-badge pb2">②</span> 興味 — 「欲しいと思わせる」</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>制作物</th>
+                        <th>用途</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>LP v2（オレンジテーマ）</td>
+                        <td>LINE登録への誘導ページ<br><a href="https://brain-booster-pkg.surge.sh" target="_blank"
+                                style="color:#F97316;font-size:11px">brain-booster-pkg.surge.sh →</a></td>
+                        <td><span class="status-badge done">✅ デプロイ済み</span></td>
+                    </tr>
+                    <tr>
+                        <td>LINE友だち追加ボタン/QR</td>
+                        <td>LPからLINEへの導線設定</td>
+                        <td><span class="status-badge pending">⚠️ CTA未設定</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="detail-section">
+            <h2><span class="phase-badge pb3">③</span> 検討 — 「行動を決めさせる」</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>制作物</th>
+                        <th>用途</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>シナリオ① テキスト原稿</td>
+                        <td>プレゼント紹介（2日締切・11ステップ）</td>
+                        <td><span class="status-badge done">✅ 完了</span></td>
+                    </tr>
+                    <tr>
+                        <td>シナリオ② テキスト原稿</td>
+                        <td>面談予約誘導（7日締切・14ステップ）</td>
+                        <td><span class="status-badge done">✅ 完了</span></td>
+                    </tr>
+                    <tr>
+                        <td>LINE配信用画像 15枚</td>
+                        <td>ヘッダー4枚・CTA5種・コンテンツ3枚・緊急性バナー3種</td>
+                        <td><span class="status-badge pending">⚠️ 仕様書のみ</span></td>
+                    </tr>
+                    <tr>
+                        <td>プロライン実装</td>
+                        <td>シナリオをプロラインに設定</td>
+                        <td><span class="status-badge pending">⚠️ 未実施</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="detail-section">
+            <h2><span class="phase-badge pb4">④</span> 行動 — 「予約・面談」</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>制作物</th>
+                        <th>用途</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>面談予約ページ コピー</td>
+                        <td>Calendly等に掲載するテキスト</td>
+                        <td><span class="status-badge done">✅ 完了</span></td>
+                    </tr>
+                    <tr>
+                        <td>面談予約ページ本体</td>
+                        <td>Calendly/TimerRex連携の予約ページ</td>
+                        <td><span class="status-badge pending">⚠️ 未構築</span></td>
+                    </tr>
+                    <tr>
+                        <td>Zoom面談（村上チーム）</td>
+                        <td>セールスチームの面談実施</td>
+                        <td><span class="status-badge done">✅ チーム稼働中</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="detail-section">
+            <h2><span class="phase-badge pb5">⑤</span> 定着 — 「価値提供・リピート」</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>制作物</th>
+                        <th>用途</th>
+                        <th>ステータス</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10大特典コンテンツ</td>
+                        <td>4タイプ対応のMarkdown原稿 10本</td>
+                        <td><span class="status-badge done">✅ 完了</span></td>
+                    </tr>
+                    <tr>
+                        <td>会員サイト（Webアプリ）</td>
+                        <td>特典閲覧ページ<br><a href="https://brain-booster-pkg.surge.sh" target="_blank"
+                                style="color:#059669;font-size:11px">brain-booster-pkg.surge.sh →</a></td>
+                        <td><span class="status-badge done">✅ デプロイ済み</span></td>
+                    </tr>
+                    <tr>
+                        <td>面談後LINE自動メッセージ</td>
+                        <td>特典URL送付メッセージ</td>
+                        <td><span class="status-badge done">✅ シナリオに含む</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PRIORITY BOX -->
+        <div class="priority-box">
+            <h3>🚀 ファネル稼働に必要な最優先タスク</h3>
+            <div class="priority-steps">
+                <div class="p-step">
+                    <div class="p-num">1</div>
+                    <div class="p-title">面談予約ページ</div>
+                    <div class="p-desc">Calendly連携で<br>予約導線を構築</div>
+                </div>
+                <div class="p-step">
+                    <div class="p-num">2</div>
+                    <div class="p-title">LINE画像 15枚</div>
+                    <div class="p-desc">仕様書に沿って<br>画像を制作</div>
+                </div>
+                <div class="p-step">
+                    <div class="p-num">3</div>
+                    <div class="p-title">プロライン実装</div>
+                    <div class="p-desc">シナリオ①②を<br>プロラインに設定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>ブースターパッケージ カスタマージャーニー — 最終更新: 2026年3月9日</p>
+    </footer>
+
+</body>
+
+</html>

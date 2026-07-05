@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山本あふい様向け｜伴走型FC開発支援 ご提案書｜リッツプロ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --primary-light: #16213e;
+            --accent: #c8a96e;
+            --accent-light: #d4bc8a;
+            --accent-dark: #a8894e;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --white: #ffffff;
+            --bg: #f8f6f3;
+            --card-bg: #ffffff;
+            --border: #e8e2d8;
+            --success: #2d8a4e;
+            --gradient-gold: linear-gradient(135deg, #c8a96e 0%, #e8d5a8 50%, #c8a96e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* Cover */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(200, 169, 110, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 50%, rgba(200, 169, 110, 0.06) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                transform: rotate(0deg)
+            }
+
+            50% {
+                transform: rotate(3deg)
+            }
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .cover-badge {
+            display: inline-block;
+            padding: .5rem 2rem;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: .8rem;
+            letter-spacing: .3em;
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+
+        .cover h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: .05em;
+        }
+
+        .cover h1 span {
+            color: var(--accent);
+        }
+
+        .cover-sub {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: .8;
+            margin-bottom: 3rem;
+            letter-spacing: .1em;
+        }
+
+        .cover-meta {
+            font-size: .85rem;
+            opacity: .5;
+        }
+
+        /* Section */
+        section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--accent);
+            font-size: .75rem;
+            letter-spacing: .3em;
+            font-weight: 600;
+            margin-bottom: .5rem;
+            text-transform: uppercase;
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-gold);
+        }
+
+        section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: .75rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            font-size: .9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Table */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .9rem;
+        }
+
+        .styled-table thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .styled-table th {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: .05em;
+        }
+
+        .styled-table td {
+            padding: .9rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .styled-table tbody tr:hover {
+            background: rgba(200, 169, 110, .05);
+        }
+
+        .styled-table .highlight {
+            color: var(--accent-dark);
+            font-weight: 700;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 169, 110, .15), transparent 70%);
+        }
+
+        .highlight-box h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            opacity: .9;
+            position: relative;
+        }
+
+        /* Quote */
+        .quote {
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 2rem;
+            background: rgba(200, 169, 110, .06);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: .95rem;
+        }
+
+        /* Roadmap */
+        .roadmap {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: .5rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+        }
+
+        .roadmap-year {
+            font-size: .8rem;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: .15em;
+        }
+
+        .roadmap-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: .3rem 0;
+        }
+
+        .roadmap-desc {
+            font-size: .9rem;
+            color: var(--text-light);
+        }
+
+        /* Result cards */
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-dark);
+        }
+
+        .result-label {
+            font-size: .8rem;
+            color: var(--text-light);
+            margin-top: .3rem;
+        }
+
+        /* Steps */
+        .step-list {
+            counter-reset: steps;
+            margin: 2rem 0;
+        }
+
+        .step-item {
+            counter-increment: steps;
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .step-item::before {
+            content: counter(steps);
+            position: absolute;
+            left: 1.2rem;
+            top: 1.4rem;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            font-weight: 700;
+        }
+
+        .step-item h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: .3rem;
+        }
+
+        .step-item p {
+            font-size: .85rem;
+            color: var(--text-light);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .cta-section p {
+            opacity: .8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gradient-gold);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            letter-spacing: .1em;
+            transition: transform .3s, box-shadow .3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(200, 169, 110, .4);
+        }
+
+        footer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: .8rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        /* Pill badge */
+        .pill {
+            display: inline-block;
+            padding: .2rem .8rem;
+            border-radius: 20px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .pill-gold {
+            background: rgba(200, 169, 110, .15);
+            color: var(--accent-dark);
+        }
+
+        .pill-green {
+            background: rgba(45, 138, 78, .1);
+            color: var(--success);
+        }
+
+        .pill-red {
+            background: rgba(220, 53, 69, .1);
+            color: #dc3545;
+        }
+
+        .compare-winner {
+            background: rgba(45, 138, 78, .04);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+        /* Simulation box */
+        .sim-box {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            color: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sim-box::before {
+            content: '💰';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 4rem;
+            opacity: .12;
+        }
+
+        .sim-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .9rem 0;
+            border-bottom: 1px solid rgba(200, 169, 110, .2);
+        }
+
+        .sim-row:last-child {
+            border-bottom: none;
+        }
+
+        .sim-label {
+            font-size: .9rem;
+            opacity: .8;
+        }
+
+        .sim-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .sim-val.big {
+            font-size: 1.6rem;
+        }
+
+        .sim-section-title {
+            color: var(--accent);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            padding: 1rem 0 .5rem;
+        }
+
+        /* Warning box */
+        .warn-box {
+            background: rgba(201, 87, 76, .06);
+            border: 1px solid rgba(201, 87, 76, .25);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .warn-box strong {
+            color: #c9574c;
+        }
+
+        /* FAQ / Concern rebuttal */
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.4rem 1.8rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-q-badge {
+            flex-shrink: 0;
+            background: rgba(201, 87, 76, .1);
+            color: #c9574c;
+            font-weight: 700;
+            font-size: .75rem;
+            padding: .25rem .7rem;
+            border-radius: 20px;
+            margin-top: .15rem;
+            letter-spacing: .05em;
+        }
+
+        .faq-q-text {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+            flex: 1;
+        }
+
+        .faq-a {
+            padding: 0 1.8rem 1.4rem 1.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .faq-a-badge {
+            display: inline-block;
+            background: rgba(45, 138, 78, .1);
+            color: var(--success);
+            font-weight: 700;
+            font-size: .75rem;
+            padding: .25rem .7rem;
+            border-radius: 20px;
+            margin: 1rem 0 .6rem;
+            letter-spacing: .05em;
+        }
+
+        .faq-a p {
+            font-size: .92rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .faq-a strong {
+            color: var(--primary);
+        }
+
+        /* Question box */
+        .q-box {
+            background: rgba(200, 169, 110, .06);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .q-item {
+            margin-bottom: .8rem;
+            font-size: .95rem;
+        }
+
+        .q-item::before {
+            content: '●';
+            color: var(--accent);
+            margin-right: .6rem;
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 3rem 1.2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sim-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COVER -->
+    <div class="cover">
+        <div class="cover-content">
+            <div class="cover-badge">CONFIDENTIAL PROPOSAL</div>
+            <h1>伴走型<span>FC開発支援</span><br>第2回ミーティング<br>ご提案書</h1>
+            <p class="cover-sub">山本あふい様 ─ 脱毛・ホワイトニングサロン事業（北海道）</p>
+            <p class="cover-meta">リッツプロ株式会社 ｜ 2026年</p>
+        </div>
+    </div>
+
+    <!-- ごあいさつ -->
+    <section>
+        <span class="section-label">Introduction</span>
+        <h2>ごあいさつ</h2>
+        <p>山本あふい様</p>
+        <p style="margin-top:1rem;">
+            先日はお忙しい中、初回ミーティングにご参加いただき誠にありがとうございました。<br>
+            法人設立直後というタイミングにもかかわらず、満席状態の自宅サロンを一人で回しながら
+            「次の展開を考えていきたい」という強い意志をお持ちであること、大変頼もしく思いました。
+        </p>
+        <p style="margin-top:1rem;">
+            本資料では、第1回でお伺いした内容を踏まえて、<strong>山本様の事業が目指すべき方向性</strong>と
+            <strong>リッツプロがご提供できる具体的な支援内容</strong>をお伝えします。
+            ぜひ率直なご意見・ご質問をいただきながら、一緒に最適な道を考えていけたらと思います。
+        </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 事業理解 -->
+    <section>
+        <span class="section-label">Section 01</span>
+        <h2>山本様の現状理解</h2>
+
+        <p style="margin-bottom:2rem;">第1回ミーティングをもとに、山本様の事業状況を以下のように整理しました。認識のズレがあればご指摘ください。</p>
+
+        <h3>現状の事業概要</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>事業内容</td>
+                    <td>脱毛施術 ＋ ホワイトニング（2ブース同時稼働）</td>
+                </tr>
+                <tr>
+                    <td>店舗形態</td>
+                    <td>自宅サロン（約4.3畳＋カウンセリングスペース2畳）</td>
+                </tr>
+                <tr>
+                    <td>運営体制</td>
+                    <td>山本様（プレイヤー）＋ スタッフ1名</td>
+                </tr>
+                <tr>
+                    <td>開業年数</td>
+                    <td>2年目（来月で丸2年）</td>
+                </tr>
+                <tr>
+                    <td>法人化</td>
+                    <td>今月設立したばかり</td>
+                </tr>
+                <tr>
+                    <td>年商</td>
+                    <td class="highlight">約2,200万円（月150〜200万円）</td>
+                </tr>
+                <tr>
+                    <td>稼働状況</td>
+                    <td class="highlight">ほぼ満席（稼働率ほぼ100%）</td>
+                </tr>
+                <tr>
+                    <td>客単価</td>
+                    <td>平均1万円前後（施術5〜8千円＋組み合わせ）</td>
+                </tr>
+                <tr>
+                    <td>月施術数</td>
+                    <td>約200件＋α</td>
+                </tr>
+                <tr>
+                    <td>集客方法</td>
+                    <td>ホットペッパービューティー中心</td>
+                </tr>
+                <tr>
+                    <td>利益率</td>
+                    <td class="highlight">高水準（自宅のため家賃・光熱費の事業按分ほぼゼロ）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h3>🔑 山本様のビジネスが持つ圧倒的な強み</h3>
+            <p>
+                自宅の一角（約6坪）でスタッフ2名体制、年商2,200万円というのは<strong>業界水準を大きく超える収益性</strong>です。
+                脱毛＋ホワイトニングを組み合わせた「時間単価の最大化」設計と、
+                歯科衛生士としての専門的技術が1年目から売上を支えています。<br><br>
+                これは「山本様の属人的な力」と同時に、<strong>「正しく設計すれば再現できるモデル」</strong>でもあります。
+            </p>
+        </div>
+
+        <h3>現在の課題・懸念事項</h3>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">🏃</div>
+                <h4>プレイヤー脱却が最初の壁</h4>
+                <p>現在、山本様ご自身が施術の中心でありスタッフも1名。まず自分がいなくても回る仕組みを作ることが全ての前提になります。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h4>マニュアルがゼロの状態</h4>
+                <p>口頭指導のみで運営中。FCを展開するにしても、直営を増やすにしても、標準化・マニュアル化が急務です。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏠</div>
+                <h4>物理的な拡張限界</h4>
+                <p>自宅サロンは満席。スタッフを増やすにも休憩スペースすらない状況。移転 or 2号店出店の意思決定が近づいています。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">❓</div>
+                <h4>「メニューは横展開できるのか」の不安</h4>
+                <p>今の売上は山本様の技術力によるものか、ビジネスモデルの力によるものか、まだ検証できていない状態です。</p>
+            </div>
+        </div>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- ゴール整理 -->
+    <section>
+        <span class="section-label">Section 02</span>
+        <h2>目指すゴールの整理</h2>
+
+        <p style="margin-bottom:2rem;">
+            第1回でのお話から、山本様のゴールは大きく下記のように整理しました。
+            これをベースに「どのルートで進むか」を一緒に確認していきたいと思います。
+        </p>
+
+        <h3>山本様が描くビジョン（ヒアリングより）</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>軸</th>
+                    <th>お話いただいた内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>店舗数</td>
+                    <td>直営4〜5店舗 ＋ FC15店舗前後（合計20店舗程度）</td>
+                </tr>
+                <tr>
+                    <td>売上目標</td>
+                    <td>年商2億円規模</td>
+                </tr>
+                <tr>
+                    <td>経営スタイル</td>
+                    <td>プレイヤーから離れ、本部・教育側にシフトしたい</td>
+                </tr>
+                <tr>
+                    <td>人材育成</td>
+                    <td>技術を教えることが好き。研修・教育体制を自分で担いたい</td>
+                </tr>
+                <tr>
+                    <td>M&A・売却</td>
+                    <td>現時点では10年くらい自分でやりたい。すぐの売却は想定していない</td>
+                </tr>
+                <tr>
+                    <td>時間軸</td>
+                    <td>今年（2026年）中に直営2号店・ゼロ次FC1号を検討中</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote">
+            <strong>リッツプロの見立て：</strong>
+            今すぐM&Aを目指す必要はありません。まず「正しく設計してFC展開を始める」だけで、
+            後から出口の選択肢が広がります。今は基盤を固めることが最優先です。
+        </div>
+
+        <h3>直営拡大 vs FC展開 ── どちらが山本様に向いているか</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>観点</th>
+                    <th>直営のみ拡大</th>
+                    <th>FC展開中心</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>必要資本</td>
+                    <td>1店舗500万〜1000万円の自己資金</td>
+                    <td class="compare-winner"><strong>加盟金で賄える（自己資金ほぼ不要）</strong> <span class="pill pill-green">◎</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>拡大スピード</td>
+                    <td>資金調達に依存、ゆっくり</td>
+                    <td class="compare-winner"><strong>並行して何店舗も展開可能</strong> <span class="pill pill-green">◎</span></td>
+                </tr>
+                <tr>
+                    <td>スタッフ採用</td>
+                    <td>全員直接雇用・管理</td>
+                    <td class="compare-winner"><strong>加盟オーナーが採用・運営（本部の採用負荷が低い）</strong> <span
+                            class="pill pill-green">◎</span></td>
+                </tr>
+                <tr>
+                    <td>売上の安定性</td>
+                    <td>直営売上のみ（変動大）</td>
+                    <td class="compare-winner"><strong>ロイヤリティ収入が安定ストック収益に</strong> <span
+                            class="pill pill-green">◎</span></td>
+                </tr>
+                <tr>
+                    <td>山本様の役割</td>
+                    <td>現場管理・採用・教育を直接</td>
+                    <td class="compare-winner"><strong>本部機能（教育・マーケ・戦略）に集中できる</strong> <span
+                            class="pill pill-green">◎</span></td>
+                </tr>
+                <tr>
+                    <td>リスク</td>
+                    <td>閉店時のコストも自社負担</td>
+                    <td>加盟店の失敗はブランドに影響（設計が重要）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="quote">
+            <strong>結論：山本様のゴール（プレイヤー離脱 ＋ 自己資本を使わない拡大 ＋ 教育に専念）は、FC展開と完全に一致しています。</strong>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 収益シミュレーション -->
+    <section>
+        <span class="section-label">Section 03</span>
+        <h2>収益シミュレーション</h2>
+
+        <h3>FC本部の収益モデル（イメージ）</h3>
+        <p style="margin-bottom:1.5rem;">
+            山本様の業態（小資本・ワンオペ可・高稼働率）はFC展開に最も適したモデルのひとつです。
+            以下は、山本様が本部をゼロから構築した場合の想定収益シミュレーションです。
+        </p>
+
+        <div class="sim-box">
+            <div class="sim-section-title">1 店舗あたりの本部収益（想定）</div>
+            <div class="sim-row">
+                <span class="sim-label">加盟店の目標売上</span>
+                <span class="sim-val">月 150 万円</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">加盟店の想定利益</span>
+                <span class="sim-val">月 40〜60 万円（固定費除く）</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">本部ロイヤリティ収入（月額固定想定）</span>
+                <span class="sim-val">月 10〜20 万円 / 店</span>
+            </div>
+
+            <div class="sim-section-title" style="margin-top:1.5rem;">FC20 店舗達成時（ロースペース年2〜3年目）</div>
+            <div class="sim-row">
+                <span class="sim-label">ロイヤリティ合計（20店 × 15万円）</span>
+                <span class="sim-val">月 300 万円</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">加盟金収入（ゼロ次〜1次募集 ×20件）</span>
+                <span class="sim-val">総額 3,000〜5,000 万円</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">直営2〜3店舗の売上（参考）</span>
+                <span class="sim-val">月 300〜450 万円</span>
+            </div>
+
+            <div class="sim-section-title" style="margin-top:1.5rem;">本部の収益（本部経費を差し引いたイメージ）</div>
+            <div class="sim-row">
+                <span class="sim-label">FC本部として月間利益（20店舗時）</span>
+                <span class="sim-val big">月 100〜200 万円</span>
+            </div>
+            <div class="sim-row">
+                <span class="sim-label">山本様の年収想定（役員報酬ベース）</span>
+                <span class="sim-val">1,000〜1,500 万円 / 年</span>
+            </div>
+        </div>
+
+        <div class="warn-box">
+            <strong>⚠️ 役員報酬の限界について</strong><br>
+            法人化して役員報酬として個人に引き出すと、課税率は最大50%近くになります。
+            年商2億円の会社でも、個人に残るお金は思ったより少ないのが現実です。
+            だからこそ、将来的に「M&Aによる株式売却（課税率20%）」という選択肢を
+            頭の片隅に置いておくことを推奨しています——今すぐでなくても大丈夫です。
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- FC展開の現実 -->
+    <section>
+        <span class="section-label">Section 04</span>
+        <h2>「本当にできるのか」 ── FC展開の現実</h2>
+
+        <p style="margin-bottom:1.5rem;">
+            「100店舗なんて現実的じゃない」「マニュアルもないのにどうする？」という疑問はまったく正常です。
+            リッツプロが伴走してきた事例をもとに、現実的なステップをお伝えします。
+        </p>
+
+        <h3>ブプラ（小顔サロン）の実績と山本様の対比</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>ブプラの当初状況</th>
+                    <th>山本様の現状</th>
+                    <th>比較</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>開始時の店舗数</td>
+                    <td>直営1店舗</td>
+                    <td>直営1店舗（自宅）</td>
+                    <td><span class="pill pill-gold">同等</span></td>
+                </tr>
+                <tr>
+                    <td>1年目打ち出し</td>
+                    <td>月売上100万円台</td>
+                    <td class="highlight">月150〜200万円</td>
+                    <td><span class="pill pill-green">優位</span></td>
+                </tr>
+                <tr>
+                    <td>初期コスト</td>
+                    <td>数百万円以内</td>
+                    <td class="highlight">自宅のためほぼゼロ</td>
+                    <td><span class="pill pill-green">大幅優位</span></td>
+                </tr>
+                <tr>
+                    <td>マニュアル</td>
+                    <td>当初ほぼなし</td>
+                    <td>当初ほぼなし</td>
+                    <td><span class="pill pill-gold">同等</span></td>
+                </tr>
+                <tr>
+                    <td>資格要件</td>
+                    <td>なし（技術研修のみ）</td>
+                    <td>歯科衛生士資格（ホワイトニング）</td>
+                    <td><span class="pill pill-red">要検討</span></td>
+                </tr>
+                <tr>
+                    <td>FC開始後のペース</td>
+                    <td>1年目1店、2年目30店、3年目100店</td>
+                    <td>（これから設計）</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warn-box">
+            <strong>⚠️ ホワイトニングのFC化における注意点</strong><br>
+            ホワイトニングに歯科衛生士または歯科医師の資格が必要な場合、
+            加盟オーナーが同条件を満たせるか確認が必要です。
+            「歯科衛生士不要で提供できるホワイトニング商材・手法の採用」か
+            「脱毛専門の横展開」を軸にするか、<strong>第2回ミーティングで一緒に確認したい重要ポイント</strong>です。
+        </div>
+
+        <h3>FC展開を成功させる3つの条件（山本様への評価）</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>FC成功の柱</th>
+                    <th>山本様の現状評価</th>
+                    <th>スコア</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>① 専門性</strong></td>
+                    <td>「脱毛×ホワイトニング」の組み合わせは独自。ただしFC化では絞り込みが必要かも</td>
+                    <td><span class="pill pill-gold">◯〜◎</span></td>
+                </tr>
+                <tr>
+                    <td><strong>② 拡大性</strong>（再現性・低コスト）</td>
+                    <td>ワンオペ・十坪以下・高利益率はFC向き。資格要件の整理が鍵</td>
+                    <td><span class="pill pill-gold">◯（整理次第で◎）</span></td>
+                </tr>
+                <tr>
+                    <td><strong>③ 社会性・共感性</strong></td>
+                    <td>「自分と同じように稼げる人を増やしたい」というMVVを言語化できれば強力</td>
+                    <td><span class="pill pill-gold">◯（言語化で◎）</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- リッツプロのサポート内容 -->
+    <section>
+        <span class="section-label">Section 05</span>
+        <h2>リッツプロが提供する支援内容</h2>
+
+        <p style="margin-bottom:2rem;">
+            リッツプロは「広告だけ」「コンサルだけ」ではなく、
+            FC展開の全体を伴走する支援を行っています。
+            山本様の現在地に合わせた、実際の支援フローを以下にご説明します。
+        </p>
+
+        <h3>Phase 0（今すぐ）── 基盤整備フェーズ</h3>
+        <div class="step-list">
+            <div class="step-item">
+                <h4>現状分析・事業整理（ヒアリング②）</h4>
+                <p>メニュー構成・客数・客単価・リピート率・スタッフ状況などの数字を整理。FC向き商品設計の方向性を決定します。</p>
+            </div>
+            <div class="step-item">
+                <h4>FCコンセプト設計</h4>
+                <p>「どんな人に」「いくらで出店できる形で」「何を売るFC」なのかを設計します。ホワイトニングの資格要件についてもここで解決策を出します。</p>
+            </div>
+            <div class="step-item">
+                <h4>直営店の標準化・マニュアル作成支援</h4>
+                <p>山本様の頭の中にある知識・技術を「誰でもできる形」に落とし込みます。接客フロー・カウンセリングシートなども含めてサポートします。</p>
+            </div>
+            <div class="step-item">
+                <h4>採用・研修体制の設計</h4>
+                <p>スタッフが山本様なしで動けるよう、日次報告シート・KPI管理表・研修フロー（例：3日間研修）を構築します。</p>
+            </div>
+        </div>
+
+        <h3>Phase 1（3〜6ヶ月後）── ゼロ次募集フェーズ</h3>
+        <div class="step-list">
+            <div class="step-item">
+                <h4>知人・身近な方へのゼロ次FC募集</h4>
+                <p>「一緒にマニュアルを作ってくれるパートナー」として、低加盟金で1〜3店舗テスト展開。データ収集と再現性の確認を行います。</p>
+            </div>
+            <div class="step-item">
+                <h4>説明会・商談フローの設計</h4>
+                <p>加盟希望者に向けた説明会資料・商談スクリプトを構築。今後の加盟開発を山本様が独力で進められるようにします。</p>
+            </div>
+            <div class="step-item">
+                <h4>加盟契約書・開示書面の整備</h4>
+                <p>FC法上必要な書類の整備を支援。専門家（行政書士）紹介も対応します。</p>
+            </div>
+        </div>
+
+        <h3>Phase 2（6〜18ヶ月後）── 本格拡大フェーズ</h3>
+        <div class="step-list">
+            <div class="step-item">
+                <h4>オンライン広告による加盟店開発</h4>
+                <p>Meta広告・LP制作を活用した加盟店獲得フローを整備。広告運用パートナーとのミーティングにも同席し、適切な施策を一緒に判断します。</p>
+            </div>
+            <div class="step-item">
+                <h4>月次コンサルティング</h4>
+                <p>数字の確認・課題解決・戦略の修正を毎月定期ミーティングで実施。本部としての意思決定を迷わず進められるよう伴走します。</p>
+            </div>
+            <div class="step-item">
+                <h4>オーナーミーティング設計</h4>
+                <p>加盟オーナーとの毎月の集会（オンライン可）設計。エンゲージメントを高め、「2店舗目出店率100%」を目指す文化を醸成します。</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ロードマップ -->
+    <section>
+        <span class="section-label">Section 06</span>
+        <h2>3年ロードマップ（案）</h2>
+
+        <div class="roadmap">
+            <div class="roadmap-item">
+                <div class="roadmap-year">2026年（YEAR 1）── 基盤構築フェーズ</div>
+                <div class="roadmap-title">プレイヤー脱却 ＋ マニュアル完成 ＋ ゼロ次FC1〜3店舗</div>
+                <div class="roadmap-desc">
+                    スタッフが山本様なしで回せる体制の構築（日次報告・KPI管理）<br>
+                    FCコンセプト設計・加盟店モデル店舗の選定<br>
+                    直営2号店の出店検討（今の良さを横展開するモデルで）<br>
+                    ゼロ次加盟店（知人・身近な方）でマニュアルのブラッシュアップ<br>
+                    <span class="pill pill-gold" style="margin-top:.5rem;display:inline-block;">目標：FC3店舗・直営2店舗</span>
+                </div>
+            </div>
+
+            <div class="roadmap-item">
+                <div class="roadmap-year">2027年（YEAR 2）── 拡大加速フェーズ</div>
+                <div class="roadmap-title">1次募集開始 ＋ FC10店舗到達 ＋ 本部体制強化</div>
+                <div class="roadmap-desc">
+                    再現性確認が取れたFC商品で1次募集開始（自社LP＋Meta広告）<br>
+                    加盟店商談フローの最適化・月5件以上の問い合わせ獲得を目標<br>
+                    本部スタッフ1〜2名採用（営業 or 加盟店サポート担当）<br>
+                    月次オーナーミーティング開始（エンゲージメント強化）<br>
+                    <span class="pill pill-gold"
+                        style="margin-top:.5rem;display:inline-block;">目標：FC10〜15店舗・月ロイヤリティ100〜200万円</span>
+                </div>
+            </div>
+
+            <div class="roadmap-item">
+                <div class="roadmap-year">2028年（YEAR 3）── 安定成長フェーズ</div>
+                <div class="roadmap-title">FC20店舗超 ＋ 年商2億円到達 ＋ 出口戦略の選択</div>
+                <div class="roadmap-desc">
+                    月10件以上の新規加盟問い合わせ体制<br>
+                    加盟オーナーの2店舗目出店が自然発生<br>
+                    M&A売却 or 継続拡大 or IPOの選択肢が明確に<br>
+                    この時点でFC20店舗があれば、売却価格は数億円規模も射程に<br>
+                    <span class="pill pill-green"
+                        style="margin-top:.5rem;display:inline-block;">目標：FC20〜30店舗・年商グループ2億円</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="result-card">
+                <div class="result-number">20+</div>
+                <div class="result-label">3年後のFC店舗数目標</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number">2億円</div>
+                <div class="result-label">グループ年商目標</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number">3日</div>
+                <div class="result-label">目指す研修期間（再現性の証明）</div>
+            </div>
+            <div class="result-card">
+                <div class="result-number">100%</div>
+                <div class="result-label">目指す2店舗目出店率（ブプラ実績値）</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 第2回ミーティングで確認したいこと -->
+    <section>
+        <span class="section-label">Section 07</span>
+        <h2>第2回ミーティングの議題・確認事項</h2>
+
+        <p style="margin-bottom:1.5rem;">
+            山本様についてさらに深くお話を伺いたいことがあります。
+            以下の項目を中心に、今後の方向性を一緒に決めていきます。
+        </p>
+
+        <h3>ヒアリングしたいこと</h3>
+        <div class="q-box">
+            <div class="q-item">現在のスタッフ（1名）の技術習得状況・離脱リスクはどうか？</div>
+            <div class="q-item">月別・メニュー別の売上構成（脱毛：ホワイトニングの比率）</div>
+            <div class="q-item">ホワイトニングを行うのに「歯科衛生士が施術する必要があるか」の整理</div>
+            <div class="q-item">今年の直営2号店出店はどのエリア・規模で考えているか？</div>
+            <div class="q-item">知人・身近にゼロ次FCの候補者はいるか（来月9月開業希望の方以外に）？</div>
+            <div class="q-item">現在使用している薬剤・機器の仕入れ先・ロット・コスト感</div>
+            <div class="q-item">リピート率・コース契約率・カウンセリングのトークフローはどうなっているか？</div>
+            <div class="q-item">山本様が「プレイヤーを離れる」ための条件として何が必要か？</div>
+        </div>
+
+        <h3>方向性の意思確認</h3>
+        <div class="q-box">
+            <div class="q-item">「脱毛＋ホワイトニング」を両方展開するか、絞り込むか</div>
+            <div class="q-item">直営店の移転 or 新規出店の優先順位をどうするか</div>
+            <div class="q-item">9月に加盟したい方との話を「ゼロ次FC」として進めるか</div>
+            <div class="q-item">リッツプロとの連携を始めるとすれば、何から着手するか</div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- よくある不安への回答 -->
+    <section>
+        <span class="section-label">Section 08</span>
+        <h2>山本様が感じている不安への回答</h2>
+
+        <p style="margin-bottom:2rem;">
+            第1回のお話の中で、山本様が率直に口にされた疑問・不安を振り返ります。
+            それぞれに対して、リッツプロの見解と実績データをもとにお答えします。
+        </p>
+
+        <!-- Q1 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 1</span>
+                <span class="faq-q-text">「今の売上は私が頑張っているだけで、ビジネスモデルの力なのかわからない。属人性が高くてFC化できるか不安」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    これは全ての優秀な1人オーナーが最初に感じる、まったく正常な疑問です。<br><br>
+                    ただし、「属人性が高い＝FC化できない」ではありません。<br>
+                    ブプラ（小顔サロン）も最初は代表者1人の技術によるものでした。そこから
+                    <strong>「6割の実力でも月150万円の売上が出る」</strong>設計に落とし込むことで、全国に200店舗展開しました。<br><br>
+                    山本様のケースで重要なのは、「山本様本人がいなくても月100万以上売れる形を作れるか」という設計の問題です。
+                    FC化の前段として<strong>まず直営2号店でスタッフだけで回す実証</strong>を行い、そこで再現性を確認することが第一歩です。
+                    一人で全部できて初めてFC化するのではなく、「できる仕組み」に変えながら並行して進める方法を取ります。
+                </p>
+            </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 2</span>
+                <span class="faq-q-text">「マニュアルがゼロ。今の忙しさで、言われたことをこなす時間が取れるのか不安」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    これは最もリアルで重要な懸念です。正直に言うと、確かに最初の3〜6ヶ月は<strong>「今より少し余裕が必要」</strong>です。
+                    ただし、リッツプロはこの点を熟知しているため、<strong>山本様に「作ってもらう」ではなく「一緒に作る・代わりに作る」</strong>体制で進めます。<br><br>
+                    例えば：<br>
+                    ・山本様に「口頭で話してもらったこと」をリッツプロ側でドキュメント化<br>
+                    ・日次報告シートや研修チェックリストはリッツプロがテンプレートを用意<br>
+                    ・今いるスタッフに「このシートを使ってもらう」だけでデータが溜まる仕組みを構築<br><br>
+                    マニュアルゼロからスタートした案件は、僕が担当している案件の中にもあります。
+                    採用票からスタッフの日次報告シートまで、リッツプロが全て用意して起動させました。
+                    <strong>山本様の仕事は「見てOKかどうか確認すること」だけ</strong>という役割にするのが目標です。
+                </p>
+            </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 3</span>
+                <span class="faq-q-text">「100店舗って、物件も人材も探すだけで何ヶ月もかかる。そんな簡単にできるものなの？」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    おっしゃる通り、簡単ではありません。ただし「仕組みの設計次第で難易度は大きく変わる」というのが実態です。<br><br>
+                    ブプラが全国展開できた理由は<strong>「物件・採用の両方で難易度が低い設計」</strong>にしたからです：<br>
+                    ・<strong>物件</strong>：路面店不要・空中階マンションでOK・30㎡程度・オートロックなしが基準
+                    → これだけで条件に合う物件は日本中にどこでも見つかります<br>
+                    ・<strong>採用</strong>：18時終業設定で主婦・ダブルワーカー層にフィット
+                    → 募集すると応募が集まりやすい条件設計<br><br>
+                    山本様の業態もこの設計に近く、「誰でも入れやすい物件・誰でも働きやすい条件」に整えることが
+                    スケールの前提です。逆に言えば、<strong>今の自宅サロンの条件のまま横展開するだけで北海道内は広げられます。</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 4</span>
+                <span class="faq-q-text">「脱毛もホワイトニングもセルフが増えていて、競合が多い。今更FC化できるジャンルなのか」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    「セルフ脱毛・セルフホワイトニング」の台頭は確かに注目すべき変化です。ただ、視点を変えると
+                    <strong>これはむしろチャンスです。</strong><br><br>
+                    ・セルフは「安さ」を売りにしているマーケット → 価格競争にしかなりません<br>
+                    ・山本様の強みは「歯科衛生士が施術する高品質ホワイトニング＋脱毛の組み合わせ」<br>
+                    ・ホットペッパービューティーを見ると、<strong>「技術者が施術する」脱毛×ホワイトニングのコンボ店舗はまだ北海道内に少ない</strong><br><br>
+                    FCで出店者が増えるとセルフと差別化される高品質モデルとして逆に市場認知が高まります。
+                    ブプラが「セルフ小顔器があるのに売れるの？」と言われながら200店舗になれたのも同じ理由です。
+                    <strong>「誰でもできる安いもの」と「ちゃんとしたプロに施術してもらえる」は、ターゲットが根本的に違います。</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 5</span>
+                <span class="faq-q-text">「最初2割と言っていた人が急に4割に変えてきた。お金の話になると信頼できるか不安。慎重に判断したい」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    これは山本様の判断が<strong>完全に正しい</strong>です。契約前に条件を変えてくる相手は要注意です。<br><br>
+                    リッツプロが提案するモデルは原則として下記の通りです：<br>
+                    ・<strong>ロイヤリティは一切いただかない</strong>（山本様の継続収益には一切介入しない）<br>
+                    ・報酬は<strong>加盟金から</strong>のみ。かつ<strong>マーケティングコストを先に差し引いた後の残額</strong>から一定割合<br>
+                    ・初期契約料（着手金）はかかりますが、進める前に書面で明示します<br><br>
+                    また、リッツプロとの連携では<strong>山本様が本部の主体</strong>です。代わりに経営されてしまうのではなく、
+                    「山本様の会社を一緒に育てる」スタンスです。慎重に他の話を聞いてから判断することを歓迎します。
+                    急かしたり、その場での決断を求めることはしません。
+                </p>
+            </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item">
+            <div class="faq-q">
+                <span class="faq-q-badge">不安 6</span>
+                <span class="faq-q-text">「M&Aは10年後のイメージ。まだ自分でやりたい。すぐ売るとは思えない」</span>
+            </div>
+            <div class="faq-a">
+                <div class="faq-a-badge">リッツプロの回答</div>
+                <p>
+                    <strong>今すぐM&Aを目指す必要はまったくありません。</strong>
+                    リッツプロが最初に「M&A」の話をするのは、後から選択肢を失わないための設計をするためです。<br><br>
+                    重要なのは、<strong>今の段階でロイヤリティを誰かに渡す契約を結んでしまうと、
+                        10年後に「売りたい」と思ったときに売れなくなる</strong>ということです。
+                    これが地元経営者の「4割」提案が危険だった理由でもあります。<br><br>
+                    山本様のゴールが「10年自分でやって、その後は子どもに継ぐ or 売却」であっても、
+                    「ずっと自分の会社として運営し続ける」であっても、
+                    <strong>「正しく設計されたFC本部」を作ることは全てのゴールにとって有利</strong>です。
+                    M&Aを「する・しない」の決断は後でいい。今は「後から選べる状態」を作ることが大切です。
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <hr class="divider">
+
+    <!-- 費用感・契約 -->
+    <section>
+        <span class="section-label">Section 09</span>
+
+        <h2>リッツプロとの連携について（費用感）</h2>
+
+        <p style="margin-bottom:2rem;">
+            第1回でご説明した通り、リッツプロは<strong>ロイヤリティからは一切取らない</strong>モデルです。
+            山本様の将来的な売却額が最大化されるよう、本部側の収益を守ります。
+        </p>
+
+        <div class="highlight-box">
+            <h3>💡 リッツプロの報酬モデル（概要）</h3>
+            <p>
+                ① <strong>初期契約料</strong>（着手金）：本部構築支援の開始に際する固定費用<br>
+                ② <strong>成果連動報酬</strong>：加盟金から一定割合（制作・マーケコストを差し引いた残額の70%程度）<br>
+                ③ ロイヤリティへの関与：なし（山本様の会社の継続収益はすべて山本様に残る）
+            </p>
+            <p style="margin-top:1rem;">
+                ※ 具体的な金額は、事業規模・現状・支援範囲によって変わります。
+                第2回ミーティングでヒアリングの上、個別にご提示させていただきます。
+            </p>
+        </div>
+
+        <h3>他社との主な違い</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>比較項目</th>
+                    <th>地元の経営者（前の提案）</th>
+                    <th>一般的なFC開発会社</th>
+                    <th>リッツプロ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>本部への権限</td>
+                    <td>ロイヤリティの40〜60%</td>
+                    <td>ロイヤリティの一定割合</td>
+                    <td class="compare-winner"><strong>ゼロ（ロイヤリティ不介入）</strong></td>
+                </tr>
+                <tr>
+                    <td>M&A時の影響</td>
+                    <td>売却額が大幅減額</td>
+                    <td>契約条件次第で制限も</td>
+                    <td class="compare-winner"><strong>なし（売却益はすべて山本様へ）</strong></td>
+                </tr>
+                <tr>
+                    <td>支援範囲</td>
+                    <td>本部運営代行（主体性が失われる）</td>
+                    <td>部分支援が多い</td>
+                    <td class="compare-winner"><strong>全体伴走（本部構築〜加盟開発〜広告まで）</strong></td>
+                </tr>
+                <tr>
+                    <td>実績</td>
+                    <td>19店舗（自社）</td>
+                    <td>様々</td>
+                    <td class="compare-winner"><strong>200店舗超（ブプラ）など複数実績</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>次のステップへ</h2>
+        <p>
+            「何から始めるべきか」「本当に私のビジネスで可能か」──その答えを<br>
+            第2回ミーティングで一緒に見つけていきましょう。<br>
+            まだ迷っている段階でも構いません。より詳しくお話できることを楽しみにしています。
+        </p>
+        <a href="mailto:info@ritzpro.jp" class="cta-btn">お問い合わせ・日程調整</a>
+    </div>
+
+    <footer>
+        <p>株式会社リッツプロ ｜ 本資料は山本あふい様専用です。第三者への開示はご遠慮ください。</p>
+        <p style="margin-top:.5rem;">© 2026 Ritz Pro Inc. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

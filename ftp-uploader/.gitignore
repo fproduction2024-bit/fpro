@@ -1,0 +1,11 @@
+# FTP接続情報（パスワード含む）
+config.json
+
+# Pythonキャッシュ
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# macOS
+.DS_Store

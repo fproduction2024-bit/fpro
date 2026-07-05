@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>初案件獲得テンプレート集 | Skill Hacks 全話視聴者限定特典</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --orange: #F06543;
+            --orange-light: #FFF4F1;
+            --bg: #f8f9fb;
+            --white: #fff;
+            --text: #1a1a2e;
+            --sub: #555;
+            --muted: #999;
+            --border: #e8e8e8;
+            --radius: 10px
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px
+        }
+
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 32px 20px 28px;
+            text-align: center
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .accent {
+            color: #fbbf24
+        }
+
+        .sub {
+            font-size: 13px;
+            opacity: .75
+        }
+
+        .tab-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--border);
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .tab-nav-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .tab-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--sub);
+            cursor: pointer;
+            background: var(--white);
+            font-family: inherit;
+            transition: all .2s;
+            white-space: nowrap
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--orange);
+            color: #fff;
+            border-color: var(--orange)
+        }
+
+        .tab-content {
+            display: none
+        }
+
+        .tab-content.active {
+            display: block
+        }
+
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 16px 16px 60px
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            overflow: hidden
+        }
+
+        .card-head {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .card-head .icon {
+            font-size: 1.3rem
+        }
+
+        .card-head h2 {
+            font-size: 1rem;
+            font-weight: 900
+        }
+
+        .card-body {
+            padding: 20px
+        }
+
+        .tpl-wrap {
+            position: relative;
+            margin: 12px 0
+        }
+
+        .tpl-box {
+            background: #f7f7f7;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            color: #333;
+            white-space: pre-wrap;
+            word-break: break-all
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 10px;
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .copy-btn.copied {
+            background: #333
+        }
+
+        .tip-box {
+            background: var(--orange-light);
+            border-left: 3px solid var(--orange);
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--sub);
+            margin: 12px 0;
+            line-height: 1.7
+        }
+
+        .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 4px;
+            display: block
+        }
+
+        .warn-box {
+            background: #fff8ed;
+            border-left: 3px solid #f59e0b;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--sub);
+            margin: 12px 0
+        }
+
+        .sect-title {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            border-bottom: 1px solid #fde4d8;
+            padding-bottom: 6px
+        }
+
+        .body-text {
+            font-size: .9rem;
+            color: var(--sub);
+            margin-bottom: 12px;
+            line-height: 1.8
+        }
+
+        .body-text strong {
+            color: var(--text)
+        }
+
+        .tbl-wrap {
+            overflow-x: auto;
+            margin: 12px 0
+        }
+
+        .tbl-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .82rem
+        }
+
+        .tbl-wrap th {
+            background: #f7f7f7;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border)
+        }
+
+        .tbl-wrap td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--sub)
+        }
+
+        .list-item {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: .88rem;
+            color: var(--sub);
+            margin-bottom: 6px
+        }
+
+        .list-item.ng {
+            background: #fff1f2;
+            border: 1px solid #fecaca
+        }
+
+        .list-item.ok {
+            background: #f0fdf4;
+            border: 1px solid #86efac
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: var(--muted);
+            background: var(--white);
+            border-top: 1px solid var(--border)
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="badge">🎁 全話視聴者限定特典②</div>
+        <h1>📝 初案件獲得<span class="accent">テンプレート集</span></h1>
+        <p class="sub">そのまま使える・カスタマイズして使えるテンプレート。【 】内をあなたの情報に置き換えてください。</p>
+    </header>
+
+    <nav class="tab-nav">
+        <div class="tab-nav-inner">
+            <button class="tab-btn active" onclick="showTab('profile',this)">👤 プロフィール</button>
+            <button class="tab-btn" onclick="showTab('proposal',this)">📬 提案文</button>
+            <button class="tab-btn" onclick="showTab('price',this)">💰 価格設定</button>
+            <button class="tab-btn" onclick="showTab('message',this)">💬 メッセージ</button>
+            <button class="tab-btn" onclick="showTab('ai',this)">🤖 AI活用</button>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <!-- PROFILE -->
+        <div class="tab-content active" id="tab-profile">
+            <div class="card">
+                <div class="card-head"><span class="icon">🎬</span>
+                    <h2>動画編集 プロフィール</h2>
+                </div>
+                <div class="card-body">
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t1">はじめまして、【名前】と申します。プロフィールをご覧いただきありがとうございます。
+
+                            ■ 対応可能な業務
+                            ・YouTube動画の編集（カット・テロップ・BGM・SE・画像挿入）
+                            ・ショート動画 / リール動画の編集　・サムネイル作成
+
+                            ■ 使用ツール
+                            Adobe Premiere Pro / Photoshop / Canva
+
+                            ■ 制作実績
+                            【サンプル動画のURL or ポートフォリオURL】
+
+                            ■ 納期
+                            ・10分動画：3〜5営業日　・ショート動画：1〜2営業日
+
+                            ■ 稼働時間
+                            平日【○時〜○時】、土日【○時〜○時】／連絡は24時間以内に返信いたします。
+
+                            ■ 心がけていること
+                            ・視聴維持率を意識した編集　・テイストの統一　・納期厳守とこまめな進捗共有
+
+                            まずはお気軽にご相談ください。よろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t1',this)">コピー</button>
+                    </div>
+                    <div class="tip-box"><span class="tip-label">💡
+                            ワンポイント</span>「視聴維持率を意識した編集」は強力なワード。クライアントは「再生数を伸ばしたい」のが本音。</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head"><span class="icon">✍️</span>
+                    <h2>ライティング プロフィール</h2>
+                </div>
+                <div class="card-body">
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t2">はじめまして、【名前】と申します。プロフィールをご覧いただきありがとうございます。
+
+                            ■ 対応可能な業務
+                            ・SEO記事の執筆（キーワード選定〜入稿まで対応可）
+                            ・ブログ記事・コラムの執筆　・取材記事・インタビュー記事の執筆
+                            ・WordPress入稿作業
+
+                            ■ 得意ジャンル
+                            【得意なジャンルを2〜3つ記載。例：美容・健康、IT・テクノロジー、ビジネス】
+
+                            ■ 執筆実績
+                            【サンプル記事URL or ポートフォリオURL】
+
+                            ■ 納期　・3,000字の記事：2〜3営業日　・5,000字以上：4〜5営業日
+
+                            ■ 稼働時間
+                            平日【○時〜○時】、土日【○時〜○時】
+
+                            ■ 心がけていること
+                            ・読者にとって分かりやすい文章　・SEOを意識した構成　・正確な情報を届けること
+
+                            お気軽にご相談ください。よろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t2',this)">コピー</button>
+                    </div>
+                    <div class="tip-box"><span class="tip-label">💡
+                            ワンポイント</span>「得意ジャンル」は最も差別化しやすいポイント。社会人経験＝あなただけの専門ジャンル。</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head"><span class="icon">🎨</span>
+                    <h2>デザイン・プログラミング プロフィール</h2>
+                </div>
+                <div class="card-body">
+                    <div class="sect-title">デザイン</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t3">はじめまして、【名前】と申します。プロフィールをご覧いただきありがとうございます。
+
+                            ■ 対応可能な業務
+                            ・バナー広告制作（Web / SNS用）　・SNS用画像制作
+                            ・YouTubeサムネイル制作　・LP（ランディングページ）デザイン
+
+                            ■ 使用ツール
+                            Adobe Photoshop / Illustrator / Canva / Figma
+
+                            ■ 制作実績　【ポートフォリオURL】
+
+                            ■ 納期
+                            ・バナー1枚：1〜2営業日　・LPデザイン：5〜7営業日
+
+                            お気軽にご相談ください。よろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t3',this)">コピー</button>
+                    </div>
+                    <div class="sect-title">プログラミング</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t4">はじめまして、【名前】と申します。プロフィールをご覧いただきありがとうございます。
+
+                            ■ 対応可能な業務
+                            ・LP（ランディングページ）コーディング　・コーポレートサイト制作・修正
+                            ・WordPressカスタマイズ　・レスポンシブ対応（スマホ・タブレット）
+
+                            ■ 使用言語
+                            HTML / CSS / JavaScript / jQuery / WordPress
+
+                            ■ 制作実績　【ポートフォリオURL】
+
+                            ■ 納期
+                            ・LP1ページ：最短3営業日〜　・サイト修正：最短1営業日〜
+
+                            ■ 稼働時間
+                            平日【○時〜○時】、土日【○時〜○時】／連絡は24時間以内に返信いたします。
+
+                            まずはお気軽にご相談ください。よろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t4',this)">コピー</button>
+                    </div>
+                    <div class="warn-box">⚠️ 「なんでもできます」は逆効果。自分が実際にできることだけを具体的に書きましょう。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROPOSAL -->
+        <div class="tab-content" id="tab-proposal">
+            <div class="card">
+                <div class="card-head"><span class="icon">📬</span>
+                    <h2>案件応募（提案文）テンプレート</h2>
+                </div>
+                <div class="card-body">
+                    <div class="sect-title">基本テンプレート（全スキル共通）</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t5">【クライアント名 or 会社名】様
+
+                            はじめまして、【名前】と申します。
+                            今回の案件に興味を持ち、ご応募いたしました。
+
+                            ■ 応募理由
+                            【案件の内容に触れて、なぜ自分が適任か1〜2文で記載】
+
+                            ■ 対応可能な内容
+                            【案件の要件に合わせて箇条書き】
+
+                            ■ 制作実績　【サンプルURL or ポートフォリオURL】
+
+                            ■ 納期　ご依頼から【○】営業日以内に納品可能です。
+
+                            ■ 稼働時間
+                            平日【○時〜○時】で対応可能です。チャットでのご連絡は24時間以内に返信いたします。
+
+                            ■ 料金
+                            ご予算【○○円】の範囲で対応可能です。※ご予算に応じてご相談させてください。
+
+                            ご検討のほどよろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t5',this)">コピー</button>
+                    </div>
+                    <div class="sect-title">差別化ポイント追加版</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t6">【上記テンプレートに加えて、以下のいずれかを追記】
+
+                            ① 具体的な提案を添える
+                            「お送りいただいた参考動画を拝見しました。テロップのフォントは○○系、BGMは○○の雰囲気が合うと考えています。」
+
+                            ② 相手のチャンネル/サイトを分析する
+                            「○○様のチャンネルを拝見しました。○○な世界観が素敵だと感じました。その雰囲気を崩さない編集を心がけます。」
+
+                            ③ テスト納品を提案する
+                            「まず1本、テスト的にお受けすることも可能です。品質をご確認いただいた上で、継続をご判断ください。」</div>
+                        <button class="copy-btn" onclick="copyText('t6',this)">コピー</button>
+                    </div>
+                    <div class="tip-box"><span class="tip-label">💡
+                            ワンポイント</span>①が最も効果的。「ちゃんと案件内容を見ている」と伝わるだけで、返信率が<strong>2〜3倍</strong>になります。コピペ感のある提案文は見てもらえません。
+                    </div>
+
+                    <div class="sect-title">📊 応募のリアルデータ</div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>応募方法</th>
+                                    <th>返信率</th>
+                                    <th>受注率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>コピペ提案文</td>
+                                    <td>5〜8%</td>
+                                    <td>10〜20%</td>
+                                </tr>
+                                <tr>
+                                    <td>カスタマイズ提案文</td>
+                                    <td>15〜25%</td>
+                                    <td>30〜50%</td>
+                                </tr>
+                                <tr>
+                                    <td>作品分析＋提案文</td>
+                                    <td>25〜40%</td>
+                                    <td>50〜70%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="body-text">300件応募してようやく初案件を取り、その後月50万稼ぐ動画編集者になった方もいます。数を打てば当たる。当たった後は急成長します。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRICE -->
+        <div class="tab-content" id="tab-price">
+            <div class="card">
+                <div class="card-head"><span class="icon">💰</span>
+                    <h2>価格設定ガイドライン</h2>
+                </div>
+                <div class="card-body">
+                    <div class="sect-title">初心者が設定すべき価格の目安</div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>スキル</th>
+                                    <th>案件例</th>
+                                    <th>初心者相場</th>
+                                    <th>実績3件後</th>
+                                    <th>実績10件後</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>動画編集</td>
+                                    <td>YouTube 10分</td>
+                                    <td>3,000〜5,000円</td>
+                                    <td>5,000〜1万円</td>
+                                    <td>1〜2万円</td>
+                                </tr>
+                                <tr>
+                                    <td>動画編集</td>
+                                    <td>ショート動画</td>
+                                    <td>1,000〜3,000円</td>
+                                    <td>3,000〜5,000円</td>
+                                    <td>5,000〜1万円</td>
+                                </tr>
+                                <tr>
+                                    <td>ライティング</td>
+                                    <td>3,000字記事</td>
+                                    <td>文字単価1円〜</td>
+                                    <td>文字単価2〜3円</td>
+                                    <td>文字単価3〜5円</td>
+                                </tr>
+                                <tr>
+                                    <td>デザイン</td>
+                                    <td>バナー1枚</td>
+                                    <td>3,000〜5,000円</td>
+                                    <td>5,000〜1万円</td>
+                                    <td>1〜3万円</td>
+                                </tr>
+                                <tr>
+                                    <td>プログラミング</td>
+                                    <td>LP1ページ</td>
+                                    <td>3〜5万円</td>
+                                    <td>5〜10万円</td>
+                                    <td>10〜30万円</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tip-box"><span
+                            class="tip-label">ポイント</span>最初の3件は「実績を作ること」が目的。相場より少し安めに設定して、★5のレビューを集めましょう。実績3件後は段階的に単価を上げていきます。
+                    </div>
+
+                    <div class="sect-title">値段設定のやってはいけない</div>
+                    <div class="list-item ng">❌ <strong>いきなり高額</strong>：実績ゼロで相場以上の価格をつけると選ばれない</div>
+                    <div class="list-item ng">❌ <strong>「いくらでもいいです」</strong>：自信がないように見える。必ず具体的な金額を提示する</div>
+                    <div class="list-item ok">✅ <strong>最適解</strong>：相場の70〜80%で提示し、「実績づくりのため特別価格です」と添える</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MESSAGE -->
+        <div class="tab-content" id="tab-message">
+            <div class="card">
+                <div class="card-head"><span class="icon">💬</span>
+                    <h2>クライアントへのメッセージテンプレート</h2>
+                </div>
+                <div class="card-body">
+                    <div class="sect-title">案件受注直後</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t7">【クライアント名】様
+
+                            この度はご依頼いただき、誠にありがとうございます。
+                            精一杯取り組ませていただきます。
+
+                            つきまして、以下の点を確認させてください。
+                            1. 【確認事項①（例：素材の受け渡し方法）】
+                            2. 【確認事項②（例：参考イメージ）】
+                            3. 納期は【○月○日】でよろしいでしょうか？
+
+                            ご確認のほどよろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t7',this)">コピー</button>
+                    </div>
+
+                    <div class="sect-title">進捗報告</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t8">【クライアント名】様
+
+                            お世話になっております、【名前】です。
+                            進捗のご報告です。
+
+                            ■ 現在の進捗
+                            【具体的な状況：例「全体の50%が完了しました。△△の部分を作業中です」】
+
+                            ■ 完了予定
+                            【○月○日】までに初稿をお送りする予定です。
+
+                            何かご要望や変更点がございましたら、お気軽にお知らせください。
+                            引き続きよろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t8',this)">コピー</button>
+                    </div>
+                    <div class="tip-box"><span class="tip-label">💡</span>作業の50%時点で1回、納品前に1回──最低2回は進捗報告を入れると信頼度が上がります。
+                    </div>
+
+                    <div class="sect-title">納品時</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t9">【クライアント名】様
+
+                            お世話になっております、【名前】です。
+                            納品物が完成いたしましたので、お送りいたします。
+
+                            ■ 納品ファイル　【ファイル名 / URL】
+
+                            ■ 補足事項　【修正回数の残り、注意点など】
+
+                            ご確認いただき、修正点がございましたらお知らせください。
+                            【○回】まで修正対応いたします。
+
+                            今後ともよろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t9',this)">コピー</button>
+                    </div>
+
+                    <div class="sect-title">リピート（継続案件）のお願い</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t10">【クライアント名】様
+
+                            この度はご依頼いただき、ありがとうございました。
+                            ご一緒にお仕事ができ、大変勉強になりました。
+
+                            もし今後も同様のお仕事がございましたら、
+                            ぜひお声がけいただけますと幸いです。
+
+                            継続的にご依頼いただける場合、
+                            通常よりお得な料金でご提案することも可能です。
+
+                            今後ともよろしくお願いいたします。</div>
+                        <button class="copy-btn" onclick="copyText('t10',this)">コピー</button>
+                    </div>
+                    <div class="tip-box"><span class="tip-label">💡
+                            ワンポイント</span>リピートのお願いを「わざわざ」送る人は少ない。だからこそ送るだけで差別化になります。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI -->
+        <div class="tab-content" id="tab-ai">
+            <div class="card">
+                <div class="card-head"><span class="icon">🤖</span>
+                    <h2>AI活用 Tips</h2>
+                </div>
+                <div class="card-body">
+                    <p class="body-text">ChatGPTやClaude等のAIツールを使えば、テンプレートのカスタマイズが格段に楽になります。</p>
+                    <div class="sect-title">プロフィール文のAIカスタマイズ</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t11">以下のプロフィール文テンプレートを、私の情報に合わせてカスタマイズしてください。
+
+                            【テンプレートをここにコピペ】
+
+                            ■ 私の情報
+                            ・名前：○○
+                            ・スキル：動画編集（Premiere Pro）
+                            ・稼働可能時間：平日21時〜24時、土日10時〜18時
+                            ・強み：前職の営業経験でクライアント対応が得意
+                            ・ポートフォリオURL：○○</div>
+                        <button class="copy-btn" onclick="copyText('t11',this)">コピー</button>
+                    </div>
+                    <div class="sect-title">提案文のAIカスタマイズ</div>
+                    <div class="tpl-wrap">
+                        <div class="tpl-box" id="t12">以下の案件に応募する提案文を作ってください。
+
+                            ■ 案件名：【案件ページからコピペ】
+                            ■ 案件の詳細：【案件ページからコピペ】
+                            ■ 私のスキル：○○
+                            ■ ポートフォリオ：○○
+
+                            以下のテンプレートをベースに、この案件に特化した提案文にカスタマイズしてください。
+                            特に「応募理由」は案件内容に具体的に触れること。
+
+                            【テンプレートをここにコピペ】</div>
+                        <button class="copy-btn" onclick="copyText('t12',this)">コピー</button>
+                    </div>
+                    <div class="sect-title">⚠️ AI活用の注意点</div>
+                    <div class="list-item ng">🚫 <strong>そのままコピペしない</strong>：必ず自分の言葉で微調整する</div>
+                    <div class="list-item ng">🚫 <strong>嘘を書かない</strong>：AIは実績を盛ることがある。嘘の実績はNG</div>
+                    <div class="list-item ng">🚫 <strong>毎回同じ文を使い回す</strong>：コピペ感が出てバレる</div>
+                    <div class="list-item ok">✅ <strong>最終チェックは自分で</strong>：送信前に必ず音読する</div>
+                    <div class="tip-box" style="margin-top:16px">AIは「書き出しの壁」を超えるためのツール。最終的な仕上げは、あなた自身の言葉で。</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer
+        style="text-align:center;padding:24px 20px;font-size:11px;color:var(--muted);background:var(--white);border-top:1px solid var(--border)">
+        <p>© Skill Hacks by Brain Inc. ｜ スキルハックス 全話視聴者限定特典</p>
+        <p style="margin-top:6px">※ 本コンテンツの内容は個人の経験に基づくものであり、成果を保証するものではありません。</p>
+    </footer>
+    <script>
+        function showTab(name, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            btn.classList.add('active');
+        }
+        function copyText(id, btn) {
+            navigator.clipboard.writeText(document.getElementById(id).textContent).then(() => {
+                const o = btn.textContent; btn.textContent = 'コピーしました！'; btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = o; btn.classList.remove('copied'); }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>

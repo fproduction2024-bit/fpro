@@ -1,0 +1,3253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コミット｜プロジェクトダッシュボード</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b0f;
+      --surface: #12141a;
+      --surface2: #1a1d27;
+      --surface3: #22263a;
+      --border: rgba(255,255,255,0.07);
+      --border-bright: rgba(255,255,255,0.15);
+
+      --primary: #6c63ff;
+      --primary-glow: rgba(108, 99, 255, 0.25);
+      --primary-dim: rgba(108, 99, 255, 0.1);
+
+      --accent: #ff6b6b;
+      --accent2: #ffd166;
+      --accent3: #06d6a0;
+      --accent4: #118ab2;
+
+      --text: #e8eaf0;
+      --text-dim: #8b90a8;
+      --text-muted: #4a4f66;
+
+      --red: #ff4757;
+      --yellow: #ffd166;
+      --green: #06d6a0;
+      --blue: #118ab2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ═══ HEADER ═══ */
+    .header {
+      background: linear-gradient(135deg, #0d0e1a 0%, #12141f 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), #a855f7);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .header-badge {
+      background: var(--primary-dim);
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      color: #a89cff;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .header-date {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: right;
+    }
+
+    /* ═══ NAV TABS ═══ */
+    .nav-tabs {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+    }
+
+    .nav-tabs-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+    }
+
+    .tab-btn {
+      padding: 14px 22px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      font-family: 'Noto Sans JP', sans-serif;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* ═══ MAIN ═══ */
+    .main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ═══ SECTION TITLES ═══ */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ═══ GRID ═══ */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    @media (max-width: 1024px) {
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .main { padding: 16px; }
+    }
+
+    /* ═══ CARDS ═══ */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-1px);
+    }
+
+    .card-sm { padding: 18px; }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-value {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+      letter-spacing: -1px;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ═══ STATUS BADGE ═══ */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge-done { background: rgba(6,214,160,0.15); color: var(--green); border: 1px solid rgba(6,214,160,0.3); }
+    .badge-wip { background: rgba(255,209,102,0.15); color: var(--yellow); border: 1px solid rgba(255,209,102,0.3); }
+    .badge-todo { background: rgba(139,144,168,0.1); color: var(--text-dim); border: 1px solid var(--border); }
+    .badge-urgent { background: rgba(255,71,87,0.15); color: var(--red); border: 1px solid rgba(255,71,87,0.3); }
+    .badge-primary { background: var(--primary-dim); color: #a89cff; border: 1px solid rgba(108,99,255,0.3); }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ═══ FUNNEL CARD ═══ */
+    .funnel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .funnel-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .funnel-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .funnel-ep {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .funnel-title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .funnel-meta {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+
+    .funnel-body { padding: 16px 24px 20px; }
+
+    .funnel-role {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .funnel-blocks { display: flex; flex-direction: column; gap: 8px; }
+
+    .block-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .block-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .block-text { font-size: 12px; line-height: 1.5; flex: 1; }
+    .block-label { font-weight: 600; }
+    .block-sub { color: var(--text-dim); font-size: 11px; margin-top: 2px; }
+
+    .funnel-gift {
+      margin-top: 14px;
+      background: var(--surface2);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .funnel-gift-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a89cff;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .funnel-hook {
+      margin-top: 10px;
+      background: rgba(255,209,102,0.05);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ═══ PROGRESS ═══ */
+    .progress-bar {
+      height: 6px;
+      background: var(--surface3);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+
+    /* ═══ STAT CARDS ═══ */
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .stat-info {}
+    .stat-value { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+    .stat-label { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+    /* ═══ PERSONA CARD ═══ */
+    .persona-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .pain-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pain-item:last-child { border-bottom: none; }
+
+    .pain-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .pain-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .pain-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+    /* ═══ MESSAGE CARD ═══ */
+    .quote-block {
+      background: var(--surface2);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      font-size: 14px;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .truth-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .truth-num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary-dim);
+      border: 1px solid rgba(108,99,255,0.3);
+      color: #a89cff;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .truth-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .truth-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+    /* ═══ TASK ═══ */
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface2);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .task-item:hover { border-color: var(--border-bright); }
+    .task-item.done { opacity: 0.5; }
+
+    .task-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--border-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.2s;
+    }
+
+    .task-check.checked {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .task-body { flex: 1; }
+    .task-title { font-size: 13px; font-weight: 600; line-height: 1.4; }
+    .task-meta { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+
+    /* ═══ KEYWORD TABLE ═══ */
+    .kw-table { width: 100%; border-collapse: collapse; }
+    .kw-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .kw-table td {
+      padding: 12px 12px;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .kw-table tr:last-child td { border-bottom: none; }
+    .kw-table tr:hover td { background: var(--surface2); }
+
+    .hit { color: var(--green); }
+    .miss { color: var(--red); }
+
+    /* ═══ TIMELINE ═══ */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -24px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid;
+    }
+
+    .timeline-item h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .timeline-item p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+    /* ═══ COLORS ═══ */
+    .c-purple { color: var(--primary); }
+    .c-yellow { color: var(--yellow); }
+    .c-red { color: var(--red); }
+    .c-green { color: var(--green); }
+    .c-blue { color: var(--blue); }
+    .c-dim { color: var(--text-dim); }
+
+    .bg-purple { background: var(--primary-dim); }
+    .bg-yellow { background: rgba(255,209,102,0.1); }
+    .bg-red { background: rgba(255,71,87,0.1); }
+    .bg-green { background: rgba(6,214,160,0.1); }
+    .bg-blue { background: rgba(17,138,178,0.1); }
+
+    .border-purple { border-color: rgba(108,99,255,0.3); }
+    .border-yellow { border-color: rgba(255,209,102,0.3); }
+    .border-red { border-color: rgba(255,71,87,0.3); }
+    .border-green { border-color: rgba(6,214,160,0.3); }
+
+    /* ═══ DIVIDER ═══ */
+    .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+    /* ═══ GLOW EFFECT ═══ */
+    .glow-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px; right: -1px; bottom: -1px;
+      background: linear-gradient(135deg, rgba(108,99,255,0.2), transparent, rgba(168,85,247,0.1));
+      border-radius: inherit;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .glow-card > * { position: relative; z-index: 1; }
+
+    /* ═══ HERO BANNER ═══ */
+    .hero-banner {
+      background: linear-gradient(135deg, #12101e 0%, #0f1420 50%, #0a1220 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 40px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: 10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      font-size: 12px;
+      font-weight: 700;
+      color: #a89cff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #a89cff, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* ═══ COURSE CARDS ═══ */
+    .course-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card.featured {
+      border-color: rgba(108,99,255,0.4);
+      background: linear-gradient(135deg, #141526, #12141f);
+    }
+
+    .course-price {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin: 12px 0 4px;
+    }
+
+    .course-detail { font-size: 12px; color: var(--text-dim); line-height: 1.6; }
+
+    .feature-list { list-style: none; margin-top: 16px; }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      padding: 6px 0;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li .check { color: var(--green); flex-shrink: 0; margin-top: 1px; }
+    .feature-list li .star { color: var(--primary); flex-shrink: 0; margin-top: 1px; }
+
+    /* ═══ INTERVIEW ═══ */
+    .q-item {
+      padding: 14px 16px;
+      background: var(--surface2);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      transition: all 0.2s;
+    }
+
+    .q-item:hover { background: var(--surface3); }
+
+    .q-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .q-text { font-size: 13px; line-height: 1.6; }
+    .q-note { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-style: italic; }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-content.active { animation: fadeIn 0.3s ease; }
+
+    /* ═══ SCROLLBAR ═══ */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+    /* ═══ GANTT CHART ═══ */
+    .gantt-wrapper {
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .gantt-container {
+      min-width: 900px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .gantt-header {
+      display: grid;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+
+    .gantt-header-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-right: 1px solid var(--border);
+    }
+
+    .gantt-header-dates {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .gantt-date-col {
+      flex-shrink: 0;
+      text-align: center;
+      padding: 6px 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-dim);
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .gantt-date-col.today {
+      background: rgba(108,99,255,0.15);
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .gantt-date-col.today::after {
+      content: '▼';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      color: var(--primary);
+    }
+
+    .gantt-row {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .gantt-row:last-child { border-bottom: none; }
+    .gantt-row:hover { background: rgba(255,255,255,0.02); }
+
+    .gantt-row-label {
+      min-width: 230px;
+      width: 230px;
+      padding: 12px 16px;
+      border-right: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .gantt-row-phase {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .gantt-row-task {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .gantt-row-who {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .gantt-bar-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: 58px;
+      overflow: hidden;
+    }
+
+    .gantt-bar {
+      position: absolute;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: filter 0.2s;
+    }
+
+    .gantt-bar:hover { filter: brightness(1.15); }
+
+    .gantt-today-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--primary);
+      opacity: 0.5;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .gantt-phase-header {
+      background: var(--surface2);
+      padding: 8px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      border-left: 3px solid;
+    }
+
+    .gantt-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .gantt-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .gantt-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .gantt-milestone {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      transition: all 0.2s;
+    }
+
+    .gantt-milestone:hover {
+      border-color: var(--border-bright);
+    }
+
+    .gantt-milestone-date {
+      min-width: 48px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .gantt-milestone-day {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .gantt-milestone-month {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+    }
+
+    .gantt-milestone-body { flex: 1; }
+
+    .gantt-milestone-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .gantt-milestone-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .mt-4 { margin-top: 4px; }
+    .mt-8 { margin-top: 8px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .flex-wrap { flex-wrap: wrap; }
+
+    .fw-bold { font-weight: 700; }
+    .fs-12 { font-size: 12px; }
+    .fs-13 { font-size: 13px; }
+    .fs-14 { font-size: 14px; }
+    .lh-16 { line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-icon">⚡</div>
+      <div>
+        <div class="header-title">コミット</div>
+        <div class="header-subtitle">プロジェクトダッシュボード</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-12">
+      <div class="header-badge">v6 制作進行中</div>
+      <div class="header-date">
+        <div>最終更新</div>
+        <div style="font-weight:600;color:var(--text)">2026.05.05</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ NAV TABS ═══ -->
+<nav class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('overview', this)" id="tab-overview">📋 概要</button>
+    <button class="tab-btn" onclick="switchTab('gantt', this)" id="tab-gantt">📅 ガントチャート</button>
+    <button class="tab-btn" onclick="switchTab('funnel', this)" id="tab-funnel">🎬 ファネル設計</button>
+    <button class="tab-btn" onclick="switchTab('plot', this)" id="tab-plot">📽 動画プロット v6</button>
+    <button class="tab-btn" onclick="switchTab('message', this)" id="tab-message">💬 コアメッセージ</button>
+    <button class="tab-btn" onclick="switchTab('persona', this)" id="tab-persona">👤 ターゲット</button>
+    <button class="tab-btn" onclick="switchTab('interview', this)" id="tab-interview">🎤 木村インタビュー</button>
+    <button class="tab-btn" onclick="switchTab('tasks', this)" id="tab-tasks">✅ タスク</button>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 1: 概要                             ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content active" id="tab-content-overview">
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-tagline">Brain × 木村 共同プロジェクト</div>
+      <h1 class="hero-title">凡人か、<span>超人</span>か。<br>一生に一度の<span>基準値の書き換え</span>。</h1>
+      <p class="hero-desc">
+        迫佑樹が証人となり、木村が提供する「強制同期型」高密度コミュニティ。年商1000万〜5000万の経営者が持つ「見えない天井」を、ピラミッド構造（基準値→スキル→行動）とコンフォートゾーン拡張によって突破させる。
+        教材を売るのではなく、木村と同じ基準値で走れる50人のチームに入るチケット。
+      </p>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val c-purple">月額11万円</div>
+          <div class="hero-stat-label">超人コース（審査制）</div>
+        </div>
+        <div>
+          <div class="hero-stat-val c-yellow">50名限定</div>
+          <div class="hero-stat-label">把握できる最大人数</div>
+        </div>
+        <div>
+          <div class="hero-stat-val c-green">0〜3話＋VSL</div>
+          <div class="hero-stat-label">動画ファネル構成（5本）</div>
+        </div>
+        <div>
+          <div class="hero-stat-val c-blue">v6</div>
+          <div class="hero-stat-label">現在の動画プロット</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="section-title">🔥 プロジェクトステータス</div>
+    <div class="grid-4" style="margin-bottom:28px">
+      <div class="stat-card">
+        <div class="stat-icon bg-purple">📽</div>
+        <div class="stat-info">
+          <div class="stat-value c-purple">0〜3+VSL</div>
+          <div class="stat-label">動画構成（5本確定）</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-yellow">📝</div>
+        <div class="stat-info">
+          <div class="stat-value c-yellow">v6</div>
+          <div class="stat-label">プロット最新版</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-green">🎯</div>
+        <div class="stat-info">
+          <div class="stat-value c-green">0%</div>
+          <div class="stat-label">台本完成率</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon bg-red">⏰</div>
+        <div class="stat-info">
+          <div class="stat-value c-red">TBD</div>
+          <div class="stat-label">撮影予定日</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Milestone / Course -->
+    <div class="grid-2" style="margin-bottom:28px">
+      <!-- Milestones -->
+      <div class="card">
+        <div class="card-title">🚀 マイルストーン</div>
+        <div class="timeline" style="margin-top:12px">
+          <div class="timeline-item">
+            <div class="timeline-dot c-green" style="background:var(--green); border-color:var(--green)"></div>
+            <h4>動画プロット v6 完成 <span class="badge badge-done ml-4" style="margin-left:8px">完了</span></h4>
+            <p>0話（迫Tアップ対談）＋1〜3話（木村ソロ）＋VSLの5本構成に確定。ピラミッド・コンフォートゾーン・膨張vs拡大の3軸を明示。</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background:var(--yellow); border-color:var(--yellow)"></div>
+            <h4>迫・木村へのv6確認 <span class="badge badge-wip" style="margin-left:8px">確認待ち</span></h4>
+            <p>v6プロット・話者設計・0話Tアップ構成を共同制作者へ共有・フィードバック依頼</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--border-bright)"></div>
+            <h4>剣心くんへのインタビュー依頼 <span class="badge badge-todo" style="margin-left:8px">未着手</span></h4>
+            <p>1話の「剣心型」身近な事例として動画使用の許可取りと素材収集</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--border-bright)"></div>
+            <h4>0話台本執筆（迫Tアップ） <span class="badge badge-todo" style="margin-left:8px">未着手</span></h4>
+            <p>対談形式のため事前に2人へ共有・擦り合わせが必要。迫のTアップエピソード選定。</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--border-bright)"></div>
+            <h4>1〜3話＋VSL台本執筆（木村ソロ） <span class="badge badge-todo" style="margin-left:8px">未着手</span></h4>
+            <p>木村が一人で語る形式。ピラミッド図・コンフォートゾーン図・膨張vs拡大図の設計も並行。</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color:var(--border-bright)"></div>
+            <h4>全話台本 → 撮影 → 編集 <span class="badge badge-todo" style="margin-left:8px">未着手</span></h4>
+            <p>5本の動画制作・公開</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Overview -->
+      <div class="card">
+        <div class="card-title">💰 コース構成</div>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-top:12px">
+
+          <!-- 超人コース -->
+          <div style="background:linear-gradient(135deg,rgba(108,99,255,0.1),rgba(108,99,255,0.05));border:1px solid rgba(108,99,255,0.3);border-radius:14px;padding:18px">
+            <div class="flex items-center justify-between">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#a89cff;letter-spacing:1px">超人コース</div>
+                <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-top:4px">¥110,000<span style="font-size:12px;font-weight:400;color:var(--text-dim)">/月</span></div>
+              </div>
+              <div class="badge badge-primary">審査制 · 50名限定</div>
+            </div>
+            <ul class="feature-list" style="margin-top:12px">
+              <li><span class="star">★</span>木村が全員と直接関わり続ける</li>
+              <li><span class="star">★</span>日報・壁打ち・合宿・作業会（月2回）</li>
+              <li><span class="star">★</span>超人ルーティンの強制実行</li>
+              <li><span class="star">★</span>Discord全機能 + 年4回合宿</li>
+              <li><span class="star">★</span>1億・10億経営者との壁打ち機会</li>
+            </ul>
+          </div>
+
+          <!-- 見学コース -->
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:18px">
+            <div class="flex items-center justify-between">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-dim);letter-spacing:1px">見学コース</div>
+                <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-top:4px">¥20,000<span style="font-size:12px;font-weight:400;color:var(--text-dim)">/月</span></div>
+              </div>
+              <div class="badge badge-todo">審査なし · すぐ入れる</div>
+            </div>
+            <ul class="feature-list" style="margin-top:12px">
+              <li><span class="check">✓</span>木村の日報・活動・コラム閲覧</li>
+              <li><span class="check">✓</span>任意タイミングで超人コース審査申請可能</li>
+              <li><span class="check">✓</span>コミュニティの雰囲気を体感</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Philosophy -->
+    <div class="section-title">🧠 成功5ステップ（コア哲学）</div>
+    <div class="grid-4">
+      <div class="card card-sm" style="border-left:3px solid var(--primary)">
+        <div style="font-size:22px;font-weight:800;color:var(--primary);margin-bottom:6px">①</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">基準値＆マインド叩き込み</div>
+        <div class="c-dim" style="font-size:12px">成功者の「当たり前」を24時間浴びる</div>
+      </div>
+      <div class="card card-sm" style="border-left:3px solid var(--accent2)">
+        <div style="font-size:22px;font-weight:800;color:var(--accent2);margin-bottom:6px">②</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">上位者に方向性を決めてもらう</div>
+        <div class="c-dim" style="font-size:12px">迷いの完全排除。「今やること」を指定</div>
+      </div>
+      <div class="card card-sm" style="border-left:3px solid var(--accent3)">
+        <div style="font-size:22px;font-weight:800;color:var(--accent3);margin-bottom:6px">③</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">必要な知識だけを学ぶ</div>
+        <div class="c-dim" style="font-size:12px">ノウハウコレクター脱却。Brain 17,000本から厳選</div>
+      </div>
+      <div class="card card-sm" style="border-left:3px solid var(--accent)">
+        <div style="font-size:22px;font-weight:800;color:var(--accent);margin-bottom:6px">④⑤</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">超人基準で実践 → 監視下で継続</div>
+        <div class="c-dim" style="font-size:12px">一切の言い訳を許さない強制実行の環境</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 2: ガントチャート                   ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-gantt">
+
+    <!-- Summary Cards -->
+    <div class="grid-4" style="margin-bottom:28px">
+      <div class="stat-card" style="border-left:3px solid #6c63ff">
+        <div class="stat-icon" style="background:rgba(108,99,255,0.1);font-size:20px">📅</div>
+        <div class="stat-info">
+          <div class="stat-value" style="font-size:20px;color:#a89cff">4/18〜5末</div>
+          <div class="stat-label">プロジェクト期間</div>
+        </div>
+      </div>
+      <div class="stat-card" style="border-left:3px solid var(--yellow)">
+        <div class="stat-icon" style="background:rgba(255,209,102,0.1);font-size:20px">🎬</div>
+        <div class="stat-info">
+          <div class="stat-value" style="font-size:20px;color:var(--yellow)">4/23</div>
+          <div class="stat-label">本番撮影日</div>
+        </div>
+      </div>
+      <div class="stat-card" style="border-left:3px solid var(--green)">
+        <div class="stat-icon" style="background:rgba(6,214,160,0.1);font-size:20px">🚀</div>
+        <div class="stat-info">
+          <div class="stat-value" style="font-size:20px;color:var(--green)">5月末</div>
+          <div class="stat-label">正式リリース目標</div>
+        </div>
+      </div>
+      <div class="stat-card" style="border-left:3px solid var(--red)">
+        <div class="stat-icon" style="background:rgba(255,71,87,0.1);font-size:20px">⏳</div>
+        <div class="stat-info">
+          <div class="stat-value" style="font-size:20px;color:var(--red)" id="days-to-shoot">-</div>
+          <div class="stat-label">撮影まで（日）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gantt Chart -->
+    <div class="section-title">📅 制作スケジュール（ガントチャート）</div>
+    <div class="gantt-wrapper" style="margin-bottom:28px">
+      <div class="gantt-container" id="gantt-main">
+        <!-- JS で生成 -->
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="gantt-legend" style="margin-bottom:32px">
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(108,99,255,0.7)"></div>
+        <span>準備フェーズ</span>
+      </div>
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(255,209,102,0.7)"></div>
+        <span>リハーサル・磨き込み</span>
+      </div>
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(255,71,87,0.7)"></div>
+        <span>本番撮影</span>
+      </div>
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(17,138,178,0.7)"></div>
+        <span>編集・実装</span>
+      </div>
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(6,214,160,0.7)"></div>
+        <span>リリース</span>
+      </div>
+      <div class="gantt-legend-item">
+        <div class="gantt-legend-dot" style="background:rgba(108,99,255,0.5);border:1px solid var(--primary)"></div>
+        <span>今日</span>
+      </div>
+    </div>
+
+    <!-- Milestone Detail Cards -->
+    <div class="section-title">🗺 主要マイルストーン詳細</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px">
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(108,99,255,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-purple">18</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">🌙 今夜：プロット・ダッシュボード共有</div>
+          <div class="gantt-milestone-desc">マンキーさんから現状のプロットとダッシュボードを共有受け取り。内容確認・フィードバック開始。</div>
+        </div>
+        <span class="badge badge-wip"><span class="dot"></span>進行中</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(108,99,255,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-purple">19</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">✏️ 木村：プロット個人微調整（Day 1）</div>
+          <div class="gantt-milestone-desc">共有を受け取った上で木村が個人的にプロットの微調整を行う。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(108,99,255,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-purple">20</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">✈️ 福岡 → 羽田移動 ＋ プロット微調整（Day 2）</div>
+          <div class="gantt-milestone-desc">移動日。引き続き木村が個人でプロットの磨き込みを継続。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(255,209,102,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-yellow">21</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">🏢 コミットファネルリハーサル（12:00〜21:00）</div>
+          <div class="gantt-milestone-desc">東京丸の内シェアラウンジにてマンキーさんと合流。特典内容と収録プロットを磨く集中セッション。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(255,209,102,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-yellow">22</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">👥 コミット東京作業会（10:00〜22:00）</div>
+          <div class="gantt-milestone-desc">7名参加の本気の価値提供作業会。コアメンバーへの連携・本番に向けた最終調整。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(255,71,87,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-red">23</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">🎥 コミットファネル 本番撮影</div>
+          <div class="gantt-milestone-desc">全5本（0話〜3話＋VSL）の動画を収録。0話は迫×木村対談、1〜3話＋VSLは木村ソロ。</div>
+        </div>
+        <span class="badge badge-urgent">KEY DATE</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(17,138,178,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-blue">24</div>
+          <div class="gantt-milestone-month">APR</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">📤 素材転送 → 編集・LINE実装 開始</div>
+          <div class="gantt-milestone-desc">撮影素材をグループへ転送。ちなさんが動画編集、マンキーさんがVSL・LINE仕組みの実装を並行開始。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+      <div class="gantt-milestone" style="border-left:3px solid rgba(6,214,160,0.5)">
+        <div class="gantt-milestone-date">
+          <div class="gantt-milestone-day c-green">末</div>
+          <div class="gantt-milestone-month">MAY</div>
+        </div>
+        <div class="gantt-milestone-body">
+          <div class="gantt-milestone-title">🚀 既存リストへ正式リリース</div>
+          <div class="gantt-milestone-desc">コミット2コース（月額2万円・月額10万円）を既存Brainリストへ正式ローンチ。</div>
+        </div>
+        <span class="badge badge-todo">未着手</span>
+      </div>
+
+    </div>
+
+    <!-- Team Assignment -->
+    <div class="section-title">👥 担当者アサイン</div>
+    <div class="grid-3" style="margin-bottom:28px">
+      <div class="card card-sm">
+        <div class="card-title" style="color:var(--yellow)">🎬 木村</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.8">
+          ・プロット微調整（4/19〜20）<br>
+          ・リハーサル参加（4/21）<br>
+          ・作業会参加（4/22）<br>
+          ・本番撮影（4/23）
+        </div>
+      </div>
+      <div class="card card-sm">
+        <div class="card-title" style="color:var(--primary)">⚙️ マンキーさん</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.8">
+          ・プロット・DB共有（今夜）<br>
+          ・リハーサル参加（4/21）<br>
+          ・VSL・LINEシステム実装（4/24〜）
+        </div>
+      </div>
+      <div class="card card-sm">
+        <div class="card-title" style="color:var(--accent3)">✂️ ちなさん</div>
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.8">
+          ・動画編集（4/24〜）<br>
+          ・テロップ・インサート・図解<br>
+          ・5本分の完成まで対応
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 3: ファネル設計                     ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-funnel">
+
+    <!-- Funnel Flow -->
+    <div class="card glow-card" style="margin-bottom:28px">
+      <div class="card-title" style="margin-bottom:16px">🔀 ファネル全体フロー</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <div style="background:var(--primary-dim);border:1px solid rgba(108,99,255,0.3);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px">
+          <div style="font-size:10px;color:#a89cff;font-weight:700;letter-spacing:1px;margin-bottom:4px">WHY</div>
+          <div style="font-size:13px;font-weight:700">第一話</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:2px">≈30分</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="text-align:center;min-width:80px">
+          <div style="font-size:10px;color:var(--text-muted)">LINE感想 →</div>
+          <div style="font-size:10px;color:var(--accent3)">特典① 配布</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="background:rgba(255,209,102,0.1);border:1px solid rgba(255,209,102,0.3);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px">
+          <div style="font-size:10px;color:var(--yellow);font-weight:700;letter-spacing:1px;margin-bottom:4px">WHAT</div>
+          <div style="font-size:13px;font-weight:700">第二話</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:2px">≈35分</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="text-align:center;min-width:80px">
+          <div style="font-size:10px;color:var(--text-muted)">LINE感想 →</div>
+          <div style="font-size:10px;color:var(--accent3)">特典② 配布</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="background:rgba(6,214,160,0.1);border:1px solid rgba(6,214,160,0.3);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px">
+          <div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;margin-bottom:4px">HOW</div>
+          <div style="font-size:13px;font-weight:700">第三話</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:2px">≈40分</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="text-align:center;min-width:80px">
+          <div style="font-size:10px;color:var(--text-muted)">LINE感想 →</div>
+          <div style="font-size:10px;color:var(--accent3)">特典③ 配布</div>
+        </div>
+        <div style="color:var(--text-dim);font-size:18px">→</div>
+        <div style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);border-radius:10px;padding:12px 16px;text-align:center;min-width:110px">
+          <div style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:1px;margin-bottom:4px">DECISION</div>
+          <div style="font-size:13px;font-weight:700">VSL</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:2px">≈30〜40分</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="grid-3" style="gap:12px">
+        <div style="background:var(--surface2);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--accent3);margin-bottom:6px">🔒 感想ボタンで次話解放</div>
+          <div style="font-size:12px;color:var(--text-dim)">LINE自動応答。感想を送らないと次のURL未着。エンゲージメントを強制。</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--accent2);margin-bottom:6px">⏱ 3日間限定配信</div>
+          <div style="font-size:12px;color:var(--text-dim)">各話公開から72時間で視聴不可。緊急性を演出。行動力がある人だけが前へ進める。</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--primary);margin-bottom:6px">🎁 特典即配布</div>
+          <div style="font-size:12px;color:var(--text-dim)">感想送信と同時にPDF自動配布。「行動する人だけが得する」を体感させる。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gift Strategy -->
+    <div class="section-title">🎁 特典戦略</div>
+    <div style="overflow-x:auto;margin-bottom:28px">
+      <table class="kw-table" style="background:var(--surface);border-radius:16px;overflow:hidden">
+        <thead>
+          <tr style="background:var(--surface2)">
+            <th>話</th>
+            <th>特典名</th>
+            <th>形式</th>
+            <th>配布条件</th>
+            <th>心理的効果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-primary">第一話</span></td>
+            <td style="font-weight:600">基準値セルフ診断 10問</td>
+            <td>PDF</td>
+            <td>LINE感想送信</td>
+            <td class="c-dim">自分の低さを数字で自覚 → 第二話への渇望</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-wip">第二話</span></td>
+            <td style="font-weight:600">ノウハウコレクター脱出マップ + マトリクス</td>
+            <td>PDF</td>
+            <td>LINE感想送信</td>
+            <td class="c-dim">「知識高×基準値低」の自覚 → 解決策を知りたい</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-done">第三話</span></td>
+            <td style="font-weight:600">超人モード7日間チャレンジシート</td>
+            <td>ワークシート</td>
+            <td>LINE感想送信</td>
+            <td class="c-dim">3日で挫折 → 外部監視なしでは無理を体感</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-urgent">VSL</span></td>
+            <td style="font-weight:600">迫×木村 1on1初回コンサル（60分）</td>
+            <td>特別セッション</td>
+            <td>入会者限定</td>
+            <td class="c-dim">初月で元が取れる確信 → 決断のラストプッシュ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="background:rgba(108,99,255,0.05);border-color:rgba(108,99,255,0.2)">
+      <div style="font-size:13px;font-weight:700;color:#a89cff;margin-bottom:8px">💡 全特典の共通設計原則</div>
+      <div style="font-size:13px;line-height:1.7;color:var(--text-dim)">
+        使えば使うほど「一人では限界」を体感させる設計。特典がそのまま「コミットへの渇望製造装置」になっている。
+        特典のクオリティが高いほど、「こんな設計が毎月来るのか」という期待値が上がり、入会後の継続率にも寄与する。
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 3: 動画プロット v6                  ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-plot">
+
+    <!-- ヘッダー -->
+    <div class="card" style="background:linear-gradient(135deg,rgba(108,99,255,0.08),rgba(168,85,247,0.05));border-color:rgba(108,99,255,0.25);margin-bottom:28px">
+      <div style="font-size:13px;font-weight:700;color:#a89cff;margin-bottom:12px">📋 動画プロット清書版（ミーティング議事録より）</div>
+      <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.9;margin-bottom:16px">
+        <strong>第０話</strong>（対談）：迫が木村をTアップ。シリーズ全体の文脈設定 ｜
+        <strong>第１〜３話</strong>（木村ソロ）：フォーカス・戦略・環境を体系的に解説 ｜
+        <strong>第４話</strong>（木村ソロ）：コミットのセールス動画<br>
+        <span style="color:var(--text-dim);font-size:12px">💡 このプロットはミーティング録音から抽出・清書したもの。各話のセクション構成・感情トーン・ディレクション備考まで含む完全版。</span>
+      </div>
+      <!-- 全体構成表 -->
+      <div style="overflow-x:auto">
+        <table class="kw-table" style="background:var(--surface3);border-radius:12px;overflow:hidden">
+          <thead>
+            <tr style="background:var(--surface2)">
+              <th>話</th><th>テーマ</th><th>話者</th><th>特典</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-primary">第０話</span></td>
+              <td style="font-weight:600">シリーズ全体の文脈設定・対象者定義</td>
+              <td>迫メイン（木村をTアップ）</td>
+              <td class="c-dim">—</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-wip">第１話</span></td>
+              <td style="font-weight:600">同じノウハウ・同じリソースから始めて4年で100倍の差がついた３つの理由</td>
+              <td>木村ソロ</td>
+              <td class="c-dim">解説レポートPDF</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-wip">第２話</span></td>
+              <td style="font-weight:600">０→１０億までの５ステップロードマップ～木村が上場企業から１０億の買収提案を受けた事業構築法～</td>
+              <td>木村ソロ</td>
+              <td class="c-dim">黄金分配率シート</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-wip">第３話</span></td>
+              <td style="font-weight:600">木村が100億メンターと出会って、当たり前の桁が上がった奇跡の10分間</td>
+              <td>木村ソロ</td>
+              <td class="c-dim">木村ルーティーンレポート</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-urgent">第４話</span></td>
+              <td style="font-weight:600">コミットとは何か 基準値が上がる設計図</td>
+              <td>木村ソロ</td>
+              <td class="c-dim">全特典（完走者）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ 第０話 ═══ -->
+    <div class="section-title">📽 第０話（序章）｜清書版</div>
+    <div style="background:linear-gradient(135deg,rgba(108,99,255,0.06),rgba(108,99,255,0.02));border:1px solid rgba(108,99,255,0.2);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(108,99,255,0.12);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:#a89cff;letter-spacing:1.5px;text-transform:uppercase">第０話 · 対談 · 迫が木村をTアップ</div>
+          <div style="font-size:15px;font-weight:800;margin-top:4px">シリーズ全体の文脈設定・対象者定義</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-primary">話者：迫メイン</span>
+          <span class="badge badge-done">序章</span>
+        </div>
+      </div>
+      <div style="padding:20px 24px">
+
+        <!-- 0-1 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-1｜コアメッセージ（動画シリーズ全体で何を得られるか）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>コンセプト</strong><br>
+            あなたと全くスタートラインが同じだった人が、4年前から今にかけて「圧倒的な差」を出している。<br>
+            「なぜここまで差がついたのか」をすべて言語化する動画シリーズです。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>革新的メッセージの軸</strong><br>
+            ・足りなかったのはノウハウではなかった<br>
+            ・ノウハウはすでに均一化されている<br>
+            ・差がつくのは「誰とやるか」「基準値の環境」
+          </div>
+        </div>
+
+        <!-- 0-2 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-2｜対象者の定義（こんな人に見てほしい）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>状態① — 器用貧乏</strong><br>
+            ・頑張っているのに「手残り」がない<br>
+            ・忙しいが売上が停滞している<br>
+            ・自信を持って利益が出る商品を提供できていない<br>
+            ・年間1,000万円の顧問プランがあっても公表できないような「心理的な線引き」がある
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>状態② — 踏み込めない感</strong><br>
+            ・次の一手の答えが分からず、身動きが取れない
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>定量的な定義</strong><br>
+            ・年商1,000万〜5,000万のレンジ<br>
+            ・利益が「余っていなくもないが、余ってもいない」人
+          </div>
+        </div>
+
+        <!-- 0-3 自己紹介 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-3｜自己紹介（迫 → 木村へのTアップ対談）</div>
+          <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:10px;padding:10px 14px;font-size:11px;color:#a89cff;margin-bottom:10px">
+            📹 撮影形式：2人が並んで話す対談形式。迫がメインで進行し、木村をTアップする。
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-left:3px solid var(--primary);border-radius:0 10px 10px 0;padding:12px 14px;font-size:12px;line-height:1.8">
+              <strong>① 迫の自己紹介（迫が話す）</strong><br>
+              1. 業界最大級の知識共有プラットフォーム「Brain」を運営している<br>
+              2. ユーザー数は急増し、年間流通額は10億円超<br>
+              3. 教育事業を多数展開し、複数の会社経営も行っている<br>
+              4. ビジネス仲間として、おさるさん（デジタルマーケティング系・実業）など多数の方と活動している<br>
+              <span style="color:var(--text-muted)">→ 淡々と事実を話す。「おさるさんとも一緒にやってます」という実績だけ出して次へ</span>
+            </div>
+            <div style="background:var(--surface2);border-left:3px solid var(--accent2);border-radius:0 10px 10px 0;padding:12px 14px;font-size:12px;line-height:1.8">
+              <strong>② 木村の紹介（迫がTアップ → 木村が補足）</strong><br>
+              ・「パートナーの木村さんです」<br>
+              ・オフラインでのセミナー・授業を実施している<br>
+              ・Brain上でのコンテンツ展開も行っている<br>
+              ・コンサルティングも多数手がけている<br>
+              <span style="color:var(--text-muted)">→ 木村本人が補足。フォーマット：「実際にやってきたこと」「今の活動」の2点を端的に</span>
+            </div>
+            <div style="background:var(--surface2);border-left:3px solid var(--green);border-radius:0 10px 10px 0;padding:12px 14px;font-size:12px;line-height:1.8">
+              <strong>③ 共通の権威づけ（迫が代表して話す）</strong><br>
+              1. 「僕も木村さんも、5〜6年前は本当にゼロからのスタートでした」<br>
+              2. 実際にクライアントワークをしていて、皆さんと同じ時代を過ごしていた<br>
+              3. 「消えなかった2人の共通点」をお伝えしたいと思っています<br><br>
+              <strong style="color:var(--text-muted)">視聴者の疑念（先出しして潰す）</strong><br>
+              →「Brainというプラットフォームがあるから強いんでしょ」<br>
+              →「オフラインで借り入れできる資本があるからできるんでしょ」<br><br>
+              <strong>切り返しセリフ（迫）</strong><br>
+              →「Brainができる前の僕は、あなたたちと一緒でした」<br>
+              →「資本を借りてトラックをやる前の木村さんも、あなたたちと一緒でした」<br>
+              →「では、なぜそういうことができるようになったのか。それをお伝えするのが今日の動画です」
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.8">
+              <strong>④ 権威づけまとめ（迫がしめる）</strong><br>
+              ・「僕らがコンサルしてきた領域はとても広い。無形・有形、地方・都市、あらゆる業種」<br>
+              ・「その中で、生き残った人・消えていった人を、長い時間軸の中で見てきました」<br>
+              ・「そこには共通点がありました。本には書かれていない、生々しい情報をこの動画でお伝えします」
+            </div>
+          </div>
+        </div>
+
+        <!-- 0-4 手に入るもの -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-4｜このシリーズで手に入るもの（3本の動画で解説すること）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>① 第１話で手に入ること</strong><br>
+            同じ時間・同じリソースなのに、3,000万で止まる人と1億にノンストップで拡大する人の差。「考え方と時間の使い方」の違いを完全に理解できる。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>② 第２話で手に入ること</strong><br>
+            1億まで行ったのになぜか突然消えてしまった人と、2億・3億と伸び続けた人の差。<strong>キーワード：膨張 vs 拡大。</strong><br>
+            1億をゴールにして1億を手本にすると「短距離走」になり、消えてしまうビジネスを作ってしまう。本当に構造的優位なビジネスであれば10億まで行くはず、という視点で事業設計を見直す。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>③ 第３話で手に入ること</strong><br>
+            第１話・第２話で得た考え方を「机上の空論」で終わらせず、実地で継続できる状態にする方法。勢力（引力）が働き続ける環境に身を置くことの重要性。甲子園に行く学校は「だいたいみんなうまい」── 同じ基準値を持つ仲間と近くにいるから再現性が生まれる。コミットとは関係なく、まず一般論として「正しい引力の中に身を置くこと」が答えだと提示する。<br>
+            <span style="color:var(--text-muted);font-size:11px">※ 第4話でコミットのサービス紹介へとつなげる</span>
+          </div>
+        </div>
+
+        <!-- 0-5 最高の未来 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-5｜最高の未来（この動画を見たら手に入るもの）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            ・自分がやっている当たり前の仕事を当たり前にこなすだけで、<strong>年商1億の会社が運営できるようになる</strong><br>
+            ・無理やり出している売上ではなく、構造をきちんと作り、お客様・従業員も喜んでいる<strong>社会的なビジネス</strong>が作れる<br>
+            ・「理論として誰でも、お金も時間もなくても、今日からできることしかやっていない」ということが分かる<br>
+            ・自分の先を開拓していってくれる仲間・メンターと出会える（稼ぎ方を教えるのではなく、生き方の指針になる人）
+          </div>
+        </div>
+
+        <!-- 0-6 避けられる未来 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">0-6｜避けられる未来（見逃した場合のリスク）</div>
+          <div style="background:rgba(255,71,87,0.05);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            ・頑張り続けても「自分一人分の結果」しか出ず、年商が1,000万〜3,000万で止まり続ける<br>
+            ・会社の利益が年間100〜200万の世界のまま、毎年同じ結果しか出ない<br>
+            ・売り方・マーケティングを変えて一時的に売上を伸ばしたものの、評判が悪化する構造を知らないうちに作ってしまう<br>
+            ・SNSで叩かれるリスクを抱える<br>
+            ・知らぬ間に「膨張状態」になっている<br>
+            ・自分の周りに上手くいかない人ばかりが集まり、全員を引き上げようとしても自分一人の力では詰んでしまう
+          </div>
+        </div>
+
+        <!-- 0-7 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-7｜動画を最後まで見る理由（ビデオクロージング）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>メッセージ設計</strong><br>
+            ・この動画のテーマは「ある業界のマル秘ノウハウ」ではない<br>
+            ・広い業種（無形・有形、地方・都市）のコンサルをしてきた中で、生き残った人と消えた人の「共通点」を見てきた<br>
+            ・長い時間軸の中で体感してきた「本には書かれていない生々しい情報」をお伝えする
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>視聴者の分岐（ターゲットの絞り込み）</strong><br>
+            ✗「一発逆転のノウハウが欲しい人」→ この動画シリーズは不要です<br>
+            ✓「頑張っているのに結果が出ない理由が知りたい人」<br>
+            ✓「一時的に売上が上がったが、このまま続く気がしない人」
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>社会的証明・緊急性</strong><br>
+            ・4年間で関わってきた受講生の中から、大きく成長した人の実例を紹介（迫・木村それぞれの周辺から）<br>
+            ・この動画は<strong>期間限定（3日間）</strong>で公開<br>
+            ・「いつでも見れる動画」は見逃し率が高く、6〜12ヶ月後に見ても意味が薄れる<br>
+            ・期間内に見て、感想を送ってほしい
+          </div>
+        </div>
+
+        <!-- 0-8 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">0-8｜エンディング</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            ・「以上が序章（第０話）です」<br>
+            ・第１話から本編スタート<br>
+            ・「下のチェックボックスにチェックを入れて、第１話動画をご覧ください」
+          </div>
+        </div>
+
+        <!-- 感情トーン -->
+        <div style="background:rgba(108,99,255,0.05);border:1px solid rgba(108,99,255,0.15);border-radius:10px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:#a89cff;margin-bottom:10px">✦ 感情トーン設計</div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-1 コアメッセージ</span><span style="color:var(--text-dim)">「なぜ差がついたのかが分かる」という期待感・好奇心</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-2 対象者定義</span><span style="color:var(--text-dim)">「自分のことだ」という共鳴・安心感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-3 手に入るもの</span><span style="color:var(--text-dim)">「これが欲しかった」という欲求喚起</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-4 最高の未来</span><span style="color:var(--text-dim)">希望・ワクワク感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-5 避けられる未来</span><span style="color:var(--text-dim)">危機感・回避したい感情</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-6 自己紹介</span><span style="color:var(--text-dim)">信頼感・権威への安心</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-7 最後まで見る理由</span><span style="color:var(--text-dim)">「この人たちについていけばいい」という確信</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">0-8 エンディング</span><span style="color:var(--text-dim)">次の動画への期待感と行動意欲</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ 第１話 ═══ -->
+    <div class="section-title">📽 第１話｜清書版</div>
+    <div style="background:linear-gradient(135deg,rgba(6,214,160,0.06),rgba(6,214,160,0.02));border:1px solid rgba(6,214,160,0.2);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(6,214,160,0.1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:#06d6a0;letter-spacing:1.5px;text-transform:uppercase">第１話 · 木村ソロ</div>
+          <div style="font-size:15px;font-weight:800;margin-top:4px">同じノウハウ・同じリソースから始めて４年で100倍の差がついた３つの理由</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px">キーワード：フォーカスポイント・4つの戦略・1億円コンフォートゾーン</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-done">木村ソロ</span>
+          <div style="background:rgba(6,214,160,0.15);border:1px solid rgba(6,214,160,0.3);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:#06d6a0">特典：解説レポートPDF</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px">
+
+        <!-- 1-1 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-1｜導入（前回の振り返りと本動画の目的）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>前回（第０話）のおさらい</strong><br>
+            迫さんと木村が、この4年間で「ちゃんと成長した人」と「消えていった人」を見てきた。その共通点と違いを、この動画シリーズ全体でお伝えすると予告した。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>今回の動画の目的</strong><br>
+            特に「年商1億を当たり前に達成している人」と「頑張っても1,000万〜3,000万で止まってしまい、利益も出ない人」の違いが<strong>具体的に何なのか</strong>を解説する。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>視聴後に得られるもの</strong><br>
+            ・3万人以上の受講生の中で、爆発的な成果を出す人と普通の成果の人の「根本的な違い」が分かる<br>
+            ・どんな事業でも年商1億は当たり前に作れる、という基準値になる<br>
+            ・同じノウハウ・同じリソースを持っていても、圧倒的な成果を出せるようになる
+          </div>
+        </div>
+
+        <!-- 1-2 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-2｜問題提起（頑張っているのに稼げない3つの原因）</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-left:3px solid var(--red);border-radius:0 10px 10px 0;padding:14px 16px;font-size:12px;line-height:1.8">
+              <strong>① フォーカスする領域が間違っている</strong><br>
+              1,000万〜3,000万で止まっている人の多くは「行動」にフォーカスしている。行動＝今月どんな仕事を受注したか・今月何を完了させたか。例：動画編集者なら「案件をどう取るか」「今の仕事の効率化」ばかりに集中。週7で頑張って月300万になっても、2〜3ヵ月先まで仕事がパンパンで限界、という状態に。
+            </div>
+            <div style="background:var(--surface2);border-left:3px solid var(--yellow);border-radius:0 10px 10px 0;padding:14px 16px;font-size:12px;line-height:1.8">
+              <strong>② 戦略の違い（必要な知識が足りていない）</strong><br>
+              ビジネスを作る上で考えるべき「4つの戦略の階層」を知らない。ノウハウはどの業界でも均一化しているが、この戦略の知識は全事業の土台。この知識格差が結果の差として現れている。
+            </div>
+            <div style="background:var(--surface2);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:14px 16px;font-size:12px;line-height:1.8">
+              <strong>③ 正しい投資ができていない</strong><br>
+              ずっと自己投資を続けているが、事業を大きくするフェーズの投資に移れていない。拡大している人は「自己投資ではない投資」をちゃんとやっている。どのフェーズでどんな投資が必要なのか、が分かっていない。
+            </div>
+          </div>
+        </div>
+
+        <!-- 1-3 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-3｜解決策①｜フォーカスポイントの違い（意識のピラミッド）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px;font-family:monospace">
+            [ マインド・基準値 ]  ← 伸びる人はここにフォーカス<br>
+            [　　スキル・知識　]<br>
+            [　　行動・タスク　]  ← 伸び悩む人はここにフォーカス
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>伸び悩む人の状態</strong><br>
+            ピラミッドの「行動」部分に意識が集中している。目の前の案件を効率化しても、行動の天井に到達すると詰まってしまう。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>伸びる人の状態</strong><br>
+            ピラミッドの「土台（マインド・基準値）」にフォーカスしている。マインドが変わると基準値が変わる。例：「自分で動画編集する」→「スクールにしよう」「自社で雇用して伸ばそう」という発想に自然になる。その結果、スキルが広がり、行動が変わり、事業の規模が変わる。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>重要なポイント</strong><br>
+            ・ノウハウ自体はいくらでも教えられる<br>
+            ・でも「このマインドと基準値を持っていないと」ノウハウを聞いたところで行動に落とし込めない<br>
+            ・目の前の行動にフォーカスが当たっているか、これから作るものにフォーカスが当たっているか、これが全ての差
+          </div>
+        </div>
+
+        <!-- 1-4 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-4｜解決策②｜4つの戦略の違い（経営の4層ピラミッド）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px;font-family:monospace">
+            [ 全社戦略 ]　会社の存在意義・ビジョン・ミッション<br>
+            [ 事業戦略 ]　何の事業をやるか<br>
+            [ 機能戦略 ]　マーケティング・採用・教育（ノウハウはここ）<br>
+            [ 財務戦略 ]　資金調達・再投資の方法
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>重要な原則</strong><br>
+            ・企業家は「上から順に」考える（MBAは下から考えるが、企業家は逆）<br>
+            ・上の階層の問題は、下の階層では解決できない
+          </div>
+          <div style="overflow-x:auto;margin-bottom:8px">
+            <table class="kw-table" style="background:var(--surface3);border-radius:10px;overflow:hidden;min-width:560px">
+              <thead><tr style="background:var(--surface2)"><th>層</th><th>内容</th></tr></thead>
+              <tbody>
+                <tr><td><strong>全社戦略</strong></td><td>会社が何のために存在するか（ビジョン・ミッション・バリュー）</td></tr>
+                <tr><td><strong>事業戦略</strong></td><td>全社戦略を実現するための事業選択（ビジョンが変われば事業が変わる）</td></tr>
+                <tr><td><strong>機能戦略</strong></td><td>事業を成立させるマーケティング・採用・教育戦略。「ノウハウ」はすべてここ</td></tr>
+                <tr><td><strong>財務戦略</strong></td><td>機能を動かすための人・資金・物の調達方法</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>具体例（動画編集ビジネス）</strong><br>
+            「クライアントのために良い動画を納品する」が全社戦略 → 動画編集屋さんになる<br>
+            「動画編集を通して多くの人の人生を変える」が全社戦略 → 動画編集スクールになる<br>
+            <strong>全社戦略が違うだけで、事業の形が根本的に変わる</strong>
+          </div>
+        </div>
+
+        <!-- 1-5 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-5｜解決策③｜正しい投資の段階（1億円コンフォートゾーンマトリックス）</div>
+          <div style="overflow-x:auto">
+            <table class="kw-table" style="background:var(--surface3);border-radius:10px;overflow:hidden;min-width:700px">
+              <thead><tr style="background:var(--surface2)"><th>フェーズ</th><th>状態</th><th>必要な投資</th></tr></thead>
+              <tbody>
+                <tr><td style="white-space:nowrap">〜1,000万</td><td>自己投資型。自分の食い口のために頑張るだけで到達できる。案件は毎月リセット型</td><td><span class="badge badge-primary">自己投資</span></td></tr>
+                <tr><td style="white-space:nowrap">1,000〜3,000万</td><td>自分＋社員・提携先リソースを活用。事業計画・予算管理が必要になる。案件単価アップ（B2B:300万/B2C:100万近く）</td><td><span class="badge badge-wip">人的投資</span></td></tr>
+                <tr><td style="white-space:nowrap">3,000万〜1億</td><td>人間が稼働するマックスの壁。「工場の生産ライン」を作るフェーズ。教材・マニュアル・外注管理の仕組みで人に依存しない富の再生産を構築。スクール・SNS運用会社など「同じものを何個も売る」モデルへ移行</td><td><span class="badge badge-done">設備投資（仕組みへの先行投資）</span></td></tr>
+                <tr><td style="white-space:nowrap">1億〜</td><td>知らない人・ファンでない人にも届くフェーズ。商品力・全社戦略の力がないと炎上リスク。設備投資が済んで「いい価値を安く提供できる」状態になっていないと広告は組めない</td><td><span class="badge badge-urgent">広告・認知投資</span></td></tr>
+                <tr><td style="white-space:nowrap">さらに上</td><td>業界全体の手本・お手本モデルになる。自社リソースを見つめ直し、完全に新しい活用法を発明するフェーズ</td><td><span class="badge" style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.3)">ビジネスモデル開発投資（ピボット）</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 1-6〜1-7 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-6｜インタビュー挿入（具体例パート）※別撮り</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            候補：迫さんの事例（Brainをなぜどのように作ったか）/ 木村さんの事例（車業界M&Aの経緯）/ 受講生事例（月収100万→月収1,000万）/ 候補：西田さんなど
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px">1-7｜まとめとネクストアクション</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>次回予告（第2話）</strong>：この考え方を持っていても<strong>なぜ消えてしまう人がいるのか</strong>──「膨張 vs 拡大」の話をお伝えする<br>
+            <strong>CTA</strong>：動画の下の感想送信ボタンから感想を送ってください → 次の動画が受け取れます
+          </div>
+          <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="font-size:11px;font-weight:700;color:#a89cff;margin-bottom:6px">🎁 第１話特典</div>
+            「4つの戦略ピラミッド × 3つのフォーカスポイント × 1億円コンフォートゾーンマトリックス」<br>図・実例・補足を加えた詳細解説レポート（PDF / 30〜50P想定）<br>→ 動画シリーズを最後まで見た方にプレゼント
+          </div>
+        </div>
+
+        <!-- 感情トーン 1 -->
+        <div style="background:rgba(6,214,160,0.05);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:#06d6a0;margin-bottom:10px">✦ 感情トーン設計</div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-1 導入</span><span style="color:var(--text-dim)">「前回の続きだ」という連続感・期待感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-2 問題提起</span><span style="color:var(--text-dim)">「自分のことだ」という共鳴・刺さる感覚</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-3 フォーカス</span><span style="color:var(--text-dim)">「目から鱗」──なぜ頑張っても変わらないのかへの納得感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-4 4つの戦略</span><span style="color:var(--text-dim)">「プロ経営者の視点を得た」という知的な充実感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-5 投資段階</span><span style="color:var(--text-dim)">「自分は今どこにいるか」の自己診断・次の一手が見えるワクワク感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-6 インタビュー</span><span style="color:var(--text-dim)">リアリティ・信頼感・「やっぱりそういうことか」という確信</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">1-7 まとめ</span><span style="color:var(--text-dim)">「次の動画も見たい」という強い引力</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ 第２話 ═══ -->
+    <div class="section-title">📽 第２話｜清書版</div>
+    <div style="background:linear-gradient(135deg,rgba(255,209,102,0.06),rgba(255,209,102,0.02));border:1px solid rgba(255,209,102,0.2);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(255,209,102,0.1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--yellow);letter-spacing:1.5px;text-transform:uppercase">第２話 · 木村ソロ</div>
+          <div style="font-size:15px;font-weight:800;margin-top:4px">０→１０億までの５ステップロードマップ～木村が上場企業から１０億の買収提案を受けた事業構築法～</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px">キーワード：価値の流れ vs お金の流れ・LTV・負のスパイラル・黄金分配率</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-done">木村ソロ</span>
+          <div style="background:rgba(255,209,102,0.15);border:1px solid rgba(255,209,102,0.3);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--yellow)">特典：黄金分配率シート</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px">
+
+        <!-- 2-1〜2-2 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-1｜導入（前回の振り返り）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            PL志向（目に見える売上だけを追いかける）になると短命に終わりやすい。長く続くビジネスを作るには、売上を上げながらそれをお客様への価値還元と社内体制の整備（BS視点）に回していくことが必要。社内体制を整えている人は地味でも生き残り、CSへの投資をしないで綱渡り経営をしている人は消えていく。<br><span style="color:var(--text-muted);font-size:11px">※ PL（損益計算書）志向 vs BS（貸借対照表）志向の補足説明を動画内でどこかに入れる</span>
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-2｜視聴者への共感（あなたの視点わかるよ）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>多くの人が感じていること</strong><br>
+            SNSを見ると、「難しい理論なんて気にしなくても簡単に売上が立っている人」に見える人が大勢いる。「もっとシンプルに稼げるんじゃないか？」と感じるのは自然なこと。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>今回の動画で明かすこと</strong><br>
+            「遊びながら長く生き残っている人の裏側の地道な姿」と「順調に見えてなぜか突然消えてしまった人が見えていなかったポイント」を対比させて解説する。例：表では派手に使っているように見えても、裏では事業の競争力を維持するための口座は別管理・手をつけない運用をしている。
+          </div>
+        </div>
+
+        <!-- 2-3 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-3｜問題提起（消えていく人の2パターン）</div>
+          <div style="overflow-x:auto;margin-bottom:8px">
+            <table class="kw-table" style="background:var(--surface3);border-radius:10px;overflow:hidden;min-width:560px">
+              <thead><tr style="background:var(--surface2)"><th>パターン</th><th>特徴</th><th>原因</th></tr></thead>
+              <tbody>
+                <tr><td>①低空飛行のまま消える</td><td>ずっと小さい売上のまま撤退</td><td>基準値が低い・ノウハウが間違っている・<strong>お手本が間違っている</strong></td></tr>
+                <tr><td>②打ち上げて消える</td><td>一時的に大きな売上を出したが突然消える</td><td>実態を伴わない売上（膨張）を作っていた</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>特に危険なのは「①がお手本にしているのが②」という構造</strong><br>
+            一発当てて消えた人は「勝ち続けた人」の10倍以上いる。その消えた人をお手本にすると、歪んだ売上の作り方を真似することになり、同じように消える。<br><br>
+            <strong>消えていく共通のメカニズム</strong><br>
+            フォーカスが「お金の流れ（売上数字）」に当たっている。「価値の流れ（誰の人生をどう変えたか・お客様に本当に価値が届いているか）」が見えていない。例：FC本部が「何件FC契約を取れたか」だけに注目している → 1店舗1店舗のお客様への価値提供から設計されていない。
+          </div>
+        </div>
+
+        <!-- 2-4 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-4｜解決策①｜「価値の流れ」を中心に置く</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>「価値の総量」と「売上の総量」の関係</strong><br>
+            価値の総量 ＞ 売上の総量 → 長く生き残る<br>
+            売上の総量 ＞ 価値の総量 → 信用がなくなって消える
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>価値の流れを中心に置くとは</strong><br>
+            ・無形商品：誰の人生をどんな風に変えたか<br>
+            ・クライアントワーク：この制作物でクライアントの売上がどれだけ上がったか<br>
+            ・EC・店舗：来てくれたお客様にどのように価値を届けているか<br>
+            これを「注目するべき数字」として事業の中心に置いている人は長生きしている。
+          </div>
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>新規顧客獲得コストの罠（負のスパイラル）</strong><br>
+            CSに投資せず価値提供の質が下がる → リピートが発生しない → 毎月新規顧客を取り続けなければならない → 新規を取れば取るほどCSが追いつかなくなりクオリティが下がる →<strong>新規コスト↑ × リピート率↓ × 品質↓ の「負のスパイラル」</strong>が起こる
+          </div>
+        </div>
+
+        <!-- 2-5 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-5｜解決策②｜正しいお金の回し方（分配率の設計）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>膨張している人がやりがちなお金の回し方</strong><br>
+            ・売上のほぼ全てをマーケティング・営業コストに再投資する<br>
+            ・CS（顧客対応・品質）への投資が極端に薄い（例：営業10人・CS2人）<br>
+            ・設備投資（仕組み・マニュアル化）をしないまま売上規模を拡大しようとする<br>
+            ・規模が大きくなるほど社内コミュニケーションコストが増し、1人あたりの仕事量が増え、クオリティが下がる
+          </div>
+          <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>長く生き残る人がやっていること</strong><br>
+            1. まず「今いるお客さんへの価値提供」を気合で上げる<br>
+            2. リピートしてもらえる体制を作る → LTV（顧客生涯価値）を高める<br>
+            3. 残った利益でCSをマニュアル化・仕組み化（設備投資）する<br>
+            4. 低コストで高い価値を届けられる土台を作る<br>
+            5. 稼働率が80%程度になってから、人的投資・店舗拡大・次の売上へ<br><br>
+            <strong>結果：時間が経つほど売上と利益が自然に上がる構造になる</strong>
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>遊んでいるように見えて生き残っている人の本質</strong><br>
+            遊んでいる部分だけが切り取られているが、裏側では「仕組み」が常に動いている。仕組みが完成しているから、遊びに使う適切な分配率が算出できている。仕組みが完成していないのに目先のお金で遊ぶと、CSへの再投資ができなくなり苦しくなる。
+          </div>
+        </div>
+
+        <!-- 2-6〜2-8 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-6｜コンフォートゾーンマトリックスとの接続</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            順番を間違えると膨張する。例：自己投資・人的投資フェーズ（〜3,000万クラス）なのに、いきなり広告・認知投資に踏み込む。社内の仕組みが整っていないのに外へ大量認知を取ると、クレーム・炎上・品質劣化が起きる。業種・業態によって売上の数字に差はあるが、<strong>「この土台をクリアした上で次の投資へ」という順番は変わらない</strong>。
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-7｜インタビュー挿入（具体例パート）※別撮り</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「仕組みをしっかり作って長く生き残っている○○さん」のインタビュー。実際に月収100万→月収1,000万と伸ばした受講生事例。迫さんや木村さんの失敗・成功経験の具体エピソード。
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px;letter-spacing:1px">2-8｜まとめとネクストアクション</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>まとめ</strong>：売上数字ばかりを追う「膨張思考」は消えていく人の共通パターン。「価値の流れ」を中心に置き、今いるお客さんに価値を届けてリピートを生み出す「拡大思考」が長く生き残る人の共通点。地味に見えても長く生き残っている人は、この仕組みが完成してファンに支えられている。<br><br>
+            <strong>次回予告（第3話）</strong>：とはいえ、こんな地道で堅い方法、人間って本当に続けられるのか？なぜ迫さんや木村さんはこれを続けられているのか。その秘密を第3話でお伝えする。
+          </div>
+          <div style="background:rgba(255,209,102,0.08);border:1px solid rgba(255,209,102,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:6px">🎁 第２話特典</div>
+            「黄金分配率シート（業種別3パターン：無形・有形・混合）」<br>
+            いくらの商品を、どの原価率で設計すれば健全か。マーケ・CS・設備・利益の正しい分配比率を業種別に図解。
+          </div>
+        </div>
+
+        <!-- 感情トーン 2 -->
+        <div style="background:rgba(255,209,102,0.05);border:1px solid rgba(255,209,102,0.15);border-radius:10px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:10px">✦ 感情トーン設計</div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-1 導入</span><span style="color:var(--text-dim)">「前回の続きだ」という流れの一体感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-2 共感</span><span style="color:var(--text-dim)">「自分もそう思ってた」という安心感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-3 問題提起</span><span style="color:var(--text-dim)">「お手本が間違っていたのか」という衝撃・目から鱗</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-4 価値の流れ</span><span style="color:var(--text-dim)">「そういうことか」という深い納得感・本質を掴んだ感覚</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-5 分配率</span><span style="color:var(--text-dim)">「自分の会社の状態が見えてきた」という自己診断の感覚</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-6 マトリックス</span><span style="color:var(--text-dim)">「順番が大事だったんだ」という構造的な理解</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">2-8 まとめ</span><span style="color:var(--text-dim)">「次の話も絶対見たい」という強い引力</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ 第３話 ═══ -->
+    <div class="section-title">📽 第３話｜清書版（最新：11ブロック構成）</div>
+    <div style="background:linear-gradient(135deg,rgba(17,138,178,0.06),rgba(17,138,178,0.02));border:1px solid rgba(17,138,178,0.2);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(17,138,178,0.1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--blue);letter-spacing:1.5px;text-transform:uppercase">第３話 · 木村ソロ ＋ 受講生インタビュー（別撮り）</div>
+          <div style="font-size:15px;font-weight:800;margin-top:4px">木村が100億メンターと出会って、当たり前の桁が上がった奇跡の10分間</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px">推定尺：25〜30分｜キーワード：プレイヤー兼経営者の罠・ミラーニューロン・環境設計</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-done">木村ソロ</span>
+          <div style="background:rgba(17,138,178,0.15);border:1px solid rgba(17,138,178,0.3);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--blue)">特典：木村ルーティーンレポート</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px">
+
+        <!-- 3-1 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-1｜前回の動画の振り返り</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「第2話では、PL志向（目の前の売上だけを追いかける）のビジネスがなぜ短命に終わるのかという話をしました。」<br>
+            「ちゃんと利益を体制づくりに再投資して、今いるお客さんにもう一度買ってもらえる仕組みを作った人は、地味でも長く生き残っている。逆にマーケコストだけに再投資してCSを削った人は、売上は一瞬伸びても消えていった。これが前回の結論でした。」
+          </div>
+        </div>
+
+        <!-- 3-2 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-2｜今回の動画を最後まで見る理由</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            「でも正直、『仕組みに投資しろ』『長期目線で動け』って言葉だけ聞くと、教科書みたいに聞こえますよね。」<br>
+            「今回の動画では、机上の空論じゃなくて、僕と迫さんが実際にどうやってその思考を手に入れたのかという、完全に実地の話をします。」
+          </div>
+          <div style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「『そんな高い視座で動けるのは、元々センスがある人だけでしょ』と思っている方がいたら、今日の話を聞いたら考えが変わると思います。僕自身、最初からできていたわけじゃないので。」<br>
+            「仕組みに投資するための第一ステップが何かを、ステップバイステップで話します。最後まで見てください。」
+          </div>
+        </div>
+
+        <!-- 3-3 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-3｜それで得られる最高の未来</div>
+          <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            ・プレイヤーとして現場に入りながら、同時に経営者目線で事業を見られるようになる<br>
+            ・来月の数字だけじゃなく、3年後の事業の形が見えた状態で「今日何に時間を使うか」を判断できるようになる<br>
+            ・判断の質が変わる → 今の状況だけで投資を渋るんじゃなく、3年後に何倍で返ってくるかで決断できる<br>
+            ・同じ方向を向いている仲間ができる。自分より先を行っている人の存在が毎日の基準値を引き上げてくれる
+          </div>
+        </div>
+
+        <!-- 3-4 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-4｜回避できる最悪の未来</div>
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            ・現場の作業を一人でこなしている間は、世界からのフィードバックが「今日の仕事が何件終わったか」だけになる<br>
+            ・気づいたら、自分より売上が低い人とだけ話す時間が一番長い状態になっている<br>
+            ・コンサルを売っている人は特にこれが起きやすい。コンサル生と毎日話すと思考の引力がそこに引っ張られる<br>
+            ・エネルギーが下がり、出力が落ちて消えていく。何年か経っても事業規模が全然変わっていない
+          </div>
+        </div>
+
+        <!-- 3-5 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-5｜問題提起（プレイヤー兼経営者の罠）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>「一番最初、会社の核になる人間は自分一人だけです。」</strong><br>
+            プレイヤーとして動いている時間が長くなるほど、フォーカスは目の前の作業に当たっていく。今月の受注、今日の納品、来週のアポ。そこだけ見ていると、必然的に機能戦略のレイヤーでしか考えられなくなる。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>脳の限界問題</strong><br>
+            「脳内に、プレイヤー目線と経営者目線という2人のキャラクターを同時に存在させるのは、生物として本当に難しい。気合があればできるというものじゃない。」<br>
+            「でも、長く成長し続けた人たちは、なぜかそれができていた。なぜか。」
+          </div>
+        </div>
+
+        <!-- 3-6 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-6｜解決策｜「引力が働く環境」を意図的に設計する</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>ミラーニューロンの原理</strong><br>
+            「答えは、自分の環境を意図的に設計していたから、です。」<br>
+            人間には「同じ時間・空間を共有している人に自然と思考が近づいていく」性質（ミラーニューロン）がある。だから、誰と時間を共有するかで自分の基準値が決まる。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>木村の実体験（エピソード）</strong><br>
+            村上さんや井崎先生など「自分より圧倒的に大きな結果を出している人」と、意図的に時間を共有するようにしてから事業が成長し始めた。「その人たちが当たり前として話す判断基準・時間の使い方を隣で聞いているだけで、自分の基準値が変わっていく。情報として学ぶんじゃなくて、空気として染み込んでいく感覚。」<br>
+            目の前の仕事をしながら、そういう時間を月の中に必ず設計していた。
+          </div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>迫の実体験（エピソード）</strong><br>
+            「迫さんも同じです。自分より先を行っている経営者と意図的に時間を作っていた。だから消えなかった。」
+          </div>
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>なぜコンサルを受けるだけでは不十分なのか</strong><br>
+            コンサルをしていると、自分より「状態が後ろ」の人と多くの時間を共有することになる。下の基準値に引っ張られるリスクがある。だからこそ「引き上げてくれる人と何かを共有する」機会を意識して設計する必要がある。
+          </div>
+        </div>
+
+        <!-- 3-7 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-7｜解決策を実行した人のインタビュー ※別撮り</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            <strong>インタビュー収録の方向性（事前に本人に伝えておくこと）</strong><br>
+            ①「木村・迫と関わる前、どんな状況でしたか？」（Before）<br>
+            ②「何がきっかけで、どう環境を変えましたか？」（転換点）<br>
+            ③「環境が変わってから、何が一番変わりましたか？」（After）<br>
+            ④「その変化は、売上以外どこに出ましたか？」（思考・行動の変化）
+          </div>
+          <div style="background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <strong>インタビュー後、木村が一言：</strong><br>
+            「この話を聞いて、何が変わったかというと、仕事のやり方じゃなくて、誰と時間を過ごすかが変わった。それだけで、こういう結果が出ている。これは再現できます。」
+          </div>
+        </div>
+
+        <!-- 3-8 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-8｜今回の話のまとめ</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「プレイヤー目線と経営者目線、どちらも必要です。でも一人でいると経営者目線は必ず落ちていく。なぜなら、フィードバックをくれる世界が『今日の作業量』だけになるから。」<br><br>
+            「じゃあどうすればいいか。自分を引き上げてくれる環境に、意図的に身を置くことです。自分より大きな結果を出している人と同じ時間・空間を共有する。これがプレイヤーをしながら経営者目線を保つ唯一の方法です。情報じゃない、<strong>環境です</strong>。」<br><br>
+            「これが、僕と迫さんが事業を成長させてこれた、一番の理由だったと思っています。」
+          </div>
+        </div>
+
+        <!-- 3-9 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-9｜プレゼントの告知</div>
+          <div style="background:rgba(17,138,178,0.08);border:1px solid rgba(17,138,178,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:6px">🎁 第３話特典｜木村ルーティーンレポート</div>
+            「僕が今のような状態になる前、あなたと同じような状況にいた頃に、どういう1日・1ヶ月を過ごしていたかをまとめたレポートを用意しました。」<br>
+            ・月に何回「師匠・メンター」と話していたか<br>
+            ・勉強の時間と実務の時間のバランスはどうだったか<br>
+            ・師匠と話す時間をどこに設計していたか<br>
+            ・具体的な数字と時間配分で全部書いています<br><br>
+            「これを真似してもらえれば、同じ環境設定ができます。受け取り方は動画の下の案内ページをご確認ください。」
+          </div>
+        </div>
+
+        <!-- 3-10 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-10｜次回動画の予告</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「次の動画が、このシリーズの最終回です。今回まで3本の動画で、1億円の事業を作る考え方・成長し続ける事業と消える事業の違い・そしてプレイヤーと経営者を両立するための環境設計を話してきました。」<br><br>
+            「次の動画では、僕がなぜ今回この動画シリーズを作ったのか、そしてどんな人と一緒に走りたいのかという話をします。それと合わせて、この動画シリーズのプレゼント3つをまとめてお渡しします。」<br><br>
+            「コミットというプログラムのご案内も含まれますが、興味がなくてもプレゼントだけ受け取るために最後まで見ていただいても全然OKです。」
+          </div>
+        </div>
+
+        <!-- 3-11 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:8px;letter-spacing:1px">3-11｜CTA</div>
+          <div style="background:rgba(17,138,178,0.08);border:1px solid rgba(17,138,178,0.3);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            「この動画の感想を下のボタンから送ってください。感想を送っていただいた方に、次の最終話のURLをお送りします。」<br>
+            「この動画は<strong>3日間の限定配信</strong>です。期間内に感想を送って、最終話まで受け取ってください。」
+          </div>
+        </div>
+
+        <!-- 感情トーン 3 -->
+        <div style="background:rgba(17,138,178,0.05);border:1px solid rgba(17,138,178,0.15);border-radius:10px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:10px">✦ 感情トーン設計</div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-1 振り返り</span><span style="color:var(--text-dim)">「前回の続きだ」という流れの一体感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-2 見る理由</span><span style="color:var(--text-dim)">教科書じゃない「実地の話」への期待感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-3 最高の未来</span><span style="color:var(--text-dim)">「そういう状態になりたい」という欲求の喚起</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-4 最悪の未来</span><span style="color:var(--text-dim)">「あ、それ自分のことだ」という強い共鳴・孤独感の共有</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-5 問題提起</span><span style="color:var(--text-dim)">「そういうことか」という構造的な理解と納得</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-6 解決策</span><span style="color:var(--text-dim)">「環境が答えだったんだ」という目から鱗 ＋ 憧れ・希望感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-7 インタビュー</span><span style="color:var(--text-dim)">「自分にも再現できるかもしれない」という期待感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-8 まとめ</span><span style="color:var(--text-dim)">「情報じゃない、環境だ」という本質を掴んだ感覚</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">3-10 次回予告</span><span style="color:var(--text-dim)">「次の動画が気になる」という強い引力。ゴールが見えた感覚</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ 第４話（セールス） ═══ -->
+    <div class="section-title">📽 第４話（VSL・セールス動画）｜清書版（COMPASS構造版）</div>
+    <div style="background:linear-gradient(135deg,rgba(255,71,87,0.06),rgba(255,71,87,0.02));border:1px solid rgba(255,71,87,0.2);border-radius:16px;overflow:hidden;margin-bottom:24px">
+      <div style="background:rgba(255,71,87,0.1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--red);letter-spacing:1.5px;text-transform:uppercase">第４話 · 木村ソロ · VSL／セールス動画</div>
+          <div style="font-size:15px;font-weight:800;margin-top:4px">コミットとは何か 基準値が上がる設計図</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px">推定尺：30〜35分｜構成：1〜3話振り返り → 問題提起①② → オファー → CTA</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-urgent">セールス動画</span>
+          <div style="background:rgba(255,71,87,0.15);border:1px solid rgba(255,71,87,0.3);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--red)">全特典（完走者に全部）</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px">
+
+        <!-- 演出メモ -->
+        <div style="background:rgba(255,209,102,0.06);border:1px solid rgba(255,209,102,0.2);border-radius:10px;padding:12px 16px;font-size:11px;color:var(--text-dim);margin-bottom:20px;line-height:1.7">
+          <span style="font-weight:700;color:var(--yellow)">🎬 演出メモ</span>　トーン：冷静・確信・「売り込まない」姿勢。事実を語るだけ。カウントダウンタイマーは画面下部に常時表示。教育40%・オファー60%の配分。ブロック間にテロップインサートを入れてテンポを保つ。
+        </div>
+
+        <!-- テロップ -->
+        <div style="background:rgba(255,71,87,0.08);border-left:3px solid var(--red);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12px;font-style:italic;color:var(--text-dim);margin-bottom:20px;line-height:1.7">
+          【テロップ】「年商1億を突破したBrainコミット参加者、複数名輩出。」<br>「その共通点は、たった一つだった。」
+        </div>
+
+        <!-- 振り返り -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">📌 前回（1〜3話）の振り返り</div>
+          <div style="background:rgba(108,99,255,0.05);border:1px solid rgba(108,99,255,0.15);border-radius:10px;padding:10px 14px;font-size:11px;color:#a89cff;margin-bottom:8px">このブロックの役割：1〜3話を見た視聴者に「ここまでの旅を肯定する」安心感を与えつつ、4話（オファー回）への期待値を高める。「やっとここまで来た」という達成感を作ること。</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:#a89cff;margin-bottom:6px">第１話のおさらい</div>
+              年商1,000万で止まる人と1億に行く人は、フォーカスしている場所が根本的に違う。止まる人は「今月の受注・来月の受注」という行動レベルだけを見ている。伸びる人は「自分の仕事の基準値・どこまでを自分ごととして見るか」という上のレイヤーを見ている。全社戦略・事業戦略・機能戦略・財務戦略を順番に設計している——これが1話の結論。
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:6px">第２話のおさらい</div>
+              生き残っている事業と消えていった事業の決定的な違いは「価値の流れを中心に置いているか」。売上数字だけを追う膨張志向の人はCSを削って新規ばかり追い信用を失う。今いるお客さんへの価値提供を優先してリピートが生まれる仕組みを作った人は売上が積み上がり続ける。情報じゃなく、仕組みで生き残る——これが2話の結論。
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--blue);margin-bottom:6px">第３話のおさらい</div>
+              プレイヤーと経営者という2つの目線をどうやって両立するか。一人でいると目の前の作業だけにフォーカスが向いてしまい、経営者目線は消えていく。脳の構造上、一人の中に両方を同時に存在させるのは難しい。それを解決したのが環境。ミラーニューロンの原理で、誰と時間を共有するかが基準値を決める。村上さんや井崎先生と意図的に時間を共有するようにしてから事業が変わっていった。<strong>情報じゃない、環境です——これが3話の結論。今日の話はここから始まる。</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 導入 -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-1｜導入（今日の動画の予告）</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            「ここまで3本の動画を見てくれた、ありがとうございます。今回4本目となる最後の動画では、これまでの話を踏まえて、Brainコミットへの参加についてお話しします。」<br><br>
+            ・なぜ知識だけでは年商は変わらないのか<br>
+            ・基準値を変えるために本当に必要なもの<br>
+            ・Brainコミットが何者なのか、その全貌
+          </div>
+          <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+            逆に今日の話を知らずに進めると、「どれだけ良い教材を買っても3ヶ月で行動が止まったり」「一人で頑張り続けて基準値が年々下がっていったり」「本当は年収1億の世界に行けたのに、行けないまま終わったり」——そういう未来が待っている。
+          </div>
+        </div>
+
+        <!-- 問題提起① -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-2｜問題提起①：知識と行動のギャップ</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">①-A 視聴者の代弁</div>
+              「基準値が大事なのは分かった。でも、どうすれば変えられるんだろう」「教材は何十冊も読んできた。なのにまだ年商が変わっていない」——知識を積み上げているのに結果が変わらない違和感。
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">①-B 常識破壊</div>
+              「基準値を上げるために良い情報・良い教材を入れる」は正しいか？——<strong>情報は頭に届くが、環境は体を動かす。基準値を変えるのは『情報』ではなく『環境』。</strong>
+            </div>
+            <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px">①-C 最悪な未来</div>
+              教材を買い続けることはそんなに甘くない。「情報が増えれば行動が変わる」という誤解があると何年取り組んでも事業規模は変わらない。
+            </div>
+            <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px">①-D 解決策（環境が基準値を変える）</div>
+              毎朝5時起きを習慣化したいとき、一人で決意しても3日で終わる。でも全員が5時起きを当たり前にしているLINEグループがあったら？——これが環境の力。年商10億の木村の日常と基準値を毎日全員が浴びる環境。
+            </div>
+            <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px">①-E 理想の未来</div>
+              環境が変わると毎日の行動水準が上がる。意思決定のスピードが速くなる。一人では届かなかった規模の仕事に手が届くようになる。一人で3〜5年かかることが6ヶ月〜1年で起きる。
+            </div>
+          </div>
+        </div>
+
+        <!-- 問題提起② -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-3｜問題提起②：一人では基準値は下がり続ける</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">②-A 新たな問題</div>
+              「環境が大事なのは分かったけど、どんな環境に入ればいいのか分からない」「コミュニティはたくさんあるがどれが本物なのか」——ただの『仲間が集まる場所』と基準値が変わる環境は根本的に別物。
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">②-B コミットの設計の正体</div>
+              オリンピック選手が隣のマシンで追い込んでいたら、自分でも気づかないうちに動きが変わる——これが基準値の同期。木村の日報が毎日全員に公開・月2回の作業会（大阪・東京）・年4回の合宿・Discordでの壁打ち。50名限定の理由は全員の顔と状況を木村自身が把握できる人数だから。
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">②-C 実例ストーリー</div>
+              月末になると目標未達でまた翌月新たな目標を立てるを3年繰り返していた参加者が、コミット入会後2週間で木村の日報を見て衝撃。起床時間・報告が変わり、3ヶ月後に3年間届かなかった月商を突破。「変わったのはノウハウじゃなかった。隣にいる人間が変わっただけだった」
+            </div>
+            <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px">②-D 最悪の未来</div>
+              自分一人の基準値は放っておくと必ず下がる。これは意志の問題じゃなく脳の仕組みの話。環境への投資に早く気づいた人ほど先に動かし、気づかなかった人との差は年々広がっていく。
+            </div>
+            <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.15);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px">②-E 理想の未来（実例）</div>
+              年商2,000万→4,500万（半年）・意思決定スピードが激変した事例・JVをきっかけに単独では動かせなかった規模の案件が動き始めた事例。正しい情報＋正しい環境 → 基準値が変わる → 売上が変わる。
+            </div>
+          </div>
+        </div>
+
+        <!-- まとめ・オファー -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-4｜まとめ・オファー提示</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px">総括</div>
+              基準値（OS）こそが年商のステージを決めている → 膨張ではなく拡大する事業には業界への責任感と一人では動かせないリソースが必要 → 基準値は環境が変わらなければ変わらない。同じ基準値で走れるチームを作り、毎日その環境の中で動き続け、一人では届かなかったリソースを仲間と動かす。
+            </div>
+            <div style="background:rgba(108,99,255,0.08);border:1px solid rgba(108,99,255,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:#a89cff;margin-bottom:8px">💎 超人コース（月額11万円）</div>
+              教材の月謝ではなく、木村という人間が年商10億の基準値で毎日走っている環境への入場料。<br>
+              ✓ 日報提出とフィードバック（毎日）<br>
+              ✓ 月2回の作業会（大阪・東京）<br>
+              ✓ 年4回の合宿<br>
+              ✓ Discordでの壁打ち・質問・案件シェア<br>
+              ✓ 木村本人が全員を把握し続ける<br>
+              ✓ 参加者同士の協業・案件シェア・JVの機会<br>
+              <span style="color:#a89cff;font-weight:700">📌 今回限定：迫さんと木村による1on1初回コンサル（60分）を入会特典として追加</span>
+            </div>
+            <div style="background:var(--surface2);border-radius:10px;padding:12px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--text-dim);margin-bottom:4px">👁 見学コース（月額2万円）</div>
+              審査なし。今すぐ入会可。木村の日報・活動ログ・コラムの閲覧。任意のタイミングで超人コースの審査申請が可能。
+            </div>
+          </div>
+        </div>
+
+        <!-- スクリーニング -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-5｜スクリーニング（来てほしい人・来てほしくない人）</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">❌ 来てほしくない方</div>
+              稼いでダラダラしたい方<br>
+              ゴールに着いたらやめたい方<br>
+              言い訳が先に出る方<br>
+              月額11万円を「高い」だけで判断している方
+            </div>
+            <div style="background:rgba(6,214,160,0.06);border:1px solid rgba(6,214,160,0.2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8">
+              <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px">✅ 来てほしい方</div>
+              年商1,000万以上を自力で作ってきた方<br>
+              本気で「このままじゃダメだ」と感じている方<br>
+              指示されたことを素直に実行できる方<br>
+              情報じゃなく、環境を求めている方
+            </div>
+          </div>
+          <div style="background:rgba(108,99,255,0.06);border-left:3px solid var(--primary);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12px;margin-top:8px;font-style:italic">
+            「基準値が問題だとは分かっていた。でも、一人では変えられなかった。」——この一言に共感できる方に、この環境は刺さります。
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px">4-6｜「分かる」と「できる」の差 → CTA</div>
+          <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;margin-bottom:8px">
+            「ここまで4本の動画を見てくれたあなたは、今『知っている』状態。基準値が大事だと知っている。環境が変わることが必要だと知っている。一人では限界があると知っている。でも問題は、これを『やっている』状態に変えられるかどうかです。」<br><br>
+            「今ここで速く決断できるかどうか——それ自体が、すでに基準値のテストです。」
+          </div>
+          <div style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);border-radius:10px;padding:14px 16px;font-size:12px;line-height:1.8;text-align:center">
+            <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px">⏳ このオファーの申込期間はカウントダウン終了まで</div>
+            超人コース 審査申込 → フォームはこちら<br>
+            見学コース → こちらから今すぐ
+          </div>
+        </div>
+
+        <!-- 構造サマリー -->
+        <div style="background:rgba(255,209,102,0.05);border:1px solid rgba(255,209,102,0.15);border-radius:10px;padding:14px 16px">
+          <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:10px">✦ COMPASS構造との対応 & 心理設計</div>
+          <div style="display:grid;gap:6px;font-size:11px">
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">振り返り</span><span style="color:var(--text-dim)">「4本見てきた」という達成感と一体感→クロージング抵抗を下げる</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">導入</span><span style="color:var(--text-dim)">「ついに詳細が分かる」という期待感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">問題提起①-B</span><span style="color:var(--text-dim)">「情報じゃなく環境だったのか」という常識の書き換え</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">問題提起①-D</span><span style="color:var(--text-dim)">「5時起きの例」で環境の力をリアルに体感</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">問題提起②-B</span><span style="color:var(--text-dim)">コミットの設計が「なぜそうなっているのか」を完全理解</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">問題提起②-C</span><span style="color:var(--text-dim)">実例を聞いて「自分にも起きるかもしれない」という確信</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">まとめ②</span><span style="color:var(--text-dim)">「11万円でいいのか」という驚き</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">スクリーニング</span><span style="color:var(--text-dim)">「来てほしい方だ」という自己証明欲求</span></div>
+            <div style="display:flex;gap:8px"><span style="color:var(--text-muted);width:180px;flex-shrink:0">CTA</span><span style="color:var(--text-dim)">「今決断しないと機会が消える」という緊張感と覚悟</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+
+  <!-- ║  TAB 4: コアメッセージ                   ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-message">
+
+    <!-- 核心コピー -->
+    <div style="background:linear-gradient(135deg,#12101e,#0f1420);border:1px solid rgba(108,99,255,0.3);border-radius:20px;padding:36px;text-align:center;margin-bottom:28px">
+      <div style="font-size:12px;font-weight:700;color:#a89cff;letter-spacing:2px;margin-bottom:16px">CORE MESSAGE</div>
+      <div style="font-size:22px;font-weight:900;line-height:1.5;letter-spacing:-0.3px">
+        「凡人で終わるか、超人に届くか。<br>
+        <span style="background:linear-gradient(135deg,#a89cff,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+        一生に一度、人生の景色が変わるほど</span><br>
+        『魂の基準値』を書き換える究極体験。」
+      </div>
+    </div>
+
+    <!-- 5つの真実 -->
+    <div class="section-title">🔑 5つの核心真実</div>
+    <div class="grid-2" style="margin-bottom:28px">
+      <div>
+        <div class="truth-item">
+          <div class="truth-num">1</div>
+          <div>
+            <div class="truth-title">「知識の切り売り」への宣戦布告</div>
+            <div class="truth-desc">教材を売るだけでは人は変わらない。行動を「強制同期」させることが教育者としての本当の誠実さ。</div>
+          </div>
+        </div>
+        <div class="truth-item">
+          <div class="truth-num">2</div>
+          <div>
+            <div class="truth-title">「基準値」という無形のOS</div>
+            <div class="truth-desc">1億・10億を作れない理由はノウハウ不足ではない。一秒一秒の判断・集中力という「OS」が凡人のまま。</div>
+          </div>
+        </div>
+        <div class="truth-item">
+          <div class="truth-num">3</div>
+          <div>
+            <div class="truth-title">強制同期（シンクロ）システム</div>
+            <div class="truth-desc">24時間の監視・管理により逃げ場をなくし、プロの基準値に自分の心拍数を合わせる。</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="truth-item">
+          <div class="truth-num">4</div>
+          <div>
+            <div class="truth-title">迷いの完全排除</div>
+            <div class="truth-desc">膨大な情報から「今やるべきこと」だけを木村氏が指定。迷うエネルギーを全て実行に転換する。</div>
+          </div>
+        </div>
+        <div class="truth-item">
+          <div class="truth-num">5</div>
+          <div>
+            <div class="truth-title">「2つ先からお金をもらう」誠実さ</div>
+            <div class="truth-desc">成功の先にある「共創」を狙うからこそ手加減なしの超人化にコミットできる。目先の受講料ではなく未来の共創。</div>
+          </div>
+        </div>
+        <!-- 動画の各話核心メッセージ -->
+        <div class="card card-sm" style="background:rgba(255,209,102,0.05);border-color:rgba(255,209,102,0.2);margin-top:8px">
+          <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:10px">各話のコアメッセージ（1行）</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:12px"><span style="color:var(--text-muted);font-size:10px;font-weight:700;margin-right:8px">第一話</span>「孤独なまま賢い人間は、もったいない」</div>
+            <div style="font-size:12px"><span style="color:var(--text-muted);font-size:10px;font-weight:700;margin-right:8px">第二話</span>「1億は、日常の解像度の問題だ」</div>
+            <div style="font-size:12px"><span style="color:var(--text-muted);font-size:10px;font-weight:700;margin-right:8px">第三話</span>「ルーティンは、習慣じゃない。自分への宣言だ」</div>
+            <div style="font-size:12px"><span style="color:var(--text-muted);font-size:10px;font-weight:700;margin-right:8px">VSL</span>「俺たちは50人とだけ、本気でやる」</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 刺さる・刺さらない言葉 -->
+    <div class="section-title">💯 刺さる言葉 / 刺さらない言葉</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="color:var(--green)">✅ 刺さる言葉</div>
+        <table class="kw-table" style="margin-top:8px">
+          <thead>
+            <tr><th>フレーズ</th><th>なぜ刺さるか</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="hit fw-bold">「売上のこと、一人で<br>考えてませんか？」</td>
+              <td>一番の孤独に直接触れている</td>
+            </tr>
+            <tr>
+              <td class="hit fw-bold">「年商1500万なのに、<br>なぜか楽にならないですよね」</td>
+              <td>外から見えない苦しみを言い当てている</td>
+            </tr>
+            <tr>
+              <td class="hit fw-bold">「頑張ってないわけじゃない。<br>頑張り方が間違ってるだけ」</td>
+              <td>努力を認めつつ原因を提示</td>
+            </tr>
+            <tr>
+              <td class="hit fw-bold">「自分がいないと回らない会社は<br>会社じゃなくて自営業です」</td>
+              <td>グサッと来るが、本質</td>
+            </tr>
+            <tr>
+              <td class="hit fw-bold">「5年後も同じ1日を<br>繰り返しますか？」</td>
+              <td>最大の恐怖を直接突く</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--red)">❌ 刺さらない言葉</div>
+        <table class="kw-table" style="margin-top:8px">
+          <thead>
+            <tr><th>フレーズ</th><th>なぜ刺さらないか</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="miss fw-bold">「年商10億を<br>目指しましょう！」</td>
+              <td>現実感がなさすぎる</td>
+            </tr>
+            <tr>
+              <td class="miss fw-bold">「マインドセットが<br>大事です」</td>
+              <td>抽象的すぎる。明日の売上に繋がらない</td>
+            </tr>
+            <tr>
+              <td class="miss fw-bold">「自由な人生を<br>手に入れよう」</td>
+              <td>独立したのに不自由だと分かっている</td>
+            </tr>
+            <tr>
+              <td class="miss fw-bold">「基準値を上げれば<br>全て変わる」</td>
+              <td>概念は分かるが明日の請求書は概念では払えない</td>
+            </tr>
+            <tr>
+              <td class="miss fw-bold">「成功者のマインドを<br>学ぼう」</td>
+              <td>「学ぶ」でなく「近くにいたい」。情報でなく距離</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 視聴者の感情設計 -->
+    <div class="section-title mt-32">❤️ 視聴者に抱かせる感情（動画全体のゴール）</div>
+    <div class="grid-4">
+      <div class="card card-sm" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">😱</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">①「痛恨」</div>
+        <div style="font-size:12px;color:var(--text-dim)">自分の基準値が止まっていたことへの焦り</div>
+      </div>
+      <div class="card card-sm" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">🔥</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">②「渇望」</div>
+        <div style="font-size:12px;color:var(--text-dim)">迫・木村と同じ「基準値の空気圧」で仕事をしたい欲求</div>
+      </div>
+      <div class="card card-sm" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">💡</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">③「確信」</div>
+        <div style="font-size:12px;color:var(--text-dim)">この環境さえあれば10億の世界は現実の延長線上にある</div>
+      </div>
+      <div class="card card-sm" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">⚡</div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px">④「覚悟」</div>
+        <div style="font-size:12px;color:var(--text-dim)">月額11万円を投資し自分の魂を預けるという決断</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 5: ターゲット                       ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-persona">
+
+    <!-- Persona Profile -->
+    <div class="grid-2" style="margin-bottom:28px">
+      <div class="persona-block">
+        <div style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--primary)">📊 基本プロフィール</div>
+        <table class="kw-table">
+          <tbody>
+            <tr><td style="color:var(--text-dim);width:80px">年齢</td><td style="font-weight:600">28〜38歳（中央値32歳）</td></tr>
+            <tr><td style="color:var(--text-dim)">年商</td><td style="font-weight:600">1000万〜5000万円<span style="color:var(--text-dim);font-size:11px;margin-left:6px">（中央値1500〜2000万）</span></td></tr>
+            <tr><td style="color:var(--text-dim)">業種</td><td>Web制作、マーケ支援、コンサル、物販、スクール等</td></tr>
+            <tr><td style="color:var(--text-dim)">社員数</td><td>0〜5名（外注含め10名前後）</td></tr>
+            <tr><td style="color:var(--text-dim)">事業歴</td><td>3〜7年<span style="color:var(--text-dim);font-size:11px;margin-left:6px">（軌道に乗り→停滞）</span></td></tr>
+            <tr><td style="color:var(--text-dim)">月手取り</td><td style="font-weight:600;color:var(--red)">50〜80万円<span style="color:var(--text-dim);font-size:11px;margin-left:6px">（経費で消える）</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 5 Hells -->
+      <div class="persona-block">
+        <div style="font-size:13px;font-weight:700;margin-bottom:16px;color:var(--red)">🔥 5つの地獄</div>
+        <div class="pain-item">
+          <div class="pain-icon bg-red" style="font-size:14px">①</div>
+          <div>
+            <div class="pain-title">売上は自分にしか作れない</div>
+            <div class="pain-desc">自分が病気で1週間倒れたら会社が止まる。自分が商品であり、自分がボトルネック。</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon bg-red" style="font-size:14px">②</div>
+          <div>
+            <div class="pain-title">売上が増えても残らない</div>
+            <div class="pain-desc">規模を大きくしたのに自分の生活は楽にならない。責任とストレスだけが増えた。</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon bg-red" style="font-size:14px">③</div>
+          <div>
+            <div class="pain-title">人の問題が終わらない</div>
+            <div class="pain-desc">採用という名の博打。育てた社員に辞められる。残っている人のモチベ管理まで自分の仕事。</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-icon bg-red" style="font-size:14px">④</div>
+          <div>
+            <div class="pain-title">経営者としての孤独</div>
+            <div class="pain-desc">社員にも妻にも友達にも言えない。同じ苦しみを共有できる相手がいない。</div>
+          </div>
+        </div>
+        <div class="pain-item" style="border-bottom:none">
+          <div class="pain-icon bg-red" style="font-size:14px">⑤</div>
+          <div>
+            <div class="pain-title">比較と焦り</div>
+            <div class="pain-desc">努力の量ではなく何か根本的なものが違う。でもそれが何なのか言語化できない。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distance Desire -->
+    <div class="card glow-card" style="margin-bottom:28px;border-color:rgba(108,99,255,0.3)">
+      <div style="font-size:14px;font-weight:700;color:#a89cff;margin-bottom:16px">🎯 最深層の欲求：「距離への渇望」</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--text-dim);max-width:700px">
+        夜、ベッドの中でInstagramを開く。迫さんのストーリーが流れてくる。事業ミーティングの様子。新しいプロジェクトの発表。一緒に仕事してる仲間たちとの食事。<br><br>
+        <strong style="color:var(--text)">「俺もあの輪の中に入りたい」</strong><br><br>
+        これは論理じゃない。でも夜のベッドの中でスマホを握りしめながら感じるこの気持ちが── <strong style="color:#a89cff">一番正直な欲求。</strong>
+      </div>
+      <div class="divider"></div>
+      <div class="grid-3" style="gap:12px">
+        <div style="background:rgba(255,71,87,0.08);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px">❌ 教育サービスの月謝として</div>
+          <div style="font-size:12px;color:var(--text-dim)">月11万円 → 高い</div>
+        </div>
+        <div style="background:rgba(255,209,102,0.08);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:6px">❌ 自己啓発の投資として</div>
+          <div style="font-size:12px;color:var(--text-dim)">月11万円 → 効果が見えない</div>
+        </div>
+        <div style="background:rgba(6,214,160,0.08);border:1px solid rgba(6,214,160,0.3);border-radius:10px;padding:14px">
+          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px">✅ 迫・木村の「圏内」への入場料</div>
+          <div style="font-size:13px;font-weight:700">月11万円 → 安すぎる</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Target / Non-Target -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="color:var(--green)">✅ 来てほしい人</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <div class="block-item"><span class="c-green" style="font-size:16px;flex-shrink:0">◉</span><div class="block-text"><div class="block-label">年商1000万〜5000万を自力で作った</div><div class="block-sub">「稼ぐ力」は証明済み。足りないのはスケールの環境</div></div></div>
+          <div class="block-item"><span class="c-green" style="font-size:16px;flex-shrink:0">◉</span><div class="block-text"><div class="block-label">「このままじゃダメだ」と本気で危機感がある</div><div class="block-sub">危機感がない人間は木村が管理しても動かない</div></div></div>
+          <div class="block-item"><span class="c-green" style="font-size:16px;flex-shrink:0">◉</span><div class="block-text"><div class="block-label">指示されたことを素直に実行できる</div><div class="block-sub">自分のやり方を一度全部捨てる覚悟がある人</div></div></div>
+          <div class="block-item"><span class="c-green" style="font-size:16px;flex-shrink:0">◉</span><div class="block-text"><div class="block-label">情報じゃなくて「環境」を求めている</div><div class="block-sub">教材もセミナーも終わり。「学ぶ」フェーズを自覚している</div></div></div>
+          <div class="block-item"><span class="c-green" style="font-size:16px;flex-shrink:0">◉</span><div class="block-text"><div class="block-label">「迫・木村の近くにいたい」と感じている</div><div class="block-sub">理屈でなく直感で決める人。この感覚がある人は必ず入る</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--red)">❌ 来てほしくない人</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+          <div class="block-item"><span class="c-red" style="font-size:16px;flex-shrink:0">✕</span><div class="block-text"><div class="block-label">年商1000万未満（まだ食えていない）</div><div class="block-sub">スキルハックスが正解。ゼロイチは教えるフェーズ</div></div></div>
+          <div class="block-item"><span class="c-red" style="font-size:16px;flex-shrink:0">✕</span><div class="block-text"><div class="block-label">ノウハウコレクター</div><div class="block-sub">また新しい教材を買う感覚。25枠の1つを無駄にする</div></div></div>
+          <div class="block-item"><span class="c-red" style="font-size:16px;flex-shrink:0">✕</span><div class="block-text"><div class="block-label">言い訳が先に出る人</div><div class="block-sub">「忙しくて…」「今月は…」が口癖。木村は全部潰す</div></div></div>
+          <div class="block-item"><span class="c-red" style="font-size:16px;flex-shrink:0">✕</span><div class="block-text"><div class="block-label">意思決定を自分一人でできない人</div><div class="block-sub">「妻に相談してから」→ これが事業が伸びない理由と同じ</div></div></div>
+          <div class="block-item"><span class="c-red" style="font-size:16px;flex-shrink:0">✕</span><div class="block-text"><div class="block-label">月11万を「高い」と感じる人</div><div class="block-sub">このサービスを「教育」だと思っている証拠。距離の価値が分かっていない</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 6: インタビュー設計                 ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-interview">
+
+    <div class="card glow-card" style="background:rgba(255,209,102,0.05);border-color:rgba(255,209,102,0.3);margin-bottom:24px">
+      <div style="font-size:12px;font-weight:700;color:var(--yellow);margin-bottom:8px">🎯 最も重要な質問（これだけは必ず聞く）</div>
+      <div style="font-size:16px;font-weight:700;line-height:1.6">
+        「木村さんが今まで関わった人で、最も変化した人の話を聞かせてもらえますか。<br>どんな状態で来て、今どうなっていますか。」
+      </div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:8px">→ この答えが全メッセージの「血肉」になる</div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">インタビューの進め方：①原体験 → ②③具体的観察 → ⑤ビジョン → ⑥逆張り（反論潰し）</div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="section-title">① 木村氏自身の原体験（本物感の土台）</div>
+        <div class="q-item">
+          <div class="q-num">Q01</div>
+          <div class="q-text">木村さん自身が「変わった」瞬間はいつですか？ある日を境にモノの見え方が変わったとか、やめられなくなった習慣ができたとか、その具体的な日の話を聞かせてください。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q02</div>
+          <div class="q-text">「もったいない」と本気で感じた人の話を聞かせてもらえますか？明らかに才能があるのに、一人で止まっていた人。その人を見てどう感じましたか。今どうなってますか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q03</div>
+          <div class="q-text">今でも守っているルーティンは何ですか？それをやめたらどうなると思います？やめかけた時期はありましたか。</div>
+        </div>
+
+        <div class="section-title mt-24">② 「1億の解像度」を可視化する（第二話コア）</div>
+        <div class="q-item">
+          <div class="q-num">Q04</div>
+          <div class="q-text">年商1億を超えている人と、1000万で止まっている人を、最初の5分の会話で見分けられますか？見ているポイントは何ですか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q05</div>
+          <div class="q-text">「日常の解像度が高い」とはどういう状態ですか？月曜朝8時の行動で、高い人と低い人の具体的な違いは？</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q06</div>
+          <div class="q-text">参加者の中で「あ、この人は変わった」と感じた瞬間を教えてください。何が変わりましたか。本人は気づいていましたか。</div>
+        </div>
+
+        <div class="section-title mt-24">③ ルーティンの本質（「宣言」を掘り出す）</div>
+        <div class="q-item">
+          <div class="q-num">Q07</div>
+          <div class="q-text">超人ルーティンの中で「これだけは絶対に外せない」行動は何ですか？なぜそれが機能すると思いますか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q08</div>
+          <div class="q-text">早起きと1億円は本当に繋がっていますか？懐疑的な人をどう説得しますか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q09</div>
+          <div class="q-text">ルーティンを「習慣」ではなく「宣言」と言い換えるとしたら、どういう意味ですか？毎朝やる時、自分の中で何が起きていますか。</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title">④ コミュニティの本質（「なぜここでなければ」）</div>
+        <div class="q-item">
+          <div class="q-num">Q10</div>
+          <div class="q-text">コミット内でしか起きない「出会い」の話を聞かせてもらえますか？参加者が「これがなかったら出会えなかった」と言った具体的なエピソード。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q11</div>
+          <div class="q-text">「一人でいると基準値は必ず下がる」と言いますが、木村さんも一人でいた時期はありましたか？その時と今で何が違いますか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q12</div>
+          <div class="q-text">「この人はここにいてほしくない」と感じる人のパターンは何ですか？どこを見ていますか。</div>
+        </div>
+
+        <div class="section-title mt-24">⑤ ビジョンの根拠（「なぜ50人か」「なぜ日本のためか」）</div>
+        <div class="q-item">
+          <div class="q-num">Q13</div>
+          <div class="q-text">「潰れかけた会社を救える人を作りたい」というビジョンはどこから来ていますか？</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q14</div>
+          <div class="q-text">50人というのはなぜ50ですか？「把握できる限界」という話でしたが、51人目が来たらどうなりますか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q15</div>
+          <div class="q-text">10年後、コミットから生まれた超人が50人いる世界を想像してください。社会の何が変わっていますか。木村さんはその時どこにいますか。</div>
+        </div>
+
+        <div class="section-title mt-24">⑥ 逆張り・カウンターインテュイティブ（常識の書き換え）</div>
+        <div class="q-item">
+          <div class="q-num">Q16</div>
+          <div class="q-text">コミットメントが強いのに成果が出なかった人はいましたか？その理由は何でしたか。</div>
+          <div class="q-note">→ 反論潰しの素材。「根性があれば変わる」への回答</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q17</div>
+          <div class="q-text">「頑張る」という言葉について、木村さんはどう思いますか？コミットの参加者は「頑張っている」のですか。</div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">Q18</div>
+          <div class="q-text">「私は夜型で成功している」と言われたら、どう対応しますか。</div>
+          <div class="q-note">→ ルーティン懐疑論への回答素材</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════╗ -->
+  <!-- ║  TAB 7: タスク管理                       ║ -->
+  <!-- ╚══════════════════════════════════════════╝ -->
+  <section class="tab-content" id="tab-content-tasks">
+
+    <div class="grid-2">
+      <!-- 第一話関連 -->
+      <div>
+        <div class="section-title">📽 動画プロット・台本</div>
+
+        <div class="task-item done" id="task-1" onclick="toggleTask('task-1')">
+          <div class="task-check checked" id="check-1">✓</div>
+          <div class="task-body">
+            <div class="task-title">動画プロット v5 作成</div>
+            <div class="task-meta">恐怖→希望→仲間の3話構造に再設計完了</div>
+          </div>
+          <span class="badge badge-done">完了</span>
+        </div>
+
+        <div class="task-item" id="task-2" onclick="toggleTask('task-2')">
+          <div class="task-check" id="check-2"></div>
+          <div class="task-body">
+            <div class="task-title">v5プロットを迫さん・木村さんに確認してもらう</div>
+            <div class="task-meta">フィードバック後、v6orFIXに移行</div>
+          </div>
+          <span class="badge badge-wip">対応中</span>
+        </div>
+
+        <div class="task-item" id="task-3" onclick="toggleTask('task-3')">
+          <div class="task-check" id="check-3"></div>
+          <div class="task-body">
+            <div class="task-title">木村さんに村上さん・グラントさんの話を動画で使っていいか確認</div>
+            <div class="task-meta">第二話の主力コンテンツ。事前承認が必須</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-4" onclick="toggleTask('task-4')">
+          <div class="task-check" id="check-4"></div>
+          <div class="task-body">
+            <div class="task-title">特典の具体的内容を設計する</div>
+            <div class="task-meta">特典①〜③のPDF内容。特に③のチャレンジシートの設計</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-5" onclick="toggleTask('task-5')">
+          <div class="task-check" id="check-5"></div>
+          <div class="task-body">
+            <div class="task-title">第一話台本の執筆</div>
+            <div class="task-meta">対談形式のため事前に2人へ共有・擦り合わせが必要</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-6" onclick="toggleTask('task-6')">
+          <div class="task-check" id="check-6"></div>
+          <div class="task-body">
+            <div class="task-title">第二話・第三話・VSL 台本執筆</div>
+            <div class="task-meta">木村ソロ形式。インタビュー後の素材を反映して執筆</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="section-title mt-24">🎤 インタビュー・素材収集</div>
+
+        <div class="task-item" id="task-7" onclick="toggleTask('task-7')">
+          <div class="task-check" id="check-7"></div>
+          <div class="task-body">
+            <div class="task-title">木村さんとの深掘りセッションを実施</div>
+            <div class="task-meta">18問の質問リストを活用。最重要Q：「最も変化した人の話」</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-8" onclick="toggleTask('task-8')">
+          <div class="task-check" id="check-8"></div>
+          <div class="task-body">
+            <div class="task-title">セッションの書き起こし保存</div>
+            <div class="task-meta">→ コミットファネル相談２.txt として保存</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-9" onclick="toggleTask('task-9')">
+          <div class="task-check" id="check-9"></div>
+          <div class="task-body">
+            <div class="task-title">得られた素材を元に各話のメッセージを確定</div>
+            <div class="task-meta">インタビュー後に各話コアメッセージを最終確定</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+      </div>
+
+      <!-- 制作・公開 -->
+      <div>
+        <div class="section-title">🎬 制作・公開</div>
+
+        <div class="task-item" id="task-10" onclick="toggleTask('task-10')">
+          <div class="task-check" id="check-10"></div>
+          <div class="task-body">
+            <div class="task-title">撮影日程の調整・セッティング</div>
+            <div class="task-meta">特に第一話は迫×木村の対談。スケジュール調整が必要</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-11" onclick="toggleTask('task-11')">
+          <div class="task-check" id="check-11"></div>
+          <div class="task-body">
+            <div class="task-title">撮影実施（第一話〜VSL）</div>
+            <div class="task-meta">4本の動画。第一話のみ対談、その他は木村ソロ</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-12" onclick="toggleTask('task-12')">
+          <div class="task-check" id="check-12"></div>
+          <div class="task-body">
+            <div class="task-title">動画編集（テロップ・インサート映像・フレームワーク図解）</div>
+            <div class="task-meta">デモ映像・クライアント証言映像の収集も含む</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="section-title mt-24">🔧 ファネル構築</div>
+
+        <div class="task-item" id="task-13" onclick="toggleTask('task-13')">
+          <div class="task-check" id="check-13"></div>
+          <div class="task-body">
+            <div class="task-title">LINE自動応答の構築（感想ボタン→次話解放）</div>
+            <div class="task-meta">e-Harbor方式。感想送信→自動でURL＋特典を配布</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-14" onclick="toggleTask('task-14')">
+          <div class="task-check" id="check-14"></div>
+          <div class="task-body">
+            <div class="task-title">特典PDF制作（①〜③）</div>
+            <div class="task-meta">診断シート・マトリクス・7日間チャレンジシート</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-15" onclick="toggleTask('task-15')">
+          <div class="task-check" id="check-15"></div>
+          <div class="task-body">
+            <div class="task-title">申込フォーム・審査フローの構築</div>
+            <div class="task-meta">超人コース（審査あり）・見学コース（即入会）の経路分岐</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <div class="task-item" id="task-16" onclick="toggleTask('task-16')">
+          <div class="task-check" id="check-16"></div>
+          <div class="task-body">
+            <div class="task-title">3日間限定配信の仕組み設定</div>
+            <div class="task-meta">各話公開から72時間で視聴不可になるシステム</div>
+          </div>
+          <span class="badge badge-todo">未着手</span>
+        </div>
+
+        <!-- Progress Summary -->
+        <div class="card" style="margin-top:24px;background:var(--surface2)">
+          <div class="card-title">📊 タスク進捗サマリー</div>
+          <div id="progress-summary" style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+              <span>全体進捗</span>
+              <span id="progress-text" class="fw-bold">1 / 16 完了</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill" style="width:6.25%;background:linear-gradient(90deg,var(--primary),#a855f7)"></div>
+            </div>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
+            <div><span class="badge badge-done" id="count-done">1 完了</span></div>
+            <div><span class="badge badge-wip" id="count-wip">1 対応中</span></div>
+            <div><span class="badge badge-todo" id="count-todo">14 未着手</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Tab switching
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-content-' + tabId).classList.add('active');
+    btn.classList.add('active');
+    if (tabId === 'gantt') renderGantt();
+  }
+
+  // Task toggling
+  const taskStates = {};
+
+  function toggleTask(id) {
+    const item = document.getElementById(id);
+    const check = document.getElementById('check-' + id.split('task-')[1]);
+
+    if (id === 'task-1') {
+      // Already done, keep it done
+      return;
+    }
+
+    taskStates[id] = !taskStates[id];
+
+    if (taskStates[id]) {
+      item.classList.add('done');
+      check.classList.add('checked');
+      check.textContent = '✓';
+    } else {
+      item.classList.remove('done');
+      check.classList.remove('checked');
+      check.textContent = '';
+    }
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = 16;
+    let done = 1; // task-1 is always done
+
+    for (let i = 2; i <= 16; i++) {
+      if (taskStates['task-' + i]) done++;
+    }
+
+    const pct = (done / total * 100).toFixed(1);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = done + ' / ' + total + ' 完了';
+    document.getElementById('count-done').textContent = done + ' 完了';
+  }
+
+  // ═══ GANTT CHART ═══
+  function renderGantt() {
+    const container = document.getElementById('gantt-main');
+    if (!container || container.dataset.rendered) return;
+    container.dataset.rendered = '1';
+
+    // Date range: April 18 to May 31, 2026
+    const startDate = new Date(2026, 3, 18); // April 18
+    const endDate   = new Date(2026, 4, 31); // May 31
+    const today     = new Date();
+    today.setHours(0,0,0,0);
+
+    // Build date array
+    const dates = [];
+    let d = new Date(startDate);
+    while (d <= endDate) {
+      dates.push(new Date(d));
+      d.setDate(d.getDate() + 1);
+    }
+    const totalDays = dates.length;
+    const COL_W = 28; // px per day
+    const LABEL_W = 230;
+
+    // Helper: day index from startDate
+    function dayIdx(date) {
+      const ms = date - startDate;
+      return Math.max(0, Math.floor(ms / 86400000));
+    }
+
+    // Tasks definition
+    const phases = [
+      {
+        phase: '📥 準備', color: 'rgba(108,99,255,0.7)', borderColor: 'rgba(108,99,255,0.3)',
+        tasks: [
+          { label: 'プロット・DB共有受取', who: 'マンキーさん → 木村', start: new Date(2026,3,18), end: new Date(2026,3,18) },
+          { label: 'プロット個人微調整', who: '木村', start: new Date(2026,3,19), end: new Date(2026,3,20) },
+        ]
+      },
+      {
+        phase: '📝 リハーサル・磨き込み', color: 'rgba(255,209,102,0.7)', borderColor: 'rgba(255,209,102,0.3)',
+        tasks: [
+          { label: 'コミットファネルリハーサル', who: '木村・マンキーさん（丸の内 12-21時）', start: new Date(2026,3,21), end: new Date(2026,3,21) },
+          { label: 'コミット東京作業会', who: '7名（10-22時）', start: new Date(2026,3,22), end: new Date(2026,3,22) },
+        ]
+      },
+      {
+        phase: '🎥 本番撮影', color: 'rgba(255,71,87,0.8)', borderColor: 'rgba(255,71,87,0.3)',
+        tasks: [
+          { label: '本番撮影（全5本）', who: '木村（0話:迫×木村、1-3話+VSL:ソロ）', start: new Date(2026,3,23), end: new Date(2026,3,23) },
+        ]
+      },
+      {
+        phase: '✂️ 編集・LINE実装', color: 'rgba(17,138,178,0.7)', borderColor: 'rgba(17,138,178,0.3)',
+        tasks: [
+          { label: '素材転送・動画編集', who: 'ちなさん', start: new Date(2026,3,24), end: new Date(2026,4,20) },
+          { label: 'VSL・LINE仕組み実装', who: 'マンキーさん', start: new Date(2026,3,24), end: new Date(2026,4,25) },
+        ]
+      },
+      {
+        phase: '🚀 リリース', color: 'rgba(6,214,160,0.7)', borderColor: 'rgba(6,214,160,0.3)',
+        tasks: [
+          { label: '既存リストへ正式リリース', who: 'チーム全員', start: new Date(2026,4,25), end: new Date(2026,4,31) },
+        ]
+      },
+    ];
+
+    // Build HTML
+    let html = '';
+
+    // Header row
+    html += `<div style="display:flex">`;
+    html += `<div style="min-width:${LABEL_W}px;width:${LABEL_W}px;background:var(--surface2);border-right:1px solid var(--border);padding:8px 14px;font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:0.8px;text-transform:uppercase;display:flex;align-items:flex-end">タスク / 担当</div>`;
+    html += `<div style="flex:1;display:flex;overflow:hidden">`;
+
+    // Month labels + date cols
+    let prevMonth = -1;
+    dates.forEach((dt, i) => {
+      const isToday = dt.getTime() === today.getTime();
+      const dow = ['日','月','火','水','木','金','土'][dt.getDay()];
+      const isWeekend = dt.getDay() === 0 || dt.getDay() === 6;
+      const bgStyle = isToday ? 'background:rgba(108,99,255,0.2)' : isWeekend ? 'background:rgba(255,255,255,0.02)' : '';
+      const colorStyle = isToday ? 'color:var(--primary);font-weight:800' : isWeekend ? 'color:rgba(255,255,255,0.3)' : 'color:var(--text-muted)';
+      html += `<div style="flex-shrink:0;width:${COL_W}px;text-align:center;border-right:1px solid var(--border);font-size:9px;font-weight:600;padding:4px 2px;${bgStyle};${colorStyle}">`;
+      html += `<div>${dt.getDate()}</div><div>${dow}</div>`;
+      if (isToday) html += `<div style="font-size:7px;color:var(--primary)">▼</div>`;
+      html += `</div>`;
+    });
+
+    html += `</div></div>`;
+
+    // Phase rows
+    phases.forEach(phase => {
+      // Phase header
+      html += `<div style="display:flex;background:var(--surface2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">`;
+      html += `<div style="min-width:${LABEL_W}px;width:${LABEL_W}px;padding:6px 14px;font-size:10px;font-weight:700;color:${phase.color.replace('0.7','1').replace('0.8','1')};border-right:1px solid var(--border);letter-spacing:0.8px;border-left:3px solid ${phase.color}">${phase.phase}</div>`;
+      html += `<div style="flex:1"></div>`;
+      html += `</div>`;
+
+      // Task rows
+      phase.tasks.forEach(task => {
+        const startIdx = dayIdx(task.start);
+        const endIdx   = Math.min(dayIdx(task.end), totalDays - 1);
+        const spanDays = endIdx - startIdx + 1;
+        const leftPx   = startIdx * COL_W;
+        const widthPx  = Math.max(spanDays * COL_W - 4, COL_W - 4);
+
+        html += `<div style="display:flex;border-bottom:1px solid var(--border);align-items:center">`;
+        html += `<div style="min-width:${LABEL_W}px;width:${LABEL_W}px;padding:10px 14px;border-right:1px solid var(--border);flex-shrink:0">`;
+        html += `<div style="font-size:12px;font-weight:600;line-height:1.3">${task.label}</div>`;
+        html += `<div style="font-size:10px;color:var(--text-dim);margin-top:2px">${task.who}</div>`;
+        html += `</div>`;
+        html += `<div style="flex:1;position:relative;height:52px;overflow:hidden">`;
+
+        // Today line
+        const todayIdx = dayIdx(today);
+        if (todayIdx >= 0 && todayIdx < totalDays) {
+          const todayLeft = todayIdx * COL_W + COL_W / 2;
+          html += `<div style="position:absolute;top:0;bottom:0;left:${todayLeft}px;width:2px;background:var(--primary);opacity:0.4;z-index:5"></div>`;
+        }
+
+        // Bar
+        const taskStartMs = task.start.getTime();
+        const taskEndMs = task.end.getTime();
+        const todayMs = today.getTime();
+        let barOpacity = 1;
+        if (taskEndMs < todayMs) barOpacity = 0.45; // past
+
+        html += `<div style="position:absolute;top:50%;transform:translateY(-50%);left:${leftPx + 2}px;width:${widthPx}px;height:26px;border-radius:6px;background:${phase.color};display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:${barOpacity};transition:filter 0.2s" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter=''">`;
+        const dateLabel = task.start.getMonth()+1 + '/' + task.start.getDate() + (task.end > task.start ? '〜' + (task.end.getMonth()+1) + '/' + task.end.getDate() : '');
+        html += spanDays >= 3 ? dateLabel : '';
+        html += `</div>`;
+
+        html += `</div></div>`;
+      });
+    });
+
+    container.innerHTML = html;
+
+    // Days to shoot counter
+    const shootDate = new Date(2026, 3, 23);
+    const daysLeft = Math.ceil((shootDate - today) / 86400000);
+    const el = document.getElementById('days-to-shoot');
+    if (el) {
+      if (daysLeft > 0) el.textContent = daysLeft + '日';
+      else if (daysLeft === 0) el.textContent = '今日！';
+      else el.textContent = '撮影済';
+    }
+  }
+
+  // Update date display
+  const now = new Date();
+  const dateStr = now.getFullYear() + '.' + String(now.getMonth()+1).padStart(2,'0') + '.' + String(now.getDate()).padStart(2,'0');
+</script>
+</body>
+</html>

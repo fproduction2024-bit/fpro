@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP Editor - ランディングページ編集</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .editor-container {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+            height: calc(100vh - 200px);
+        }
+
+        .editor-panel {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            overflow-y: auto;
+        }
+
+        .preview-panel {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+            overflow-y: auto;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .section-group {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--bg-color);
+            border-radius: 8px;
+        }
+
+        .section-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .preview-frame {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: white;
+            min-height: 600px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .add-section-btn {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .section-item {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 2px solid var(--border-color);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .section-type {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px 8px;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 1024px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>✏️ LP Editor</h1>
+            <p id="lpTitle">ランディングページを編集</p>
+        </header>
+
+        <div class="editor-header">
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+                ← ダッシュボードに戻る
+            </button>
+            <div class="editor-actions">
+                <button class="btn btn-secondary" id="previewBtn">👁️ プレビュー</button>
+                <button class="btn btn-secondary" id="exportBtn">💾 エクスポート</button>
+                <button class="btn btn-primary" id="saveBtn">✅ 保存</button>
+            </div>
+        </div>
+
+        <div class="editor-container">
+            <!-- Editor Panel -->
+            <div class="editor-panel">
+                <h2 style="margin-bottom: 20px;">編集パネル</h2>
+
+                <!-- Hero Section -->
+                <div class="section-group">
+                    <h3>🎯 ヒーローセクション</h3>
+                    <div class="form-group">
+                        <label>メインタイトル</label>
+                        <input type="text" id="heroTitle" placeholder="メインタイトルを入力">
+                    </div>
+                    <div class="form-group">
+                        <label>サブタイトル</label>
+                        <input type="text" id="heroSubtitle" placeholder="サブタイトルを入力">
+                    </div>
+                    <div class="form-group">
+                        <label>CTAボタンテキスト</label>
+                        <input type="text" id="heroCtaText" placeholder="ボタンのテキスト">
+                    </div>
+                    <div class="form-group">
+                        <label>CTAボタンURL</label>
+                        <input type="text" id="heroCtaUrl" placeholder="https://...">
+                    </div>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="section-group">
+                    <h3>📝 コンテンツセクション</h3>
+                    <div id="sectionsContainer">
+                        <!-- Sections will be added here -->
+                    </div>
+                    <button class="btn btn-secondary add-section-btn" id="addSectionBtn">
+                        ➕ セクション追加
+                    </button>
+                </div>
+
+                <!-- Profile Section -->
+                <div class="section-group">
+                    <h3>👤 プロフィールセクション</h3>
+                    <div class="form-group">
+                        <label>名前</label>
+                        <input type="text" id="profileName" placeholder="プロフィール名">
+                    </div>
+                    <div class="form-group">
+                        <label>自己紹介</label>
+                        <textarea id="profileBio" placeholder="プロフィール本文を入力"></textarea>
+                    </div>
+                </div>
+
+                <!-- Footer Section -->
+                <div class="section-group">
+                    <h3>🔗 フッター</h3>
+                    <div class="form-group">
+                        <label>会社概要URL</label>
+                        <input type="text" id="footerCompanyUrl" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>プライバシーポリシーURL</label>
+                        <input type="text" id="footerPrivacyUrl" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>特定商取引法URL</label>
+                        <input type="text" id="footerTermsUrl" placeholder="https://...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="preview-panel">
+                <h2 style="margin-bottom: 20px;">プレビュー</h2>
+                <div id="previewFrame" class="preview-frame">
+                    <!-- Preview will be rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Section Modal -->
+    <div id="sectionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>セクション追加</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>セクションタイプ</label>
+                    <select id="sectionType">
+                        <option value="text">テキスト</option>
+                        <option value="image-text">画像 + テキスト</option>
+                        <option value="cta">CTAボタン</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelSectionBtn">キャンセル</button>
+                <button class="btn btn-primary" id="addSectionSubmitBtn">追加</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/editor.js"></script>
+</body>
+
+</html>

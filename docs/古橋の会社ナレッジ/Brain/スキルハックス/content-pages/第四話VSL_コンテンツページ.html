@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【特別動画】スキルハックスの全てと特別オファー</title>
+    <meta name="description" content="スキルハックス動画講座 最終回（特別動画）。全講座の詳細、伴走支援、受講生データ、価格、2倍返金保証、特別オファーの全てを解説。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: #f8f9fb;
+            color: #333;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* ── Header ── */
+        .ep-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 40%, #e94560 100%);
+            color: #fff;
+            text-align: center;
+            padding: 48px 20px 36px;
+        }
+
+        .ep-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .2);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .ep-title {
+            font-size: clamp(20px, 5.5vw, 26px);
+            font-weight: 900;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .ep-subtitle {
+            font-size: 15px;
+            opacity: .85;
+            font-weight: 500;
+        }
+
+        .ep-meta {
+            font-size: 13px;
+            opacity: .7;
+            margin-top: 12px;
+        }
+
+        .timer-bar {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+            color: #fff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .video-section {
+            background: #000;
+        }
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #111;
+        }
+
+        .video-placeholder .insert-note {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .video-placeholder .insert-note strong {
+            color: #f87171;
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .content {
+            background: #fff;
+            padding: 32px 24px;
+        }
+
+        .content h2 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid #2563eb;
+            line-height: 1.5;
+        }
+
+        .content p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .congrats-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .congrats-box .icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .congrats-box p {
+            font-size: 15px;
+            color: #92400e;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        .vsl-checklist {
+            list-style: none;
+            margin: 0 0 24px;
+        }
+
+        .vsl-checklist li {
+            padding: 12px 0 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .vsl-checklist .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            background: #2563eb;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .vsl-checklist .text strong {
+            color: #1a1a2e;
+        }
+
+        .duration-note {
+            background: #f0f4ff;
+            border-radius: 8px;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin: 16px 0;
+        }
+
+        /* ── Present Section ── */
+        .present-section {
+            background: linear-gradient(180deg, #fff 0%, #fffbeb 100%);
+            padding: 32px 24px;
+            border-top: 3px solid #f59e0b;
+        }
+
+        .present-section h2 {
+            font-size: 20px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .present-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+        }
+
+        .present-card .p-num {
+            display: inline-block;
+            background: #f59e0b;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .present-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .present-card p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* ── Form ── */
+        .form-section {
+            background: #fff;
+            padding: 32px 24px 40px;
+            border-top: 3px solid #06C755;
+        }
+
+        .form-section h2 {
+            font-size: 20px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color .2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #06C755 0%, #05a848 100%);
+            color: #fff;
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-top: 8px;
+            transition: opacity .2s;
+            box-shadow: 0 4px 14px rgba(6, 199, 85, .3);
+        }
+
+        .submit-btn:hover {
+            opacity: .9;
+        }
+
+        .submit-btn .sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .micro-copy {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+
+        /* ── Sales Section (after form) ── */
+        .sales-section {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .sales-section h2 {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .sales-section p {
+            font-size: 14px;
+            opacity: .8;
+            margin-bottom: 20px;
+        }
+
+        .sales-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #e94560 0%, #c0392b 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            text-decoration: none;
+            transition: opacity .2s;
+            box-shadow: 0 4px 20px rgba(233, 69, 96, .4);
+        }
+
+        .sales-btn:hover {
+            opacity: .9;
+        }
+
+        .sales-btn .sub {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            margin-top: 4px;
+            opacity: .9;
+        }
+
+        .sales-price {
+            margin: 24px 0 8px;
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .sales-price .yen {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .sales-price .tax {
+            font-size: 13px;
+            opacity: .7;
+            font-weight: 400;
+        }
+
+        .sales-installment {
+            font-size: 14px;
+            opacity: .7;
+            margin-bottom: 24px;
+        }
+
+        /* ── Bonus Links ── */
+        .bonus-section {
+            background: #0f3460;
+            padding: 32px 24px;
+            border-top: 2px solid #60a5fa;
+        }
+
+        .bonus-section h2 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .bonus-link {
+            display: block;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: background .2s;
+        }
+
+        .bonus-link:hover {
+            background: rgba(255, 255, 255, .14);
+        }
+
+        .bonus-link .b-num {
+            display: inline-block;
+            background: #f59e0b;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        .bonus-link .b-title {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .bonus-link .b-desc {
+            display: block;
+            font-size: 12px;
+            opacity: .6;
+            margin-top: 4px;
+            padding-left: 42px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: #bbb;
+            background: #f8f9fb;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <!-- ── Header ── -->
+        <header class="ep-header">
+            <div class="ep-badge">🔥 特別動画【最終回】</div>
+            <h1 class="ep-title">
+                スキルハックスの全てと特別オファー
+            </h1>
+            <p class="ep-subtitle">迫佑樹が全てを語るご案内動画</p>
+            <p class="ep-meta">講師：迫 佑樹（株式会社ブレイン 代表取締役）</p>
+        </header>
+
+        <!-- ── Timer ── -->
+        <div class="timer-bar">
+            ⏰ この動画の視聴期限：あと <strong>7日間</strong>
+        </div>
+
+        <!-- ── Video ── -->
+        <section class="video-section">
+            <div class="video-placeholder">
+                <div class="insert-note">
+                    <strong>▶ ここに特別動画（VSL）を挿入</strong>
+                    Vimeo or YouTube（限定公開）を埋め込み<br>
+                    ※ 約50分〜1時間のセールス動画
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Content ── -->
+        <section class="content">
+            <div class="congrats-box">
+                <div class="icon">🎊</div>
+                <p>
+                    ここまで3本の動画を全て見てくださった<br>
+                    <strong>あなただけ</strong>に、この特別動画をお届けしています。
+                </p>
+            </div>
+
+            <h2>この動画の内容</h2>
+            <ul class="vsl-checklist">
+                <li>
+                    <span class="num">1</span>
+                    <span class="text"><strong>全講座の詳細内容</strong><br>単体合計788,000円分が学び放題</span>
+                </li>
+                <li>
+                    <span class="num">2</span>
+                    <span class="text"><strong>伴走支援の流れ</strong><br>初回面談→学習→個別Zoom→黙々会→日報モニタリング</span>
+                </li>
+                <li>
+                    <span class="num">3</span>
+                    <span class="text"><strong>受講生データ</strong><br>満足度88%、4人に1人が1ヶ月以内に初収益達成</span>
+                </li>
+                <li>
+                    <span class="num">4</span>
+                    <span class="text"><strong>なぜ39万8千円なのか</strong><br>価格の裏にある迫佑樹の葛藤</span>
+                </li>
+                <li>
+                    <span class="num">5</span>
+                    <span class="text"><strong>2倍返金保証</strong><br>条件と詳細</span>
+                </li>
+                <li>
+                    <span class="num">6</span>
+                    <span class="text"><strong>具体的な申し込み手順</strong><br>決済方法、分割払いの詳細</span>
+                </li>
+            </ul>
+
+            <div class="duration-note">
+                📌 約80分の動画です。1.5倍速なら約50分で視聴できます。
+            </div>
+        </section>
+
+        <!-- ── 5大特典 ── -->
+        <section class="present-section">
+            <h2>🎁 感想送信で<br>【5大特典】プレゼント</h2>
+
+            <div class="present-card">
+                <span class="p-num">特典❶</span>
+                <h3>スキルチェックリスト</h3>
+                <p>案件獲得に必要なスキルを職種別にチェック。迫佑樹が運営で実際に使っていたシートを特別公開。</p>
+            </div>
+            <div class="present-card">
+                <span class="p-num">特典❷</span>
+                <h3>初案件獲得テンプレート集</h3>
+                <p>プロフィール文・提案文・価格設計・クライアント対応のテンプレートをそのまま使える形で。</p>
+            </div>
+            <div class="present-card">
+                <span class="p-num">特典❸</span>
+                <h3>案件獲得ロードマップ</h3>
+                <p>ソフトスキルも含めた初案件獲得までのステップを完全網羅。</p>
+            </div>
+            <div class="present-card">
+                <span class="p-num">特典❹</span>
+                <h3>副業スキルマッチングシート</h3>
+                <p>10の質問に答えるだけで、あなたに最適なスキルが分かる診断シート。</p>
+            </div>
+            <div class="present-card">
+                <span class="p-num">特典❺</span>
+                <h3>副業ゼロイチ 90日間ロードマップ</h3>
+                <p>Day 1〜90の具体的なアクションプランとチェックリスト付き。</p>
+            </div>
+        </section>
+
+        <!-- ── Form ── -->
+        <section class="form-section" id="form">
+            <h2>感想を送信して<br>5大特典を受け取る</h2>
+            <p class="form-note">
+                動画の感想を一言でも送信いただければ、<br>
+                5大特典＋スキルハックスへのお申し込みページをお届けします。
+            </p>
+
+            <form>
+                <div class="form-group">
+                    <label>お名前</label>
+                    <input type="text" placeholder="例：田中 太郎">
+                </div>
+                <div class="form-group">
+                    <label>動画のご感想</label>
+                    <textarea placeholder="動画を見て率直に感じたこと、スキルハックスについて気になることなどをお聞かせください。"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    感想を送信して5大特典を受け取る 🎁
+                    <span>💬 送信後、LINEで特典＋お申し込みページをお届けします</span>
+                </button>
+            </form>
+
+            <p class="micro-copy">
+                ※ いただいた感想は迫佑樹が全て目を通しています。<br>
+                ※ 視聴期限を過ぎると、このページは閲覧できなくなります。
+            </p>
+        </section>
+
+        <!-- ── Sales CTA ── -->
+        <section class="sales-section">
+            <h2>スキルハックスに参加して<br>人生を変える第一歩を踏み出す</h2>
+            <p>
+                全講座学び放題 ＋ 伴走支援 ＋ コミュニティ ＋ 2倍返金保証
+            </p>
+            <div class="sales-price">
+                <span class="yen">¥</span>398,000<span class="tax">（税込）</span>
+            </div>
+            <p class="sales-installment">
+                最大24回分割対応｜1日あたり約450円（コーヒー1杯分）
+            </p>
+            <a href="#" class="sales-btn">
+                スキルハックスに申し込む
+                <span>▼ 申し込みページへ進む ▼</span>
+            </a>
+        </section>
+
+        <!-- ── Bonus Links ── -->
+        <section class="bonus-section">
+            <h2>🎁 5大特典ダウンロード</h2>
+
+            <!-- ▼ ここに各特典のリンクURLを設定してください ▼ -->
+
+            <a href="#" class="bonus-link">
+                <span class="b-num">特典❶</span>
+                <span class="b-title">スキルチェックリスト</span>
+                <span class="b-desc">職種別チェックシート（PDF）</span>
+            </a>
+
+            <a href="#" class="bonus-link">
+                <span class="b-num">特典❷</span>
+                <span class="b-title">初案件獲得テンプレート集</span>
+                <span class="b-desc">プロフィール文・提案文・価格設計テンプレート（PDF）</span>
+            </a>
+
+            <a href="#" class="bonus-link">
+                <span class="b-num">特典❸</span>
+                <span class="b-title">案件獲得ロードマップ</span>
+                <span class="b-desc">初案件獲得までの完全ステップガイド（PDF）</span>
+            </a>
+
+            <a href="#" class="bonus-link">
+                <span class="b-num">特典❹</span>
+                <span class="b-title">副業スキルマッチングシート</span>
+                <span class="b-desc">最適スキル診断シート（PDF）</span>
+            </a>
+
+            <a href="#" class="bonus-link">
+                <span class="b-num">特典❺</span>
+                <span class="b-title">副業ゼロイチ 90日間ロードマップ</span>
+                <span class="b-desc">90日間のアクションプランとチェックリスト（PDF）</span>
+            </a>
+
+            <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;">
+                ※ 各リンクのhref属性に実際のPDF URLを設定してください
+            </p>
+        </section>
+
+        <!-- ── Footer ── -->
+        <footer class="footer">
+            <p>© Skill Hacks by Brain Inc.</p>
+            <p>※ 本ページの内容は個人の経験に基づくものであり、結果を保証するものではありません。</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy Dashboard — デプロイ一覧</title>
+    <meta name="description" content="デプロイ済みのWebページ・資料を一覧で確認できるダッシュボード">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+
+<body>
+
+    <!-- ═══ HERO ═══ -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                DEPLOY DASHBOARD
+            </div>
+            <h1 class="hero-title">
+                <span class="gradient-text">デプロイ一覧</span>
+            </h1>
+            <p class="hero-subtitle">
+                surge.sh・Vercelにデプロイ済みのすべてのWebページ・資料を<br>このダッシュボードで一元管理します
+            </p>
+            <div class="stats-row" id="statsRow">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ FILTER ═══ -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs" id="filterTabs">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CARDS ═══ -->
+    <section class="cards-section">
+        <div class="container">
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <p>Deploy Dashboard — Last updated: <span id="lastUpdated"></span></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

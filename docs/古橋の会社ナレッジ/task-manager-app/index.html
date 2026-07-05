@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management Dashboard | YOLO's & Ritz Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h1>Task Flow</h1>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-filter="all">
+                    <i class="fa-solid fa-border-all"></i>
+                    <span>All Tasks</span>
+                </a>
+                <a href="#" class="nav-item" data-filter="furuhashi">
+                    <div class="avatar-sm avatar-furuhashi">F</div>
+                    <span>古橋さん</span>
+                </a>
+                <a href="#" class="nav-item" data-filter="oda">
+                    <div class="avatar-sm avatar-oda">O</div>
+                    <span>小田さん</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button id="add-task-btn" class="btn btn-primary btn-full">
+                    <i class="fa-solid fa-plus"></i> New Task
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">
+                    <h2 id="current-view-title">All Tasks Overview</h2>
+                    <p class="subtitle">プロジェクトの全体タスク状況と個人の負荷を可視化</p>
+                </div>
+                <div class="header-actions">
+                    <div class="date-display" id="current-date"></div>
+                </div>
+            </header>
+
+            <!-- KPIs -->
+            <section class="kpi-section">
+                <div class="kpi-card">
+                    <div class="kpi-icon teal"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Total Active Tasks</span>
+                        <h3 class="kpi-value" id="kpi-total">0</h3>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon orange"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Furuhashi's Tasks</span>
+                        <h3 class="kpi-value" id="kpi-furuhashi">0</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar orange" id="progress-furuhashi" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon blue"><i class="fa-solid fa-user"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-label">Oda's Tasks</span>
+                        <h3 class="kpi-value" id="kpi-oda">0</h3>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar blue" id="progress-oda" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kanban Board -->
+            <section class="kanban-board">
+                <!-- Column: To Do -->
+                <div class="kanban-column" data-status="todo">
+                    <div class="column-header">
+                        <h3 class="column-title"><span class="status-dot dot-gray"></span> To Do</h3>
+                        <span class="task-count" id="count-todo">0</span>
+                    </div>
+                    <div class="kanban-cards" id="list-todo">
+                        <!-- Task cards will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Column: In Progress -->
+                <div class="kanban-column" data-status="inprogress">
+                    <div class="column-header">
+                        <h3 class="column-title"><span class="status-dot dot-orange"></span> In Progress</h3>
+                        <span class="task-count" id="count-inprogress">0</span>
+                    </div>
+                    <div class="kanban-cards" id="list-inprogress">
+                    </div>
+                </div>
+
+                <!-- Column: Done -->
+                <div class="kanban-column" data-status="done">
+                    <div class="column-header">
+                        <h3 class="column-title"><span class="status-dot dot-teal"></span> Done</h3>
+                        <span class="task-count" id="count-done">0</span>
+                    </div>
+                    <div class="kanban-cards" id="list-done">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New Task</h3>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <input type="hidden" id="task-id">
+                    <div class="form-group">
+                        <label for="task-title">Task Title</label>
+                        <input type="text" id="task-title" placeholder="例: 動画プロットの作成" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-assignee">Assignee</label>
+                            <select id="task-assignee" required>
+                                <option value="" disabled selected>選択してください</option>
+                                <option value="furuhashi">古橋さん</option>
+                                <option value="oda">小田さん</option>
+                                <option value="unassigned">未割り当て</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-priority">Priority</label>
+                            <select id="task-priority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-deadline">Deadline (Optional)</label>
+                        <input type="date" id="task-deadline">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-desc">Description</label>
+                        <textarea id="task-desc" rows="3" placeholder="タスクの詳細や備考"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal">Cancel</button>
+                <button type="submit" form="task-form" class="btn btn-primary" id="save-task-btn">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

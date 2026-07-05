@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>スキルチェックリスト | Skill Hacks 全話視聴者限定特典</title>
+    <meta name="description" content="案件獲得に必要なスキルを網羅したチェックリスト。全項目にチェックが付いたら案件応募OK。動画編集・ライティング・デザイン・プログラミング対応。">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --blue: #2563eb;
+            --blue-light: #eff6ff;
+            --blue-mid: #dbeafe;
+            --bg: #f8f9fb;
+            --white: #fff;
+            --text: #1a1a2e;
+            --sub: #555;
+            --muted: #888;
+            --border: #e8e8e8;
+            --radius: 10px;
+            --orange: #F06543;
+            --green: #16a34a;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.9;
+            font-size: 15px
+        }
+
+        /* Header */
+        .site-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            padding: 32px 20px 28px;
+            text-align: center
+        }
+
+        .site-header .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, .15);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: .5px
+        }
+
+        .site-header h1 {
+            font-size: clamp(1.3rem, 5vw, 1.9rem);
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 8px
+        }
+
+        .site-header h1 .accent {
+            color: #60a5fa
+        }
+
+        .site-header .sub {
+            font-size: 13px;
+            opacity: .75
+        }
+
+        /* Sticky Nav */
+        .skill-nav {
+            background: var(--white);
+            border-bottom: 2px solid var(--blue-mid);
+            padding: 10px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100
+        }
+
+        .skill-nav-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .skill-nav a {
+            padding: 5px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--sub);
+            text-decoration: none;
+            transition: all .2s;
+            white-space: nowrap;
+            background: var(--white)
+        }
+
+        .skill-nav a:hover,
+        .skill-nav a.active {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue)
+        }
+
+        /* Main */
+        .main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 16px 60px
+        }
+
+        /* Section */
+        .skill-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin: 24px 0;
+            overflow: hidden
+        }
+
+        .skill-section-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg)
+        }
+
+        .skill-section-header .icon {
+            font-size: 1.5rem
+        }
+
+        .skill-section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--text)
+        }
+
+        .skill-section-header .tag {
+            margin-left: auto;
+            font-size: 11px;
+            background: var(--blue-light);
+            color: var(--blue);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        /* Sub-sections */
+        .sub-section {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .sub-section:last-child {
+            border-bottom: none
+        }
+
+        .sub-section h3 {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        /* Checklist */
+        .ck {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        .ck-item {
+            position: relative
+        }
+
+        .ck-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all .15s;
+            background: var(--white)
+        }
+
+        .ck-label:hover {
+            border-color: var(--blue-mid);
+            background: var(--blue-light)
+        }
+
+        .ck-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .ck-item input[type=checkbox] {
+            display: none
+        }
+
+        .ck-item input:checked+.ck-label {
+            background: #f0fdf4;
+            border-color: #86efac
+        }
+
+        .ck-item input:checked+.ck-label .ck-box {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .ck-item input:checked+.ck-label .ck-box::after {
+            content: '✓';
+            color: #fff;
+            font-size: 12px;
+            font-weight: 900
+        }
+
+        .ck-text {
+            flex: 1
+        }
+
+        .ck-text .main-text {
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--text);
+            display: block;
+            line-height: 1.5
+        }
+
+        .ck-text .hint {
+            font-size: .78rem;
+            color: var(--muted);
+            margin-top: 3px;
+            display: block;
+            font-style: italic;
+            line-height: 1.6
+        }
+
+        /* Progress bar */
+        .progress-wrap {
+            padding: 16px 24px;
+            background: var(--blue-light);
+            border-bottom: 1px solid var(--blue-mid)
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 6px
+        }
+
+        .progress-bar-bg {
+            background: #bfdbfe;
+            border-radius: 99px;
+            height: 8px;
+            overflow: hidden
+        }
+
+        .progress-bar-fill {
+            background: var(--blue);
+            height: 100%;
+            border-radius: 99px;
+            transition: width .4s ease;
+            width: 0%
+        }
+
+        /* Flow box */
+        .flow-box {
+            margin: 4px 0 0;
+            background: #f0f9ff;
+            border-left: 3px solid var(--blue);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 16px
+        }
+
+        .flow-box .flow-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 6px
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            font-size: .82rem;
+            color: var(--sub)
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0
+        }
+
+        .flow-step .num {
+            background: var(--blue);
+            color: #fff;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px 20px;
+            font-size: 11px;
+            color: var(--muted);
+            background: var(--white);
+            border-top: 1px solid var(--border)
+        }
+
+        /* Reset progress btn */
+        .reset-btn {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+            text-decoration: underline
+        }
+
+        @media(max-width:600px) {
+            .skill-section-header {
+                flex-wrap: wrap
+            }
+
+            .skill-section-header .tag {
+                margin-left: 0
+            }
+
+            .sub-section {
+                padding: 16px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="badge">🎁 全話視聴者限定特典①</div>
+        <h1>✅ スキル<span class="accent">チェックリスト</span></h1>
+        <p class="sub">案件獲得に必要な項目を全部チェックしよう。全部埋まったら即・営業開始OK。</p>
+    </header>
+
+    <nav class="skill-nav">
+        <div class="skill-nav-inner">
+            <a href="#movie">🎬 動画編集</a>
+            <a href="#writing">✍️ ライティング</a>
+            <a href="#design">🎨 デザイン</a>
+            <a href="#programming">🖥️ プログラミング</a>
+            <a href="#business">📊 ビジネス</a>
+            <a href="#common">🔧 共通</a>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <!-- ── 動画編集 ── -->
+        <div class="skill-section" id="movie">
+            <div class="skill-section-header">
+                <span class="icon">🎬</span>
+                <h2>動画編集</h2>
+                <span class="tag">初案件まで1〜2週間</span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label"><span>進捗</span><span class="movie-pct">0%</span></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill movie-bar"></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3>基礎スキル（必須5項目）</h3>
+                <ul class="ck" data-group="movie">
+                    <li class="ck-item"><input type="checkbox" id="m1"><label class="ck-label" for="m1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">テロップの挿入・装飾ができる</span><span
+                                    class="hint">フォント選び・色使い・位置の3つを押さえる。視聴者の目を引く最重要要素。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m2"><label class="ck-label" for="m2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">カット編集（不要部分の削除・繋ぎ）ができる</span><span
+                                    class="hint">「えーっと」「あのー」を消すだけで動画クオリティが段違いに上がる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m3"><label class="ck-label" for="m3"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">BGMの挿入・音量調整ができる</span><span
+                                    class="hint">BGMは「聞こえるか聞こえないか」の音量がベスト。大きすぎは素人の証。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m4"><label class="ck-label" for="m4"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">効果音（SE）の挿入ができる</span><span
+                                    class="hint">テロップ出現時の「ポン」「シュッ」で視聴維持率が向上するデータあり。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m5"><label class="ck-label" for="m5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">画像・図解の挿入ができる</span><span
+                                    class="hint">画像挿入があるだけで「プロっぽい」と感じてもらえる。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>実務スキル</h3>
+                <ul class="ck" data-group="movie">
+                    <li class="ck-item"><input type="checkbox" id="m6"><label class="ck-label" for="m6"><span
+                                class="ck-box"></span><span class="ck-text"><span class="main-text">編集ソフト（Premiere Pro
+                                    or DaVinci Resolve）の基本操作を理解している</span><span class="hint">案件の8割がPremiere
+                                    Pro指定。DaVinci Resolveは無料で練習に最適。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m7"><label class="ck-label" for="m7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">テンプレートを使って10分の動画を2時間以内に編集できる</span><span
+                                    class="hint">時給換算2,500円以上を確保するための最低ライン。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m8"><label class="ck-label" for="m8"><span
+                                class="ck-box"></span><span class="ck-text"><span class="main-text">サムネイル画像の作成ができる（Canva
+                                    or Photoshop）</span><span
+                                    class="hint">「編集＋サムネセット」で提案すると単価が1.5〜2倍になる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m9"><label class="ck-label" for="m9"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">書き出し設定（解像度・ビットレート）を理解している</span><span
+                                    class="hint">YouTube推奨設定を知っているだけでOK。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>案件獲得の最低ライン</h3>
+                <ul class="ck" data-group="movie">
+                    <li class="ck-item"><input type="checkbox" id="m10"><label class="ck-label" for="m10"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">YouTube動画の編集サンプルを1本以上作成した</span><span
+                                    class="hint">好きなYouTuberの動画を「勝手に編集」するのが王道。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="m11"><label class="ck-label" for="m11"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ポートフォリオ（サンプル動画のリンク集）を用意している</span><span
+                                    class="hint">Googleドライブで限定公開リンクを作り、提案文に貼るだけ。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <div class="flow-box">
+                    <div class="flow-label">🎯 最短で身につける流れ</div>
+                    <div class="flow-step">
+                        <div class="num">1</div><span>テロップ・カット・BGM・SE・画像挿入の基礎5項目を習得（1週間）</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">2</div><span>好きなYouTuberの動画を1本「勝手に編集」してサンプルを作る</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">3</div><span>クラウドソーシングで「動画編集」案件に1日3件ペースで応募開始</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ライティング ── -->
+        <div class="skill-section" id="writing">
+            <div class="skill-section-header">
+                <span class="icon">✍️</span>
+                <h2>ライティング</h2>
+                <span class="tag">初案件まで1〜2週間</span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label"><span>進捗</span><span class="writing-pct">0%</span></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill writing-bar"></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3>基礎スキル</h3>
+                <ul class="ck" data-group="writing">
+                    <li class="ck-item"><input type="checkbox" id="w1"><label class="ck-label" for="w1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">SEOライティングの基本（キーワード選定・見出し構成）を理解している</span><span
+                                    class="hint">検索上位記事の多くが適切なキーワード設計をしている。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w2"><label class="ck-label" for="w2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">PREP法（結論→理由→具体例→結論）で文章を書ける</span><span
+                                    class="hint">ビジネス文章の基本型。これだけで「読みやすい」と言われる記事になる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w3"><label class="ck-label" for="w3"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">論理的な文章構成（導入→本文→まとめ）ができる</span><span
+                                    class="hint">読者は3秒で「読むか読まないか」を判断する。導入での掴みが命。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w4"><label class="ck-label" for="w4"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">誤字脱字なく3,000文字以上の記事を書ける</span><span
+                                    class="hint">誤字脱字は一番目立つミス。納品前に必ずスペルチェックを。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>実務スキル</h3>
+                <ul class="ck" data-group="writing">
+                    <li class="ck-item"><input type="checkbox" id="w5"><label class="ck-label" for="w5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">WordPressへの入稿作業（画像挿入・装飾含む）ができる</span><span
+                                    class="hint">「入稿までお願いします」と言われた時にできるかどうかで単価が変わる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w6"><label class="ck-label" for="w6"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">キーワード調査ツール（ラッコキーワード等）を使える</span><span
+                                    class="hint">無料ツールだけで十分。有料ツールは実績3件超えてからでOK。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w7"><label class="ck-label" for="w7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">競合記事のリサーチ・分析ができる</span><span
+                                    class="hint">上位10記事の見出し構成を分析して、網羅性で上回る記事を書くのが王道。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w8"><label class="ck-label" for="w8"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">取材記事・インタビュー記事の執筆ができる</span><span
+                                    class="hint">文字単価3〜5円の高単価ゾーン。社会人経験がそのまま武器になる。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>案件獲得の最低ライン</h3>
+                <ul class="ck" data-group="writing">
+                    <li class="ck-item"><input type="checkbox" id="w9"><label class="ck-label" for="w9"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">SEO記事のサンプルを2本以上作成した</span><span
+                                    class="hint">「自分が詳しいジャンル」で書くと質が高くなり、ポートフォリオ映えする。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="w10"><label class="ck-label" for="w10"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ポートフォリオ（記事サンプルのリンク集）を用意している</span><span
+                                    class="hint">note.comに公開するだけでOK。「URLがある」ことが重要。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <div class="flow-box">
+                    <div class="flow-label">🎯 最短で身につける流れ</div>
+                    <div class="flow-step">
+                        <div class="num">1</div><span>SEOライティングの基礎（キーワード選定・見出し設計）を学ぶ</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">2</div><span>PREP法を習得して、実際に3,000字の記事を2〜3本書いてみる</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">3</div><span>書いた記事をnote等に公開してポートフォリオにし、営業を開始する</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── デザイン ── -->
+        <div class="skill-section" id="design">
+            <div class="skill-section-header">
+                <span class="icon">🎨</span>
+                <h2>デザイン</h2>
+                <span class="tag">初案件まで2〜3週間</span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label"><span>進捗</span><span class="design-pct">0%</span></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill design-bar"></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3>基礎スキル</h3>
+                <ul class="ck" data-group="design">
+                    <li class="ck-item"><input type="checkbox" id="d1"><label class="ck-label" for="d1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">画像編集ソフト（Photoshop等）の基本操作（レイヤー・マスク・切り抜き）ができる</span><span
+                                    class="hint">バナー制作の多くはPhotoshopやCanvaで対応できる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="d2"><label class="ck-label" for="d2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">配色の基礎（補色・トーン・コントラスト）を理解している</span><span
+                                    class="hint">「なんかダサい」の原因の多くは配色。Adobe Colorで解決できる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="d3"><label class="ck-label" for="d3"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">フォント選びの基本ルールを理解している</span><span
+                                    class="hint">ゴシック体＝信頼、明朝体＝高級感。この使い分けだけで印象が激変。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>実務スキル</h3>
+                <ul class="ck" data-group="design">
+                    <li class="ck-item"><input type="checkbox" id="d4"><label class="ck-label" for="d4"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">バナー広告を制作できる（サイズ展開含む）</span><span
+                                    class="hint">複数サイズに展開できると「セット受注」で単価2倍。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="d5"><label class="ck-label" for="d5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">SNS用画像（Instagram投稿・YouTubeサムネ等）を制作できる</span><span
+                                    class="hint">SNS運用代行とセットで月額案件に発展しやすい。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="d6"><label class="ck-label" for="d6"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">LP（ランディングページ）のデザインカンプを制作できる</span><span
+                                    class="hint">LP案件は1件10〜30万円。デザインだけ受ける＝高単価の入口。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>案件獲得の最低ライン</h3>
+                <ul class="ck" data-group="design">
+                    <li class="ck-item"><input type="checkbox" id="d7"><label class="ck-label" for="d7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">バナー3種類以上のサンプルを作成した</span><span
+                                    class="hint">「実在する商品のバナーを作ってみた」が最強のサンプル。架空より説得力がある。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="d8"><label class="ck-label" for="d8"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ポートフォリオ（制作実績まとめ）を用意している</span><span
+                                    class="hint">Behance、Dribbble、Notion──どれでもOK。「作品を見せられる状態」が大事。</span></span></label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <div class="flow-box">
+                    <div class="flow-label">🎯 最短で身につける流れ</div>
+                    <div class="flow-step">
+                        <div class="num">1</div><span>Photoshopの基礎（レイヤー・マスク・切り抜き）を3日で学ぶ</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">2</div><span>実在する商品のバナーを模写で3枚制作する（5日）</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">3</div><span>ポートフォリオを整理して案件応募開始</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── プログラミング ── -->
+        <div class="skill-section" id="programming">
+            <div class="skill-section-header">
+                <span class="icon">🖥️</span>
+                <h2>プログラミング（Webアプリ開発）</h2>
+                <span class="tag">初案件まで2〜4週間</span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label"><span>進捗</span><span class="programming-pct">0%</span></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill programming-bar"></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3>基礎スキル</h3>
+                <ul class="ck" data-group="programming">
+                    <li class="ck-item"><input type="checkbox" id="p1"><label class="ck-label" for="p1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">HTML/CSSの基本構造を理解している</span><span
+                                    class="hint">現場の案件の多くがHTML/CSSベース。ここが全ての土台になる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p2"><label class="ck-label" for="p2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">レスポンシブデザイン（スマホ対応）が実装できる</span><span
+                                    class="hint">2026年現在、アクセスの多くがスマホ。スマホ対応は必須スキル。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p3"><label class="ck-label" for="p3"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">プログラミング言語の基本文法（変数・関数・条件分岐・ループ）を理解している</span><span
+                                    class="hint">LP案件でも「ボタンクリックでメニューを開く」程度の実装は必須。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p4"><label class="ck-label" for="p4"><span
+                                class="ck-box"></span><span class="ck-text"><span class="main-text">jQueryまたはVanilla
+                                    JSでDOM操作ができる</span><span
+                                    class="hint">既存サイトの修正案件ではjQueryが使われていることが多い。読めるだけでOK。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>実務スキル</h3>
+                <ul class="ck" data-group="programming">
+                    <li class="ck-item"><input type="checkbox" id="p5"><label class="ck-label" for="p5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">既存のWebサイトのデザインを見て、同じものをコーディングできる</span><span
+                                    class="hint">案件の大半は「このデザインの通りにコーディングして」。模写力＝案件対応力。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p6"><label class="ck-label" for="p6"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">WordPressの基本的なカスタマイズができる</span><span
+                                    class="hint">全Webサイトの4割以上がWordPress。触れるだけで案件の幅が広がる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p7"><label class="ck-label" for="p7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ブラウザの開発者ツール（DevTools）を使ってデバッグできる</span><span
+                                    class="hint">「表示がずれてます」と言われた時に原因を特定できるかが分かれ目。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>案件獲得の最低ライン</h3>
+                <ul class="ck" data-group="programming">
+                    <li class="ck-item"><input type="checkbox" id="p8"><label class="ck-label" for="p8"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">LPコーディングのサンプルを1つ以上作成した</span><span
+                                    class="hint">「実績がない」のと「サンプルがない」は別。サンプルは今日から作れる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="p9"><label class="ck-label" for="p9"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ポートフォリオサイトを公開している</span><span class="hint">GitHub
+                                    PagesやNetlifyで無料公開できる。見せ方が9割。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <div class="flow-box">
+                    <div class="flow-label">🎯 最短で身につける流れ</div>
+                    <div class="flow-step">
+                        <div class="num">1</div><span>HTML/CSSを1週間で学習してWebサイトを作れるようになる</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">2</div><span>Rubyなどのプログラミング言語を学び、基礎的な考え方を理解する</span>
+                    </div>
+                    <div class="flow-step">
+                        <div class="num">3</div><span>Railsなどのフレームワークを学んでWebアプリケーションを作れるようになる</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ビジネスモデル ── -->
+        <div class="skill-section" id="business">
+            <div class="skill-section-header">
+                <span class="icon">📊</span>
+                <h2>ビジネスモデル / SNSマーケ</h2>
+            </div>
+
+            <div class="sub-section">
+                <h3>ビジネスモデル 理解チェック</h3>
+                <ul class="ck" data-group="business">
+                    <li class="ck-item"><input type="checkbox" id="b1"><label class="ck-label" for="b1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ビジネスモデルの基本構造（価値提供→収益化）を説明できる</span><span
+                                    class="hint">スキルで稼ぐ→発信で仕組み化→投資で自動化。この3ステップが核心。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="b2"><label class="ck-label" for="b2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">自分のスキルを使ったマネタイズ方法を3つ以上考えられる</span><span
+                                    class="hint">例：動画編集なら「受託案件」「テンプレ販売」「運営代行」が3本柱。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="b3"><label class="ck-label" for="b3"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">単発案件とストック型収益の違いを理解している</span><span
+                                    class="hint">最初は単発で実績を作り、その後月額契約に移行するのが王道パターン。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>Xマーケティング 基礎スキル</h3>
+                <ul class="ck" data-group="business">
+                    <li class="ck-item"><input type="checkbox" id="b4"><label class="ck-label" for="b4"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">プロフィール文を最適化している（肩書き・実績・CTA）</span><span
+                                    class="hint">「何ができる人か」が3秒で伝わるプロフィールが案件の直接依頼を生む。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="b5"><label class="ck-label" for="b5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ターゲットに刺さる投稿の型を3つ以上使える</span><span
+                                    class="hint">「共感型」「ノウハウ型」「ストーリー型」をローテーションするのが基本。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>LINEマーケティング 基礎スキル</h3>
+                <ul class="ck" data-group="business">
+                    <li class="ck-item"><input type="checkbox" id="b6"><label class="ck-label" for="b6"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">LINE公式アカウントの開設・基本設定ができる</span><span
+                                    class="hint">LINE公式は初期費用ゼロ・月1,000通まで無料。リスクなく始められる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="b7"><label class="ck-label" for="b7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">ステップ配信（自動メッセージ）の設計・設定ができる</span><span
+                                    class="hint">「登録→教育→販売」を自動化できるスキル。習得すれば自分のビジネスにも活きる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="b8"><label class="ck-label" for="b8"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">リッチメニューの設計・設定ができる</span><span
+                                    class="hint">タップ率を左右する最重要要素。デザインスキルとの掛け合わせで高単価案件に。</span></span></label></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ── 共通 ── -->
+        <div class="skill-section" id="common">
+            <div class="skill-section-header">
+                <span class="icon">🔧</span>
+                <h2>共通（全スキル共通）</h2>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-label"><span>進捗</span><span class="common-pct">0%</span></div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill common-bar"></div>
+                </div>
+            </div>
+
+            <div class="sub-section">
+                <h3>ツール・環境</h3>
+                <ul class="ck" data-group="common">
+                    <li class="ck-item"><input type="checkbox" id="c1"><label class="ck-label" for="c1"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">クラウドソーシングサイト（クラウドワークス or ランサーズ）にアカウント登録済み</span><span
+                                    class="hint">登録だけなら10分。本人確認まで完了させると応募できる案件が増える。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c2"><label class="ck-label" for="c2"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">プロフィールを完成させている</span><span
+                                    class="hint">プロフィールの完成度でクライアントの第一印象が決まる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c3"><label class="ck-label" for="c3"><span
+                                class="ck-box"></span><span class="ck-text"><span class="main-text">チャットツール（Chatwork /
+                                    Slack / Discord）の基本操作ができる</span><span
+                                    class="hint">クライアントとの連絡手段。使い方は5分で覚えられる。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c4"><label class="ck-label" for="c4"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">Zoomでのオンライン会議に参加できる</span><span
+                                    class="hint">初回ヒアリングはZoomが定番。画面共有のやり方も覚えておくと◎。</span></span></label></li>
+                </ul>
+            </div>
+
+            <div class="sub-section">
+                <h3>ビジネスマナー</h3>
+                <ul class="ck" data-group="common">
+                    <li class="ck-item"><input type="checkbox" id="c5"><label class="ck-label" for="c5"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">クライアントへの返信は24時間以内にできる</span><span
+                                    class="hint">レスが早いだけで「この人と仕事したい」と思われる。スキルより大事な場合も。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c6"><label class="ck-label" for="c6"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">納期を守るためのスケジュール管理ができる</span><span
+                                    class="hint">Googleカレンダーに作業時間をブロックするだけでOK。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c7"><label class="ck-label" for="c7"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">見積書・請求書の作成方法を理解している</span><span
+                                    class="hint">Misoca（無料）やfreeeで簡単に作れる。テンプレートに入力するだけ。</span></span></label></li>
+                    <li class="ck-item"><input type="checkbox" id="c8"><label class="ck-label" for="c8"><span
+                                class="ck-box"></span><span class="ck-text"><span
+                                    class="main-text">報連相（報告・連絡・相談）の重要性を理解している</span><span
+                                    class="hint">50%の段階で中間報告、問題があれば即連絡。これだけで信頼度が3倍。</span></span></label></li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>© Skill Hacks by Brain Inc. ｜ スキルハックス 全話視聴者限定特典</p>
+        <p style="margin-top:6px">※ 本コンテンツの内容は個人の経験に基づくものであり、成果を保証するものではありません。</p>
+        <button class="reset-btn" onclick="resetAll()">チェックをリセットする</button>
+    </footer>
+
+    <script>
+        // Progress tracking
+        function updateProgress(group) {
+            const items = document.querySelectorAll(`[data-group="${group}"] input[type=checkbox]`);
+            const checked = document.querySelectorAll(`[data-group="${group}"] input[type=checkbox]:checked`);
+            const pct = items.length ? Math.round(checked.length / items.length * 100) : 0;
+            const bar = document.querySelector(`.${group}-bar`);
+            const label = document.querySelector(`.${group}-pct`);
+            if (bar) bar.style.width = pct + '%';
+            if (label) label.textContent = pct + '%';
+            // Save to localStorage
+            const state = {};
+            items.forEach(i => state[i.id] = i.checked);
+            localStorage.setItem('ck_' + group, JSON.stringify(state));
+        }
+
+        function loadProgress() {
+            const groups = ['movie', 'writing', 'design', 'programming', 'common'];
+            groups.forEach(group => {
+                const saved = localStorage.getItem('ck_' + group);
+                if (saved) {
+                    const state = JSON.parse(saved);
+                    Object.keys(state).forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.checked = state[id];
+                    });
+                }
+                updateProgress(group);
+            });
+        }
+
+        function resetAll() {
+            if (!confirm('全てのチェックをリセットしますか？')) return;
+            document.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false);
+            ['movie', 'writing', 'design', 'programming', 'common'].forEach(g => {
+                localStorage.removeItem('ck_' + g);
+                updateProgress(g);
+            });
+        }
+
+        document.querySelectorAll('input[type=checkbox]').forEach(cb => {
+            cb.addEventListener('change', function () {
+                const group = this.closest('[data-group]')?.dataset.group;
+                if (group) updateProgress(group);
+            });
+        });
+
+        loadProgress();
+
+        // Nav active on scroll
+        const sections = document.querySelectorAll('.skill-section');
+        const navLinks = document.querySelectorAll('.skill-nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+            navLinks.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+        });
+    </script>
+</body>
+
+</html>

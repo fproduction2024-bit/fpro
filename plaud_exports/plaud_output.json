@@ -1,0 +1,146 @@
+{
+  "file_detail": {
+    "status": 0,
+    "msg": "success",
+    "request_id": "",
+    "data": {
+      "file_id": "e9bdab4c16a96fd5aca9a198b066dd7c",
+      "file_name": "新規録音 30",
+      "file_version": 1767781261,
+      "duration": 2411000,
+      "is_trash": false,
+      "start_time": 1767778109000,
+      "scene": 101,
+      "serial_number": "c5d7c4486895d54dcd3a0a67e056524c-1767778114834-1307",
+      "session_id": 1767778109,
+      "wait_pull": 0,
+      "filetag_id_list": [],
+      "content_list": [
+        {
+          "data_id": "source_transaction:e01a8eb3:e9bdab4c16a96fd5aca9a198b066dd7c",
+          "data_type": "transaction",
+          "task_status": 1,
+          "data_title": "",
+          "data_tab_name": "",
+          "data_link": "https://prod-plaud-content-storage.s3.amazonaws.com/permanent/c5d7c4486895d54dcd3a0a67e056524c/file_transcript/e9bdab4c16a96fd5aca9a198b066dd7c/trans_result.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASLW73ISTOOTMLGEA%2F20260117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260117T061234Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=699a4a40baff68d1e7b01282b10203582c46f7c18d02aa336e9576a7de2ad5ad",
+          "extra": {}
+        },
+        {
+          "data_id": "source_outline:e01a8eb3:e9bdab4c16a96fd5aca9a198b066dd7c",
+          "data_type": "outline",
+          "task_status": 1,
+          "data_title": "",
+          "data_tab_name": "",
+          "data_link": "https://prod-plaud-content-storage.s3.amazonaws.com/permanent/c5d7c4486895d54dcd3a0a67e056524c/file_outline/e9bdab4c16a96fd5aca9a198b066dd7c/outline.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASLW73ISTOOTMLGEA%2F20260117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260117T061234Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=6e128411082ae906ded1fb05b170cd0699e7ea5e82fa998195f945d609e1ebc6",
+          "extra": {}
+        },
+        {
+          "data_id": "auto_sum:e01a8eb3:e9bdab4c16a96fd5aca9a198b066dd7c",
+          "data_type": "auto_sum_note",
+          "task_status": 1,
+          "data_title": "Summary",
+          "data_tab_name": "Summary",
+          "data_link": "https://prod-plaud-content-storage.s3.amazonaws.com/permanent/c5d7c4486895d54dcd3a0a67e056524c/file_summary/e9bdab4c16a96fd5aca9a198b066dd7c/ai_content_part_0.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASLW73ISTOOTMLGEA%2F20260117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260117T061234Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=4badbe6fd619dc7802cf5641c64a85dfe16a27f641643cf79e70853c6babf0c3",
+          "extra": {
+            "summary_id": "20260107101859-v2@147883dd976433cb9cea8b-1",
+            "summ_type": "MEETING",
+            "summ_type_type": "system"
+          }
+        },
+        {
+          "data_id": "sum_multi:e01a8eb3:e9bdab4c16a96fd5aca9a198b066dd7c:30df8a9b366235f7f33b89b47949a469",
+          "data_type": "sum_multi_note",
+          "task_status": 1,
+          "data_title": "01-07 AI伴走型FC本部構築と広告運用内製化戦略：投資家向けターゲティング再定義とローカルナレッジ運用の確立",
+          "data_tab_name": "議論の要約",
+          "data_link": "https://prod-plaud-content-storage.s3.amazonaws.com/permanent/c5d7c4486895d54dcd3a0a67e056524c/file_summary/e9bdab4c16a96fd5aca9a198b066dd7c/ai_content_part_1.json.gz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASLW73ISTOOTMLGEA%2F20260117%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260117T061234Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=d1d2254285962b1b74aa576c7f52076eeaf37befaf4d45aa98775e687af56baf",
+          "extra": {
+            "summary_id": "20260107101859-v2@147883dd976433cb9cea8b-2",
+            "summ_type": "MEETING-SEMINAR",
+            "summ_type_type": "system"
+          }
+        }
+      ],
+      "embeddings": {},
+      "download_path_mapping": {},
+      "pre_download_content_list": [
+        {
+          "data_id": "auto_sum:e01a8eb3:e9bdab4c16a96fd5aca9a198b066dd7c",
+          "data_content": "{\"ai_content\": \"# AIを活用した広告運用内製化によるフランチャイズ開発支援事業の高度化戦略\\n\\n本議事録は、FC本部の開発支援における「伴走価値」を核に、AIを全工程へ組み込み、外部広告代理店依存（手数料22%等）を段階的に縮減・内製化する事業戦略を詳細化したもの。久保田氏を中核人材として、マニュアルの知識化・安全なローカルDB構築・LP制作と広告運用の実務習得・報告自動化までを一気通貫で実装することで、品質・コスト・スピードの三立を狙う。進行中の「島岡氏（よもぎ蒸しサロン）」案件をOJTとして活用し、実務の定着と成果創出を早期に図る計画が明示された。\\n\\n## フランチャイズ（FC）開発支援の提供価値とAIの役割\\n\\nFC開発支援の本質は、クライアント単独では困難な「膨大な知識整理と意思決定」を伴走しながら進めることにある。具体的には、最終的に500ページ規模へ拡張することを想定した本部マニュアルづくりを、まずは30〜50ページのベースから立ち上げ、モデル店の運営支援と併走して継続的にアップデートしていく方針が確認された。\\n\\nこの伴走の中核にAIを据える。指導・ミーティングは都度録音・録画し、その内容をクライアント別にAIへ投入して知識化し、ローカル環境でデータベース化する。これにより、再利用可能なナレッジベースが形成され、情報漏洩リスクを最小化しながら、本部・加盟店双方へのドキュメント供給と移植性の高い成果物の納品が可能になる。Google等のクラウドを複数人で横断的に用いる構成はリスクが高く、同一アカウントの企業体運用を除き基本はローカルベースを採用する思想で一致した。\\n\\nAIは単なる効率化ではなく「型出し」「要件抽出」「ワークフロー提示」「実務支援」まで踏み込む。道具立てとして、AntiGravity（PC操作自動化）、Gemini、Cursor、Obsidian等を用い、チャットAIに加えAIエージェントの操作自動化能力を活用する。AIの種類にこだわるより、プロセス理解と適切な指示出し（何が必要かをAIに問う、ワークフローを提示させ逐次検証する）の徹底を重視する。\\n\\n## FCビジネスの本質とターゲット顧客の再定義\\n\\nFC本部の本業は、加盟店を増やしてロイヤリティ（ストック収入）を最大化することにある。一方、支援側の収入は加盟金等のショット収入が中心であり、本部にとってはロイヤリティの持続的拡大が唯一の指標である。この前提に立ち、理想のFC加盟者は「事業投資家」であり、起業家的に自分で事業を作りたい人よりも、ナレッジ・技術が無くとも投資家（オーナー）として事業を運営し、対価としてロイヤリティを支払う価値観を持つ人をターゲットとすべきという結論が共有された。\\n\\n多くの創業社長は投資家マインドを持たないため、本部側に「事業投資」視点を教育・移植することが当社支援の重要な付加価値となる。FCは「本部が技術・ナレッジを包括提供し、加盟者は投資家として収益を得る」構図であり、この観点の統一が支援の根幹である。\\n\\n## 新規事業機会：広告運用業務の内製化提案\\n\\n外部広告代理店の手数料（20%超、例：22%）は過剰であり、LP制作・運用・分析の多くはAIで代替可能という問題意識から、広告運用の内製化を新事業として提案。久保田氏が主体となり、LP制作から計測・改善までを自走化する。\\n\\n鍵となるのが「スワイプLP」等の最新ツール群。提示価格は「初月10万円・導入10万円・月額2万円」で、従来の縦長LPに比べ、ページ概念を導入してユーザーの滞在・離脱位置、CVに至る読了経路を精緻に計測可能。スワイプ内文言の自動生成機能と組み合わせることで、コンセプトテストや、リスト化前の教育度合いの計測が容易になる。過去は高額だった視認計測も、AI自作で低コスト化が進む。\\n\\n内製化による経済性も明確化された。一般的に月額広告予算は30万〜50万円程度で、20%の手数料なら月6万円（予算30万円時）に相当。LP初期制作費15万〜20万円も相場感として許容される。作業量は多いが、AI・自動化基盤により「ボタンワンクリックのポン出し」に近い速度で検証を回せる現況なら割に合う。自社案件（例：全タングル）で小額（1,000〜2,000円）からテスト出稿し、運用環境を立ち上げて実地で学習する方針で一致した。\\n\\n## 外部広告代理店の評価と内製化へのベンチマーク\\n\\n現行委託先RIDE（野川氏）は、手数料22%と高額ながら、商材理解力・誠実性・報告規律で高評価。毎日チャットワーク予約投稿で直近3日分のCPAなどの必須指標を報告する運用規律は、業界でも希少な強みである。広告スクール出身者を多数抱え、年間取扱額は数十億円（推定20億円）規模。月100万円の広告費から年間1億円まで顧客を育てる視点・伴走力も価値が高い。\\n\\nこのベンチマークを内製化の品質指標とし、特に「商材理解に基づく訴求設計」と「日次の数値報告」をAIで自動化する。メタのAPI連携やAntiGravity＋GitHub等による定時バッチ（例：毎朝5〜6時）で前日0:00〜24:00の各指標を所定のスプレッドシートへ集約する仕組みを検討。ログイン状態での自動収集は難易度が上がるが、実装すれば人的オペレーションを削減できる。\\n\\n広告運用の困難は「多種多量な情報の収集・整理」にある。意志決定は短時間でも、データ取得・整形に時間がかかるため不真面目な運用が破綻する。まずは手動で正解フォーマットを定義し、その後AIに自動収集・一次考察までを担わせる体制を構築する。この自動化に2〜3ヶ月を投資する価値は極めて高い。\\n\\n## 内製化に向けた具体的な実行計画とOJT案件\\n\\n実務習得は、Udemy教材・ChatGPT・AIエージェント（AntiGravity、Cursor等）を併用し、ワークフロー理解を軸に進める。Facebook広告のセットアップは、個人アカウント→Facebookページ作成→Business Manager開設→Ad Managerとページの資産連携→LP登録→入金・出稿という基本手順。UI変更やエラーは多いが、一度自走すれば対応可能。コーディング等はAIエージェントに指示し、プロセス理解を前提にエラー箇所を特定・再指示・再テスト（ハッカテスト等）で堅牢化する。\\n\\n運用プロセスは次のとおり。\\n- 加盟説明資料を起点に、多数の「訴求切り口」を抽出。\\n- LPを10パターン作成し、それぞれに対応するクリエイティブを準備して広告配信。\\n- 広告データを分析し、注力LPを2〜3枚に絞り込み、当たりクリエイティブを増やして精緻化。\\n- 予算配分は「上位2割を増額」「下位2割を切り捨て」「新規2割を導入」。各LPで約10個の訴求軸を常時テストし循環させる。\\n\\nOJT案件として「島岡氏（よもぎ蒸しサロン）」を起点に始動。市場参入が増えてタイミングとしてのリスクはあるが、店舗の世界観が徹底され滞在時間のデザインまで行き届いており、競争優位の可能性が高い。旦那氏は経営に明るい一方、島岡氏自身は加盟契約獲得・営業・マーケのノウハウが薄いため、まずはミーティングで世界観・ナレッジを掘り起こして加盟説明資料（「原典」）を作成。その資料からLPの切り口を量産し、広告運用に接続する。\\n\\n広告運用委託は、事前説明済みの選択肢として「RIDE（22%）」または「自社（15%）」を提示。内製選択時は古橋氏フロント・久保田氏オペで立ち上げる。並行して、自社案件（全タングル）でテスト出稿（1,000〜2,000円）まで構築し、運用基盤の手触りを早期獲得する。将来的には月30万〜50万円の予算運用が標準化され、手数料収益（例：30万円×20%＝6万円）とLP初期費用（15万〜20万円）で事業性を確立する。\\n\\n## アクションアイテム\\n\\n- 古橋さん\\n  - [ ] 向こう（小笠原さん側）から「今やってもらうこと」の書き出しを受け取り、内容を整理・統合する - [TBD]\\n  - [ ] 島岡さん案件でフロントを担当し、久保田さんと連携して広告立ち上げを推進する - [TBD]\\n  - [ ] 島岡さん案件の加盟説明資料を作成（ミーティングで世界観・ナレッジを聞き出し、原典を整備） - [TBD]\\n  - [ ] Udemyのログパスを久保田さんに提供する - [TBD]\\n\\n- 久保田さん\\n  - [ ] 広告出稿環境を構築し、実際に出稿できる状態にする（Facebookページ／Business Manager／Ad Manager連携、LP登録、入金確認） - [TBD]\\n  - [ ] 広告数値のレポーティングを自動化する（既存スプレッドシートの形式を踏襲し、API連携やエージェント運用で日次集計） - [TBD]\\n  - [ ] 島岡さん案件で古橋さんと共同し、LPを10パターン作成・クリエイティブ準備・配信・分析・最適化まで回す - [TBD]\\n  - [ ] 全タングルの広告テストを構築し、1,000〜2,000円の予算で試運転する - [TBD]\\n\\n- 小笠原さん\\n  - [ ] 現時点で「向こうで進めてもらうこと（ToDo）」を具体的に書き出し、古橋さんへ共有する - [TBD]\", \"header\": {\"headline\": \"01-07 AIを活用した広告運用内製化によるフランチャイズ開発支援事業の高度化戦略\"}, \"category\": \"会議ノート\", \"summary_id\": \"20260107101859-v2@147883dd976433cb9cea8b-1\", \"original_category\": \"会議ノート\", \"state\": 10, \"summ_type\": \"MEETING\", \"summ_type_type\": \"system\"}"
+        }
+      ],
+      "extra_data": {
+        "model": "gpt-5",
+        "tranConfig": {
+          "llm": "auto",
+          "type": "AUTO-SELECT",
+          "language": "auto",
+          "type_type": "system",
+          "created_at": "2026-01-07T10:17:53.262000",
+          "diarization": 0
+        },
+        "task_id_info": {
+          "trans_task_id": "20260107101753-v2@504a7be915dd8eb776ad85",
+          "outline_task_id": "b68cf546533a4432b0bdf24ece8e6eaf"
+        },
+        "aiContentForm": {},
+        "aiContentHeader": {
+          "category": "会議ノート",
+          "headline": "01-07 AIを活用した広告運用内製化によるフランチャイズ開発支援事業の高度化戦略",
+          "keywords": [
+            "フランチャイズ開発支援",
+            "AI内製化",
+            "広告運用",
+            "LP制作",
+            "スワイプLP",
+            "手数料削減（22%→内製）",
+            "ローカルDB構築",
+            "AIエージェント（AntiGravity, Cursor, Gemini）",
+            "Obsidianナレッジ化",
+            "自動レポーティング（API連携）",
+            "Facebook広告セットアップ",
+            "OJT（よもぎ蒸しサロン案件）",
+            "訴求設計とABテスト",
+            "予算配分最適化",
+            "伴走型支援",
+            "投資家型加盟者ターゲット",
+            "RIDEベンチマーク",
+            "品質・コスト・スピード両立",
+            "ワークフロー標準化",
+            "日次報告自動化"
+          ],
+          "summary_id": "20260107101859-v2@147883dd976433cb9cea8b-1",
+          "language_code": "auto",
+          "industry_category": "市场营销和广告",
+          "original_category": "会議ノート",
+          "recommend_questions": [
+            {
+              "category": "key_insights",
+              "question": "フランチャイジーにとって500ページのマニュアルはどのような価値をもたらすのでしょうか？"
+            },
+            {
+              "category": "key_insights",
+              "question": "事業投資という視点は、理想的なフランチャイジー像をどう変えるのでしょうか？"
+            },
+            {
+              "category": "key_insights",
+              "question": "他の広告代理店と比較して、このサービスの核となる価値提案は何ですか？"
+            },
+            {
+              "category": "subtext",
+              "question": "ローカルデータベースの構築は、データセキュリティ以外にどのような利点を提供しますか？"
+            },
+            {
+              "category": "subtext",
+              "question": "ライド社の22%と比較した広告費用から、どのようなメッセージが伝わりますか？"
+            },
+            {
+              "category": "subtext",
+              "question": "久保田さんの「真面目で細かい作業が得意」という評価には、どのような期待が込められていますか？"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

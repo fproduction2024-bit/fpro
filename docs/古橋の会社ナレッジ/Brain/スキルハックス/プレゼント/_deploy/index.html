@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Skill Hacks 五大特典 | プレゼント集</title>
+<meta name="description" content="Skill Hacks受講者限定の五大特典。副業で最初の1円を最短で手に入れるためのツール集。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --orange:#F06543;
+  --orange-light:#FFF4F1;
+  --orange-hover:#D9573A;
+  --bg:#FAFAFA;
+  --white:#FFFFFF;
+  --text:#1C1817;
+  --text-sub:#666;
+  --text-muted:#999;
+  --border:#E8E8E8;
+  --border-light:#F0F0F0;
+  --shadow:0 1px 4px rgba(28,24,23,.06);
+  --shadow-hover:0 4px 16px rgba(28,24,23,.1);
+  --radius:10px;
+  --radius-sm:6px;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Noto Sans JP',Helvetica,Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;background:var(--bg);color:var(--text);line-height:1.9}
+
+/* Header */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:0;z-index:200}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.logo{font-size:1.4rem;font-weight:900;color:var(--orange);letter-spacing:-.02em}
+.logo span{color:var(--text)}
+.header-sub{font-size:.75rem;color:var(--text-muted)}
+
+/* Hero */
+.hero{background:var(--white);border-bottom:1px solid var(--border);padding:3rem 1.5rem;text-align:center}
+.hero-inner{max-width:680px;margin:0 auto}
+.hero-badge{display:inline-block;background:var(--orange-light);color:var(--orange);padding:.3rem 1rem;border-radius:20px;font-size:.8rem;font-weight:700;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:900;line-height:1.5;margin-bottom:.8rem;color:var(--text)}
+.hero p{color:var(--text-sub);font-size:.95rem;max-width:560px;margin:0 auto 1.5rem}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.hero-stat .num{font-size:1.8rem;font-weight:900;color:var(--orange)}
+.hero-stat .label{font-size:.75rem;color:var(--text-muted)}
+
+/* Cards */
+.cards-section{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
+.cards-section h2{font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;cursor:pointer;transition:all .2s}
+.card:hover{box-shadow:var(--shadow-hover);border-color:#ddd}
+.card-icon{font-size:1.4rem;margin-bottom:.6rem}
+.card h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.card p{font-size:.82rem;color:var(--text-sub);line-height:1.7;margin-bottom:.5rem}
+.card-tag{display:inline-block;font-size:.7rem;padding:.15rem .6rem;border-radius:12px;background:var(--orange-light);color:var(--orange);font-weight:600}
+
+/* Tabs */
+.content-area{max-width:960px;margin:0 auto;padding:0 1.5rem 3rem}
+.tab-nav{display:flex;gap:6px;flex-wrap:wrap;padding:1rem 0;position:sticky;top:49px;z-index:100;background:var(--bg);border-bottom:1px solid var(--border)}
+.tab-btn{padding:.45rem 1rem;border:1px solid var(--border);border-radius:20px;background:var(--white);color:var(--text-sub);font-size:.8rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
+.tab-btn.active,.tab-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeIn .3s ease}
+
+/* Content */
+.content-section{max-width:720px;margin:0 auto;padding-top:1.5rem}
+.content-section h2{font-size:1.3rem;font-weight:900;padding-bottom:.6rem;border-bottom:2px solid var(--text);margin-bottom:1.2rem}
+.content-section h3{font-size:1.05rem;font-weight:700;margin:2rem 0 .6rem;color:var(--text)}
+.content-section h3.sec{font-size:1.1rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.content-section h4{font-size:.95rem;font-weight:700;margin:1.2rem 0 .4rem}
+.content-section p,.content-section li{font-size:.9rem;color:var(--text-sub);line-height:1.9}
+.content-section p.sub{margin-left:1.5rem;font-size:.82rem;color:var(--text-muted);font-style:italic}
+.content-section ul,.content-section ol{padding-left:1.4rem;margin-bottom:1rem}
+.content-section li{margin-bottom:.2rem}
+.content-section strong{color:var(--text)}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto;margin:.8rem 0 1.2rem}
+.content-section table{width:100%;border-collapse:collapse;font-size:.82rem}
+.content-section thead th{background:#F7F7F7;color:var(--text);padding:.55rem .7rem;text-align:left;font-weight:600;border-bottom:2px solid var(--border)}
+.content-section tbody td{padding:.5rem .7rem;border-bottom:1px solid var(--border-light);color:var(--text-sub)}
+.content-section tbody tr:hover td{background:#FAFAFA}
+
+/* Code/pre */
+.content-section pre{background:#F7F7F7;border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.2rem;overflow-x:auto;margin:.8rem 0;font-size:.82rem;line-height:1.7;color:var(--text-sub);white-space:pre-wrap;font-family:'Noto Sans JP',monospace}
+
+/* Blockquote */
+.content-section blockquote{border-left:3px solid var(--orange);padding:.7rem 1rem;background:var(--orange-light);border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:.8rem 0;font-size:.85rem;color:var(--text-sub)}
+
+/* Checklists */
+.ck{list-style:none;padding-left:0!important}
+.ck li{padding:.4rem 0 .4rem 1.8rem;position:relative;border-bottom:1px solid var(--border-light)}
+.ck li::before{content:'☐';position:absolute;left:0;color:var(--orange);font-size:1rem}
+
+/* Quiz */
+.question{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.2rem;margin:.8rem 0}
+.question h4{margin:0 0 .5rem;font-size:.9rem}
+.question label{display:block;padding:.3rem 0;color:var(--text-sub);cursor:pointer;font-size:.85rem}
+.question label:hover{color:var(--orange)}
+.question input[type=radio]{accent-color:var(--orange);margin-right:.4rem}
+
+/* Result */
+.result-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.2rem 0}
+.result-card h4{color:var(--orange);font-size:1.1rem;margin-bottom:.4rem}
+
+/* Footer */
+.footer{text-align:center;padding:2rem 1.5rem;color:var(--text-muted);font-size:.78rem;border-top:1px solid var(--border);background:var(--white)}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:640px){
+  .tab-btn{font-size:.72rem;padding:.35rem .7rem}
+  .cards{grid-template-columns:1fr}
+  .hero h1{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span>Skill</span>Hacks</div>
+    <div class="header-sub">五大特典</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">動画視聴者限定プレゼント</span>
+    <h1>副業ゼロイチを最速で<br>達成するための五大特典</h1>
+    <p>スキルハックスの動画講座を視聴してくださった方だけにお届けする、副業の「最初の1円」を最短で手に入れるためのツール集です。</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">5</div><div class="label">特典コンテンツ</div></div>
+      <div class="hero-stat"><div class="num">90</div><div class="label">日間ロードマップ</div></div>
+      <div class="hero-stat"><div class="num">∞</div><div class="label">何度でも使える</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cards-section">
+  <h2>特典ラインナップ</h2>
+  <div class="cards">
+    <div class="card" onclick="showTab('checklist')">
+      <div class="card-icon">✅</div>
+      <h3>スキルチェックリスト</h3>
+      <p>各スキルの案件獲得に必要な項目を網羅。全項目に「なぜ重要か」の解説付き。</p>
+      <span class="card-tag">9カテゴリ・60+項目</span>
+    </div>
+    <div class="card" onclick="showTab('templates')">
+      <div class="card-icon">📝</div>
+      <h3>初案件獲得テンプレート集</h3>
+      <p>プロフィール・提案文・価格設定テンプレ＋NG例＋AI活用Tips付き。</p>
+      <span class="card-tag">4スキル対応・20+テンプレ</span>
+    </div>
+    <div class="card" onclick="showTab('roadmap')">
+      <div class="card-icon">🗺️</div>
+      <h3>案件獲得ロードマップ</h3>
+      <p>14日間で初案件を獲得する完全7STEPガイド。メンタルブロック突破法付き。</p>
+      <span class="card-tag">7STEP・14日間</span>
+    </div>
+    <div class="card" onclick="showTab('diagnosis')">
+      <div class="card-icon">🔍</div>
+      <h3>副業スキルマッチング診断</h3>
+      <p>10問で最適スキルを診断。受講生ストーリー＋ハイブリッド戦略付き。</p>
+      <span class="card-tag">10問・4タイプ診断</span>
+    </div>
+    <div class="card" onclick="showTab('ninety')">
+      <div class="card-icon">🚀</div>
+      <h3>副業ゼロイチ 90日ロードマップ</h3>
+      <p>月10万円達成の5フェーズ完全計画。各Phase落とし穴対策付き。</p>
+      <span class="card-tag">5フェーズ・90日間</span>
+    </div>
+  </div>
+</section>
+
+<section class="content-area" id="content">
+  <div class="tab-nav" id="tabNav">
+    <button class="tab-btn active" onclick="showTab('checklist')">✅ チェックリスト</button>
+    <button class="tab-btn" onclick="showTab('templates')">📝 テンプレート集</button>
+    <button class="tab-btn" onclick="showTab('roadmap')">🗺️ ロードマップ</button>
+    <button class="tab-btn" onclick="showTab('diagnosis')">🔍 スキル診断</button>
+    <button class="tab-btn" onclick="showTab('ninety')">🚀 90日計画</button>
+  </div>
+
+  <div class="tab-content active" id="tab-checklist">
+    <div class="content-section">
+      <h2>✅ スキルチェックリスト</h2>
+      <blockquote><strong>使い方</strong>: 各スキルの項目をチェックしていきましょう。全項目にチェックが付いたら、あなたはもう案件に応募できる状態です。埋まらない項目があれば、そこだけを集中的に学びましょう。<br><br>Skill Hacks 受講生特典</blockquote>
+<h3 class="sec">🖥️ ProgrammingHacks（プログラミング）</h3>
+<h3>基礎スキル</h3>
+<ul class="ck">
+<li>HTML/CSSの基本構造を理解している</li>
+<p class="sub">→ <em>現場の案件の90%以上がHTML/CSSベース。ここが全ての土台になる</em></p>
+<li>レスポンシブデザイン（スマホ対応）が実装できる</li>
+<p class="sub">→ <em>2025年現在、アクセスの75%以上がスマホ。「スマホ対応できません」は即不採用</em></p>
+<li>JavaScriptの基本文法（変数・関数・条件分岐・ループ）を理解している</li>
+<p class="sub">→ <em>LP案件でも「ボタンクリックでメニューを開く」程度のJSは必須</em></p>
+<li>jQueryまたはVanilla JSでDOM操作ができる</li>
+<p class="sub">→ <em>既存サイトの修正案件ではjQueryが使われていることが多い。読めるだけでOK</em></p>
+</ul>
+<h3>実務スキル</h3>
+<ul class="ck">
+<li>既存のWebサイトのデザインを見て、同じものをコーディングできる</li>
+<p class="sub">→ <em>案件の大半は「このデザインの通りにコーディングして」。模写力＝案件対応力</em></p>
+<li>WordPressの基本的なカスタマイズができる</li>
+<p class="sub">→ <em>全Webサイトの43%がWordPress。触れるだけで案件の幅が一気に広がる</em></p>
+<li>ブラウザの開発者ツール（DevTools）を使ってデバッグできる</li>
+<p class="sub">→ <em>「表示がずれてます」と言われた時に原因を特定できるかどうかが分かれ目</em></p>
+<li>GitHubの基本操作（clone, commit, push）ができる</li>
+<p class="sub">→ <em>チーム開発の案件では必須。個人案件でも「Git使えます」で信頼度UP</em></p>
+</ul>
+<h3>案件獲得の最低ライン</h3>
+<ul class="ck">
+<li>LPコーディングのサンプルを1つ以上作成した</li>
+<p class="sub">→ <em>「実績がない」のと「サンプルがない」は別。サンプルは今日から作れる</em></p>
+<li>ポートフォリオサイトを公開している</li>
+<p class="sub">→ <em>GitHub PagesやNetlifyで無料公開できる。見せ方が9割</em></p>
+</ul>
+<blockquote>🎯 <strong>最短で身につける方法</strong>: ProgrammingHacksの基礎編（動画約20本）を1日2本ペースで消化 → 10日で土台完成。並行してLP模写を1本作れば、そのままポートフォリオに。</blockquote>
+<h3 class="sec">🎬 MovieHacks（動画編集）</h3>
+<h3>基礎スキル（必須5項目）</h3>
+<ul class="ck">
+<li>テロップの挿入・装飾ができる</li>
+<p class="sub">→ <em>視聴者の目を引く最重要要素。フォント選び＋色使い＋位置の3つを押さえる</em></p>
+<li>カット編集（不要部分の削除・繋ぎ）ができる</li>
+<p class="sub">→ <em>「えーっと」「あのー」を消すだけで動画のクオリティが段違いに上がる</em></p>
+<li>BGMの挿入・音量調整ができる</li>
+<p class="sub">→ <em>BGMは「聞こえるか聞こえないか」の音量がベスト。大きすぎは素人の証</em></p>
+<li>効果音（SE）の挿入ができる</li>
+<p class="sub">→ <em>テロップ出現時の「ポン」「シュッ」で視聴維持率が平均12%向上するデータあり</em></p>
+<li>画像・図解の挿入ができる</li>
+<p class="sub">→ <em>トーク系動画では画像挿入があるだけで「プロっぽい」と感じてもらえる</em></p>
+</ul>
+<h3>実務スキル</h3>
+<ul class="ck">
+<li>Premiere Pro（またはDaVinci Resolve）の基本操作を理解している</li>
+<p class="sub">→ <em>案件の8割がPremiere Pro指定。DaVinci Resolveは無料で練習に最適</em></p>
+<li>テンプレートを使って10分の動画を2時間以内に編集できる</li>
+<p class="sub">→ <em>時給換算で2,500円以上を確保するための最低ライン</em></p>
+<li>サムネイル画像の作成ができる（Canva or Photoshop）</li>
+<p class="sub">→ <em>「編集＋サムネセット」で提案すると単価が1.5〜2倍になる</em></p>
+<li>書き出し設定（解像度・ビットレート）を理解している</li>
+<p class="sub">→ <em>YouTube推奨設定を知っているだけでOK。間違えるとクレームの元</em></p>
+</ul>
+<h3>案件獲得の最低ライン</h3>
+<ul class="ck">
+<li>YouTube動画の編集サンプルを1本以上作成した</li>
+<p class="sub">→ <em>好きなYouTuberの動画を「勝手に編集」して練習作品にするのが王道</em></p>
+<li>ポートフォリオ（サンプル動画のリンク集）を用意している</li>
+<p class="sub">→ <em>Googleドライブで限定公開リンクを作り、提案文に貼るだけ</em></p>
+</ul>
+<blockquote>🎯 <strong>最短で身につける方法</strong>: MovieHacksの基礎5項目は動画10本程度。1週間で完了 → すぐにサンプル制作。迫さんも「この5つができればYouTube編集案件は受けられる」と断言。</blockquote>
+<h3 class="sec">🎨 DesignHacks（デザイン）</h3>
+<h3>基礎スキル</h3>
+<ul class="ck">
+<li>Photoshopの基本操作（レイヤー・マスク・切り抜き）ができる</li>
+<p class="sub">→ <em>バナー制作の90%はPhotoshop。この3操作だけで大半のバナーは作れる</em></p>
+<li>Illustratorの基本操作（パス・図形・テキスト）ができる</li>
+<p class="sub">→ <em>ロゴやアイコン系はIllustrator必須。最低限「テキストを図形と組み合わせる」ができればOK</em></p>
+<li>配色の基礎（補色・トーン・コントラスト）を理解している</li>
+<p class="sub">→ <em>「なんかダサい」の原因の7割は配色。Adobe Colorで解決できる</em></p>
+<li>フォント選びの基本ルールを理解している</li>
+<p class="sub">→ <em>ゴシック体＝信頼、明朝体＝高級感。この使い分けだけで印象が激変</em></p>
+</ul>
+<h3>実務スキル</h3>
+<ul class="ck">
+<li>バナー広告を制作できる（サイズ展開含む）</li>
+<p class="sub">→ <em>1枚のデザインを複数サイズに展開できると「セット受注」で単価2倍</em></p>
+<li>SNS用画像（Instagram投稿・YouTubeサムネ等）を制作できる</li>
+<p class="sub">→ <em>SNS運用代行とセットで月額案件に発展しやすい</em></p>
+<li>LP（ランディングページ）のデザインカンプを制作できる</li>
+<p class="sub">→ <em>LP案件は1件10〜30万円。デザインだけ受ける＝高単価の入口</em></p>
+<li>名刺・チラシ等の印刷物デザインができる</li>
+<p class="sub">→ <em>印刷入稿の知識（解像度350dpi、カラーモードCMYK）があると差別化に</em></p>
+</ul>
+<h3>案件獲得の最低ライン</h3>
+<ul class="ck">
+<li>バナー3種類以上のサンプルを作成した</li>
+<p class="sub">→ <em>「実在する商品のバナーを作ってみた」が最強のサンプル。架空より説得力がある</em></p>
+<li>ポートフォリオ（制作実績まとめ）を用意している</li>
+<p class="sub">→ <em>Behance、Dribbble、Notion──どれでもOK。「作品を見せられる状態」が大事</em></p>
+</ul>
+<blockquote>🎯 <strong>最短で身につける方法</strong>: DesignHacksでPhotoshop基礎を3日 → バナー3枚を模写で制作（5日）→ 8日目からポートフォリオ整理＆案件応募開始。</blockquote>
+<h3 class="sec">✍️ WritingHacks（ライティング）</h3>
+<h3>基礎スキル</h3>
+<ul class="ck">
+<li>SEOライティングの基本（キーワード選定・見出し構成）を理解している</li>
+<p class="sub">→ <em>検索結果の1ページ目に表示される記事の90%が適切なキーワード設計をしている</em></p>
+<li>PREP法（結論→理由→具体例→結論）で文章を書ける</li>
+<p class="sub">→ <em>ビジネス文章の基本型。これだけで「読みやすい」と言われる記事になる</em></p>
+<li>論理的な文章構成（導入→本文→まとめ）ができる</li>
+<p class="sub">→ <em>読者は3秒で「読むか読まないか」を判断する。導入での掴みが命</em></p>
+<li>誤字脱字なく3,000文字以上の記事を書ける</li>
+<p class="sub">→ <em>誤字脱字は一番目立つミス。納品前にWordやGoogleドキュメントのスペルチェック必須</em></p>
+</ul>
+<h3>実務スキル</h3>
+<ul class="ck">
+<li>WordPressへの入稿作業（画像挿入・装飾含む）ができる</li>
+<p class="sub">→ <em>「入稿までお願いします」と言われた時にできるかどうかで単価が変わる</em></p>
+<li>キーワード調査ツール（ラッコキーワード等）を使える</li>
+<p class="sub">→ <em>無料ツールだけで十分。有料ツールは実績3件超えてからでOK</em></p>
+<li>競合記事のリサーチ・分析ができる</li>
+<p class="sub">→ <em>上位10記事の見出し構成を分析 → 網羅性で上回る記事を書くのが王道SEO</em></p>
+<li>取材記事・インタビュー記事の執筆ができる</li>
+<p class="sub">→ <em>取材記事は文字単価3〜5円の高単価ゾーン。社会人経験がそのまま武器になる</em></p>
+</ul>
+<h3>案件獲得の最低ライン</h3>
+<ul class="ck">
+<li>SEO記事のサンプルを2本以上作成した</li>
+<p class="sub">→ <em>「自分が詳しいジャンル」で書くと質が高くなり、ポートフォリオ映えする</em></p>
+<li>ポートフォリオ（記事サンプルのリンク集）を用意している</li>
+<p class="sub">→ <em>note.comに公開するだけでもOK。「URLがある」ことが重要</em></p>
+</ul>
+<blockquote>🎯 <strong>最短で身につける方法</strong>: WritingHacksは動画を見つつ添削課題を提出。受講生のリアルな声──「1週間でカリキュラム完了、10日で初案件」の実績あり。</blockquote>
+<h3 class="sec">📊 ビジネスモデルマスター講座</h3>
+<h3>理解チェック</h3>
+<ul class="ck">
+<li>ビジネスモデルの基本構造（価値提供→収益化）を説明できる</li>
+<p class="sub">→ <em>スキルで稼ぐ → 発信で仕組み化 → 投資で自動化。この3ステップが人生攻略の核心</em></p>
+<li>自分のスキルを使ったマネタイズ方法を3つ以上考えられる</li>
+<p class="sub">→ <em>例：動画編集なら「受託案件」「テンプレ販売」「運営代行」が3本柱</em></p>
+<li>単発案件とストック型収益の違いを理解している</li>
+<p class="sub">→ <em>最初は単発で実績を作り、その後月額契約に移行するのが王道パターン</em></p>
+<li>価格設定の考え方（コスト・市場価格・提供価値）を理解している</li>
+<p class="sub">→ <em>「安すぎる価格」はクライアントに不安を与える。相場の70-80%が初期の最適解</em></p>
+</ul>
+<h3 class="sec">📱 Xマーケティングマスター講座</h3>
+<h3>基礎スキル</h3>
+<ul class="ck">
+<li>プロフィール文を最適化している（肩書き・実績・CTA）</li>
+<p class="sub">→ <em>「何ができる人か」が3秒で伝わるプロフィールが案件の直接依頼を生む</em></p>
+<li>ターゲットに刺さる投稿の型を3つ以上使える</li>
+<p class="sub">→ <em>「共感型」「ノウハウ型」「ストーリー型」の3つをローテーションするのが基本</em></p>
+<li>フォロワー500人以上を達成している（または目指す運用をしている）</li>
+<p class="sub">→ <em>フォロワー数より「見てくれている人の質」が大事。同業者と繋がることが先</em></p>
+<li>ポスト→固定ポスト→プロフィール→CTAの導線を設計できる</li>
+<p class="sub">→ <em>この導線が設計されていると、1ポストがきっかけで案件依頼が来る</em></p>
+</ul>
+<h3 class="sec">📲 LINEマーケティングマスター講座</h3>
+<h3>基礎スキル</h3>
+<ul class="ck">
+<li>LINE公式アカウントの開設・基本設定ができる</li>
+<p class="sub">→ <em>LINE公式は初期費用ゼロ・月1,000通まで無料。リスクなく始められるスキル</em></p>
+<li>ステップ配信（自動メッセージ）の設計・設定ができる</li>
+<p class="sub">→ <em>「登録→教育→販売」を自動化できるスキル。習得すれば自分のビジネスにも活きる</em></p>
+<li>リッチメニューの設計・設定ができる</li>
+<p class="sub">→ <em>タップ率を左右する最重要要素。デザインスキルとの掛け合わせで高単価案件に</em></p>
+<li>登録者を集めるための導線設計を理解している</li>
+<p class="sub">→ <em>SNS→LINE→商品という導線はあらゆるビジネスの基本形</em></p>
+</ul>
+<h3 class="sec">🎥 YouTube / Instagram 運営ノウハウ</h3>
+<h3>理解チェック</h3>
+<ul class="ck">
+<li>YouTubeのアルゴリズム（インプレッション→CTR→視聴維持率）を理解している</li>
+<p class="sub">→ <em>この3つの数字を改善する編集ができると、運営代行案件で月5〜20万円の月額報酬</em></p>
+<li>サムネイルの作成ルール（テキスト量・色使い・構図）を理解している</li>
+<p class="sub">→ <em>文字は最大13文字、色は3色まで、人の顔は右側──これだけでCTRが倍になる事例多数</em></p>
+<li>Instagramのフィード投稿・リール・ストーリーの使い分けを理解している</li>
+<p class="sub">→ <em>リール＝新規獲得、フィード＝信頼構築、ストーリー＝ファン化。目的別に使い分ける</em></p>
+</ul>
+<h3 class="sec">🔧 共通（全スキル共通で必要なこと）</h3>
+<h3>ツール・環境</h3>
+<ul class="ck">
+<li>クラウドソーシングサイト（クラウドワークス or ランサーズ）にアカウント登録済み</li>
+<p class="sub">→ <em>登録だけなら10分。本人確認まで完了させると応募できる案件が増える</em></p>
+<li>プロフィールを完成させている</li>
+<p class="sub">→ <em>テンプレート集を使って作成。プロフィールの完成度でクライアントの第一印象が決まる</em></p>
+<li>作業用のPC環境が整っている</li>
+<p class="sub">→ <em>MacでもWindowsでもOK。動画編集だけはメモリ16GB以上を推奨</em></p>
+<li>チャットツール（Chatwork / Slack / Discord）の基本操作ができる</li>
+<p class="sub">→ <em>クライアントとの連絡手段。使い方は5分で覚えられる</em></p>
+<li>Zoomでのオンライン会議に参加できる</li>
+<p class="sub">→ <em>初回ヒアリングはZoomが定番。画面共有のやり方も覚えておくと◎</em></p>
+</ul>
+<h3>ビジネスマナー</h3>
+<ul class="ck">
+<li>クライアントへの返信は24時間以内にできる</li>
+<p class="sub">→ <em>レスが早いだけで「この人と仕事したい」と思われる。スキルより大事な場合も</em></p>
+<li>納期を守るためのスケジュール管理ができる</li>
+<p class="sub">→ <em>Googleカレンダーに作業時間をブロックするだけでOK。完璧なツールは不要</em></p>
+<li>見積書・請求書の作成方法を理解している</li>
+<p class="sub">→ <em>Misoca（無料）やfreeeで簡単に作れる。テンプレートに入力するだけ</em></p>
+<li>報連相（報告・連絡・相談）の重要性を理解している</li>
+<p class="sub">→ <em>50%の段階で中間報告、問題があれば即連絡。これだけで信頼度が3倍</em></p>
+</ul>
+<h3 class="sec">📊 チェック達成率別 ── 次にやるべきこと</h3>
+<p>あなたのチェック率に応じて、最適なアクションが変わります。</p>
+<h3>0〜30%（スタートライン）</h3>
+<p>まだ学習の初期段階。焦る必要はありません。</p>
+<ul>
+<li><strong>やること</strong>: スキルハックスのカリキュラム基礎編に集中。1日2〜3時間、1〜2週間で基礎スキルの項目を埋める</li>
+<li><strong>気をつけること</strong>: 完璧を目指さない。70%の理解で次に進む</li>
+<li><strong>伴走支援の使い方</strong>: 初回面談で「何から手をつけるか」を一緒に決める</li>
+</ul>
+<h3>30〜60%（基礎完了間近）</h3>
+<p>基本的な操作はできるようになってきた段階。</p>
+<ul>
+<li><strong>やること</strong>: サンプル作品の制作に着手。実際の案件を想定した作品を1〜3つ作る</li>
+<li><strong>気をつけること</strong>: 「完璧な作品」を作ろうとしない。「70点の作品を3つ」が「100点の作品を0個」より100倍価値がある</li>
+<li><strong>伴走支援の使い方</strong>: 作ったサンプルの添削をお願いする</li>
+</ul>
+<h3>60〜90%（案件応募準備OK）</h3>
+<p>ポートフォリオが整い始めている段階。もう案件に応募できます。</p>
+<ul>
+<li><strong>やること</strong>: プロフィール完成 → テンプレート集を使って提案文を準備 → 1日3件以上応募</li>
+<li><strong>気をつけること</strong>: 「もう少し勉強してから…」は禁句。迫さんもこう言っています──<strong>「技術が成熟するなんか待ってたら一生案件なんか取れない」</strong></li>
+<li><strong>伴走支援の使い方</strong>: 提案文の添削、応募する案件の選び方を相談</li>
+</ul>
+<h3>90〜100%（即戦力）</h3>
+<p>全項目が埋まった、もしくはほぼ埋まった状態。おめでとうございます！</p>
+<ul>
+<li><strong>やること</strong>: 案件を回しながら2つ目のスキルの学習を開始。スキルの掛け合わせで単価を2倍にする</li>
+<li><strong>気をつけること</strong>: 埋まらない最後の数項目は、案件をこなしながら自然に身につく</li>
+<li><strong>伴走支援の使い方</strong>: 単価アップの相談、掛け合わせスキルの選定</li>
+</ul>
+<blockquote><strong>全項目にチェックが付いたら、あなたはもう「案件に応募できる状態」です！</strong><br>完璧を目指す必要はありません。まず案件を取って、実践しながら残りを埋めていきましょう。<br><br>迫さんの言葉──「正直、最初の案件は半信半疑でいい。最低限学んだら、勇気を持って飛び込む。それだけで結果は出る」</blockquote>
+
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-templates">
+    <div class="content-section">
+      <h2>📝 初案件獲得テンプレート集</h2>
+      <blockquote>そのまま使える・カスタマイズして使えるテンプレートを集めました。<br>【 】内はあなたの情報に置き換えてください。<br><br>Skill Hacks 受講生特典</blockquote>
+<h3 class="sec">1. クラウドソーシング プロフィール文</h3>
+<h3>プログラミング（コーディング）</h3>
+<pre>はじめまして、【名前】と申します。
+プロフィールをご覧いただきありがとうございます。
+
+■ 対応可能な業務
+・LP（ランディングページ）コーディング
+・コーポレートサイト制作・修正
+・WordPressカスタマイズ
+・レスポンシブ対応（スマホ・タブレット）
+
+■ 使用ツール・言語
+HTML / CSS / JavaScript / jQuery / WordPress
+
+■ 制作実績
+【ポートフォリオURLを記載】
+
+■ 納期について
+・LP1ページ：最短3営業日〜
+・サイト修正：最短1営業日〜
+※案件内容によりご相談させてください
+
+■ 稼働時間
+平日【○時〜○時】、土日【○時〜○時】
+連絡は24時間以内に返信いたします。
+
+■ 心がけていること
+・レスポンスの早さ
+・デザインカンプに忠実なコーディング
+・納期厳守
+
+まずはお気軽にご相談ください。
+丁寧な対応を心がけます。よろしくお願いいたします。
+</pre>
+<blockquote>⚠️ <strong>注意</strong>: 「なんでもできます」は逆効果。対応業務は<strong>自分が実際にできること</strong>だけに絞りましょう。具体的に書くほどクライアントは安心します。</blockquote>
+<h4>❌ NG例：こんなプロフィールは選ばれない</h4>
+<pre>プログラミング勉強中です。まだ実績はありませんが
+頑張りますのでよろしくお願いします。
+いろいろなことに挑戦してみたいです。
+</pre>
+<p><strong>何がダメか</strong>：</p>
+<ul>
+<li>「勉強中」→ 仕事を任せる不安しかない</li>
+<li>「実績はありません」→ サンプル・ポートフォリオは作れる</li>
+<li>「いろいろ」→ 何ができるのか分からない</li>
+<li>心がけ・稼働時間・納期の情報がゼロ</li>
+</ul>
+<h3>動画編集</h3>
+<pre>はじめまして、【名前】と申します。
+プロフィールをご覧いただきありがとうございます。
+
+■ 対応可能な業務
+・YouTube動画の編集（カット・テロップ・BGM・SE・画像挿入）
+・ショート動画 / リール動画の編集
+・サムネイル作成
+
+■ 使用ツール
+Adobe Premiere Pro / Photoshop / Canva
+
+■ 制作実績
+【サンプル動画のURL or ポートフォリオURL】
+
+■ 納期について
+・10分動画の編集：3〜5営業日
+・ショート動画：1〜2営業日
+※継続案件の場合、スケジュール調整いたします
+
+■ 稼働時間
+平日【○時〜○時】、土日【○時〜○時】
+連絡は24時間以内に返信いたします。
+
+■ 心がけていること
+・視聴維持率を意識した編集
+・テイストの統一（チャンネルの雰囲気に合わせます）
+・納期厳守とこまめな進捗共有
+
+まずはお気軽にご相談ください。
+よろしくお願いいたします。
+</pre>
+<blockquote>⚠️ <strong>注意</strong>: 「視聴維持率を意識した編集」は強力なワード。クライアントは「再生数を伸ばしたい」のが本音なので、それに応えられる姿勢を見せると◎</blockquote>
+<h4>❌ NG例</h4>
+<pre>動画編集できます！楽しそうなお仕事お待ちしてます♪
+ツールはiMovieを使っています。
+暇な時にやるので納期はゆっくりめでお願いします。
+</pre>
+<p><strong>何がダメか</strong>：</p>
+<ul>
+<li>仕事感がない（「楽しそう」「暇な時」）</li>
+<li>iMovieはプロ用ツールではない</li>
+<li>納期をクライアントに求めている（逆）</li>
+</ul>
+<h3>デザイン</h3>
+<pre>はじめまして、【名前】と申します。
+プロフィールをご覧いただきありがとうございます。
+
+■ 対応可能な業務
+・バナー広告制作（Web / SNS用）
+・SNS用画像制作（Instagram投稿・ストーリー等）
+・YouTubeサムネイル制作
+・LP（ランディングページ）デザイン
+・名刺・チラシ等の印刷物デザイン
+
+■ 使用ツール
+Adobe Photoshop / Illustrator / Canva / Figma
+
+■ 制作実績
+【ポートフォリオURL】
+
+■ 納期について
+・バナー1枚：1〜2営業日
+・LPデザイン：5〜7営業日
+※案件内容によりご相談させてください
+
+■ 稼働時間
+平日【○時〜○時】、土日【○時〜○時】
+
+お気軽にご相談ください。よろしくお願いいたします。
+</pre>
+<h4>❌ NG例</h4>
+<pre>デザインが趣味で、Canvaを使って画像を作っています。
+センスには自信があります。
+ポートフォリオはまだ作っていません。
+</pre>
+<p><strong>何がダメか</strong>：</p>
+<ul>
+<li>「趣味」→ プロとしての信頼がゼロ</li>
+<li>「センスに自信」→ 根拠がないと逆効果</li>
+<li>ポートフォリオなし→ 判断材料がない</li>
+</ul>
+<h3>ライティング</h3>
+<pre>はじめまして、【名前】と申します。
+プロフィールをご覧いただきありがとうございます。
+
+■ 対応可能な業務
+・SEO記事の執筆（キーワード選定〜入稿まで対応可）
+・ブログ記事・コラムの執筆
+・取材記事・インタビュー記事の執筆
+・WordPress入稿作業
+
+■ 得意ジャンル
+【得意なジャンルを2〜3つ記載。例：美容・健康、IT・テクノロジー、ビジネス】
+
+■ 執筆実績
+【サンプル記事のURL or ポートフォリオURL】
+
+■ 納期について
+・3,000字の記事：2〜3営業日
+・5,000字以上の記事：4〜5営業日
+
+■ 稼働時間
+平日【○時〜○時】、土日【○時〜○時】
+
+■ 心がけていること
+・読者にとって分かりやすい文章
+・SEOを意識した構成
+・入念なリサーチに基づく正確な情報
+
+お気軽にご相談ください。よろしくお願いいたします。
+</pre>
+<blockquote>⚠️ <strong>注意</strong>: 「得意ジャンル」は最も差別化しやすいポイント。「なんでも書けます」より「この分野に詳しいです」の方が選ばれます。社会人経験＝あなただけの専門ジャンル。</blockquote>
+<h3 class="sec">2. 案件応募（提案文）テンプレート</h3>
+<h3>基本テンプレート（全スキル共通）</h3>
+<pre>【クライアント名 or 会社名】様
+
+はじめまして、【名前】と申します。
+今回の案件に興味を持ち、ご応募いたしました。
+
+■ 応募理由
+【案件の内容に触れて、なぜ自分が適任か1〜2文で記載】
+
+■ 対応可能な内容
+【案件の要件に合わせて、自分ができることを箇条書き】
+
+■ 制作実績
+【サンプルURL or ポートフォリオURL】
+
+■ 納期
+ご依頼から【○】営業日以内に納品可能です。
+
+■ 稼働時間
+平日【○時〜○時】で対応可能です。
+チャットでのご連絡は24時間以内に返信いたします。
+
+■ 料金
+ご予算【○○円】の範囲で対応可能です。
+※ご予算に応じてご相談させてください。
+
+ご検討のほどよろしくお願いいたします。
+</pre>
+<h3>差別化ポイント追加版</h3>
+<pre>【上記テンプレートに加えて、以下のいずれかを追記】
+
+① 具体的な提案を添える
+「お送りいただいた参考動画を拝見しました。テロップの
+ フォントは○○系、BGMは○○の雰囲気が合うと考えています。」
+
+② 相手のチャンネル/サイトを分析する
+「○○様のチャンネルを拝見しました。○○な世界観が
+ 素敵だと感じました。その雰囲気を崩さない編集を心がけます。」
+
+③ テスト納品を提案する
+「まず1本、テスト的にお受けすることも可能です。
+ 品質をご確認いただいた上で、継続をご判断ください。」
+</pre>
+<blockquote>💡 <strong>プロのコツ</strong>: ①が最も効果的。「ちゃんと案件内容を見ている」と伝わるだけで、返信率が<strong>2〜3倍</strong>になります。コピペ感のある提案文は即ゴミ箱行き。</blockquote>
+<h3>📊 データで見る「応募のリアル」</h3>
+<p>応募する前に、数字の現実を知っておきましょう。</p>
+<div class="tbl-wrap"><table><thead><tr><th>指標</th><th>初心者の目安</th><th>3ヶ月後の目安</th></tr></thead><tbody><tr><td>応募数 / 日</td><td>3〜5件</td><td>1〜2件（質重視）</td></tr><tr><td>提案文の返信率</td><td>10〜15%</td><td>25〜40%</td></tr><tr><td>返信から受注の確率</td><td>30〜50%</td><td>60〜80%</td></tr><tr><td>初案件獲得まで</td><td>10〜30件の応募</td><td>-</td></tr></tbody></table></div>
+<p><strong>つまり</strong>：初案件を取るには、最低10件は応募が必要。30件応募しても取れないこともある。でもそれは<strong>普通</strong>のこと。</p>
+<blockquote>スキルハックスの受講生の中には、300件応募してようやく初案件を取り、その後月50万稼ぐ動画編集者になった人もいます。500件応募しても取れなかった人が、コツを掴んでから100万フォロワーのインフルエンサーになった事例もあります。<br><br>不器用でも、数を打てば当たる。当たった後は急成長する。これがリアルです。</blockquote>
+<h3 class="sec">3. 価格設定ガイドライン</h3>
+<h3>初心者が設定すべき価格の目安</h3>
+<div class="tbl-wrap"><table><thead><tr><th>スキル</th><th>案件例</th><th>初心者相場</th><th>実績3件後の相場</th><th>実績10件後の相場</th></tr></thead><tbody><tr><td>プログラミング</td><td>LP1ページ</td><td>3〜5万円</td><td>5〜10万円</td><td>10〜30万円</td></tr><tr><td>プログラミング</td><td>サイト修正</td><td>5,000〜1万円</td><td>1〜3万円</td><td>3〜5万円</td></tr><tr><td>動画編集</td><td>YouTube 10分</td><td>3,000〜5,000円</td><td>5,000〜1万円</td><td>1〜2万円</td></tr><tr><td>動画編集</td><td>ショート動画</td><td>1,000〜3,000円</td><td>3,000〜5,000円</td><td>5,000〜1万円</td></tr><tr><td>デザイン</td><td>バナー1枚</td><td>3,000〜5,000円</td><td>5,000〜1万円</td><td>1〜3万円</td></tr><tr><td>デザイン</td><td>サムネイル1枚</td><td>1,000〜3,000円</td><td>3,000〜5,000円</td><td>5,000〜1万円</td></tr><tr><td>ライティング</td><td>3,000字記事</td><td>文字単価1円</td><td>文字単価2〜3円</td><td>文字単価3〜5円</td></tr><tr><td>ライティング</td><td>5,000字記事</td><td>文字単価1円</td><td>文字単価2〜3円</td><td>文字単価3〜5円</td></tr></tbody></table></div>
+<blockquote><strong>ポイント</strong>: 最初の3件は「実績を作ること」が目的。相場より少し安めに設定して、★5のレビューを集めましょう。実績が3件以上たまったら、段階的に単価を上げていきます。</blockquote>
+<h3>💡 値段設定のやってはいけない</h3>
+<ul>
+<li>❌ <strong>安すぎる価格</strong>: 1件500円などは「この人大丈夫？」と不安にさせる</li>
+<li>❌ <strong>いきなり高額</strong>: 実績ゼロで相場以上の価格をつけると応募しても選ばれない</li>
+<li>❌ <strong>「いくらでもいいです」</strong>: 自信がないように見える。必ず具体的な金額を提示する</li>
+<li>✅ <strong>最適解</strong>: 相場の70〜80%で提示し、「実績づくりのため特別価格です」と添える</li>
+</ul>
+<blockquote>迫さんも最初はこう営業しました──「大学生なんで今回特別にお安くさせていただきます。予算2〜5万円のところ、僕は18,000円でいいです。1割お値引きしますので僕に任せていただけませんか」。結果、<strong>1件目の営業で即成約</strong>。</blockquote>
+<h3 class="sec">4. クライアントへのメッセージテンプレート</h3>
+<h3>案件受注直後</h3>
+<pre>【クライアント名】様
+
+この度はご依頼いただき、誠にありがとうございます。
+精一杯取り組ませていただきます。
+
+つきまして、以下の点を確認させてください。
+
+1. 【確認事項①】
+2. 【確認事項②】
+3. 納期は【○月○日】でよろしいでしょうか？
+
+ご確認のほどよろしくお願いいたします。
+</pre>
+<blockquote>💡 確認事項の例：素材の受け渡し方法 / 参考イメージ / 修正回数の上限 / 納品ファイル形式</blockquote>
+<h3>進捗報告</h3>
+<pre>【クライアント名】様
+
+お世話になっております、【名前】です。
+進捗のご報告です。
+
+■ 現在の進捗
+【具体的な進捗状況を記載】
+
+■ 完了予定
+【○月○日】までに初稿をお送りする予定です。
+
+何かご要望や変更点がございましたら、
+お気軽にお知らせください。
+
+引き続きよろしくお願いいたします。
+</pre>
+<blockquote>💡 作業の50%時点で1回、納品前に1回──最低2回は進捗報告を入れると信頼度が爆上がり</blockquote>
+<h3>納品時</h3>
+<pre>【クライアント名】様
+
+お世話になっております、【名前】です。
+納品物が完成いたしましたので、お送りいたします。
+
+■ 納品ファイル
+【ファイル名 / URL】
+
+■ 補足事項
+【修正回数の残り、注意点など】
+
+ご確認いただき、修正点がございましたらお知らせください。
+【○回】まで修正対応いたします。
+
+今後ともよろしくお願いいたします。
+</pre>
+<h3>修正依頼への返信</h3>
+<pre>【クライアント名】様
+
+ご確認いただきありがとうございます。
+修正点、承知いたしました。
+
+以下の内容で修正いたします。
+・【修正内容①】
+・【修正内容②】
+
+【○月○日】までに修正版をお送りいたします。
+よろしくお願いいたします。
+</pre>
+<blockquote>💡 修正依頼が来ても焦らない。「承知いたしました」の一言で冷静にプロ対応。修正は「あなたの成長チャンス」でもある</blockquote>
+<h3>リピート（継続案件）のお願い</h3>
+<pre>【クライアント名】様
+
+この度はご依頼いただき、ありがとうございました。
+ご一緒にお仕事ができ、大変勉強になりました。
+
+もし今後も同様のお仕事がございましたら、
+ぜひお声がけいただけますと幸いです。
+
+継続的にご依頼いただける場合、
+通常よりお得な料金でご提案することも可能です。
+
+今後ともよろしくお願いいたします。
+</pre>
+<blockquote>💡 この一言を送るだけで、リピート率は<strong>3倍以上</strong>になるというデータもあります。「わざわざ言わなくても…」と思うかもしれませんが、言わないと「もう次はないのかな」と思われて終わり</blockquote>
+<h3 class="sec">5. 🤖 AI活用Tips── テンプレートをもっと使いこなす</h3>
+<p>ChatGPTやClaude等のAIツールを使えば、テンプレートのカスタマイズが格段に楽になります。</p>
+<h3>プロフィール文のAIカスタマイズ</h3>
+<pre>以下のプロフィール文テンプレートを、私の情報に合わせて
+カスタマイズしてください。
+
+【テンプレートをコピペ】
+
+■ 私の情報
+・名前：○○
+・スキル：動画編集（Premiere Pro）
+・稼働可能時間：平日21時〜24時、土日10時〜18時
+・強み：前職の営業経験でクライアント対応が得意
+・ポートフォリオURL：○○
+</pre>
+<h3>提案文のAIカスタマイズ</h3>
+<pre>以下の案件に応募する提案文を作ってください。
+
+■ 案件名：【コピペ】
+■ 案件の詳細：【コピペ】
+■ 私のスキル：○○
+■ ポートフォリオ：○○
+
+以下のテンプレートをベースに、この案件に特化した
+提案文にカスタマイズしてください。
+特に「応募理由」は案件内容に具体的に触れること。
+
+【テンプレートをコピペ】
+</pre>
+<h3>⚠️ AI活用の注意点</h3>
+<ul>
+<li><strong>そのままコピペしない</strong>: AIが生成した文章はそのまま使わず、必ず自分の言葉で微調整する</li>
+<li><strong>嘘を書かない</strong>: AIは実績を「盛る」ことがある。嘘の実績は絶対にNG</li>
+<li><strong>毎回変える</strong>: 同じ提案文を複数の案件に使い回すと、コピペ感が出てバレる</li>
+<li><strong>最終チェックは自分で</strong>: 誤字脱字・不自然な表現がないか、送信前に必ず音読する</li>
+</ul>
+<blockquote>AIは「書き出しの壁」を超えるためのツール。最終的な仕上げは、あなた自身の言葉で。</blockquote>
+<blockquote><strong>このテンプレート集の使い方</strong><br>1. テンプレートをそのままコピーして使う<br>2. 【 】内を自分の情報に書き換える<br>3. 慣れてきたら、自分の言葉で少しずつアレンジする<br>4. AIを使って案件ごとにカスタマイズする<br><br>最初は「型通り」で十分です。案件を重ねるうちに、自然と自分のスタイルが出来上がります。</blockquote>
+
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-roadmap">
+    <div class="content-section">
+      <h2>🗺️ 案件獲得ロードマップ</h2>
+      <blockquote>ゼロから初案件を獲得するまでの完全ステップガイド。<br>第1話〜第4話を最後まで視聴してくださった方への限定プレゼントです。<br><br>Skill Hacks 全話視聴者限定特典</blockquote>
+<h3 class="sec">このロードマップの使い方</h3>
+<ol>
+<li><strong>STEP 1〜7を順番に進めてください</strong>（飛ばさない）</li>
+<li>各STEPの「完了条件」を満たしたら次に進む</li>
+<li>迷ったら伴走支援メンバーに相談する</li>
+<li><strong>目安期間：2週間〜1ヶ月で初案件獲得</strong></li>
+</ol>
+<h3 class="sec">全体マップ</h3>
+<pre>STEP 1（1日目）    → スキルを選ぶ
+STEP 2（2〜7日目）  → コアスキルだけ学ぶ
+STEP 3（5〜7日目）  → サンプルを作る
+STEP 4（7〜8日目）  → プロフィールを整える
+STEP 5（8〜10日目） → 案件に応募する
+STEP 6（10〜14日目）→ 初案件を納品する
+STEP 7（14日目〜）  → リピートと単価アップ
+</pre>
+<h3 class="sec">STEP 1：スキルを選ぶ（1日目）</h3>
+<h3>やること</h3>
+<p>自分が取り組むスキルを1つ決める。</p>
+<h3>選び方のポイント</h3>
+<div class="tbl-wrap"><table><thead><tr><th>判断基準</th><th>質問</th></tr></thead><tbody><tr><td>興味</td><td>どの作業が「やってみたい」と思えるか？</td></tr><tr><td>適性</td><td>細かい作業が好き？ 文章を書くのが好き？</td></tr><tr><td>市場</td><td>クラウドワークスでどのくらい案件が出ているか？</td></tr><tr><td>速さ</td><td>最短で案件が取れるのはどれか？</td></tr></tbody></table></div>
+<h3>各スキルの特徴</h3>
+<div class="tbl-wrap"><table><thead><tr><th>スキル</th><th>こんな人向け</th><th>初案件までの目安</th><th>初期の案件単価</th></tr></thead><tbody><tr><td>動画編集</td><td>コツコツ作業が好き</td><td>1〜2週間</td><td>3,000〜5,000円/本</td></tr><tr><td>Webデザイン</td><td>ビジュアルにこだわりたい</td><td>2〜3週間</td><td>3,000〜5,000円/枚</td></tr><tr><td>プログラミング</td><td>論理的思考が得意</td><td>2〜4週間</td><td>3〜5万円/ページ</td></tr><tr><td>ライティング</td><td>文章を書くのが好き</td><td>1〜2週間</td><td>文字単価1円〜</td></tr></tbody></table></div>
+<blockquote><strong>迷ったら？</strong> 伴走支援の初回面談で一緒に決めましょう。全講座学び放題なので、合わなかったら後から変更もOKです。</blockquote>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「迷ってる時間が一番もったいない。直感で1つ選んで、合わなかったら変えればいい。全講座学び放題だから損はゼロです」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>取り組むスキルを1つ決めた</li>
+</ul>
+<h3 class="sec">STEP 2：コアスキルだけ学ぶ（2〜7日目）</h3>
+<h3>やること</h3>
+<p>選んだスキルのカリキュラムで、<strong>案件獲得に必要な最低限の部分だけ</strong>を学ぶ。</p>
+<h3>学習のルール</h3>
+<ol>
+<li><strong>全部やろうとしない</strong> — カリキュラムの「基礎編」だけでOK</li>
+<li><strong>手を動かしながら学ぶ</strong> — 見るだけでなく、必ず自分で操作する</li>
+<li><strong>分からないところは即質問</strong> — Q&Aサポートを活用する</li>
+<li><strong>1日の学習時間を決める</strong> — 最低1時間、できれば2〜3時間</li>
+</ol>
+<h3>各スキルの「最低限ここまで」ライン</h3>
+<p><strong>動画編集の場合:</strong></p>
+<ul>
+<li>テロップ挿入 → カット編集 → BGM挿入 → SE挿入 → 画像挿入</li>
+<li>この5つができればYouTube編集案件は受けられる</li>
+</ul>
+<p><strong>Webデザインの場合:</strong></p>
+<ul>
+<li>Photoshopの基本操作 → バナー制作 → SNS画像制作</li>
+<li>バナーが作れれば案件に応募できる</li>
+</ul>
+<p><strong>プログラミングの場合:</strong></p>
+<ul>
+<li>HTML/CSS → レスポンシブ対応 → 簡単なJavaScript</li>
+<li>LP1ページをコーディングできれば案件に応募できる</li>
+</ul>
+<p><strong>ライティングの場合:</strong></p>
+<ul>
+<li>SEOの基礎 → 記事構成の作り方 → PREP法での執筆</li>
+<li>3,000字の記事を書ければ案件に応募できる</li>
+</ul>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「枝葉のスキルに逃げないで。カラーグレーディングとか凝ったアニメーションとか、今は要らない。案件を取るのに必要な"最低限"だけを最速で身につけて」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>カリキュラムの基礎編を一通り完了した</li>
+<li>基本的な操作を自分一人でできるようになった</li>
+</ul>
+<h3 class="sec">STEP 3：サンプルを作る（5〜7日目）</h3>
+<h3>やること</h3>
+<p>案件応募用のサンプル作品（ポートフォリオ）を作る。</p>
+<h3>サンプルの作り方</h3>
+<div class="tbl-wrap"><table><thead><tr><th>スキル</th><th>作るもの</th><th>参考にするもの</th></tr></thead><tbody><tr><td>動画編集</td><td>YouTube動画の編集サンプル1本</td><td>人気YouTuberの動画をお手本に</td></tr><tr><td>デザイン</td><td>バナー3枚 + サムネイル2枚</td><td>実際の広告やYouTubeサムネを参考に</td></tr><tr><td>プログラミング</td><td>架空のLP1ページ</td><td>実在するLPを模写</td></tr><tr><td>ライティング</td><td>SEO記事2本（各3,000字）</td><td>検索上位の記事を分析して書く</td></tr></tbody></table></div>
+<h3>サンプル制作のコツ</h3>
+<ol>
+<li><strong>実在する案件を想定して作る</strong> — 架空クライアントの依頼だと思って取り組む</li>
+<li><strong>完璧じゃなくていい</strong> — 70%の完成度でOK。案件を回しながら上達する</li>
+<li><strong>見せ方を工夫する</strong> — GoogleドライブやNotionにまとめてURLで共有できるようにする</li>
+<li><strong>制作意図を書く</strong> — 「このバナーは○○をイメージして、○○を意図して作りました」と1行添えると、クライアントが制作力を判断しやすい</li>
+</ol>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「"自分で作ったサンプルです"と言えること自体が武器。実績ゼロでもサンプルは作れる。作れるのに作らないのは、自ら武器を捨てているのと同じ」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>サンプル作品を規定数作成した</li>
+<li>ポートフォリオURLとしてまとめた（Googleドライブ / Notion / サイト等）</li>
+</ul>
+<h3 class="sec">STEP 4：プロフィールを整える（7〜8日目）</h3>
+<h3>やること</h3>
+<p>クラウドソーシングサイトに登録し、プロフィールを完成させる。</p>
+<h3>登録先</h3>
+<ol>
+<li><strong>クラウドワークス</strong>（案件数が最も多い）</li>
+<li><strong>ランサーズ</strong>（高単価案件が多い傾向）</li>
+<li><strong>ココナラ</strong>（自分からサービスを出品できる）</li>
+</ol>
+<blockquote>最初はクラウドワークスだけでOK。慣れてきたら他も登録。</blockquote>
+<h3>プロフィール完成チェックリスト</h3>
+<ul class="ck">
+<li>プロフィール写真を設定した（顔写真 or プロっぽいアイコン）</li>
+<li>自己紹介文を記入した（テンプレート集を活用）</li>
+<li>スキル・経歴を記入した</li>
+<li>ポートフォリオURLを掲載した</li>
+<li>本人確認（身分証提出）を完了した</li>
+<li>NDA（秘密保持契約）に同意した</li>
+</ul>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「プロフィール写真は絶対に設定して。写真なし＝信頼ゼロ。顔写真がベストだけど、無理ならプロっぽいアイコンでもOK」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>クラウドワークスのプロフィールが100%完成している</li>
+<li>ポートフォリオURLがプロフィールに掲載されている</li>
+</ul>
+<h3 class="sec">STEP 5：案件に応募する（8〜10日目）</h3>
+<h3>やること</h3>
+<p>実際に案件を探して応募する。<strong>最低10件に応募</strong>する。</p>
+<h3>案件の探し方</h3>
+<ol>
+<li>クラウドワークスで自分のスキルに合うカテゴリを開く</li>
+<li>「新着順」でソートする</li>
+<li>以下の条件で絞り込む：</li>
+<p>   - 予算が明記されている</p>
+<p>   - 「初心者歓迎」「未経験OK」と書いてある</p>
+<p>   - 依頼内容が具体的（曖昧な案件は避ける）</p>
+<p>   - クライアントの評価が★4以上</p>
+</ol>
+<h3>応募のルール</h3>
+<div class="tbl-wrap"><table><thead><tr><th>ルール</th><th>理由</th></tr></thead><tbody><tr><td>1日3件以上応募する</td><td>返信率は10〜20%。数を打つのが大事</td></tr><tr><td>テンプレートをベースに毎回カスタマイズ</td><td>コピペ感が出ると落ちる</td></tr><tr><td>相手の案件内容に必ず触れる</td><td>「ちゃんと読んでいる」と伝わる</td></tr><tr><td>テスト納品を提案する</td><td>クライアントのリスクを下げる</td></tr><tr><td>最初の3件は安くてもOK</td><td>実績（★5レビュー）を作ることが最優先</td></tr></tbody></table></div>
+<h3>📬 応募の科学 ── データで見る案件獲得の真実</h3>
+<p>応募してからの流れを数字で把握しておくと、心が折れにくくなります。</p>
+<p><strong>返信率のリアルデータ（受講生平均）：</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>応募方法</th><th>返信率</th><th>受注率（返信→受注）</th></tr></thead><tbody><tr><td>コピペ提案文</td><td>5〜8%</td><td>10〜20%</td></tr><tr><td>カスタマイズ提案文</td><td>15〜25%</td><td>30〜50%</td></tr><tr><td>作品分析＋提案文</td><td>25〜40%</td><td>50〜70%</td></tr></tbody></table></div>
+<p><strong>つまり</strong>：</p>
+<ul>
+<li>コピペ提案文で100件応募 → 返信5〜8件 → 受注1件以下</li>
+<li>カスタマイズ提案文で30件応募 → 返信5〜8件 → 受注2〜4件</li>
+<li><strong>手間をかけた方が、結果的に少ない応募数で案件が取れる</strong></li>
+</ul>
+<p><strong>時間帯別の応募効果：</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>時間帯</th><th>効果</th><th>理由</th></tr></thead><tbody><tr><td><strong>朝 8〜10時</strong></td><td>★★★★★</td><td>クライアントが出勤後にチェック。一番見てもらえる</td></tr><tr><td><strong>昼 12〜13時</strong></td><td>★★★★☆</td><td>昼休みにチェックするクライアントが多い</td></tr><tr><td><strong>夜 20〜22時</strong></td><td>★★★☆☆</td><td>ライバルが多い時間帯。でも案件も多い</td></tr><tr><td><strong>深夜 0〜6時</strong></td><td>★★☆☆☆</td><td>朝一で目に入るかもしれないが、埋もれやすい</td></tr></tbody></table></div>
+<blockquote>💡 <strong>ベストプラクティス</strong>: 夜に提案文を「下書き保存」→ 翌朝8〜9時に送信。これが最も返信率が高いパターン。</blockquote>
+<h3>応募後にやること</h3>
+<ul>
+<li><strong>返信が来たら即レス</strong>（24時間以内、できれば数時間以内）</li>
+<li><strong>質問されたら丁寧に具体的に答える</strong></li>
+<li><strong>条件が折り合えば、すぐに着手する旨を伝える</strong></li>
+</ul>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「"案件を選んでいる場合じゃない"のが初心者フェーズ。明らかな搾取案件以外は、まず経験を積むことを優先して」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>10件以上の案件に応募した</li>
+<li>1件以上の案件を受注した</li>
+</ul>
+<h3 class="sec">STEP 6：初案件を納品する（10〜14日目）</h3>
+<h3>やること</h3>
+<p>受注した案件を納品する。<strong>ここが一番大事なSTEP。</strong></p>
+<h3>案件進行の流れ</h3>
+<pre>1. 受注確定 → 条件・納期を確認
+2. 不明点を質問 → 作業開始前に疑問をゼロにする
+3. 作業開始 → 途中経過を共有（50%時点で一度確認）
+4. 初稿提出 → 修正依頼を受ける
+5. 修正対応 → 最終確認
+6. 納品完了 → 評価をもらう
+</pre>
+<h3>初案件で意識すべき3つのこと</h3>
+<ol>
+<li><strong>レスポンスの速さ</strong> — メッセージは即返信。これだけで信頼度が段違い</li>
+<li><strong>納期厳守</strong> — 余裕を持ったスケジュールを提示し、前倒しで納品する</li>
+<li><strong>丁寧なコミュニケーション</strong> — 進捗報告をこまめにする</li>
+</ol>
+<h3>💼 初案件あるある失敗談と対処法</h3>
+<p>実際の受講生から聞いた「初案件のやらかし」とその対処法です。事前に知っておくだけで、同じミスを避けられます。</p>
+<p><strong>① 「思ったより難しい…」パニック</strong></p>
+<ul>
+<li>状況：受注したけど、想定より技術的に難しくて手が止まる</li>
+<li>対処法：まず伴走支援メンバーに即相談。「分からないけど何とかしたい」という姿勢を見せれば、必ず助けてもらえる</li>
+<li>最悪の場合：「今回お金は受け取りませんので、最後まで納品だけさせてください」で誠意を見せる。大きなトラブルにはならない</li>
+</ul>
+<p><strong>② 修正が3回以上来て心が折れる</strong></p>
+<ul>
+<li>状況：「ここ変えて」「ここも変えて」「やっぱり最初の方が…」のループ</li>
+<li>対処法：受注時に「修正は2回まで」と明記しておく（テンプレート集のメッセージ参照）。修正回数は事前合意が鉄則</li>
+<li>マインド：修正は「ダメ出し」ではなく「クライアントの好みを学ぶチャンス」</li>
+</ul>
+<p><strong>③ 納期ギリギリになって焦る</strong></p>
+<ul>
+<li>状況：作業量を見誤って、締め切り前日に徹夜コース</li>
+<li>対処法：提示する納期は「自分が思う必要日数 × 1.5倍」にする。余裕があれば前倒し納品 → クライアント大喜び</li>
+<li>鉄則：「間に合わないかも」と思った瞬間にすぐ連絡。ギリギリまで黙っているのが最悪のパターン</li>
+</ul>
+<p><strong>④ 単価が安すぎて時給100円になる</strong></p>
+<ul>
+<li>状況：1本3,000円で受けたのに、作業に20時間かかった…</li>
+<li>対処法：初案件は「実績づくり」と割り切る。2件目からは作業時間を記録して、時給を計算してから受注可否を判断する</li>
+</ul>
+<h3>トラブル対応</h3>
+<div class="tbl-wrap"><table><thead><tr><th>トラブル</th><th>対応</th></tr></thead><tbody><tr><td>作業が予想より難しい</td><td>伴走支援メンバーに即相談。一人で抱え込まない</td></tr><tr><td>納期に間に合わなそう</td><td>分かった時点ですぐクライアントに連絡。代替案を提示</td></tr><tr><td>修正が多すぎる</td><td>「修正は○回まで」を事前に合意しておく</td></tr><tr><td>クライアントの返信が遅い</td><td>2営業日返信がなければ丁寧にリマインド</td></tr></tbody></table></div>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「初案件で完璧な仕事ができる人はいません。大事なのは"誠実に向き合ったかどうか"。クライアントが見ているのは、スキルより姿勢です」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>初案件を無事に納品した</li>
+<li>クライアントから★4以上の評価をもらった</li>
+</ul>
+<h3 class="sec">STEP 7：リピートと単価アップ（14日目〜）</h3>
+<h3>やること</h3>
+<p>初案件の実績を武器に、継続案件と単価アップを目指す。</p>
+<h3>📈 単価推移のリアル── 実績と単価の関係</h3>
+<pre>実績   0件 ▓░░░░░░░░░ 相場の70%（実績づくり価格）
+実績   3件 ▓▓▓░░░░░░░ 相場通り
+実績  10件 ▓▓▓▓▓░░░░░ 相場の110〜120%
+実績  30件 ▓▓▓▓▓▓▓░░░ 相場の150%+（指名依頼も来始める）
+実績  50件 ▓▓▓▓▓▓▓▓▓░ 相場の200%+（直接契約・月額契約）
+実績 100件 ▓▓▓▓▓▓▓▓▓▓ ディレクター・外注化フェーズへ
+</pre>
+<blockquote><strong>ポイント</strong>: 最初の3件を超えるまでが一番辛い。3件超えると「実績あり」として信頼されるようになり、受注がラクになる。10件超えると「選ぶ側」に変わる。</blockquote>
+<h3>やるべきこと</h3>
+<ol>
+<li><strong>納品後にリピートを提案する</strong>（テンプレート集の「リピートのお願い」を活用）</li>
+<li><strong>プロフィールに実績を追加する</strong>（「○件の実績・平均★4.8」等）</li>
+<li><strong>提案文に実績を入れる</strong>（「類似案件の経験があります」）</li>
+<li><strong>スキルの掛け合わせを始める</strong>（動画編集 × サムネデザイン → ワンストップ提案）</li>
+<li><strong>直接取引（継続契約）を目指す</strong>（クラウドソーシングの手数料をカットできる）</li>
+</ol>
+<h3>スキルの掛け合わせ例</h3>
+<div class="tbl-wrap"><table><thead><tr><th>掛け合わせ</th><th>できる案件</th><th>単価の目安</th></tr></thead><tbody></tbody></table></div>
+<p>|-----------|-----------|-----------| </p>
+<div class="tbl-wrap"><table><thead><tr><th>動画編集 × デザイン</th><th>YouTube運営代行（編集+サムネ）</th><th>1万〜3万円/本</th></tr></thead><tbody><tr><td>プログラミング × デザイン</td><td>Webサイト制作（デザイン+コーディング）</td><td>10〜50万円/件</td></tr><tr><td>動画編集 × マーケティング</td><td>YouTubeチャンネル運営</td><td>月額5〜20万円</td></tr><tr><td>ライティング × SNS運用</td><td>SNS運用代行</td><td>月額3〜10万円</td></tr></tbody></table></div>
+<blockquote>💡 <strong>伴走支援メンバーのワンポイント</strong>: 「リピートのお願いを"わざわざ"送る人は実はかなり少ない。だからこそ、テンプレ通りでもいいから送るだけで差別化になる。特に"継続だと割引します"の一言が効く」</blockquote>
+<h3>完了条件</h3>
+<ul class="ck">
+<li>継続案件またはリピート案件を獲得した</li>
+<li>初案件より高い単価で受注できた</li>
+</ul>
+<h3 class="sec">🧠 メンタルブロック5選と突破法</h3>
+<p>案件獲得を阻む最大の敵は、スキル不足ではなく<strong>メンタルブロック</strong>です。以下は受講生が最もよくハマる5つの壁と、突破した人たちのリアルな声です。</p>
+<h3>ブロック①「まだスキルが足りない気がする…」</h3>
+<p><strong>突破法</strong>：迫さんも最初のプログラミング案件は「クイズアプリを作れる」程度の技術しかなかった。それでも学習塾のアプリ開発案件を取り、18,000円で受注して<strong>1件目の営業で即成約</strong>。技術が成熟してからなんて待てない。最低限できれば、飛び込んでいい。</p>
+<blockquote>「最悪、本当に謝って"今回お金受け取らないんでただ最後までやらせてください"って言ったら大きなトラブルになることなんかない」── 迫 佑樹</blockquote>
+<h3>ブロック②「応募しても返信が来ない…向いてないのかも」</h3>
+<p><strong>突破法</strong>：返信率10〜15%が普通。10件送って1件返事が来ればいい方。300件応募してやっと初案件を取り、今は月50万稼いでいる受講生がいる。500件応募してもダメだった人が、最終的に100万フォロワーのインフルエンサーになった事例も。<strong>「数が足りてるか？」がまず最初のチェックポイント</strong>。</p>
+<h3>ブロック③「お金をもらっていいレベルじゃない…」</h3>
+<p><strong>突破法</strong>：これは「完璧主義の罠」。先を行っている先輩がいる環境にいると「完璧じゃなくてもいける」と気づける。スキルハックスのコミュニティでは、日報を通じて他の受講生の進捗が見える。基準値が上がると「自分もやっていいんだ」と思える。</p>
+<blockquote>「完璧じゃないとお金なんかもらっちゃいけないっていうメンタルブロック…これは先を行ってる先輩がいるからこそ脱却できる」── 迫 佑樹</blockquote>
+<h3>ブロック④「一人でやってると不安で続かない…」</h3>
+<p><strong>突破法</strong>：これは受講生の声でも一番多い。独学で挫折した方がスキルハックスに入った理由の第1位が「相談できる環境が欲しかった」。ある受講生は「プログラミングスクールで先生と相性が合わなくて辞めた → 独学で行き詰まった → スキルハックスで仲間ができたことで、独学では絶対超えられなかった壁を超えた」と語っています。</p>
+<blockquote>「環境を整えてください。私の性格と能力では多分1人ではできなかったと思います」── 受講生インタビューより</blockquote>
+<h3>ブロック⑤「副業バレが怖い…会社に知られたくない」</h3>
+<p><strong>突破法</strong>：</p>
+<ul>
+<li>確定申告で「住民税を普通徴収（自分で納付）」にチェックすれば、会社には通知されない</li>
+<li>クラウドソーシングのプロフィールにはニックネーム＋本名なしでも活動可能</li>
+<li>顔出しなしでも案件は取れる（ポートフォリオで判断されるため）</li>
+<li>それでも心配なら、伴走支援メンバーに個別相談してください</li>
+</ul>
+<h3 class="sec">まとめ：14日間のアクションプラン</h3>
+<div class="tbl-wrap"><table><thead><tr><th>日</th><th>やること</th><th>目標</th></tr></thead><tbody><tr><td>1日目</td><td>スキルを選ぶ</td><td>1つに決める</td></tr><tr><td>2〜4日目</td><td>カリキュラムの基礎編を学ぶ</td><td>基本操作をマスター</td></tr><tr><td>5〜7日目</td><td>残りの基礎 + サンプル制作</td><td>ポートフォリオ完成</td></tr><tr><td>7〜8日目</td><td>プロフィール完成</td><td>クラウドワークス登録完了</td></tr><tr><td>8〜10日目</td><td>案件応募（1日3件以上）</td><td>10件応募 → 1件受注</td></tr><tr><td>10〜14日目</td><td>初案件の納品</td><td>★5評価を獲得</td></tr><tr><td>14日目〜</td><td>リピート獲得 + 単価アップ</td><td>月5万円を目指す</td></tr></tbody></table></div>
+<blockquote><strong>最後に</strong><br><br>このロードマップ通りに進めれば、14日後にはあなたも「自分の力で稼いだ」という経験を手にしています。<br><br>完璧じゃなくていい。70%でいいから、とにかく前に進むこと。<br><br>迷ったら伴走支援メンバーに聞いてください。一人で悩まないでください。<br><br>あなたの挑戦を、全力で応援しています。<br><br>── 迫 佑樹</blockquote>
+
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-diagnosis">
+    <div class="content-section">
+      <h2>🔍 副業スキルマッチング診断</h2>
+      <blockquote>10個の質問に答えるだけで、あなたに最適な副業スキルが分かります。</blockquote>
+      <div id="quizArea">
+        <div class="question"><h4>Q1. 休日に「やりたい」と自然に思うことは？</h4>
+          <label><input type="radio" name="q1" value="A"> パズルやロジック系のゲームで遊ぶ</label>
+          <label><input type="radio" name="q1" value="B"> YouTubeやNetflixを見て「この演出いいな」と思う</label>
+          <label><input type="radio" name="q1" value="C"> インスタやPinterestで素敵なデザインを眺める</label>
+          <label><input type="radio" name="q1" value="D"> 本を読んだり、SNSに長文を投稿したりする</label>
+        </div>
+        <div class="question"><h4>Q2. 学校や仕事で褒められたことがあるのは？</h4>
+          <label><input type="radio" name="q2" value="A"> 論理的に考えるのが上手い、段取りがいい</label>
+          <label><input type="radio" name="q2" value="B"> センスがいい、作ったものの完成度が高い</label>
+          <label><input type="radio" name="q2" value="C"> 資料やスライドが見やすい、色使いがいい</label>
+          <label><input type="radio" name="q2" value="D"> 文章が分かりやすい、説明が上手い</label>
+        </div>
+        <div class="question"><h4>Q3. 作業するなら、どれが一番「苦じゃない」？</h4>
+          <label><input type="radio" name="q3" value="A"> コードや数式を書いて動かすこと</label>
+          <label><input type="radio" name="q3" value="B"> 素材を並べ替えてタイミングを合わせること</label>
+          <label><input type="radio" name="q3" value="C"> 配色やレイアウトを何パターンも試すこと</label>
+          <label><input type="radio" name="q3" value="D"> 調べたことを分かりやすくまとめること</label>
+        </div>
+        <div class="question"><h4>Q4. 「すごい！」と思うのはどんな人？</h4>
+          <label><input type="radio" name="q4" value="A"> 便利なアプリやWebサイトを作れる人</label>
+          <label><input type="radio" name="q4" value="B"> かっこいい動画やMVを作れる人</label>
+          <label><input type="radio" name="q4" value="C"> おしゃれなロゴやポスターを作れる人</label>
+          <label><input type="radio" name="q4" value="D"> 読み始めたら止まらない文章を書ける人</label>
+        </div>
+        <div class="question"><h4>Q5. 地味な作業でも続けられそうなのは？</h4>
+          <label><input type="radio" name="q5" value="A"> バグを見つけて修正する作業</label>
+          <label><input type="radio" name="q5" value="B"> 不要な部分をカットして流れを整える作業</label>
+          <label><input type="radio" name="q5" value="C"> 1pxの位置ズレを修正する作業</label>
+          <label><input type="radio" name="q5" value="D"> 一つの文章を何度も推敲して磨き上げる作業</label>
+        </div>
+        <div class="question"><h4>Q6. チームでの役割は？</h4>
+          <label><input type="radio" name="q6" value="A"> 仕組みを考える担当（設計・段取り）</label>
+          <label><input type="radio" name="q6" value="B"> 素材を形にする担当（制作・編集）</label>
+          <label><input type="radio" name="q6" value="C"> 見た目を整える担当（資料・デザイン）</label>
+          <label><input type="radio" name="q6" value="D"> 伝え方を考える担当（文章・プレゼン）</label>
+        </div>
+        <div class="question"><h4>Q7. 副業で稼ぐなら、どんな働き方がいい？</h4>
+          <label><input type="radio" name="q7" value="A"> 一つの大きな案件をじっくり仕上げたい</label>
+          <label><input type="radio" name="q7" value="B"> 毎週コンスタントに案件を回したい</label>
+          <label><input type="radio" name="q7" value="C"> クリエイティブな仕事がしたい</label>
+          <label><input type="radio" name="q7" value="D"> PCとスキルだけで稼ぎたい</label>
+        </div>
+        <div class="question"><h4>Q8. 正直、どれが一番気になる？</h4>
+          <label><input type="radio" name="q8" value="A"> プログラミングってどんな感じなんだろう</label>
+          <label><input type="radio" name="q8" value="B"> YouTubeの動画編集ってどうやるんだろう</label>
+          <label><input type="radio" name="q8" value="C"> バナーやサムネってどう作るんだろう</label>
+          <label><input type="radio" name="q8" value="D"> ライターってどうやって仕事をもらうんだろう</label>
+        </div>
+        <div class="question"><h4>Q9. 学習するとき、あなたのスタイルは？</h4>
+          <label><input type="radio" name="q9" value="A"> 理屈を理解してから手を動かしたい</label>
+          <label><input type="radio" name="q9" value="B"> まず真似して、やりながら覚えたい</label>
+          <label><input type="radio" name="q9" value="C"> お手本を見て、自分なりにアレンジしたい</label>
+          <label><input type="radio" name="q9" value="D"> インプットしたらすぐアウトプットしたい</label>
+        </div>
+        <div class="question"><h4>Q10. 将来的にやってみたい方向性は？</h4>
+          <label><input type="radio" name="q10" value="A"> Webサービスやアプリを自分で作りたい</label>
+          <label><input type="radio" name="q10" value="B"> YouTube運営やSNSの映像制作をやりたい</label>
+          <label><input type="radio" name="q10" value="C"> ブランドの世界観を作るような仕事がしたい</label>
+          <label><input type="radio" name="q10" value="D"> 自分のメディアを持って発信したい</label>
+        </div>
+        <div style="text-align:center;margin:1.5rem 0">
+          <button onclick="diagnose()" style="background:var(--orange);color:#fff;border:none;padding:.7rem 2.5rem;border-radius:20px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background='var(--orange-hover)'" onmouseout="this.style.background='var(--orange)'">診断結果を見る</button>
+        </div>
+      </div>
+      <div id="diagnosisResult" style="display:none"></div>
+      <div id="diagnosisDetails" style="display:none"><h3 class="sec">同点の場合</h3>
+<p>2つのスキルが同点の場合は、以下の基準で決めましょう：</p>
+<ol>
+<li><strong>「やってみたい」と直感で思える方</strong> → 楽しさが継続の原動力になる</li>
+<li><strong>案件単価が高い方</strong> → 同じ時間で稼げる金額が変わる</li>
+<li><strong>案件数が多い方</strong> → 最初の1件を取りやすい</li>
+</ol>
+<h3>🔀 ハイブリッド戦略：同点タイプを活かす</h3>
+<p>同点は「弱点」ではなく「強み」です。2つのスキルを掛け合わせることで、単一スキルの人よりも<strong>高単価で差別化</strong>できます。</p>
+<div class="tbl-wrap"><table><thead><tr><th>同点パターン</th><th>ハイブリッド戦略</th><th>目指せる単価</th></tr></thead><tbody><tr><td>A＋C（プログラミング×デザイン）</td><td>デザインからコーディングまでワンストップ</td><td>LP制作10〜50万円/件</td></tr><tr><td>B＋C（動画編集×デザイン）</td><td>YouTube編集＋サムネをセット提案</td><td>1〜3万円/本</td></tr><tr><td>A＋D（プログラミング×ライティング）</td><td>SEOに強いWebサイト制作</td><td>10〜30万円/件</td></tr><tr><td>B＋D（動画編集×ライティング）</td><td>台本作成から編集まで一括対応</td><td>1〜5万円/本</td></tr><tr><td>C＋D（デザイン×ライティング）</td><td>LPのコピー＋デザインをセット</td><td>10〜30万円/件</td></tr><tr><td>A＋B（プログラミング×動画編集）</td><td>Webアプリ紹介動画やSaaSのPR映像</td><td>5〜20万円/件</td></tr></tbody></table></div>
+<blockquote><strong>掛け合わせのコツ</strong>: まず1つ目のスキルで案件を取れるレベルになってから、2つ目を追加する。2つ同時に学ぶのは効率が悪い。順番が大事！</blockquote>
+<blockquote><strong>迷ったら？</strong> スキルハックスなら全講座学び放題。まず1つ始めて、合わなければ途中で変更できます。伴走支援の初回面談で一緒に決めましょう。</blockquote>
+<h3 class="sec">各スキルの比較表</h3>
+<div class="tbl-wrap"><table><thead><tr><th></th><th>プログラミング</th><th>動画編集</th><th>デザイン</th><th>ライティング</th></tr></thead><tbody><tr><td>初期投資</td><td>PC</td><td>PC + 編集ソフト</td><td>PC + 制作ソフト</td><td>PC のみ</td></tr><tr><td>習得速度</td><td>★★★</td><td>★★</td><td>★★★</td><td>★</td></tr><tr><td>案件の取りやすさ</td><td>★★★★</td><td>★★★★★</td><td>★★★★</td><td>★★★★★</td></tr><tr><td>初期単価</td><td>3〜5万円</td><td>3,000〜5,000円</td><td>3,000〜5,000円</td><td>3,000〜5,000円</td></tr><tr><td>スキルUP後の単価</td><td>10〜50万円</td><td>1〜3万円</td><td>5〜30万円</td><td>1〜3万円</td></tr><tr><td>在宅完結</td><td>◎</td><td>◎</td><td>◎</td><td>◎</td></tr><tr><td>掛け合わせ</td><td>デザイン</td><td>デザイン・SNS</td><td>動画・プログラミング</td><td>SNS・マーケ</td></tr><tr><td>AI活用度（2025年）</td><td>高（コード生成）</td><td>中（字幕自動化）</td><td>高（画像生成）</td><td>中（リサーチ補助）</td></tr></tbody></table></div>
+<blockquote><strong>2025年のトレンド</strong>: どのスキルもAIで「作業の一部」が自動化されつつあります。だからこそ「AIを使いこなしてアウトプットの速度と質を上げられる人」が圧倒的に有利。AIに仕事を奪われるのではなく、<strong>AIを武器にする側</strong>に回りましょう。</blockquote>
+<blockquote><strong>次のステップ</strong>: 自分のタイプが分かったら、「スキルチェックリスト」で案件獲得に必要なスキルを確認しましょう！</blockquote>
+</div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-ninety">
+    <div class="content-section">
+      <h2>🚀 副業ゼロイチ 90日ロードマップ</h2>
+      <blockquote>スキルゼロ・実績ゼロの状態から、90日間で「月10万円の副業収入」を目指すためのロードマップです。<br>各フェーズのアクションとチェックリストを順番にクリアしていきましょう。<br><br>Skill Hacks 受講生特典</blockquote>
+<h3 class="sec">全体マップ</h3>
+<pre>Phase 1（Day 1〜7）   スキル選定・環境準備
+Phase 2（Day 8〜21）  コアスキル習得
+Phase 3（Day 22〜30） 初案件獲得
+Phase 4（Day 31〜60） 安定受注・スキルアップ
+Phase 5（Day 61〜90） 月10万円達成・仕組み化
+</pre>
+<h3>💰 90日間の月収推移イメージ</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>目標月収</th><th>累計収入（目安）</th></tr></thead><tbody><tr><td>Phase 1-2（Day 1〜21）</td><td>0円</td><td>0円（学習期間）</td></tr><tr><td>Phase 3（Day 22〜30）</td><td>5,000〜1万円</td><td>5,000〜1万円</td></tr><tr><td>Phase 4（Day 31〜60）</td><td>3〜5万円</td><td>3.5〜6万円</td></tr><tr><td>Phase 5（Day 61〜90）</td><td>10万円</td><td>13.5〜16万円</td></tr></tbody></table></div>
+<blockquote>※あくまで目安です。学習ペースや案件の取り方で個人差があります。大事なのは「月10万円は現実的なゴールである」と知ること。</blockquote>
+<h3 class="sec">Phase 1：スキル選定・環境準備（Day 1〜7）</h3>
+<h3>目標</h3>
+<p>「何をやるか」を決めて、学習をスタートできる状態にする。</p>
+<h3>Day 1〜2：自分に合うスキルを選ぶ</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>診断シートを使う</td><td>「副業スキルマッチング診断シート」で自分のタイプを確認</td></tr><tr><td>市場調査をする</td><td>クラウドワークスで各スキルの案件数・相場を確認</td></tr><tr><td>1つに決める</td><td>迷ったら伴走支援の初回面談で相談</td></tr></tbody></table></div>
+<h3>Day 3〜5：環境を整える</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>ツールを準備</td><td>必要なソフトをインストール（Premiere Pro / Photoshop 等）</td></tr><tr><td>アカウント登録</td><td>クラウドワークス・ランサーズに登録</td></tr><tr><td>学習環境</td><td>毎日の学習時間と場所を決める（例：21時〜23時）</td></tr></tbody></table></div>
+<h3>Day 6〜7：カリキュラム開始</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>学習開始</td><td>スキルハックスのカリキュラム（基礎編前半）に着手</td></tr><tr><td>学習記録</td><td>毎日の学習内容と気づきをメモ</td></tr></tbody></table></div>
+<h3>⚠️ Phase 1の落とし穴 & 対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>落とし穴</th><th>典型パターン</th><th>対策</th></tr></thead><tbody><tr><td><strong>スキル選びで迷い続ける</strong></td><td>3日経ってもまだ調べてる</td><td>迷ったら「案件数が多い × 直感でやりたい方」。全講座学び放題なので後から変更OK</td></tr><tr><td><strong>ツール選びに凝りすぎる</strong></td><td>どのPC？どのソフト？で1週間溶ける</td><td>今あるPCで始める。ソフトは無料体験版でOK。道具にこだわるのは稼いでから</td></tr><tr><td><strong>「もう少し調べてから」症候群</strong></td><td>情報収集が目的化。実際に手を動かさない</td><td>調査は2日まで。3日目には必ずカリキュラム動画を再生する</td></tr></tbody></table></div>
+<h3>Phase 1 チェックリスト</h3>
+<ul class="ck">
+<li>取り組むスキルを1つ決めた</li>
+<li>必要なツール・ソフトをインストールした</li>
+<li>クラウドワークスに登録した</li>
+<li>毎日の学習スケジュールを決めた</li>
+<li>カリキュラムの学習を開始した</li>
+</ul>
+<h3 class="sec">Phase 2：コアスキル習得（Day 8〜21）</h3>
+<h3>目標</h3>
+<p>案件を受けられる「最低限のスキル」を身につける。</p>
+<h3>Day 8〜14：基礎スキルを固める</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>カリキュラム消化</td><td>基礎編を完了させる（1日2〜3時間目安）</td></tr><tr><td>手を動かす</td><td>見るだけでなく、必ず自分で再現する</td></tr><tr><td>質問する</td><td>分からないことがあったら即Q&Aサポートへ</td></tr></tbody></table></div>
+<p><strong>スキル別の「基礎完了」ライン:</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>スキル</th><th>ここまでやればOK</th></tr></thead><tbody><tr><td>動画編集</td><td>テロップ・カット・BGM・SE・画像挿入の5つが一人でできる</td></tr><tr><td>デザイン</td><td>Photoshopでバナーを1枚作れる</td></tr><tr><td>プログラミング</td><td>HTML/CSSで簡単なページを1枚コーディングできる</td></tr><tr><td>ライティング</td><td>SEOを意識した3,000字の記事を1本書ける</td></tr></tbody></table></div>
+<h3>Day 15〜18：サンプル作品を作る</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>サンプル制作</td><td>実際の案件を想定した作品を制作</td></tr><tr><td>数の目安</td><td>動画編集：1本 / デザイン：バナー3枚 / プログラミング：LP1ページ / ライティング：記事2本</td></tr><tr><td>フィードバック</td><td>コミュニティや伴走支援メンバーに意見をもらう</td></tr></tbody></table></div>
+<h3>Day 19〜21：ポートフォリオを整える</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>まとめる</td><td>サンプルをGoogleドライブ / Notionにまとめる</td></tr><tr><td>URLを発行</td><td>共有リンクを作成（提案文に貼れるように）</td></tr><tr><td>見せ方の工夫</td><td>制作意図や工夫ポイントを一言添える</td></tr></tbody></table></div>
+<h3>⚠️ Phase 2の落とし穴 & 対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>落とし穴</th><th>典型パターン</th><th>対策</th></tr></thead><tbody><tr><td><strong>完璧主義の罠</strong></td><td>「もう少し上手くなってから…」で永遠に次に進まない</td><td>70%でOK。迫さんも断言──<strong>「技術が成熟するなんか待ってたら一生案件なんか取れない」</strong></td></tr><tr><td><strong>枝葉のスキルに逃げる</strong></td><td>カラーグレーディングとかすごいアニメーションとか…要らないスキルに時間を使う</td><td>「その技術がないと案件を納品できないか？」を自問。答えがNoならやらない</td></tr><tr><td><strong>サンプルに凝りすぎる</strong></td><td>1つの作品に1週間かけてしまう</td><td>サンプルは「70点を3つ」が「100点を1つ」より100倍価値がある</td></tr></tbody></table></div>
+<h3>Phase 2 チェックリスト</h3>
+<ul class="ck">
+<li>カリキュラムの基礎編を完了した</li>
+<li>基本操作が一人でできるようになった</li>
+<li>サンプル作品を規定数制作した</li>
+<li>ポートフォリオURLを用意した</li>
+<li>スキルチェックリストの基礎項目がすべて埋まった</li>
+</ul>
+<h3 class="sec">Phase 3：初案件獲得（Day 22〜30）</h3>
+<h3>目標</h3>
+<p>初めての案件を受注し、納品まで完了する。</p>
+<h3>Day 22〜24：プロフィール完成 & 応募準備</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>プロフィール完成</td><td>テンプレート集を使って自己紹介文を完成</td></tr><tr><td>本人確認</td><td>クラウドワークスの本人確認・NDA同意を完了</td></tr><tr><td>提案文を用意</td><td>ベースの提案文テンプレートをカスタマイズ</td></tr></tbody></table></div>
+<h3>Day 25〜27：集中応募期間</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>案件を探す</td><td>「新着順」で自分のスキルに合う案件を毎日チェック</td></tr><tr><td>1日3件以上応募</td><td>返信率は10〜20%なので数が重要</td></tr><tr><td>差別化する</td><td>相手のチャンネル/サイトを分析して提案文に反映</td></tr><tr><td>テスト提案</td><td>「まず1本テストで」を積極的に提案</td></tr></tbody></table></div>
+<h3>📬 応募テクニック集</h3>
+<p>案件獲得率を上げるための実践的テクニック：</p>
+<p><strong>① ゴールデンタイムを狙う</strong></p>
+<ul>
+<li>案件が「公開された直後」に応募すると採用率が桁違い</li>
+<li>クラウドワークスの新着案件は朝9〜10時、昼12〜13時、夜20〜22時に多い</li>
+<li>スマホに通知設定をして、新着が出たら即チェック</li>
+</ul>
+<p><strong>② 「初心者歓迎」案件の見分け方</strong></p>
+<ul>
+<li>✅ 選ぶべき：「初心者歓迎」「未経験OK」「丁寧に教えます」</li>
+<li>✅ 選ぶべき：予算が明記されている、クライアントの評価★4以上</li>
+<li>❌ 避ける：予算が異常に安い（1本300円等の搾取案件）</li>
+<li>❌ 避ける：依頼内容が曖昧、クライアントの評価が低い</li>
+</ul>
+<p><strong>③ 提案文の必殺テクニック</strong></p>
+<ul>
+<li><strong>「御社の○○を拝見しました」</strong>の一言が最強の差別化（コピペ感がゼロになる）</li>
+<li>ポートフォリオは「URL」だけでなく、1作品のスクショを提案文内に貼ると見てもらえる確率UP</li>
+<li>「テスト納品1件無料」は使い古されてるが、初心者にはまだ有効</li>
+</ul>
+<h3>Day 28〜30：初案件の受注 & 納品</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>条件確認</td><td>納期・修正回数・納品形式を事前に合意</td></tr><tr><td>50%報告</td><td>作業の中間段階でクライアントに進捗共有</td></tr><tr><td>納品</td><td>丁寧なメッセージと共に納品物を提出</td></tr><tr><td>評価獲得</td><td>★5 の評価をもらうことを意識</td></tr></tbody></table></div>
+<blockquote><strong>ポイント</strong>: 初案件は「稼ぐ」よりも「実績を作る」ことが目的。相場より少し安くても、丁寧に取り組んで★5評価を取る。</blockquote>
+<h3>⚠️ Phase 3の落とし穴 & 対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>落とし穴</th><th>典型パターン</th><th>対策</th></tr></thead><tbody><tr><td><strong>応募が怖くて手が止まる</strong></td><td>「まだ準備が…」と言い訳して応募しない</td><td>準備不足は応募しない理由にならない。迫さんは「半信半疑でも飛び込め」と言っている</td></tr><tr><td><strong>10件で諦める</strong></td><td>全部落ちた=才能ない…と凹む</td><td>10件は「少ない」。300件やって初案件の人もいる。数が正義</td></tr><tr><td><strong>安すぎるクライアントに搾取される</strong></td><td>1件300円で大量作業…疲弊する</td><td>相場の70%以下は避ける。「安くても丁寧に」と「搾取される」は違う</td></tr></tbody></table></div>
+<h3>Phase 3 チェックリスト</h3>
+<ul class="ck">
+<li>プロフィールが100%完成した</li>
+<li>10件以上の案件に応募した</li>
+<li>1件以上の案件を受注した</li>
+<li>初案件を納品した</li>
+<li>クライアントから★4以上の評価を獲得した</li>
+</ul>
+<h3 class="sec">Phase 4：安定受注・スキルアップ（Day 31〜60）</h3>
+<h3>目標</h3>
+<p>月3〜5万円を安定的に稼ぐ。</p>
+<h3>Day 31〜40：実績を積む</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>継続応募</td><td>毎日1〜2件は新規案件に応募を続ける</td></tr><tr><td>リピート打診</td><td>納品後に「今後もお仕事があればぜひ」と一言添える</td></tr><tr><td>実績3件突破</td><td>★5評価を3件以上集める → 信頼度が大幅UP</td></tr></tbody></table></div>
+<h3>Day 41〜50：単価を上げる</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>相場通りの価格に戻す</td><td>初期の割引価格から通常価格に戻す</td></tr><tr><td>提案文を磨く</td><td>実績を提案文に入れる「類似案件の経験あり」</td></tr><tr><td>プロフィール更新</td><td>実績数・評価・ポートフォリオを最新版に</td></tr><tr><td>高単価案件に挑戦</td><td>ランサーズやココナラにも展開</td></tr></tbody></table></div>
+<h3>Day 51〜60：スキルの幅を広げる</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>応用スキル学習</td><td>カリキュラムの中級〜上級編に進む</td></tr><tr><td>スキルの掛け合わせ</td><td>2つ目のスキルの基礎を学び始める</td></tr><tr><td>単価UP交渉</td><td>継続クライアントに「次回から○○円で」と相談</td></tr></tbody></table></div>
+<p><strong>スキルの掛け合わせ例:</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>メイン</th><th>サブ</th><th>できるようになること</th><th>期待単価</th></tr></thead><tbody><tr><td>動画編集</td><td>デザイン</td><td>サムネ込みのワンストップ提案</td><td>1〜3万円/本</td></tr><tr><td>ライティング</td><td>SNS運用</td><td>記事 + SNS投稿のセット提案</td><td>月額3〜10万円</td></tr><tr><td>プログラミング</td><td>デザイン</td><td>デザインからコーディングまで一括受注</td><td>10〜50万円/件</td></tr><tr><td>デザイン</td><td>ライティング</td><td>LPのコピー + デザインをセット提案</td><td>10〜30万円/件</td></tr></tbody></table></div>
+<h3>⚠️ Phase 4の落とし穴 & 対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>落とし穴</th><th>典型パターン</th><th>対策</th></tr></thead><tbody><tr><td><strong>安い案件から抜け出せない</strong></td><td>安い案件が楽で、値上げが怖い</td><td>実績3件超えたら値上げ。「値段上げたら仕事来ないかも」は幻想。品質が良ければクライアントは離れない</td></tr><tr><td><strong>キャパオーバー</strong></td><td>受けすぎて品質が下がる</td><td>同時に抱える案件は3件まで。余裕を持って納品するのがリピートの秘訣</td></tr><tr><td><strong>学習をやめてしまう</strong></td><td>案件に追われて成長が止まる</td><td>週2時間だけでも新しいスキルのインプット時間を確保する</td></tr></tbody></table></div>
+<h3>Phase 4 チェックリスト</h3>
+<ul class="ck">
+<li>実績が3件以上になった</li>
+<li>単価を初期から20%以上UPした</li>
+<li>リピートクライアントが1名以上いる</li>
+<li>月3万円以上の副業収入を達成した</li>
+<li>2つ目のスキルの学習を開始した</li>
+</ul>
+<h3 class="sec">Phase 5：月10万円達成・仕組み化（Day 61〜90）</h3>
+<h3>目標</h3>
+<p>月10万円の副業収入を達成し、継続的に稼げる仕組みを作る。</p>
+<h3>Day 61〜70：収入源を複数化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>複数プラットフォーム</td><td>クラウドワークス + ランサーズ + ココナラ の3つで案件を回す</td></tr><tr><td>直接取引</td><td>信頼関係のあるクライアントとプラットフォーム外で直接契約（手数料削減）</td></tr><tr><td>パッケージ化</td><td>「動画編集 + サムネ5枚セット ○○円」のようなセット商品を作る</td></tr></tbody></table></div>
+<h3>Day 71〜80：効率化・仕組み化</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>テンプレ化</td><td>よく使うテロップスタイル / バナーテンプレ / 記事構成を型にする</td></tr><tr><td>作業時間の短縮</td><td>同じ品質を半分の時間で出せるようにする → 時給UP</td></tr><tr><td>月額契約</td><td>「月○本の動画編集で月額○万円」の継続契約を目指す</td></tr></tbody></table></div>
+<h3>Day 81〜90：月10万円の壁を超える</h3>
+<div class="tbl-wrap"><table><thead><tr><th>アクション</th><th>詳細</th></tr></thead><tbody><tr><td>単価交渉</td><td>全クライアントに単価見直しを相談</td></tr><tr><td>高単価案件のみに絞る</td><td>低単価案件を断り、時給の高い案件に集中</td></tr><tr><td>発信を始める</td><td>X（Twitter）で学びや実績を発信 → 直接依頼の導線を作る</td></tr></tbody></table></div>
+<p><strong>月10万円の達成パターン例:</strong></p>
+<div class="tbl-wrap"><table><thead><tr><th>パターン</th><th>内訳</th><th>合計</th></tr></thead><tbody><tr><td>動画編集</td><td>8,000円/本 × 13本</td><td>104,000円</td></tr><tr><td>デザイン</td><td>バナー5,000円 × 10枚 + LP 50,000円 × 1件</td><td>100,000円</td></tr><tr><td>プログラミング</td><td>LP 50,000円 × 2件</td><td>100,000円</td></tr><tr><td>ライティング</td><td>文字単価2円 × 5,000字 × 10本</td><td>100,000円</td></tr></tbody></table></div>
+<h3>⚠️ Phase 5の落とし穴 & 対策</h3>
+<div class="tbl-wrap"><table><thead><tr><th>落とし穴</th><th>典型パターン</th><th>対策</th></tr></thead><tbody><tr><td><strong>月10万で満足して停滞</strong></td><td>「ゴール達成！」で成長が止まる</td><td>月10万は通過点。次のゴール（月20万、月額契約）を設定する</td></tr><tr><td><strong>時間の限界</strong></td><td>これ以上案件を増やせないが、収入も増えない</td><td>「単価を上げる」か「効率化する」の2択。どちらを取るか伴走支援で相談</td></tr><tr><td><strong>確定申告を忘れる</strong></td><td>副業収入が年間20万円を超えたら確定申告が必要</td><td>経費レシートは最初から保管。freee等の会計ソフトを早めに導入</td></tr></tbody></table></div>
+<h3>Phase 5 チェックリスト</h3>
+<ul class="ck">
+<li>月10万円の副業収入を達成した</li>
+<li>直接取引のクライアントが1名以上いる</li>
+<li>月額契約（継続案件）を1つ以上持っている</li>
+<li>作業の効率化が進み、初期より半分以下の時間で同品質を出せる</li>
+<li>X（Twitter）で副業の学びを発信し始めた</li>
+</ul>
+<h3 class="sec">💡 人生攻略ロードマップ ── 月10万円の「その先」</h3>
+<p>月10万円を達成したあなたは、人生攻略の<strong>ステップ①を完了</strong>しています。</p>
+<p>迫さんの著書『人生攻略ロードマップ』では、資本主義世界を最も効率的に生き抜く方法を<strong>3ステップ</strong>で解説しています。</p>
+<h3>ステップ① スキルで時間単価を最大化する（← 今ここを完了！）</h3>
+<p>スキルを身につけて、自分の1時間あたりの価値を最大限に高める。</p>
+<ul>
+<li>月10万の副業収入 = 時給1,000〜3,000円の労働</li>
+<li>ここから時給5,000円、1万円へと上げていく</li>
+</ul>
+<h3>ステップ② 仕組みと発信で「分身」を作る</h3>
+<p>自分が働いていない時間でもお金が生まれる仕組みを作る。</p>
+<ul>
+<li>X/YouTubeで発信 → フォロワーから直接依頼が来る</li>
+<li>テンプレート・教材を作って販売 → 自分が寝ている間にも売れる</li>
+<li>オンラインサロンやコミュニティ運営 → 月額のストック収入</li>
+</ul>
+<h3>ステップ③ 外注化・投資で資産を増やす</h3>
+<p>自分がいなくても回る仕組みを作り、余ったお金で資産運用する。</p>
+<ul>
+<li>案件のディレクション → 作業は外注パートナーに依頼</li>
+<li>チーム化 → 自分1人では取れない大型案件を受注</li>
+<li>余剰資金を投資へ → お金がお金を産む状態を作る</li>
+</ul>
+<blockquote><strong>迫さんの名言</strong>：「いきなりステップ③の投資からやる人がいるけど、元本が少ないんだから意味がない。いきなりステップ②の発信をやっても、あなたに何の価値もなければ誰も見ない。<strong>まずは自分の時給を最大化する。それが全ての始まり。</strong>」</blockquote>
+<h3>📊 90日後 → 1年後のスキル掛け合わせ収入シミュレーション</h3>
+<div class="tbl-wrap"><table><thead><tr><th>期間</th><th>メインスキル</th><th>サブスキル</th><th>月収目安</th><th>働き方</th></tr></thead><tbody><tr><td>90日後</td><td>動画編集</td><td>なし</td><td>10万円</td><td>案件受託</td></tr><tr><td>6ヶ月後</td><td>動画編集</td><td>サムネデザイン</td><td>20万円</td><td>ワンストップ提案</td></tr><tr><td>9ヶ月後</td><td>動画編集</td><td>サムネ + SNS運用</td><td>30万円</td><td>月額チャンネル運営代行</td></tr><tr><td>1年後</td><td>YouTube運営</td><td>ディレクション</td><td>50万円+</td><td>外注化＋ディレクション</td></tr></tbody></table></div>
+<blockquote>この表は動画編集の例ですが、どのスキルでも同じパターンが使えます。<strong>単スキル → 掛け合わせ → パッケージ化 → ディレクション化</strong>。この順序で月収は確実に上がります。</blockquote>
+<h3 class="sec">90日を超えた先のロードマップ</h3>
+<pre>Day 91〜180   → 月20〜30万円の安定収入
+Day 181〜365  → スキルの掛け合わせで月50万円
+Year 2〜      → 自動化・チーム化で労働収入→資産収入へ
+</pre>
+<h3>次のステージへ</h3>
+<div class="tbl-wrap"><table><thead><tr><th>ステージ</th><th>やること</th><th>目標月収</th></tr></thead><tbody></tbody></table></div>
+<p>|---------|---------|---------| </p>
+<div class="tbl-wrap"><table><thead><tr><th>ディレクター化</th><th>自分が営業＋ディレクション、作業は外注</th><th>30〜50万円</th></tr></thead><tbody><tr><td>事業化</td><td>チームを作って法人化</td><td>100万円〜</td></tr></tbody></table></div>
+<blockquote><strong>最後に</strong><br><br>90日で人生は変わります。でも、変えるのはこのロードマップではなく、あなた自身の行動です。<br><br>「今日が一番若い日」── 迷ったら、1ミリでも前に進んでください。<br><br>伴走支援チーム一同、あなたの90日間を全力でサポートします。<br><br>── Skill Hacks チーム</blockquote>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Skill Hacks 五大特典 | &copy; 2026 Skill Hacks. All Rights Reserved.</p>
+</footer>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const btns=document.querySelectorAll('.tab-btn');
+  const names=['checklist','templates','roadmap','diagnosis','ninety'];
+  const idx=names.indexOf(id);
+  if(idx>=0&&btns[idx])btns[idx].classList.add('active');
+  document.getElementById('content').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function diagnose(){
+  const c={A:0,B:0,C:0,D:0};
+  for(let i=1;i<=10;i++){const s=document.querySelector('input[name="q'+i+'"]:checked');if(s)c[s.value]++}
+  const t=Object.values(c).reduce((a,b)=>a+b,0);
+  if(t<5){alert('5問以上回答してから診断してください');return}
+  const mx=Math.max(...Object.values(c));
+  const w=Object.keys(c).find(k=>c[k]===mx);
+  const R={
+    A:{icon:'🖥️',title:'プログラミングタイプ',desc:'論理的に物事を考えるのが得意なあなたに。',course:'ProgrammingHacks',jobs:'LP制作・サイト修正・WordPress構築',time:'2〜4週間',price:'3〜5万円/ページ'},
+    B:{icon:'🎬',title:'動画編集タイプ',desc:'映像のテンポや演出に敏感なあなたに。',course:'MovieHacks',jobs:'YouTube動画編集・ショート動画',time:'1〜2週間',price:'3,000〜5,000円/本'},
+    C:{icon:'🎨',title:'デザインタイプ',desc:'ビジュアルへの感度が高いあなたに。',course:'DesignHacks',jobs:'バナー制作・サムネ制作・LPデザイン',time:'2〜3週間',price:'3,000〜5,000円/枚'},
+    D:{icon:'✍️',title:'ライティングタイプ',desc:'言葉で伝えることが得意なあなたに。',course:'WritingHacks',jobs:'SEO記事・ブログ記事・取材記事',time:'1〜2週間',price:'文字単価1円〜'}
+  };
+  const r=R[w],el=document.getElementById('diagnosisResult');
+  el.style.display='block';
+  el.innerHTML='<div class="result-card"><h4>'+r.icon+' あなたは「'+r.title+'」</h4><p style="color:var(--text-sub);margin:.6rem 0">'+r.desc+'</p><div class="tbl-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>おすすめ講座</td><td><strong>'+r.course+'</strong></td></tr><tr><td>主な案件</td><td>'+r.jobs+'</td></tr><tr><td>初案件まで</td><td>'+r.time+'</td></tr><tr><td>初期単価</td><td>'+r.price+'</td></tr></tbody></table></div><p style="color:var(--text-muted);font-size:.82rem">集計: A='+c.A+' / B='+c.B+' / C='+c.C+' / D='+c.D+'</p></div>';
+  document.getElementById('diagnosisDetails').style.display='block';
+  el.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

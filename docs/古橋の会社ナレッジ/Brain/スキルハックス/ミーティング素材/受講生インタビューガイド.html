@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スキルハックス 受講生インタビューガイド</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-light: #e8effc;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, #1a56db, #3b82f6);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .header .meta-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 0.82rem;
+            opacity: 0.9;
+        }
+
+        .header .meta-row span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px 64px;
+        }
+
+        /* ── Info Card ── */
+        .info-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .info-card h2 {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .info-grid label {
+            font-size: 0.78rem;
+            color: var(--gray-500);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .info-grid .field {
+            border-bottom: 1.5px solid var(--gray-300);
+            padding-bottom: 6px;
+            min-height: 28px;
+            font-size: 0.9rem;
+        }
+
+        .info-grid .field.full {
+            grid-column: 1 / -1;
+        }
+
+        /* ── Flow Overview ── */
+        .flow-overview {
+            background: var(--primary-light);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border: 1px solid #c7d8f5;
+        }
+
+        .flow-overview h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .flow-steps {
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+            padding: 10px 8px;
+            position: relative;
+            font-size: 0.78rem;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-step .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .flow-step .step-label {
+            display: block;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .flow-step .step-time {
+            display: block;
+            color: var(--gray-400);
+            font-size: 0.7rem;
+        }
+
+        /* ── Section ── */
+        .section {
+            background: white;
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .section-header:hover {
+            background: var(--gray-50);
+        }
+
+        .section-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .section-num.ice {
+            background: #6366f1;
+        }
+
+        .section-num.before {
+            background: #f59e0b;
+        }
+
+        .section-num.trigger {
+            background: #10b981;
+        }
+
+        .section-num.during {
+            background: #3b82f6;
+        }
+
+        .section-num.result {
+            background: #8b5cf6;
+        }
+
+        .section-num.change {
+            background: #ec4899;
+        }
+
+        .section-num.quote {
+            background: #ef4444;
+        }
+
+        .section-title-area {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .section-purpose {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .section-time {
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+            flex-shrink: 0;
+        }
+
+        .section-body {
+            padding: 16px 20px 20px;
+        }
+
+        /* ── Question Item ── */
+        .question-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .question-text::before {
+            content: 'Q';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .question-hint {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-left: 30px;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .question-follow {
+            font-size: 0.82rem;
+            color: var(--primary);
+            margin-left: 30px;
+            padding: 4px 0;
+        }
+
+        .question-follow::before {
+            content: '↳';
+            margin-right: 6px;
+            font-weight: 700;
+        }
+
+        .memo-area {
+            margin-left: 30px;
+            margin-top: 6px;
+            width: calc(100% - 30px);
+            min-height: 36px;
+            border: 1.5px dashed var(--gray-300);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+            background: var(--gray-50);
+            resize: vertical;
+        }
+
+        /* ── Voice Tip ── */
+        .voice-tip {
+            background: var(--accent-light);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0 6px 30px;
+            font-size: 0.82rem;
+            color: var(--gray-700);
+            border-left: 3px solid var(--accent);
+        }
+
+        .voice-tip::before {
+            content: '💬 声かけ例：';
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ── Important Badge ── */
+        .important-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: white;
+            background: var(--danger);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* ── Closing Card ── */
+        .closing-card {
+            background: var(--success-light);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 24px;
+            border: 1px solid #a7f3d0;
+        }
+
+        .closing-card h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .closing-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .closing-card li {
+            padding: 4px 0;
+            font-size: 0.88rem;
+            color: var(--gray-700);
+        }
+
+        .closing-card li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* ── Priority Table ── */
+        .priority-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-top: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .priority-section h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gray-700);
+            margin-bottom: 12px;
+        }
+
+        .priority-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .priority-table th {
+            text-align: left;
+            padding: 8px 10px;
+            background: var(--gray-100);
+            font-weight: 500;
+            color: var(--gray-500);
+            font-size: 0.78rem;
+        }
+
+        .priority-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .stars {
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 32px 16px;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+        }
+
+        /* ── Print ── */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .header {
+                padding: 20px;
+                break-after: avoid;
+            }
+
+            .container {
+                padding: 0 8px;
+            }
+
+            .section {
+                break-inside: avoid;
+            }
+
+            .memo-area {
+                min-height: 50px;
+            }
+
+            .flow-overview {
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-step::after {
+                display: none;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── Header ── -->
+    <div class="header">
+        <h1>📋 受講生インタビューガイド</h1>
+        <p class="subtitle">Skill Hacks — 受講生事例ヒアリング用</p>
+        <div class="meta-row">
+            <span>⏱ 所要時間 15〜20分</span>
+            <span>🎥 Zoom / 対面</span>
+            <span>📝 台本挿入用の素材収集</span>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ── 記入欄 ── -->
+        <div class="info-card">
+            <h2>📌 インタビュー情報</h2>
+            <div class="info-grid">
+                <div>
+                    <label>インタビュー日時</label>
+                    <div class="field" contenteditable="true"></div>
+                </div>
+                <div>
+                    <label>インタビュアー名</label>
+                    <div class="field" contenteditable="true"></div>
+                </div>
+                <div>
+                    <label>対象者名（ニックネーム可）</label>
+                    <div class="field" contenteditable="true"></div>
+                </div>
+                <div>
+                    <label>年齢層</label>
+                    <div class="field" contenteditable="true">20代 / 30代 / 40代〜</div>
+                </div>
+                <div>
+                    <label>受講前の職業・状況</label>
+                    <div class="field full" contenteditable="true"></div>
+                </div>
+                <div>
+                    <label>家庭環境</label>
+                    <div class="field full" contenteditable="true"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── 進行フロー ── -->
+        <div class="flow-overview">
+            <h2>🗺 インタビューの流れ</h2>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <span class="step-num">1</span>
+                    <span class="step-label">アイスブレイク</span>
+                    <span class="step-time">〜2分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">2</span>
+                    <span class="step-label">受講前の状態</span>
+                    <span class="step-time">〜3分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">3</span>
+                    <span class="step-label">受講の決め手</span>
+                    <span class="step-time">〜2分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">4</span>
+                    <span class="step-label">受講中の体験</span>
+                    <span class="step-time">〜5分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">5</span>
+                    <span class="step-label">案件獲得</span>
+                    <span class="step-time">〜3分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">6</span>
+                    <span class="step-label">変化と実感</span>
+                    <span class="step-time">〜3分</span>
+                </div>
+                <div class="flow-step">
+                    <span class="step-num">7</span>
+                    <span class="step-label">一言コメント</span>
+                    <span class="step-time">〜2分</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 1: アイスブレイク ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num ice">1</span>
+                <div class="section-title-area">
+                    <div class="section-title">アイスブレイク</div>
+                    <div class="section-purpose">リラックスした雰囲気をつくる</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="voice-tip">「今日はお時間いただきありがとうございます！堅くならなくて大丈夫なので、普段話すような感じでお話しいただければ嬉しいです。」</div>
+                <div class="voice-tip">「動画で使う場合もこちらで編集しますので、言い直しとか全然OKです！」</div>
+
+                <div class="question-item">
+                    <div class="question-text">最近のお仕事の調子はいかがですか？</div>
+                    <div class="question-hint">※ 場を温める程度でOK。深堀り不要。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 2: 受講前の状態 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num before">2</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講前の状態</div>
+                    <div class="section-purpose">Before像を引き出す → 視聴者の共感ポイント</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">副業を始めようと思ったきっかけを教えてください</div>
+                    <div class="question-hint">※ 感情面（不安・焦り・希望）を深堀りする</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">当時、どんな不安や悩みがありましたか？</div>
+                    <div class="question-follow">具体的にどんな場面で不安を感じましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">以前に他の教材やスクールを試したことはありますか？</div>
+                    <div class="question-follow">その時のどんな点が合わなかったですか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">「自分にもできるのか」という不安はありましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 3: 受講の決め手 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num trigger">3</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講の決め手</div>
+                    <div class="section-purpose">なぜスキルハックスを選んだか → 検討中の視聴者の後押しに</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">スキルハックスをどこで知りましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">参加を決めた一番の理由は何でしたか？</div>
+                    <div class="question-hint">※ 最後の一歩を踏み出せた理由を聞く</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">価格や返金保証は判断にどう影響しましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 4: 受講中の体験 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num during">4</span>
+                <div class="section-title-area">
+                    <div class="section-title">受講中の体験</div>
+                    <div class="section-purpose">学習プロセスのリアルさ → 「自分でもできそう」を引き出す</div>
+                </div>
+                <span class="section-time">〜5分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">最初に学んだスキルは何ですか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">学習ペースはどのくらいでしたか？</div>
+                    <div class="question-hint">※「1日何時間？」「何ヶ月で完了？」など具体的に</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">本業や家事との両立で工夫したことは？</div>
+                    <div class="question-hint">※ ターゲット層（忙しい人）へのリアルな共感ポイント</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">つまずいたポイントはありましたか？<span class="important-badge">重要</span></div>
+                    <div class="question-follow">その時、どうやって乗り越えましたか？</div>
+                    <div class="voice-tip">「完璧にうまくいった話よりも、苦労した話のほうが参考になるので、ぜひ教えてください」</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">伴走支援（個別面談・もくもく会等）は使いましたか？</div>
+                    <div class="question-follow">具体的にどう役立ちましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">コミュニティの雰囲気はどうでしたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 5: 案件獲得 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num result">5</span>
+                <div class="section-title-area">
+                    <div class="section-title">案件獲得の経験</div>
+                    <div class="section-purpose">成果の具体性 → 「本当に稼げるんだ」を証明</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">初案件を取るまでに何件くらい応募しましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">初案件の内容と単価を教えてください</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">初めてお金をもらった時の気持ちは？<span class="important-badge">重要</span></div>
+                    <div class="question-hint">※ 感情を引き出す。ここが台本のハイライトになる</div>
+                    <div class="voice-tip">「その時の気持ち、覚えていますか？率直に教えてください」</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">その後、リピートや紹介はありましたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">現在の月収（副業収入）はどのくらいですか？</div>
+                    <div class="question-hint">※ 答えにくい場合は「ざっくりでOKです」と伝える</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 6: 変化と実感 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num change">6</span>
+                <div class="section-title-area">
+                    <div class="section-title">変化と実感</div>
+                    <div class="section-purpose">After像を明確に → 視聴者が未来を描けるように</div>
+                </div>
+                <span class="section-time">〜3分</span>
+            </div>
+            <div class="section-body">
+                <div class="question-item">
+                    <div class="question-text">受講前と今で、一番変わったことは？<span class="important-badge">重要</span></div>
+                    <div class="voice-tip">「一つだけ挙げるとしたら？」と絞ると答えやすいです</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">「自信がついた」と感じた瞬間はありますか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">家族や周囲の反応はいかがでしたか？</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+                <div class="question-item">
+                    <div class="question-text">働き方や生活はどう変わりましたか？</div>
+                    <div class="question-hint">※ 時間・お金・気持ちの変化を聞く</div>
+                    <textarea class="memo-area" placeholder="メモ"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══════ SECTION 7: 台本用の一言 ══════ -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-num quote">7</span>
+                <div class="section-title-area">
+                    <div class="section-title">台本用の一言コメント<span class="important-badge">★最重要</span></div>
+                    <div class="section-purpose">台本・LPで引用するキラーフレーズを引き出す</div>
+                </div>
+                <span class="section-time">〜2分</span>
+            </div>
+            <div class="section-body">
+                <div class="voice-tip">「最後に1つだけ。もし今、過去の自分にメッセージを送るとしたら、なんて言ってあげますか？」</div>
+
+                <div class="question-item">
+                    <div class="question-text">過去の自分に対して、どんな言葉をかけますか？</div>
+                    <div class="question-hint">※ ここで出た言葉をそのまま台本で使う</div>
+                    <textarea class="memo-area" placeholder="一言コメントをそのまま記録" style="min-height: 60px;"></textarea>
+                </div>
+
+                <div class="question-item" style="margin-top: 12px;">
+                    <div class="question-text" style="font-size: 0.82rem; color: var(--gray-500);">
+                        参考フレーズ（本人が言葉に詰まった場合のヒント）</div>
+                    <ul
+                        style="margin-left: 30px; margin-top: 8px; color: var(--gray-500); font-size: 0.85rem; list-style: disc;">
+                        <li>「○○だった私が、△△できるようになった」</li>
+                        <li>「あの時一歩踏み出して本当によかった」</li>
+                        <li>「スキルハックスの○○があったから続けられた」</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── クロージング ── -->
+        <div class="closing-card">
+            <h2>🎬 インタビュー終了後のチェックリスト</h2>
+            <ul>
+                <li>感謝を伝える（「貴重なお話ありがとうございました！」）</li>
+                <li>掲載許可の最終確認（動画・テキスト・匿名 etc.）</li>
+                <li>回答を整理して台本チームに共有</li>
+                <li>台本の該当箇所に事例を挿入（第二話 §5、第四話 §4・§6）</li>
+                <li>本人に掲載箇所の最終確認を取る</li>
+            </ul>
+        </div>
+
+        <!-- ── 優先タイプ ── -->
+        <div class="priority-section">
+            <h2>🎯 欲しい受講生タイプ（優先度順）</h2>
+            <table class="priority-table">
+                <thead>
+                    <tr>
+                        <th>優先度</th>
+                        <th>タイプ</th>
+                        <th>理由</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="stars">★★★</span></td>
+                        <td>子育て中の主婦</td>
+                        <td>ターゲット層と重なる、共感度が高い</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★★</span></td>
+                        <td>完全未経験からゼロイチ突破</td>
+                        <td>「自分にもできる」感を伝えやすい</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★☆</span></td>
+                        <td>本業ありの会社員</td>
+                        <td>時間がない中での成功事例</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★★☆</span></td>
+                        <td>40代以上の方</td>
+                        <td>年齢の壁を超えた事例</td>
+                    </tr>
+                    <tr>
+                        <td><span class="stars">★☆☆</span></td>
+                        <td>他スクール経験後にスキルハックスで成功</td>
+                        <td>差別化の証明</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            Skill Hacks Interview Guide — for internal use only
+        </div>
+
+    </div>
+
+</body>
+
+</html>

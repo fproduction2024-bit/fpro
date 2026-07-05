@@ -1,0 +1,62 @@
+{
+    "template": "zentangle",
+    "sections": [
+        {
+            "type": "hero",
+            "title": "ゼンタングルプレゼント19",
+            "subtitle": "はじめての人でも、スッと描けちゃう動画クラスのプレゼント！",
+            "ctaText": "ここをタップしてLINE友だち登録をして講座を受け取る",
+            "ctaUrl": "https://hxzk7sue.autosns.app/addfriend/s/KaGnyj5v0d/@255jknci"
+        },
+        {
+            "type": "text",
+            "content": "はじめての人でも、スッと描けちゃう動画クラスのプレゼント！案内に沿ってペンを動かしていくとこんなにキレイな絵が描けちゃいますよ♪"
+        },
+        {
+            "type": "text",
+            "content": "２つ目の講座は、より深く集中できるようなタングルを選んで絵にしています。ゼンタングルのセラピー効果が感じられますよ♪"
+        },
+        {
+            "type": "text",
+            "content": "タイル（絵）の応用でメッセージカードの縁飾りを描けるようになる講座です。ギフトに添えてもオシャレですよ♪"
+        },
+        {
+            "type": "text",
+            "content": "ゼンタングルを描くと気持ちがスッキリするようなセラピー効果があります。ゼンタングルを日常に取り入たら気持ちの軽い毎日を送れるようになりますよ♪"
+        },
+        {
+            "type": "profile",
+            "name": "古橋 緑",
+            "credentials": [
+                "京都市立芸術大学日本画卒業",
+                "国内外で展覧会多数",
+                "Mistigri au Japon/フランス、EON editionより書籍出版",
+                "CATS ROCK/フランス CERNUNNOS出版に作品収録",
+                "2018年 ゼンタングル®講師資格CZT 取得"
+            ],
+            "story": "私がゼンタングルを始めたきっかけの一つは、ガンの治療で入院していたことです。肺腺ガンステージ3B、5年生存率20％の告知を受けました。治療のために8回入退院を繰り返しました。入院中、絵を描いて過ごしていると、描いている間は気持ちが楽になって、入院中もさほど落ち込むことなく治療に向き合うことができました。"
+        },
+        {
+            "type": "cta",
+            "text": "ここをタップしてLINE友だち登録をして講座を受け取る",
+            "url": "https://hxzk7sue.autosns.app/addfriend/s/KaGnyj5v0d/@255jknci"
+        },
+        {
+            "type": "footer",
+            "links": [
+                {
+                    "text": "会社概要",
+                    "url": "https://midori-zen-tangle.com/company/"
+                },
+                {
+                    "text": "プライバシーポリシー",
+                    "url": "https://midori-zen-tangle.com/privacypolicy/"
+                },
+                {
+                    "text": "特定商取引法に基づく表記",
+                    "url": "https://midori-zen-tangle.com/tokutei/"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファネル制作プロジェクト | Fプロダクション</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">▶</span>
+                <span class="logo-text">Fプロダクション</span>
+            </div>
+            <div class="project-badge">
+                <span class="badge-label">プロジェクト</span>
+                <span class="badge-name" id="projectName">【案件名を入力】</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">4本動画ファネル<br><span class="hero-accent">制作ダッシュボード</span></h1>
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span class="meta-label">クライアント</span>
+                    <span class="meta-value" id="clientName">—</span>
+                </div>
+                <div class="meta-divider"></div>
+                <div class="meta-item">
+                    <span class="meta-label">開始日</span>
+                    <span class="meta-value" id="startDate">—</span>
+                </div>
+                <div class="meta-divider"></div>
+                <div class="meta-item">
+                    <span class="meta-label">納品予定</span>
+                    <span class="meta-value" id="endDate">—</span>
+                </div>
+                <div class="meta-divider"></div>
+                <div class="meta-item">
+                    <span class="meta-label">全体進捗</span>
+                    <span class="meta-value meta-progress" id="totalProgress">0%</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-pattern"></div>
+    </section>
+
+    <!-- Progress Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="timeline-track">
+                <div class="timeline-fill" id="timelineFill"></div>
+                <div class="timeline-nodes">
+                    <div class="timeline-node active" data-phase="0">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Phase 0</div>
+                        <div class="node-title">事前ヒアリング</div>
+                    </div>
+                    <div class="timeline-node" data-phase="1">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Phase 1</div>
+                        <div class="node-title">設計</div>
+                    </div>
+                    <div class="timeline-node" data-phase="2">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Phase 2</div>
+                        <div class="node-title">台本執筆</div>
+                    </div>
+                    <div class="timeline-node" data-phase="3">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Phase 3</div>
+                        <div class="node-title">撮影・編集</div>
+                    </div>
+                    <div class="timeline-node" data-phase="4">
+                        <div class="node-dot"></div>
+                        <div class="node-label">Phase 4</div>
+                        <div class="node-title">ファネル構築</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase Cards -->
+    <section class="phases-section">
+        <div class="container">
+
+            <!-- Phase 0 -->
+            <div class="phase-card" data-phase="0" id="phase0">
+                <div class="phase-header" onclick="togglePhase(0)">
+                    <div class="phase-header-left">
+                        <div class="phase-number">0</div>
+                        <div class="phase-info">
+                            <h2 class="phase-title">事前ヒアリング</h2>
+                            <p class="phase-subtitle">コンテンツホルダーの素材を引き出す（60〜90分）</p>
+                        </div>
+                    </div>
+                    <div class="phase-header-right">
+                        <div class="phase-progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>
+                                <circle class="ring-fill" cx="18" cy="18" r="15.9" id="ring0"></circle>
+                            </svg>
+                            <span class="ring-text" id="ringText0">0%</span>
+                        </div>
+                        <div class="phase-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-description">
+                        <p>コンテンツホルダーにヒアリングシートを事前送付（3日前）。Zoom or 対面で録画しながらインタビュー。録画を文字起こし→構造化。</p>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">📋</span>
+                            準備タスク
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="0">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">ヒアリングシートを送付</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="1">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">ヒアリング日程を確定</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="2">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">Zoom録画セットアップ</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🎙️</span>
+                            ヒアリング項目
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="3">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">A. 基本情報（事業内容・商品・ターゲット・価格帯）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="4">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">B. ストーリー素材（挫折→転換点→成功）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="5">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">C. 顧客・実績素材（成功事例3名以上 / Before→After数字）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="6">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">D. 商品・メソッド素材（3ステップ説明 / 競合差別化 / 常識破壊）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="7">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">E. オファー設計（無料プレゼント / 面談形式 / 保証 / 特典）</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">📝</span>
+                            ヒアリング後処理
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="8">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">録画の文字起こし完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="9">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">素材の構造化（カテゴリ別整理）完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="0" data-task="10">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">不足素材の追加質問リスト作成・送付</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 1 -->
+            <div class="phase-card" data-phase="1" id="phase1">
+                <div class="phase-header" onclick="togglePhase(1)">
+                    <div class="phase-header-left">
+                        <div class="phase-number">1</div>
+                        <div class="phase-info">
+                            <h2 class="phase-title">設計（プロットシート作成）</h2>
+                            <p class="phase-subtitle">素材をプロットテンプレートに配置する（1〜2週間）</p>
+                        </div>
+                    </div>
+                    <div class="phase-header-right">
+                        <div class="phase-progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>
+                                <circle class="ring-fill" cx="18" cy="18" r="15.9" id="ring1"></circle>
+                            </svg>
+                            <span class="ring-text" id="ringText1">0%</span>
+                        </div>
+                        <div class="phase-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-description">
+                        <p>ヒアリング素材をプロットテンプレート（1話:28ブロック / 2話:12ブロック / 3話:16ブロック /
+                            4話:40ブロック）に当てはめる。コンテンツホルダーには簡易版（各話3〜5行の要約）のみ共有。</p>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🗺️</span>
+                            プロットシート作成
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="0">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第一話プロット（28ブロック）作成</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="1">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第二話プロット（12ブロック）作成</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="2">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第三話プロット（16ブロック）作成</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="3">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第四話プロット（40ブロック）作成</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🤝</span>
+                            クライアント共有
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="4">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">簡易版プロット（各話3〜5行要約）を作成</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="5">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">コンテンツホルダーに共有・方向性の承認取得</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🎬</span>
+                            インタビュー準備
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="6">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">顧客インタビュー対象者リスト確定（3名以上）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="7">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">インタビュー質問リスト作成</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="1" data-task="8">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">インタビュー日程調整</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="phase-card" data-phase="2" id="phase2">
+                <div class="phase-header" onclick="togglePhase(2)">
+                    <div class="phase-header-left">
+                        <div class="phase-number">2</div>
+                        <div class="phase-info">
+                            <h2 class="phase-title">台本執筆</h2>
+                            <p class="phase-subtitle">プロットから本番用台本を作成する（2〜3週間）</p>
+                        </div>
+                    </div>
+                    <div class="phase-header-right">
+                        <div class="phase-progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>
+                                <circle class="ring-fill" cx="18" cy="18" r="15.9" id="ring2"></circle>
+                            </svg>
+                            <span class="ring-text" id="ringText2">0%</span>
+                        </div>
+                        <div class="phase-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-description">
+                        <p>「そのまま読んで撮影できるレベル」の台本を作成。Fプロ側が構造設計・心理導線・CTA文言を執筆し、コンテンツホルダーが専門知識パート・口調・事実関係の確認を行う。</p>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">✍️</span>
+                            台本 初稿（Fプロ作成）
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="0">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第一話 台本初稿</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="1">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第二話 台本初稿</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="2">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第三話 台本初稿</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="3">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第四話（VSL）台本初稿</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🔍</span>
+                            クライアント確認
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="4">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">コンテンツホルダーに台本共有（Google Docs）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="5">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">赤入れ受領・修正反映</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="6">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">最終台本の承認取得</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">✅</span>
+                            品質チェック
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="7">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">冒頭3分メリット提示 / 権威性 / ストーリーアーク確認</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="8">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">顧客事例2名以上 / 次話フック / CTA確認</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="2" data-task="9">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">VSL追加チェック（反論処理5つ以上 / リスクリバーサル / スクリーニング）</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="phase-card" data-phase="3" id="phase3">
+                <div class="phase-header" onclick="togglePhase(3)">
+                    <div class="phase-header-left">
+                        <div class="phase-number">3</div>
+                        <div class="phase-info">
+                            <h2 class="phase-title">撮影・編集</h2>
+                            <p class="phase-subtitle">ブロック単位撮影 + 編集・仕上げ（1〜2週間）</p>
+                        </div>
+                    </div>
+                    <div class="phase-header-right">
+                        <div class="phase-progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>
+                                <circle class="ring-fill" cx="18" cy="18" r="15.9" id="ring3"></circle>
+                            </svg>
+                            <span class="ring-text" id="ringText3">0%</span>
+                        </div>
+                        <div class="phase-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-description">
+                        <p>本編4本 + 顧客インタビュー動画を収録。1話あたり撮影60〜90分。編集はテロップ（キーワード）、BGM、SE、インサート画像を含む。</p>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🎥</span>
+                            撮影準備
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="0">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">撮影日程確定（本編：半日×2回）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="1">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">撮影環境・機材セットアップ</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="2">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">コンテンツホルダーへ服装・準備事項連絡</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">📹</span>
+                            撮影
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="3">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第一話 撮影完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="4">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第二話 撮影完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="5">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第三話 撮影完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="6">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第四話（VSL）撮影完了</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="7">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">顧客インタビュー収録完了（3名）</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🎞️</span>
+                            編集
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="8">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第一話 編集完了（15〜25分）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="9">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第二話 編集完了（20〜30分）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="10">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第三話 編集完了（20〜30分）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="11">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">第四話（VSL）編集完了（40〜60分）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="3" data-task="12">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">コンテンツホルダー最終確認・修正対応</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="phase-card" data-phase="4" id="phase4">
+                <div class="phase-header" onclick="togglePhase(4)">
+                    <div class="phase-header-left">
+                        <div class="phase-number">4</div>
+                        <div class="phase-info">
+                            <h2 class="phase-title">ファネル構築</h2>
+                            <p class="phase-subtitle">LP・LINE・広告の設計と実装（1〜2週間）</p>
+                        </div>
+                    </div>
+                    <div class="phase-header-right">
+                        <div class="phase-progress-ring">
+                            <svg viewBox="0 0 36 36">
+                                <circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>
+                                <circle class="ring-fill" cx="18" cy="18" r="15.9" id="ring4"></circle>
+                            </svg>
+                            <span class="ring-text" id="ringText4">0%</span>
+                        </div>
+                        <div class="phase-toggle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="phase-body">
+                    <div class="phase-description">
+                        <p>LP制作、LINE公式アカウント設計（ステップ配信・自動応答・感想ボタン → 次話配信）、動画ホスティング（Vimeo）、面談フォーム、SNS広告出稿まで。</p>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🖥️</span>
+                            LP・ページ制作
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="0">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">LP（ランディングページ）制作</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="1">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">各話の視聴ページ制作（感想ボタン付き）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="2">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">面談申込フォーム制作</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">💬</span>
+                            LINE構築
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="3">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">LINE公式アカウント設定</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="4">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">リッチメニュー制作</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="5">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">ステップ配信設定（感想→次話解放フロー）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="6">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">3日限定リマインド配信設定</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🎯</span>
+                            動画・広告
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="7">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">動画アップロード（Vimeo / DL不可設定）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="8">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">広告クリエイティブ制作</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="9">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">Meta / YouTube 広告出稿設定</span>
+                        </label>
+                    </div>
+                    <div class="checklist-group">
+                        <h3 class="checklist-title">
+                            <span class="checklist-icon">🚀</span>
+                            最終チェック・公開
+                        </h3>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="10">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">全フローの通しテスト（登録→動画視聴→感想→次話→面談申込）</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="11">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">コンテンツホルダー最終確認</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" data-phase="4" data-task="12">
+                            <span class="checkmark"></span>
+                            <span class="checklist-text">本番公開 🎉</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Hearing Sheet Section -->
+    <section class="hearing-section" id="hearingSheet">
+        <div class="container">
+            <h2 class="section-title hearing-section-title">
+                <span class="section-icon">🎙️</span>
+                クライアント ヒアリングシート
+            </h2>
+            <p class="hearing-intro">コンテンツホルダーに確認すべき全項目。各項目の回答欄をクリックして記録できます。<br>
+                <span class="hearing-tip">💡 ヒント：「書けるところだけ書いて、書けないものは当日話しましょう」と事前に伝えてください。</span>
+            </p>
+
+            <!-- Category A: Basic Info -->
+            <div class="hearing-category" id="catA">
+                <div class="hearing-cat-header" onclick="toggleCategory('catA')">
+                    <div class="hearing-cat-left">
+                        <span class="hearing-cat-badge"
+                            style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">A</span>
+                        <div>
+                            <h3 class="hearing-cat-title">基本情報</h3>
+                            <p class="hearing-cat-desc">事業の全体像を把握する</p>
+                        </div>
+                    </div>
+                    <div class="hearing-cat-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hearing-cat-body">
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-1</span>
+                            <span class="hearing-question">お名前・屋号・会社名を教えてください</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a1" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-2</span>
+                            <span class="hearing-question">肩書き（動画内でどう名乗りたいか）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a2" placeholder="例：〇〇コンサルタント、〇〇アカデミー代表"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-3</span>
+                            <span class="hearing-question">事業内容を一言で説明するとどうなりますか？</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a3" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-4</span>
+                            <span class="hearing-question">ターゲット顧客は誰ですか？（年齢・職業・悩み・状況）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a4"
+                            placeholder="例：30〜50代の女性起業家で、SNS集客に疲弊している人"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-5</span>
+                            <span class="hearing-question">現在の商品ラインナップと価格帯を教えてください</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a5"
+                            placeholder="例：個別コンサル 50万円 / グループ講座 30万円 / セミナー 5,000円"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-6</span>
+                            <span class="hearing-question">バックエンド商品の価格（or 今回の想定価格）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a6" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-7</span>
+                            <span class="hearing-question">現在の主な集客方法は何ですか？</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a7"
+                            placeholder="例：Instagram投稿、紹介、ブログ、広告 etc."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">A-8</span>
+                            <span class="hearing-question">月間の面談（相談）数と成約率はどのくらいですか？</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="a8" placeholder="例：月3件面談 / 成約率 30%"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category B: Story -->
+            <div class="hearing-category" id="catB">
+                <div class="hearing-cat-header" onclick="toggleCategory('catB')">
+                    <div class="hearing-cat-left">
+                        <span class="hearing-cat-badge"
+                            style="background: linear-gradient(135deg, #6366f1, #818cf8);">B</span>
+                        <div>
+                            <h3 class="hearing-cat-title">ストーリー素材（権威＋共感）</h3>
+                            <p class="hearing-cat-desc">動画の感情的な軸になるエピソードを引き出す</p>
+                        </div>
+                    </div>
+                    <div class="hearing-cat-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hearing-cat-body">
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-1</span>
+                            <span class="hearing-question">過去の最大の挫折・失敗経験は何ですか？</span>
+                            <span class="hearing-usage">→ 第一話の「共感パート」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b1"
+                            placeholder="なるべく具体的に：いつ、何が起きて、どう感じたか"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-2</span>
+                            <span class="hearing-question">そこからどうやって今の状態になりましたか？（転換点）</span>
+                            <span class="hearing-usage">→ 第一話の「成功ストーリー」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b2"
+                            placeholder="何がきっかけで変わったのか、具体的な出会いや気づき"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-3</span>
+                            <span class="hearing-question">人生を変えた出会い・きっかけは何でしたか？</span>
+                            <span class="hearing-usage">→ ストーリーのドラマ性を高める</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b3" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-4</span>
+                            <span class="hearing-question">今の事業を始めた本当の理由（ミッション・ビジョン）は？</span>
+                            <span class="hearing-usage">→ 第四話の「理念・壮大なビジョン」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b4" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-5</span>
+                            <span class="hearing-question">メディア出演・受賞・出版・資格などの実績はありますか？</span>
+                            <span class="hearing-usage">→ 第一話の「権威性パート」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b5"
+                            placeholder="テレビ出演、書籍出版、受賞歴、専門資格など何でも"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-6</span>
+                            <span class="hearing-question">業界の中で「自分だけが言える」ことは何ですか？</span>
+                            <span class="hearing-usage">→ ポジショニング・差別化に使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b6" placeholder="独自の視点、経験に基づく持論など"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">B-7</span>
+                            <span class="hearing-question">これまでの実績を数字で表すと？（売上・人数・年数など）</span>
+                            <span class="hearing-usage">→ 権威付けの具体的な根拠</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="b7"
+                            placeholder="例：累計1,000名以上をサポート / 年商〇億 / 〇年の実績"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category C: Client Results -->
+            <div class="hearing-category" id="catC">
+                <div class="hearing-cat-header" onclick="toggleCategory('catC')">
+                    <div class="hearing-cat-left">
+                        <span class="hearing-cat-badge"
+                            style="background: linear-gradient(135deg, #3b82f6, #60a5fa);">C</span>
+                        <div>
+                            <h3 class="hearing-cat-title">顧客・実績素材</h3>
+                            <p class="hearing-cat-desc">社会的証明として使う成功事例（最低3名分が必要）</p>
+                        </div>
+                    </div>
+                    <div class="hearing-cat-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hearing-cat-body">
+                    <div class="hearing-subheader">
+                        <span class="hearing-subheader-icon">👤</span>
+                        成功事例①
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-1a</span>
+                            <span class="hearing-question">この方のプロフィール（年齢・職業・背景）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c1a" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-1b</span>
+                            <span class="hearing-question">Before（受講前の状態・悩み・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c1b"
+                            placeholder="例：月収10万で疲弊、集客が全くできなかった"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-1c</span>
+                            <span class="hearing-question">After（受講後の変化・成果・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c1c"
+                            placeholder="例：3ヶ月で月100万達成、広告で自動集客"></textarea>
+                    </div>
+
+                    <div class="hearing-subheader">
+                        <span class="hearing-subheader-icon">👤</span>
+                        成功事例②
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-2a</span>
+                            <span class="hearing-question">この方のプロフィール（年齢・職業・背景）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c2a" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-2b</span>
+                            <span class="hearing-question">Before（受講前の状態・悩み・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c2b" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-2c</span>
+                            <span class="hearing-question">After（受講後の変化・成果・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c2c" placeholder="回答を入力..."></textarea>
+                    </div>
+
+                    <div class="hearing-subheader">
+                        <span class="hearing-subheader-icon">👤</span>
+                        成功事例③
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-3a</span>
+                            <span class="hearing-question">この方のプロフィール（年齢・職業・背景）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c3a" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-3b</span>
+                            <span class="hearing-question">Before（受講前の状態・悩み・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c3b" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-3c</span>
+                            <span class="hearing-question">After（受講後の変化・成果・数字）</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c3c" placeholder="回答を入力..."></textarea>
+                    </div>
+
+                    <div class="hearing-divider"></div>
+
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-4</span>
+                            <span class="hearing-question">顧客インタビュー動画は撮れますか？何名協力してもらえそうですか？</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c4" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-5</span>
+                            <span class="hearing-question">顧客がよく言う「受ける前の不安」は何ですか？</span>
+                            <span class="hearing-usage">→ 第四話の「反論処理」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c5"
+                            placeholder="例：「自分にもできるのか不安」「時間がない」「費用が…」"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">C-6</span>
+                            <span class="hearing-question">顧客がよく言う「受けてよかった理由」は何ですか？</span>
+                            <span class="hearing-usage">→ ベネフィット訴求に使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="c6" placeholder="回答を入力..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category D: Method -->
+            <div class="hearing-category" id="catD">
+                <div class="hearing-cat-header" onclick="toggleCategory('catD')">
+                    <div class="hearing-cat-left">
+                        <span class="hearing-cat-badge"
+                            style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">D</span>
+                        <div>
+                            <h3 class="hearing-cat-title">商品・メソッド素材</h3>
+                            <p class="hearing-cat-desc">動画の教育コンテンツの核になる部分</p>
+                        </div>
+                    </div>
+                    <div class="hearing-cat-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hearing-cat-body">
+                    <div class="hearing-item hearing-item-important">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-1</span>
+                            <span class="hearing-question">あなたのメソッドを3ステップで説明するとどうなりますか？</span>
+                            <span class="hearing-usage">⭐ 最重要 → 各話（2話・3話・4話）の柱になる</span>
+                        </div>
+                        <textarea class="hearing-answer hearing-answer-large" data-field="d1"
+                            placeholder="ステップ1：&#10;ステップ2：&#10;ステップ3："></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-2</span>
+                            <span class="hearing-question">競合・他社との決定的な違いは何ですか？</span>
+                            <span class="hearing-usage">→ ポジショニング・差別化に使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d2" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-3</span>
+                            <span class="hearing-question">「これだけは絶対に間違い」と思う業界の常識はありますか？</span>
+                            <span class="hearing-usage">→ 第一話・第四話の「常識破壊パート」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d3"
+                            placeholder="例：「SNSを毎日投稿すれば集客できる」は嘘"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-4</span>
+                            <span class="hearing-question">顧客に最初に教えること（最も重要な基礎概念）は？</span>
+                            <span class="hearing-usage">→ 第二話の教育コンテンツに使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d4" placeholder="回答を入力..."></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-5</span>
+                            <span class="hearing-question">顧客が「自力では絶対にできない」ことは何ですか？</span>
+                            <span class="hearing-usage">→ バックエンド商品の必要性を語る根拠</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d5"
+                            placeholder="例：客観的なフィードバック、台本の添削、広告運用のチューニング"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-6</span>
+                            <span class="hearing-question">あなたの手法の「成功の方程式」を一言で言うと？</span>
+                            <span class="hearing-usage">→ 第一話の「売上の方程式」パートで使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d6"
+                            placeholder="例：面談数 × 成約率 × 商品単価 ＝ 売上"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-7</span>
+                            <span class="hearing-question">顧客が手に入れられる「理想の未来」を具体的に描写してください</span>
+                            <span class="hearing-usage">→ 随所の「最高の未来」描写で使用</span>
+                        </div>
+                        <textarea class="hearing-answer hearing-answer-large" data-field="d7"
+                            placeholder="収入面、時間面、精神面、人間関係面…なるべく具体的に"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">D-8</span>
+                            <span class="hearing-question">ターゲットの「最悪の未来」（このままだとどうなるか）</span>
+                            <span class="hearing-usage">→ 問題提起・緊急性のパートで使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="d8"
+                            placeholder="例：来月の売上が読めない不安が永遠に続く / 労働集約から抜け出せない"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category E: Offer Design -->
+            <div class="hearing-category" id="catE">
+                <div class="hearing-cat-header" onclick="toggleCategory('catE')">
+                    <div class="hearing-cat-left">
+                        <span class="hearing-cat-badge"
+                            style="background: linear-gradient(135deg, #22c55e, #4ade80);">E</span>
+                        <div>
+                            <h3 class="hearing-cat-title">オファー設計</h3>
+                            <p class="hearing-cat-desc">第四話のクロージングに直結する素材</p>
+                        </div>
+                    </div>
+                    <div class="hearing-cat-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hearing-cat-body">
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-1</span>
+                            <span class="hearing-question">無料プレゼントとして提供できるものは何ですか？</span>
+                            <span class="hearing-usage">→ フロントエンド＆登録の動機付けに使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e1"
+                            placeholder="例：テンプレート、チェックリスト、動画講座、電子書籍"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-2</span>
+                            <span class="hearing-question">面談（個別相談）の形式と、どう呼びたいですか？</span>
+                            <span class="hearing-usage">→ CTA（行動喚起）の設計に使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e2"
+                            placeholder="例：1on1戦略診断、無料個別相談、〇〇カウンセリング"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-3</span>
+                            <span class="hearing-question">保証・返金ポリシーはありますか？</span>
+                            <span class="hearing-usage">→ 第四話の「リスクリバーサル」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e3"
+                            placeholder="例：30日間全額返金保証 / 成果保証 / なし"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-4</span>
+                            <span class="hearing-question">限定性は作れますか？（人数制限・期間限定）</span>
+                            <span class="hearing-usage">→ 緊急性の演出に使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e4"
+                            placeholder="例：毎月5名限定 / 今回の募集は3日間のみ"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-5</span>
+                            <span class="hearing-question">特典として出せるものは何ですか？（3〜5個）</span>
+                            <span class="hearing-usage">→ 第四話の「特典パート」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer hearing-answer-large" data-field="e5"
+                            placeholder="特典①：&#10;特典②：&#10;特典③：&#10;特典④：&#10;特典⑤："></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-6</span>
+                            <span class="hearing-question">「こういう人には来てほしくない」というスクリーニング基準は？</span>
+                            <span class="hearing-usage">→ 第四話の「審査・スクリーニング」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e6"
+                            placeholder="例：他責思考の人、行動しない人、投資マインドがない人"></textarea>
+                    </div>
+                    <div class="hearing-item">
+                        <div class="hearing-q">
+                            <span class="hearing-num">E-7</span>
+                            <span class="hearing-question">このサービスの「他にはない優位性」を端的に言うと？</span>
+                            <span class="hearing-usage">→ 第四話の「この講座の優位性」で使用</span>
+                        </div>
+                        <textarea class="hearing-answer" data-field="e7" placeholder="回答を入力..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Notes Section -->
+    <section class="notes-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="section-icon">💡</span>
+                制作メモ
+            </h2>
+            <div class="notes-grid">
+                <div class="note-card">
+                    <h3 class="note-title">クライアントへの共有ルール</h3>
+                    <ul class="note-list">
+                        <li>プロットは <strong>簡易版のみ</strong> 共有（詳細構造はノータッチ）</li>
+                        <li>台本は <strong>Google Docs</strong> で赤入れ対応</li>
+                        <li>連絡は <strong>LINE / チャットワーク</strong></li>
+                    </ul>
+                </div>
+                <div class="note-card">
+                    <h3 class="note-title">クライアントに依頼すること</h3>
+                    <ul class="note-list">
+                        <li>①素材を出す（ヒアリング）</li>
+                        <li>②台本の赤入れ</li>
+                        <li>③撮影に出演</li>
+                        <li>④顧客インタビュー対象者の手配</li>
+                    </ul>
+                </div>
+                <div class="note-card">
+                    <h3 class="note-title">動画の尺目安</h3>
+                    <ul class="note-list">
+                        <li>第一話: 15〜25分</li>
+                        <li>第二話: 20〜30分</li>
+                        <li>第三話: 20〜30分</li>
+                        <li>第四話（VSL）: 40〜60分</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Fプロダクション — 4本動画ファネル制作テンプレート</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

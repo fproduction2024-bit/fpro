@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Hacks | 副業のゼロイチを最短で達成する</title>
+    <meta name="description" content="全講座学び放題×伴走支援×コミュニティ。2倍返金保証付き。副業未経験から最短で最初の1円を稼ぐ。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --primary: #1B2838;
+            --primary-light: #2A3B52;
+            --accent: #E8B341;
+            --accent-dark: #D4A035;
+            --cta: #27AE60;
+            --cta-hover: #219653;
+            --danger: #E74C3C;
+            --bg: #FFFFFF;
+            --bg-cream: #FDF8F0;
+            --bg-dark: #1B2838;
+            --bg-light: #F7F9FC;
+            --text: #1A1A2E;
+            --text-light: #555;
+            --text-muted: #888;
+            --text-white: #FFFFFF;
+            --border: #E8E8E8;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, .08);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, .12);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #1B2838 0%, #2C3E50 50%, #1B2838 100%);
+            color: var(--text-white);
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--bg))
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: .3rem 1.2rem;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .05em;
+            margin-bottom: 1.5rem
+        }
+
+        .hero h1 {
+            font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: 1rem
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+            display: block
+        }
+
+        .hero p.sub {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, .75);
+            max-width: 600px;
+            margin: 0 auto 2rem
+        }
+
+        .hero-kpi {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem
+        }
+
+        .hero-kpi-item {
+            text-align: center
+        }
+
+        .hero-kpi-item .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent)
+        }
+
+        .hero-kpi-item .label {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .6);
+            margin-top: .2rem
+        }
+
+        /* ── Sections ── */
+        .section {
+            padding: 4rem 0
+        }
+
+        .section-alt {
+            background: var(--bg-cream)
+        }
+
+        .section-dark {
+            background: var(--bg-dark);
+            color: var(--text-white)
+        }
+
+        .section-light {
+            background: var(--bg-light)
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem
+        }
+
+        .section-title h2 {
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-weight: 900;
+            line-height: 1.4;
+            margin-bottom: .5rem
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: .95rem
+        }
+
+        .section-title .marker {
+            background: linear-gradient(transparent 60%, rgba(232, 179, 65, .3) 60%);
+            padding: 0 .2rem
+        }
+
+        /* ── Pain ── */
+        .pain-list {
+            list-style: none;
+            padding: 0
+        }
+
+        .pain-list li {
+            padding: 1rem 1.2rem 1rem 3rem;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: .95rem;
+            color: var(--text-light)
+        }
+
+        .pain-list li::before {
+            content: '😰';
+            position: absolute;
+            left: .8rem;
+            top: 1rem;
+            font-size: 1.1rem
+        }
+
+        /* ── Solution Cards ── */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem
+        }
+
+        .solution-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform .3s
+        }
+
+        .solution-card:hover {
+            transform: translateY(-4px)
+        }
+
+        .solution-card .icon {
+            font-size: 2rem;
+            margin-bottom: .8rem
+        }
+
+        .solution-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: .4rem
+        }
+
+        .solution-card p {
+            font-size: .85rem;
+            color: var(--text-light);
+            line-height: 1.6
+        }
+
+        .solution-card .emphasis {
+            color: var(--danger);
+            font-weight: 700;
+            font-size: .85rem;
+            margin-top: .5rem
+        }
+
+        /* ── KPI Grid ── */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem
+        }
+
+        .kpi-box {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center
+        }
+
+        .kpi-box .num {
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent)
+        }
+
+        .kpi-box .label {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .6);
+            margin-top: .3rem
+        }
+
+        .kpi-box .sub {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .2rem
+        }
+
+        /* ── Course Table ── */
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0
+        }
+
+        .course-table th {
+            background: var(--primary);
+            color: var(--text-white);
+            padding: .7rem;
+            font-size: .85rem;
+            text-align: left
+        }
+
+        .course-table td {
+            padding: .7rem;
+            border-bottom: 1px solid var(--border);
+            font-size: .88rem;
+            color: var(--text-light)
+        }
+
+        .course-table tr:hover td {
+            background: var(--bg-light)
+        }
+
+        .total-row {
+            background: var(--bg-cream);
+            font-weight: 700
+        }
+
+        .total-row td {
+            color: var(--danger);
+            font-size: 1rem
+        }
+
+        /* ── Support Flow ── */
+        .flow-steps {
+            counter-reset: flow
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .flow-step::before {
+            counter-increment: flow;
+            content: counter(flow);
+            background: var(--accent);
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .85rem;
+            font-weight: 700;
+            flex-shrink: 0
+        }
+
+        .flow-step div h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: .2rem
+        }
+
+        .flow-step div p {
+            font-size: .85rem;
+            color: var(--text-light)
+        }
+
+        /* ── Testimonials ── */
+        .testimonial {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow)
+        }
+
+        .testimonial .tag {
+            display: inline-block;
+            background: var(--bg-cream);
+            color: var(--accent-dark);
+            font-size: .75rem;
+            font-weight: 600;
+            padding: .2rem .6rem;
+            border-radius: 20px;
+            margin-bottom: .6rem
+        }
+
+        .testimonial h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: .5rem
+        }
+
+        .testimonial p {
+            font-size: .88rem;
+            color: var(--text-light);
+            line-height: 1.7
+        }
+
+        .testimonial .result {
+            color: var(--danger);
+            font-weight: 700
+        }
+
+        /* ── Guarantee ── */
+        .guarantee-box {
+            background: linear-gradient(135deg, #1B2838, #2C3E50);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-white)
+        }
+
+        .guarantee-box h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--accent)
+        }
+
+        .guarantee-box p {
+            font-size: .9rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .85)
+        }
+
+        .guarantee-calc {
+            background: rgba(255, 255, 255, .06);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+            font-size: .85rem;
+            color: rgba(255, 255, 255, .75)
+        }
+
+        /* ── Compare ── */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: .7rem .5rem;
+            font-size: .82rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .compare-table thead th {
+            background: var(--bg-light);
+            font-weight: 600;
+            color: var(--text)
+        }
+
+        .compare-table .ours {
+            background: rgba(232, 179, 65, .08)
+        }
+
+        .compare-table .ours-head {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700
+        }
+
+        /* ── Price ── */
+        .price-box {
+            text-align: center;
+            padding: 2rem 1.5rem
+        }
+
+        .price-original {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-decoration: line-through
+        }
+
+        .price-main {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 900;
+            color: var(--danger);
+            margin: .5rem 0
+        }
+
+        .price-main span {
+            font-size: .5em;
+            font-weight: 700
+        }
+
+        .price-monthly {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem
+        }
+
+        .price-monthly strong {
+            color: var(--accent-dark);
+            font-size: 1.2rem
+        }
+
+        /* ── FAQ ── */
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0
+        }
+
+        .faq-q {
+            display: flex;
+            gap: .6rem;
+            align-items: flex-start;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: .95rem
+        }
+
+        .faq-q::before {
+            content: 'Q';
+            background: var(--accent);
+            color: var(--primary);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            flex-shrink: 0
+        }
+
+        .faq-a {
+            padding: .8rem 0 0 2.2rem;
+            font-size: .88rem;
+            color: var(--text-light);
+            line-height: 1.8
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 1.5rem
+        }
+
+        .cta-section h3 {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: .5rem;
+            color: var(--text-white)
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, .7);
+            font-size: .9rem;
+            margin-bottom: 1.5rem
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cta), #2ECC71);
+            color: #fff;
+            padding: 1rem 3rem;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, .3);
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, .4)
+        }
+
+        .cta-btn .now {
+            background: var(--accent);
+            color: var(--primary);
+            padding: .15rem .5rem;
+            border-radius: 4px;
+            font-size: .7rem;
+            margin-right: .3rem
+        }
+
+        .cta-micro {
+            margin-top: .8rem;
+            font-size: .78rem;
+            color: rgba(255, 255, 255, .5)
+        }
+
+        .inline-cta {
+            text-align: center;
+            padding: 2rem 0
+        }
+
+        /* ── Who ── */
+        .who-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .who-card {
+            border-radius: var(--radius);
+            padding: 1.5rem
+        }
+
+        .who-no {
+            background: #FFF5F5;
+            border: 1px solid #FECACA
+        }
+
+        .who-yes {
+            background: #F0FFF4;
+            border: 1px solid #C6F6D5
+        }
+
+        .who-card h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: .8rem
+        }
+
+        .who-card ul {
+            list-style: none;
+            padding: 0
+        }
+
+        .who-card li {
+            font-size: .85rem;
+            padding: .3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light)
+        }
+
+        .who-no li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: var(--danger);
+            font-weight: 700
+        }
+
+        .who-yes li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--cta);
+            font-weight: 700
+        }
+
+        /* ── Bonus ── */
+        .bonus-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: .8rem;
+            box-shadow: var(--shadow)
+        }
+
+        .bonus-num {
+            background: var(--accent);
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: .9rem;
+            flex-shrink: 0
+        }
+
+        .bonus-item h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: .1rem
+        }
+
+        .bonus-item p {
+            font-size: .8rem;
+            color: var(--text-light)
+        }
+
+        /* ── Floating CTA ── */
+        .floating-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(27, 40, 56, .95);
+            backdrop-filter: blur(10px);
+            padding: .8rem 1.5rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transform: translateY(100%);
+            transition: transform .4s ease;
+            border-top: 2px solid var(--accent)
+        }
+
+        .floating-cta.visible {
+            transform: translateY(0)
+        }
+
+        .floating-cta .price-tag {
+            color: var(--text-white);
+            font-size: .85rem;
+            font-weight: 700
+        }
+
+        .floating-cta .price-tag .amount {
+            font-family: 'Inter';
+            color: var(--accent);
+            font-size: 1.1rem
+        }
+
+        .floating-cta .f-btn {
+            background: linear-gradient(135deg, var(--cta), #2ECC71);
+            color: #fff;
+            padding: .6rem 1.5rem;
+            border-radius: 50px;
+            font-size: .9rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: .8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border)
+        }
+
+        /* ── Responsive ── */
+        @media(max-width:640px) {
+            .hero-kpi {
+                grid-template-columns: repeat(3, 1fr);
+                gap: .5rem
+            }
+
+            .hero-kpi-item .num {
+                font-size: 1.4rem
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .who-grid {
+                grid-template-columns: 1fr
+            }
+
+            .solution-grid {
+                grid-template-columns: 1fr
+            }
+
+            .compare-table {
+                font-size: .75rem
+            }
+
+            .floating-cta .price-tag {
+                font-size: .75rem
+            }
+        }
+
+        /* ── Animation ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .6s ease
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">副業ゼロイチ特化型スクール</span>
+            <h1>全講座学び放題 × 伴走支援<span class="highlight">副業の「最初の1円」を最短で手に入れる</span></h1>
+            <p class="sub">プログラミング・動画編集・デザイン・ライティング──<br>788,000円分の全講座が学び放題。<br>しかも<strong>2倍返金保証</strong>付き。</p>
+            <div class="hero-kpi">
+                <div class="hero-kpi-item">
+                    <div class="num">88%</div>
+                    <div class="label">受講生満足度</div>
+                </div>
+                <div class="hero-kpi-item">
+                    <div class="num">4人に1人</div>
+                    <div class="label">1ヶ月で初収益</div>
+                </div>
+                <div class="hero-kpi-item">
+                    <div class="num">¥788K</div>
+                    <div class="label">分の講座が学び放題</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAIN ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>こんな状態に<span class="marker">心当たり</span>はありませんか？</h2>
+            </div>
+            <ul class="pain-list reveal">
+                <li>副業に興味はあるけど、何から手をつけていいか分からない</li>
+                <li>YouTubeやノートで情報収集はしてるけど、行動できていない</li>
+                <li>スクールにお金を払ったけど、思うような結果が出なかった</li>
+                <li>独学で挫折した経験があり「自分にはセンスがない」と思い込んでいる</li>
+                <li>気づけばノウハウコレクターになってしまっている</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ═══════════════ SOLUTION ═══════════════ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>スキルハックスなら<br><span class="marker">その全てが解決します</span></h2>
+                <p>結果を出す人だけが持っている「3つの武器」を全て提供</p>
+            </div>
+            <div class="solution-grid reveal">
+                <div class="solution-card">
+                    <div class="icon">📚</div>
+                    <h4>全講座学び放題</h4>
+                    <p>プログラミング・動画編集・デザイン・ライティング＋マーケティング系講座。単体で購入すると788,000円分。</p>
+                    <div class="emphasis">コアスキルだけに集中できる</div>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🤝</div>
+                    <h4>伴走支援</h4>
+                    <p>初回面談→個別ロードマップ→日報モニタリング→個別Zoom→提案文チェック。あなた専属のサポートチーム。</p>
+                    <div class="emphasis">挫折しない環境</div>
+                </div>
+                <div class="solution-card">
+                    <div class="icon">🌐</div>
+                    <h4>コミュニティ</h4>
+                    <p>24時間オンライン作業会（黙々会）。同じ志を持つ仲間と切磋琢磨。成功者のロールモデルが身近に。</p>
+                    <div class="emphasis">一人じゃない安心感</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ INLINE CTA ═══════════════ -->
+    <div class="inline-cta"><a href="#apply" class="cta-btn"><span class="now">今すぐ</span>Skill Hacks に申し込む</a></div>
+
+    <!-- ═══════════════ COURSES ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>含まれる<span class="marker">全講座一覧</span></h2>
+                <p>どこから始めても、いつでも切り替えてもOK</p>
+            </div>
+            <table class="course-table reveal">
+                <thead>
+                    <tr>
+                        <th>講座名</th>
+                        <th>内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🎬 ムービーハックス</td>
+                        <td>動画編集（テロップ・カット・BGM・画像挿入）── 単体で1万人以上受講の人気講座</td>
+                    </tr>
+                    <tr>
+                        <td>🎨 デザインハックス</td>
+                        <td>サムネイル・バナー・LPデザイン ── 上場企業案件実績の講師</td>
+                    </tr>
+                    <tr>
+                        <td>✍️ ライティングハックス</td>
+                        <td>SEOライティング ── 何千記事も納品してきた実績講師</td>
+                    </tr>
+                    <tr>
+                        <td>🖥️ プログラミングハックス</td>
+                        <td>ホームページ制作・Webアプリ開発 ── LP受注〜フリーランス独立まで</td>
+                    </tr>
+                    <tr>
+                        <td>📊 ビジネスモデルマスター</td>
+                        <td>ビジネスの原理原則とマーケティング</td>
+                    </tr>
+                    <tr>
+                        <td>📱 Xマーケティングマスター</td>
+                        <td>フリーランス必須のX（旧Twitter）運用</td>
+                    </tr>
+                    <tr>
+                        <td>📲 LINEマーケティングマスター</td>
+                        <td>公式LINEを使ったマーケティング全般</td>
+                    </tr>
+                    <tr>
+                        <td>🧠 30日間マインドセット変革</td>
+                        <td>毎朝ラジオ形式で行動マインドをインストール</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td colspan="2">単体合計 788,000円分 → Skill Hacks なら全て学び放題</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══════════════ SUPPORT FLOW ═══════════════ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2><span class="marker">伴走支援</span>の流れ</h2>
+                <p>あなた専属のサポートチームが最初の1円まで徹底伴走</p>
+            </div>
+            <div class="flow-steps reveal">
+                <div class="flow-step">
+                    <div>
+                        <h4>初回面談（キックオフ）</h4>
+                        <p>人生・キャリア・性格・目標をヒアリング → 最適なロードマップを作成</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div>
+                        <h4>カリキュラムに沿って学習</h4>
+                        <p>分からないことはいつでも相談（回数無制限）</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div>
+                        <h4>個別Zoom相談</h4>
+                        <p>解決が難しい問題は随時Zoomを組んで対応</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div>
+                        <h4>黙々会（24時間オンライン作業会）</h4>
+                        <p>仲間と一緒に作業。モチベーションが自然に上がる環境</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div>
+                        <h4>提案文・クライアント対応チェック</h4>
+                        <p>営業文・納品物を全てスタッフがチェック＆フィードバック</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div>
+                        <h4>日報モニタリング</h4>
+                        <p>毎日の進捗を確認し、ペース調整。迷子にさせない</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ DATA ═══════════════ -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color:var(--text-white)"><span class="marker">受講生データ</span>が証明する実力</h2>
+                <p style="color:rgba(255,255,255,.6)">473名対象アンケートより</p>
+            </div>
+            <div class="kpi-grid reveal">
+                <div class="kpi-box">
+                    <div class="num">88%</div>
+                    <div class="label">受講生満足度</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="num">1/4</div>
+                    <div class="label">1ヶ月以内に初収益</div>
+                    <div class="sub">4人に1人が達成</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="num">¥450</div>
+                    <div class="label">1日あたりの投資額</div>
+                    <div class="sub">24分割の場合</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="num">2倍</div>
+                    <div class="label">返金保証</div>
+                    <div class="sub">未回収分の2倍を返金</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>受講生の<span class="marker">リアルな声</span></h2>
+            </div>
+
+            <div class="testimonial reveal">
+                <span class="tag">動画編集 / 23歳</span>
+                <h4>受講2日で学習完了、初月32万円 → 2年後に年商1億達成</h4>
+                <p>何もない普通の若者だった。受講してすぐに案件獲得を狙い、初月で<span class="result">32万円</span>。5〜6ヶ月目には月収118万円に。チームを作って事業を拡大し、<span
+                        class="result">2年後に会社を売却</span>するまでに。</p>
+            </div>
+
+            <div class="testimonial reveal">
+                <span class="tag">ライティング / 38歳</span>
+                <h4>WordPressの見出しすら分からない状態 → 独立して月収100万円</h4>
+                <p>普通のサラリーマンで、WordPressの見出しの入れ方すら分からなかった。受講1ヶ月で最初の案件を獲得。未経験から2年で独立し、<span
+                        class="result">月収100万円</span>を達成。</p>
+            </div>
+
+            <div class="testimonial reveal">
+                <span class="tag">動画編集 / 主婦</span>
+                <h4>子育てしながら副業 → 月売上57万円を達成</h4>
+                <p>会社員として短時間勤務しながら副業開始。コミュニティの仲間がいたからこそ続けられた。月の売上は<span
+                        class="result">平均35万円、最高57万円</span>。「環境って大事だよ」──これが一番伝えたいメッセージ。</p>
+            </div>
+
+            <div class="testimonial reveal">
+                <span class="tag">プログラミング / 45歳</span>
+                <h4>体調不良で休職 → フリーランスエンジニア → 年収1,000万超え</h4>
+                <p>外で通用するスキルがゼロだった。プログラミングを学び、転職先で自らシステムを提案。フリーランスとして独立し<span
+                        class="result">年収1,000万超え</span>。現在はAI・データ分析基盤の会社を設立準備中。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ INLINE CTA ═══════════════ -->
+    <div class="inline-cta"><a href="#apply" class="cta-btn"><span class="now">今すぐ</span>Skill Hacks に申し込む</a></div>
+
+    <!-- ═══════════════ GUARANTEE ═══════════════ -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>前代未聞の<span class="marker">2倍返金保証</span></h2>
+                <p>やっても稼げなかったら──お金が返ってくる</p>
+            </div>
+            <div class="guarantee-box reveal">
+                <h3>🛡️ 2倍返金保証</h3>
+                <p>運営が伝えた課題をこなし、日報を毎日提出し、月の収益報告をする。<br>この3つをやって、なお<strong>2年間で受講料をペイできなかった場合</strong>──<br><strong
+                        style="font-size:1.2rem">未回収分の2倍を返金</strong>します。</p>
+                <div class="guarantee-calc">
+                    <strong>計算例:</strong><br>
+                    • 20万円しか稼げなかった → 差額19.8万の2倍 = <strong>39.6万円返金</strong><br>
+                    • 1円も稼げなかった → 39.8万の2倍 = <strong>79.6万円返金</strong>（完全に赤字）
+                </div>
+                <p style="font-size:.85rem;margin-top:1rem">「やったけど稼げなかった」→ お金が戻る<br>「やったら稼げた」→
+                    投資回収できた<br><strong>どちらに転んでも、あなたは損をしない。</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ COMPARE ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>他社との<span class="marker">比較</span></h2>
+            </div>
+            <table class="compare-table reveal">
+                <thead>
+                    <tr>
+                        <th>項目</th>
+                        <th>高額スクールA</th>
+                        <th>SNS系スクール</th>
+                        <th>個別コーチング</th>
+                        <th class="ours-head">Skill Hacks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>価格</td>
+                        <td>約88万円</td>
+                        <td>100〜500万円</td>
+                        <td>約300万円</td>
+                        <td class="ours"><strong>398,000円</strong></td>
+                    </tr>
+                    <tr>
+                        <td>講座数</td>
+                        <td>1講座のみ</td>
+                        <td>1講座のみ</td>
+                        <td>なし</td>
+                        <td class="ours"><strong>全8講座学び放題</strong></td>
+                    </tr>
+                    <tr>
+                        <td>伴走支援</td>
+                        <td>なし</td>
+                        <td>グループのみ</td>
+                        <td>あり</td>
+                        <td class="ours"><strong>個別対応</strong></td>
+                    </tr>
+                    <tr>
+                        <td>返金保証</td>
+                        <td>なし</td>
+                        <td>なし</td>
+                        <td>なし</td>
+                        <td class="ours"><strong>2倍返金保証</strong></td>
+                    </tr>
+                    <tr>
+                        <td>カリキュラム</td>
+                        <td>永久</td>
+                        <td>期限あり</td>
+                        <td>期限あり</td>
+                        <td class="ours"><strong>永久に見放題</strong></td>
+                    </tr>
+                    <tr>
+                        <td>分割払い</td>
+                        <td>あり</td>
+                        <td>あり</td>
+                        <td>一括のみ</td>
+                        <td class="ours"><strong>最大24分割</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ═══════════════ BONUS ═══════════════ -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>参加者<span class="marker">限定特典</span></h2>
+            </div>
+            <div class="reveal">
+                <div class="bonus-item">
+                    <div class="bonus-num">1</div>
+                    <div>
+                        <h4>個別ロードマップ作成会</h4>
+                        <p>マンツーマンZoomであなた専用のロードマップを作成</p>
+                    </div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-num">2</div>
+                    <div>
+                        <h4>2倍返金保証</h4>
+                        <p>受講料未回収分の2倍を返金する前代未聞の保証制度</p>
+                    </div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-num">3</div>
+                    <div>
+                        <h4>スキルマッチング診断シート</h4>
+                        <p>10問の質問であなたに最適なスキルが分かる</p>
+                    </div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-num">4</div>
+                    <div>
+                        <h4>初案件獲得テンプレート集</h4>
+                        <p>プロフィール文・提案文・価格設定──そのまま使えるテンプレ</p>
+                    </div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-num">5</div>
+                    <div>
+                        <h4>スキルチェックリスト</h4>
+                        <p>案件獲得に必要なスキルの全チェック項目</p>
+                    </div>
+                </div>
+                <div class="bonus-item">
+                    <div class="bonus-num">6</div>
+                    <div>
+                        <h4>副業ゼロイチ 90日間ロードマップ</h4>
+                        <p>この通りやれば90日で月10万円を目指せるアクションプラン</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ WHO ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="who-grid reveal">
+                <div class="who-card who-no">
+                    <h4>❌ こういう方はご遠慮ください</h4>
+                    <ul>
+                        <li>楽して稼ぎたい方</li>
+                        <li>教えてもらえば自動的に稼げると思っている方</li>
+                        <li>1日30分も確保できない方</li>
+                        <li>情報を集めて満足してしまう方</li>
+                        <li>返金保証目当てで参加する方</li>
+                    </ul>
+                </div>
+                <div class="who-card who-yes">
+                    <h4>✅ こういう方に来てほしい</h4>
+                    <ul>
+                        <li>副業のゼロイチを本気で達成したい方</li>
+                        <li>1日1〜2時間は確保できる方</li>
+                        <li>学ぶだけでなくちゃんと行動する方</li>
+                        <li>半年以内に副業で結果を出したい方</li>
+                        <li>独学に限界を感じて環境を求めている方</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PRICE ═══════════════ -->
+    <section class="section section-dark" id="apply">
+        <div class="container">
+            <div class="price-box">
+                <div class="section-title">
+                    <h2 style="color:var(--text-white)">Skill Hacks<br>受講料</h2>
+                </div>
+                <p class="price-original">通常価格 ¥788,000</p>
+                <div class="price-main">¥398,000<span>（税込）</span></div>
+                <p class="price-monthly">24分割なら<strong> 1日あたり約450円</strong>── コーヒー1杯分</p>
+                <a href="#" class="cta-btn" style="font-size:1.2rem;padding:1.2rem 3.5rem"><span
+                        class="now">今すぐ</span>Skill Hacks に申し込む</a>
+                <p class="cta-micro" style="color:rgba(255,255,255,.5)">※ 押し売りは一切ありません ／ 最大24分割対応</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FAQ ═══════════════ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>よくある<span class="marker">ご質問</span></h2>
+            </div>
+            <div class="reveal">
+                <div class="faq-item">
+                    <div class="faq-q">完全に未経験ですが大丈夫ですか？</div>
+                    <div class="faq-a">大丈夫です。年商25億規模の受講生も、上場企業に会社を売却した受講生も、最初は完全にゼロからスタートしています。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">本業が忙しくて時間が取れません</div>
+                    <div class="faq-a">オンライン動画形式なので隙間時間・移動時間でも学べます。1日1〜2時間あればOKです。伴走スタッフが一緒にスケジューリングもします。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">どのスキルから始めればいいか分かりません</div>
+                    <div class="faq-a">初回キックオフ面談で、あなたの性格・ライフスタイル・目標をヒアリングした上で最適なロードマップを個別に作成します。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">分割払いはできますか？</div>
+                    <div class="faq-a">はい。最大24回分割に対応しています。1日あたり約450円──コーヒー1杯分です。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">いつから始められますか？</div>
+                    <div class="faq-a">決済後10秒でスタート可能です。初回キックオフ面談は最短当日〜1週間以内に設定します。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">途中でやめたくなったらどうすればいいですか？</div>
+                    <div class="faq-a">サポートメンバーに相談→Zoomでヒアリング。カリキュラム自体は永久に見放題なので、一旦休憩して再開もOKです。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">パソコンは必要ですか？</div>
+                    <div class="faq-a">はい。15〜20万円程度のPC（MacBook Air等）が必要です。2年分割なら金利ゼロで購入できます。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FINAL CTA ═══════════════ -->
+    <section class="section section-dark cta-section">
+        <div class="container">
+            <h3>自信があるから行動するんじゃない。<br>行動するから自信がつく。</h3>
+            <p>1日経って行動しなかったことは1週間経っても行動しない。<br>1週間経って行動しなかったことは一生やらない。</p>
+            <a href="#apply" class="cta-btn" style="font-size:1.2rem;padding:1.2rem 3.5rem"><span
+                    class="now">今すぐ</span>Skill Hacks に申し込む</a>
+            <p class="cta-micro">※ この動画を視聴してから1週間で申込み終了</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <p>&copy; 2026 Skill Hacks. All Rights Reserved. | 特定商取引法に基づく表記</p>
+    </footer>
+
+    <!-- ═══════════════ FLOATING CTA ═══════════════ -->
+    <div class="floating-cta" id="floatingCta">
+        <div class="price-tag">Skill Hacks <span class="amount">¥398,000</span><span
+                style="font-size:.7rem;opacity:.6">（税込）</span></div>
+        <a href="#apply" class="f-btn">今すぐ申し込む →</a>
+    </div>
+
+    <script>
+        // Floating CTA
+        const fc = document.getElementById('floatingCta');
+        window.addEventListener('scroll', () => { fc.classList.toggle('visible', window.scrollY > 500) });
+
+        // Scroll reveal
+        const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } }) }, { threshold: .15 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>

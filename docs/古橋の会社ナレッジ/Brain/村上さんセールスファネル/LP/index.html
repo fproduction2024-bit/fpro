@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain ブースターパッケージ｜10大特典を無料プレゼント</title>
+    <meta name="description" content="Brainで月50万円を達成するロードマップをはじめ、10個の実践テンプレート＆ガイドを無料プレゼント。LINE登録で今すぐ受け取れます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-cream: #f7f5f0;
+            --bg-white: #ffffff;
+            --bg-dark: #1a1a1a;
+            --accent-gold: #b8965a;
+            --accent-gold-light: #d4b87a;
+            --accent-gold-dark: #9a7a46;
+            --accent-purple: #6c3ce0;
+            --accent-purple-light: #8b5cf6;
+            --text-primary: #2a2a2a;
+            --text-secondary: #5a5a5a;
+            --text-light: #8a8a8a;
+            --text-white: #f5f5f5;
+            --border-light: #e8e4dc;
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-gold: 0 4px 20px rgba(184, 150, 90, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-cream);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ───── Utility ───── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 600;
+            text-align: center;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: 0.04em;
+            line-height: 1.5;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 20px auto 32px;
+        }
+
+        /* ───── CTA Button ───── */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: #fff;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 18px 48px;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-gold);
+            letter-spacing: 0.04em;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(184, 150, 90, 0.4);
+        }
+
+        .cta-button-large {
+            font-size: 1.15rem;
+            padding: 22px 56px;
+        }
+
+        .cta-wrapper {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 12px;
+        }
+
+        /* ───── Hero ───── */
+        .hero {
+            position: relative;
+            padding: 100px 0 80px;
+            background: var(--bg-cream);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(184, 150, 90, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(108, 60, 224, 0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(184, 150, 90, 0.12);
+            color: var(--accent-gold-dark);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            letter-spacing: 0.06em;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-gold-dark);
+        }
+
+        .hero-lead {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 56px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 6px;
+            letter-spacing: 0.04em;
+        }
+
+        /* ───── Problem ───── */
+        .problem {
+            background: var(--bg-white);
+        }
+
+        .problem-list {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .problem-list li {
+            position: relative;
+            padding: 16px 0 16px 40px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-list li::before {
+            content: '✕';
+            position: absolute;
+            left: 8px;
+            top: 16px;
+            color: #d45555;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ───── Present Card ───── */
+        .present-section {
+            background: var(--bg-cream);
+        }
+
+        .present-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-light);
+        }
+
+        .present-card-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .present-card-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+            letter-spacing: 0.08em;
+        }
+
+        .present-card-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .present-list {
+            list-style: none;
+        }
+
+        .present-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .present-item:last-child {
+            border-bottom: none;
+        }
+
+        .present-num {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: rgba(184, 150, 90, 0.1);
+            color: var(--accent-gold-dark);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .present-text {
+            flex: 1;
+        }
+
+        .present-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .present-text p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .present-target {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .target-a {
+            background: rgba(108, 60, 224, 0.08);
+            color: var(--accent-purple);
+        }
+
+        .target-b {
+            background: rgba(34, 197, 94, 0.08);
+            color: #16a34a;
+        }
+
+        .target-c {
+            background: rgba(234, 179, 8, 0.08);
+            color: #ca8a04;
+        }
+
+        .target-d {
+            background: rgba(239, 68, 68, 0.08);
+            color: #dc2626;
+        }
+
+        .target-all {
+            background: rgba(184, 150, 90, 0.1);
+            color: var(--accent-gold-dark);
+        }
+
+        /* ───── How it works ───── */
+        .steps-section {
+            background: var(--bg-white);
+        }
+
+        .steps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            position: relative;
+        }
+
+        .step-line {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .step-circle {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 12px rgba(184, 150, 90, 0.2);
+        }
+
+        .step-connector {
+            width: 2px;
+            flex: 1;
+            background: var(--border-light);
+            min-height: 32px;
+        }
+
+        .step-content {
+            padding-bottom: 36px;
+            padding-top: 8px;
+        }
+
+        .step-content h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .step-content p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .step-item:last-child .step-connector {
+            display: none;
+        }
+
+        /* ───── Testimonials ───── */
+        .testimonials-section {
+            background: var(--bg-cream);
+        }
+
+        .testimonial-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--border-light);
+        }
+
+        .testimonial-quote {
+            font-size: 0.92rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            position: relative;
+            padding-left: 16px;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .testimonial-author {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+
+        /* ───── FAQ ───── */
+        .faq-section {
+            background: var(--bg-white);
+        }
+
+        .faq-list {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-light);
+            padding: 24px 0;
+        }
+
+        .faq-q {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .faq-q-mark {
+            color: var(--accent-gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            padding-left: 24px;
+        }
+
+        /* ───── Final CTA ───── */
+        .final-cta {
+            background: var(--bg-dark);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .final-cta .section-title {
+            color: var(--text-white);
+        }
+
+        .final-cta .section-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .final-cta .gold-line {
+            background: var(--accent-gold);
+        }
+
+        .final-presents-mini {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 36px;
+        }
+
+        .final-present-tag {
+            background: rgba(184, 150, 90, 0.12);
+            color: var(--accent-gold-light);
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        /* ───── Footer ───── */
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ───── Responsive ───── */
+        @media (max-width: 640px) {
+            .section {
+                padding: 56px 0;
+            }
+
+            .hero {
+                padding: 72px 0 56px;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+
+            .hero-stat-number {
+                font-size: 1.8rem;
+            }
+
+            .present-card {
+                padding: 32px 20px;
+            }
+
+            .cta-button {
+                padding: 16px 36px;
+                font-size: 0.95rem;
+            }
+
+            .cta-button-large {
+                padding: 18px 40px;
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">期間限定 無料プレゼント</div>
+            <h1 class="hero-title">
+                Brainで<span class="highlight">月50万円</span>を<br>達成するためのすべて
+            </h1>
+            <p class="hero-lead">
+                10個の実践テンプレート＆ガイドを<br>
+                LINE登録者限定で無料プレゼント。
+            </p>
+            <div class="cta-wrapper" style="margin-top: 24px;">
+                <a href="#" class="cta-button cta-button-large">
+                    📦 LINEで無料プレゼントを受け取る
+                </a>
+                <p class="cta-note">※ 無料のLINE登録のみで受け取れます</p>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">10</div>
+                    <div class="hero-stat-label">特典数</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">92%</div>
+                    <div class="hero-stat-label">満足度</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">¥0</div>
+                    <div class="hero-stat-label">完全無料</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ PROBLEM ═══════ -->
+    <section class="problem section">
+        <div class="container">
+            <p class="section-title">
+                こんなお悩みはありませんか？
+            </p>
+            <div class="gold-line"></div>
+            <ul class="problem-list">
+                <li>Brainに登録したものの、何から始めればいいかわからない</li>
+                <li>自分の経験やスキルをどうコンテンツにすればいいかわからない</li>
+                <li>商品を出したけど、全然売れない</li>
+                <li>値段の付け方がわからず、安売りしてしまっている</li>
+                <li>売上はあるけど、次のステージに行くための壁を感じている</li>
+                <li>アフィリエイトで効率よく報酬を得る方法を知りたい</li>
+            </ul>
+            <p class="section-subtitle" style="margin-top: 36px; margin-bottom: 0;">
+                ひとつでも当てはまるなら、<br>このプレゼントがお役に立てます。
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════ PRESENT CARD ═══════ -->
+    <section class="present-section section">
+        <div class="container">
+            <p class="section-title">ブースターパッケージ 10大特典</p>
+            <div class="gold-line"></div>
+            <p class="section-subtitle">
+                あなたのステージに合わせた最適なテンプレート＆ガイドを<br>
+                全て無料でお届けします。
+            </p>
+
+            <div class="present-card">
+                <div class="present-card-header">
+                    <div class="present-card-badge">ALL FREE</div>
+                    <p class="present-card-title">10大特典の内容</p>
+                </div>
+
+                <ul class="present-list">
+                    <li class="present-item">
+                        <div class="present-num">01</div>
+                        <div class="present-text">
+                            <h4>Brain販売で月50万円を達成するロードマップ</h4>
+                            <p>Phase 0〜4まで、テーマ選定から安定収益化まで完全ステップ化。「何を」「どの順番で」やればいいかが一目でわかります。</p>
+                            <span class="present-target target-a">コンテンツ販売者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">02</div>
+                        <div class="present-text">
+                            <h4>コンテンツの値段設計テンプレート</h4>
+                            <p>安すぎず高すぎない最適価格を、論理的に導き出せるテンプレート。値段で悩む時間をゼロに。</p>
+                            <span class="present-target target-a">コンテンツ販売者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">03</div>
+                        <div class="present-text">
+                            <h4>初心者が最短で月5万円を作る3ステップ</h4>
+                            <p>知識・経験・実績ゼロでも最短で初収益を達成するための完全ガイド。実践者の成功パターンを凝縮。</p>
+                            <span class="present-target target-b">初心者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">04</div>
+                        <div class="present-text">
+                            <h4>稼げるスキル選定チェックリスト</h4>
+                            <p>「どのスキルが売れるのか？」を判定するチェックリスト。需要と供給のバランスを数値で可視化。</p>
+                            <span class="present-target target-b">初心者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">05</div>
+                        <div class="present-text">
+                            <h4>売上の壁を突破する「仕組み化」チェックシート</h4>
+                            <p>属人的なビジネスから脱却し、安定した売上を実現するための仕組み化チェックリスト。</p>
+                            <span class="present-target target-c">経営者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">06</div>
+                        <div class="present-text">
+                            <h4>年商1億経営者が実践するKPI設計テンプレート</h4>
+                            <p>売上を因数分解して、ボトルネックを数値で特定。感覚経営から脱却した経営者に大好評。</p>
+                            <span class="present-target target-c">経営者向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">07</div>
+                        <div class="present-text">
+                            <h4>Brainアフィリエイトで月10万円稼ぐ戦略ガイド</h4>
+                            <p>自分の商品がなくても、紹介だけで月10万円を達成する具体的な戦略を解説。</p>
+                            <span class="present-target target-d">アフィリエイター向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">08</div>
+                        <div class="present-text">
+                            <h4>SNSフォロワーを最速で伸ばすX運用テンプレート</h4>
+                            <p>投稿テンプレート、時間帯分析、エンゲージメント戦略をまとめた実践ガイド。</p>
+                            <span class="present-target target-d">アフィリエイター向け</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">09</div>
+                        <div class="present-text">
+                            <h4>迫さん直伝・ビジネスモデル構築の全体像</h4>
+                            <p>Brain創業者・迫さんのビジネス設計思考を体系的に学べる特別コンテンツ。</p>
+                            <span class="present-target target-all">全ステージ共通</span>
+                        </div>
+                    </li>
+                    <li class="present-item">
+                        <div class="present-num">10</div>
+                        <div class="present-text">
+                            <h4>Brain成功者インタビュー集</h4>
+                            <p>実際にBrainで月50万〜100万円を達成した先輩たちのリアルな成功ストーリー。</p>
+                            <span class="present-target target-all">全ステージ共通</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cta-wrapper">
+                <a href="#" class="cta-button cta-button-large">
+                    📦 LINEで無料プレゼントを受け取る
+                </a>
+                <p class="cta-note">※ 30秒で登録完了・いつでもブロック可能</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ HOW IT WORKS ═══════ -->
+    <section class="steps-section section">
+        <div class="container">
+            <p class="section-title">受け取りまでの3ステップ</p>
+            <div class="gold-line"></div>
+            <p class="section-subtitle">
+                かんたん3ステップで、<br>
+                10大特典がすべて手に入ります。
+            </p>
+
+            <div class="steps-grid">
+                <div class="step-item">
+                    <div class="step-line">
+                        <div class="step-circle">1</div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h4>LINE登録</h4>
+                        <p>下のボタンからLINE友だち追加をしてください。30秒で完了します。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-line">
+                        <div class="step-circle">2</div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h4>無料個別面談を予約</h4>
+                        <p>LINEでお届けする案内から、ご都合の良い日時を選んで予約するだけ。面談は完全無料・60分間です。</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-line">
+                        <div class="step-circle">3</div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h4>面談に参加 → 10大特典を受け取り</h4>
+                        <p>面談であなた専用のアドバイスを受けた後、専用会員サイトからすべての特典にアクセスできます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-wrapper">
+                <a href="#" class="cta-button">
+                    📦 まずはLINE登録する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ TESTIMONIALS ═══════ -->
+    <section class="testimonials-section section">
+        <div class="container">
+            <p class="section-title">参加者の声</p>
+            <div class="gold-line"></div>
+
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        ロードマップ通りに進めて初月で3万円の売上が出ました！独学だったら、いつまでたっても最初の一歩が踏み出せなかったと思います。
+                    </p>
+                    <p class="testimonial-author">— 副業初心者 Tさん</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        値段設計テンプレートを使って、商品単価を2倍にできました。今まで安売りしてたことに気づかされました。
+                    </p>
+                    <p class="testimonial-author">— コンテンツ販売者 Kさん</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">
+                        年商3000万から伸び悩んでいましたが、KPI設計テンプレートのおかげで具体的に何を変えればいいかがクリアになりました。
+                    </p>
+                    <p class="testimonial-author">— 経営者 Mさん</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FAQ ═══════ -->
+    <section class="faq-section section">
+        <div class="container">
+            <p class="section-title">よくある質問</p>
+            <div class="gold-line"></div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <span class="faq-q-mark">Q.</span>
+                        <span>本当に無料ですか？</span>
+                    </div>
+                    <p class="faq-a">はい、完全無料です。LINE登録も面談も一切費用はかかりません。面談後に何かを購入する義務もありません。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <span class="faq-q-mark">Q.</span>
+                        <span>初心者でも大丈夫ですか？</span>
+                    </div>
+                    <p class="faq-a">もちろんです。10大特典には初心者向けの「月5万円を作る3ステップ」や「スキル選定チェックリスト」を含んでおり、面談でもあなたのレベルに合わせてお話します。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <span class="faq-q-mark">Q.</span>
+                        <span>プレゼントはいつもらえますか？</span>
+                    </div>
+                    <p class="faq-a">LINE登録後に届く案内に従って面談をご予約ください。面談終了後、LINEで専用ページのURLをお届けします。面談当日中にお届けします。</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <span class="faq-q-mark">Q.</span>
+                        <span>面談では何をしますか？</span>
+                    </div>
+                    <p class="faq-a">
+                        あなたの現在のステージ（初心者・販売者・経営者・アフィリエイター）をヒアリングした上で、最適なBrain活用戦略と今後のロードマップを個別にアドバイスします。強引な勧誘は一切ありません。
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">
+                        <span class="faq-q-mark">Q.</span>
+                        <span>LINEを登録したら何が届きますか？</span>
+                    </div>
+                    <p class="faq-a">まずプレゼントの概要と受け取り方法をお伝えします。その後、面談予約のご案内をお届けします。不要なメッセージはお送りしません。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FINAL CTA ═══════ -->
+    <section class="final-cta">
+        <div class="container">
+            <p class="section-title">10大特典を、今すぐ無料で。</p>
+            <div class="gold-line"></div>
+
+            <div class="final-presents-mini">
+                <span class="final-present-tag">月50万ロードマップ</span>
+                <span class="final-present-tag">値段設計テンプレ</span>
+                <span class="final-present-tag">月5万3ステップ</span>
+                <span class="final-present-tag">スキル選定リスト</span>
+                <span class="final-present-tag">仕組み化シート</span>
+                <span class="final-present-tag">KPI設計テンプレ</span>
+                <span class="final-present-tag">月10万アフィリ戦略</span>
+                <span class="final-present-tag">X運用テンプレ</span>
+                <span class="final-present-tag">ビジネスモデル全体像</span>
+                <span class="final-present-tag">成功者インタビュー</span>
+            </div>
+
+            <div class="cta-wrapper" style="margin-top: 32px;">
+                <a href="#" class="cta-button cta-button-large"
+                    style="background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold));">
+                    📦 LINEで無料プレゼントを受け取る
+                </a>
+                <p class="cta-note" style="color: rgba(255,255,255,0.4);">
+                    ※ 30秒で登録完了・いつでもブロック可能
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Brain Booster Package. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

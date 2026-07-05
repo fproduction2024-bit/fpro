@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>構築代行支援 実行計画書｜プロライン</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+    // ============================================================
+    //  ★ 数値変数 — ここを変更すると全ページに反映されます
+    // ============================================================
+    const VARS = {
+        // --- 現状 ---
+        currentHourlyRate:       5000,      // 現行コンサルタント時給（円）
+        currentHourlyRateMax:    6000,      // 現行コンサルタント時給 上限（円）
+
+        // --- 目標・体制 ---
+        targetPlayers:           5,         // 構築代行プレイヤー目標人数
+        targetCasesPerMonth:     3,         // 1プレイヤーあたり月間目標案件数
+        targetPeriodMonths:      3,         // 初期フェーズ期間（ヶ月）
+
+        // --- 収益試算 ---
+        annualImpactPerPlayer:   2500000,   // 1プレイヤーあたり年間インパクト（円）下限
+        annualImpactPerPlayerMax:3000000,   // 同上限
+        monthlyFeePerAccount:    7000,      // 1アカウント月額（円）
+        ltv12months:             84000,     // 1アカウント年間LTV（円）
+
+        // --- パッケージ価格（案） ---
+        packagePriceLight:       80000,     // ライトプラン（案）
+        packagePriceStandard:    150000,    // スタンダードプラン（案）
+        packagePriceCustom:      300000,    // カスタムプラン（案）
+
+        // --- スケジュール ---
+        phase1Weeks: 3,  // Phase1（フォーマット整備）所要週数
+        phase2Weeks: 2,  // Phase2（パイロット展開）所要週数
+        phase3Months: 3, // Phase3（本格展開）目標月数
+    };
+    // ============================================================
+
+    const fmt = {
+        num:  (n) => Number(n).toLocaleString('ja-JP'),
+        yen:  (n) => '¥' + Number(n).toLocaleString('ja-JP'),
+        pct:  (n) => Math.round(n * 100) + '%',
+        man:  (n) => Math.round(n / 10000) + '万円',
+        manNum:(n) => Math.round(n / 10000) + '万',
+    };
+
+    const CALC = {
+        totalAnnualImpact: VARS.annualImpactPerPlayer * VARS.targetPlayers,
+        totalAnnualImpactMax: VARS.annualImpactPerPlayerMax * VARS.targetPlayers,
+        monthlyPlayerCases: VARS.targetPlayers * VARS.targetCasesPerMonth,
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-var]').forEach(el => {
+            const key = el.dataset.var;
+            const format = el.dataset.fmt || 'num';
+            const val = key.startsWith('CALC.') ? CALC[key.replace('CALC.','')] : VARS[key];
+            if (val !== undefined) el.textContent = fmt[format] ? fmt[format](val) : val;
+        });
+    });
+    </script>
+
+    <style>
+        :root {
+            --teal: #0C4A4E;
+            --teal-mid: #145B60;
+            --orange: #E8650A;
+            --orange-light: #F08040;
+            --orange-pale: #FFF3EC;
+            --text: #1E2B2E;
+            --text-light: #6B7B7D;
+            --white: #FFFFFF;
+            --bg: #F5F8F8;
+            --card-bg: #FFFFFF;
+            --border: #D8E5E6;
+            --success: #1F9E5E;
+            --warn: #C75000;
+            --route-a: rgba(12,74,78,.08);
+            --route-b: rgba(232,101,10,.07);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg); color: var(--text); line-height: 1.9; font-size: 15px;
+        }
+
+        /* COVER */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #061E20 0%, #0C4A4E 50%, #145B60 100%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; text-align: center; color: var(--white);
+        }
+        .cover::before {
+            content: '';
+            position: absolute; bottom: -20%; left: -10%; width: 55%; height: 110%;
+            background: radial-gradient(ellipse, rgba(232,101,10,.15) 0%, transparent 65%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.05);opacity:.8} }
+
+        .cover-inner { position: relative; z-index: 2; padding: 3rem 2rem; max-width: 820px; }
+        .cover-badge {
+            display: inline-block; padding: .4rem 1.8rem;
+            border: 1px solid rgba(232,101,10,.7); color: var(--orange-light);
+            font-size: .7rem; letter-spacing: .35em; margin-bottom: 2rem;
+            border-radius: 2px; text-transform: uppercase; font-family: 'Inter', sans-serif; font-weight: 600;
+        }
+        .cover h1 { font-size: clamp(1.9rem, 5vw, 3.4rem); font-weight: 900; letter-spacing: .04em; line-height: 1.35; margin-bottom: 1rem; }
+        .cover h1 .accent { color: var(--orange-light); }
+        .cover p.sub { font-size: .92rem; opacity: .68; letter-spacing: .08em; margin-bottom: .4rem; font-weight: 300; }
+        .cover-meta { font-size: .78rem; opacity: .38; margin-top: 2rem; letter-spacing: .08em; }
+
+        .cover-kpi-row { display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+        .cover-kpi {
+            background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+            border-radius: 12px; padding: 1rem 1.4rem; min-width: 150px;
+        }
+        .cover-kpi .ck-label { font-size: .67rem; letter-spacing: .1em; opacity: .52; margin-bottom: .2rem; }
+        .cover-kpi .ck-num { font-size: 1.45rem; font-weight: 900; color: var(--orange-light); font-family: 'Inter', sans-serif; line-height: 1.1; }
+        .cover-kpi .ck-sub { font-size: .67rem; opacity: .48; margin-top: .15rem; }
+
+        /* NAV */
+        .toc { background: var(--teal); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.2); }
+        .toc-inner { max-width: 1040px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+        .toc-inner::-webkit-scrollbar { display: none; }
+        .toc-item {
+            padding: .85rem 1.2rem; font-size: .76rem; letter-spacing: .05em;
+            color: rgba(255,255,255,.6); white-space: nowrap; text-decoration: none;
+            border-bottom: 3px solid transparent; transition: color .2s, border-color .2s; font-weight: 500;
+        }
+        .toc-item:hover { color: var(--white); border-color: var(--orange); }
+
+        /* LAYOUT */
+        section { max-width: 1040px; margin: 0 auto; padding: 4.5rem 2rem; }
+        .sec-label {
+            display: inline-block; color: var(--orange); font-size: .68rem;
+            letter-spacing: .3em; font-weight: 700; margin-bottom: .4rem;
+            text-transform: uppercase; font-family: 'Inter', sans-serif;
+        }
+        section > h2 { font-size: 1.75rem; font-weight: 900; color: var(--teal); margin-bottom: 1rem; padding-bottom: 1rem; position: relative; }
+        section > h2::after { content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orange-light)); border-radius: 2px; }
+        .lead { color: var(--text-light); font-size: .93rem; margin-bottom: 2rem; max-width: 760px; line-height: 2; }
+        hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+        /* CARDS */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.1rem; margin: 1.8rem 0; }
+        .kpi-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.3rem; text-align: center; transition: transform .25s, box-shadow .25s; }
+        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(12,74,78,.1); }
+        .kpi-card .kl { font-size: .7rem; letter-spacing: .08em; color: var(--text-light); margin-bottom: .45rem; }
+        .kpi-card .kn { font-size: 1.8rem; font-weight: 900; color: var(--teal); line-height: 1.2; font-family: 'Inter', sans-serif; }
+        .kpi-card .ks { font-size: .7rem; color: var(--text-light); margin-top: .35rem; line-height: 1.6; }
+        .kpi-card.orange { border-color: var(--orange); }
+        .kpi-card.orange .kn { color: var(--orange); }
+        .kpi-card.dark { background: linear-gradient(135deg, var(--teal), var(--teal-mid)); border-color: #1A7A82; }
+        .kpi-card.dark .kl, .kpi-card.dark .ks { color: rgba(255,255,255,.5); }
+        .kpi-card.dark .kn { color: var(--orange-light); }
+
+        /* CONTENT BLOCK */
+        .content-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 2rem; margin: 1.4rem 0; }
+        .content-block h3 { color: var(--teal); font-size: 1rem; margin-bottom: 1rem; padding-bottom: .7rem; border-bottom: 1px solid var(--border); }
+
+        /* HL BOX */
+        .hl-box { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%); color: var(--white); border-radius: 16px; padding: 2.2rem 2.5rem; margin: 1.8rem 0; position: relative; overflow: hidden; }
+        .hl-box::after { content: ''; position: absolute; top: -40%; right: -10%; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(232,101,10,.18), transparent 70%); }
+        .hl-box h3 { color: var(--orange-light); font-size: 1rem; margin-bottom: .7rem; position: relative; z-index: 1; }
+        .hl-box p, .hl-box ul { opacity: .9; position: relative; z-index: 1; line-height: 2; }
+        .hl-box .big-num { font-size: 2.8rem; font-weight: 900; color: var(--orange-light); display: block; line-height: 1.1; margin: .4rem 0 .2rem; font-family: 'Inter', sans-serif; position: relative; z-index: 1; }
+        .hl-box .big-sub { font-size: .78rem; opacity: .55; position: relative; z-index: 1; }
+
+        /* BULLET */
+        .bullet-list { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: .8rem 0; }
+        .bullet-list li { padding-left: 1.3rem; position: relative; font-size: .91rem; line-height: 1.75; }
+        .bullet-list li::before { content: '▶'; position: absolute; left: 0; color: var(--orange); font-size: .62rem; top: .4rem; }
+        .bullet-list.teal li::before { color: var(--teal); }
+        .bullet-list.check li::before { content: '✓'; color: var(--success); font-size: .75rem; top: .3rem; }
+
+        /* NOTE / WARN */
+        .note-box { background: rgba(12,74,78,.05); border: 1px solid var(--border); border-left: 4px solid var(--teal); border-radius: 8px; padding: 1rem 1.4rem; margin: 1rem 0; font-size: .87rem; color: var(--text-light); line-height: 1.85; }
+        .note-box strong { color: var(--teal); }
+        .warn-box { background: var(--orange-pale); border: 1px solid rgba(232,101,10,.25); border-left: 4px solid var(--orange); border-radius: 8px; padding: 1rem 1.4rem; margin: 1rem 0; font-size: .87rem; line-height: 1.85; }
+        .warn-box strong { color: var(--warn); }
+
+        /* TABLE */
+        .styled-table { width: 100%; border-collapse: collapse; margin: 1.3rem 0; font-size: .88rem; }
+        .styled-table thead { background: var(--teal); color: var(--white); }
+        .styled-table th { padding: .85rem 1.1rem; text-align: left; font-weight: 600; font-size: .82rem; }
+        .styled-table td { padding: .8rem 1.1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .styled-table tbody tr:hover { background: rgba(12,74,78,.03); }
+        .styled-table .num { text-align: right; font-family: 'Inter', sans-serif; }
+        .styled-table .hl { color: var(--orange); font-weight: 700; }
+        .styled-table .hl-g { color: var(--success); font-weight: 700; }
+        .styled-table tfoot td { padding: .9rem 1.1rem; font-weight: 700; background: var(--orange-pale); border-top: 2px solid var(--orange); color: var(--warn); }
+
+        /* ROUTE CARDS */
+        .route-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.4rem 0; }
+        @media (max-width: 680px) { .route-grid { grid-template-columns: 1fr; } }
+        .route-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+        .route-header { padding: .85rem 1.3rem; font-weight: 700; font-size: .88rem; display: flex; align-items: center; gap: .6rem; border-bottom: 1px solid var(--border); }
+        .route-header.a { background: var(--route-a); color: var(--teal); }
+        .route-header.b { background: var(--route-b); color: var(--warn); }
+        .route-badge { display: inline-block; padding: .15rem .7rem; border-radius: 20px; font-size: .7rem; font-weight: 700; font-family: 'Inter', sans-serif; }
+        .route-badge.a { background: var(--teal); color: var(--white); }
+        .route-badge.b { background: var(--orange); color: var(--white); }
+        .route-body { padding: 1.2rem 1.3rem; font-size: .89rem; line-height: 1.85; color: var(--text-light); }
+        .route-body strong { color: var(--text); }
+
+        /* CHECKLIST */
+        .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin: 1rem 0; }
+        @media (max-width: 640px) { .checklist { grid-template-columns: 1fr; } }
+        .check-item { background: rgba(12,74,78,.04); border: 1px solid var(--border); border-radius: 8px; padding: .7rem 1rem; font-size: .85rem; display: flex; align-items: flex-start; gap: .6rem; }
+        .check-icon { color: var(--success); font-size: .9rem; flex-shrink: 0; margin-top: .1rem; }
+
+        /* TIMELINE */
+        .timeline { margin: 1.8rem 0; }
+        .tl-item { display: flex; gap: 1.2rem; margin-bottom: 1.4rem; align-items: flex-start; }
+        .tl-left { display: flex; flex-direction: column; align-items: center; min-width: 52px; }
+        .tl-dot { width: 42px; height: 42px; border-radius: 50%; background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: .82rem; flex-shrink: 0; font-family: 'Inter', sans-serif; }
+        .tl-dot.o { background: var(--orange); }
+        .tl-line { width: 2px; flex: 1; background: var(--border); min-height: 28px; margin-top: 4px; }
+        .tl-content { flex: 1; padding-bottom: .4rem; }
+        .tl-phase { font-size: .7rem; letter-spacing: .1em; color: var(--orange); font-weight: 700; margin-bottom: .25rem; text-transform: uppercase; }
+        .tl-title { font-size: .98rem; font-weight: 700; color: var(--teal); margin-bottom: .35rem; }
+        .tl-desc { font-size: .87rem; color: var(--text-light); line-height: 1.8; }
+
+        [data-var] { color: var(--orange); font-weight: 700; }
+        h4 { font-size: .93rem; font-weight: 700; color: var(--teal); margin: 1.5rem 0 .55rem; }
+
+        footer { max-width: 1040px; margin: 0 auto; padding: 2.5rem 2rem 3.5rem; text-align: center; font-size: .78rem; color: var(--text-light); border-top: 1px solid var(--border); }
+
+        @media (max-width: 640px) {
+            section { padding: 3rem 1.2rem; }
+            .hl-box { padding: 1.8rem 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <div class="cover-inner">
+        <div class="cover-badge">Action Plan — Proline</div>
+        <h1><span class="accent">構築代行プレイヤー支援</span><br>実行計画書</h1>
+        <p class="sub">型化・標準化によって「案件が回る基盤」をプロラインが整備する計画</p>
+        <div class="cover-kpi-row">
+            <div class="cover-kpi">
+                <div class="ck-label">目標プレイヤー数</div>
+                <div class="ck-num"><span data-var="targetPlayers"></span>人</div>
+                <div class="ck-sub">年間1,000万超を目指す体制</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">1人あたり年間インパクト</div>
+                <div class="ck-num"><span data-var="annualImpactPerPlayer" data-fmt="man"></span>〜<span data-var="annualImpactPerPlayerMax" data-fmt="man"></span></div>
+                <div class="ck-sub">継続利用アカウントの積み上げ</div>
+            </div>
+            <div class="cover-kpi">
+                <div class="ck-label">初期フェーズ期間</div>
+                <div class="ck-num"><span data-var="targetPeriodMonths"></span>ヶ月</div>
+                <div class="ck-sub">フォーマット整備〜本格展開まで</div>
+            </div>
+        </div>
+        <p class="cover-meta">プロライン 構築代行支援プロジェクト ／ 2026年4月</p>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+    <div class="toc-inner">
+        <a class="toc-item" href="#sec-goal">① 目的・目標</a>
+        <a class="toc-item" href="#sec-issue">② 現状課題</a>
+        <a class="toc-item" href="#sec-route">③ ルートA・B設計</a>
+        <a class="toc-item" href="#sec-format">④ フォーマット整備</a>
+        <a class="toc-item" href="#sec-price">⑤ 価格設計</a>
+        <a class="toc-item" href="#sec-sim">⑥ 収益試算</a>
+        <a class="toc-item" href="#sec-kpi">⑦ KPI管理</a>
+        <a class="toc-item" href="#sec-roadmap">⑧ スケジュール</a>
+    </div>
+</nav>
+
+
+<!-- ① 目的・目標 -->
+<section id="sec-goal">
+    <span class="sec-label">Section 01</span>
+    <h2>① 目的と目標</h2>
+    <p class="lead">
+        プロライン本体がすべての構築を自社で抱えるのではなく、
+        <strong>案件を取れる人・構築できる人が動きやすい基盤を整えること</strong>に本体が集中します。
+        その結果として、カード登録アカウントの積み上げを加速させます。
+    </p>
+
+    <div class="hl-box">
+        <h3>🎯 この計画が目指すゴール</h3>
+        <p>
+            構築代行プレイヤー <strong style="color:var(--orange-light);"><span data-var="targetPlayers"></span>人体制</strong> を確立し、<br>
+            年間 <strong style="color:var(--orange-light);"><span data-var="CALC.totalAnnualImpact" data-fmt="man"></span>〜<span data-var="CALC.totalAnnualImpactMax" data-fmt="man"></span></strong> の継続課金収益増加を目指す。
+        </p>
+        <div class="big-num"><span data-var="CALC.totalAnnualImpact" data-fmt="manNum"></span>〜<span data-var="CALC.totalAnnualImpactMax" data-fmt="manNum"></span>円/年</div>
+        <p class="big-sub">解約されにくい、継続利用アカウント積み上げによる質の高い売上</p>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card orange">
+            <div class="kl">目標プレイヤー数</div>
+            <div class="kn"><span data-var="targetPlayers"></span>人</div>
+            <div class="ks">認定コンサル・外部プレイヤー含む</div>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kl">1人あたり月間目標案件数</div>
+            <div class="kn"><span data-var="targetCasesPerMonth"></span>件</div>
+            <div class="ks">無理のない継続可能な件数</div>
+        </div>
+        <div class="kpi-card dark">
+            <div class="kl">全体の月間総案件数（目標）</div>
+            <div class="kn"><span data-var="CALC.monthlyPlayerCases"></span>件</div>
+            <div class="ks"><span data-var="targetPlayers"></span>人 × <span data-var="targetCasesPerMonth"></span>件/人/月</div>
+        </div>
+        <div class="kpi-card dark">
+            <div class="kl">1アカウント年間LTV</div>
+            <div class="kn"><span data-var="ltv12months" data-fmt="man"></span></div>
+            <div class="ks">月額 <span data-var="monthlyFeePerAccount" data-fmt="yen"></span> × 12ヶ月</div>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ② 現状課題 -->
+<section id="sec-issue">
+    <span class="sec-label">Section 02</span>
+    <h2>② 現状課題の整理</h2>
+    <p class="lead">なぜ今、この施策が必要なのか。現状の構造的な問題を整理します。</p>
+
+    <div class="content-block">
+        <h3>⚠️ 現在の構造的な課題</h3>
+        <table class="styled-table">
+            <thead><tr><th>課題</th><th>詳細</th><th>インパクト</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td><strong>単価の高さ</strong></td>
+                    <td>コンサルタントの時給が<span data-var="currentHourlyRate" data-fmt="yen"></span>〜<span data-var="currentHourlyRateMax" data-fmt="yen"></span>と発注側から見て高い</td>
+                    <td style="color:var(--warn);">案件を依頼しづらい状況。仕事が回らない</td>
+                </tr>
+                <tr>
+                    <td><strong>フォーマット未整備</strong></td>
+                    <td>構築の内容・価格・手順が担当者ごとにバラバラ</td>
+                    <td style="color:var(--warn);">再現性がない。外部から使いづらい</td>
+                </tr>
+                <tr>
+                    <td><strong>属人化</strong></td>
+                    <td>一部の優秀な人に仕事が集中。他は動けていない</td>
+                    <td style="color:var(--warn);">スケールしない。リスクも高い</td>
+                </tr>
+                <tr>
+                    <td><strong>教育コストの無駄</strong></td>
+                    <td>プロラインが教育しても雇用関係がなく資産化しない</td>
+                    <td style="color:var(--warn);">教育投資の回収ができていない</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="warn-box" style="margin-top:.5rem;">
+        <strong>根本的な問題：</strong>
+        現在の構造は「プロラインコンサルタントを抱える」モデル。
+        本来目指すべきは「プロラインが基盤を整備し、外部プレイヤーが自律的に動く」モデルです。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ③ ルートA・B -->
+<section id="sec-route">
+    <span class="sec-label">Section 03</span>
+    <h2>③ ルートA・B の設計</h2>
+    <p class="lead">
+        構築代行プレイヤーが動きやすくするための<strong>2つのルート</strong>を設計します。
+        両ルートは排他的ではなく、並行して進めることができます。
+    </p>
+
+    <div class="route-grid">
+        <div class="route-card">
+            <div class="route-header a">
+                <span class="route-badge a">ルート A</span>
+                案件取得者 × プロライン仲介・支援
+            </div>
+            <div class="route-body">
+                <strong>基本的な考え方：</strong><br>
+                すでに外部から案件を取れる人（コンサルタント等）が受注し、
+                その一部の実装・設定作業をプロライン側が支援できる体制を作る。
+                <br><br>
+                <strong>プロラインの役割：</strong><br>
+                発注された実装・設定を自社アカウント内で実施。
+                コンサルタントと顧客の間を結ぶ実装パートナーとして機能する。
+                <br><br>
+                <strong>メリット：</strong><br>
+                既存の案件獲得チャネルをそのまま活かせる。
+                営業コストなしでプロラインが実装収益を得られる。
+            </div>
+        </div>
+        <div class="route-card">
+            <div class="route-header b">
+                <span class="route-badge b">ルート B</span>
+                誰でも使えるフォーマット整備
+            </div>
+            <div class="route-body">
+                <strong>基本的な考え方：</strong><br>
+                プロライン本体が構築の「型」を整備し、
+                「何を用意すれば案件が作れるか」を明確化して提供する。
+                <br><br>
+                <strong>必要な素材さえあれば誰でも実装できる：</strong><br>
+                動画と配信文面があれば、残りの実装部分（フォーム・シナリオ等）を
+                標準フォーマットで進められるようにする。
+                <br><br>
+                <strong>メリット：</strong><br>
+                1人への依存がなくなる。プレイヤーが増えるほどスケールする。
+            </div>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <strong>Phase1ではルートBを先に整備する</strong>のが現実的です。
+        フォーマットが整って初めて、ルートAで仲介が機能するようになります。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ④ フォーマット整備 -->
+<section id="sec-format">
+    <span class="sec-label">Section 04</span>
+    <h2>④ フォーマット整備の内容（ルートB）</h2>
+    <p class="lead">
+        「動画と配信文面があれば、あとは実装できる」状態を作るために
+        標準化すべき実装項目を定義します。
+    </p>
+
+    <div class="content-block">
+        <h3>標準化する実装項目一覧</h3>
+        <div class="checklist">
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>フォーム</strong><br>作成・接続・自動応答の標準設定</div></div>
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>コンテンツページ</strong><br>テンプレートベースで即作成可能な構成</div></div>
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>シナリオ構築</strong><br>ステップ別の配信設計の型（AI活用可）</div></div>
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>メッセージ設定</strong><br>文面テンプレート＋変数設定の標準化</div></div>
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>必要最低限の画像整備</strong><br>バナー・アイコン等の最小セット定義</div></div>
+            <div class="check-item"><span class="check-icon">✓</span><div><strong>設定導線チェックリスト</strong><br>抜け漏れ防止のための確認フロー</div></div>
+        </div>
+        <div class="note-box" style="margin-top:1rem;">
+            <strong>AI活用方針：</strong>
+            文章作成・シナリオ文面・HTMLテンプレート生成はAIを前提として実施。
+            人間は最終確認と設定作業に集中することで、最小工数で案件を回せる体制にする。
+        </div>
+    </div>
+
+    <div class="content-block" style="margin-top:1.4rem;">
+        <h3>整備の優先順位（案）</h3>
+        <table class="styled-table">
+            <thead><tr><th>優先度</th><th>項目</th><th>難易度</th><th>目安工数</th></tr></thead>
+            <tbody>
+                <tr><td>★★★</td><td>シナリオ構築テンプレート（AI＋型）</td><td>中</td><td>3〜5日</td></tr>
+                <tr><td>★★★</td><td>フォーム標準設定マニュアル</td><td>低</td><td>1〜2日</td></tr>
+                <tr><td>★★☆</td><td>コンテンツページテンプレート</td><td>中</td><td>3〜5日</td></tr>
+                <tr><td>★★☆</td><td>メッセージ文面テンプレート集</td><td>低</td><td>2〜3日</td></tr>
+                <tr><td>★☆☆</td><td>画像最小セット（バナー等）</td><td>高</td><td>要検討</td></tr>
+                <tr><td>★☆☆</td><td>設定チェックリスト</td><td>低</td><td>1日</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="warn-box">
+        <strong>⚠️ 注意：</strong>
+        画像・コンテンツページのリッチ化は工数対効果を必ず確認してから着手すること。
+        まずは「必要最低限で案件が完成する状態」を先に整備し、後から品質を上げる方針が現実的。
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑤ 価格設計 -->
+<section id="sec-price">
+    <span class="sec-label">Section 05</span>
+    <h2>⑤ 価格・単価設計の見直し</h2>
+    <p class="lead">
+        時給型から<strong>パッケージ型</strong>への移行により、
+        発注側が依頼しやすく、プレイヤー側も件数を増やしやすい体制を作ります。
+    </p>
+
+    <div class="hl-box">
+        <h3>💡 基本的な考え方</h3>
+        <p>
+            高単価な時給型（<span data-var="currentHourlyRate" data-fmt="yen"></span>〜<span data-var="currentHourlyRateMax" data-fmt="yen"></span>/時間）で抱えるのではなく、<br>
+            <strong style="color:var(--orange-light);">型化・標準化した作業を、より実務的なパッケージ単価で回せるようにする。</strong>
+        </p>
+    </div>
+
+    <div class="content-block">
+        <h3>パッケージ価格設計案（※要調整）</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>プラン</th>
+                    <th>含まれる内容</th>
+                    <th class="num">価格目安</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ライトプラン</strong></td>
+                    <td>フォーム＋シナリオ＋基本設定のみ</td>
+                    <td class="num hl"><span data-var="packagePriceLight" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>スタンダードプラン</strong></td>
+                    <td>ライト＋コンテンツページ＋メッセージ設計</td>
+                    <td class="num hl"><span data-var="packagePriceStandard" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>カスタムプラン</strong></td>
+                    <td>スタンダード＋画像整備＋コンテンツリッチ化</td>
+                    <td class="num hl"><span data-var="packagePriceCustom" data-fmt="man"></span>〜</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            価格は変数 <code>packagePriceLight / packagePriceStandard / packagePriceCustom</code> で変更できます。
+            実際の市場価格や競合事例を調査した上で最終決定してください。
+        </div>
+    </div>
+
+    <ul class="bullet-list" style="margin-top:1.4rem;">
+        <li><strong>発注側のメリット：</strong>事前に費用が見えるため稟議・判断がしやすい</li>
+        <li><strong>構築側のメリット：</strong>作業の型が決まると件数をこなしやすくなる</li>
+        <li><strong>プロライン側のメリット：</strong>案件の標準化により品質が安定・管理しやすい</li>
+    </ul>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑥ 収益試算 -->
+<section id="sec-sim">
+    <span class="sec-label">Section 06</span>
+    <h2>⑥ 収益インパクト試算</h2>
+    <p class="lead">構築代行プレイヤーが育った場合のプロラインへの収益貢献を試算します。</p>
+
+    <div class="content-block">
+        <h3>📊 プレイヤー体制シミュレーション</h3>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>計算式</th>
+                    <th class="num">試算値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1プレイヤーあたり年間インパクト（下限）</td>
+                    <td>月<span data-var="targetCasesPerMonth"></span>件 × アカウントLTV</td>
+                    <td class="num"><span data-var="annualImpactPerPlayer" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td>1プレイヤーあたり年間インパクト（上限）</td>
+                    <td>同上の高水準シナリオ</td>
+                    <td class="num"><span data-var="annualImpactPerPlayerMax" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td>プレイヤー<span data-var="targetPlayers"></span>人体制（下限）</td>
+                    <td><span data-var="targetPlayers"></span>人 × <span data-var="annualImpactPerPlayer" data-fmt="man"></span></td>
+                    <td class="num hl"><span data-var="CALC.totalAnnualImpact" data-fmt="man"></span></td>
+                </tr>
+                <tr>
+                    <td>プレイヤー<span data-var="targetPlayers"></span>人体制（上限）</td>
+                    <td><span data-var="targetPlayers"></span>人 × <span data-var="annualImpactPerPlayerMax" data-fmt="man"></span></td>
+                    <td class="num hl"><span data-var="CALC.totalAnnualImpactMax" data-fmt="man"></span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>年間収益インパクト（試算レンジ）</strong></td>
+                    <td class="num"><strong><span data-var="CALC.totalAnnualImpact" data-fmt="man"></span>〜<span data-var="CALC.totalAnnualImpactMax" data-fmt="man"></span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="hl-box" style="margin-top:1.4rem;">
+        <h3>💡 なぜこの売上が重要なのか</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; position:relative; z-index:1;">
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                継続課金アカウントとして積み上がるため、<strong style="color:var(--orange-light);">解約されにくい売上基盤</strong>になる
+            </li>
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                コンサル型・一時売上と異なり、<strong style="color:var(--orange-light);">ツールが実際に使われた結果</strong>として積み上がる
+            </li>
+            <li style="padding-left:1.3rem; position:relative;">
+                <span style="position:absolute;left:0;color:var(--orange-light);">▶</span>
+                積み上がるほど企業価値（M&A評価含む）に直結する<strong style="color:var(--orange-light);">ストックビジネスの本質</strong>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑦ KPI -->
+<section id="sec-kpi">
+    <span class="sec-label">Section 07</span>
+    <h2>⑦ KPI・管理指標</h2>
+    <p class="lead">毎月確認すべき指標と判断基準を定義します。</p>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>指標</th>
+                <th>目標値</th>
+                <th>確認方法</th>
+                <th>判断基準</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>月間構築代行案件数（全体）</td>
+                <td class="hl"><span data-var="CALC.monthlyPlayerCases"></span>件/月</td>
+                <td>案件台帳・管理シート</td>
+                <td><span data-var="CALC.monthlyPlayerCases"></span>件に届かない月が続く場合は原因分析</td>
+            </tr>
+            <tr>
+                <td>アクティブプレイヤー数</td>
+                <td class="hl"><span data-var="targetPlayers"></span>人以上</td>
+                <td>案件発生数で確認</td>
+                <td>月1件以上稼働している人をカウント</td>
+            </tr>
+            <tr>
+                <td>カード登録アカウント純増数</td>
+                <td class="hl">月次で純増傾向</td>
+                <td>管理画面で解約数と比較</td>
+                <td>純増がゼロ以下になったら施策見直し</td>
+            </tr>
+            <tr>
+                <td>フォーマット完成率</td>
+                <td class="hl">Phase1完了時点で70%以上</td>
+                <td>制作進捗チェックリスト</td>
+                <td>遅延が発生した場合はスコープを削減</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr class="divider">
+
+
+<!-- ⑧ スケジュール -->
+<section id="sec-roadmap">
+    <span class="sec-label">Section 08</span>
+    <h2>⑧ 実行スケジュール</h2>
+    <p class="lead">初期<span data-var="targetPeriodMonths"></span>ヶ月の実行タイムラインです。フォーマット整備を先行し、その後展開・改善を繰り返します。</p>
+
+    <div class="timeline">
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot">P1</div><div class="tl-line"></div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 1 — 第<span data-var="phase1Weeks"></span>週以内</div>
+                <div class="tl-title">フォーマット整備（ルートB基盤づくり）</div>
+                <div class="tl-desc">
+                    優先度「★★★」の項目から着手：シナリオテンプレート＋フォーム標準マニュアル<br>
+                    AI活用で文面・テンプレートを高速生成<br>
+                    整備物を社内でレビュー → v1.0を確定
+                </div>
+            </div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot o">P2</div><div class="tl-line"></div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 2 — 第<span data-var="phase2Weeks"></span>〜5週</div>
+                <div class="tl-title">パイロット展開（ルートA活用開始）</div>
+                <div class="tl-desc">
+                    既存の案件獲得者（ルートA）にフォーマットを使ってもらい実案件で検証<br>
+                    パッケージ価格の実運用テスト・単価調整<br>
+                    フィードバックをもとにフォーマットを改善
+                </div>
+            </div>
+        </div>
+        <div class="tl-item">
+            <div class="tl-left"><div class="tl-dot">P3</div></div>
+            <div class="tl-content">
+                <div class="tl-phase">Phase 3 — 〜<span data-var="targetPeriodMonths"></span>ヶ月</div>
+                <div class="tl-title">本格展開・プレイヤー増加</div>
+                <div class="tl-desc">
+                    対象プレイヤーを<span data-var="targetPlayers"></span>人まで拡大<br>
+                    月間案件数<span data-var="CALC.monthlyPlayerCases"></span>件を目標に管理<br>
+                    コンテンツページ・画像整備など残りフォーマットを順次完成させる
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hl-box" style="margin-top:2rem;">
+        <h3>🚀 この計画の成功要件</h3>
+        <p>
+            「自社で全部やる」から「基盤を作ってプレイヤーに動いてもらう」への発想転換が鍵。<br>
+            <strong style="color:var(--orange-light);">フォーマットが先、プレイヤー展開が後。</strong> この順番を守ることで再現性のある体制が生まれます。
+        </p>
+    </div>
+</section>
+
+
+<footer>
+    <p style="margin-bottom:.3rem;">プロライン 構築代行プレイヤー支援 実行計画書</p>
+    <p>2026年4月 ／ Confidential</p>
+</footer>
+
+</body>
+</html>

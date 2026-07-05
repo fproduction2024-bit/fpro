@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>患者タイプ別対応集 — KLF スタッフマニュアル</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mint: #0B6E4F;
+            --mint-pale: #E8F5F0;
+            --mint-mid: #C5E8DA;
+            --amber: #D97706;
+            --amber-pale: #FEF3C7;
+            --amber-light: #F59E0B;
+            --slate: #1E293B;
+            --slate-mid: #334155;
+            --slate-light: #64748B;
+            --bg: #F1F5F2;
+            --card: #FFFFFF;
+            --red: #DC2626;
+            --red-pale: #FEE2E2;
+            --blue: #1D4ED8;
+            --blue-pale: #DBEAFE;
+            --green: #16A34A;
+            --green-pale: #DCFCE7;
+            --purple: #7C3AED;
+            --purple-pale: #EDE9FE;
+            --pink: #DB2777;
+            --pink-pale: #FCE7F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--slate);
+            line-height: 1.65;
+        }
+
+        .top-bar {
+            background: var(--mint);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar h1 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .top-bar .sub {
+            color: rgba(255, 255, 255, .75);
+            font-size: 12px;
+        }
+
+        .badge-staff {
+            background: var(--amber);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, var(--mint) 0%, #0D7A6A 100%);
+            color: #fff;
+            border-radius: 16px;
+            padding: 22px 28px;
+            margin-bottom: 32px;
+        }
+
+        .intro h2 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .intro p {
+            font-size: 13.5px;
+            opacity: .9;
+            line-height: 1.7;
+        }
+
+        /* Type tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .tab-btn {
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 2px solid var(--mint-mid);
+            background: transparent;
+            color: var(--slate-light);
+            cursor: pointer;
+            transition: all .2s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--mint);
+            border-color: var(--mint);
+            color: #fff;
+        }
+
+        /* Type section */
+        .type-section {
+            display: none;
+        }
+
+        .type-section.active {
+            display: block;
+        }
+
+        /* Hero card */
+        .type-hero {
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .type-hero .hero-left {}
+
+        .type-hero .hero-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .type-hero .hero-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: inherit;
+            margin-bottom: 4px;
+        }
+
+        .type-hero .hero-sub {
+            font-size: 13.5px;
+            opacity: .9;
+            line-height: 1.6;
+        }
+
+        .type-hero .hero-right {}
+
+        .trait-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .trait {
+            background: rgba(255, 255, 255, .25);
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 12.5px;
+        }
+
+        /* Approach blocks */
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .approach-block {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            padding: 20px 22px;
+        }
+
+        .ab-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--mint);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ab-points {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ab-point {
+            display: flex;
+            gap: 10px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .ab-point::before {
+            content: '▶';
+            font-size: 10px;
+            color: var(--mint);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        /* Scripts */
+        .script-card {
+            background: var(--card);
+            border-radius: 14px;
+            border: 1px solid var(--mint-mid);
+            padding: 20px 22px;
+            margin-bottom: 16px;
+        }
+
+        .sc-title {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--slate);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dialog {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .line {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .line-speaker {
+            width: 52px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 6px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .line-speaker.staff {
+            background: var(--mint);
+            color: #fff;
+        }
+
+        .line-speaker.pt {
+            background: var(--slate-mid);
+            color: #fff;
+        }
+
+        .line-text.staff-line {
+            background: var(--mint-pale);
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-mid);
+        }
+
+        .line-text.pt-line {
+            background: #F1F5F9;
+            border-radius: 0 10px 10px 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--slate-light);
+        }
+
+        .tip-box {
+            background: var(--amber-pale);
+            border: 1px solid var(--amber-light);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 12px;
+        }
+
+        .tip-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 4px;
+        }
+
+        .caution-box {
+            background: var(--red-pale);
+            border: 1px solid #FECACA;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+            margin-top: 12px;
+        }
+
+        .caution-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 4px;
+        }
+
+        /* Warning list */
+        .ng-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .ng-item {
+            display: flex;
+            gap: 8px;
+            font-size: 13.5px;
+            color: var(--slate-mid);
+        }
+
+        .ng-item::before {
+            content: '❌';
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .ok-item::before {
+            content: '✅';
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .section-div {
+            height: 2px;
+            background: linear-gradient(90deg, var(--mint-mid), transparent);
+            margin: 32px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--slate-light);
+            font-size: 12px;
+            border-top: 1px solid var(--mint-mid);
+            margin-top: 60px;
+        }
+
+        @media(max-width:700px) {
+            .top-bar {
+                padding: 14px 20px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <div>
+            <h1>👥 患者タイプ別 対応集</h1>
+            <div class="sub">KLF スタッフ用 — 4タイプの患者特性と効果的なアプローチ</div>
+        </div>
+        <span class="badge-staff">STAFF ONLY</span>
+    </div>
+
+    <div class="container">
+
+        <div class="intro">
+            <h2>📌 なぜタイプ別対応が必要か</h2>
+            <p>同じ説明でも「産後2ヶ月の初来院患者」と「エステ目的の初来院患者」では響くポイントが全く異なります。<br>
+                患者タイプを素早く見極め、刺さるアプローチを選ぶことが成約率・継続率の向上に直結します。</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showType('postnatal',this)">🤱 産後ケア（初来院）</button>
+            <button class="tab-btn" onclick="showType('esthetic',this)">✨ エステ・ダイエット</button>
+            <button class="tab-btn" onclick="showType('pain',this)">🦴 急性痛み・怪我</button>
+            <button class="tab-btn" onclick="showType('sports',this)">🏋️ 元スポーツ選手</button>
+        </div>
+
+        <!-- TYPE: 産後ケア -->
+        <div class="type-section active" id="type-postnatal">
+            <div class="type-hero" style="background:linear-gradient(135deg,#EC4899,#BE185D);color:#fff;">
+                <div class="hero-left">
+                    <div class="hero-icon">🤱</div>
+                    <div class="hero-name">産後ケア（初来院）</div>
+                    <div class="hero-sub">産後〜1年以内の来院。<br>特に産後3ヶ月は骨格が可動性を持つ「ゴールデン期間」。</div>
+                </div>
+                <div class="hero-right">
+                    <div class="trait-list">
+                        <div class="trait">体が戻るか不安</div>
+                        <div class="trait">育児で余裕がない</div>
+                        <div class="trait">費用を気にしている</div>
+                        <div class="trait">効果を出せるか半信半疑</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-block">
+                    <div class="ab-title">🎯 最初にすること</div>
+                    <div class="ab-points">
+                        <div class="ab-point">来院パターンを確認（最初から決めてた？症状で来た？）</div>
+                        <div class="ab-point">授乳中かどうかを確認（タンパク質の話の前に必要）</div>
+                        <div class="ab-point">上の子の年齢・人数を聞いて抱っこの負荷を把握</div>
+                        <div class="ab-point">「産後いつから来てOKか」の不安を先に取り除く</div>
+                    </div>
+                </div>
+                <div class="approach-block">
+                    <div class="ab-title">💡 刺さるポイント</div>
+                    <div class="ab-points">
+                        <div class="ab-point"><strong>産後3ヶ月がゴールデン期間</strong>という希少性をつかう</div>
+                        <div class="ab-point">「子どもが大きくなるにつれて負担が増える」という将来の危機感</div>
+                        <div class="ab-point">「前回（1人目）は改善した」過去の成功体験があれば活かす</div>
+                        <div class="ab-point">産後骨盤矯正と骨盤矯正の<strong>セット提案</strong>（今日がチャンス）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 「産後はいつから来ていいの？」への回答</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker pt">患者</span>
+                        <div class="line-text pt-line">産後ってすぐ来ても大丈夫なんですか？</div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            産後3週間すぎれば来ていただいて全然大丈夫ですよ。<br>ただ産後の骨盤ってまだ柔らかくて動きやすい状態なんです。特に最初の3ヶ月が一番骨盤が締めやすい期間で、<strong>ここが黄金期</strong>なんですよ。<br>3ヶ月すぎると段々硬くなってきて、変えるのに時間がかかるようになります。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 費用面で迷っている産後患者へ</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker pt">患者</span>
+                        <div class="line-text pt-line">費用がちょっと気になって…毎月は難しいかも</div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            それはわかります！じゃあ例えば来月はこのプランで、再来月は別のプランにするとか、月によって調整もできますよ。<br>来られへん月があっても大丈夫なように、なるべく損しないやり方を一緒に考えましょう。
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 産後患者へのプラン推奨</div>
+                    産後ケアを優先したい方には3ヶ月プランが効果的。「産後の3ヶ月で変わるかどうかが分岐点になります」と伝えると決断しやすい。
+                </div>
+            </div>
+        </div>
+
+        <!-- TYPE: エステ -->
+        <div class="type-section" id="type-esthetic">
+            <div class="type-hero" style="background:linear-gradient(135deg,#7C3AED,#5B21B6);color:#fff;">
+                <div class="hero-left">
+                    <div class="hero-icon">✨</div>
+                    <div class="hero-name">エステ・ダイエット目的</div>
+                    <div class="hero-sub">むくみ・脂肪・ウエストなど体型改善が主な目的。<br>効果への期待値が高く、結果にシビア。</div>
+                </div>
+                <div class="hero-right">
+                    <div class="trait-list">
+                        <div class="trait">結果（見た目変化）重視</div>
+                        <div class="trait">理論より体感で動く</div>
+                        <div class="trait">競合他社と比較している</div>
+                        <div class="trait">ビフォーアフター写真が刺さる</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-block">
+                    <div class="ab-title">🎯 最初にすること</div>
+                    <div class="ab-points">
+                        <div class="ab-point">「一番気になってる部位はどこか」を先に聞く</div>
+                        <div class="ab-point">過去に何を試したか確認（ジム・エステ・食事制限など）</div>
+                        <div class="ab-point">ゴールのイメージを聞く（−○kgが理想？ウエストが理想？）</div>
+                        <div class="ab-point">インボディで「数字ではむくみ少ない」ことを先に伝える</div>
+                    </div>
+                </div>
+                <div class="approach-block">
+                    <div class="ab-title">💡 刺さるポイント</div>
+                    <div class="ab-points">
+                        <div class="ab-point"><strong>脂肪細胞は3歳で数が確定</strong>→膨らむだけ→小さくできる</div>
+                        <div class="ab-point">温めて溶かす、吸引で引き剥がす→内出血が証拠（効いてる証拠）</div>
+                        <div class="ab-point">体型タイプ（C型）を伝えて「体の歪みも同時に取れる」優位性を説明</div>
+                        <div class="ab-point">ビフォーアフターを次回は撮影することを提案</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 「むくみが気になる」への切り返し</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker pt">患者</span>
+                        <div class="line-text pt-line">いつもむくんでいるので、むくみをどうにかしたくて来ました</div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            わかります！ただ今日測ってみたら、インボディの細胞外水分比って言う「むくみの指標」が0.380でほぼ標準なんですよ。<br>むくんでる感じがするのに数字がいいのって逆に珍しくて、もともと運動してた方じゃないとこの数字にならないんです。
+                        </div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            むくんで見える原因は「脂肪」の可能性が高いんですよ。体幹の体脂肪が187%になってて、標準の2倍以上ついてるんです。<br>脂肪を減らすと「むくみがとれた感じ」になるんで、そこをターゲットにしましょうか。
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 ポイント</div>
+                    「むくみではなかった」という事実を伝えつつ、「でも解決策はある」という方向に流す。患者が「正直に教えてもらえた」と感じることで信頼につながる。
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 脂肪燃焼の仕組みを説明（エステの理論）</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            脂肪って動物性なんで、冷えると固まって温まると溶けるんですよ。フライパンで焼いたお肉を放置したら白い脂が固まるじゃないですか。もう一回熱を加えると溶けますよね、あれと一緒です。<br>だからまず温めて脂肪を溶かして、そこにEMSと吸引をかけて引き剥がす流れになります。
+                        </div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            ただ、施術後は内出血が出る可能性があります。これは脂肪が老廃物とくっついてた部分が引き剥がれた証拠なんで「効いてる証拠」なんですよ。2週間前後で消えていきます。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">⚠️ 施術後の注意事項（エステ専用）</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            施術後の3時間は食べ物をなるべく控えてもらいたいんです。脂肪を溶かすと体の吸収力が一時的に高まっちゃうので、食べると太りやすい状態になります。<br>3時間はお水をしっかり飲んで、脂肪の代謝を助けてもらえると効果が出やすいです。
+                        </div>
+                    </div>
+                </div>
+                <div class="caution-box">
+                    <div class="caution-label">⚠️ 注意事項リスト（書面でも渡すこと）</div>
+                    <div class="ng-list">
+                        <div class="ng-item">施術後3時間は食事を減らす</div>
+                        <div class="ng-item">内出血が出ても揉まない（消えるまで待つ）</div>
+                        <div class="ng-item">お酒は当日控える（血行がよくなりすぎる）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TYPE: 急性痛み -->
+        <div class="type-section" id="type-pain">
+            <div class="type-hero" style="background:linear-gradient(135deg,#DC2626,#B91C1C);color:#fff;">
+                <div class="hero-left">
+                    <div class="hero-icon">🦴</div>
+                    <div class="hero-name">急性痛み・怪我（3日以内）</div>
+                    <div class="hero-sub">ぎっくり腰・肉離れ・ぴきっと来た急性症状。<br>まず「安心させる」が最優先。</div>
+                </div>
+                <div class="hero-right">
+                    <div class="trait-list">
+                        <div class="trait">不安・焦りが強い</div>
+                        <div class="trait">間違ったケアをしてしまっている可能性</div>
+                        <div class="trait">とにかく早く治したい</div>
+                        <div class="trait">「これって大丈夫？」の確認をしたい</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-block">
+                    <div class="ab-title">🎯 最初にすること</div>
+                    <div class="ab-points">
+                        <div class="ab-point">怪我した经緯（いつ・どんな動作で・どこが）を確認</div>
+                        <div class="ab-point">急性期NG行動をすでにやってないか確認・修正</div>
+                        <div class="ab-point">「大丈夫ですよ」という安心ワードを早めに言う</div>
+                        <div class="ab-point">アドレナリンで痛みが見えにくい仕組みを説明</div>
+                    </div>
+                </div>
+                <div class="approach-block">
+                    <div class="ab-title">💡 急性期の3NG（必ず伝える）</div>
+                    <div class="ab-points">
+                        <div class="ab-point"><strong>温めること</strong>（血流が増して内出血が広がる）</div>
+                        <div class="ab-point"><strong>お酒を飲むこと</strong>（同じく血流促進でNG）</div>
+                        <div class="ab-point"><strong>痛みを探る動作</strong>（怪我部位をわざわざ動かす）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 急性期NG説明スクリプト</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            ピキッとなった時って、中で筋肉が少し切れてる状態なんですよ。腫れが出るのって内出血なんです。<br>だから怪我した最初の3日間はNGがあって、①温めること、②お酒を飲むこと、③わざわざ痛いとこ探す動作、この3つはやめてください。
+                        </div>
+                    </div>
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            アドレナリンが出てるから最初は痛みが出にくいんですよ。だから「今日はまだ大丈夫」って思ってたのに翌日から本格的に痛くなってくる、ってパターンが多いです。<br>今日しっかり処置しておくと回復が全然違いますよ。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TYPE: 元スポーツ選手 -->
+        <div class="type-section" id="type-sports">
+            <div class="type-hero" style="background:linear-gradient(135deg,#1D4ED8,#1E40AF);color:#fff;">
+                <div class="hero-left">
+                    <div class="hero-icon">🏋️</div>
+                    <div class="hero-name">元スポーツ選手・数値意識高め</div>
+                    <div class="hero-sub">バスケ・サッカー・水泳などの経験者。<br>体への意識が高く、論理的な説明を求める。</div>
+                </div>
+                <div class="hero-right">
+                    <div class="trait-list">
+                        <div class="trait">体への意識・知識がある</div>
+                        <div class="trait">データ・数値で納得する</div>
+                        <div class="trait">「自分でできる」と思いがち</div>
+                        <div class="trait">細胞外水分比が低い（優秀な数値）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="approach-grid">
+                <div class="approach-block">
+                    <div class="ab-title">🎯 アプローチのポイント</div>
+                    <div class="ab-points">
+                        <div class="ab-point">インボディ数値を「実は良い」と先に伝えて信頼を作る</div>
+                        <div class="ab-point">感覚的な説明より、「なぜそうなるか」の理論を優先</div>
+                        <div class="ab-point">「スポーツやってたからこそ」のリスクを伝える</div>
+                        <div class="ab-point">自己流の対処法の「限界」を柔らかく伝える</div>
+                    </div>
+                </div>
+                <div class="approach-block">
+                    <div class="ab-title">💡 刺さるポイント</div>
+                    <div class="ab-points">
+                        <div class="ab-point"><strong>「細胞外水分比が低いのは優秀」</strong>と評価する</div>
+                        <div class="ab-point">スポーツ体験を共感ポイントとして使う（先生自身の話も活用）</div>
+                        <div class="ab-point">「歪みがある状態で筋トレすると怪我しやすい」のWHYで説明</div>
+                        <div class="ab-point">「自分でできる部分：栄養・柔軟」「院でしかできない部分：歪み矯正」を整理して伝える</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="script-card">
+                <div class="sc-title">💬 元スポーツ選手への数値褒めトーク</div>
+                <div class="dialog">
+                    <div class="line">
+                        <span class="line-speaker staff">先生</span>
+                        <div class="line-text staff-line">
+                            この細胞外水分比って数字、0.380以下が良い数値なんですけど〇〇さん低いんですよ。これってスポーツをやってた人でしかなかなかいい数字にならないんです。<br>筋肉の質自体は全然悪くないですよ。だから歪みさえ取れれば体の回復力はある状態です。
+                        </div>
+                    </div>
+                </div>
+                <div class="tip-box">
+                    <div class="tip-label">💡 共感ポイントの作り方</div>
+                    先生自身がサッカーをやっていた経験を話すことで、スポーツ経験者同士の共感が生まれやすくなる。相手のスポーツ名を聞いてから「それはしんどいポジションですよね」など、具体的に共感する。
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            KLF スタッフマニュアル A-5 / 患者タイプ別対応集 &nbsp;|&nbsp; 制作：リッツプロ &nbsp;|&nbsp; 2026年4月
+        </div>
+    </div>
+
+    <script>
+        function showType(type, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.type-section').forEach(s => s.classList.remove('active'));
+            document.getElementById('type-' + type).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

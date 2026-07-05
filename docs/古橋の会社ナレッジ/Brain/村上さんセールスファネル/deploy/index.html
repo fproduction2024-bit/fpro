@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain ブースターパッケージ｜10大特典</title>
+    <meta name="description" content="Brain代表・迫佑樹が贈る10大特典ブースターパッケージ。あなたのステージに合わせた戦略・テンプレート・成功事例を無料で受け取れます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-badge">🎁 期間限定 無料プレゼント</div>
+            <h1 class="hero-title">
+                Brain<br>
+                <span class="gradient-text">ブースターパッケージ</span>
+            </h1>
+            <p class="hero-subtitle">
+                コンテンツ販売・スキル習得・事業拡大・SNS収益化<br>
+                <strong>あなたのステージに合った10大特典</strong>をお届け
+            </p>
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-num">10</span><span class="stat-label">大特典</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num">4</span><span class="stat-label">タイプ対応</span></div>
+                <div class="stat-divider"></div>
+                <div class="stat"><span class="stat-num">0</span><span class="stat-label">円</span></div>
+            </div>
+            <a href="#cta" class="cta-btn pulse">
+                📩 無料面談を予約して全特典を受け取る
+                <span>▼ 面談参加で10大特典が全て手に入ります ▼</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══ TYPE TABS ═══ -->
+    <section class="section" id="presents">
+        <div class="container">
+            <h2 class="section-title">あなたに合った特典を見つけよう</h2>
+            <p class="section-desc">タイプをクリックすると、該当する特典が表示されます</p>
+
+            <div class="type-tabs">
+                <button class="type-tab active" data-type="all">
+                    <span class="tab-icon">✨</span>
+                    <span class="tab-label">すべて</span>
+                </button>
+                <button class="type-tab" data-type="A">
+                    <span class="tab-icon">📦</span>
+                    <span class="tab-label">コンテンツ販売</span>
+                </button>
+                <button class="type-tab" data-type="B">
+                    <span class="tab-icon">🚀</span>
+                    <span class="tab-label">0→1 初心者</span>
+                </button>
+                <button class="type-tab" data-type="C">
+                    <span class="tab-icon">📈</span>
+                    <span class="tab-label">経営者</span>
+                </button>
+                <button class="type-tab" data-type="D">
+                    <span class="tab-icon">📱</span>
+                    <span class="tab-label">アフィリエイター</span>
+                </button>
+            </div>
+
+            <!-- CARDS -->
+            <div class="cards-grid" id="cardsGrid">
+
+                <!-- Card 1 -->
+                <div class="present-card" data-type="A" data-index="0">
+                    <div class="card-badge">Type A</div>
+                    <div class="card-number">01</div>
+                    <h3 class="card-title">Brain販売で月50万円を達成するロードマップ</h3>
+                    <p class="card-desc">Phase 0〜4のステップバイステップで、コンテンツ販売月50万円を実現する完全ガイド。テーマ選定から初速の作り方、安定収益までを網羅。</p>
+                    <div class="card-tags">
+                        <span class="tag">ロードマップ</span>
+                        <span class="tag">コンテンツ販売</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(0)">内容を見る →</button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="present-card" data-type="A" data-index="1">
+                    <div class="card-badge">Type A</div>
+                    <div class="card-number">02</div>
+                    <h3 class="card-title">コンテンツの値段設計テンプレート</h3>
+                    <p class="card-desc">5つの価格設計原則と、売上シミュレーション付きのテンプレート。値段を変えるだけで売上3倍になった実例も公開。</p>
+                    <div class="card-tags">
+                        <span class="tag">テンプレート</span>
+                        <span class="tag">価格戦略</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(1)">内容を見る →</button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="present-card" data-type="B" data-index="2">
+                    <div class="card-badge">Type B</div>
+                    <div class="card-number">03</div>
+                    <h3 class="card-title">初心者が最短で月5万円を作る3ステップ</h3>
+                    <p class="card-desc">90日で売れるスキルを身につけ、最初の1件を獲得し、月5万円を安定させる具体的な手順書。提案文テンプレート付き。</p>
+                    <div class="card-tags">
+                        <span class="tag">初心者向け</span>
+                        <span class="tag">副業</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(2)">内容を見る →</button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="present-card" data-type="B" data-index="3">
+                    <div class="card-badge">Type B</div>
+                    <div class="card-number">04</div>
+                    <h3 class="card-title">稼げるスキル選定チェックリスト</h3>
+                    <p class="card-desc">5大基準×5点満点の採点シートで、あなたに最適な稼げるスキルを特定。2026年版スキルランキングTOP8も収録。</p>
+                    <div class="card-tags">
+                        <span class="tag">チェックリスト</span>
+                        <span class="tag">スキル選定</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(3)">内容を見る →</button>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="present-card" data-type="C" data-index="4">
+                    <div class="card-badge">Type C</div>
+                    <div class="card-number">05</div>
+                    <h3 class="card-title">売上の壁を突破する「仕組み化」チェックシート</h3>
+                    <p class="card-desc">集客・教育・セールス・価値提供・組織の5セクション×5項目で仕組み化レベルを診断。ボトルネック別の処方箋付き。</p>
+                    <div class="card-tags">
+                        <span class="tag">診断ツール</span>
+                        <span class="tag">仕組み化</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(4)">内容を見る →</button>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="present-card" data-type="C" data-index="5">
+                    <div class="card-badge">Type C</div>
+                    <div class="card-number">06</div>
+                    <h3 class="card-title">年商1億経営者が実践するKPI設計テンプレート</h3>
+                    <p class="card-desc">売上の因数分解、KPIツリー、ボトルネック特定マトリクス、週次ダッシュボード、年商1億の逆算設計を完全テンプレート化。</p>
+                    <div class="card-tags">
+                        <span class="tag">テンプレート</span>
+                        <span class="tag">KPI設計</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(5)">内容を見る →</button>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="present-card" data-type="D" data-index="6">
+                    <div class="card-badge">Type D</div>
+                    <div class="card-number">07</div>
+                    <h3 class="card-title">Brainアフィリエイトで月10万円稼ぐ戦略ガイド</h3>
+                    <p class="card-desc">報酬率50%のBrainアフィリエイトで月10万円を達成する方程式。売れる商品の選び方、紹介文テンプレート3種、30日ロードマップ。</p>
+                    <div class="card-tags">
+                        <span class="tag">戦略ガイド</span>
+                        <span class="tag">アフィリエイト</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(6)">内容を見る →</button>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="present-card" data-type="D" data-index="7">
+                    <div class="card-badge">Type D</div>
+                    <div class="card-number">08</div>
+                    <h3 class="card-title">SNSフォロワーを最速で伸ばすX運用テンプレート</h3>
+                    <p class="card-desc">投稿の型7選、1週間投稿スケジュール、5つの加速器、フォロワー数別マイルストーンなど、X運用の全てが詰まったテンプレート。</p>
+                    <div class="card-tags">
+                        <span class="tag">テンプレート</span>
+                        <span class="tag">X運用</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(7)">内容を見る →</button>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="present-card featured" data-type="ALL" data-index="8">
+                    <div class="card-badge card-badge-special">全タイプ共通</div>
+                    <div class="card-number">09</div>
+                    <h3 class="card-title">迫佑樹直伝 ビジネスモデル構築の全体像</h3>
+                    <p class="card-desc">4つのステージ理論、ビジネスモデル設計の7原則、9マスビジネスモデルキャンバス。年商10億を達成した迫の全知識を凝縮。</p>
+                    <div class="card-tags">
+                        <span class="tag tag-special">限定</span>
+                        <span class="tag">ビジネスモデル</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(8)">内容を見る →</button>
+                </div>
+
+                <!-- Card 10 -->
+                <div class="present-card featured" data-type="ALL" data-index="9">
+                    <div class="card-badge card-badge-special">全タイプ共通</div>
+                    <div class="card-number">10</div>
+                    <h3 class="card-title">Brain成功者インタビュー集</h3>
+                    <p class="card-desc">4つのタイプの成功者ストーリー。元会社員→月150万、販売員→月60万、コンサル→年商1.2億、アルバイター→月35万。共通する5つの成功法則。</p>
+                    <div class="card-tags">
+                        <span class="tag tag-special">限定</span>
+                        <span class="tag">成功事例</span>
+                    </div>
+                    <button class="card-btn" onclick="openModal(9)">内容を見る →</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">受け取り方法</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>無料面談を予約</h3>
+                    <p>下のボタンから面談の日程を選んでください</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Zoom面談に参加</h3>
+                    <p>あなたの現状に合わせた具体的なアドバイスをお伝えします</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>10大特典を受取</h3>
+                    <p>面談参加者限定の専用会員サイトにご招待します</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="section cta-section" id="cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">🎁 10大特典を<span class="gradient-text">無料</span>で受け取る</h2>
+                <p class="cta-desc">
+                    面談に参加いただいた方全員に<br>
+                    <strong>「ブースターパッケージ」</strong>専用会員サイトへのアクセス権をプレゼント
+                </p>
+                <ul class="cta-list">
+                    <li>✅ Brain販売ロードマップ</li>
+                    <li>✅ 値段設計テンプレート</li>
+                    <li>✅ 月5万円の3ステップ</li>
+                    <li>✅ スキル選定チェックリスト</li>
+                    <li>✅ 仕組み化チェックシート</li>
+                    <li>✅ KPI設計テンプレート</li>
+                    <li>✅ アフィリエイト戦略ガイド</li>
+                    <li>✅ X運用テンプレート</li>
+                    <li>✅ ビジネスモデル全体像</li>
+                    <li>✅ 成功者インタビュー集</li>
+                </ul>
+                <a href="#" class="cta-btn cta-btn-large pulse">
+                    📩 無料面談を予約する
+                    <span>▼ 面談参加で全10特典をプレゼント ▼</span>
+                </a>
+                <p class="cta-note">※ 面談は完全無料です。強引な勧誘は一切ありません。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <p>© Brain Inc. All Rights Reserved.</p>
+        <p>※ 本ページの内容は個人の経験に基づくものであり、結果を保証するものではありません。</p>
+    </footer>
+
+    <!-- ═══ MODAL ═══ -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>特典09｜迫佑樹直伝 ビジネスモデル構築の全体像 - Brain ブースターパッケージ</title>
+<meta name="description" content="Brain ブースターパッケージ 特典09：迫佑樹直伝 ビジネスモデル構築の全体像。迫佑樹（Brain代表）からの限定特典コンテンツ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #f59e0b;
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --text: #f0f0f5;
+    --text-muted: #8888aa;
+    --border: rgba(255,255,255,0.08);
+    --radius: 12px;
+  }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: rgba(10,10,15,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-logo {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar-logo span {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .topbar-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0f1f 50%, #0f1a1f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #f59e0b22 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-num {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .hero-num .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .hero-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    display: block;
+    filter: drop-shadow(0 0 20px #f59e0b66);
+  }
+  .hero-type {
+    display: inline-block;
+    background: #f59e0b22;
+    border: 1px solid #f59e0b44;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-author {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .hero-author strong {
+    color: var(--accent);
+  }
+
+  /* MAIN CONTENT */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Content styles */
+  .content h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 48px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f59e0b44;
+    color: var(--text);
+    position: relative;
+  }
+  .content h2::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+  }
+  .content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 32px 0 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .content h3::before {
+    content: '▶';
+    font-size: 10px;
+  }
+  .content p {
+    margin-bottom: 16px;
+    color: #d0d0e0;
+  }
+  .content strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .content em {
+    color: var(--accent);
+    font-style: normal;
+  }
+  .content code {
+    background: rgba(255,255,255,0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #a8d8ff;
+  }
+  .content pre {
+    background: #0d0d18;
+    border: 1px solid #f59e0b33;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 20px 0;
+    overflow-x: auto;
+  }
+  .content pre code {
+    background: none;
+    padding: 0;
+    color: #c8e6ff;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .content blockquote {
+    background: #f59e0b11;
+    border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: #c0c0d8;
+    font-style: italic;
+  }
+  .content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+  .content ul {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+  }
+  .content ul li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .content ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .content ol {
+    list-style: none;
+    margin: 16px 0 20px;
+    padding: 0;
+    counter-reset: ol-counter;
+  }
+  .content ol li {
+    padding: 6px 0 6px 36px;
+    position: relative;
+    color: #d0d0e0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    counter-increment: ol-counter;
+  }
+  .content ol li::before {
+    content: counter(ol-counter);
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    top: 8px;
+  }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: #f59e0b22;
+    color: var(--text);
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #f59e0b44;
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 16px;
+    color: #c0c0d8;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+  tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* NAVIGATION */
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    gap: 16px;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover {
+    color: var(--text);
+    border-color: #f59e0b44;
+    background: #f59e0b11;
+  }
+  .nav-index {
+    background: var(--surface2);
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .nav-index:hover {
+    color: var(--accent);
+    border-color: #f59e0b44;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #060609;
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 36px; }
+    .container { padding: 32px 16px 60px; }
+    .cta-section { padding: 28px 20px; }
+    .page-nav { padding: 16px; flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    🧠 <span>Brain</span> ブースターパッケージ
+  </a>
+  <span class="topbar-badge">特典 09 / 10</span>
+</div>
+
+<section class="hero">
+  <div class="hero-num">
+    <span class="dot"></span>
+    SPECIAL BONUS 09
+  </div>
+  <span class="hero-icon">🏗️</span>
+  <div class="hero-type">全タイプ共通 特別版</div>
+  <h1>迫佑樹直伝 ビジネスモデル構築の全体像</h1>
+  <p class="hero-author">by <strong>迫 佑樹</strong>（Brain代表）</p>
+</section>
+
+<div class="container">
+  <div class="content">
+    <hr>
+<blockquote>「スキルがあっても稼げない人」と「普通のスキルで年商1億の人」。 違いは1つ——ビジネスモデルを持っているかどうか。</blockquote>
+<hr>
+<h2>はじめに</h2>
+<p>僕がBrainを作る前、プログラミングスクールを経営していた時に気づいたことがある。</p>
+<p><strong>「頑張っている量」と「稼いでいる金額」は比例しない。</strong></p>
+<p>月100時間働いて月収30万円の人がいれば、月20時間で月収300万円の人もいる。</p>
+<p>この差は、能力の差じゃない。<strong>ビジネスモデルの差</strong>だ。</p>
+<p>このコンテンツでは、僕が20歳で年商10億円を達成するまでに学んだ「ビジネスモデル構築の全体像」を、ステージ別にお伝えします。</p>
+<hr>
+<h2>Chapter 1：ビジネスの4ステージ</h2>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                                                         │
+│  Stage 4：レバレッジ          年商3億〜                  │
+│  「仕組みが仕組みを生む」                                │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 3：仕組み化            年商3000万〜3億            │
+│  「自分がいなくても回る」                                │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 2：収益の安定          年商500万〜3000万          │
+│  「毎月の売上が読める」                                  │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  Stage 1：0→1               年商0〜500万               │
+│  「最初の1円を稼ぐ」                                    │
+│                                                         │
+└─────────────────────────────────────────────────────────┘</code></pre>
+<p><strong>多くの人はStage 1と2を行ったり来たりしている。</strong></p>
+<p>Stage 3に進むには「ビジネスモデル」の転換が必要。</p>
+<p>Stage 4に進むには「レバレッジ」の発想が必要。</p>
+<hr>
+<h2>Chapter 2：各ステージで必要なこと</h2>
+<h3>Stage 1：0→1（年商0〜500万）</h3>
+<p><strong>このステージの目標</strong>: 最初の「売れる体験」を作る</p>
+<div class="table-wrap"><table><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr><tr><td>1つのスキルを極める</td><td>複数のことに手を出す</td></tr><tr><td>実績を1つ作る</td><td>ブランディング</td></tr><tr><td>直接営業する</td><td>広告を回す</td></tr><tr><td>安くてもいいから売る</td><td>値段にこだわる</td></tr></table></div>
+<p><strong>最速のビジネスモデル</strong>:</p>
+<pre><code>スキル × クライアントワーク ＝ 確実な収益
+
+例）Web制作 × 企業から受注 ＝ 月30〜50万円
+例）動画編集 × YouTuber案件 ＝ 月10〜30万円</code></pre>
+<hr>
+<h3>Stage 2：収益の安定（年商500万〜3000万）</h3>
+<p><strong>このステージの目標</strong>: 「お客さんが毎月来る仕組み」を作る</p>
+<div class="table-wrap"><table><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr><tr><td>継続収入モデルを作る</td><td>単発収入だけに依存する</td></tr><tr><td>自分の商品を持つ</td><td>他人のプラットフォームに依存する</td></tr><tr><td>リスト獲得の仕組みを作る</td><td>手動営業だけで回す</td></tr><tr><td>教育コンテンツを作る</td><td>毎回ゼロから説明する</td></tr></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre><code>コンテンツ販売 × 自動化 ＝ レバレッジのある収益
+
+例）Brain教材 × ステップ配信 ＝ 月100〜300万円
+例）オンライン講座 × サブスク ＝ 月50〜200万円</code></pre>
+<hr>
+<h3>Stage 3：仕組み化（年商3000万〜3億）</h3>
+<p><strong>このステージの目標</strong>: 「自分がいなくても売上が立つ」状態を作る</p>
+<div class="table-wrap"><table><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr><tr><td>チームを作る</td><td>1人で全部やる</td></tr><tr><td>マニュアルを整備する</td><td>口頭伝達だけで済ませる</td></tr><tr><td>KPIで経営する</td><td>感覚で判断する</td></tr><tr><td>バックエンド商品を作る</td><td>フロント商品だけで戦う</td></tr></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre><code>フロント × バックエンド × 組織 ＝ スケーラブルな事業
+
+例）
+フロント：無料動画 → ステップ配信 → 個別面談
+バックエンド：月額コミュニティ（月3万円 × 100人 ＝ 月300万円）
+組織：セールス2名 + CS1名 + マーケ1名</code></pre>
+<hr>
+<h3>Stage 4：レバレッジ（年商3億〜）</h3>
+<p><strong>このステージの目標</strong>: 「1つの事業の成功モデルを横展開する」</p>
+<div class="table-wrap"><table><tr><th>やるべきこと</th><th>やらなくていいこと</th></tr><tr><td>成功したモデルを他業種に転用</td><td>ゼロから新しいことを始める</td></tr><tr><td>M&A or 事業提携</td><td>全部自前でやる</td></tr><tr><td>代理店モデル / FC展開</td><td>自社だけで拡大する</td></tr><tr><td>投資的な意思決定をする</td><td>現場作業を続ける</td></tr></table></div>
+<p><strong>最適なビジネスモデル</strong>:</p>
+<pre><code>成功モデル × 横展開 × レバレッジ ＝ 年商10億円超
+
+例）
+BrainのFC代理店モデル：
+代理店4拠点（東京/名古屋/大阪/福岡） × 売上の80%バック
+→ 代理店が集客。本部は商品開発と価値提供に集中
+→ 商品原価20%で設計（メーカーの卸と同じ構造）</code></pre>
+<hr>
+<h2>Chapter 3：ビジネスモデル設計の7つの原則</h2>
+<h3>原則1：フロントエンドとバックエンドを分ける</h3>
+<pre><code>フロントエンド（集客商品）：利益は出なくてもいい。リストを取ることが目的
+バックエンド（収益商品）：ここで利益を出す</code></pre>
+<h3>原則2：LTV（顧客生涯価値）で考える</h3>
+<pre><code>❌ 1回の取引で利益を最大化しよう
+✅ 1人の顧客から長期的にいくら得られるか？で設計しよう
+
+LTV &gt; CPA であれば、いくらでも広告を回せる</code></pre>
+<h3>原則3：商品原価は売値の20%以内に抑える</h3>
+<pre><code>これが「スケーラブルな事業」の鉄則
+
+売値10万円 → 原価2万円以内
+→ 残り80%を「集客」「セールス」「利益」に分配
+
+VERYの法則：
+ 20% 商品原価
+ 20% 集客コスト
+ 20% セールスコスト
+ 20% 運営コスト
+ 20% 利益</code></pre>
+<h3>原則4：「時間」を売らないモデルを作る</h3>
+<pre><code>❌ コンサル1時間5万円 → 1日5件が限界 → 月収上限あり
+✅ 動画コンテンツ → 一度作れば無限に売れる → 上限なし</code></pre>
+<h3>原則5：継続収入（リカーリング）を組み込む</h3>
+<pre><code>月額課金：月3万円 × 100人 ＝ 月300万円（毎月自動で入る）
+回数券：年間30万円のチケットをまとめ売り</code></pre>
+<h3>原則6：他人の力を借りる設計にする</h3>
+<pre><code>アフィリエイト報酬：50%を紹介者に還元 → 他人が営業してくれる
+代理店モデル：80%を代理店にバック → 代理店が集客してくれる</code></pre>
+<h3>原則7：データで判断する</h3>
+<pre><code>KPI を設計 → 数値を計測 → ボトルネックを特定 → 改善 → 再計測
+このサイクルを週次で回す</code></pre>
+<hr>
+<h2>Chapter 4：あなたのビジネスモデル設計ワークシート</h2>
+<h3>ワーク①：今のステージを特定する</h3>
+<div class="table-wrap"><table><tr><th>ステージ</th><th>あなたの現状</th></tr><tr><td>Stage 1（0→1）</td><td>□ まだ月収50万円に達していない</td></tr><tr><td>Stage 2（安定）</td><td>□ 売上はあるが毎月不安定</td></tr><tr><td>Stage 3（仕組み化）</td><td>□ 売上は安定だが自分が止まると事業も止まる</td></tr><tr><td>Stage 4（レバレッジ）</td><td>□ 仕組みは回っている。次の拡大を模索中</td></tr></table></div>
+<h3>ワーク②：9マスビジネスモデルキャンバス</h3>
+<div class="table-wrap"><table><tr><th>項目</th><th>あなたの回答</th></tr><tr><td>**① 顧客は誰か？**</td></tr><tr><td>**② 顧客の最大の悩みは？**</td></tr><tr><td>**③ あなたが提供する解決策は？**</td></tr><tr><td>**④ フロント商品は？**</td></tr><tr><td>**⑤ バックエンド商品は？**</td></tr><tr><td>**⑥ 集客チャネルは？**</td></tr><tr><td>**⑦ セールスの方法は？**</td></tr><tr><td>**⑧ 継続収入の仕組みは？**</td></tr><tr><td>**⑨ 1年後の目標売上は？**</td></tr></table></div>
+<hr>
+<h2>最後に</h2>
+<p>ビジネスモデルは「地図」だ。</p>
+<p>地図なしで目的地に着く人もいるけど、それは運がいいだけ。</p>
+<p>地図があれば、誰でも、最短ルートで目的地に着ける。</p>
+<p>あなたの事業の「地図」、一緒に描きませんか？</p>
+<p><strong>面談で、あなたのステージに最適なビジネスモデルを一緒に設計しましょう。</strong></p>
+<hr>
+<p><em>© Brain Inc. All Rights Reserved.</em></p>
+<p><em>本コンテンツは Brain ブースターパッケージの一部です。無断転載・再配布を禁止します。</em></p>
+  </div>
+</div>
+
+<nav class="page-nav">
+  <a href="bonus-08.html" class="nav-btn nav-prev">← 特典08へ</a>
+  <a href="index.html" class="nav-index">📋 特典一覧へ</a>
+  <a href="bonus-10.html" class="nav-btn nav-next">特典10へ →</a>
+</nav>
+
+<footer>
+  <p>© Brain Inc. All Rights Reserved.</p>
+  <p>本コンテンツは Brain ブースターパッケージの限定特典です。無断転載・再配布を禁止します。</p>
+</footer>
+
+</body>
+</html>
