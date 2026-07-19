@@ -64,3 +64,7 @@ projects/tangleseed_hp_production.zip
 # 自動生成ログ（git管理外。ファイルはローカルに残る）
 plaud_exports/*.log
 projects/proline_extractor/logs/
+
+# 認証トークン（2026-07-19 公開履歴からの追跡除去。実トークンは失効させること）
+plaud_exports/.plaud_token
+*.plaud_token
