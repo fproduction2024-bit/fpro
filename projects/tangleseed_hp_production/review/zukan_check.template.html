@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>タングル図鑑チェック</title>
+<style>
+:root{--bg:#f7f5f0;--panel:#fff;--ink:#222;--sub:#666;--line:#e3ded3;--accent:#2f7d6d;--ok:#2e7d32;--fix:#c77700;--del:#c62828;--chip:#f1ede4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--panel:#212121;--ink:#eee;--sub:#aaa;--line:#383838;--accent:#5cc0a8;--ok:#66bb6a;--fix:#ffb74d;--del:#ef5350;--chip:#2c2c2c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 "Hiragino Sans","Noto Sans JP",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line);padding:10px 16px}
+h1{font-size:18px;margin:0 0 4px}
+.meta{color:var(--sub);font-size:12px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.bar input,.bar select,.bar button{font:inherit;font-size:13px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink)}
+.bar button{cursor:pointer}.bar button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.progress{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;margin-top:8px}.progress>div{height:100%;background:var(--accent)}
+.stats{display:flex;gap:12px;font-size:12px;color:var(--sub);margin-top:4px;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.help{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:13px;margin-bottom:16px}
+.help summary{cursor:pointer;font-weight:600}
+.card{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;margin-bottom:14px}
+.card[data-status="ok"]{border-left-color:var(--ok)}.card[data-status="fix"]{border-left-color:var(--fix)}.card[data-status="del"]{border-left-color:var(--del)}
+.card>summary{list-style:none;cursor:pointer;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.card>summary::-webkit-details-marker{display:none}
+.id{font-family:ui-monospace,monospace;color:var(--sub);min-width:3em}
+.nm{font-weight:700;font-size:16px}.en{color:var(--sub)}
+.badge{font-size:11px;padding:1px 8px;border-radius:10px;background:var(--chip);white-space:nowrap}
+.badge.st-ok{background:var(--ok);color:#fff}.badge.st-fix{background:var(--fix);color:#fff}.badge.st-del{background:var(--del);color:#fff}
+.flag{font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid var(--fix);color:var(--fix)}
+.body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;padding:0 14px 14px}
+@media (max-width:820px){.body{grid-template-columns:1fr}}
+.content h3{font-size:13px;color:var(--sub);margin:14px 0 4px;border-bottom:1px solid var(--line)}
+.desc p{margin:6px 0}.desc ul,.desc ol{margin:4px 0;padding-left:1.4em}
+.steps{width:100%;border-collapse:collapse;font-size:13px}.steps td{border-top:1px solid var(--line);padding:4px 6px;vertical-align:top}.steps td:first-child{width:2em;color:var(--sub)}
+.steps .s-en{color:var(--sub);font-size:12px}
+.links a{color:var(--accent);margin-right:12px;font-size:13px}
+.img{width:100%;aspect-ratio:1;border:1px dashed var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:12px;overflow:hidden;background:var(--chip)}
+.img img{width:100%;height:100%;object-fit:cover}
+.review{background:var(--chip);border-radius:8px;padding:10px;font-size:13px;margin-top:10px}
+.review .sts{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.review .sts label{border:1px solid var(--line);border-radius:6px;padding:2px 8px;cursor:pointer;background:var(--panel)}
+.review .sts input{display:none}
+.review .sts input:checked+span{font-weight:700;color:var(--accent)}
+.review .chk label{display:block}
+.review textarea{width:100%;min-height:70px;font:inherit;font-size:13px;margin-top:6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);padding:6px}
+.en-desc{font-size:13px;color:var(--sub)}
+.tags{font-size:12px;color:var(--sub)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>タングル図鑑 本番前チェックシート（全__COUNT__件）</h1>
+  <div class="meta">元データ: web/src/data/patterns/patterns.ts ／ 生成日 __GENERATED__ ／ チェック結果はこのブラウザに自動保存（JSON書き出しでバックアップ・共有）</div>
+  <div class="bar">
+    <input id="q" type="search" placeholder="名前・slug・タグで検索" size="22">
+    <select id="fStatus"><option value="">ステータス: 全て</option><option value="none">未確認</option><option value="ok">OK</option><option value="fix">要修正</option><option value="del">削除・統合</option></select>
+    <select id="fFlag"><option value="">自動フラグ: 全て</option><option value="any">フラグあり</option><option value="image">画像なし</option><option value="video">動画なし</option><option value="desc">説明文の長さ</option><option value="steps">手順</option><option value="dup">重複</option><option value="ref">出典・調査メモ</option></select>
+    <select id="fDiff"><option value="">難易度: 全て</option><option value="beginner">初級</option><option value="intermediate">中級</option><option value="advanced">上級</option></select>
+    <label style="font-size:13px">ローカルURL <input id="base" size="18" value="http://localhost:3000"></label>
+    <button id="openAll">全て開く</button><button id="closeAll">全て閉じる</button>
+    <button id="csv" class="primary">CSV書き出し</button><button id="json">JSON書き出し</button>
+    <label class="bar-file" style="font-size:13px;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:4px 8px">JSON読み込み<input id="imp" type="file" accept=".json" hidden></label>
+  </div>
+  <div class="progress"><div id="pbar" style="width:0"></div></div>
+  <div class="stats" id="stats"></div>
+</header>
+<main>
+  <details class="help">
+    <summary>チェックの進め方</summary>
+    <ol>
+      <li>Webサイトをローカル起動すると「サイトで見る」から実ページを確認できます（<code>cd projects/tangleseed_hp_production/web && npm install && npm run dev</code>）。</li>
+      <li>各タングルの内容（名前・読み、説明文、手順、画像、動画、難易度/カテゴリ、出典）を確認し、確認できた項目にチェックを入れます。</li>
+      <li>ステータスを「OK / 要修正 / 削除・統合」から選び、要修正の場合はメモに修正内容（正しい表記・差し替え文など）を書きます。</li>
+      <li>オレンジの自動フラグは機械チェックで見つかった懸念点です（画像ファイルが無い、動画IDが無い、説明文が400字未満、重複、調査メモ等）。</li>
+      <li>終わったら「CSV書き出し」で一覧を保存し、修正担当者へ渡します。別PCに引き継ぐ時は「JSON書き出し→JSON読み込み」。</li>
+    </ol>
+    <p>データ更新後の再生成: <code>node projects/tangleseed_hp_production/review/build_zukan_check.mjs</code>（チェック結果はIDで紐づくので消えません）</p>
+  </details>
+  <div id="list"></div>
+</main>
+<script>
+const DATA = /*__DATA__*/[];
+const KEY = 'tangle-zukan-review-v1';
+const CHECKS = [['name','名称・読み'],['desc','日本語説明（事実・表現）'],['steps','描き方手順'],['image','画像'],['video','動画'],['meta','難易度・カテゴリ・タグ'],['source','出典・クレジット']];
+const STATUS = {none:'未確認',ok:'OK',fix:'要修正',del:'削除・統合'};
+const DIFF = {beginner:'初級',intermediate:'中級',advanced:'上級'};
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const rv = id => (state[id] ||= {status:'none', checks:{}, memo:''});
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function md(text) {
+  const out = []; let list = null;
+  const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+  for (const raw of String(text || '').split('\n')) {
+    const line = raw.trim();
+    let m;
+    if (!line) { close(); continue; }
+    if ((m = line.match(/^[-*]\s+(.*)/))) { if (list !== 'ul') { close(); out.push('<ul>'); list = 'ul'; } out.push(`<li>${inline(m[1])}</li>`); }
+    else if ((m = line.match(/^\d+\.\s+(.*)/))) { if (list !== 'ol') { close(); out.push('<ol>'); list = 'ol'; } out.push(`<li>${inline(m[1])}</li>`); }
+    else { close(); out.push(`<p>${inline(line)}</p>`); }
+  }
+  close(); return out.join('');
+}
+function card(p) {
+  const r = rv(p.id);
+  const base = document.getElementById('base').value.replace(/\/$/, '');
+  const yt = p.youtubeVideoId ? `<a href="https://www.youtube.com/watch?v=${esc(p.youtubeVideoId)}" target="_blank" rel="noopener">YouTube (${esc(p.youtubeVideoId)})</a>` : '';
+  return `<details class="card" data-id="${esc(p.id)}" data-status="${r.status}" open>
+  <summary><span class="id">#${esc(p.id)}</span><span class="nm">${esc(p.nameJa)}</span><span class="en">${esc(p.name)}</span>
+    <span class="badge">${DIFF[p.difficulty] || esc(p.difficulty)}</span><span class="badge st-${r.status}" data-role="stbadge">${STATUS[r.status]}</span>
+    ${p.flags.map(f => `<span class="flag">${esc(f[1])}</span>`).join('')}</summary>
+  <div class="body">
+    <div class="content">
+      <div class="links"><a href="${esc(base)}/library/${esc(p.slug)}" target="_blank" rel="noopener">サイトで見る（/library/${esc(p.slug)}）</a>${p.refUrl ? `<a href="${esc(p.refUrl)}" target="_blank" rel="noopener">TanglePatterns.com</a>` : `<span class="tags" style="margin-right:12px">参照: ${esc(p.refNote || 'なし')}</span>`}${yt}</div>
+      <div class="tags">カテゴリ: ${p.categoryJa.map(esc).join(' / ')} ／ タグ: ${p.tags.map(esc).join(', ')} ／ 日本語説明 ${p.jaLen}字</div>
+      <h3>日本語説明（descriptionJa）</h3><div class="desc">${md(p.descriptionJa)}</div>
+      <h3>描き方手順（${p.steps.length}ステップ）</h3>
+      <table class="steps">${p.steps.map(s => `<tr><td>${s.stepNumber}</td><td>${esc(s.instructionJa)}<div class="s-en">${esc(s.instruction)}</div></td></tr>`).join('')}</table>
+      <h3>英語説明（description）</h3><div class="en-desc">${esc(p.description)}</div>
+    </div>
+    <aside>
+      <div class="img">${p.imgSrc ? `<img src="${esc(p.imgSrc)}" alt="${esc(p.nameJa)}" loading="lazy">` : `画像なし<br>${esc(p.imageUrl)}`}</div>
+      <div class="review">
+        <div class="sts">${Object.entries(STATUS).map(([k, v]) => `<label><input type="radio" name="st-${esc(p.id)}" value="${k}" ${r.status === k ? 'checked' : ''}><span>${v}</span></label>`).join('')}</div>
+        <div class="chk">${CHECKS.map(([k, v]) => `<label><input type="checkbox" data-chk="${k}" ${r.checks[k] ? 'checked' : ''}> ${v}</label>`).join('')}</div>
+        <textarea placeholder="修正内容・気づいた点">${esc(r.memo)}</textarea>
+      </div>
+    </aside>
+  </div></details>`;
+}
+const list = document.getElementById('list');
+function render() { list.innerHTML = DATA.map(card).join(''); applyFilter(); }
+function applyFilter() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const fs = document.getElementById('fStatus').value, ff = document.getElementById('fFlag').value, fd = document.getElementById('fDiff').value;
+  let shown = 0;
+  for (const p of DATA) {
+    const el = list.querySelector(`[data-id="${CSS.escape(p.id)}"]`);
+    const hay = [p.id, p.name, p.nameJa, p.slug, ...p.tags].join(' ').toLowerCase();
+    const ok = (!q || hay.includes(q)) && (!fs || rv(p.id).status === fs) && (!fd || p.difficulty === fd)
+      && (!ff || (ff === 'any' ? p.flags.length : p.flags.some(f => f[0] === ff)));
+    el.classList.toggle('hidden', !ok); if (ok) shown++;
+  }
+  stats(shown);
+}
+function stats(shown) {
+  const c = {none:0, ok:0, fix:0, del:0};
+  for (const p of DATA) c[rv(p.id).status]++;
+  const done = DATA.length - c.none;
+  document.getElementById('pbar').style.width = (done / DATA.length * 100) + '%';
+  document.getElementById('stats').textContent = `進捗 ${done}/${DATA.length}　OK ${c.ok}　要修正 ${c.fix}　削除・統合 ${c.del}　未確認 ${c.none}　（表示中 ${shown ?? ''}件）`;
+}
+list.addEventListener('change', e => {
+  const cardEl = e.target.closest('.card'); if (!cardEl) return;
+  const r = rv(cardEl.dataset.id);
+  if (e.target.type === 'radio') {
+    r.status = e.target.value; cardEl.dataset.status = r.status;
+    const b = cardEl.querySelector('[data-role="stbadge"]'); b.className = `badge st-${r.status}`; b.textContent = STATUS[r.status];
+  } else if (e.target.dataset.chk) r.checks[e.target.dataset.chk] = e.target.checked;
+  save(); applyFilter();
+});
+list.addEventListener('input', e => { if (e.target.tagName === 'TEXTAREA') { rv(e.target.closest('.card').dataset.id).memo = e.target.value; save(); } });
+for (const id of ['q', 'fStatus', 'fFlag', 'fDiff']) document.getElementById(id).addEventListener('input', applyFilter);
+document.getElementById('base').addEventListener('change', render);
+document.getElementById('openAll').onclick = () => list.querySelectorAll('.card').forEach(d => d.open = true);
+document.getElementById('closeAll').onclick = () => list.querySelectorAll('.card').forEach(d => d.open = false);
+function download(name, text, type) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+const today = () => new Date().toISOString().slice(0, 10);
+document.getElementById('csv').onclick = () => {
+  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const head = ['ID', '英名', '日本語名', 'slug', '難易度', 'ステータス', ...CHECKS.map(c => c[1]), 'メモ', '自動フラグ', '参照URL'];
+  const rows = DATA.map(p => { const r = rv(p.id); return [p.id, p.name, p.nameJa, p.slug, DIFF[p.difficulty], STATUS[r.status], ...CHECKS.map(c => r.checks[c[0]] ? '✓' : ''), r.memo, p.flags.map(f => f[1]).join(' / '), p.refUrl]; });
+  download(`tangle_zukan_check_${today()}.csv`, '﻿' + [head, ...rows].map(r => r.map(q).join(',')).join('\r\n'), 'text/csv');
+};
+document.getElementById('json').onclick = () => download(`tangle_zukan_check_${today()}.json`, JSON.stringify(state, null, 1), 'application/json');
+document.getElementById('imp').onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { const obj = JSON.parse(await f.text()); if (confirm('読み込んだ内容で現在のチェック結果を上書きしますか？')) { state = obj; save(); render(); } }
+  catch (err) { alert('JSONを読み込めませんでした: ' + err.message); }
+  e.target.value = '';
+};
+render();
+</script>
+</body>
+</html>
