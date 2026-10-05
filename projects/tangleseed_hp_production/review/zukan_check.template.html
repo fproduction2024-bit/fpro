@@ -53,13 +53,13 @@ main{max-width:1100px;margin:0 auto;padding:16px}
 <body>
 <header>
   <h1>タングル図鑑 本番前チェックシート（全__COUNT__件）</h1>
-  <div class="meta">元データ: web/src/data/patterns/patterns.ts ／ 生成日 __GENERATED__ ／ チェック結果はこのブラウザに自動保存（JSON書き出しでバックアップ・共有）</div>
+  <div class="meta">元データ: patterns.ts ／ 生成日 __GENERATED__ ／ チェック結果はこのブラウザに自動保存（JSON書き出しでバックアップ・共有）</div>
   <div class="bar">
     <input id="q" type="search" placeholder="名前・slug・タグで検索" size="22">
     <select id="fStatus"><option value="">ステータス: 全て</option><option value="none">未確認</option><option value="ok">OK</option><option value="fix">要修正</option><option value="del">削除・統合</option></select>
-    <select id="fFlag"><option value="">自動フラグ: 全て</option><option value="any">フラグあり</option><option value="image">画像なし</option><option value="video">動画なし</option><option value="desc">説明文の長さ</option><option value="steps">手順</option><option value="dup">重複</option><option value="ref">出典・調査メモ</option></select>
+    <select id="fFlag"><option value="">自動フラグ: 全て</option><option value="any">フラグあり</option><option value="image">画像なし</option><option value="video">動画なし</option><option value="desc">説明文の長さ</option><option value="steps">手順</option><option value="dup">重複</option><option value="ref">出典・調査メモ</option><option value="meta">カテゴリ</option></select>
     <select id="fDiff"><option value="">難易度: 全て</option><option value="beginner">初級</option><option value="intermediate">中級</option><option value="advanced">上級</option></select>
-    <label style="font-size:13px">ローカルURL <input id="base" size="18" value="http://localhost:3000"></label>
+    <label style="font-size:13px">ローカルURL <input id="base" size="18" value="__SITE_BASE__" placeholder="未起動なら空欄"></label>
     <button id="openAll">全て開く</button><button id="closeAll">全て閉じる</button>
     <button id="csv" class="primary">CSV書き出し</button><button id="json">JSON書き出し</button>
     <label class="bar-file" style="font-size:13px;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:4px 8px">JSON読み込み<input id="imp" type="file" accept=".json" hidden></label>
@@ -71,13 +71,13 @@ main{max-width:1100px;margin:0 auto;padding:16px}
   <details class="help">
     <summary>チェックの進め方</summary>
     <ol>
-      <li>Webサイトをローカル起動すると「サイトで見る」から実ページを確認できます（<code>cd projects/tangleseed_hp_production/web && npm install && npm run dev</code>）。</li>
+      <li>Webサイトを手元で起動している場合は、上の「ローカルURL」を入れると各タングルに「サイトで見る」リンクが出ます（空欄なら非表示）。</li>
       <li>各タングルの内容（名前・読み、説明文、手順、画像、動画、難易度/カテゴリ、出典）を確認し、確認できた項目にチェックを入れます。</li>
       <li>ステータスを「OK / 要修正 / 削除・統合」から選び、要修正の場合はメモに修正内容（正しい表記・差し替え文など）を書きます。</li>
-      <li>オレンジの自動フラグは機械チェックで見つかった懸念点です（画像ファイルが無い、動画IDが無い、説明文が400字未満、重複、調査メモ等）。</li>
+      <li>オレンジの自動フラグは機械チェックで見つかった懸念点です（画像ファイルが無い、動画IDが無い、説明文が400字未満、重複、未定義カテゴリ、調査メモ等）。</li>
       <li>終わったら「CSV書き出し」で一覧を保存し、修正担当者へ渡します。別PCに引き継ぐ時は「JSON書き出し→JSON読み込み」。</li>
     </ol>
-    <p>データ更新後の再生成: <code>node projects/tangleseed_hp_production/review/build_zukan_check.mjs</code>（チェック結果はIDで紐づくので消えません）</p>
+    <p>データ更新後の再生成: <code>__REBUILD__</code>（チェック結果はIDで紐づくので消えません）</p>
   </details>
   <div id="list"></div>
 </main>
@@ -116,7 +116,7 @@ function card(p) {
     ${p.flags.map(f => `<span class="flag">${esc(f[1])}</span>`).join('')}</summary>
   <div class="body">
     <div class="content">
-      <div class="links"><a href="${esc(base)}/library/${esc(p.slug)}" target="_blank" rel="noopener">サイトで見る（/library/${esc(p.slug)}）</a>${p.refUrl ? `<a href="${esc(p.refUrl)}" target="_blank" rel="noopener">TanglePatterns.com</a>` : `<span class="tags" style="margin-right:12px">参照: ${esc(p.refNote || 'なし')}</span>`}${yt}</div>
+      <div class="links">${base ? `<a href="${esc(base)}/library/${esc(p.slug)}" target="_blank" rel="noopener">サイトで見る（/library/${esc(p.slug)}）</a>` : ''}${p.refUrl ? `<a href="${esc(p.refUrl)}" target="_blank" rel="noopener">TanglePatterns.com</a>` : `<span class="tags" style="margin-right:12px">参照: ${esc(p.refNote || 'なし')}</span>`}${yt}</div>
       <div class="tags">カテゴリ: ${p.categoryJa.map(esc).join(' / ')} ／ タグ: ${p.tags.map(esc).join(', ')} ／ 日本語説明 ${p.jaLen}字</div>
       <h3>日本語説明（descriptionJa）</h3><div class="desc">${md(p.descriptionJa)}</div>
       <h3>描き方手順（${p.steps.length}ステップ）</h3>
